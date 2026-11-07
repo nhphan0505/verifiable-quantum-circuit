@@ -1,6 +1,6 @@
 # Optimization by decoded quantum interferometry — thuật toán DQI, luật bán nguyệt và quy về giải mã Reed–Solomon
 
-Status: draft
+Status: ready
 Track: dqi
 Source: doi:10.1038/s41586-025-09527-5 (https://doi.org/10.1038/s41586-025-09527-5); metadata và SHA-256 trong source.json
 Version: Nature Vol. 646, pp. 831–836 (2025-10-23; published online 2025-10-22); bản PDF local 7 trang, đọc ngày 2026-11-07

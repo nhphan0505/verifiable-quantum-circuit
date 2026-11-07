@@ -13,7 +13,7 @@ Luôn đối chiếu với EXPERIMENTS, Issues và results
 | Paper / phương pháp | Track | Từ khóa / thành phần | Ghi chú chi tiết | Nguồn gốc |
 | --- | --- | --- | --- | --- |
 | Quantum computation of stopping power for inertial fusion target design | invsqrt | Tài liệu BTC cung cấp cho task 1; arXiv:2308.12352v1 | [note.md — ready](invsqrt/papers/arxiv-2308.12352/note.md) | [PDF v1](invsqrt/papers/arxiv-2308.12352/paper.pdf) |
-| Optimization by decoded quantum interferometry | dqi | Thuật toán DQI gốc, bài toán OPI/max-LINSAT, giải mã Reed–Solomon; doi:10.1038/s41586-025-09527-5 | [note.md — draft](dqi/papers/doi-10.1038--s41586-025-09527-5/note.md) | [PDF Nature 2025](dqi/papers/doi-10.1038--s41586-025-09527-5/paper.pdf) |
+| Optimization by decoded quantum interferometry | dqi | Thuật toán DQI gốc, bài toán OPI/max-LINSAT, giải mã Reed–Solomon; doi:10.1038/s41586-025-09527-5 | [note.md — ready](dqi/papers/doi-10.1038--s41586-025-09527-5/note.md) | [PDF Nature 2025](dqi/papers/doi-10.1038--s41586-025-09527-5/paper.pdf) |
 
 
 ## Discussions
