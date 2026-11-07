@@ -1,7 +1,7 @@
 # 08 — Merge và hoàn thành hướng
 
 ```text
-Đọc AGENTS.md và CONTRIBUTING.md trước khi làm.
+Đọc AGENTS.md, CONTRIBUTING.md và docs/EXPERIMENT_WORKFLOW.md trước khi làm.
 
 PR: <URL>
 ISSUE: <URL>

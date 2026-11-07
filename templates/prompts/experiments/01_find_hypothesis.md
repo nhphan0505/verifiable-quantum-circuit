@@ -1,7 +1,7 @@
 # 01 — Tìm hypothesis (chỉ đọc)
 
 ```text
-Đọc AGENTS.md và CONTRIBUTING.md trước khi làm.
+Đọc AGENTS.md, CONTRIBUTING.md và docs/EXPERIMENT_WORKFLOW.md trước khi làm.
 
 TRACK: <invsqrt | dqi | dfthcsos>
 MỤC TIÊU: <nút thắt muốn cải thiện, hoặc để agent đề xuất>
@@ -20,10 +20,13 @@ Tự phân tích hàm điểm, ràng buộc verifier, code/config và results đ
 nút thắt, giả định có thể thay đổi và cơ hội tối ưu. Chủ động suy ra hướng
 mới; không giới hạn đề xuất vào những phương pháp đã có trong research.
 
-Đọc research/README.md và các nguồn liên quan để tìm phương pháp bổ sung,
-kết hợp ý tưởng hoặc phản biện hypothesis tự nghĩ ra. Khi dùng công thức/
-kết luận từ tài liệu, kiểm tra bản gốc. Không cố gắn paper cho ý tưởng chưa
-có nguồn tương ứng; thiếu nguồn thì ghi rõ giới hạn.
+Trong research chỉ đọc các file note.md có Status: ready đã merge vào nhánh chính, liên quan dưới track đang nghiên cứu
+và shared; có thể tìm bằng danh sách đường dẫn. Dùng note để bổ sung phương
+pháp, kết hợp ý tưởng hoặc phản biện hypothesis tự nghĩ ra. Không đọc PDF,
+bản thảo discussion hoặc mở link nguồn; không tự viết/chuyển nguồn thành
+note trong giai đoạn này. Nguồn chưa có note thì bỏ qua và nêu giới hạn;
+note thiếu căn cứ thì ghi chưa kiểm chứng, không khẳng định đã đọc bản gốc.
+Không cố gắn paper cho ý tưởng chưa có nguồn tương ứng. Việc chuyển PDF/discussion thành note thuộc luồng literature riêng.
 
 Đối chiếu EXPERIMENTS, Issues và results để tránh trùng hướng đã thử/đang làm.
 Phân biệt suy luận với bằng chứng đã đo; không tuyên bố mới trên toàn thế

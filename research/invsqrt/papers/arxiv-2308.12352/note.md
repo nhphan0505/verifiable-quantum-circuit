@@ -1,6 +1,6 @@
 # Quantum computation of stopping power — nội suy bậc ba và Newton–Raphson cho invsqrt
 
-Status: draft
+Status: ready
 Track: invsqrt
 Source: arXiv:2308.12352v1; metadata và SHA-256 trong source.json
 Version: v1 ngày 2023-08-23; bản PDF local 37 trang, đọc ngày 2026-11-07
@@ -17,7 +17,8 @@ Version: v1 ngày 2023-08-23; bản PDF local 37 trang, đọc ngày 2026-11-07
   Đã xem ảnh trang 12–14 để đối chiếu hệ số, dấu và số mũ. Các phần vật lý,
   block encoding/QSP, phép đo, ước lượng Trotter và phụ lục chưa được review sâu.
 - Số trang bên dưới là số trang PDF (trùng số in trên các trang được dẫn).
-  Đây là bản nháp của tác giả note, chưa có review độc lập hay quyết định nhóm.
+  Tác giả đã xử lý findings của review commit 04b7c8a. Trạng thái ready là
+  trạng thái chuẩn bị xuất bản; reviewer phải xác nhận HEAD cuối trước merge theo quyết định nhóm.
 
 ## Vấn đề và kết quả của paper
 
@@ -240,7 +241,7 @@ Chưa có thử nghiệm được ghi nhận trong note về offset Newton, conf
 thiết kế workspace khác. Chưa tái lập numerical minimax của tác giả, chưa chứng
 minh bound fixed-point cho mọi x, chưa đọc sâu [102]/[103], chưa đối chiếu phiên
 bản mới hơn hoặc errata. Reviewer cần kiểm lại công thức, hệ số, diễn giải bound,
-map code–paper và giới hạn của nhận xét về b trước khi đổi Status sang ready.
+map code–paper và giới hạn của nhận xét về b trước khi chấp thuận xuất bản HEAD cuối.
 
 ## Tài liệu liên quan
 

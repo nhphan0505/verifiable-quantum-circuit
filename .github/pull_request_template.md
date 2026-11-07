@@ -1,3 +1,6 @@
+<!-- PR thử nghiệm dùng mẫu bên dưới. PR đọc paper/discussion dùng
+templates/research/pull_request.md; không yêu cầu compile hoặc điểm cho tài liệu. -->
+
 ## Experiment và vấn đề
 
 Closes #...

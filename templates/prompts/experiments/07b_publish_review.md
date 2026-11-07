@@ -1,7 +1,7 @@
 # 07b — Teammate đăng kết luận review lên GitHub
 
 ```text
-Đọc AGENTS.md và CONTRIBUTING.md trước khi làm.
+Đọc AGENTS.md, CONTRIBUTING.md và docs/EXPERIMENT_WORKFLOW.md trước khi làm.
 
 PR: <URL>
 REVIEW GIAI ĐOẠN 07: <kết luận/findings và SHA đã review, hoặc tham chiếu trong chat này>

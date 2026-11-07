@@ -1,0 +1,12 @@
+{
+  "track": "invsqrt",
+  "kind": "papers",
+  "source_id": "arxiv-2308.12352",
+  "title": "REPLACE_WITH_SOURCE_TITLE",
+  "source_url": "https://arxiv.org/abs/2308.12352",
+  "version": "v1",
+  "accessed_at": "YYYY-MM-DD",
+  "source_file": "paper.pdf",
+  "source_sha256": "REPLACE_WITH_ACTUAL_SHA256",
+  "coverage": "REPLACE_WITH_SECTIONS_ACTUALLY_READ"
+}

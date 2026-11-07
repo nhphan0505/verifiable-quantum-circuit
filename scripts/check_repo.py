@@ -185,6 +185,7 @@ class Audit:
                     self.require(p.get(key) == original.get(key), f'{run}: {key} differs from build_run')
 
     def run(self):
+        self.research()
         legacy = set(self.load(self.root / 'scripts/legacy_runs.json').get('runs', []))
         manifest = self.load(self.root / 'data_manifest.json').get('files', {})
         for name, digest in manifest.items():
@@ -357,6 +358,59 @@ class Audit:
                 except (ValueError, KeyError, ZeroDivisionError):
                     self.errors.append(f'{path}: invalid improvement ratio')
 
+    def research(self):
+        """Validate note identity and source bytes; never certify scientific claims."""
+        for note in (self.root / 'research').rglob('note.md'):
+            parts = note.relative_to(self.root).parts
+            if not self.require(len(parts) == 5 and parts[1] in {*TRACKS, 'shared'} and parts[2] in {'papers', 'discussions'}, f'{note}: invalid research note path'):
+                continue
+            _, track, kind, source_id, _ = parts
+            if kind == 'papers':
+                self.require(bool(re.fullmatch(r'arxiv-(?:[0-9]{4}\.[0-9]{4,5}|[a-z-]+--[0-9]{7})|doi-10\.[0-9]{4,9}--[a-z0-9._%\-]+', source_id)), f'{note}: invalid paper identifier')
+            else:
+                self.require(bool(re.fullmatch(r'[a-z0-9]+(?:[-_][a-z0-9]+)*', source_id)), f'{note}: invalid discussion identifier')
+            text = self.read(note)
+            for key in ['Status', 'Track', 'Source', 'Version']:
+                self.require(bool(re.search(r'^' + key + r':\s*\S[^\n]*$', text, re.M)), f'{note}: missing metadata {key}')
+            self.require(bool(re.search(r'^Status: (draft|ready)\s*$', text, re.M)), f'{note}: invalid note status')
+            self.require(bool(re.search(r'^Track: ' + track + r'\s*$', text, re.M)), f'{note}: note track mismatch')
+            source = self.load(note.parent / 'source.json')
+            for key, expected in [('track', track), ('kind', kind), ('source_id', source_id)]:
+                self.require(source.get(key) == expected, f'{note}: source {key} mismatch')
+            for key in ['title', 'version', 'accessed_at', 'coverage']:
+                self.require(isinstance(source.get(key), str) and bool(source[key].strip()), f'{note}: missing source {key}')
+            self.require(bool(re.fullmatch(r'\d{4}-\d{2}-\d{2}', str(source.get('accessed_at', '')))), f'{note}: invalid access date')
+            name = source.get('source_file')
+            if name:
+                if not self.require(isinstance(name, str), f'{note}: source_file must be a filename'):
+                    continue
+                path = note.parent / name
+                safe = isinstance(name, str) and '/' not in name and '\\' not in name and path.resolve().parent == note.parent.resolve()
+                if self.require(safe and path.is_file(), f'{note}: source file missing/outside source directory'):
+                    self.require(hashlib.sha256(path.read_bytes()).hexdigest() == source.get('source_sha256'), f'{note}: source hash mismatch')
+            else:
+                self.require(bool(re.match(r'https?://', str(source.get('source_url', '')))), f'{note}: require source file or URL')
+                self.require(source.get('source_sha256') is None, f'{note}: hash without local source')
+            snapshot = source.get('project_snapshot')
+            if snapshot is not None:
+                if not self.require(isinstance(snapshot, dict), f'{note}: invalid project_snapshot'):
+                    continue
+                commit = snapshot.get('commit', '')
+                files = snapshot.get('files')
+                valid_commit = bool(re.fullmatch(r'[0-9a-f]{40}', str(commit)))
+                self.require(valid_commit, f'{note}: project_snapshot requires full commit SHA')
+                if not self.require(isinstance(files, dict) and bool(files), f'{note}: project_snapshot requires files'):
+                    continue
+                for name, digest in files.items():
+                    valid_path = isinstance(name, str) and not Path(name).is_absolute() and '..' not in Path(name).parts and ':' not in name
+                    self.require(valid_path and bool(re.fullmatch(HASH, str(digest))), f'{note}: invalid snapshot path/hash')
+                    if self.git_available and valid_commit and valid_path:
+                        try:
+                            actual = hashlib.sha256(self.git('show', f'{commit}:{name}')).hexdigest()
+                            self.require(actual == digest, f'{note}: project_snapshot hash differs from Git blob: {name}')
+                        except subprocess.CalledProcessError:
+                            self.errors.append(f'{note}: project_snapshot Git blob unavailable: {commit}:{name}')
+
     def scope(self, base, branch):
         if not self.git_available:
             self.errors.append('--base requires Git repository')
@@ -364,6 +418,21 @@ class Audit:
         self.immutable_results(base)
         match = re.match(r'exp/((INV|DQI|DFT)-[1-9][0-9]*)(?:-|$)', branch)
         files = self.git('diff', '--name-only', f'{base}...HEAD').decode().splitlines()
+        if branch.startswith('research/'):
+            personal = re.fullmatch(r'research/[A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?', branch)
+            if not self.require(bool(personal), 'Research branch must use research/<username>'):
+                return
+            resource = r'research/(invsqrt|dqi|dfthcsos|shared)/(papers|discussions)/[a-z0-9._%\-]+/[^/]+'
+            for name in files:
+                allowed = bool(re.fullmatch(resource, name)) and Path(name).suffix.lower() in {'.md', '.json', '.pdf', '.txt', '.png', '.jpg', '.jpeg', '.svg'} and Path(name).name != 'AGENTS.md'
+                self.require(allowed or name == 'research/README.md', f'research branch modified outside its scope: {name}')
+                if name == 'research/README.md':
+                    diff = self.git('diff', '--unified=0', f'{base}...HEAD', '--', name).decode()
+                    for line in diff.splitlines():
+                        if line.startswith(('+++', '---')) or not line.startswith(('+', '-')):
+                            continue
+                        self.require(line[1:].startswith('|') and bool(re.search(r'(invsqrt|dqi|dfthcsos|shared)/(papers|discussions)/[a-z0-9._%\-]+/', line[1:])), f'{name}: changed index outside resource rows')
+            return
         if branch.startswith('exp/'):
             self.require(bool(match), 'Experiment branch must use exp/<ID>-<name>')
         if not match:
@@ -392,7 +461,7 @@ class Audit:
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--base', help='Git base SHA/ref for PR scope check')
-    parser.add_argument('--branch', default='', help='PR head branch; exp/<ID>-... enables scope enforcement')
+    parser.add_argument('--branch', default='', help='PR head branch; exp/... and research/... enable scope enforcement')
     args = parser.parse_args()
     audit = Audit(ROOT)
     audit.run()
