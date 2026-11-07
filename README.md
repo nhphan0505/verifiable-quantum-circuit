@@ -30,6 +30,7 @@ GQA/
 ├── sample_submission/                # Submission mẫu gốc
 ├── kickmix/                          # Binary Linux gốc; hiện dùng pip
 ├── notebooks/                        # Notebook upload/chấm/tải results
+├── research/                         # Mục lục paper, ghi chú và thảo luận
 ├── docs/                             # Hướng dẫn
 ├── templates/                        # Mẫu mô tả, source docstring và record run
 ├── .github/                          # Mẫu Issue và PR
@@ -128,3 +129,5 @@ người clone mới chưa có sẵn artifact baseline trong máy.
 Các record cũ đã chuyển về cấu trúc mới, giữ nguyên JSON/log. Đường dẫn lịch sử bên trong metadata vẫn là đường dẫn lúc chạy; xem results/setup/structure_migration.json để đối chiếu.
 
 Kiểm tra trước PR: `.\.venv\Scripts\python.exe scripts/check_repo.py`. Xem [phạm vi check, provenance và phiên bản môi trường](docs/REPOSITORY_CHECKS.md). Dùng Python 3.13 và dependency đã pin.
+
+Kho tài nguyên: [paper và thảo luận nghiên cứu](research/README.md).

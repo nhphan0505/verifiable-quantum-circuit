@@ -14,6 +14,10 @@ implementation/config và results liên quan. Không chỉ dựa vào main vì c
 có người đang làm hướng chưa merge. Nếu chưa truy cập được GitHub, nói rõ
 chưa xác nhận được trùng hướng; không khẳng định hướng chưa ai làm.
 
+Đọc research/README.md, chọn note/discussion liên quan theo track/từ khóa;
+kiểm tra nguồn gốc trước khi dùng công thức hoặc kết luận. Phân biệt kết quả
+paper, suy luận và kết quả nhóm đã đo; thiếu nguồn thì ghi rõ giới hạn.
+
 Đề xuất tối đa 3 hypothesis. Mỗi hướng cần:
 - Title mô tả rõ thành phần, phương pháp và phạm vi thử.
 - Loại: tinh chỉnh, kết hợp hay mới; link nguồn/phiên bản kế thừa.
