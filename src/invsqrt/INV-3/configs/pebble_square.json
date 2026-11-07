@@ -1,0 +1,15 @@
+{
+  "n_p": 10,
+  "precision": {
+    "delta_bits": 14,
+    "coef_bits": 17,
+    "square_bits": 28,
+    "product_bits": 28,
+    "result_bits": 29
+  },
+  "schedule": {
+    "early_uncompute_c3": true,
+    "staged_y1_scratch": true,
+    "early_uncompute_square": true
+  }
+}

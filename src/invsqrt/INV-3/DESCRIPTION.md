@@ -154,12 +154,14 @@ Với cấu hình độ rộng chuẩn (`n_p = 10, delta_bits = 14, coef_bits = 
   - Vì toàn bộ phép toán số học trên `x`, `flags`, `selectors`, `c0..c3`, `square`, `z`, `p`, `y1` và bước áp pha `_phase_by_bits(builder, y1)` thực hiện đúng cùng tập biểu thức đại số trên cùng độ rộng bit như baseline, giá trị nguyên $y_1(x)$ sinh ra tại bước áp pha trùng khớp từng bit với `fixed_point_model(n_p, prec, xs)` trên toàn bộ miền $x \in [1, 3\,133\,452]$, kể cả các biên khoảng chuẩn hóa $M \in \{1, 1.5, 2, 3\}$ và mọi giá trị dịch $s \in \{0, \dots, 10\}$.
   - Sai số tương đối cực đại theo mô hình giữ nguyên ở $2^{-25.07}$ (tại $x = 2\,588\,411$), và tỉ số `worst_error_over_tolerance` trên bộ `dev_5min` dự kiến giữ nguyên bằng `0.37839383360236045` (tại $x = 3\,010\,856$).
 - **Vai trò và ràng buộc tham số cấu hình (`configs/<name>.json`):**
-  - Cấu hình ban đầu được chọn là `configs/staged_alloc.json` nhằm kiểm chứng trực tiếp và độc lập giả thuyết cốt lõi:
-    + `early_uncompute_c3 = true`: uncompute Clifford và giải phóng sớm `c3` (17 qubit).
-    + `staged_y1_scratch = true`: trì hoãn cấp phát `p` (30 qubit) và giải phóng `scratch` (30 qubit) trước khi mở rộng `y1` (10 qubit).
-    + `early_uncompute_square = false`: chưa bật pebbling bình phương để giữ nguyên chi phí cổng Toffoli ($\Delta C = 0$) và không làm tăng bất kỳ phép tính số học nào ($\Delta\text{error} = 0$).
-  - Mọi độ rộng bit giữ nguyên theo mốc đối chiếu `INV-BASELINE`: `delta_bits = 14, coef_bits = 17, square_bits = 28, product_bits = 28, result_bits = 29`.
-  - Lý do chọn: Đây là cấu hình tối ưu nhất về mặt kiểm chứng giả thuyết ban đầu vì nó cô lập hoàn toàn tác động của lịch trình cấp phát bộ nhớ lượng tử lên số qubit cực đại $Q$, mà không bị nhiễu bởi sự thay đổi số cổng Toffoli hay độ chính xác số học. Mốc đối chứng là run `dev_5min` của baseline (`20261106T111429Z-local-dev5min`). Dự đoán $Q$ giảm từ $260$ xuống $232$ qubit, Toffoli giữ nguyên $7735$, giúp điểm `dev_5min` giảm $\approx 10.8\%$. Kết quả sẽ ủng hộ hypothesis nếu chạy `dev_5min` đạt `PASS`, khôi phục toàn bộ scratch về $|0\rangle$, và điểm số cải thiện đúng tỉ lệ. Nếu số qubit không giảm hoặc scratch bị bẩn, hypothesis sẽ bị bác bỏ.
+  - Cấu hình 1: `configs/staged_alloc.json` (đã thử):
+    + `early_uncompute_c3 = true`, `staged_y1_scratch = true`, `early_uncompute_square = false`.
+    + Giữ nguyên 100% độ rộng bit và toán tử số học baseline, không tốn thêm Toffoli ($\Delta C = 0$). Kết quả đã đạt: $Q = 232$ qubit, Toffoli = 7735, score dev_5min = 1.852.826 (cải thiện 1.12×).
+  - Cấu hình 2: `configs/pebble_square.json` (thử nghiệm pebbling):
+    + `early_uncompute_c3 = true`, `staged_y1_scratch = true`, `early_uncompute_square = true`.
+    + Giữ nguyên các độ rộng bit chuẩn (`delta_bits = 14, coef_bits = 17, square_bits = 28, product_bits = 28, result_bits = 29`).
+    + Lý do chọn: Đo lường chính xác sự đánh đổi của kỹ thuật pebbling: giải phóng sớm thanh ghi `square` (28 qubit) ngay sau `_multiply_m` (trước `_multiply_y0`) để kéo đỉnh qubit xuống sâu hơn nữa ($Q = 204$ qubit, giảm 21.5% so với baseline 260), đánh đổi bằng việc phải thực hiện thêm 1 lần uncompute và 1 lần recompute của `_square` (tăng thêm $2 \times 442 = 884$ Toffoli, đưa tổng Toffoli lên 8619).
+    + Dự đoán: Chi phí $C$ tăng $\approx 11.07\%$ ($7986.32 \to 8870.32$), nhưng số qubit $Q$ giảm $\approx 12.07\%$ so với `staged_alloc` ($232 \to 204$). Điểm `dev_5min` dự kiến đạt $\approx 204 \times 8870.32 \approx 1.809.545$ (cải thiện $\approx 1.147\times$ so với baseline, và giảm thêm $\approx 2.3\%$ chi phí so với `staged_alloc`). Tiêu chí ủng hộ: `pebble_square` đạt PASS và có điểm số thấp hơn 1.852.826; nếu điểm số cao hơn hoặc bằng, cấu hình `staged_alloc` sẽ được chọn làm ứng viên chính thức cuối cùng.
 
 - **Giả định đã được kiểm chứng bằng mô hình local:**
   - Bộ quản lý qubit của `km.CircuitBuilder` tái sử dụng hoàn toàn các qubit đã `free()` cho các lệnh cấp phát tiếp theo trong ngăn xếp LIFO. Biên dịch thực tế xác nhận `circuit.num_qubits = 232` (giảm 28 qubit so với baseline 260) và `toffoli_count = 7735` (khớp chính xác baseline).
@@ -197,5 +199,5 @@ Kết quả thực nghiệm trên bộ dữ liệu chuẩn `dev_5min` (run `2026
 | Dev | [configs/staged_alloc.json](configs/staged_alloc.json) | `a5e1edb25864ab262261f3714b14ae676d96d2bf` | [20261107T174505Z-local-dev_5min-bf75bb](../../../results/invsqrt/INV-3/staged_alloc/dev_5min/20261107T174505Z-local-dev_5min-bf75bb/verifier.json) / [provenance.json](../../../results/invsqrt/INV-3/staged_alloc/dev_5min/20261107T174505Z-local-dev_5min-bf75bb/provenance.json) |
 | Full | Chưa có (chưa chấm full) | Chưa có | Chưa chấm |
 
-Mã triển khai: [solution.py](solution.py). Cấu hình: [configs](configs/).
+Mã triển khai: [solution.py](solution.py). Cấu hình: [configs](configs/) ([staged_alloc.json](configs/staged_alloc.json), [pebble_square.json](configs/pebble_square.json)).
 Điểm và các run: [SCORES.md](../SCORES.md).
