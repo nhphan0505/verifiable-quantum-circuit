@@ -16,7 +16,7 @@ profile và phép tính baseline/candidate; chỉ ra thiếu bằng chứng nế
 
 Kiểm tra link, artifact có lỡ vào Git, thay đổi hạ tầng/verifier ngoài phạm vi,
 và việc giữ đủ các hướng trong bảng. Có thể chạy kiểm tra local cần thiết,
-nhưng không mở hoặc chấm Colab thay thành viên.
+nhưng không mở hoặc tự chạy chấm thay thành viên.
 
 Báo các lỗi cần sửa với file/dòng và ảnh hưởng, hoặc nói rõ không thấy lỗi
 trong phạm vi đã kiểm tra; nêu kiểm tra chưa làm. Không tự sửa branch, đăng

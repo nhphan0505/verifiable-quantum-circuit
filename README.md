@@ -19,7 +19,6 @@ GQA/
 │   │   └── <EXPERIMENT_ID>/
 │   │       ├── <CONFIG_NAME>.kmb      # Task 1–2
 │   │       └── <CONFIG_NAME>.zip      # Task 3
-│   └── colab/                        # ZIP verifier và dữ liệu tham chiếu
 ├── results/                          # Kết quả từng lần chạy
 │   ├── <TRACK>/
 │   │   └── <EXPERIMENT_ID>/
@@ -47,7 +46,7 @@ Dùng coding agent: yêu cầu đọc [AGENTS.md](AGENTS.md) trước khi bắt 
 4. Tạo branch cho hướng
 5. Viết mô tả, implementation và config
 6. Commit nguồn trước khi dựng và chấm
-7. Dựng artifact và chấm thủ công trên Colab
+7. Dựng artifact và chấm bằng notebook local
 8. Tải results và gắn phiên bản nguồn
 9. Phân tích và cập nhật điểm
 10. Commit kết quả và quyết định thử tiếp
@@ -78,7 +77,7 @@ py -3.13 -m venv .venv
 
 Dùng trực tiếp Python trong `.venv` như trên, không cần activate. Nếu không có
 lệnh `py`, dùng `python --version` xác nhận đúng 3.13 rồi chạy `python -m venv .venv`.
-Colab dùng bộ dependency riêng đã pin trong notebook và `requirements-colab.txt`.
+Notebook local dùng cùng bộ dependency trong requirements.txt và các package giao diện trong requirements-notebook.txt.
 
 **3. Bổ sung dữ liệu ban tổ chức:**
 
@@ -128,4 +127,4 @@ người clone mới chưa có sẵn artifact baseline trong máy.
 
 Các record cũ đã chuyển về cấu trúc mới, giữ nguyên JSON/log. Đường dẫn lịch sử bên trong metadata vẫn là đường dẫn lúc chạy; xem results/setup/structure_migration.json để đối chiếu.
 
-Kiểm tra trước PR: `.\.venv\Scripts\python.exe scripts/check_repo.py`. Xem [phạm vi check, provenance và phiên bản môi trường](docs/REPOSITORY_CHECKS.md). Dùng Python 3.13 và dependency đã pin; Colab dùng bộ riêng trong requirements-colab.txt.
+Kiểm tra trước PR: `.\.venv\Scripts\python.exe scripts/check_repo.py`. Xem [phạm vi check, provenance và phiên bản môi trường](docs/REPOSITORY_CHECKS.md). Dùng Python 3.13 và dependency đã pin.

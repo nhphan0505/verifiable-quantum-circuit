@@ -14,4 +14,4 @@ Sau khi clone, lấy đúng bộ dữ liệu ban tổ chức và đặt lại đ
 Repo giữ mã verifier và các LICENSE.txt. Manifest SHA-256 bộ gốc nằm tại data_manifest.json;
 đối chiếu hash trước khi so sánh điểm giữa các máy. Chưa cấu hình tải dữ liệu tự động hoặc Git LFS.
 
-Chuẩn bị hai ZIP upload Colab sau khi có dữ liệu: chạy `.\.venv\Scripts\python.exe scripts/prepare_colab.py` từ root. Script kiểm tra SHA-256 và ghi ZIP/manifest vào `artifacts/colab/`; xem [hướng dẫn Colab](docs/COLAB_GRADING.md).
+Chấm trực tiếp artifact bằng [notebook local](docs/LOCAL_GRADING.md); không cần đóng gói ZIP verifier.

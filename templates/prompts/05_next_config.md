@@ -29,7 +29,7 @@ compile không lỗi và artifact mới đã được tạo đúng tên/đườn
 hoặc cần đổi hypothesis, báo nguyên nhân và trao đổi với tôi.
 
 Bàn giao artifact, hash và TRACK/MODE/ID/OWNER/CONFIG_NAME chọn trong notebook rồi dừng. Tôi tự
-chấm Colab. Không tự chạy notebook, mở browser, theo dõi runtime, tự tạo điểm, merge hoặc đóng Issue.
+chạy notebook local. Không tự chạy notebook, mở browser, theo dõi runtime, tự tạo điểm, merge hoặc đóng Issue.
 Cuối lượt liệt kê file thực sự đã tạo/sửa kèm link thật để tôi kiểm tra thủ công.
 
 ```

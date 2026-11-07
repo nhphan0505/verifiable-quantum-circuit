@@ -18,8 +18,8 @@ Khôi phục syndrome, workspace sạch và pha MBUC đúng. Sai số được c
 
 ## Chạy
 
-Dùng `.venv` và pip kickmix trên Windows để dựng mạch; upload submission lên notebook Colab để chấm.
-Xem [lệnh dựng baseline và hướng dẫn chấm](../../docs/COLAB_GRADING.md).
+Dùng `.venv` và pip kickmix trên Windows để dựng mạch; chạy notebook local để chấm artifact trực tiếp.
+Xem [lệnh dựng baseline và hướng dẫn chấm](../../docs/LOCAL_GRADING.md).
 Mạch đã dựng nằm trong `artifacts/dqi/DQI-BASELINE/`. Lưu JSON chấm vào `results/dqi/`.
 SCORES.md ghi cả FULL / PASS và DEV_5MIN / PASS; chỉ so điểm trong cùng chế độ và cấu hình.
 

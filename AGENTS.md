@@ -54,7 +54,7 @@ results/<TRACK>/<ID>/<CONFIG_NAME>/<MODE>/<run_id>/
 ## 4. Commit nguồn, dựng mạch và ghi provenance
 
 - Với công việc thử nghiệm đã được giao: commit mô tả/code/config trước khi dựng/chấm; lấy SHA nguồn thực tế. Thay source/config sau đó thì commit và dựng lại trước lần chấm mới.
-- Chạy Python 3.13 trong `.venv`, dùng package pip đã pin theo requirements.txt (Colab dùng requirements-colab.txt). Không dùng binary Linux `kickmix.so` để dựng trên Windows.
+- Chạy Python 3.13 trong `.venv`, dùng package pip đã pin theo requirements.txt. Không dùng binary Linux `kickmix.so` để dựng trên Windows.
 - `solution.py` suy ra TRACK/ID từ vị trí file, đọc `--config` là JSON ngay trong `configs/` của hướng sau khi resolve đường dẫn, và mặc định xuất artifact vào đúng TRACK/ID. Chỉ ghi đè artifact khi đang chủ động dựng lại; không sửa hoặc ghi đè run cũ.
 - Task 3: ZIP có `submission.npz` và toàn bộ `angle_k_0.kmb`, `angle_k_1.kmb`, ... liên tục từ 0 ở gốc ZIP, không có thư mục con/file thừa.
 - Dùng schema [templates/run/provenance.json](templates/run/provenance.json) và [quy tắc check](docs/REPOSITORY_CHECKS.md); source/config local phải khớp bytes snapshot commit trước build.

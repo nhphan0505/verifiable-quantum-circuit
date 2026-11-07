@@ -37,7 +37,7 @@ class RepositoryChecks(unittest.TestCase):
                     shutil.copyfile(source, target)
         for source in list(REPO.glob('*.md')) + [REPO / 'data_manifest.json']:
             shutil.copyfile(source, self.root / source.name)
-        for filename in ['requirements.txt', 'requirements-colab.txt', '.python-version']:
+        for filename in ['requirements.txt', '.python-version']:
             shutil.copyfile(REPO / filename, self.root / filename)
         # Root docs link to these files/directories, too.
         shutil.copytree(REPO / '.github', self.root / '.github')

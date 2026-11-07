@@ -237,7 +237,7 @@ class Audit:
             self.links(path)
         notebook = self.load(self.root / 'notebooks/GQA_Grade_Submission.ipynb')
         pins = {}
-        for filename in ['requirements.txt', 'requirements-colab.txt']:
+        for filename in ['requirements.txt']:
             packages = [line.strip() for line in self.read(self.root / filename).splitlines() if line.strip() and not line.startswith('#')]
             self.require(all(re.fullmatch(r'[A-Za-z0-9_-]+==[0-9][A-Za-z0-9.]*', p) for p in packages), f'{filename}: dependencies must have exact version pins')
             pins[filename] = packages

@@ -60,17 +60,11 @@ Không thêm run mới vào danh sách để né check; thay đổi danh sách t
 
 Python hỗ trợ cho workflow này: **3.13**; `.python-version` ghi minor này.
 Local baseline đã chạy Python 3.13.14: `requirements.txt` cố định kickmix 1.0.0,
-NumPy 2.5.4, SciPy 1.18.1. Colab full baseline đã chạy Python 3.13.18:
-`requirements-colab.txt` cố định kickmix 1.0.0, NumPy 2.4.6, SciPy 1.16.3.
-Notebook cài đúng bộ Colab và chặn minor Python khác; nếu runtime không còn cung cấp
-Python 3.13, cần kiểm chứng môi trường mới và chấm lại baseline đối chứng trước khi đổi.
-
-Metadata lịch sử giữ nguyên phiên bản thực tế. Hai bộ dependency được giữ riêng vì
-đã có bằng chứng chạy khác nhau, chưa khẳng định chúng cho điểm giống nhau mọi bài.
-So ứng viên/baseline cùng mode/profile và môi trường chấm; nếu đổi dependency, ghi rõ
-và chạy lại đối chứng. CI chỉ kiểm tra records bằng Python 3.13, không xác nhận khả năng
-cài hoặc chạy package Colab. Workflow sẽ hoạt động khi push lên GitHub; việc đặt nó
-thành required check và yêu cầu reviewer phải cấu hình trên GitHub sau khi tạo repo.
+NumPy 2.5.4, SciPy 1.18.1. Notebook local kiểm tra đúng kernel `.venv` và bộ
+package này. Cài thêm requirements-notebook.txt để có giao diện notebook/dropdown.
+Metadata của các run Colab lịch sử vẫn giữ nguyên Python/package thực tế; khi
+so điểm với run local cần dùng baseline tương thích hoặc để hệ số trống.
+CI kiểm tra records bằng Python 3.13; review/check bắt buộc do cấu hình GitHub quyết định.
 
 ## Bằng chứng chấm và tính bất biến
 
@@ -96,4 +90,4 @@ thành required check và yêu cầu reviewer phải cấu hình trên GitHub sa
   thể đối chiếu tính bất biến. Tính nhất quán JSON không chứng minh dữ liệu mới là
   kết quả chạy thật: reviewer vẫn phải xem bằng chứng nguồn của run.
 
-Notebook hiện chạy local, đối chiếu EXPECTED_PACKAGES với requirements.txt. requirements-colab.txt giữ để nhận diện môi trường Colab lịch sử. Xem [LOCAL_GRADING.md](LOCAL_GRADING.md).
+Notebook chạy local, đối chiếu EXPECTED_PACKAGES với requirements.txt. Xem [LOCAL_GRADING.md](LOCAL_GRADING.md).

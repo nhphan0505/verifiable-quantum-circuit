@@ -21,6 +21,6 @@ chưa xác nhận được trùng hướng; không khẳng định hướng chư
 - Phạm vi khác các hướng đã có, cách kiểm tra bằng dev_5min.
 - Độ ưu tiên và lý do chọn một hướng bắt đầu.
 
-Không tạo Issue, branch, sửa file, commit hoặc chạy Colab. Dừng sau khi đưa
+Không tạo Issue, branch, sửa file, commit hoặc tự chạy chấm. Dừng sau khi đưa
 ra đề xuất để tôi chọn hướng.
 ```

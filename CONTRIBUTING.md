@@ -31,7 +31,7 @@ py -3.13 -m venv .venv
 
 Dùng trực tiếp Python trong `.venv` như trên, không cần activate. Nếu không có
 lệnh `py`, dùng `python --version` xác nhận đúng 3.13 rồi chạy `python -m venv .venv`.
-Colab dùng bộ dependency riêng đã pin trong notebook và `requirements-colab.txt`.
+Notebook local dùng cùng bộ dependency trong requirements.txt và các package giao diện trong requirements-notebook.txt.
 
 **3. Bổ sung dữ liệu ban tổ chức:**
 
