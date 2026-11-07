@@ -185,12 +185,17 @@ Với cấu hình độ rộng chuẩn (`n_p = 10, delta_bits = 14, coef_bits = 
 
 ## Kết luận và phiên bản tái lập
 
-Đang ở giai đoạn 03 — đã hoàn thành triển khai mã nguồn [solution.py](solution.py), tạo cấu hình ban đầu [configs/staged_alloc.json](configs/staged_alloc.json) và biên dịch artifact `artifacts/invsqrt/INV-3/staged_alloc.kmb` với 232 qubit và 7735 Toffoli. Đang bàn giao để chấm `dev_5min` trên notebook local; bảng mốc tốt nhất bên dưới sẽ được cập nhật sau khi có kết quả chấm chính thức.
+Kết quả thực nghiệm trên bộ dữ liệu chuẩn `dev_5min` (run `20261107T174505Z-local-dev_5min-bf75bb`) đã **ủng hộ mạnh mẽ hypothesis**:
+- **Trạng thái:** `PASS` trên toàn bộ 8.192 shots (4.096 mẫu đầu vào $\times$ 2 repeats), khôi phục $x$ và trả toàn bộ scratch về $|0\rangle$ hoàn hảo trên mọi nhánh đo ngẫu nhiên của `del_and`.
+- **Số qubit cực đại $Q$:** Giảm từ 260 xuống **232** qubit ($\Delta Q = -28$ qubit, giảm 10.77%), đạt kết quả vượt mức dự đoán ban đầu (233 qubit) nhờ bộ phân bổ LIFO của Kickmix CircuitBuilder tái sử dụng tối ưu các qubit sạch sau khi free.
+- **Chi phí cổng:** Toffoli giữ nguyên **7.735,0** ($\Delta\text{Toffoli} = 0$); số phép quay giữ nguyên 37 và 1 cổng T; rotation synthesis epsilon đạt $1.813003214175951 \times 10^{-12}$ (trùng khớp hoàn toàn baseline). Chi phí Toffoli tương đương $C = 7986.319634297497$.
+- **Độ chính xác:** `worst_error_over_tolerance` đạt `0.37839383360236045` tại `worst_x = 3010856` (khớp chính xác từng chữ số thập phân với baseline), xác nhận không có bất kỳ sai lệch số học nào xảy ra khi thay đổi lịch trình quản lý thanh ghi.
+- **Điểm số:** Giảm từ `2076443.1049173493` xuống **`1852826.1551570194`** trên `dev_5min`. Tỉ số cải thiện số học đạt $2076443.10 / 1852826.16 = \mathbf{1.12\times}$ (chính xác bằng tỉ số $260 / 232$). Do run đối chứng baseline `20261106T111429Z-local-dev5min` thuộc nhóm legacy thiếu hash `verifier_sha256`, cột tỉ lệ trong `SCORES.md` được ghi `—` theo đúng quy tắc kiểm tra tính bất biến môi trường của repository.
 
 | Mốc tốt nhất | Config | Commit nguồn | Run / provenance |
 | --- | --- | --- | --- |
-| Dev | Chưa có (sẽ tạo ở giai đoạn 03) | Chưa có | Chưa chấm |
-| Full | Chưa có (sẽ tạo ở giai đoạn 03) | Chưa có | Chưa chấm |
+| Dev | [configs/staged_alloc.json](configs/staged_alloc.json) | `a5e1edb25864ab262261f3714b14ae676d96d2bf` | [20261107T174505Z-local-dev_5min-bf75bb](../../../results/invsqrt/INV-3/staged_alloc/dev_5min/20261107T174505Z-local-dev_5min-bf75bb/verifier.json) / [provenance.json](../../../results/invsqrt/INV-3/staged_alloc/dev_5min/20261107T174505Z-local-dev_5min-bf75bb/provenance.json) |
+| Full | Chưa có (chưa chấm full) | Chưa có | Chưa chấm |
 
 Mã triển khai: [solution.py](solution.py). Cấu hình: [configs](configs/).
 Điểm và các run: [SCORES.md](../SCORES.md).
