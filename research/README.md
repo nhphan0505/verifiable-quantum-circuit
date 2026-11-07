@@ -12,6 +12,7 @@ Luôn đối chiếu với EXPERIMENTS, Issues và results
 
 | Paper / phương pháp | Track | Từ khóa / thành phần | Ghi chú chi tiết | Nguồn gốc |
 | --- | --- | --- | --- | --- |
+| Quantum computation of stopping power for inertial fusion target design | invsqrt | Tài liệu BTC cung cấp cho task 1; arXiv:2308.12352v1 | [note.md — ready](invsqrt/papers/arxiv-2308.12352/note.md) | [PDF v1](invsqrt/papers/arxiv-2308.12352/paper.pdf) |
 
 
 ## Discussions
