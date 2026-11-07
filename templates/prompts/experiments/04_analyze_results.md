@@ -1,7 +1,7 @@
 # 04 — Nhận results, phân tích và quyết định bước tiếp
 
 ```text
-Đọc AGENTS.md và CONTRIBUTING.md trước khi làm.
+Đọc AGENTS.md, CONTRIBUTING.md và docs/EXPERIMENT_WORKFLOW.md trước khi làm.
 
 TRACK: <bài>
 EXPERIMENT_ID: <ID>

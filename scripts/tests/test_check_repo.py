@@ -29,9 +29,9 @@ class RepositoryChecks(unittest.TestCase):
         self.root = Path(self.temp.name).resolve()
         assert self.root.parent == base
         self.addCleanup(self.temp.cleanup)
-        for folder in ['src', 'scripts', 'results', 'verifiers', 'docs', 'templates', 'notebooks']:
+        for folder in ['src', 'scripts', 'results', 'verifiers', 'docs', 'templates', 'notebooks', 'research']:
             for source in (REPO / folder).rglob('*'):
-                if source.is_file() and source.suffix in {'.py', '.md', '.json', '.ipynb', '.txt'}:
+                if source.is_file() and source.suffix in {'.py', '.md', '.json', '.ipynb', '.txt', '.pdf'}:
                     target = self.root / source.relative_to(REPO)
                     target.parent.mkdir(parents=True, exist_ok=True)
                     shutil.copyfile(source, target)
@@ -42,6 +42,58 @@ class RepositoryChecks(unittest.TestCase):
         # Root docs link to these files/directories, too.
         shutil.copytree(REPO / '.github', self.root / '.github')
         self.audit = module.Audit(self.root)
+
+    def test_research_note_identity_and_hash(self):
+        folder = self.root / 'research/dqi/discussions/decoder-errors'
+        folder.mkdir(parents=True)
+        (folder / 'source.md').write_text('Discussion snapshot', encoding='utf-8')
+        note = folder / 'note.md'
+        note.write_text('# Decoder errors\nStatus: draft\nTrack: dqi\nSource: internal snapshot\nVersion: 2026-11-07\n', encoding='utf-8')
+        source = dict(track='dqi', kind='discussions', source_id='decoder-errors', title='Decoder errors',
+                      version='2026-11-07', accessed_at='2026-11-07', coverage='Full supplied thread',
+                      source_file='source.md', source_sha256=hashlib.sha256((folder / 'source.md').read_bytes()).hexdigest())
+        (folder / 'source.json').write_text(json.dumps(source))
+        self.audit.research()
+        self.assertEqual([], self.audit.errors)
+        # A project snapshot must hash Git blobs, not CRLF checkout bytes.
+        source['project_snapshot'] = {'commit': 'a' * 40, 'files': {'src/example.py': hashlib.sha256(b'line\n').hexdigest()}}
+        (folder / 'source.json').write_text(json.dumps(source))
+        self.audit.git_available = True
+        self.audit.git = lambda *args: b'line\n'
+        self.audit.research()
+        self.assertEqual([], self.audit.errors)
+        source['project_snapshot']['files']['src/example.py'] = hashlib.sha256(b'line\r\n').hexdigest()
+        (folder / 'source.json').write_text(json.dumps(source))
+        self.audit.research()
+        self.assertTrue(any('project_snapshot hash differs from Git blob' in e for e in self.audit.errors))
+        self.audit.errors.clear()
+        del source['project_snapshot']
+        (folder / 'source.json').write_text(json.dumps(source))
+        (folder / 'source.md').write_text('Changed snapshot')
+        self.audit.research()
+        self.assertTrue(any('source hash mismatch' in e for e in self.audit.errors))
+        self.audit.errors.clear()
+        note.write_text('# Missing metadata')
+        self.audit.research()
+        self.assertTrue(any('missing metadata' in e for e in self.audit.errors))
+
+    def test_personal_research_scope_allows_multiple_sources_not_code(self):
+        self.audit.git_available = True
+        self.audit.immutable_results = lambda base: None
+        files = ['research/invsqrt/papers/arxiv-2308.12352/note.md', 'research/dqi/discussions/decoder-errors/note.md', 'research/README.md']
+        row = '+| paper | invsqrt | [note](invsqrt/papers/arxiv-2308.12352/note.md) |'
+        self.audit.git = lambda *args: (row if '--unified=0' in args else '\n'.join(files)).encode()
+        branch = 'research/test-user'
+        self.audit.scope('base', branch)
+        self.assertEqual([], self.audit.errors)
+        files.append('src/dqi/DQI-BASELINE/solution.py')
+        self.audit.scope('base', branch)
+        self.assertTrue(any('outside its scope' in e for e in self.audit.errors))
+        self.audit.errors.clear()
+        files.pop()
+        row = '+Changed workflow instructions'
+        self.audit.scope('base', branch)
+        self.assertTrue(any('changed index outside resource rows' in e for e in self.audit.errors))
 
     def test_current_records_pass(self):
         self.audit.run()

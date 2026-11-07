@@ -6,6 +6,16 @@ on:
 permissions:
   contents: read
 jobs:
+  research-notes:
+    name: Research resources require notes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Reject resources without note.md
+        run: python scripts/check_research_notes.py
   repository-checks:
     runs-on: ubuntu-latest
     steps:

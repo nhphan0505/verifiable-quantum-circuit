@@ -1,7 +1,7 @@
 # 02 — Tạo Issue mới và branch cho hướng đã chọn
 
 ```text
-Đọc AGENTS.md và CONTRIBUTING.md trước khi làm.
+Đọc AGENTS.md, CONTRIBUTING.md và docs/EXPERIMENT_WORKFLOW.md trước khi làm.
 
 TRACK: <invsqrt | dqi | dfthcsos>
 HYPOTHESIS ĐÃ CHỌN: <ý tưởng và phạm vi cụ thể>

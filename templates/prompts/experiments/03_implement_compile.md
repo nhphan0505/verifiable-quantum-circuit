@@ -1,7 +1,7 @@
 # 03 — Viết code/config và compile để bàn giao chấm
 
 ```text
-Đọc AGENTS.md và CONTRIBUTING.md trước khi làm.
+Đọc AGENTS.md, CONTRIBUTING.md và docs/EXPERIMENT_WORKFLOW.md trước khi làm.
 
 TRACK: <bài>
 EXPERIMENT_ID: <ID>

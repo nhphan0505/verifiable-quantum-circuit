@@ -1,8 +1,20 @@
 # <Tên paper — phương pháp/thành phần liên quan>
 
-<!-- Copy tới research/papers/<slug>/NOTES.md. Đọc bản gốc, điền mục phù hợp,
+<!-- Copy tới research/<TRACK>/papers/<PAPER_ID>/note.md; PAPER_ID theo research/README.md.
+Đọc bản gốc, điền mục phù hợp,
 xóa hướng dẫn/placeholder. Phần chưa kiểm chứng phải ghi rõ, không tự bổ sung
-công thức hoặc kết quả paper không có. Link tương đối tính từ vị trí NOTES.md. -->
+công thức hoặc kết quả paper không có. Link tương đối tính từ vị trí note.md.
+Đọc theo bộ prompt literature và research/AGENTS.md. Không dùng bước sinh
+hypothesis để đọc PDF hoặc tự chuyển nguồn thành note. -->
+
+Status: draft
+Track: <invsqrt | dqi | dfthcsos | shared>
+Source: <định danh/URL nguồn; metadata chi tiết trong source.json cùng thư mục>
+Version: <phiên bản/hash snapshot; ngày truy cập>
+
+<!-- Chỉ đặt ready sau khi xử lý findings. Ready chỉ dùng cho sinh hypothesis
+sau review và merge. Ghi giới hạn, phần chưa đọc và dẫn trang/mục/comment ID.
+Không coi việc template được điền đủ là chứng minh nội dung đúng. -->
 
 - Paper: <tên đầy đủ, tác giả, năm, DOI/URL gốc, phiên bản arXiv nếu có>.
 - Track: <invsqrt / dqi / dfthcsos / dùng chung>.

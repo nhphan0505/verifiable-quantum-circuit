@@ -100,3 +100,37 @@ legacy_runs.json. Phải ghi source_path/source_sha256 đúng biên bản cũ v�
 Checker đối chiếu hash upload với build cũ; không miễn kiểm tra run mới, không mở
 ngoại lệ cho build mới hoặc tự thêm run vào allowlist. Mẫu provenance thông thường
 vẫn bắt buộc SHA Git đầy đủ cho mọi build từ workflow hiện tại.
+
+## Research notes và branch tài liệu
+
+Note nằm tại research/<TRACK>/<papers|discussions>/<SOURCE_ID>/note.md.
+Checker đối chiếu metadata Status (draft/ready), Track, Source, Version và source.json:
+identity theo folder, title/version/ngày truy cập/coverage, đường dẫn nguồn cùng
+thư mục và SHA-256 thật. Checker cấu trúc cho phép bản nháp; job CI research-notes yêu cầu mỗi thư mục nguồn có note.md không rỗng. Nguồn URL phải có URL
+và phiên bản/ngày truy cập; không khai hash file local nếu không lưu file.
+
+Branch research/<username> có thể sửa nhiều nguồn trong research/<TRACK>/<papers|discussions>/<SOURCE_ID>/
+và các dòng bảng trong research/README.md. Không sửa research/AGENTS.md hay code/
+config/results/templates. Chạy --base <base-ref> --branch research/<username> trước PR.
+Checker chỉ kiểm tra hình thức username; quyền sở hữu và quyết định của nhóm được
+xác minh qua GitHub và người dùng. Branch hạ tầng (ví dụ infra/...) dùng cho sửa workflow.
+
+CI không chứng minh nội dung note đúng hoặc đã review/merge. Reviewer kiểm tra
+nguồn trực tiếp; publisher xác nhận approval gắn HEAD cuối. Agent nghiên cứu chỉ
+đọc note ready trên nhánh chính. Test fixture bao gồm research để kiểm tra link.
+
+## CI bắt buộc note đi kèm resource
+
+Job `Research resources require notes` trong .github/workflows/repo-checks.yml chạy
+`python scripts/check_research_notes.py` trên PR, push và workflow_dispatch.
+Mọi thư mục nguồn dưới bốn track/papers hoặc discussions phải có note.md chữ thường,
+không rỗng, UTF-8 và không phải symlink. source.md, source.json hoặc PDF không thay thế note.
+Tài nguyên đặt rời ngoài thư mục nguồn bị chặn; .gitkeep ở cấp papers/discussions được bỏ qua.
+Check này áp dụng toàn kho, không miễn nguồn cũ và không phụ thuộc tên branch.
+
+Check file không xác nhận chất lượng nội dung; reviewer phải đối chiếu nguồn.
+Cần đặt job này là required check trong branch protection/ruleset để GitHub thực sự
+chặn merge khi đỏ; chỉ có workflow không tự bật bảo vệ branch.
+
+Nếu source.json có project_snapshot, hash phải lấy từ Git blob tại commit đã ghi,
+không lấy từ checkout CRLF/LF. Checker đối chiếu với git show khi có Git.

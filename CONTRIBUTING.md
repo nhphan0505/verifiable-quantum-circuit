@@ -4,7 +4,25 @@ Một hướng nghiên cứu tương ứng một GitHub Issue, một branch và 
 
 **Chuẩn bị → kiểm tra hướng cũ → nhận Issue → tạo branch → mô tả/code/config → commit nguồn → dựng/chấm → lưu và phân tích → commit kết quả → thử tiếp hoặc PR → review/merge → đóng Issue.**
 
-Mẫu giao việc cho coding agent: [templates/prompts/README.md](templates/prompts/README.md).
+Mẫu giao việc cho coding agent: [templates/prompts/README.md](templates/prompts/experiments/README.md).
+
+## Hai luồng cộng tác
+
+- **Nghiên cứu thử nghiệm:** [agent](docs/EXPERIMENT_WORKFLOW.md),
+  [prompts](templates/prompts/experiments/README.md); thực hiện 12 bước bên dưới.
+- **Đọc tài liệu:** [agent](research/AGENTS.md), [prompts](templates/prompts/literature/README.md).
+  Tạo/tiếp tục branch `research/<username>` → thêm nhiều resource → viết note →
+  review → nhóm họp chọn đợt research → giao merge PR vào main. Issue cho nguồn
+  là tùy chọn; không có yêu cầu một nguồn một branch/Issue.
+- Dùng agent/chat riêng, worktree/workspace riêng khi chạy đồng thời. Branch research
+  thuộc một thành viên, chỉ sửa tài nguyên và mục lục research; hạ tầng cần nhiệm vụ riêng.
+  Workflow experiment vẫn một Issue/branch/owner và không phụ thuộc việc nhóm đang đọc tài liệu.
+- Note ready đã review và merge là điểm nối. Agent nghiên cứu chỉ đọc note trong
+  research, vẫn tự phân tích code/verifier/results; không đọc nguồn hoặc tự viết note.
+- Agent tài liệu được đọc nguồn nhưng không sửa thí nghiệm, điểm hoặc chạy chấm.
+  Luồng tài liệu không cần compile/provenance build. Quy tắc merge/approval vẫn áp dụng.
+- CI yêu cầu mỗi thư mục resource có note.md không rỗng; PDF/link-only chỉ lưu nháp,
+  chưa được merge. Chạy scripts/check_research_notes.py trước bàn giao PR.
 
 ## 1. Chuẩn bị workspace
 
@@ -69,8 +87,8 @@ git status --short --branch
 ```
 
 Nếu thiếu tên/email, cấu hình danh tính Git của mình trước khi commit.
-Bắt đầu bằng [prompt 01 — tìm hypothesis](templates/prompts/01_find_hypothesis.md),
-sau đó làm theo [bộ prompt từng giai đoạn](templates/prompts/README.md).
+Bắt đầu bằng [prompt 01 — tìm hypothesis](templates/prompts/experiments/01_find_hypothesis.md),
+sau đó làm theo [bộ prompt từng giai đoạn](templates/prompts/experiments/README.md).
 Agent sẽ tạo branch, code/config và compile artifact khi được giao hướng;
 người clone mới chưa có sẵn artifact baseline trong máy.
 
@@ -181,7 +199,7 @@ Sau khi chấm, kết quả tự nằm trong
 
 Mỗi run là một thư mục riêng. Không ghi đè run cũ, không sửa JSON verifier hoặc metadata gốc để làm đẹp kết quả. Giữ config.json, metadata.json, verifier.json (nếu có), stdout/stderr và dữ liệu lỗi khi chạy thất bại. `config.json` từ notebook là cấu hình chấm; config dựng mạch nằm trong source ở bước 5.
 
-Thêm `provenance.json` vào thư mục run, ghi ít nhất: SHA commit nguồn ở bước 6, đường dẫn và hash JSON config dựng, hash artifact, lệnh dựng thực tế. Đối chiếu hash artifact với hash submission mà notebook ghi. Đây là record bổ sung; notebook hiện chưa tự lấy commit từ máy local, thành viên cần ghi lại.
+Thêm `provenance.json` vào thư mục run, ghi ít nhất: SHA commit nguồn ở bước 6, đường dẫn và hash JSON config dựng, hash artifact, lệnh dựng thực tế. Đối chiếu hash artifact với hash submission mà notebook ghi. Notebook tự nối provenance khi có đúng một build khớp hash; agent đối chiếu và bổ sung khi thiếu/mơ hồ, không suy đoán commit từ HEAD.
 
 Không commit token hay thông tin bí mật. Dữ liệu JSON/log nhỏ trong results được commit; artifact lớn vẫn ở ngoài Git. Xem thêm [quy ước results](results/README.md).
 
@@ -233,9 +251,9 @@ Trước PR, agent chạy `.\.venv\Scripts\python.exe scripts/check_repo.py`, b�
 Reviewer kiểm tra mô tả/Issue đã đồng bộ, code đọc config, commit nguồn/provenance, hash và bằng chứng chấm, điểm đúng cột và link kết quả mở được. Các kiểm tra nhỏ hoặc CI chỉ chạy nếu phù hợp; không tuyên bố full PASS khi chỉ có dev. Hướng thất bại vẫn có thể merge để lưu tri thức, nhưng phải ghi kết luận rõ.
 
 Phân công review: tác giả dùng prompt 06 chuẩn bị PR; teammate dùng phiên agent
-riêng chạy [07](templates/prompts/07_review_pr.md), ghi findings và SHA đã review.
+riêng chạy [07](templates/prompts/experiments/07_review_pr.md), ghi findings và SHA đã review.
 Tác giả sửa/push nếu cần; teammate kiểm tra lại commit mới rồi dùng
-[07b](templates/prompts/07b_publish_review.md) để đăng Approve hoặc Request changes.
+[07b](templates/prompts/experiments/07b_publish_review.md) để đăng Approve hoặc Request changes.
 Tài khoản reviewer phải khác tác giả. CI đang chờ thì chưa approve; thiếu approval
 không phải lỗi check kỹ thuật. Findings trong chat chưa thay thế review GitHub.
 Nếu HEAD đổi sau review, teammate review lại phần mới và đăng approval cho HEAD đó,

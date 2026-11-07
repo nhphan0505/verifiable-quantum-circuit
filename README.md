@@ -39,7 +39,7 @@ GQA/
 
 ## Làm việc
 
-Dùng coding agent: yêu cầu đọc [AGENTS.md](AGENTS.md) trước khi bắt đầu. Chọn [prompt theo giai đoạn](templates/prompts/README.md) để giao việc.
+Dùng coding agent: yêu cầu đọc [AGENTS.md](AGENTS.md) trước khi bắt đầu. Chọn [prompt theo giai đoạn](templates/prompts/experiments/README.md) để giao việc.
 
 1. Chuẩn bị workspace
 2. Kiểm tra các hướng đã có
@@ -117,8 +117,8 @@ git status --short --branch
 ```
 
 Nếu thiếu tên/email, cấu hình danh tính Git của mình trước khi commit.
-Bắt đầu bằng [prompt 01 — tìm hypothesis](templates/prompts/01_find_hypothesis.md),
-sau đó làm theo [bộ prompt từng giai đoạn](templates/prompts/README.md).
+Bắt đầu bằng [prompt 01 — tìm hypothesis](templates/prompts/experiments/01_find_hypothesis.md),
+sau đó làm theo [bộ prompt từng giai đoạn](templates/prompts/experiments/README.md).
 Agent sẽ tạo branch, code/config và compile artifact khi được giao hướng;
 người clone mới chưa có sẵn artifact baseline trong máy.
 
@@ -131,3 +131,18 @@ Các record cũ đã chuyển về cấu trúc mới, giữ nguyên JSON/log. Đ
 Kiểm tra trước PR: `.\.venv\Scripts\python.exe scripts/check_repo.py`. Xem [phạm vi check, provenance và phiên bản môi trường](docs/REPOSITORY_CHECKS.md). Dùng Python 3.13 và dependency đã pin.
 
 Kho tài nguyên: [paper và thảo luận nghiên cứu](research/README.md).
+
+## Hai luồng dùng agent
+
+| Luồng | Hướng dẫn | Bộ prompt |
+| --- | --- | --- |
+| Nghiên cứu thử nghiệm | [Workflow](docs/EXPERIMENT_WORKFLOW.md) | [experiments](templates/prompts/experiments/README.md) |
+| Đọc paper/discussion thành note | [Agent tài liệu](research/AGENTS.md) | [literature](templates/prompts/literature/README.md) |
+
+Dùng chat và workspace riêng khi chạy đồng thời. Agent tài liệu xuất bản note;
+agent nghiên cứu chỉ dùng note ready đã review và merge. Chấm notebook local vẫn
+thực hiện thủ công. Xem [điểm vào chung](templates/prompts/README.md).
+
+Luồng tài liệu: mỗi thành viên thêm nhiều nguồn/note trên `research/<username>`,
+mở PR để nhóm xem và họp quyết định đợt nhập vào main. Issue nguồn là tùy chọn.
+Workflow experiment vẫn dùng `exp/<ID>-...` như trước.
