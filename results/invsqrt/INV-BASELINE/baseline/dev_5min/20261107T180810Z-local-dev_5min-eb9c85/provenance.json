@@ -1,0 +1,23 @@
+{
+  "provenance_type": "pre_git_build",
+  "track": "invsqrt",
+  "experiment_id": "INV-BASELINE",
+  "config_name": "baseline",
+  "source_commit": null,
+  "source_path": "src/invsqrt/baseline.py",
+  "source_sha256": "7e7a1c83d3991b7f2fa405248222060dce269d6a5d28cae4140137f80e99d66a",
+  "build_config_path": null,
+  "build_config_sha256": null,
+  "artifact_path": "artifacts/invsqrt/INV-BASELINE/baseline.kmb",
+  "artifact_sha256": "e2bf8eb64350a4460a271fc7f1d591ef125b1e276377e9a0f64b96ab3ca321e1",
+  "build_run": "results/invsqrt/INV-BASELINE/baseline/build_only/20261106T100536Z-local-build",
+  "build_command": null,
+  "environment": {
+    "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4"
+    }
+  },
+  "limitations": "Artifact built before Git/config restructuring. Historical record preserves source hash and artifact hash, but no Git SHA, exact command or JSON build config. Current HEAD is not its build commit."
+}

@@ -21,3 +21,19 @@ Mã triển khai: [baseline.py](solution.py). Nguồn: [nr_reference_circuit.py]
 Phiên bản nguồn gốc được đối chiếu bằng SHA-256 trong [data_manifest.json](../../../data_manifest.json); chưa có Git commit/Issue để gắn permalink.
 
 Cấu hình dựng baseline: [configs/baseline.json](configs/baseline.json). CLI mới đọc JSON và tự đặt tên artifact theo tên config; thuật toán tạo mạch được giữ nguyên.
+
+
+## Kết luận và mốc đối chiếu local
+
+Run dev_5min mới xác nhận lại baseline trên 4.096 mẫu (8.192 shots) với seed 20261106:
+không phát hiện lỗi giá trị/pha, kết quả trùng mốc dev trước (score 2076443.1049173493).
+Đây là bằng chứng trên profile dev, chưa xác nhận full. Dùng run mới làm mốc đối chiếu
+cho ứng viên cùng môi trường và hash verifier/harness; score nằm trong SCORES.md.
+
+Config tham chiếu: [baseline.json](configs/baseline.json).
+Run: [verifier.json](../../../results/invsqrt/INV-BASELINE/baseline/dev_5min/20261107T180810Z-local-dev_5min-eb9c85/verifier.json).
+Nguồn gốc: [provenance.json](../../../results/invsqrt/INV-BASELINE/baseline/dev_5min/20261107T180810Z-local-dev_5min-eb9c85/provenance.json).
+Artifact được dựng trước Git; chỉ xác định được hash nguồn lịch sử và hash artifact
+qua biên bản build, không có SHA commit nguồn. Không coi HEAD hiện tại là phiên bản
+tạo artifact này. Source/config hiện tại dùng để tham khảo/tái dựng, không thay thế
+bằng chứng lịch sử.
