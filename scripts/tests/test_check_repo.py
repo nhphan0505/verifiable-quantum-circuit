@@ -59,7 +59,9 @@ class RepositoryChecks(unittest.TestCase):
         source['project_snapshot'] = {'commit': 'a' * 40, 'files': {'src/example.py': hashlib.sha256(b'line\n').hexdigest()}}
         (folder / 'source.json').write_text(json.dumps(source))
         self.audit.git_available = True
-        self.audit.git = lambda *args: b'line\n'
+        real_repository = module.Audit(REPO)
+        self.audit.git = lambda *args: (b'line\n' if args == ('show', 'a' * 40 + ':src/example.py')
+                                       else real_repository.git(*args))
         self.audit.research()
         self.assertEqual([], self.audit.errors)
         source['project_snapshot']['files']['src/example.py'] = hashlib.sha256(b'line\r\n').hexdigest()
