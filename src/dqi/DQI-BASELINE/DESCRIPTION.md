@@ -26,7 +26,7 @@ Cấu hình dựng baseline: [configs/baseline.json](configs/baseline.json). CLI
 
 Run dev_5min mới xác nhận lại baseline trên 4.096 shots với seed 20261106:
 không phát hiện lỗi giá trị/pha, kết quả trùng mốc dev trước. Đây là bằng chứng
-trên profile dev, chưa xác nhận full. Dùng run mới làm mốc đối chiếu cho ứng viên
+trên profile dev. Dùng run mới làm mốc đối chiếu cho ứng viên
 cùng môi trường và hash verifier/harness; score nằm trong SCORES.md.
 
 Config tham chiếu: [baseline.json](configs/baseline.json).
@@ -36,3 +36,15 @@ Artifact được dựng trước Git; chỉ xác định được hash nguồn 
 qua biên bản build, không có SHA commit nguồn. Không coi HEAD hiện tại là phiên bản
 tạo artifact này. Source/config hiện tại dùng để tham khảo/tái dựng, không thay thế
 bằng chứng lịch sử.
+
+Run [full local](../../../results/dqi/DQI-BASELINE/baseline/full/20261107T094931Z-local-full-5ed1c6/verifier.json)
+đã PASS với 102.400 shots, không phát hiện lỗi giá trị hoặc pha, dùng tham số
+mặc định chính thức của verifier DQI. Đây là mốc full để so với ứng viên cùng
+môi trường và phiên bản verifier; chưa phải điểm nộp trên hệ thống cuộc thi.
+Không so trực tiếp score full với dev vì hệ số phạt phụ thuộc số mẫu.
+
+Hash artifact của full khớp run dev và biên bản build baseline trước Git;
+[provenance full](../../../results/dqi/DQI-BASELINE/baseline/full/20261107T094931Z-local-full-5ed1c6/provenance.json)
+giữ hash nguồn lịch sử, không gán SHA commit hiện tại cho artifact cũ.
+Config hiện tại chỉ là tham chiếu như đã nêu trên. Kết quả full/dev và hệ số
+baseline `1.00×` được ghi riêng trong SCORES.md.

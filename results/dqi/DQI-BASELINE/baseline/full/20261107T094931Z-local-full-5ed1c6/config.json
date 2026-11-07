@@ -1,0 +1,13 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-BASELINE",
+  "config_name": "baseline",
+  "mode": "full",
+  "command": [
+    "d:\\GQA\\.venv\\Scripts\\python.exe",
+    "D:\\GQA\\verifiers\\dqi\\verify_submission_dqi.py",
+    "D:\\GQA\\artifacts\\dqi\\DQI-BASELINE\\baseline.kmb",
+    "--max-workers",
+    "1"
+  ]
+}

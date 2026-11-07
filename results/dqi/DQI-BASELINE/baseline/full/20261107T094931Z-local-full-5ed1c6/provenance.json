@@ -1,0 +1,23 @@
+{
+  "provenance_type": "pre_git_build",
+  "track": "dqi",
+  "experiment_id": "DQI-BASELINE",
+  "config_name": "baseline",
+  "source_commit": null,
+  "source_path": "src/dqi/baseline.py",
+  "source_sha256": "2637a6ef3a9046fcc7b318ee8926fd888e23a7a9f42b0b9f8f87c0580cc5fe51",
+  "build_config_path": null,
+  "build_config_sha256": null,
+  "artifact_path": "artifacts/dqi/DQI-BASELINE/baseline.kmb",
+  "artifact_sha256": "959471d05a26373b4f14ca0cae2d8639ea25f18170d9f6532139aa51ccc04995",
+  "build_run": "results/dqi/DQI-BASELINE/baseline/build_only/20261106T100536Z-local-build",
+  "build_command": null,
+  "environment": {
+    "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4"
+    }
+  },
+  "limitations": "Artifact built before Git/config restructuring. Historical record preserves source hash and artifact hash, but no Git SHA, exact command or JSON build config. Current HEAD is not its build commit."
+}

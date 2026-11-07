@@ -1,0 +1,17 @@
+{
+  "status": "REVIEWED",
+  "verification_level": "full",
+  "official_score": false,
+  "checks": {
+    "stdout_matches_verifier_json": true,
+    "stderr_empty": true,
+    "artifact_matches_historical_build_and_manifest": true,
+    "verifier_hashes_match_local": true,
+    "official_default_full_parameters": true,
+    "verified_shots": 102400,
+    "value_errors": 0,
+    "phase_errors": 0
+  },
+  "score": 24439463583672.93,
+  "note": "Local full verifier PASS, not a competition-platform submission score. Historical pre-Git build identified by hash; see provenance.json. Supersedes initial review.json missing-provenance notice; raw files unchanged."
+}
