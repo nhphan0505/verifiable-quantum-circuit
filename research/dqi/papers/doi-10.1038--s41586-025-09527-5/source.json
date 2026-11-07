@@ -1,0 +1,12 @@
+{
+  "track": "dqi",
+  "kind": "papers",
+  "source_id": "doi-10.1038--s41586-025-09527-5",
+  "title": "Optimization by decoded quantum interferometry",
+  "source_url": "https://doi.org/10.1038/s41586-025-09527-5",
+  "version": "Nature Vol. 646, pp. 831-836 (2025-10-23); published online 2025-10-22; accepted 2025-08-13; received 2024-12-04; local PDF created 2025-10-11",
+  "accessed_at": "2026-11-07",
+  "source_file": "paper.pdf",
+  "source_sha256": "f492957ba9897ef735decb7a4a7a75fc7cdd6515a3e2b94b9571726ab060420f",
+  "coverage": "Initial registration and classification only (step 01): PDF metadata, p.1 header/title/authors/abstract/DOI, skimming pp.1-4 (DQI 5-step circuit Fig. 1, max-LINSAT/OPI Definitions 1-2, Reed-Solomon decoding and Qualtran resource estimate at p=521) and pp.5-7 (Discussion, references, data/code availability) to confirm paper identity and dqi track. Not deeply analyzed yet."
+}
