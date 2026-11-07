@@ -33,7 +33,7 @@ Các output không commit; teammate clone mới chạy lại lệnh này.
 Mở `notebooks/GQA_Grade_Submission.ipynb` trong Colab, chọn CPU và chạy tuần tự:
 
 1. Dùng runtime Python 3.13; cell cài kickmix 1.0.0, NumPy 2.4.6 và SciPy 1.16.3 theo requirements-colab.txt.
-2. Upload `artifacts/colab/gqa_verifiers.zip`: code chấm gốc và dev harness, không có binary kickmix.
+2. Notebook tự kiểm tra các file verifier/harness cần thiết trong runtime; nếu đủ thì bỏ qua upload. Nếu thiếu, upload đúng một `artifacts/colab/gqa_verifiers.zip`; notebook kiểm tra lại sau giải nén.
 3. Chọn TRACK, EXPERIMENT_ID, MODE và OWNER. Không có ô CONFIG_NAME.
 4. Task 1–2 bắt buộc đúng một `.kmb`; task 3 bắt buộc đúng một ZIP submission. Sai số lượng/định dạng/cấu trúc ZIP thì code báo lỗi và chặn verify, không dùng lại submission cũ.
 5. Riêng task 3, upload `artifacts/colab/dfthcsos_reference.zip` ở cell dữ liệu nếu runtime chưa có dữ liệu tham chiếu.
