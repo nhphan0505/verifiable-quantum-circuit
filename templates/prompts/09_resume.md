@@ -16,7 +16,7 @@ không tạo lại Issue/branch/run hay chạy lại build nếu đã có bằng
 Giữ thay đổi hiện có của người dùng; kiểm tra artifact bằng hash nếu dùng lại.
 
 Tiếp tục đúng giai đoạn được giao theo prompt tương ứng trong templates/prompts/.
-Thiếu quyền cho push/PR/merge thì không tự suy ra từ việc đổi chat. Không mở
+Thiếu quyền cho push/PR/merge thì không tự suy ra từ việc đổi chat. Không tự chạy notebook, mở
 Colab hoặc theo dõi runtime. Báo trạng thái đã xác minh và chỉ hỏi thông tin
 còn thiếu mà không tra được từ project/GitHub.
 ```

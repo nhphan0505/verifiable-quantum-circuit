@@ -25,7 +25,7 @@ cd GQA
 
 ```powershell
 py -3.13 -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m pip install -r requirements-notebook.txt
 .\.venv\Scripts\python.exe -m pip check
 ```
 
@@ -37,7 +37,7 @@ Colab dùng bộ dependency riêng đã pin trong notebook và `requirements-col
 
 Lấy bộ dữ liệu gốc của cuộc thi hoặc từ người phụ trách nhóm, đặt theo [DATA.md](DATA.md).
 Git không chứa dataset lớn, submission mẫu, `.venv` hoặc artifact đã compile.
-Để tạo đủ hai ZIP Colab cần:
+Để chấm task 3 local cần:
 
 - `verifiers/dfthcsos/FeMoCo76o113e.fcidump`
 - `verifiers/dfthcsos/FeMoCo76o113e.fixed_shifts.npz`
@@ -46,17 +46,15 @@ Dựng baseline task 3 còn cần `sample_submission/dfthcsos/submission.npz`.
 Các file mạch mẫu dùng để đối chiếu khi cần; Windows dùng package pip Kickmix,
 không cần binary Linux `kickmix.so` để compile.
 
-**4. Tạo ZIP dùng cho Colab và kiểm tra workspace:**
+**4. Kiểm tra workspace và mở notebook local:**
 
 ```powershell
-.\.venv\Scripts\python.exe scripts/prepare_colab.py
 .\.venv\Scripts\python.exe scripts/check_repo.py
 ```
 
-Lệnh đầu kiểm tra hash dữ liệu và tạo `gqa_verifiers.zip`, `dfthcsos_reference.zip`
-cùng manifest trong `artifacts/colab/`. Nếu thiếu dữ liệu thì bổ sung đúng file
-trước khi chạy lại. Checker có thể chạy riêng mà không cần dataset lớn.
-Xem [hướng dẫn chấm Colab](docs/COLAB_GRADING.md) để sử dụng notebook và các ZIP này.
+Mở `notebooks/GQA_Grade_Submission.ipynb` trong VS Code/Jupyter, chọn kernel
+`.venv`. Điền TRACK, MODE, EXPERIMENT_ID, OWNER, CONFIG_NAME; artifact được đọc
+từ project và results lưu đúng chỗ. Xem [chấm local](docs/LOCAL_GRADING.md).
 
 **5. Chuẩn bị coding agent để bắt đầu nghiên cứu:**
 
@@ -159,7 +157,7 @@ Dựng mạch từ đúng phiên bản đã commit. Nếu có thay đổi chưa 
 
 Giữ SHA đã được run tham chiếu; tránh amend/rebase làm mất dấu các commit đó. Có thể commit/push từng phần trước khi tới mốc này, nhưng phải có một commit xác định đầy đủ code/config thực tế dùng cho lần dựng.
 
-## 7. Dựng artifact và chấm thủ công trên Colab
+## 7. Dựng artifact và chấm bằng notebook local
 
 Chạy solution.py bằng Python trong `.venv`, truyền `--config`. Artifact phải cùng tên config và ở đúng vị trí:
 
@@ -170,24 +168,16 @@ artifacts/<TRACK>/<ID>/<config-name>.zip   Task 3
 
 Task 3 phải đóng gói `submission.npz` và `angle_k_0.kmb`, `angle_k_1.kmb`, ... liên tục từ 0 ở gốc ZIP. Nếu đổi setting, dùng artifact tương ứng; không chấm nhầm file của lần dựng trước. Nếu chủ động dựng lại cùng tên, dùng tùy chọn ghi đè của solution và đối chiếu hash artifact mới.
 
-Mở [notebook chấm](notebooks/GQA_Grade_Submission.ipynb) trong Colab và chạy theo [hướng dẫn](docs/COLAB_GRADING.md):
-
-1. Cài package, upload `gqa_verifiers.zip`.
-2. Chọn đúng TRACK, EXPERIMENT_ID, MODE và OWNER.
-3. Task 1–2 upload đúng một `.kmb`; task 3 upload đúng một ZIP submission. Sai quy tắc thì sửa và upload lại trước khi chấm.
-4. Tên config tự lấy từ tên artifact; không phải nhập hoặc upload JSON build.
-5. Với task 3, nạp riêng ZIP dữ liệu tham chiếu nếu runtime chưa có.
-6. Chạy verify, không khởi chạy trùng trong lúc verifier còn chạy.
+Mở [notebook local](notebooks/GQA_Grade_Submission.ipynb), chọn kernel `.venv`,
+điền TRACK, MODE, EXPERIMENT_ID, OWNER, CONFIG_NAME rồi Run All theo
+[hướng dẫn local](docs/LOCAL_GRADING.md). File trong artifacts được đọc trực tiếp.
 
 Dùng smoke để kiểm tra cơ bản, dev_5min để so sánh các phương án trong cùng cấu hình chấm. Full chạy khi cần xác nhận đầy đủ hoặc trước mốc nộp quan trọng, không bắt buộc cho mọi config. Điểm dev không tương đương full; DQI còn có hệ số phạt phụ thuộc số mẫu.
 
 ## 8. Tải results và gắn phiên bản nguồn
 
-Sau khi chấm xong, tải ZIP và giải nén vào root project. Notebook giữ đúng cấu trúc:
-
-```text
-results/<TRACK>/<ID>/<config-name>/<mode>/<run-id>/
-```
+Sau khi chấm, kết quả tự nằm trong
+`results/<TRACK>/<ID>/<config-name>/<mode>/<run-id>/`; không tải/giải nén ZIP.
 
 Mỗi run là một thư mục riêng. Không ghi đè run cũ, không sửa JSON verifier hoặc metadata gốc để làm đẹp kết quả. Giữ config.json, metadata.json, verifier.json (nếu có), stdout/stderr và dữ liệu lỗi khi chạy thất bại. `config.json` từ notebook là cấu hình chấm; config dựng mạch nằm trong source ở bước 5.
 
@@ -208,7 +198,7 @@ So với baseline cùng chế độ, profile, seed và số mẫu; chưa có bas
 Ứng viên cuối cần kiểm tra bổ sung độc lập (mẫu/seed chưa dùng để chọn config,
 kiểm tra biên phù hợp) hoặc full trước khi khẳng định chất lượng. Bộ dev cố định
 có thể bị chọn quá phù hợp sau nhiều vòng thử. Nếu so điểm trên profile bổ sung,
-chấm đối chứng cùng profile; thành viên vẫn tự chấm Colab. Chưa có kiểm tra bổ sung
+chấm đối chứng cùng profile; thành viên vẫn tự chạy notebook local. Chưa có kiểm tra bổ sung
 thì có thể tổng kết/merge với giới hạn rõ ràng, không tuyên bố đã xác nhận đầy đủ.
 
 Trong DESCRIPTION, ghi config/run tốt nhất của từng mode kèm SHA nguồn thực tế,
@@ -272,4 +262,4 @@ Nếu chỉ merge phần bàn giao mà hướng còn dang dở, giữ Issue mở
 
 Trạng thái đề xuất: `proposed → claimed → running → in_review → completed`; thêm `paused` hoặc `abandoned` khi cần. Mô tả trong repo là bản chuẩn, đồng bộ với Issue. Khi chưa có GitHub thì theo dõi phân công trực tiếp trong nhóm, giữ nguyên các nguyên tắc ID, source/config và kết quả.
 
-Chuẩn bị hai ZIP upload Colab sau khi có dữ liệu: chạy `.\.venv\Scripts\python.exe scripts/prepare_colab.py` từ root. Script kiểm tra SHA-256 và ghi ZIP/manifest vào `artifacts/colab/`; xem [hướng dẫn Colab](docs/COLAB_GRADING.md).
+Chấm local theo [hướng dẫn](docs/LOCAL_GRADING.md); không cần tạo ZIP verifier hoặc tải results về máy.

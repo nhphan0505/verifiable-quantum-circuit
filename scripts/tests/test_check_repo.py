@@ -77,10 +77,10 @@ class RepositoryChecks(unittest.TestCase):
         self.assertTrue(any('organizer verifier missing/modified' in e for e in self.audit.errors))
 
     def test_notebook_dependency_drift_fails(self):
-        path = self.root / 'requirements-colab.txt'
-        path.write_text(path.read_text().replace('numpy==2.4.6', 'numpy==2.5.4'))
+        path = self.root / 'requirements.txt'
+        path.write_text(path.read_text().replace('numpy==2.5.4', 'numpy==2.4.6'))
         self.audit.run()
-        self.assertTrue(any('Notebook pip command differs' in e for e in self.audit.errors))
+        self.assertTrue(any('Notebook dependency pins differ' in e for e in self.audit.errors))
 
     def test_full_settings_for_all_tracks(self):
         cases = {

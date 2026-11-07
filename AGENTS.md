@@ -62,20 +62,16 @@ results/<TRACK>/<ID>/<CONFIG_NAME>/<MODE>/<run_id>/
 - Nếu chưa có Git hoặc thao tác commit bị chặn, ghi rõ điều đó và dùng hash source/config để nhận diện tạm; không bịa SHA hoặc tuyên bố đã commit. Báo giới hạn này khi bàn giao.
 - Không commit artifacts lớn, `.venv`, token hoặc thông tin đăng nhập. Không amend/rebase làm mất dấu commit đã được run tham chiếu.
 
-## 5. Bàn giao chấm Colab — điểm dừng bắt buộc của thử nghiệm
+## 5. Bàn giao chấm local — điểm dừng bắt buộc của thử nghiệm
 
-Thành viên tự chấm thủ công. Sau khi dựng artifact và kiểm tra phù hợp, cung cấp:
+Thành viên tự chạy notebook `notebooks/GQA_Grade_Submission.ipynb` bằng kernel
+`.venv` theo [hướng dẫn local](docs/LOCAL_GRADING.md). Agent bàn giao artifact/hash,
+TRACK, MODE, EXPERIMENT_ID, OWNER, CONFIG_NAME và đường dẫn results dự kiến.
+Không cần upload hoặc ZIP verifier. Task 3 vẫn dùng artifact ZIP đúng quy cách.
+Sau bàn giao dừng chờ kết quả; chỉ tự chạy chấm khi người dùng giao rõ lượt đó.
+Không mở Colab/MCP hoặc theo dõi runtime thay thành viên.
 
-1. Đường dẫn artifact và SHA-256.
-2. TRACK, EXPERIMENT_ID, tên config và mode đề xuất.
-3. Hướng dẫn mở notebook, upload ZIP verifier và đúng một artifact; task 3 nạp thêm ZIP dữ liệu tham chiếu nếu cần.
-4. Hướng dẫn tải results và giải nén ZIP vào root project.
-
-Sau đó dừng và chờ kết quả. Không tự mở browser, chạy Colab, theo dõi runtime hay dùng MCP để chấm thay, trừ khi người dùng yêu cầu rõ ràng cho lượt đó.
-
-Notebook tự lấy CONFIG_NAME từ tên artifact. Task 1–2 chỉ nhận một `.kmb`; task 3 chỉ nhận một ZIP submission. Không yêu cầu upload JSON build. Xem [docs/COLAB_GRADING.md](docs/COLAB_GRADING.md).
-
-## 6. Khi người dùng đã tải results
+## 6. Khi người dùng đã chạy notebook local
 
 - Tìm run mới trong project trước khi hỏi lại vị trí. Đối chiếu TRACK/ID/config/mode, trạng thái, số mẫu, profile/seed và hash mạch/verifier.
 - Nối kết quả với record build_only bằng hash artifact, không chỉ dựa vào tên file. Bổ sung provenance.json cho run chấm, dẫn SHA nguồn/config/lệnh dựng đã ghi lúc compile. Nếu không xác định được bản build, ghi rõ thiếu provenance; không suy đoán từ HEAD hiện tại.
@@ -85,7 +81,7 @@ Notebook tự lấy CONFIG_NAME từ tên artifact. Task 1–2 chỉ nhận mộ
 - Khi tính cải thiện, môi trường Python/package và hash verifier/dev harness phải khớp đối chứng theo checker; thiếu bằng chứng thì để `—`, không suy đoán hash hoặc sửa metadata gốc.
 - Cải thiện (lần) = `baseline_score / candidate_score`; baseline `1.00×`, cao hơn tốt hơn. Chỉ so baseline cùng mode/profile/seed/số mẫu. Chưa có baseline phù hợp thì để `—`. Chỉ tính với PASS và chi phí hữu hạn, lớn hơn 0.
 - Smoke/FAIL/TIMEOUT chỉ lưu results và kết luận cần thiết, không ghi điểm vào bảng. Không lấy điểm dev so trực tiếp với full.
-- Chọn ứng viên cuối cần kiểm tra bổ sung độc lập (mẫu/seed chưa dùng chọn config, kiểm tra biên phù hợp) hoặc full; không khẳng định chất lượng chỉ từ nhiều lần tối ưu trên cùng bộ dev. So điểm ở profile mới cần đối chứng tương ứng; vẫn bàn giao để thành viên tự chấm Colab. Chưa có bằng chứng bổ sung thì ghi rõ giới hạn, không gọi đã xác nhận full.
+- Chọn ứng viên cuối cần kiểm tra bổ sung độc lập (mẫu/seed chưa dùng chọn config, kiểm tra biên phù hợp) hoặc full; không khẳng định chất lượng chỉ từ nhiều lần tối ưu trên cùng bộ dev. So điểm ở profile mới cần đối chứng tương ứng; vẫn bàn giao để thành viên tự chạy notebook local. Chưa có bằng chứng bổ sung thì ghi rõ giới hạn, không gọi đã xác nhận full.
 - DESCRIPTION ghi mapping config/run tốt nhất của từng mode với SHA nguồn và link provenance/permalink. Khi sửa solution.py, giữ đúng phiên bản của mốc tốt cũ; JSON cùng tên chạy với code mới không bảo đảm tái lập run cũ. Không thay SHA của run cũ bằng HEAD mới.
 - Phân tích giả thuyết, đánh đổi, rủi ro còn lại và đề xuất thử tiếp hay dừng. Cùng ý tưởng thì thêm config/sửa implementation theo phạm vi giao; đổi hypothesis đáng kể phải quay lại bước nhận hướng.
 - Commit kết quả, provenance, bảng điểm và phân tích sau chấm. Khi tiếp tục, lặp: commit nguồn/config → compile → bàn giao chấm → commit kết quả/phân tích.
@@ -104,4 +100,4 @@ Notebook tự lấy CONFIG_NAME từ tên artifact. Task 1–2 chỉ nhận mộ
 
 ## 8. Báo cáo khi kết thúc lượt
 
-Nêu ngắn gọn: đã đổi gì, ID/branch/commit liên quan, kiểm tra thực sự đã chạy, kết quả và việc còn lại. Khi bàn giao Colab, đưa đúng artifact và bước tiếp theo. Phân biệt rõ dự kiến, BUILT, dev PASS, full PASS và kết quả chấm chính thức. Không tự tạo Issue/commit/PR/điểm hoặc tuyên bố hoàn tất khi chưa có bằng chứng.
+Nêu ngắn gọn: đã đổi gì, ID/branch/commit liên quan, kiểm tra thực sự đã chạy, kết quả và việc còn lại. Khi bàn giao chấm local, đưa đúng artifact và bước tiếp theo. Phân biệt rõ dự kiến, BUILT, dev PASS, full PASS và kết quả chấm chính thức. Không tự tạo Issue/commit/PR/điểm hoặc tuyên bố hoàn tất khi chưa có bằng chứng.

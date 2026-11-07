@@ -1,3 +1,5 @@
+> Workflow hiện tại dùng [notebook local](LOCAL_GRADING.md). Nội dung Colab bên dưới là hướng dẫn lịch sử.
+
 # Local build → Colab verify
 
 ## Dựng mạch theo config

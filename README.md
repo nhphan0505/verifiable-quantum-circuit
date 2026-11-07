@@ -72,7 +72,7 @@ cd GQA
 
 ```powershell
 py -3.13 -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m pip install -r requirements-notebook.txt
 .\.venv\Scripts\python.exe -m pip check
 ```
 
@@ -84,7 +84,7 @@ Colab dùng bộ dependency riêng đã pin trong notebook và `requirements-col
 
 Lấy bộ dữ liệu gốc của cuộc thi hoặc từ người phụ trách nhóm, đặt theo [DATA.md](DATA.md).
 Git không chứa dataset lớn, submission mẫu, `.venv` hoặc artifact đã compile.
-Để tạo đủ hai ZIP Colab cần:
+Để chấm task 3 local cần:
 
 - `verifiers/dfthcsos/FeMoCo76o113e.fcidump`
 - `verifiers/dfthcsos/FeMoCo76o113e.fixed_shifts.npz`
@@ -93,17 +93,15 @@ Dựng baseline task 3 còn cần `sample_submission/dfthcsos/submission.npz`.
 Các file mạch mẫu dùng để đối chiếu khi cần; Windows dùng package pip Kickmix,
 không cần binary Linux `kickmix.so` để compile.
 
-**4. Tạo ZIP dùng cho Colab và kiểm tra workspace:**
+**4. Kiểm tra workspace và mở notebook local:**
 
 ```powershell
-.\.venv\Scripts\python.exe scripts/prepare_colab.py
 .\.venv\Scripts\python.exe scripts/check_repo.py
 ```
 
-Lệnh đầu kiểm tra hash dữ liệu và tạo `gqa_verifiers.zip`, `dfthcsos_reference.zip`
-cùng manifest trong `artifacts/colab/`. Nếu thiếu dữ liệu thì bổ sung đúng file
-trước khi chạy lại. Checker có thể chạy riêng mà không cần dataset lớn.
-Xem [hướng dẫn chấm Colab](docs/COLAB_GRADING.md) để sử dụng notebook và các ZIP này.
+Mở `notebooks/GQA_Grade_Submission.ipynb` trong VS Code/Jupyter, chọn kernel
+`.venv`. Điền TRACK, MODE, EXPERIMENT_ID, OWNER, CONFIG_NAME; artifact được đọc
+từ project và results lưu đúng chỗ. Xem [chấm local](docs/LOCAL_GRADING.md).
 
 **5. Chuẩn bị coding agent để bắt đầu nghiên cứu:**
 
@@ -125,7 +123,7 @@ Agent sẽ tạo branch, code/config và compile artifact khi được giao hư�
 người clone mới chưa có sẵn artifact baseline trong máy.
 
 - [Invsqrt](src/invsqrt/README.md) · [DQI](src/dqi/README.md) · [DFTHC](src/dfthcsos/README.md)
-- [Hướng dẫn Colab](docs/COLAB_GRADING.md) · [Cộng tác](CONTRIBUTING.md) · [Dữ liệu gốc](DATA.md)
+- [Hướng dẫn chấm local](docs/LOCAL_GRADING.md) · [Cộng tác](CONTRIBUTING.md) · [Dữ liệu gốc](DATA.md)
 - [Quy ước results](results/README.md)
 
 Các record cũ đã chuyển về cấu trúc mới, giữ nguyên JSON/log. Đường dẫn lịch sử bên trong metadata vẫn là đường dẫn lúc chạy; xem results/setup/structure_migration.json để đối chiếu.

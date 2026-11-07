@@ -11,9 +11,9 @@ Các link thư mục bên dưới mở vị trí thực tế để tìm file c�
 | --- | --- | --- | --- |
 | 1. Tìm hướng trên main | [Tìm hypothesis](01_find_hypothesis.md) | Hypothesis có nguồn, khác hướng đã có, phạm vi rõ và cách kiểm chứng; chưa sửa file hoặc nhận việc | Đề xuất, chưa sửa hoặc nhận việc |
 | 2. Nhận hướng | [Tạo Issue mới và branch](02_claim_issue_branch.md) | ① Có `S/DESCRIPTION.md`; ② `src/<TRACK>/EXPERIMENTS.md` đã thêm dòng của hướng, link mở đúng DESCRIPTION; ③ lên GitHub kiểm tra đã có Issue và branch đúng ID/owner qua URL agent báo — [src](../../src/) | Có mô tả, mục lục và draft PR; chưa code |
-| 3. Triển khai | [Code/config/compile](03_implement_compile.md) | ① Có `S/solution.py` đúng chỗ; ② có `S/configs/<name>.json`, setting đúng hướng đang thử; ③ compile ra `artifacts/<TRACK>/<ID>/<name>.kmb` (task 1–2) hoặc `.zip` (task 3), tên trùng config; **Tùy chọn:** mở `S/DESCRIPTION.md` xem có giải thích ý nghĩa các config, khác biệt giữa chúng và lý do chọn setting — [src](../../src/), [artifacts](../../artifacts/) | Có artifact/provenance, bàn giao Colab |
+| 3. Triển khai | [Code/config/compile](03_implement_compile.md) | ① Có `S/solution.py` đúng chỗ; ② có `S/configs/<name>.json`, setting đúng hướng đang thử; ③ compile ra `artifacts/<TRACK>/<ID>/<name>.kmb` (task 1–2) hoặc `.zip` (task 3), tên trùng config; **Tùy chọn:** mở `S/DESCRIPTION.md` xem có giải thích ý nghĩa các config, khác biệt giữa chúng và lý do chọn setting — [src](../../src/), [artifacts](../../artifacts/) | Có artifact/provenance, bàn giao notebook local |
 | 4. Đã tải results | [Phân tích kết quả](04_analyze_results.md) | Không cần kiểm tra file thủ công. Chat với LLM về kết quả và đề xuất để quyết định: thử config tiếp, sửa implementation, tách hướng mới hoặc dừng hướng. Agent tự kiểm tra results và cập nhật tracking theo quy định. | Ghi kết quả, commit và đề xuất quyết định |
-| 5. Thử tiếp | [Config tiếp theo](05_next_config.md) | ① Config mới nằm trong `S/configs/<name>.json`; ② artifact mới nằm trong `artifacts/<TRACK>/<ID>/<name>.kmb` (task 1–2) hoặc `.zip` (task 3), tên trùng config — [src](../../src/), [artifacts](../../artifacts/) | Artifact mới, bàn giao Colab |
+| 5. Thử tiếp | [Config tiếp theo](05_next_config.md) | ① Config mới nằm trong `S/configs/<name>.json`; ② artifact mới nằm trong `artifacts/<TRACK>/<ID>/<name>.kmb` (task 1–2) hoặc `.zip` (task 3), tên trùng config — [src](../../src/), [artifacts](../../artifacts/) | Artifact mới, bàn giao notebook local |
 | 6. Tác giả chuẩn bị PR | [Chuẩn bị PR](06_prepare_pr.md) | PR mô tả giải pháp cuối, config/run tốt nhất và giới hạn; code/mô tả/điểm/results đồng bộ, link hợp lệ; không đưa artifact lớn vào Git — [src](../../src/), [results](../../results/) | PR sẵn sàng review, chưa merge |
 | 7. Teammate review | [Review PR](07_review_pr.md) | Findings có file/dòng, ảnh hưởng và bằng chứng; nêu kiểm tra đã/chưa làm; không sửa/approve/merge | Chưa sửa/approve/merge |
 | 7b. Teammate đăng review | [Đăng Approve / Request changes](07b_publish_review.md) | Review có URL, đúng tài khoản reviewer và SHA đã kiểm tra; nếu còn lỗi thì tác giả sửa và quay lại 7 | Đã đăng review, chưa merge |
@@ -30,10 +30,10 @@ Kiểm tra thủ công giai đoạn 3 gồm ba mục chính trên; có thể đ�
 | DQI | [EXPERIMENTS.md](../../src/dqi/EXPERIMENTS.md) | [SCORES.md](../../src/dqi/SCORES.md) | [dqi](../../src/dqi/) | [results](../../results/dqi/) |
 | DFTHC | [EXPERIMENTS.md](../../src/dfthcsos/EXPERIMENTS.md) | [SCORES.md](../../src/dfthcsos/SCORES.md) | [dfthcsos](../../src/dfthcsos/) | [results](../../results/dfthcsos/) |
 
-Sau mỗi prompt, thành viên chỉ thực hiện phần kiểm tra/trao đổi ghi trong bảng trước khi giao giai đoạn tiếp theo. Giai đoạn 4 chỉ trao đổi với LLM để quyết định bước tiếp, không yêu cầu kiểm tra file thủ công. Với task 3, kiểm tra ZIP có submission.npz và các angle_k_*.kmb liên tục từ 0 ở gốc ZIP. BUILT chỉ xác nhận đã dựng artifact, chưa phải verifier PASS. File tải từ Colab do thành viên giải nén; agent không được tự bịa JSON verifier để đủ danh sách.
+Sau mỗi prompt, thành viên chỉ thực hiện phần kiểm tra/trao đổi ghi trong bảng trước khi giao giai đoạn tiếp theo. Giai đoạn 4 chỉ trao đổi với LLM để quyết định bước tiếp, không yêu cầu kiểm tra file thủ công. Với task 3, kiểm tra ZIP có submission.npz và các angle_k_*.kmb liên tục từ 0 ở gốc ZIP. BUILT chỉ xác nhận đã dựng artifact, chưa phải verifier PASS. Results được notebook local lưu đúng thư mục; agent không được tự bịa JSON verifier để đủ danh sách.
 
-Luồng thường: **1 → chọn hướng → 2 → 3 → tự chấm Colab → 4 → quyết định**.
-Nếu thử tiếp: **5 → tự chấm → 4**. 
+Luồng thường: **1 → chọn hướng → 2 → 3 → tự chạy notebook local → 4 → quyết định**.
+Nếu thử tiếp: **5 → tự chạy notebook → 4**. 
 Nếu dừng: **6 → 7 → tác giả sửa/push nếu cần → teammate review lại → 7b → 8**.
 Nếu 7b yêu cầu sửa, quay lại tác giả sửa/push rồi 7 và 7b.
 Tác giả làm 6 và 8; teammate làm 7 và 7b bằng phiên agent riêng, tài khoản GitHub khác tác giả. Một Issue/branch vẫn thuộc một owner; reviewer không sửa branch tác giả. HEAD đổi sau approval thì cần review/approval lại trên HEAD mới.
@@ -43,7 +43,7 @@ Ví dụ điền trường: TRACK `invsqrt`, ID `INV-123`, config `balanced`.
 Nếu chưa kết nối GitHub, agent phải báo phần chưa xác minh/thực hiện; không tự tạo Issue hoặc URL giả.
 
 Mốc commit: code/config trước compile; results/provenance/score/kết luận sau chấm.
-Thành viên chỉ làm thủ công bước upload/chấm/tải ZIP Colab; agent làm phần còn lại
+Thành viên tự chạy notebook local với 5 tham số; results lưu trực tiếp vào project; agent làm phần còn lại
 trong phạm vi prompt được giao. Prompt 07 trả findings về chat; teammate dùng 07b để giao agent đăng review lên PR.
 Prompt 08 chỉ merge sau khi approval GitHub và các check đạt.
 

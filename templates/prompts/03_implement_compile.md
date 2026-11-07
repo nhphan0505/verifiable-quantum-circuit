@@ -52,9 +52,9 @@ artifact cũ hoặc file sinh dở như kết quả lần build mới. Chỉ bá
 compile không lỗi và artifact mới đã được tạo đúng tên/đường dẫn. Nếu bị chặn
 hoặc cần đổi hypothesis, báo nguyên nhân và trao đổi với tôi.
 
-Dừng khi có artifact BUILT và provenance. Báo file cần upload, hash, TRACK,
-ID/config/mode đề xuất, lý do chọn config và cách lấy results. Nếu có hơn
-một artifact, chỉ rõ thứ tự chấm và mục đích của từng config. Tôi tự chấm Colab: không mở browser,
+Dừng khi có artifact BUILT và provenance. Báo artifact local, hash, TRACK,
+ID/config/mode đề xuất, lý do chọn config và đường dẫn results tự lưu. Nếu có hơn
+một artifact, chỉ rõ thứ tự chấm và mục đích của từng config. Tôi tự chạy notebook local: không tự chấm, không mở browser,
 không chạy Colab/MCP, không theo dõi runtime, không gọi BUILT là PASS.
 Cuối lượt liệt kê file đã tạo/sửa kèm link thật để tôi kiểm tra thủ công.
 Không merge hoặc đóng Issue.

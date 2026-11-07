@@ -95,3 +95,5 @@ thành required check và yêu cầu reviewer phải cấu hình trên GitHub sa
   Check đọc working tree nên bắt cả sửa/xóa chưa commit. Không có Git/base thì không
   thể đối chiếu tính bất biến. Tính nhất quán JSON không chứng minh dữ liệu mới là
   kết quả chạy thật: reviewer vẫn phải xem bằng chứng nguồn của run.
+
+Notebook hiện chạy local, đối chiếu EXPECTED_PACKAGES với requirements.txt. requirements-colab.txt giữ để nhận diện môi trường Colab lịch sử. Xem [LOCAL_GRADING.md](LOCAL_GRADING.md).

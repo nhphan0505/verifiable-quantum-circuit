@@ -243,8 +243,13 @@ class Audit:
             pins[filename] = packages
         self.require(self.read(self.root / '.python-version').strip() == '3.13', 'Python minor must match documented 3.13 baseline')
         install = '\n'.join(''.join(cell.get('source', [])) for cell in notebook.get('cells', []))
-        pip = next((line for line in install.splitlines() if line.startswith('%pip ')), '')
-        self.require(pip == '%pip -q install ' + ' '.join(pins['requirements-colab.txt']), 'Notebook pip command differs from requirements-colab.txt')
+        expected = None
+        for cell in notebook.get('cells', []):
+            if cell.get('cell_type') == 'code':
+                for node in ast.parse(''.join(cell.get('source', []))).body:
+                    if isinstance(node, ast.Assign) and any(isinstance(t, ast.Name) and t.id == 'EXPECTED_PACKAGES' for t in node.targets):
+                        expected = ast.literal_eval(node.value)
+        self.require(expected == dict(p.split('==') for p in pins['requirements.txt']), 'Notebook dependency pins differ from requirements.txt')
         for cell in notebook.get('cells', []):
             if cell.get('cell_type') == 'code':
                 source = ''.join(cell['source'])
