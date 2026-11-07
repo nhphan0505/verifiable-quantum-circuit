@@ -1,0 +1,4 @@
+# Colab full baseline: Python 3.13 (measured with 3.13.18).
+kickmix==1.0.0
+numpy==2.4.6
+scipy==1.16.3

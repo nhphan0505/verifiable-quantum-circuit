@@ -1,0 +1,82 @@
+{
+  "description": "Workspace structure migration; result payloads were moved unchanged. Historical paths inside raw run metadata refer to the original execution workspace. All existing runs map to config baseline.",
+  "moves": [
+    {
+      "from": "src/invsqrt/baseline.py",
+      "to": "src/invsqrt/INV-BASELINE/solution.py"
+    },
+    {
+      "from": "src/invsqrt/experiments/INV-BASELINE.md",
+      "to": "src/invsqrt/INV-BASELINE/DESCRIPTION.md"
+    },
+    {
+      "from": "results/invsqrt/INV-BASELINE/20261106T100536Z-local-build",
+      "to": "results/invsqrt/INV-BASELINE/baseline/build_only/20261106T100536Z-local-build"
+    },
+    {
+      "from": "results/invsqrt/INV-BASELINE/20261106T102533Z-colab-smoke-d53ae8",
+      "to": "results/invsqrt/INV-BASELINE/baseline/smoke/20261106T102533Z-colab-smoke-d53ae8"
+    },
+    {
+      "from": "results/invsqrt/INV-BASELINE/20261106T103144Z-colab-full-ef9a7a",
+      "to": "results/invsqrt/INV-BASELINE/baseline/full/20261106T103144Z-colab-full-ef9a7a"
+    },
+    {
+      "from": "results/invsqrt/INV-BASELINE/20261106T111429Z-local-dev5min",
+      "to": "results/invsqrt/INV-BASELINE/baseline/dev_5min/20261106T111429Z-local-dev5min"
+    },
+    {
+      "from": "src/dqi/baseline.py",
+      "to": "src/dqi/DQI-BASELINE/solution.py"
+    },
+    {
+      "from": "src/dqi/experiments/DQI-BASELINE.md",
+      "to": "src/dqi/DQI-BASELINE/DESCRIPTION.md"
+    },
+    {
+      "from": "results/dqi/DQI-BASELINE/20261106T100536Z-local-build",
+      "to": "results/dqi/DQI-BASELINE/baseline/build_only/20261106T100536Z-local-build"
+    },
+    {
+      "from": "results/dqi/DQI-BASELINE/20261106T111431Z-local-dev5min",
+      "to": "results/dqi/DQI-BASELINE/baseline/dev_5min/20261106T111431Z-local-dev5min"
+    },
+    {
+      "from": "src/dfthcsos/baseline.py",
+      "to": "src/dfthcsos/DFT-BASELINE/solution.py"
+    },
+    {
+      "from": "src/dfthcsos/experiments/DFT-BASELINE.md",
+      "to": "src/dfthcsos/DFT-BASELINE/DESCRIPTION.md"
+    },
+    {
+      "from": "results/dfthcsos/DFT-BASELINE/20261106T100538Z-local-build",
+      "to": "results/dfthcsos/DFT-BASELINE/baseline/build_only/20261106T100538Z-local-build"
+    },
+    {
+      "from": "results/dfthcsos/DFT-BASELINE/20261106T111625Z-local-dev5min",
+      "to": "results/dfthcsos/DFT-BASELINE/baseline/dev_5min/20261106T111625Z-local-dev5min"
+    },
+    {
+      "from": "artifacts/local/invsqrt.kmb",
+      "to": "artifacts/invsqrt/INV-BASELINE/baseline.kmb"
+    },
+    {
+      "from": "artifacts/local/dqi.kmb",
+      "to": "artifacts/dqi/DQI-BASELINE/baseline.kmb"
+    },
+    {
+      "from": "artifacts/local/dfthcsos_submission.zip",
+      "to": "artifacts/dfthcsos/DFT-BASELINE/baseline.zip"
+    },
+    {
+      "from": "artifacts/local/dfthcsos_reference.zip",
+      "to": "artifacts/colab/dfthcsos_reference.zip"
+    },
+    {
+      "from": "artifacts/local/INV_BASELINE_Smoke.ipynb",
+      "to": "artifacts/colab/archive/INV_BASELINE_Smoke.ipynb"
+    }
+  ],
+  "removed_redundant": "artifacts/local/dfthcsos (all files verified byte-identical to the retained baseline.zip)"
+}

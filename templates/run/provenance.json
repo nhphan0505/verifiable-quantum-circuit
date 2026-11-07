@@ -1,0 +1,15 @@
+{
+  "track": null,
+  "experiment_id": null,
+  "config_name": null,
+  "source_commit": null,
+  "source_path": null,
+  "source_sha256": null,
+  "build_config_path": null,
+  "build_config_sha256": null,
+  "artifact_path": null,
+  "artifact_sha256": null,
+  "build_command": null,
+  "environment": {},
+  "build_run": null
+}

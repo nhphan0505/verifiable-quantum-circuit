@@ -1,0 +1,24 @@
+{
+  "experiment_id": "INV-BASELINE",
+  "run_id": "20261106T103144Z-colab-full-ef9a7a",
+  "track": "invsqrt",
+  "verification_level": "full",
+  "status": "STARTED",
+  "score": null,
+  "parameters": {
+    "n_p": 10,
+    "width": 22,
+    "max_x": 3133452,
+    "beta": 1,
+    "precision_bits": 24,
+    "shots_per_x": 64,
+    "batch_size": 256,
+    "max_workers": 1
+  },
+  "expected_verified_shots": 200540928,
+  "artifact": "artifacts/local/invsqrt.kmb",
+  "artifact_sha256": "e2bf8eb64350a4460a271fc7f1d591ef125b1e276377e9a0f64b96ab3ca321e1",
+  "pid": 10596,
+  "remote_results": "/content/GQA_verify/results/invsqrt/INV-BASELINE/20261106T103144Z-colab-full-ef9a7a",
+  "note": "Launch confirmed. Monitoring stopped at user request; user runs FULL result collection and download cells. No result or score yet."
+}

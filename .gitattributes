@@ -1,0 +1,7 @@
+* text=auto eol=lf
+*.kmb binary
+*.zip binary
+*.npz binary
+*.pdf binary
+verifiers/** -text
+results/** -text

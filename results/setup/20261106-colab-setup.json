@@ -1,0 +1,8 @@
+{
+  "status": "INCOMPLETE",
+  "verification_level": "setup_only",
+  "score": null,
+  "summary": "Colab MCP data transfer and baseline build attempted. Runtime reset; first runner failed on Windows path separators. Retry initiated but no complete verifier result downloaded. No score promoted.",
+  "local_followup": "All three baselines built successfully on Windows using pip kickmix 1.0.0; see track build_only metadata.",
+  "cleanup": "Temporary MCP transport payloads and install logs removed after recording this summary."
+}

@@ -1,0 +1,22 @@
+{
+  "track": "dqi",
+  "verification_level": "build_only",
+  "status": "BUILT",
+  "score": null,
+  "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+  "packages": {
+    "kickmix": "1.0.0",
+    "numpy": "2.5.4"
+  },
+  "source": "src/dqi/baseline.py",
+  "source_sha256": "2637a6ef3a9046fcc7b318ee8926fd888e23a7a9f42b0b9f8f87c0580cc5fe51",
+  "artifacts": [
+    {
+      "path": "artifacts/local/dqi.kmb",
+      "bytes": 886118180,
+      "sha256": "959471d05a26373b4f14ca0cae2d8639ea25f18170d9f6532139aa51ccc04995",
+      "matches_original": true
+    }
+  ],
+  "note": "Build succeeded locally. No verifier score from this build-only run."
+}

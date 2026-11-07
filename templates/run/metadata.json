@@ -1,0 +1,33 @@
+{
+  "experiment_id": null,
+  "run_id": null,
+  "track": null,
+  "owner": null,
+  "started_at_utc": null,
+  "git_commit": null,
+  "working_tree_dirty": null,
+  "environment": {
+    "os": null,
+    "python": null,
+    "numpy": null,
+    "scipy": null,
+    "kickmix_binary_sha256": null
+  },
+  "build_command": null,
+  "verify_command": null,
+  "verification_level": null,
+  "status": null,
+  "seed": null,
+  "salt": null,
+  "verifier_sha256": {},
+  "artifacts": [
+    {
+      "path": null,
+      "sha256": null
+    }
+  ],
+  "baseline_run": null,
+  "notes": null,
+  "config_name": null,
+  "build_config_sha256": null
+}

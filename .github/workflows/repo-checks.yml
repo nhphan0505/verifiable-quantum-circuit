@@ -1,0 +1,30 @@
+name: Repository checks
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  repository-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Check records and experiment scope
+        env:
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+          PR_BRANCH: ${{ github.head_ref }}
+        shell: bash
+        run: |
+          if [ -n "$PR_BASE" ]; then
+            python scripts/check_repo.py --base "$PR_BASE" --branch "$PR_BRANCH"
+          else
+            python scripts/check_repo.py
+          fi
+      - name: Test checker failure cases
+        run: python -m unittest discover -s scripts/tests -v

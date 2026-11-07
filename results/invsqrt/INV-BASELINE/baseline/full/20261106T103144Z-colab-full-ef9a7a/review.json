@@ -1,0 +1,15 @@
+{
+  "status": "REVIEWED",
+  "verification_level": "full",
+  "result": "PASS",
+  "verified_shots": 200540928,
+  "benchmark_parameters_match": true,
+  "circuit_matches_local_and_organizer": true,
+  "all_verifier_hashes_match_local": true,
+  "stdout_matches_verifier_json": true,
+  "stderr_empty": true,
+  "score_formula_verified": true,
+  "score": 2076774.233715282,
+  "promoted_to_scoreboard": true,
+  "note": "launch.json retains the historical start event; metadata.json is the final result. This is full local-verifier reproduction on Colab, not an official leaderboard submission."
+}

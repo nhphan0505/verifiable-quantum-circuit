@@ -1,0 +1,28 @@
+# Python và môi trường
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+.pytest_cache/
+.ruff_cache/
+
+# Output tái sinh; không loại bỏ JSON kết quả trong results/
+/artifacts/
+/tmp/
+*.log
+
+# Binary/dataset của ban tổ chức: cung cấp riêng, xem DATA.md
+/kickmix/*.so
+/sample_submission/
+/verifiers/dfthcsos/*.npz
+/verifiers/dfthcsos/*.fcidump
+/verifiable_circuit_compilation.pdf
+
+# Editor và hệ điều hành
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

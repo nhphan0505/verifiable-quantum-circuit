@@ -1,0 +1,25 @@
+{
+  "track": "invsqrt",
+  "mode": "full",
+  "command": [
+    "/usr/bin/python3",
+    "/content/GQA_verify/verifiers/invsqrt/verify_submission_invsqrt.py",
+    "/content/GQA_verify/uploads/89c1b83c720f4497821279ace39ade2c/invsqrt.kmb",
+    "--max-workers",
+    "1",
+    "--n-p",
+    "10",
+    "--width",
+    "22",
+    "--max-x",
+    "3133452",
+    "--beta",
+    "1",
+    "--precision-bits",
+    "24",
+    "--shots-per-x",
+    "64",
+    "--batch-size",
+    "256"
+  ]
+}

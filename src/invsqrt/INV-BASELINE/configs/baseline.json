@@ -1,0 +1,10 @@
+{
+  "n_p": 10,
+  "precision": {
+    "delta_bits": 14,
+    "coef_bits": 17,
+    "square_bits": 28,
+    "product_bits": 28,
+    "result_bits": 29
+  }
+}

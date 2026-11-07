@@ -1,0 +1,22 @@
+{
+  "track": "invsqrt",
+  "verification_level": "build_only",
+  "status": "BUILT",
+  "score": null,
+  "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+  "packages": {
+    "kickmix": "1.0.0",
+    "numpy": "2.5.4"
+  },
+  "source": "src/invsqrt/baseline.py",
+  "source_sha256": "7e7a1c83d3991b7f2fa405248222060dce269d6a5d28cae4140137f80e99d66a",
+  "artifacts": [
+    {
+      "path": "artifacts/local/invsqrt.kmb",
+      "bytes": 579721,
+      "sha256": "e2bf8eb64350a4460a271fc7f1d591ef125b1e276377e9a0f64b96ab3ca321e1",
+      "matches_original": true
+    }
+  ],
+  "note": "Build succeeded locally. No verifier score from this build-only run."
+}

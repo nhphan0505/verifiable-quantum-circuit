@@ -1,0 +1,13 @@
+{
+  "verification_level": "dev_5min",
+  "profile_version": 1,
+  "parameters": {
+    "track": "invsqrt",
+    "submission": "D:\\GQA\\artifacts\\local\\invsqrt.kmb",
+    "seed": 20261106,
+    "invsqrt_samples": 4096,
+    "invsqrt_repeats": 2,
+    "dqi_shots": 4096,
+    "dfthc_repeats": 4
+  }
+}

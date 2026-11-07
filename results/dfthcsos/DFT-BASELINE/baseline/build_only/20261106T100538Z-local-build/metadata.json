@@ -1,0 +1,76 @@
+{
+  "track": "dfthcsos",
+  "verification_level": "build_only",
+  "status": "BUILT",
+  "score": null,
+  "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+  "packages": {
+    "kickmix": "1.0.0",
+    "numpy": "2.5.4"
+  },
+  "source": "src/dfthcsos/baseline.py",
+  "source_sha256": "725e6e3d4bd3b23a891979292240b22f2db61d35c3727e3699f32c4f5aba2dcd",
+  "artifacts": [
+    {
+      "path": "artifacts/local/dfthcsos/angle_k_0.kmb",
+      "bytes": 1671932,
+      "sha256": "7bfb3983accc6ff97d6ab41a88deae924f1d1c97cf30e60879d0bff5688a8e25",
+      "matches_original": true
+    },
+    {
+      "path": "artifacts/local/dfthcsos/angle_k_1.kmb",
+      "bytes": 1662896,
+      "sha256": "a04b6d0d57ce851b123af265066aaab2ab33353ea049d26acd534727466d72b6",
+      "matches_original": true
+    },
+    {
+      "path": "artifacts/local/dfthcsos/angle_k_2.kmb",
+      "bytes": 1665821,
+      "sha256": "5c1b8987bc3fa1a4b8607e470f8c8f1392c22e7a7dbcb228f0ce9ec986e18058",
+      "matches_original": true
+    },
+    {
+      "path": "artifacts/local/dfthcsos/angle_k_3.kmb",
+      "bytes": 1666802,
+      "sha256": "16ac67cdcaf3e2c6abdd98c4138ff1ae8a56cfc4ae15622bcdb3d3a3ba1e22cf",
+      "matches_original": true
+    },
+    {
+      "path": "artifacts/local/dfthcsos/angle_k_4.kmb",
+      "bytes": 1954082,
+      "sha256": "d21cdd4c7e94196654aab15ebcabfe10ce8d343151a5e8dc3672e76684b6628d",
+      "matches_original": true
+    },
+    {
+      "path": "artifacts/local/dfthcsos/angle_k_5.kmb",
+      "bytes": 1948583,
+      "sha256": "63b8d4cba36955e6098321f3b2ef3e34401dd276fa629b2e490d043b1743880b",
+      "matches_original": true
+    },
+    {
+      "path": "artifacts/local/dfthcsos/angle_k_6.kmb",
+      "bytes": 1947980,
+      "sha256": "5bf740428e661d035fda860142578f421969e35e0df2e4e024fbf01a7340b378",
+      "matches_original": true
+    },
+    {
+      "path": "artifacts/local/dfthcsos/angle_k_7.kmb",
+      "bytes": 1968527,
+      "sha256": "606009582111a22bd549b795c8d115ac8bbeb124bc8da24a80380eca6d34163d",
+      "matches_original": true
+    },
+    {
+      "path": "artifacts/local/dfthcsos/angle_k_8.kmb",
+      "bytes": 1957124,
+      "sha256": "57c7cc51f5922fff6e95d76e1f723d4c2d029a241da643b95684d6322157a8fe",
+      "matches_original": true
+    },
+    {
+      "path": "artifacts/local/dfthcsos/angle_k_9.kmb",
+      "bytes": 1953830,
+      "sha256": "22cbe2828988ff954fc07fd971a25e6bc04a02c302bf2cc642e4c3535daaad65",
+      "matches_original": true
+    }
+  ],
+  "note": "Build succeeded locally. No verifier score from this build-only run."
+}

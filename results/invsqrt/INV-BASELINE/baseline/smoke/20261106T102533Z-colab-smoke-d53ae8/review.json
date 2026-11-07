@@ -1,0 +1,11 @@
+{
+  "status": "REVIEWED",
+  "verification_level": "smoke",
+  "result": "PASS",
+  "verified_shots": 4096,
+  "circuit_matches_local": true,
+  "all_verifier_hashes_match_local": true,
+  "stdout_matches_verifier_json": true,
+  "full_score_promoted": false,
+  "note": "Score depends on the reduced input domain and is not the full competition baseline. launch.json is the historical start record; metadata.json is the final Colab status."
+}

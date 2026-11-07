@@ -1,0 +1,17 @@
+{
+  "experiment_id": "INV-BASELINE",
+  "run_id": "20261106T102533Z-colab-smoke-d53ae8",
+  "track": "invsqrt",
+  "verification_level": "smoke",
+  "status": "STARTED",
+  "score": null,
+  "parameters": {
+    "max_x": 4096,
+    "shots_per_x": 1,
+    "max_workers": 1
+  },
+  "artifact": "artifacts/local/invsqrt.kmb",
+  "artifact_sha256": "e2bf8eb64350a4460a271fc7f1d591ef125b1e276377e9a0f64b96ab3ca321e1",
+  "remote_results": "/content/GQA_verify/results/invsqrt/INV-BASELINE/20261106T102533Z-colab-smoke-d53ae8",
+  "note": "Verifier launched via project notebook template. Monitoring stopped at user request. User will execute result collection and download cells. Replace this launch record with downloaded metadata when available."
+}

@@ -1,0 +1,25 @@
+{
+  "experiment_id": "INV-BASELINE",
+  "run_id": "20261106T111429Z-local-dev5min",
+  "verification_level": "dev_5min",
+  "status": "PASS",
+  "command": [
+    "D:\\GQA\\.venv\\Scripts\\python.exe",
+    "D:\\GQA\\src\\common\\dev_verify.py",
+    "--track",
+    "invsqrt",
+    "--submission",
+    "D:\\GQA\\artifacts\\local\\invsqrt.kmb"
+  ],
+  "exit_code": 0,
+  "environment": {
+    "os": "Windows-11-10.0.26200-SP0",
+    "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    }
+  },
+  "dev_harness_sha256": "56a7e3b1647c3212ca94f81380a35a28e32d4671b5b68f232b775725df58917b"
+}

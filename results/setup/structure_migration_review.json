@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "original_organizer_files_unchanged": true,
+  "circuit_functions_ast_identical_excluding_main": true,
+  "rebuilt_artifacts_match_organizer": {
+    "invsqrt": true,
+    "dqi": true,
+    "dfthcsos_all_zip_entries": true
+  },
+  "documentation_links_valid": true,
+  "notebook_code_syntax_valid": true,
+  "results_payloads": "Moved without rewriting; historical paths retained inside original records."
+}

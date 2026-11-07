@@ -1,0 +1,15 @@
+{
+  "track": "invsqrt",
+  "mode": "smoke",
+  "command": [
+    "/usr/bin/python3",
+    "/content/GQA_verify/verifiers/invsqrt/verify_submission_invsqrt.py",
+    "/content/GQA_verify/uploads/89c1b83c720f4497821279ace39ade2c/invsqrt.kmb",
+    "--max-workers",
+    "1",
+    "--max-x",
+    "4096",
+    "--shots-per-x",
+    "1"
+  ]
+}
