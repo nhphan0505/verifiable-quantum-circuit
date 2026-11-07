@@ -75,10 +75,12 @@ Khác biệt với baseline
 
 Đánh đổi tài nguyên
 ------------------
-- Số qubit cực đại Q: Giảm từ 260 xuống 232 (-28 qubit, giảm 10.77%).
-- Toffoli: Giữ nguyên 7735.0 (0 Toffoli phụ trội).
+- Số qubit cực đại Q: Giảm từ 260 xuống 232 (-28 qubit, giảm 10.77%) ở staged_alloc và xuống 204 (-56 qubit, giảm 21.54%) ở pebble_square.
+- Toffoli: Giữ nguyên 7735.0 (0 Toffoli phụ trội) ở staged_alloc; tăng lên 8619.0 (+884 Toffoli, +11.43%) ở pebble_square.
 - Phép quay Z_POW và T: Giữ nguyên 37 phép quay và 1 cổng T.
-- Tích Q * C: Giảm từ ~2.076.443 xuống ~1.844.806 trên dev_5min (cải thiện ~1.125x).
+- Tích Q * C trên dev_5min:
+  + staged_alloc: đạt 1.852.826 (cải thiện 1.1207x, tức 1.12x).
+  + pebble_square: đạt 1.809.545 (cải thiện 1.1475x, tức 1.15x).
 
 Cách chạy và kiểm tra
 --------------------
