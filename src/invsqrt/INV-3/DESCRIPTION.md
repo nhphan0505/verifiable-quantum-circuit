@@ -170,7 +170,7 @@ Với cấu hình độ rộng chuẩn (`n_p = 10, delta_bits = 14, coef_bits = 
 
 - Mốc đối chứng:
   - Source và config baseline: [INV-BASELINE/solution.py](../INV-BASELINE/solution.py) và [INV-BASELINE/configs/baseline.json](../INV-BASELINE/configs/baseline.json) tại commit `13ec200455ab4aea1afc8df0bcab493cd269075e`.
-  - Run `dev_5min` đối chứng: [20261106T111429Z-local-dev5min](../../../results/invsqrt/INV-BASELINE/baseline/dev_5min/20261106T111429Z-local-dev5min/verifier.json) (`status = PASS`, `score = 2076443.1049173493`, `num_qubits = 260`, `toffoli_equivalent = 7986.319634297497`, `toffoli_count = 7735.0`, `t_count = 1.0`, `rotation_count = 37.0`, `worst_error_over_tolerance = 0.37839383360236045`, `worst_x = 3010856`, `seed = 20261106`, `invsqrt_samples = 4096`, `invsqrt_repeats = 2`).
+  - Run `dev_5min` đối chứng: [20261107T180810Z-local-dev_5min-eb9c85](../../../results/invsqrt/INV-BASELINE/baseline/dev_5min/20261107T180810Z-local-dev_5min-eb9c85/verifier.json) (và run lịch sử [20261106T111429Z-local-dev5min](../../../results/invsqrt/INV-BASELINE/baseline/dev_5min/20261106T111429Z-local-dev5min/verifier.json)) (`status = PASS`, `score = 2076443.1049173493`, `num_qubits = 260`, `toffoli_equivalent = 7986.319634297497`, `toffoli_count = 7735.0`, `t_count = 1.0`, `rotation_count = 37.0`, `worst_error_over_tolerance = 0.37839383360236045`, `worst_x = 3010856`, `seed = 20261106`, `invsqrt_samples = 4096`, `invsqrt_repeats = 2`).
   - Run `full` đối chứng: [20261106T103144Z-colab-full-ef9a7a](../../../results/invsqrt/INV-BASELINE/baseline/full/20261106T103144Z-colab-full-ef9a7a/verifier.json) (`status = PASS`, `score = 2076774.233715282`, `num_qubits = 260`, `toffoli_equivalent = 7987.593206597238`, `worst_error_over_tolerance = 0.4769116097939472`, `worst_x = 2588411`).
 - Dự đoán:
   - Cấu hình 1 (dự kiến đặt tên `staged_alloc` ở giai đoạn 03 — bật xóa sớm `c3` bằng Clifford và tách vòng đời `p`/`y1_hi`/`scratch`, không pebbling `square`): dự đoán `num_qubits` giảm từ $260$ xuống $233$ ($\Delta Q = -27$), `toffoli_count` giữ nguyên $7735.0$ ($\Delta\text{Toffoli} = 0$), `worst_error_over_tolerance` trên `dev_5min` giữ nguyên `0.37839383360236045`, và điểm `dev_5min` giảm xuống $\approx 233 \times 7986.3196 \approx 1\,860\,812.47$ (cải thiện $\approx 1.116\times$).
@@ -201,7 +201,7 @@ Hai cấu hình thực nghiệm trên bộ dữ liệu chuẩn `dev_5min` đều
 
 **Kết luận đánh đổi kỹ thuật:**
 Tỉ lệ giảm số qubit cực đại $Q$ ($204/232 = 0.8793$, tức giảm $12.07\%$) lớn hơn tỉ lệ tăng chi phí tính toán $C$ ($8870.32/7986.32 = 1.1107$, tức tăng $11.07\%$), giúp tích $Q \times C$ tiếp tục giảm thêm $2.34\%$. Do đó, `pebble_square` là ứng viên có điểm số tốt nhất của hướng `INV-3` trên `dev_5min`.
-Do run đối chứng baseline `20261106T111429Z-local-dev5min` thuộc nhóm legacy thiếu hash `verifier_sha256`, cột tỉ lệ trong `SCORES.md` được ghi `—` theo đúng quy tắc kiểm tra tính bất biến môi trường của repository.
+Do run đối chứng baseline ban đầu `20261106T111429Z-local-dev5min` thuộc nhóm legacy thiếu hash `verifier_sha256`, sau khi chạy lại run đối chứng baseline `20261107T180810Z-local-dev_5min-eb9c85` có đầy đủ `verifier_sha256` và `dev_harness_sha256` đồng bộ môi trường, cột tỉ lệ cải thiện trong `SCORES.md` được ghi nhận chính thức là **1.15×** (tính toán chính xác $1.1475\times$).
 
 | Mốc tốt nhất | Config | Commit nguồn | Run / provenance |
 | --- | --- | --- | --- |
