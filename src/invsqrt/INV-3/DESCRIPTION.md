@@ -4,9 +4,9 @@ Loại: Tinh chỉnh một phương án.
 
 ## File gốc
 
-- File Python gốc kế thừa: [INV-BASELINE/solution.py](../INV-BASELINE/solution.py) (tại commit nhánh chính `13ec200455ab4aea1afc8df0bcab493cd269075e`, Git blob SHA-256: `a5a5fb399614c873625d37efb2e7a04ca070d943`).
+- File Python gốc kế thừa: [INV-BASELINE/solution.py](../INV-BASELINE/solution.py) (tại commit nhánh chính `13ec200455ab4aea1afc8df0bcab493cd269075e`, SHA-256: `fddc7ecc89a67a4a897a5bf509c902805383b31c94964221f8ae70c2f695cfad`).
 - Mô tả baseline gốc: [INV-BASELINE/DESCRIPTION.md](../INV-BASELINE/DESCRIPTION.md).
-- Cấu hình baseline đối chiếu: [INV-BASELINE/configs/baseline.json](../INV-BASELINE/configs/baseline.json) (Git blob SHA-256: `d2be4a71a86092762b1d0d64b86dcb47e2ed31c3`).
+- Cấu hình baseline đối chiếu: [INV-BASELINE/configs/baseline.json](../INV-BASELINE/configs/baseline.json) (SHA-256: `8c76e1d32d9b6b0c898d347e883c9ea65b1e26b3151bd57c99d9e98487a1c8a8`).
 - Nguồn tham khảo của ban tổ chức: [verifiers/invsqrt/nr_reference_circuit.py](../../../verifiers/invsqrt/nr_reference_circuit.py) (SHA-256 trong [data_manifest.json](../../../data_manifest.json): `bb90330dcf774f7b502de471293facba67f27952cc8808fe4a9970a9b1322e23`, giấy phép Apache-2.0 tại [src/LICENSE.txt](../../LICENSE.txt)).
 - Verifier chấm điểm: [verifiers/invsqrt/verify_submission_invsqrt.py](../../../verifiers/invsqrt/verify_submission_invsqrt.py) (SHA-256 trong [data_manifest.json](../../../data_manifest.json): `ddef520dec6b68d1cf0a6f328ddd36d79eb84570b9192cf3f7acaf073f06733a`).
 - Ghi chú tài liệu liên quan đã merge trên nhánh chính: [research/invsqrt/papers/arxiv-2308.12352/note.md](../../../research/invsqrt/papers/arxiv-2308.12352/note.md).
