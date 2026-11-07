@@ -1,6 +1,4 @@
-# GQA — tối ưu mạch lượng tử có thể kiểm chứng
-
-Dự án nhóm cho invsqrt, DQI và DFTHC SOS. Baseline cả ba bài đã dựng và đối chiếu với sample gốc; invsqrt đã full PASS trên Colab (score 2076774.233715282).
+# Google Quantum AI - Verifiable Quantum Circuit Compilation
 
 ## Cấu trúc
 
