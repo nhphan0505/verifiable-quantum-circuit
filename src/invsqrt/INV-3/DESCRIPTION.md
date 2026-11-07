@@ -187,16 +187,25 @@ Với cấu hình độ rộng chuẩn (`n_p = 10, delta_bits = 14, coef_bits = 
 
 ## Kết luận và phiên bản tái lập
 
-Kết quả thực nghiệm trên bộ dữ liệu chuẩn `dev_5min` (run `20261107T174505Z-local-dev_5min-bf75bb`) đã **ủng hộ mạnh mẽ hypothesis**:
-- **Trạng thái:** `PASS` trên toàn bộ 8.192 shots (4.096 mẫu đầu vào $\times$ 2 repeats), khôi phục $x$ và trả toàn bộ scratch về $|0\rangle$ hoàn hảo trên mọi nhánh đo ngẫu nhiên của `del_and`.
-- **Số qubit cực đại $Q$:** Giảm từ 260 xuống **232** qubit ($\Delta Q = -28$ qubit, giảm 10.77%), đạt kết quả vượt mức dự đoán ban đầu (233 qubit) nhờ bộ phân bổ LIFO của Kickmix CircuitBuilder tái sử dụng tối ưu các qubit sạch sau khi free.
-- **Chi phí cổng:** Toffoli giữ nguyên **7.735,0** ($\Delta\text{Toffoli} = 0$); số phép quay giữ nguyên 37 và 1 cổng T; rotation synthesis epsilon đạt $1.813003214175951 \times 10^{-12}$ (trùng khớp hoàn toàn baseline). Chi phí Toffoli tương đương $C = 7986.319634297497$.
-- **Độ chính xác:** `worst_error_over_tolerance` đạt `0.37839383360236045` tại `worst_x = 3010856` (khớp chính xác từng chữ số thập phân với baseline), xác nhận không có bất kỳ sai lệch số học nào xảy ra khi thay đổi lịch trình quản lý thanh ghi.
-- **Điểm số:** Giảm từ `2076443.1049173493` xuống **`1852826.1551570194`** trên `dev_5min`. Tỉ số cải thiện số học đạt $2076443.10 / 1852826.16 = \mathbf{1.12\times}$ (chính xác bằng tỉ số $260 / 232$). Do run đối chứng baseline `20261106T111429Z-local-dev5min` thuộc nhóm legacy thiếu hash `verifier_sha256`, cột tỉ lệ trong `SCORES.md` được ghi `—` theo đúng quy tắc kiểm tra tính bất biến môi trường của repository.
+Hai cấu hình thực nghiệm trên bộ dữ liệu chuẩn `dev_5min` đều đạt `status: PASS` và **ủng hộ mạnh mẽ hypothesis**:
+1. **Cấu hình không pebbling `staged_alloc`** (run `20261107T174505Z-local-dev_5min-bf75bb`, commit `a5e1edb25864ab262261f3714b14ae676d96d2bf`):
+   - $Q = 232$ qubit ($-28$ qubit so với baseline 260), Toffoli = 7.735,0 ($\Delta\text{Toffoli} = 0$), $C = 7986.319634297497$.
+   - Điểm `dev_5min`: `1852826.1551570194` (cải thiện $1.1207\times$, tức $1.12\times$).
+   - `worst_error_over_tolerance`: $0.37839383360236045$ tại $x = 3010856$ (khớp chính xác baseline).
+2. **Cấu hình pebbling `pebble_square`** (run `20261107T175755Z-local-dev_5min-cdf94b`, commit `12add6c14db799510c78e463bd85f8633aa59977`):
+   - $Q = 204$ qubit (giảm $56$ qubit tức $-21.54\%$ so với baseline 260; giảm thêm 28 qubit tức $-12.07\%$ so với `staged_alloc`).
+   - Toffoli: 8.619,0 ($+884$ Toffoli, tăng $+11.43\%$), $C = 8870.319634297497$ ($+11.07\%$).
+   - Điểm `dev_5min`: **`1809545.2053966895`** (cải thiện **$1.1475\times$** so với baseline $2076443.10$, và giảm thêm $43.280,95$ điểm tức $-2.34\%$ so với `staged_alloc`).
+   - `worst_error_over_tolerance`: $0.37839383360236045$ tại $x = 3010856$ (khớp chính xác baseline).
+   - Rotation eps giữ nguyên $1.813003214175951 \times 10^{-12}$ (37 Z_POW, 1 T).
+
+**Kết luận đánh đổi kỹ thuật:**
+Tỉ lệ giảm số qubit cực đại $Q$ ($204/232 = 0.8793$, tức giảm $12.07\%$) lớn hơn tỉ lệ tăng chi phí tính toán $C$ ($8870.32/7986.32 = 1.1107$, tức tăng $11.07\%$), giúp tích $Q \times C$ tiếp tục giảm thêm $2.34\%$. Do đó, `pebble_square` là ứng viên có điểm số tốt nhất của hướng `INV-3` trên `dev_5min`.
+Do run đối chứng baseline `20261106T111429Z-local-dev5min` thuộc nhóm legacy thiếu hash `verifier_sha256`, cột tỉ lệ trong `SCORES.md` được ghi `—` theo đúng quy tắc kiểm tra tính bất biến môi trường của repository.
 
 | Mốc tốt nhất | Config | Commit nguồn | Run / provenance |
 | --- | --- | --- | --- |
-| Dev | [configs/staged_alloc.json](configs/staged_alloc.json) | `a5e1edb25864ab262261f3714b14ae676d96d2bf` | [20261107T174505Z-local-dev_5min-bf75bb](../../../results/invsqrt/INV-3/staged_alloc/dev_5min/20261107T174505Z-local-dev_5min-bf75bb/verifier.json) / [provenance.json](../../../results/invsqrt/INV-3/staged_alloc/dev_5min/20261107T174505Z-local-dev_5min-bf75bb/provenance.json) |
+| Dev | [configs/pebble_square.json](configs/pebble_square.json) | `12add6c14db799510c78e463bd85f8633aa59977` | [20261107T175755Z-local-dev_5min-cdf94b](../../../results/invsqrt/INV-3/pebble_square/dev_5min/20261107T175755Z-local-dev_5min-cdf94b/verifier.json) / [provenance.json](../../../results/invsqrt/INV-3/pebble_square/dev_5min/20261107T175755Z-local-dev_5min-cdf94b/provenance.json) |
 | Full | Chưa có (chưa chấm full) | Chưa có | Chưa chấm |
 
 Mã triển khai: [solution.py](solution.py). Cấu hình: [configs](configs/) ([staged_alloc.json](configs/staged_alloc.json), [pebble_square.json](configs/pebble_square.json)).
