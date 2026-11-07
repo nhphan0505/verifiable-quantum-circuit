@@ -8,16 +8,73 @@ Mẫu giao việc cho coding agent: [templates/prompts/README.md](templates/prom
 
 ## 1. Chuẩn bị workspace
 
-Clone repository của nhóm nếu chưa có, hoặc đồng bộ nhánh chính nếu đã có. Dùng đúng tên nhánh chính của repository; không ghi đè thay đổi chưa commit của mình.
+Nếu đã có workspace, đồng bộ nhánh chính khi working tree an toàn; giữ nguyên thay đổi chưa commit. Khi vừa clone, làm các bước sau.
 
-Dùng Python 3.13; phiên bản package local/Colab được cố định riêng theo [môi trường baseline](docs/REPOSITORY_CHECKS.md). Từ root project, tạo môi trường và cài phụ thuộc nếu chưa làm:
+
+Mỗi thành viên dùng một workspace riêng. Chuẩn bị Git, Python **3.13** và quyền
+truy cập repo. Các lệnh dưới đây chạy bằng **PowerShell trên Windows**.
+
+**1. Clone và mở thư mục project** (nếu đã clone thì chỉ mở thư mục đó):
 
 ```powershell
-python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+git clone https://github.com/nhphan0505/verifiable-quantum-circuit-.git GQA
+cd GQA
 ```
 
-Bổ sung dữ liệu ban tổ chức theo [DATA.md](DATA.md). Xem [hướng dẫn Colab](docs/COLAB_GRADING.md) để chuẩn bị notebook và ZIP verifier. `.venv/`, dữ liệu lớn và `artifacts/` không commit vào Git.
+**2. Tạo môi trường Python và cài dependency local:**
+
+```powershell
+py -3.13 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m pip check
+```
+
+Dùng trực tiếp Python trong `.venv` như trên, không cần activate. Nếu không có
+lệnh `py`, dùng `python --version` xác nhận đúng 3.13 rồi chạy `python -m venv .venv`.
+Colab dùng bộ dependency riêng đã pin trong notebook và `requirements-colab.txt`.
+
+**3. Bổ sung dữ liệu ban tổ chức:**
+
+Lấy bộ dữ liệu gốc của cuộc thi hoặc từ người phụ trách nhóm, đặt theo [DATA.md](DATA.md).
+Git không chứa dataset lớn, submission mẫu, `.venv` hoặc artifact đã compile.
+Để tạo đủ hai ZIP Colab cần:
+
+- `verifiers/dfthcsos/FeMoCo76o113e.fcidump`
+- `verifiers/dfthcsos/FeMoCo76o113e.fixed_shifts.npz`
+
+Dựng baseline task 3 còn cần `sample_submission/dfthcsos/submission.npz`.
+Các file mạch mẫu dùng để đối chiếu khi cần; Windows dùng package pip Kickmix,
+không cần binary Linux `kickmix.so` để compile.
+
+**4. Tạo ZIP dùng cho Colab và kiểm tra workspace:**
+
+```powershell
+.\.venv\Scripts\python.exe scripts/prepare_colab.py
+.\.venv\Scripts\python.exe scripts/check_repo.py
+```
+
+Lệnh đầu kiểm tra hash dữ liệu và tạo `gqa_verifiers.zip`, `dfthcsos_reference.zip`
+cùng manifest trong `artifacts/colab/`. Nếu thiếu dữ liệu thì bổ sung đúng file
+trước khi chạy lại. Checker có thể chạy riêng mà không cần dataset lớn.
+Xem [hướng dẫn chấm Colab](docs/COLAB_GRADING.md) để sử dụng notebook và các ZIP này.
+
+**5. Chuẩn bị coding agent để bắt đầu nghiên cứu:**
+
+Mở workspace trong coding agent, yêu cầu đọc [AGENTS.md](AGENTS.md) và quy trình trong tài liệu này. Kiểm tra Git đã có tên/email commit của chính
+thành viên và công cụ GitHub của agent đã đăng nhập đúng tài khoản, có quyền
+thao tác repo. Không dùng chung tài khoản tác giả/reviewer.
+
+```powershell
+git config user.name
+git config user.email
+git status --short --branch
+```
+
+Nếu thiếu tên/email, cấu hình danh tính Git của mình trước khi commit.
+Bắt đầu bằng [prompt 01 — tìm hypothesis](templates/prompts/01_find_hypothesis.md),
+sau đó làm theo [bộ prompt từng giai đoạn](templates/prompts/README.md).
+Agent sẽ tạo branch, code/config và compile artifact khi được giao hướng;
+người clone mới chưa có sẵn artifact baseline trong máy.
 
 ## 2. Kiểm tra các hướng đã có
 
