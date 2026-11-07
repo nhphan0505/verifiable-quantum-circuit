@@ -64,7 +64,7 @@ truy cập repo. Các lệnh dưới đây chạy bằng **PowerShell trên Wind
 **1. Clone và mở thư mục project** (nếu đã clone thì chỉ mở thư mục đó):
 
 ```powershell
-git clone https://github.com/nhphan0505/verifiable-quantum-circuit-.git GQA
+git clone https://github.com/nhphan0505/verifiable-quantum-circuit.git GQA
 cd GQA
 ```
 
