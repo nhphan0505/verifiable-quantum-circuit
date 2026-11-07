@@ -8,13 +8,14 @@
   "accessed_at": "2026-11-07",
   "source_file": "paper.pdf",
   "source_sha256": "93ef6148f93419e985f95fe3d5da667431fc23b0433cbde23b4e305b56e85db1",
-  "coverage": "Focused reading: abstract p.1; section II.D pp.12-14 through Eq.(50) and uncomputation/beta discussion; context Table IV and Discussion pp.21-22; reference entries [102]-[104] p.26. Equations on pp.12-14 visually checked. Other sections/appendices not deeply reviewed.",
+  "coverage": "Focused reading: abstract p.1; section II.D pp.12-14 through Eq.(50) and uncomputation/beta discussion; context Table IV and Discussion pp.21-22; reference entries [102]-[104] p.26. Equations on pp.12-14 visually checked. Other sections/appendices not deeply reviewed. Review follow-up: section II.A p.5 for momentum range and Table II p.19 for eta=218; clarified shift-back location and arithmetic-cost discrepancy.",
   "project_snapshot": {
     "commit": "df3d62b6dec8622ced06a4bd876dff69d6ebc01c",
     "files": {
-      "src/invsqrt/INV-BASELINE/solution.py": "e9bf96681aef52c7de398c9b5e8fc3051382cb65a1f95de97a0b20c18d0ef3f9",
-      "src/invsqrt/INV-BASELINE/configs/baseline.json": "fc2e329e2bce7a62aeafcaf8bfff4da6316f20c96f9ee1dfcb27e70a4aa2713b",
+      "src/invsqrt/INV-BASELINE/solution.py": "fddc7ecc89a67a4a897a5bf509c902805383b31c94964221f8ae70c2f695cfad",
+      "src/invsqrt/INV-BASELINE/configs/baseline.json": "8c76e1d32d9b6b0c898d347e883c9ea65b1e26b3151bd57c99d9e98487a1c8a8",
       "verifiers/invsqrt/verify_submission_invsqrt.py": "ddef520dec6b68d1cf0a6f328ddd36d79eb84570b9192cf3f7acaf073f06733a"
-    }
+    },
+    "hash_basis": "Raw Git blob bytes at project_snapshot.commit, independent of checkout line endings."
   }
 }

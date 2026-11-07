@@ -13,6 +13,7 @@ Version: v1 ngày 2023-08-23; bản PDF local 37 trang, đọc ngày 2026-11-07
   Horner, Newton–Raphson, chuẩn hóa, fixed-point, phase kickback, uncompute.
 - Phạm vi: đọc sâu mục II.D, trang PDF 12–14, đến Eq. (50) và đoạn uncompute/hệ số b;
   đọc abstract trang 1, ngữ cảnh Table IV/trang 21–22 và mục tham khảo [102]–[104]/trang 26.
+  Sau review, đối chiếu thêm mục II.A/trang 5 và Table II/trang 19 cho miền đầu vào và eta.
   Đã xem ảnh trang 12–14 để đối chiếu hệ số, dấu và số mũ. Các phần vật lý,
   block encoding/QSP, phép đo, ước lượng Trotter và phụ lục chưa được review sâu.
 - Số trang bên dưới là số trang PDF (trùng số in trên các trang được dẫn).
@@ -50,6 +51,10 @@ với các đầu vào rời rạc thuộc 16 lần khoảng [1,3/2].
 Với khoảng có đầu mút cơ sở c nhân 2^m, hệ số bậc j được scale thành
 `a_j * 2^(-(j+1/2)*m)`, và độ lệch dùng `x - c*2^m` (trang 13, đoạn sau Eq. (42)).
 Đây là cách giữ các đa thức cùng biểu diễn một hàm sau đổi thang.
+Hằng `delta_NR` giữ nguyên khi scale khoảng (paper ghi rõ sau Eq. (42));
+`x*y0^2` bất biến khi x nhân 2^m và y0 chia 2^(m/2). Nếu đưa offset của paper vào
+baseline, các khoảng [2,3), [3,4) lần lượt kế thừa offset của A, B; vẫn cần kiểm tra
+lượng tử hóa trong fixed-point. Baseline hiện tại không dùng các offset này.
 
 Paper xử lý số nhỏ bằng bỏ **cặp bit 0 đầu** và dịch bù, giúp tránh tăng precision
 quá nhiều trong các phép nhân (trang 13 cuối–14 đầu). x=0 không nằm trong phép
@@ -58,7 +63,10 @@ lấy nghịch đảo căn; không dùng ô QROM 0 để suy ra hàm được đ
 **Đối chiếu implementation của repo:** chuẩn hóa thành `M = x*2^(2s)/2^(2*n_p)`
 trong [1,4), với `s` là số cặp bit 0 được dịch. Khi đó
 `1/sqrt(x) = 2^(s-n_p)/sqrt(M)`. Bốn khoảng là [1,1.5), [1.5,2), [2,3), [3,4).
-Hai khoảng cuối dùng M/2 và hệ số `a_j/(2^j*sqrt(2))`. Đây là quy ước cụ thể của
+Hai khoảng cuối biểu diễn `P_A(M/2)/sqrt(2)` hoặc `P_B(M/2)/sqrt(2)`.
+Trong mạch, Horner vẫn nhận độ lệch **chưa chia thang** `d=M-2` hoặc `d=M-3`,
+kết hợp hệ số `a_j/(2^j*sqrt(2))`. Không đồng thời thay d bằng M/2-c, vì như vậy
+sẽ chia thừa hệ số theo bậc j. Đây là quy ước cụ thể của
 baseline, không phải nguyên văn thiết kế register của paper.
 
 ### 2. Hai đa thức nền
@@ -102,7 +110,8 @@ hiệu chỉnh sai số tương đối khoảng không quá 2.5821e-9 ở khoả
 chứng minh mọi cách làm tròn và mọi mạch lượng tử đều đạt các mức đó.
 
 **Suy luận đại số của note:** với Newton chuẩn không offset, đặt
-`y0=(1+e)/sqrt(x)` thì `e1 = -3*e^2/2 - e^3/2`. Vì vậy sai số khởi tạo nhỏ được
+`y0=(1+e)/sqrt(x)` và `y1=(1+e1)/sqrt(x)`, tức `e1=y1*sqrt(x)-1`,
+thì `e1 = -3*e^2/2 - e^3/2`. Vì vậy sai số khởi tạo nhỏ được
 cải thiện theo bậc hai. Với offset, thêm `delta_NR*(1+e)/2`. Phép cắt cụt fixed-point
 còn thêm sai số khác; cần mô hình đúng từng phép nhân/thanh ghi.
 
@@ -128,8 +137,19 @@ Trang 13 cho ước lượng dùng nội suy precision 15 bit, rồi số học 
 - Bình phương 15 bit, hai phép nhân 24 bit và phép trừ bổ sung đưa tổng số học
   lên khoảng 2136 Toffoli, chưa gồm tổng bình phương/QROM.
 - Tổng bình phương ba tọa độ n bit: `3*n^2-n-1`; QROM: `4*n+2`.
-- Thêm chuẩn hóa `n*(n+1)` và dịch bù khoảng `15*n`.
+- Thêm chuẩn hóa `n*(n+1)` và dịch bù khoảng `15*n`. Khoản `15*n` ở trang 14
+  giả định dịch đầu ra nội suy 15 bit trước các phép nhân Newton. Baseline thực hiện
+  Newton hoàn toàn trên M chuẩn hóa, rồi mới `_denormalize` kết quả. Với config mặc
+  định, p là lát 30 bit trong y1 40 bit; mỗi bước dịch điều khiển xoay một đoạn
+  31 bit của y1. Không dùng `15*n` làm chi phí dịch bù của baseline. Nếu thay vị trí
+  dịch, phải đồng bộ scale của mọi toán hạng và kiểm tra dải động/truncation.
 - Eq. (50), trang 14: `2137 + 4*n^2 + 19*n`, bằng 2395 tại n=6.
+
+**Chênh lệch cần giữ rõ:** tổng các thành phần liệt kê ở trang 13 là
+`675 + 45 + 225 + 1152 + 24 = 2121`, trong khi paper ghi xấp xỉ 2136 và dùng
+2136 để lập Eq. (50). Đoạn nguồn không giải thích riêng 15 Toffoli chênh lệch;
+note không tự thêm một phép toán để khớp tổng. 2136/2395 ở trên là số tác giả báo cáo,
+chưa phải kết quả đếm mạch độc lập.
 
 n trong estimate trên là bit tọa độ của mô hình paper. Task 1 có n_p=10 và verifier
 chấm cả Q, cổng chạy thực, uncompute và tổng hợp phép quay. Không so 2395 trực tiếp
@@ -148,6 +168,15 @@ tol(x) = 2^-24/sqrt(x) turns
 score = Q * (Toffoli_mean + T/4)
 ```
 
+Liên hệ miền đầu vào: mục II.A trang 5 định nghĩa lưới động lượng G và G0 là miền
+hiệu hai vector. Với quy ước thành phần nguyên có dấu n_p bit của benchmark, mỗi
+thành phần có độ lớn tối đa `2^(n_p-1)-1`; hiệu có độ lớn tối đa `2^n_p-2`. Tổng
+bình phương ba chiều bị chặn bởi `3*(2^n_p-2)^2 < 2^(2*n_p+2)`, giải thích 22 bit.
+Đây là đối chiếu encoding benchmark với khái niệm G/G0, không giả định mọi lưới
+N trong paper đều lấp đầy miền biểu diễn này. Hằng `ETA=218` của verifier khớp
+hệ Alpha + Hydrogen ở Table II trang 19 (và Table IV trang 21); không đổi n_p của
+benchmark theo ví dụ n=6 trong estimate paper.
+
 So pha modulo 1, phục hồi x và toàn bộ scratch. Full mặc định 64 shots mỗi x để
 kiểm tra cả các nhánh measurement-based uncomputation. Dư địa sai số còn lại phải
 đủ cho tổng hợp Z_POW; sai số số học sát ngưỡng có thể làm chi phí T tăng hoặc FAIL.
@@ -165,7 +194,7 @@ không bác bỏ thuật toán beta=1 đang dùng trong benchmark.
 
 ## Khả năng áp dụng vào project
 
-Các file được đọc tại commit df3d62b6dec8622ced06a4bd876dff69d6ebc01c, hash bytes trong source.json:
+Các file được đọc tại commit df3d62b6dec8622ced06a4bd876dff69d6ebc01c, hash bytes **Git blob** (không phụ thuộc CRLF/LF khi checkout) trong source.json:
 
 - [solution.py baseline](../../../../src/invsqrt/INV-BASELINE/solution.py):
   `Precision.coefficient_table`, `_normalize`, `_horner`, `_compute_y1`,
