@@ -1,0 +1,5 @@
+{
+  "missing_provenance": true,
+  "matching_builds": [],
+  "note": "Agent must identify build evidence; do not infer source commit from current HEAD."
+}

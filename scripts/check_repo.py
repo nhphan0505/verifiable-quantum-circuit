@@ -133,6 +133,31 @@ class Audit:
         p = self.load(run / 'provenance.json')
         for key, value in [('track', track), ('experiment_id', exp), ('config_name', config)]:
             self.require(p.get(key) == value, f'{run}: provenance {key} mismatch')
+        if p.get('provenance_type') == 'pre_git_build':
+            # An existing artifact may be graded again after Git initialization.
+            # Accept only a specifically allowlisted historical build record;
+            # never invent a source commit or config for a pre-Git compilation.
+            legacy = self.load(self.root / 'scripts/legacy_runs.json').get('runs', [])
+            build_name = p.get('build_run', '')
+            build = self.root / str(build_name)
+            valid = (build_name in legacy and build.parent == self.root / f'results/{track}/{exp}/{config}/build_only')
+            if not self.require(valid, f'{run}: pre-Git provenance needs an allowlisted historical build'):
+                return
+            original = self.load(build / 'metadata.json')
+            hashes = [a.get('sha256') for a in original.get('artifacts', [])]
+            self.require(original.get('status') == 'BUILT' and original.get('track') == track,
+                         f'{run}: invalid historical build identity')
+            self.require(p.get('source_commit') is None and p.get('build_config_path') is None
+                         and p.get('build_config_sha256') is None, f'{run}: do not invent pre-Git commit/config')
+            self.require(p.get('source_path') == original.get('source')
+                         and p.get('source_sha256') == original.get('source_sha256')
+                         and bool(re.fullmatch(HASH, str(p.get('source_sha256', '')))),
+                         f'{run}: source hash/path differs from historical build')
+            self.require(p.get('artifact_sha256') in hashes
+                         and p.get('artifact_sha256') == meta.get('upload_artifact', {}).get('sha256'),
+                         f'{run}: artifact hash differs from historical build/upload')
+            self.require(bool(p.get('limitations')), f'{run}: document pre-Git provenance limitations')
+            return
         for key in ['source_sha256', 'build_config_sha256', 'artifact_sha256']:
             self.require(bool(re.fullmatch(HASH, str(p.get(key, '')))), f'{run}: invalid {key}')
         commit = p.get('source_commit', '')

@@ -91,3 +91,12 @@ CI kiểm tra records bằng Python 3.13; review/check bắt buộc do cấu hì
   kết quả chạy thật: reviewer vẫn phải xem bằng chứng nguồn của run.
 
 Notebook chạy local, đối chiếu EXPECTED_PACKAGES với requirements.txt. Xem [LOCAL_GRADING.md](LOCAL_GRADING.md).
+
+## Chấm lại artifact được dựng trước Git
+
+Run mới có thể dùng `provenance_type: pre_git_build`, source_commit/config build là
+null, nếu nối được chính xác bằng hash artifact tới một build_only lịch sử có trong
+legacy_runs.json. Phải ghi source_path/source_sha256 đúng biên bản cũ và limitations.
+Checker đối chiếu hash upload với build cũ; không miễn kiểm tra run mới, không mở
+ngoại lệ cho build mới hoặc tự thêm run vào allowlist. Mẫu provenance thông thường
+vẫn bắt buộc SHA Git đầy đủ cho mọi build từ workflow hiện tại.

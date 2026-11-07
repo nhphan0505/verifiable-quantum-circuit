@@ -70,6 +70,27 @@ class RepositoryChecks(unittest.TestCase):
         self.audit.run()
         self.assertTrue(any('provenance.json' in e for e in self.audit.errors))
 
+    def test_pre_git_build_requires_matching_historical_evidence(self):
+        build = next((self.root / 'results/dqi/DQI-BASELINE/baseline/build_only').iterdir())
+        original = json.loads((build / 'metadata.json').read_text())
+        run = self.root / 'results/dqi/DQI-BASELINE/baseline/dev_5min/test-regrade'
+        run.mkdir(parents=True)
+        digest = original['artifacts'][0]['sha256']
+        p = dict(provenance_type='pre_git_build', track='dqi', experiment_id='DQI-BASELINE',
+                 config_name='baseline', source_commit=None, build_config_path=None,
+                 build_config_sha256=None, source_path=original['source'],
+                 source_sha256=original['source_sha256'], artifact_sha256=digest,
+                 build_run=build.relative_to(self.root).as_posix(), limitations='No Git commit at build time')
+        record = run / 'provenance.json'
+        record.write_text(json.dumps(p))
+        meta = {'upload_artifact': {'sha256': digest}}
+        self.audit.provenance(run, 'dqi', 'DQI-BASELINE', 'baseline', 'dev_5min', meta)
+        self.assertEqual([], self.audit.errors)
+        p['artifact_sha256'] = 'a' * 64
+        record.write_text(json.dumps(p))
+        self.audit.provenance(run, 'dqi', 'DQI-BASELINE', 'baseline', 'dev_5min', meta)
+        self.assertTrue(any('artifact hash differs' in e for e in self.audit.errors))
+
     def test_verifier_change_fails(self):
         path = self.root / 'verifiers/invsqrt/verify_submission_invsqrt.py'
         path.write_text('"""Changed."""\n', encoding='utf-8')

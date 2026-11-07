@@ -1,0 +1,17 @@
+{
+  "status": "REVIEWED",
+  "verification_level": "dev_5min",
+  "official_score": false,
+  "checks": {
+    "stdout_matches_verifier_json": true,
+    "stderr_empty": true,
+    "artifact_matches_historical_build_and_organizer_sample": true,
+    "verifier_and_harness_hashes_match_local": true,
+    "verified_shots": 4096,
+    "value_errors": 0,
+    "phase_errors": 0
+  },
+  "score": 61234661450380.1,
+  "elapsed_seconds": 118.78387240000302,
+  "provenance": "pre_git_build; see provenance.json. Supersedes initial review.json missing-provenance notice without changing it."
+}
