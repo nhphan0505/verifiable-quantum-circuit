@@ -1,0 +1,28 @@
+{
+  "track": "invsqrt",
+  "experiment_id": "INV-3",
+  "config_name": "staged_alloc",
+  "source_commit": "a5e1edb25864ab262261f3714b14ae676d96d2bf",
+  "source_path": "src/invsqrt/INV-3/solution.py",
+  "source_sha256": "70675dc2f6451937b55b5b4b05552e16abbf4300bde710a3586bb136725765e1",
+  "build_config_path": "src/invsqrt/INV-3/configs/staged_alloc.json",
+  "build_config_sha256": "94d0881155ac33b0aceb2448c26566540bdda2ef36025780737f94f5430d4146",
+  "artifact_path": "artifacts/invsqrt/INV-3/staged_alloc.kmb",
+  "artifact_sha256": "a0f4631b29839f380b90f1d9077acfcc07f886ddb13e8caa3dd8a003369831f5",
+  "build_command": [
+    "D:\\GQA\\.venv\\Scripts\\python.exe",
+    "src/invsqrt/INV-3/solution.py",
+    "--config",
+    "src/invsqrt/INV-3/configs/staged_alloc.json",
+    "--overwrite"
+  ],
+  "environment": {
+    "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    }
+  },
+  "build_run": "results/invsqrt/INV-3/staged_alloc/build_only/20261107T174241Z-local-build-2f707e"
+}

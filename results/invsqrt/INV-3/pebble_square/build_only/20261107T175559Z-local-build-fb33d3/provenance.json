@@ -1,0 +1,28 @@
+{
+  "track": "invsqrt",
+  "experiment_id": "INV-3",
+  "config_name": "pebble_square",
+  "source_commit": "12add6c14db799510c78e463bd85f8633aa59977",
+  "source_path": "src/invsqrt/INV-3/solution.py",
+  "source_sha256": "70675dc2f6451937b55b5b4b05552e16abbf4300bde710a3586bb136725765e1",
+  "build_config_path": "src/invsqrt/INV-3/configs/pebble_square.json",
+  "build_config_sha256": "de4d36e2ffa01c0d0417347c5bb1253e08ec85396ab39b189b86dc82c53aeeb6",
+  "artifact_path": "artifacts/invsqrt/INV-3/pebble_square.kmb",
+  "artifact_sha256": "52ea9bc30a1257ec339a65fc697e8f768325b5f8de54beccf8482dec7b7a7fd5",
+  "build_command": [
+    "D:\\GQA\\.venv\\Scripts\\python.exe",
+    "src/invsqrt/INV-3/solution.py",
+    "--config",
+    "src/invsqrt/INV-3/configs/pebble_square.json",
+    "--overwrite"
+  ],
+  "environment": {
+    "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    }
+  },
+  "build_run": null
+}
