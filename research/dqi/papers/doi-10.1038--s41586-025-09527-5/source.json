@@ -1,0 +1,22 @@
+{
+  "track": "dqi",
+  "kind": "papers",
+  "source_id": "doi-10.1038--s41586-025-09527-5",
+  "title": "Optimization by decoded quantum interferometry",
+  "source_url": "https://doi.org/10.1038/s41586-025-09527-5",
+  "version": "Nature Vol. 646, pp. 831-836 (2025-10-23); published online 2025-10-22; accepted 2025-08-13; received 2024-12-04; local PDF created 2025-10-11",
+  "accessed_at": "2026-11-07",
+  "source_file": "paper.pdf",
+  "source_sha256": "f492957ba9897ef735decb7a4a7a75fc7cdd6515a3e2b94b9571726ab060420f",
+  "coverage": "Read in full and visually verified against PDF pages 1-7 (Nature pp. 831-836): Abstract and max-XORSAT introduction with Eq. (1) on PDF p. 1 (p. 831); 5-step DQI state preparation, Eqs. (2)-(5), Fig. 1, syndrome decoding reduction to dual code C^perp, gate overhead O(T + m^2), Definition 1 (max-LINSAT), and Eq. (6) (semicircle law) on PDF pp. 2-3 (pp. 832-833); Definition 2 (OPI), Figs. 2-3, Reed-Solomon / Berlekamp-Massey reduction, and Prange comparison on PDF p. 3 (p. 833); OPI hardness context, concrete challenge parameters (n/p=1/10 and n/p=r/p=1/2), Qualtran resource estimate at p=521 (~1e8 Toffoli gates, ~9e3 qubits), and sparse max-XORSAT / LDPC / BP vs simulated annealing benchmarks (Table 1) on PDF p. 4 (p. 834); Discussion (Regev reductions, Yamakawa-Zhandry oracle problem, multivariate OPI / Reed-Muller, max-k-XORSAT limits, fair sampling) on PDF p. 5 (p. 835); References [1]-[59] and Data/Code availability on PDF pp. 5-7 (pp. 835-836). External Supplementary Information (Sections 1-13, Supplementary Theorems 1.1 and 7.1) is not included in the 7-page local PDF and was not read directly.",
+  "project_snapshot": {
+    "commit": "74c543d217ad394457054f14a6ea9e66fd3c2552",
+    "files": {
+      "src/dqi/DQI-BASELINE/solution.py": "3bba2c941021749393d322c1b779e02dd7ec987c61c7b253a54fd2173968cdb4",
+      "src/dqi/DQI-BASELINE/configs/baseline.json": "74055cda362a06faece1aa628efa072d1b6ecce8898934143c2b0fb40985466d",
+      "verifiers/dqi/verify_submission_dqi.py": "f14274bc0943fb9769ddb01131be6063191a15009fe1caf1d4bdd9fd25194e65",
+      "verifiers/dqi/dqi_reference_circuit.py": "2b8e1b80a806157c333a7e308eaf2499ee09de499efbc05875202c327959959e"
+    },
+    "hash_basis": "Raw Git blob bytes at project_snapshot.commit, independent of checkout line endings."
+  }
+}
