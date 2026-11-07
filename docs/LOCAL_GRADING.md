@@ -12,7 +12,10 @@ extensions, chọn kernel `.venv` của project. Tên file notebook được gi�
 cũ vẫn mở được; nội dung hiện chạy local. Không cần server Colab hoặc upload ZIP.
 
 Điền TRACK (`invsqrt`, `dqi`, `dfthcsos`), MODE (`smoke`, `dev_5min`, `full`),
-EXPERIMENT_ID, OWNER và CONFIG_NAME; Run All. Notebook tìm file đúng tên trong
+EXPERIMENT_ID, OWNER và CONFIG_NAME trong form: chạy cell setup và cell form
+trước, chọn dropdown rồi chạy cell chấm. Đổi track sẽ xóa ID/config đang chọn;
+đổi ID sẽ xóa config. Nút Làm mới lấy lại danh sách sau khi compile config mới.
+ID lấy từ src theo track; config chỉ hiện khi có JSON và artifact đúng tên. Notebook tìm file đúng tên trong
 `artifacts/<TRACK>/<ID>/<CONFIG_NAME>.kmb` hoặc `.zip` (task 3), đồng thời yêu cầu
 `src/<TRACK>/<ID>/configs/<CONFIG_NAME>.json` tồn tại. Không tự chọn config khác.
 Task 3 cần hai file dữ liệu FeMoCo trong verifiers/dfthcsos theo DATA.md.

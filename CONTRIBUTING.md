@@ -53,7 +53,7 @@ không cần binary Linux `kickmix.so` để compile.
 ```
 
 Mở `notebooks/GQA_Grade_Submission.ipynb` trong VS Code/Jupyter, chọn kernel
-`.venv`. Điền TRACK, MODE, EXPERIMENT_ID, OWNER, CONFIG_NAME; artifact được đọc
+`.venv`. Chọn TRACK, MODE, EXPERIMENT_ID, CONFIG_NAME trong dropdown, điền OWNER rồi chạy cell chấm; artifact được đọc
 từ project và results lưu đúng chỗ. Xem [chấm local](docs/LOCAL_GRADING.md).
 
 **5. Chuẩn bị coding agent để bắt đầu nghiên cứu:**
@@ -169,7 +169,7 @@ artifacts/<TRACK>/<ID>/<config-name>.zip   Task 3
 Task 3 phải đóng gói `submission.npz` và `angle_k_0.kmb`, `angle_k_1.kmb`, ... liên tục từ 0 ở gốc ZIP. Nếu đổi setting, dùng artifact tương ứng; không chấm nhầm file của lần dựng trước. Nếu chủ động dựng lại cùng tên, dùng tùy chọn ghi đè của solution và đối chiếu hash artifact mới.
 
 Mở [notebook local](notebooks/GQA_Grade_Submission.ipynb), chọn kernel `.venv`,
-điền TRACK, MODE, EXPERIMENT_ID, OWNER, CONFIG_NAME rồi Run All theo
+chạy cell setup/form, chọn TRACK, MODE, EXPERIMENT_ID, CONFIG_NAME và điền OWNER, rồi chạy cell chấm theo
 [hướng dẫn local](docs/LOCAL_GRADING.md). File trong artifacts được đọc trực tiếp.
 
 Dùng smoke để kiểm tra cơ bản, dev_5min để so sánh các phương án trong cùng cấu hình chấm. Full chạy khi cần xác nhận đầy đủ hoặc trước mốc nộp quan trọng, không bắt buộc cho mọi config. Điểm dev không tương đương full; DQI còn có hệ số phạt phụ thuộc số mẫu.

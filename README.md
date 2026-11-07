@@ -100,7 +100,7 @@ không cần binary Linux `kickmix.so` để compile.
 ```
 
 Mở `notebooks/GQA_Grade_Submission.ipynb` trong VS Code/Jupyter, chọn kernel
-`.venv`. Điền TRACK, MODE, EXPERIMENT_ID, OWNER, CONFIG_NAME; artifact được đọc
+`.venv`. Chọn TRACK, MODE, EXPERIMENT_ID, CONFIG_NAME trong dropdown, điền OWNER rồi chạy cell chấm; artifact được đọc
 từ project và results lưu đúng chỗ. Xem [chấm local](docs/LOCAL_GRADING.md).
 
 **5. Chuẩn bị coding agent để bắt đầu nghiên cứu:**
