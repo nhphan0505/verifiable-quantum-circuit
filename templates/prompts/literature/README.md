@@ -3,6 +3,16 @@
 Đọc [research/AGENTS.md](../../../research/AGENTS.md). Mỗi thành viên dùng research/<username>, một đợt có thể thêm nhiều nguồn.
 Issue theo nguồn là tùy chọn. Luồng này độc lập với experiment.
 
+Prompt 01 nhận PDF đính kèm: thành viên điền OWNER, TRACK và gửi file cùng prompt.
+TRACK có các lựa chọn invsqrt/dqi/dfthcsos/shared hoặc **agent tự chọn**;
+không cần link hoặc biết trước track. Agent tự phân loại paper/discussion và chọn
+track bằng cách đọc lướt tài liệu, đối chiếu bài trong repo; nêu căn cứ khi bàn giao.
+Có thể chỉ định track nếu đã biết. Agent dùng đúng bản gửi, không tự tìm/tải bản khác.
+Sau đó dùng prompt 02 để đọc paper thành note.
+Prompt 02 chỉ cần điền SOURCE_DIR và BRANCH / OWNER; agent tự chọn phần liên quan
+đến track, đọc thêm căn cứ cần thiết và ghi rõ phạm vi đã đọc/chưa đọc.
+Với discussion dùng nguồn/snapshot đã giao và prompt 03.
+
 | Giai đoạn | Prompt | Kiểm tra thủ công / điểm dừng |
 | --- | --- | --- |
 | Nhận nguồn | [01](01_register_source.md) | Đúng nguồn/track/thư mục, branch cá nhân và draft PR thật; chưa đọc sâu |
