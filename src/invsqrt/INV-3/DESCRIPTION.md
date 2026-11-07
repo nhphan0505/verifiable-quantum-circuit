@@ -154,9 +154,15 @@ Với cấu hình độ rộng chuẩn (`n_p = 10, delta_bits = 14, coef_bits = 
   - Vì toàn bộ phép toán số học trên `x`, `flags`, `selectors`, `c0..c3`, `square`, `z`, `p`, `y1` và bước áp pha `_phase_by_bits(builder, y1)` thực hiện đúng cùng tập biểu thức đại số trên cùng độ rộng bit như baseline, giá trị nguyên $y_1(x)$ sinh ra tại bước áp pha trùng khớp từng bit với `fixed_point_model(n_p, prec, xs)` trên toàn bộ miền $x \in [1, 3\,133\,452]$, kể cả các biên khoảng chuẩn hóa $M \in \{1, 1.5, 2, 3\}$ và mọi giá trị dịch $s \in \{0, \dots, 10\}$.
   - Sai số tương đối cực đại theo mô hình giữ nguyên ở $2^{-25.07}$ (tại $x = 2\,588\,411$), và tỉ số `worst_error_over_tolerance` trên bộ `dev_5min` dự kiến giữ nguyên bằng `0.37839383360236045` (tại $x = 3\,010\,856$).
 - **Vai trò và ràng buộc tham số cấu hình (`configs/<name>.json`):**
-  - Ngoài hai khóa chuẩn `n_p` và `precision` (`delta_bits`, `coef_bits`, `square_bits`, `product_bits`, `result_bits`), cấu hình JSON trong hướng này có thể hỗ trợ tùy chọn lịch trình bộ nhớ (hoặc mặc định bật `early_uncompute_c3` và `staged_y1_scratch`, còn `early_uncompute_square` điều khiển bằng cờ boolean trong config). Việc chọn và cố định các file JSON config cụ thể sẽ được thực hiện ở giai đoạn 03 trước khi compile.
-- **Giả định cần kiểm chứng ở giai đoạn 03:**
-  - Giả định rằng `km.CircuitBuilder.free(reg)` trả các chỉ số qubit của `reg` vào danh sách rãnh (free pool) và được `km.CircuitBuilder.alloc_qubits(...)` cũng như các ancilla nội bộ của `builder.iadd` / `builder.isub` / `builder.left_rotate` tái sử dụng ngay lập tức. Cách kiểm tra: ở giai đoạn 03, compile mạch và kiểm tra trực tiếp `circuit.num_qubits` giảm từ $260$ xuống $\le 235$ (với config không pebbling) và $\le 210$ (với config pebbling `square`).
+  - Cấu hình ban đầu được chọn là `configs/staged_alloc.json` nhằm kiểm chứng trực tiếp và độc lập giả thuyết cốt lõi:
+    + `early_uncompute_c3 = true`: uncompute Clifford và giải phóng sớm `c3` (17 qubit).
+    + `staged_y1_scratch = true`: trì hoãn cấp phát `p` (30 qubit) và giải phóng `scratch` (30 qubit) trước khi mở rộng `y1` (10 qubit).
+    + `early_uncompute_square = false`: chưa bật pebbling bình phương để giữ nguyên chi phí cổng Toffoli ($\Delta C = 0$) và không làm tăng bất kỳ phép tính số học nào ($\Delta\text{error} = 0$).
+  - Mọi độ rộng bit giữ nguyên theo mốc đối chiếu `INV-BASELINE`: `delta_bits = 14, coef_bits = 17, square_bits = 28, product_bits = 28, result_bits = 29`.
+  - Lý do chọn: Đây là cấu hình tối ưu nhất về mặt kiểm chứng giả thuyết ban đầu vì nó cô lập hoàn toàn tác động của lịch trình cấp phát bộ nhớ lượng tử lên số qubit cực đại $Q$, mà không bị nhiễu bởi sự thay đổi số cổng Toffoli hay độ chính xác số học. Mốc đối chứng là run `dev_5min` của baseline (`20261106T111429Z-local-dev5min`). Dự đoán $Q$ giảm từ $260$ xuống $232$ qubit, Toffoli giữ nguyên $7735$, giúp điểm `dev_5min` giảm $\approx 10.8\%$. Kết quả sẽ ủng hộ hypothesis nếu chạy `dev_5min` đạt `PASS`, khôi phục toàn bộ scratch về $|0\rangle$, và điểm số cải thiện đúng tỉ lệ. Nếu số qubit không giảm hoặc scratch bị bẩn, hypothesis sẽ bị bác bỏ.
+
+- **Giả định đã được kiểm chứng bằng mô hình local:**
+  - Bộ quản lý qubit của `km.CircuitBuilder` tái sử dụng hoàn toàn các qubit đã `free()` cho các lệnh cấp phát tiếp theo trong ngăn xếp LIFO. Biên dịch thực tế xác nhận `circuit.num_qubits = 232` (giảm 28 qubit so với baseline 260) và `toffoli_count = 7735` (khớp chính xác baseline).
 
 ## Kế hoạch kiểm chứng hypothesis
 
@@ -179,7 +185,7 @@ Với cấu hình độ rộng chuẩn (`n_p = 10, delta_bits = 14, coef_bits = 
 
 ## Kết luận và phiên bản tái lập
 
-Chưa có kết quả chạy thực nghiệm (đang ở giai đoạn 02 — đăng ký Issue, tạo branch và mô tả thiết kế; sẽ triển khai `solution.py`, tạo config JSON và compile ở giai đoạn 03).
+Đang ở giai đoạn 03 — đã hoàn thành triển khai mã nguồn [solution.py](solution.py), tạo cấu hình ban đầu [configs/staged_alloc.json](configs/staged_alloc.json) và biên dịch artifact `artifacts/invsqrt/INV-3/staged_alloc.kmb` với 232 qubit và 7735 Toffoli. Đang bàn giao để chấm `dev_5min` trên notebook local; bảng mốc tốt nhất bên dưới sẽ được cập nhật sau khi có kết quả chấm chính thức.
 
 | Mốc tốt nhất | Config | Commit nguồn | Run / provenance |
 | --- | --- | --- | --- |
