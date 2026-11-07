@@ -76,8 +76,9 @@ Quy trình đầy đủ: [hướng dẫn agent tài liệu](AGENTS.md),
 Một branch research/<username> có thể chứa nhiều paper/discussion ở nhiều track.
 Issue theo nguồn là tùy chọn. Tạo/tiếp tục branch của đúng thành viên, không sửa
 branch của người khác. Mở draft PR cho đợt research để nhóm thấy nguồn đang đọc.
-Review note trước, rồi nhóm họp chọn nội dung và giao merge PR vào main. Không tự
-merge sau review kỹ thuật. Note ready chỉ dùng cho hypothesis sau khi đã merge;
+Review độc lập ở bước 04 đạt và checks đạt thì tác giả được hoàn thiện và merge PR
+vào main ở bước 05; không cần họp nhóm hoặc đăng approval GitHub riêng. Note ready chỉ dùng cho hypothesis sau khi đã merge;
 PDF/source_only chỉ được lưu trên branch nháp; không được merge khi chưa có note.md.
-Nếu nhóm chỉ chọn một phần thì chỉnh PR đúng phạm vi được chọn và review lại HEAD.
+Nội dung/nguồn/phạm vi PR thay đổi sau review thì review lại phần mới ở bước 04.
+Chỉ đặt ready và đồng bộ trạng thái mục lục thì không cần review lại. Không bypass rules GitHub.
 Sau merge, đồng bộ main vào branch cá nhân trước đợt tiếp; không force-push/reset.

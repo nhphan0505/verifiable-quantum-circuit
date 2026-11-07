@@ -116,7 +116,8 @@ Checker chỉ kiểm tra hình thức username; quyền sở hữu và quyết �
 xác minh qua GitHub và người dùng. Branch hạ tầng (ví dụ infra/...) dùng cho sửa workflow.
 
 CI không chứng minh nội dung note đúng hoặc đã review/merge. Reviewer kiểm tra
-nguồn trực tiếp; publisher xác nhận approval gắn HEAD cuối. Agent nghiên cứu chỉ
+nguồn trực tiếp ở bước 04 và ghi SHA; tác giả kiểm tra diff sau review, chỉ miễn review
+lại khi đổi draft sang ready và đồng bộ trạng thái mục lục. CI phải đạt trên HEAD cuối. Agent nghiên cứu chỉ
 đọc note ready trên nhánh chính. Test fixture bao gồm research để kiểm tra link.
 
 ## CI bắt buộc note đi kèm resource

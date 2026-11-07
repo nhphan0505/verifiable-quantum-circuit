@@ -12,7 +12,7 @@ Mẫu giao việc cho coding agent: [templates/prompts/README.md](templates/prom
   [prompts](templates/prompts/experiments/README.md); thực hiện 12 bước bên dưới.
 - **Đọc tài liệu:** [agent](research/AGENTS.md), [prompts](templates/prompts/literature/README.md).
   Tạo/tiếp tục branch `research/<username>` → thêm nhiều resource → viết note →
-  review → nhóm họp chọn đợt research → giao merge PR vào main. Issue cho nguồn
+  review độc lập bước 04 → tác giả hoàn thiện và merge PR vào main ở bước 05. Issue cho nguồn
   là tùy chọn; không có yêu cầu một nguồn một branch/Issue.
 - Dùng agent/chat riêng, worktree/workspace riêng khi chạy đồng thời. Branch research
   thuộc một thành viên, chỉ sửa tài nguyên và mục lục research; hạ tầng cần nhiệm vụ riêng.
@@ -20,7 +20,9 @@ Mẫu giao việc cho coding agent: [templates/prompts/README.md](templates/prom
 - Note ready đã review và merge là điểm nối. Agent nghiên cứu chỉ đọc note trong
   research, vẫn tự phân tích code/verifier/results; không đọc nguồn hoặc tự viết note.
 - Agent tài liệu được đọc nguồn nhưng không sửa thí nghiệm, điểm hoặc chạy chấm.
-  Luồng tài liệu không cần compile/provenance build. Quy tắc merge/approval vẫn áp dụng.
+  Luồng tài liệu không cần compile/provenance build. Review bước 04 đủ làm căn cứ để
+  tác giả merge khi checks đạt; không cần họp nhóm hoặc đăng approval GitHub riêng.
+  Vẫn tuân thủ rules GitHub thực tế, không bypass nếu repo yêu cầu approval.
 - CI yêu cầu mỗi thư mục resource có note.md không rỗng; PDF/link-only chỉ lưu nháp,
   chưa được merge. Chạy scripts/check_research_notes.py trước bàn giao PR.
 

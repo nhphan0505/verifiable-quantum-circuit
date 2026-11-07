@@ -19,13 +19,13 @@ Với discussion dùng nguồn/snapshot đã giao và prompt 03.
 | Đọc paper | [02](02_read_paper.md) | Có note.md draft, source.json và căn cứ |
 | Đọc discussion | [03](03_read_discussion.md) | Có snapshot và note.md draft |
 | Review riêng | [04](04_review_note.md) | Findings/SHA do agent khác trả về |
-| Hoàn thiện/xuất bản | [05](05_publish_note.md) | Chọn rõ một vai trò mỗi lần: tác giả chuẩn bị → reviewer đăng review → tác giả merge |
+| Hoàn thiện/xuất bản | [05](05_publish_note.md) | Tác giả đặt ready, chạy checks và merge sau review bước 04 đạt |
 | Tiếp tục chat | [06](06_resume.md) | Khôi phục nguồn, branch, giai đoạn thật |
 
-Luồng: 01 → 02 hoặc 03 → 04 → sửa findings → 05 author_prepare →
-05 reviewer_publish → nhóm họp quyết định → giao 05 author_merge. Có lỗi thì quay lại sửa/review.
-Agent độc lập review không sửa branch tác giả. Approval phải thuộc HEAD cuối.
+Luồng: 01 → 02 hoặc 03 → 04 → sửa findings và review lại nếu cần → 05 tác giả hoàn thiện/merge.
+Agent độc lập review không sửa branch tác giả. Review bước 04 ghi kết luận và SHA;
+không cần họp nhóm hoặc đăng approval GitHub riêng. Nội dung đã review thay đổi thì
+quay lại 04; chỉ đặt ready và đồng bộ trạng thái mục lục thì không cần review lại.
 PDF được lưu nháp trước khi có note; CI chặn merge nguồn thiếu note.md hoặc note rỗng.
-Trước bàn giao PR, chạy scripts/check_research_notes.py; không tạo placeholder để đủ file.
-Sau merge, đồng bộ main vào branch cá nhân trước đợt tiếp. Không tự merge khi chưa có
-quyết định nhóm và giao quyền merge.
+Trước merge chạy checker/tests/scope và chờ CI đạt; không bypass rules GitHub thực tế.
+Sau merge, đồng bộ main vào branch cá nhân trước đợt tiếp.

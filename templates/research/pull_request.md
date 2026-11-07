@@ -22,9 +22,10 @@ Câu hỏi chưa kiểm chứng / giới hạn:
 - [ ] Liệt kê note ready; không coi ready trên branch là đã xuất bản
 - [ ] scripts/check_research_notes.py đạt
 - [ ] Checker/tests và scope --base/--branch đạt
-- [ ] Reviewer độc lập đã kiểm tra HEAD cuối; approval GitHub còn hiệu lực
+- [ ] Review độc lập bước 04 đạt, ghi SHA; thay đổi sau review chỉ là đặt ready/đồng bộ trạng thái mục lục
+- [ ] CI trên HEAD cuối đạt và đáp ứng rules GitHub thực tế
 
-SHA đã review / review URL:
+Kết luận bước 04 / SHA đã review / HEAD cuối / diff sau review:
 Không áp checklist compile/provenance build của PR thử nghiệm cho PR tài liệu.
 
-Quyết định sau họp nhóm (người dùng cung cấp), phạm vi được chọn và giao quyền merge:
+Tác giả được merge bằng merge commit sau review bước 04 đạt và checks đạt; không cần họp nhóm hoặc đăng approval riêng.
