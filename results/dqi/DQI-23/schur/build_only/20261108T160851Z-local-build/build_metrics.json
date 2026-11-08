@@ -1,0 +1,11 @@
+{
+  "status": "BUILT",
+  "num_qubits": 900,
+  "emitted_toffoli_like": 12565900,
+  "artifact_bytes": 1096210127,
+  "num_ops": 113341248,
+  "reaction_depth": 471805,
+  "diagnostic_shots": 256,
+  "diagnostic_value_errors": 0,
+  "diagnostic_phase_errors": 0
+}

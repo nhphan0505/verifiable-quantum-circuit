@@ -1,0 +1,24 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-23",
+  "config_name": "schur",
+  "source_commit": "b87d51d88e294ef5cedb35473821d57a0c2b370c",
+  "source_path": "src/dqi/DQI-23/solution.py",
+  "source_sha256": "ff1a250ec93930e4525702bf8ad2d5346cf658cdf8b1a7b035a434ed16c3d5eb",
+  "build_config_path": "src/dqi/DQI-23/configs/schur.json",
+  "build_config_sha256": "74055cda362a06faece1aa628efa072d1b6ecce8898934143c2b0fb40985466d",
+  "artifact_path": "artifacts/dqi/DQI-23/schur.kmb",
+  "artifact_sha256": "370fcb205c5daf0d23c0752f1ee4c1d41f028e411cf908afcf8f83c780618594",
+  "build_command": ".\\.venv\\Scripts\\python.exe src/dqi/DQI-23/solution.py --config src/dqi/DQI-23/configs/schur.json --overwrite",
+  "environment": {
+    "python": "3.13.7",
+    "executable": "D:\\verifiable-quantum-circuit\\.venv\\Scripts\\python.exe",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    }
+  },
+  "build_run": null
+}
