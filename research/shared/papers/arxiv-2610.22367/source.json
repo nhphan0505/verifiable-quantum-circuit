@@ -1,0 +1,12 @@
+{
+  "track": "shared",
+  "kind": "papers",
+  "source_id": "arxiv-2610.22367",
+  "title": "Discovering state-of-the-art quantum circuits with large language models",
+  "source_url": "https://arxiv.org/abs/2610.22367v1",
+  "version": "arXiv:2610.22367v1 (2026-10-15)",
+  "accessed_at": "2026-11-08",
+  "source_file": "paper.pdf",
+  "source_sha256": "3607f457c3349db74e10b131abadef23a4a2dea0fefa0cf6ac6d0ed9f37fdfd9",
+  "coverage": "Registration only: PDF metadata and pages 1-2 (title, authors, arXiv version/date, abstract, introduction and Figure 1). Remaining pages 3-46 not read; no technical note or validation of results yet."
+}
