@@ -1,0 +1,24 @@
+{
+  "track": "dfthcsos",
+  "kind": "papers",
+  "source_id": "doi-10.1103--pb2g-j9cw",
+  "title": "Fast Quantum Simulation of Electronic Structure by Spectral Amplification",
+  "source_url": "https://doi.org/10.1103/pb2g-j9cw",
+  "version": "Phys. Rev. X 15, 041016 (2025), published 2025-10-31 (APS published PDF, 41 pp.)",
+  "accessed_at": "2026-11-08",
+  "source_file": "paper.pdf",
+  "source_sha256": "dc7b523f810a920b7ff71fa57328059c93cd4f0e05f8a11cdd3801eef5a55b26",
+  "coverage": "Read Sec. I-VI pp. 1-16; Appendix B pp. 20-27 (Tables VII-IX); Appendix D pp. 33-36; Table X FeMoco-76 rows p. 30; Table XI p. 33; start of Appendix E p. 36. Visually checked pp. 3, 10, 14, 30, 36. Skimmed/not read: Appendix A pp. 17-20 (only end of p. 20), Appendix C pp. 28-33 (only Tables X/XI), Fig. 7 pp. 34-35 (captions only), rest of E, Appendix F p. 37, Appendix G p. 38; references only [37],[38] checked. No proofs re-derived, no author code run, no external sources accessed.",
+  "project_snapshot": {
+    "commit": "cd4f4ac58360aad26e634a29c13cc6046298dbd5",
+    "files": {
+      "src/dfthcsos/DFT-BASELINE/solution.py": "5c4599510c1bf0a1a26873e08edb05127534b91fb079e0ac7eae904d9ad7327b",
+      "src/dfthcsos/DFT-BASELINE/DESCRIPTION.md": "972713ec13b0a76b1306d216b156d3e7ef75ed41663dca66e89a53c0d41fc253",
+      "verifiers/dfthcsos/verify.py": "0775be7a528922367caebe9e4d051d6199811f1aefeaa4b793eaaa4621b8ec9d",
+      "verifiers/dfthcsos/SCORING_README.md": "c2228569f96e58e118419bc32be2be9e33d6abffb8117cb0b91e1fc25b2a0230",
+      "verifiers/dfthcsos/scoreinfra/costs_prepare.py": "7f1e190c42fc5325f3e6689fbbef51f95b0cb12f1c828cda92b6c088e72206da",
+      "verifiers/dfthcsos/scoreinfra/dfthc_math.py": "ae82898d47a7a86b96378fb906e0f8a9f46003065cf19c7c09952a123b5b5af8"
+    },
+    "hash_basis": "Raw Git blob bytes at project_snapshot.commit; read snapshot, not historical build provenance."
+  }
+}
