@@ -47,3 +47,17 @@ Bản 1,60 GB báo MemoryError: bad allocation trong lượt dev_5min 20261108T1
 | Full | Chưa có | Chưa có | Chưa chấm |
 
 Điểm và các run đối chứng nằm trong [SCORES.md](https://github.com/nhphan0505/verifiable-quantum-circuit/blob/bb3a6311113217a69c64e88e9c3bb0513237a1f9/src/dqi/SCORES.md).
+
+## Tiếp nhận và kế hoạch bàn giao stage 03 trên macOS
+
+Người dùng giao tiếp tục stage 03 của branch hiện có; không tạo lại Issue/branch/config. Mốc nguồn thuật toán là `1fed986e9e736a15195fc654c48cf85dc53620c7`, source SHA-256 `d2461e322a413a6463cba13741f1434e83c96577a70d6e3b5a0240ae44e1637f`; config [schur.json](configs/schur.json) SHA-256 `74055cda362a06faece1aa628efa072d1b6ecce8898934143c2b0fb40985466d`. Giữ nguyên implementation và config đã build ở máy trước; chỉ dựng lại artifact còn thiếu trên máy tiếp nhận, không lấy bằng chứng Windows làm provenance build macOS.
+
+Kế hoạch trước rebuild/chấm:
+
+- Mốc đối chứng thực dụng: DQI-19 control_input tại `c0cf9dfb45b62ba7eeb8588c87b0066409880046`, [config](https://github.com/nhphan0505/verifiable-quantum-circuit/blob/c0cf9dfb45b62ba7eeb8588c87b0066409880046/src/dqi/DQI-19/configs/rank42_control_input.json), [dev run](../../../results/dqi/DQI-19/rank42_control_input/dev_5min/20261108T122637Z-local-dev_5min-3fdc53/verifier.json). Dev dùng profile v1, seed 20261106, 4096 shots, Python 3.13.7 và packages pin. Trước so điểm phải đối chiếu hash verifier/harness và môi trường; formal baseline toàn repo có Python patch khác nên chưa mặc định có hệ số hợp lệ.
+- Dự đoán tái lập: build đủ m/n/degree=4095/70/12, Q=900, T tĩnh=12565900 và artifact hash giống bản `1fed986` nếu serialization xác định trên hai hệ điều hành. Khác hash cần ghi thực tế và điều tra trước gắn record cũ; không sửa provenance Windows. T cao hơn DQI-19, nhưng Q² thấp hơn có thể bù. Đây là dự đoán từ build lịch sử, chưa là score đo hoặc decoder PASS.
+- Ủng hộ hypothesis tài nguyên khi Q<=900 và score dev PASS thấp hơn đối chứng tương thích, không lỗi value/phase; kiểm cả khôi phục input và workspace theo hợp đồng verifier. Nếu phát hiện lỗi hoặc score không tốt hơn thì bác bỏ implementation/đánh đổi hiện tại, không suy mọi kiến trúc Schur đều thất bại. TIMEOUT hoặc MemoryError chỉ là chưa chấm xong, không chứng minh mạch sai.
+- Giới hạn vòng tiếp nhận: một rebuild config schur mới nhất và bàn giao dev. Không mở thêm config hay tăng giới hạn tài nguyên tự động; nếu build/nạp lỗi thì xử lý trong phạm vi stage 03, ghi bằng chứng thật và giữ run cũ. Chưa có decoder dev/full PASS trong records đã tiếp nhận; probe 256 shots ở máy trước không thay dev/full chính thức.
+- Kiểm tra ứng viên cuối: sau dev, thành viên chạy full chính thức hoặc bộ seed giữ lại độc lập trước khi khẳng định chất lượng; lưu cả ca biên trọng số 0/1/35 và valuation jumps đã nêu. Agent không tự chạy notebook/grader. Đổi bytes artifact có thể đổi seed full mặc định, nên không gọi so sánh full paired nếu chưa có seed chung thực tế.
+
+Build local dùng `.venv` Python 3.13.7, kickmix 1.0.0, numpy 2.5.4, scipy 1.18.1. Source/config đã commit, bytes phải khớp snapshot trước và sau compile; build record/provenance macOS mới được lưu riêng. GitHub vẫn giữ attribution/owner gốc; việc tiếp nhận do người dùng giao không sửa danh tính hay log cũ. Không push tùy chọn ở stage 03.
