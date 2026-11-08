@@ -20,7 +20,7 @@ Mỗi nhân GF(8) dùng sáu AND nhị phân: d_i=a_i*b_i (i=0,1,2), s_ij=(a_i+a
 
 Tính parity đầu vào bằng CX vào hai scratch qubit; init_and vào scratch thứ ba, XOR qua mask p_k vào product 12 qubit, del_and rồi đảo parity. Compute product dùng 42 Toffoli-like. Accumulate vào target không giả thiết target=0: CX nếu không control, CCX từng bit nếu control lượng tử (thêm 12 Toffoli). Đo X/reset 12 bit product, được c; với mỗi k bù CZ giữa hai parity đầu vào khi parity(c&p_k)=1. Pha cần bù là (-1)^(c dot xy); mọi scratch/input được khôi phục. Phép del_and cũng tự bù pha riêng. Không có rounding, truncation hoặc sai số chủ động.
 
-Đánh đổi: thêm product/scratch qubit, CNOT và CZ; giảm Toffoli của multiply-add có điều khiển từ số đo primitive local 75 xuống dự kiến 54, nhưng Q^2 và thời gian simulator có thể tăng. Đếm này chỉ cho primitive, chưa phải chi phí toàn decoder. Config đầu tiên sẽ giữ m=4095,n=70,degree=12 để tách tác động bộ nhân; chưa compile ở bước 02.
+Đánh đổi: thêm product/scratch qubit, CNOT và CZ; giảm Toffoli của multiply-add có điều khiển từ số đo primitive local 75 xuống dự kiến 54, nhưng Q^2 và thời gian simulator có thể tăng. Đếm này chỉ cho primitive, chưa phải chi phí toàn decoder. Config đầu tiên [rank42.json](configs/rank42.json) giữ m=4095,n=70,degree=12 để tách tác động bộ nhân; không quét tham số. `solution.py` tự suy ra TRACK/ID và kiểm tra config nằm trực tiếp trong configs/ sau resolve. Để dựng: `python src/dqi/DQI-19/solution.py --config src/dqi/DQI-19/configs/rank42.json`. Dùng Python 3.13 trong .venv và dependency đã pin.
 
 ## Kế hoạch kiểm chứng hypothesis
 
@@ -32,4 +32,13 @@ Tính parity đầu vào bằng CX vào hai scratch qubit; init_and vào scratch
 
 ## Kết luận và phiên bản tái lập
 
-Chưa triển khai/chấm, chưa có config tối ưu hoặc kết luận cải thiện. Bước 03 sẽ thêm source/config, commit trước compile và record build_only. Chưa có dev/full ứng viên.
+Đã triển khai tensor và hai call site EEA trong [solution.py](solution.py), giữ nguyên thuật toán decoder còn lại. Parity scratch được cập nhật bằng XOR hiệu hai mask kế tiếp để giảm CNOT; mạng tuyến tính cuối được đảo để dọn scratch. Kết quả kiểm tra primitive sampled trên ba seed HMR độc lập không phát hiện lỗi giá trị, pha hoặc workspace. Đếm primitive có điều khiển là 54 Toffoli-like và 52 qubit (bao gồm 37 qubit input/target/control), so với 75 và 49 của native Kickmix. Đây là kiểm tra kernel, không phải điểm hoặc PASS của decoder. Kiểm tra exhaustive được tái lập bằng `python src/dqi/DQI-19/solution.py --validate-kernel exhaustive`: đủ 2^24 cặp toán hạng với cả hai giá trị control, target ban đầu khác zero theo công thức cố định; reference dùng nhân polynomial nhị phân độc lập, không dùng tensor để tính expected.
+
+Chưa có dev/full ứng viên, chưa có config tối ưu hoặc kết luận cải thiện. Source/config được commit trước build. Record build_only sẽ ghi commit, dependency versions, hash source/config/artifact và kết quả kiểm tra kernel; agent dừng sau BUILT để thành viên chấm notebook local. Dự kiến mode dev_5min, 4096 shots theo harness của repo; OWNER trng-hminh, TRACK dqi, EXPERIMENT_ID DQI-19, CONFIG_NAME rank42.
+
+| Mốc tốt nhất | Config | Commit nguồn | Run / provenance |
+| --- | --- | --- | --- |
+| Dev | Chưa xác định | Chưa chấm | Chưa chấm |
+| Full | Chưa xác định | Chưa chấm | Chưa chấm |
+
+Mã triển khai: [solution.py](solution.py). Điểm: [SCORES.md](../SCORES.md).
