@@ -1,6 +1,6 @@
 # Özer v23: refit trọng số FeMoCo, tái dùng tích DQI và chuyển khối pha invsqrt
 
-Status: draft
+Status: ready
 Track: shared
 Source: https://www.kaggle.com/code/ahmedberatozer/quantum-ai-df-thc-group-compression?scriptVersionId=366387300
 Version: Kaggle v23 (scriptVersionId 366387300)
