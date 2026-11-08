@@ -1,0 +1,7 @@
+{
+  "m": 4095,
+  "n": 70,
+  "degree": 12,
+  "layout": "materialized_exact",
+  "aux_steps": 36
+}

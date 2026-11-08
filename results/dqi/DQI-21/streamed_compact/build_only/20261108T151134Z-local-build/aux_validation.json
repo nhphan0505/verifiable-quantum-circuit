@@ -1,0 +1,11 @@
+{
+  "verification_level": "coherent auxiliary EEA unit test, not decoder grading",
+  "cases": 18,
+  "value_errors": 0,
+  "phase_errors": 0,
+  "workspace_errors": 0,
+  "compact_degree_history": true,
+  "test_circuit_qubits_including_snapshots": 3334,
+  "test_circuit_static_toffoli_like": 594351,
+  "source_commit": "2bfda079587dfdc4b85b1245417b7acca52362ff"
+}

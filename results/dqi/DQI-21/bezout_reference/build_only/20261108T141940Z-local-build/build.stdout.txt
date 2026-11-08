@@ -1,0 +1,7 @@
+{
+  "status": "BUILT",
+  "artifact_path": "/Users/tranxuanhoa/Documents/research/GQA-DQI-21/artifacts/dqi/DQI-21/bezout_reference.kmb",
+  "num_qubits": 5042,
+  "static_toffoli_like": 5009520,
+  "num_instructions": 82641733
+}

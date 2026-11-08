@@ -1,0 +1,34 @@
+{
+  "verification_level": "phase block boundary unit test, not full decoder grading",
+  "cases": 10,
+  "points_per_case": 4095,
+  "value_errors": 0,
+  "phase_errors": 0,
+  "workspace_errors": 0,
+  "component_qubits": 4091,
+  "component_static_toffoli_like": 721404,
+  "component_instructions": 44211477,
+  "stages": {
+    "bezout_forward": {
+      "static_toffoli_like": 313011,
+      "instructions": 2598811
+    },
+    "error_polynomial_forward": {
+      "static_toffoli_like": 52920,
+      "instructions": 1229762
+    },
+    "phase_only_sweep": {
+      "static_toffoli_like": 45045,
+      "instructions": 37465157
+    },
+    "error_polynomial_mbuc": {
+      "static_toffoli_like": 0,
+      "instructions": 332222
+    },
+    "bezout_reverse": {
+      "static_toffoli_like": 310428,
+      "instructions": 2585525
+    }
+  },
+  "elapsed_seconds": 6.306881875032559
+}
