@@ -1,3 +1,8 @@
+"""Reproduce classical cursor predicate identities and compile a small decoder.
+
+No verifier, simulator shots or score computation is invoked. The generated
+JSON describes assertion coverage and compile statistics, not circuit validity.
+"""
 import importlib.util,json
 from pathlib import Path
 checks=0
