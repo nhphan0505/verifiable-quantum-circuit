@@ -1,0 +1,7 @@
+{
+  "terms": 42,
+  "pairs_checked": 861,
+  "equal_quadratic_signatures": 0,
+  "scope": "single rank42 tensor, independent masked lhs/rhs boundary; not a global no-cache proof",
+  "selected_route": "two cached EEA tail products; third affine reuse c3*flag=c3 XOR c3*(1+flag)"
+}

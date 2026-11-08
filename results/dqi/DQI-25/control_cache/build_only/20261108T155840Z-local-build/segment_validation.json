@@ -1,0 +1,76 @@
+{
+  "scope": "isolated reduced EEA tail, arbitrary arrays, one-hot-or-zero controls and bounded metadata, both orderings; not decoder PASS",
+  "cases": 73728,
+  "measurement_seeds": [
+    2501,
+    2502,
+    2503
+  ],
+  "value_errors": 0,
+  "phase_errors": 0,
+  "workspace_errors": 0,
+  "segments": [
+    {
+      "iteration": 0,
+      "adjoint": false,
+      "reference_q": 83,
+      "cached_q": 83,
+      "reference_t": 100,
+      "cached_t": 97
+    },
+    {
+      "iteration": 0,
+      "adjoint": true,
+      "reference_q": 83,
+      "cached_q": 83,
+      "reference_t": 100,
+      "cached_t": 97
+    },
+    {
+      "iteration": 2,
+      "adjoint": false,
+      "reference_q": 83,
+      "cached_q": 83,
+      "reference_t": 101,
+      "cached_t": 98
+    },
+    {
+      "iteration": 2,
+      "adjoint": true,
+      "reference_q": 83,
+      "cached_q": 83,
+      "reference_t": 101,
+      "cached_t": 98
+    },
+    {
+      "iteration": 221,
+      "adjoint": false,
+      "reference_q": 83,
+      "cached_q": 83,
+      "reference_t": 103,
+      "cached_t": 100
+    },
+    {
+      "iteration": 221,
+      "adjoint": true,
+      "reference_q": 83,
+      "cached_q": 83,
+      "reference_t": 103,
+      "cached_t": 100
+    }
+  ],
+  "product_identity": {
+    "exhaustive_boolean_inputs": 256,
+    "measurement_seeds": 32,
+    "cases": 8192,
+    "value_errors": 0,
+    "phase_errors": 0,
+    "workspace_errors": 0,
+    "proof": "p=c0*(1+f), q=c3*(1+f); c3+q=c3*f; factors unchanged until del_and",
+    "measurement_note": "32 simulator HMR seeds, not forced exhaustive outcome enumeration"
+  },
+  "limitations": [
+    "Reduced tail tests respect inherited one-hot controls and unary cursor metadata bounds; arbitrary out-of-bound metadata can leave workspace even in reference. Algebraic cache identity is separately exhaustive on independent controls.",
+    "HMR seeds sample outcomes; correctness on every outcome follows the unchanged-factor del_and identity, not finite sampling."
+  ]
+}
