@@ -1,6 +1,6 @@
 # mrmeows v3 — mạch mở, tối ưu tài nguyên và các hướng đã thử
 
-Status: draft
+Status: ready
 Track: shared
 Source: https://www.kaggle.com/code/mrmeows/qcc-14-50-everything-i-learned-open-circuits?scriptVersionId=362387953
 Version: Kaggle v3 (scriptVersionId 362387953)
