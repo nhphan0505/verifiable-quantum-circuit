@@ -118,6 +118,16 @@ Config đầu tiên của vòng 05 chọn streamed_exact + compact_degree_histor
 
 Kiểm tra trước build: mạng Frobenius square đã so đúng toàn bộ 4096 field values; coherent auxiliary compact trên 18 ca không lỗi/cleanup; phase block streamed trên 10 ca sparse/dense, 4095 điểm mỗi ca, không lỗi value/phase/workspace. Aligned component Q giảm 4091->2925, T tĩnh 721404->688536: Bézout thuận 298467, sweep 94185 (23x4095), Bézout reverse 295884. Chưa có decoder grader result cho setting này; unit/static counts không phải PASS/score của submission. Regression phase block của config materialized cũ vẫn giữ Q=4091, T=721404 và không lỗi trên cùng 10 ca.
 
+#### Bàn giao artifact vòng 05
+
+Config **streamed_compact** đã BUILT từ source commit `2bfda079587dfdc4b85b1245417b7acca52362ff`; [provenance](../../../results/dqi/DQI-21/streamed_compact/build_only/20261108T151134Z-local-build/provenance.json), [build record](../../../results/dqi/DQI-21/streamed_compact/build_only/20261108T151134Z-local-build/build.json), [phase validation](../../../results/dqi/DQI-21/streamed_compact/build_only/20261108T151134Z-local-build/phase_validation.json), [auxiliary validation](../../../results/dqi/DQI-21/streamed_compact/build_only/20261108T151134Z-local-build/aux_validation.json), [point kernel](../../../results/dqi/DQI-21/streamed_compact/build_only/20261108T151134Z-local-build/point_kernel_validation.json), [regression reference](../../../results/dqi/DQI-21/streamed_compact/build_only/20261108T151134Z-local-build/reference_regression.json). Source/config/helper hashes khớp snapshots đã ghi. Checker/scope 0 lỗi, 21 tests repo đạt; không chạy submission grader.
+
+Artifact `artifacts/dqi/DQI-21/streamed_compact.kmb`, SHA-256 `1f81db5ac6685ce8b742b600a1e0fdb99feb27314cf301d75afbb0edfe322d46`, 825336486 bytes. Full build Q=3876, T tĩnh=4976652, 80902255 instruction. So reference Q giảm 23.1257%, proxy Q²T giảm 41.2912% (còn 0.587088 lần). Proxy so baseline vẫn 3.644124 lần. Mục tiêu intermediate 20% Q/30% proxy đạt ở build-time, chưa phải score hoặc PASS của grader. Sweep 23/điểm đã được đếm riêng; không gọi là 11.
+
+Thành viên mở notebook trong **GQA-DQI-21**, kernel `.venv` Python 3.13.7, chọn TRACK=dqi, MODE=dev_5min, EXPERIMENT_ID=DQI-21, CONFIG_NAME=streamed_compact, OWNER=trng-hminh. Giữ profile v1/seed 20261106/4096 shots. Results tự lưu `results/dqi/DQI-21/streamed_compact/dev_5min/<run-id>/`; đối chiếu bằng artifact hash với build record phía trên. Agent dừng chờ kết quả thật để làm bước 04 tiếp theo, không tự chấm/đổi stage/merge/đóng Issue.
+
+Chỉ source/config/plan được commit theo yêu cầu trước build; build record và annotation bàn giao giữ local, chưa commit/push, để gộp cùng results trong mốc commit bắt buộc bước 04 kế tiếp. Mốc reference đã chấm vẫn ở source `433dd403bc03a2b346c36314967a4d9665cefbbb`; không sửa run/source mapping cũ hoặc SCORES cho candidate chưa chấm.
+
 #### Giới hạn và gợi ý cho reviewer sau này
 
 - Vẫn có sáu polynomial phụ (1296 qubit) và quotient/swap/shift transcript; do đó dù bỏ toàn bộ H/tape/scratch miễn phí, main state 1803+1296=3099 qubit vẫn quá lớn. Proxy tĩnh lạc quan khi preprocessing miễn phí và sweep 11/điểm vẫn khoảng 2.0249x baseline. Setting intermediate không giải quyết được giới hạn nền tảng này và chưa là tối ưu Bézout/Hankel tại chỗ.
@@ -126,11 +136,29 @@ Kiểm tra trước build: mạng Frobenius square đã so đúng toàn bộ 409
 - Có thể cân nhắc recompute hoặc encode quotient vào hệ số đã triệt tiêu, nhưng phải chứng minh khả năng khôi phục history từ trạng thái reachable và đếm thêm T. Small config tuning hoặc chỉ uncompute sau peak không giảm được Q cực đại.
 - Bước 05 chỉ commit source/config trước build, tạo artifact/provenance mới và bàn giao; không chạy grader, không push tùy chọn hoặc chuyển stage 06. Build record sau đó giữ local để gộp cùng kết quả bước 04 tiếp theo.
 
+### Kết quả intermediate và tổng kết bước 06
+
+Vòng bước 05 đã được thành viên chấm dev và full; không mở thêm config. Hai run đều PASS, không lỗi value/phase, artifact hash khớp build `1f81db5ac6685ce8b742b600a1e0fdb99feb27314cf301d75afbb0edfe322d46` và source `2bfda079587dfdc4b85b1245417b7acca52362ff`. Agent đối chiếu raw stdout với verifier JSON, exit code, mode/shots, source/config/helper hashes, verifier/harness và build provenance; không chạy grader lại. Raw records giữ nguyên, nhận xét nằm trong review sidecar.
+
+| Mode | Run / provenance / review | Score ↓ | Shots | Q | Mean Toffoli-like |
+| --- | --- | ---: | ---: | ---: | ---: |
+| full | [run](../../../results/dqi/DQI-21/streamed_compact/full/20261108T151635Z-local-full-01aa72/verifier.json), [provenance](../../../results/dqi/DQI-21/streamed_compact/full/20261108T151635Z-local-full-01aa72/provenance.json), [review](../../../results/dqi/DQI-21/streamed_compact/full/20261108T151635Z-local-full-01aa72/review.json) | 89065503750194.22 | 102400 | 3876 | 4976628.966533203 |
+| dev_5min | [run](../../../results/dqi/DQI-21/streamed_compact/dev_5min/20261108T151523Z-local-dev_5min-9f886e/verifier.json), [provenance](../../../results/dqi/DQI-21/streamed_compact/dev_5min/20261108T151523Z-local-dev_5min-9f886e/provenance.json), [review](../../../results/dqi/DQI-21/streamed_compact/dev_5min/20261108T151523Z-local-dev_5min-9f886e/review.json) | 223159064173843.12 | 4096 | 3876 | 4976629.494140625 |
+
+Dev giữ profile v1/seed 20261106/4096 shots như reference; full dùng verifier chính thức defaults m/n/degree/r=4095/70/12/2016, 102400 shots, log2_delta=-128 và chỉ thêm max-workers=1. Full bổ sung bằng chứng thống kê ngoài dev cố định, không là chứng minh mọi input. Các full run dùng seed mặc định phụ thuộc artifact, không gọi là paired common-seed test.
+
+**Kết luận:** intermediate đạt tiêu chí đã đặt trước: Q giảm 23.1257% (5042→3876), score thực giảm khoảng 41.2913% so reference trong cả hai mode. Sweep tăng 11→23 Toffoli-like/điểm, bù bằng bỏ H/convolution và compact transcript; mean T toàn decoder giảm nhẹ. So baseline recheck cùng môi trường, cost vẫn khoảng 3.6443×, gain số học khoảng 0.2744×: hypothesis thắng baseline tiếp tục bị bác bỏ cho layout này. Hai cột gain formal giữ `—` vì baseline chính thức khác Python patch/harness và recheck thiếu build provenance. Bản sao bằng chứng baseline và giới hạn nằm trong từng run/review; không thay dòng baseline hoặc dựng provenance suy đoán.
+
+Dừng sau đúng một intermediate theo phạm vi người dùng chọn. Giữ sáu polynomial phụ và transcript khiến Q còn cao; cải tiến nhỏ không bù được Q². Các gợi ý in-place/Bézoutian ở trên là nghiên cứu tương lai, chưa triển khai hoặc chứng minh tài nguyên. Không đề nghị dùng DQI-21 thay incumbent DQI-19. PR lưu cả implementation đúng trên các kiểm tra đã chạy và kết quả âm; hoàn tất phạm vi thử nghiệm hữu hạn, không tuyên bố giải quyết mọi kiến trúc H2.
+
 ### Mốc tái lập đã chấm
 
-| Mốc tốt nhất trong ID này | Config tại source commit | Commit nguồn | Run / provenance |
-| --- | --- | --- | --- |
-| Dev | [bezout_reference](https://github.com/nhphan0505/verifiable-quantum-circuit/blob/433dd403bc03a2b346c36314967a4d9665cefbbb/src/dqi/DQI-21/configs/bezout_reference.json) | `433dd403bc03a2b346c36314967a4d9665cefbbb` | [run](../../../results/dqi/DQI-21/bezout_reference/dev_5min/20261108T142410Z-local-dev_5min-8dc872/verifier.json), [provenance](../../../results/dqi/DQI-21/bezout_reference/dev_5min/20261108T142410Z-local-dev_5min-8dc872/provenance.json) |
-| Full | [bezout_reference](https://github.com/nhphan0505/verifiable-quantum-circuit/blob/433dd403bc03a2b346c36314967a4d9665cefbbb/src/dqi/DQI-21/configs/bezout_reference.json) | `433dd403bc03a2b346c36314967a4d9665cefbbb` | [run](../../../results/dqi/DQI-21/bezout_reference/full/20261108T142542Z-local-full-22b54f/verifier.json), [provenance](../../../results/dqi/DQI-21/bezout_reference/full/20261108T142542Z-local-full-22b54f/provenance.json) |
+Cả dev và full tốt nhất trong DQI-21 hiện là `streamed_compact`, source `2bfda079587dfdc4b85b1245417b7acca52362ff`, config [streamed_compact.json](configs/streamed_compact.json); run/provenance ở bảng phía trên. Từ checkout source đó, khôi phục hai helper đúng SHA/hash trong provenance rồi chạy:
 
-Đây là config duy nhất đã chấm của DQI-21, không phải phương án tốt hơn baseline hoặc DQI-19. Tái lập bằng source/config và hai helper tại đúng SHA/hash trong provenance; không amend/rebase các commit nguồn. Mã: [solution.py](solution.py). Config build: [bezout_reference.json](configs/bezout_reference.json). Probe: [exact_probe.json](configs/exact_probe.json). Điểm: [SCORES.md](../SCORES.md).
+```sh
+./.venv/bin/python src/dqi/DQI-21/solution.py --config src/dqi/DQI-21/configs/streamed_compact.json
+```
+
+Môi trường Python 3.13.7, kickmix 1.0.0, numpy 2.5.4, scipy 1.18.1. Không amend/rebase các commit nguồn. Artifact lớn được ignore; build record/provenance/results được lưu trong Git. Reference cũ vẫn gắn source `433dd403bc03a2b346c36314967a4d9665cefbbb`, config `bezout_reference`, dev `20261108T142410Z-local-dev_5min-8dc872`, full `20261108T142542Z-local-full-22b54f` và provenance ở bảng reference phía trên; không dùng HEAD mới để thay source mapping lịch sử.
+
+Các ghi chú “chưa chấm/local/chờ bước 04” trong phần bàn giao là trạng thái tại thời điểm build, đã được kết quả và tổng kết này thay thế. Bước 06 push các mốc đã giữ, đồng bộ main bằng merge và chuẩn bị PR cho reviewer độc lập bước 07/07b. Chưa approve, merge PR hoặc đóng Issue.
