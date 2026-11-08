@@ -105,6 +105,27 @@ Q peak được giải thích bởi 1803 qubit state EEA chính, 1296 qubit cho 
 
 **Quyết định bước 04: dừng materialized reference, không thử thêm config hoặc mở stage 05.** Giữ code, model/unit, artifact provenance và kết quả âm để tránh lặp lại hướng này. Không bác bỏ mọi thiết kế H2: một biến đổi Bézout/Hankel tại chỗ dùng lại evaluator/workspace có thể là nghiên cứu tiếp, nhưng cần bound Q/T mới trước build; không triển khai trong lượt wrap-up. Không merge, đóng Issue hoặc đưa PR ready trong bước 04.
 
+### Kế hoạch bước 05 — intermediate streamed/compact ablation
+
+Sau kết luận dừng materialized reference, người dùng giao bước 05 và chọn rõ **build intermediate dù vẫn kém baseline**, kèm giới hạn và gợi ý cho reviewer; không yêu cầu coi đây là phương án competitive. Vì vậy chỉ mở đúng một setting [streamed_compact.json](configs/streamed_compact.json), giữ m/n/degree=4095/70/12, 36 auxiliary step, field basis, EEA chính và verifier. Config/reference đã chấm cùng mapping source `433dd403bc03a2b346c36314967a4d9665cefbbb` được giữ nguyên. Không cập nhật SCORES cho setting chưa chấm.
+
+Hai thay đổi đúng phạm vi H2:
+
+1. Bỏ 70 word H và convolution. Chuẩn hóa A/B như cũ, square từng word tại chỗ bằng mạng CNOT Frobenius. Tại z=alpha^j, đánh giá P(z)=A(z)^2+B(z)^2/z và omega(z), rồi khi sigma(z)=0 áp phase của mask runtime trên omega(z)*P(z). Hệ số A_i² cập nhật alpha^(2i), B_i² alpha^(2i-1), omega_i alpha^i, sigma_i alpha^i. Restore mọi multiplier rồi unsquare A/B trước reverse EEA. Chain zero-test tốn 11, root-masked omega 12 temporary AND, gf2_phase_by_product/del_and Clifford; tổng **23 Toffoli-like/điểm**. Đây là tradeoff chủ động, không tuyên bố vẫn 11 cho setting mới. Point kernel mới đã kiểm 49152 trường hợp trên ba seed HMR, bao phủ mọi predicate/mask word 12 bit, không lỗi phase/value/workspace; reference kernel cũ vẫn được giữ riêng.
+2. Compact degree history: thay d0/d1 riêng mỗi step bằng hai thanh ghi live 5 bit. Sau swap, shift=d0-d1 được lưu; xóa d0 cũ bằng shift+d1, cập nhật remainder rồi query degree mới vào d0. Khi đảo, query xóa degree hiện tại, undo row update, dựng lại d0=shift+d1, xóa quotient/shift, undo swap. Cuối cùng xóa live degrees từ E/O đã phục hồi. Tape mỗi step chỉ 5 shift+1 swap+12 quotient=18 qubit thay vì 28; thêm 10 live degree bit, tiết kiệm đúng 350 qubit. Không xóa thông tin quantum hoặc đo degree.
+
+Config đầu tiên của vòng 05 chọn streamed_exact + compact_degree_history để kiểm tra mức giảm Q từ hai khoản rõ ràng, không quét tùy chọn. Dự đoán trước submission build: giảm peak Q ít nhất 20% và static Q²T ít nhất 30% so bezout_reference; không dự đoán thắng baseline. Dev giữ nguyên profile v1/seed 20261106/4096 shots; nếu có phase/value/workspace error thì bác bỏ implementation. Nếu tổng chi phí không giảm rõ so reference, không mở thêm config thường lệ; cần một thiết kế memory khác.
+
+Kiểm tra trước build: mạng Frobenius square đã so đúng toàn bộ 4096 field values; coherent auxiliary compact trên 18 ca không lỗi/cleanup; phase block streamed trên 10 ca sparse/dense, 4095 điểm mỗi ca, không lỗi value/phase/workspace. Aligned component Q giảm 4091->2925, T tĩnh 721404->688536: Bézout thuận 298467, sweep 94185 (23x4095), Bézout reverse 295884. Chưa có decoder grader result cho setting này; unit/static counts không phải PASS/score của submission. Regression phase block của config materialized cũ vẫn giữ Q=4091, T=721404 và không lỗi trên cùng 10 ca.
+
+#### Giới hạn và gợi ý cho reviewer sau này
+
+- Vẫn có sáu polynomial phụ (1296 qubit) và quotient/swap/shift transcript; do đó dù bỏ toàn bộ H/tape/scratch miễn phí, main state 1803+1296=3099 qubit vẫn quá lớn. Proxy tĩnh lạc quan khi preprocessing miễn phí và sweep 11/điểm vẫn khoảng 2.0249x baseline. Setting intermediate không giải quyết được giới hạn nền tảng này và chưa là tối ưu Bézout/Hankel tại chỗ.
+- Muốn competitive, cần thay đổi cách biểu diễn, chẳng hạn biến đổi evaluator 35 word tại chỗ thành omega*(sigma')^-1 mod sigma thay vì output/register riêng, và dùng shared polynomial storage/quotient recovery. Phải chứng minh phép biến đổi invertible theo locator, bảo toàn input và dọn workspace/phase; không free dữ liệu EEA còn sống chỉ vì muốn giảm Q.
+- Một hướng toán học cần khảo sát là factorization của Bézoutian: với định nghĩa B(f,g) theo (f(x)g(y)+g(x)f(y))/(x+y), phép nhân nghịch đảo derivative có dạng B(f,1)*B(f,f')^-1. Phân tách chẵn/lẻ đặc số 2 có thể giảm trường hợp bậc 35 thành các solve 17 word và triangular transforms. Đây chỉ là gợi ý nghiên cứu, chưa có coherent variable-degree circuit/resource proof. Reviewer phải xử lý locator hằng, bậc <35, pivot và runtime masks; không chuyển số liệu paper/fixed masks sang benchmark này.
+- Có thể cân nhắc recompute hoặc encode quotient vào hệ số đã triệt tiêu, nhưng phải chứng minh khả năng khôi phục history từ trạng thái reachable và đếm thêm T. Small config tuning hoặc chỉ uncompute sau peak không giảm được Q cực đại.
+- Bước 05 chỉ commit source/config trước build, tạo artifact/provenance mới và bàn giao; không chạy grader, không push tùy chọn hoặc chuyển stage 06. Build record sau đó giữ local để gộp cùng kết quả bước 04 tiếp theo.
+
 ### Mốc tái lập đã chấm
 
 | Mốc tốt nhất trong ID này | Config tại source commit | Commit nguồn | Run / provenance |

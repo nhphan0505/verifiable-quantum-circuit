@@ -31,6 +31,24 @@ measure H in X and correct its convolution phase via gf2_phase_by_product,
 undo normalization, reverse the auxiliary tape, erase E/O and initial units,
 then let the unchanged main EEA restore syndrome and other workspace.
 
+Stage 5 adds layout="streamed_exact" with compact_degree_history=true.
+It keeps only two live degree registers and a per-step shift/swap/quotient
+transcript (18 bits per step instead of 28), restoring each prior degree as
+shift+divisor_degree before undoing its step. The current remainder supplies
+the new degree, so no historical degree copies are retained. Both degrees are
+erased against the restored E/O at the end; 350 qubits are saved in total.
+
+The streamed sweep allocates no 70-word H: it evaluates A(z)^2+B(z)^2/z and
+omega(z) separately, combines them through gf2_phase_by_product with a
+root-masked numerator, and restores both normalized cofactor rows. Exact
+Frobenius CNOT networks square/unsquare those rows in place. This costs 23
+Toffoli-like gates per point (11 zero predicate +12 masked-numerator ANDs),
+explicitly trading away the 11-point target to reduce total space. Original
+materialized config and its graded source/run mapping remain unchanged.
+This is an intermediate ablation, not a baseline-beating design: six separate
+auxiliary polynomials still make Q too large. Future work must use in-place
+Bezout/Hankel transforms and prove variable-degree, mask and cleanup invariants.
+
 Tradeoff: this materialized reference layout has a poor predicted Q^2*T score
 because it retains auxiliary state and 70 H words. The user requested a full
 stage-3 build after that screening result, to obtain exact correctness/cost
@@ -486,7 +504,161 @@ def _scale_inplace(builder, polynomial, factor, inverse_factor):
     builder.free(temp)
 
 
-def _prepare_bezout(builder, sigma):
+def _aux_step_compact(builder, rows, degrees):
+    """Keep two live degrees; store only shift/swap/quotient per step."""
+    r0,r1=rows[0];d0,d1=degrees
+    shift=builder.alloc_qubits(5);swapped=builder.alloc_qubits(1)[0]
+    quotient=builder.alloc_qubits(12)
+    builder.flip_if_less_than(d0,d1,target=swapped)
+    for a,b in rows:builder.cswap(swapped,_flat([a]),_flat([b]))
+    builder.cswap(swapped,d0,d1)
+    l0,l1=builder.alloc_qubits(12),builder.alloc_qubits(12)
+    _selected_leading_xor(builder,r0,d0,l0);_selected_leading_xor(builder,r1,d1,l1)
+    builder.init_gf2_div(l0,l1,target=quotient,field=FIELD)
+    _selected_leading_xor(builder,r0,d0,l0);_selected_leading_xor(builder,r1,d1,l1)
+    builder.free(l0+l1)
+    builder.cx(d0,shift);builder.isub(d1,target=shift)
+    builder.isub(d1,target=d0);builder.cx(shift,d0)
+    _row_update(builder,rows,quotient,shift)
+    _degree_xor(builder,r0,d0)
+    return shift,swapped,quotient
+
+
+def _aux_step_compact_inverse(builder,rows,degrees,record):
+    r0,r1=rows[0];d0,d1=degrees;shift,swapped,quotient=record
+    _degree_xor(builder,r0,d0)
+    _row_update(builder,rows,quotient,shift)
+    builder.cx(shift,d0);builder.iadd(d1,target=d0)
+    l0,l1=builder.alloc_qubits(12),builder.alloc_qubits(12)
+    _selected_leading_xor(builder,r0,d0,l0);_selected_leading_xor(builder,r1,d1,l1)
+    builder.del_gf2_div(l0,l1,target=quotient,field=FIELD)
+    _selected_leading_xor(builder,r0,d0,l0);_selected_leading_xor(builder,r1,d1,l1)
+    builder.free(l0+l1)
+    builder.iadd(d1,target=shift);builder.cx(d0,shift)
+    builder.cswap(swapped,d0,d1)
+    for a,b in rows:builder.cswap(swapped,_flat([a]),_flat([b]))
+    builder.flip_if_less_than(d0,d1,target=swapped)
+    builder.free(shift+km.array([swapped])+quotient)
+
+
+def _square_inplace(builder,word,*,inverse=False):
+    """Binary Gaussian decomposition of the exact Frobenius automorphism."""
+    rows=[sum(((FIELD.square(1<<j)>>i)&1)<<j for j in range(12)) for i in range(12)]
+    operations=[]
+    for col in range(12):
+        pivot=next(i for i in range(col,12) if rows[i]>>col&1)
+        if pivot!=col:
+            rows[col],rows[pivot]=rows[pivot],rows[col]
+            operations.append(('swap',col,pivot))
+        for row in range(12):
+            if row!=col and rows[row]>>col&1:
+                rows[row]^=rows[col];operations.append(('xor',col,row))
+    assert rows==[1<<i for i in range(12)]
+    for kind,a,b in (operations if inverse else reversed(operations)):
+        if kind=='swap':builder.swap(word[a],word[b])
+        else:builder.cx(word[a],word[b])
+
+
+def _phase_reciprocal_point(builder,sigma_value,omega_value,reciprocal_value,mask):
+    """23 Toffoli-like gates: 11 zero-test + 12 root-masked numerator ANDs."""
+    chain=builder.alloc_qubits(11);located=builder.alloc_qubits(12)
+    builder.x(sigma_value)
+    builder.init_and(sigma_value[0],sigma_value[1],chain[0])
+    for i in range(2,12):builder.init_and(chain[i-2],sigma_value[i],chain[i-1])
+    builder.init_and(chain[-1],omega_value,located)
+    builder.gf2_phase_by_product(located,reciprocal_value,mask=mask,field=FIELD)
+    builder.del_and(chain[-1],omega_value,located)
+    for i in range(11,1,-1):builder.del_and(chain[i-2],sigma_value[i],chain[i-1])
+    builder.del_and(sigma_value[0],sigma_value[1],chain[0])
+    builder.x(sigma_value);builder.free(chain+located)
+
+
+def validate_streamed_kernel():
+    """Independent field-product phase test across predicates/masks and HMR seeds."""
+    import numpy as np
+    b=km.CircuitBuilder()
+    sigma=b.create_quantum_register(12,'sigma');omega=b.create_quantum_register(12,'omega')
+    reciprocal=b.create_quantum_register(12,'reciprocal');mask=b.create_classical_register(12,'mask')
+    _phase_reciprocal_point(b,sigma,omega,reciprocal,mask)
+    circuit=b.finish_circuit();assert circuit.operation_statistics().num_toffoli_like==23
+    n=16384;shifts=np.arange(12,dtype=np.uint32)[:,None]
+    bits=lambda v:((v[None,:]>>shifts)&1).astype(bool)
+    for seed in (2105,2106,2107):
+        rng=np.random.default_rng(seed)
+        sv=np.arange(n,dtype=np.uint32)&4095;sv[:8192]=0
+        ov=rng.integers(0,4096,n,dtype=np.uint32);pv=rng.integers(0,4096,n,dtype=np.uint32)
+        mv=np.arange(n,dtype=np.uint32)&4095
+        for i,a in enumerate((0,1,4095)):
+            for j,c in enumerate((0,1,4095)):
+                k=3*i+j;ov[k]=a;pv[k]=c;mv[k]=4095
+        product=np.array([FIELD.mul(int(a),int(c)) for a,c in zip(ov,pv)],dtype=np.uint32)
+        parity=product&mv
+        parity ^= parity>>8;parity ^= parity>>4;parity ^= parity>>2;parity ^= parity>>1
+        expected=(sv==0)&((parity&1)!=0)
+        sim=km.Simulator(n,debug_print=False,seed=seed);sim.use_same_registers_as(circuit)
+        for reg,values in ((sigma,sv),(omega,ov),(reciprocal,pv),(mask,mv)):sim.write_across_shots(reg,bits(values))
+        sim.do(circuit)
+        for reg,values in ((sigma,sv),(omega,ov),(reciprocal,pv),(mask,mv)):assert np.array_equal(sim.read_across_shots(reg),bits(values))
+        _assert_clean_except(sim,circuit,[sigma,omega,reciprocal])
+        assert np.array_equal(sim.read_phase_flipped_across_shots(),expected)
+    return {'verification_level':'streamed point kernel unit test, not decoder grading',
+            'cases_checked':n*3,'measurement_seeds':[2105,2106,2107],
+            'all_predicate_words_covered':True,'all_runtime_mask_words_covered':True,
+            'static_toffoli_like':23,'qubits_including_36_inputs':circuit.num_qubits,
+            'value_errors':0,'phase_errors':0,'workspace_errors':0}
+
+
+def _scan_streamed_reciprocal(builder,sigma,omega,state,masks):
+    # Psi(z)/z = sum B_i^2*z^(2i-1) + sum A_i^2*z^(2i).
+    # Squaring and constant-field updates are Clifford; the original cofactor
+    # words are restored before auxiliary EEA uncomputation.
+    A,B=state['A'],state['B']
+    for word in A+B:_square_inplace(builder,word)
+    sv,ov,pv=(builder.alloc_qubits(12) for _ in range(3))
+    groups=[(sigma,sv),(omega,ov),(A+B,pv)]
+    vectors=[(_flat([regs]),km.array([q for _ in regs for q in value])) for regs,value in groups]
+    steps=[(word,FIELD.pow(FIELD.primitive_element,k)) for k,word in enumerate(sigma) if k]
+    steps += [(word,FIELD.pow(FIELD.primitive_element,k)) for k,word in enumerate(omega) if k]
+    steps += [(word,FIELD.pow(FIELD.primitive_element,2*k)) for k,word in enumerate(A) if k]
+    steps += [(word,FIELD.pow(FIELD.primitive_element,(2*k-1)%4095)) for k,word in enumerate(B)]
+    active=builder.alloc_bits(1)[0]
+    for j,mask in enumerate(masks):
+        with builder.mark('streamed_reciprocal_point'):
+            builder.bit_store(active,False);builder.bit_store(active,True,control=mask)
+            builder.push_condition(active)
+            for source,target in vectors:builder.cx(source,target)
+            _phase_reciprocal_point(builder,sv,ov,pv,mask)
+            for source,target in reversed(vectors):builder.cx(source,target)
+            builder.pop_condition();builder.bit_store(active,False)
+        if j+1<len(masks):
+            for word,factor in steps:builder.gf2_imul(factor,target=word,field=FIELD)
+    if len(masks)>1:
+        for word,factor in steps:builder.gf2_idiv(FIELD.pow(factor,len(masks)-1),target=word,field=FIELD)
+    builder.free(sv+ov+pv);builder.free(active)
+    for word in reversed(A+B):_square_inplace(builder,word,inverse=True)
+
+
+def _aligned_streamed_phase(builder,sigma,omega,masks,metrics=None):
+    def count():
+        s=builder.finish_circuit().operation_statistics()
+        return s.num_toffoli_like,s.num_instructions
+    last=count() if metrics is not None else (0,0)
+    def record(name):
+        nonlocal last
+        if metrics is not None:
+            now=count();metrics[name]={'static_toffoli_like':now[0]-last[0],'instructions':now[1]-last[1]};last=now
+    with builder.mark('compact_bezout_forward'):
+        state=_prepare_bezout(builder,sigma,compact=True)
+    record('compact_bezout_forward')
+    with builder.mark('streamed_reciprocal_sweep'):
+        _scan_streamed_reciprocal(builder,sigma,omega,state,masks)
+    record('streamed_reciprocal_sweep')
+    with builder.mark('compact_bezout_reverse'):
+        _erase_bezout(builder,sigma,state)
+    record('compact_bezout_reverse')
+
+
+def _prepare_bezout(builder, sigma, *, compact=False):
     polys = [_alloc_poly(builder, AUX_WORDS) for _ in range(6)]
     r0, r1, a0, a1, b0, b1 = polys
     for i in range(AUX_WORDS):
@@ -494,12 +666,18 @@ def _prepare_bezout(builder, sigma):
         _xor_frobenius(builder, sigma[2*i+1], r1[i], 11)
     builder.x(km.array([a0[0][0], b1[0][0]]))
     rows = [(r0, r1), (a0, a1), (b0, b1)]
-    tape = [_aux_step(builder, rows) for _ in range(AUX_STEPS)]
+    degrees = None
+    if compact:
+        degrees=(builder.alloc_qubits(5),builder.alloc_qubits(5))
+        _degree_xor(builder,r0,degrees[0]);_degree_xor(builder,r1,degrees[1])
+        tape=[_aux_step_compact(builder,rows,degrees) for _ in range(AUX_STEPS)]
+    else:
+        tape = [_aux_step(builder, rows) for _ in range(AUX_STEPS)]
     inverse_g, scaffold = builder.init_gf2_inverse_with_scaffold(r0[0], field=FIELD)
     _scale_inplace(builder, a0, inverse_g, r0[0])
     _scale_inplace(builder, b0, inverse_g, r0[0])
     return {'polys': polys, 'rows': rows, 'tape': tape, 'inverse_g': inverse_g,
-            'scaffold': scaffold, 'A': a0, 'B': b0}
+            'scaffold': scaffold, 'A': a0, 'B': b0, 'compact':compact, 'degrees':degrees}
 
 
 def _erase_bezout(builder, sigma, state):
@@ -510,7 +688,12 @@ def _erase_bezout(builder, sigma, state):
     builder.del_gf2_inverse_with_scaffold(r0[0], target=inverse_g,
                                          scaffold=state['scaffold'], field=FIELD)
     builder.free(inverse_g+state['scaffold'])
-    for record in reversed(state['tape']): _aux_step_inverse(builder, state['rows'], record)
+    if state['compact']:
+        for record in reversed(state['tape']):_aux_step_compact_inverse(builder,state['rows'],state['degrees'],record)
+        _degree_xor(builder,r0,state['degrees'][0]);_degree_xor(builder,r1,state['degrees'][1])
+        builder.free(state['degrees'][0]+state['degrees'][1])
+    else:
+        for record in reversed(state['tape']): _aux_step_inverse(builder, state['rows'], record)
     builder.x(km.array([a0[0][0], b1[0][0]]))
     for i in range(AUX_WORDS):
         _xor_frobenius(builder, sigma[2*i], r0[i], 11)
@@ -599,12 +782,13 @@ def _aligned_phase(builder, sigma, omega, masks, metrics=None):
     record('bezout_reverse')
 
 
-def build_candidate():
+def build_candidate(layout="materialized_exact"):
     base = baseline_module()
     class BezoutDecoder(base.ProosAndZalkaDecoder):
         def _chien_search_and_forney_mbuc(self, builder, reg_b, masks, nb, nB):
             self._pre_align_reg_b(builder, reg_b, nb, nB, is_adjoint=False)
-            _aligned_phase(builder, reg_b[:36], list(reversed(reg_b[37:72])), masks)
+            phase=_aligned_streamed_phase if layout=='streamed_exact' else _aligned_phase
+            phase(builder, reg_b[:36], list(reversed(reg_b[37:72])), masks)
             self._pre_align_reg_b(builder, reg_b, nb, nB, is_adjoint=True)
     builder = km.CircuitBuilder()
     syndromes = [builder.create_quantum_register(12, 'S'+str(i)) for i in range(70)]
@@ -681,14 +865,14 @@ def _assert_clean_except(sim, circuit, registers):
     assert not sim.read_across_shots(junk).any(), 'nonzero quantum workspace'
 
 
-def validate_aux_circuit():
+def validate_aux_circuit(*, compact=False):
     """Check real coherent EEA/cofactor extraction and complete inverse cleanup."""
     import numpy as np
     cases = [list(c['sigma']) for c in PACKED_CASES]
     cases += [f+[0]*(36-len(f)) for f in _sample_locators()[6::9]]
     b = km.CircuitBuilder()
     sigma = [b.create_quantum_register(12, 'sigma'+str(i)) for i in range(36)]
-    state = _prepare_bezout(b, sigma)
+    state = _prepare_bezout(b, sigma, compact=compact)
     copies = {}
     for name, polynomial in (('A',state['A']),('B',state['B']),('R0',state['polys'][0]),('R1',state['polys'][1])):
         copies[name] = [b.create_quantum_register(12, name+str(i)) for i in range(18)]
@@ -710,11 +894,12 @@ def validate_aux_circuit():
     assert not sim.read_phase_flipped_across_shots().any(), 'unexpected auxiliary EEA phase'
     return {'verification_level':'coherent auxiliary EEA unit test, not decoder grading',
             'cases':len(cases),'value_errors':0,'phase_errors':0,'workspace_errors':0,
+            'compact_degree_history':compact,
             'test_circuit_qubits_including_snapshots':circuit.num_qubits,
             'test_circuit_static_toffoli_like':circuit.operation_statistics().num_toffoli_like}
 
 
-def validate_phase_block():
+def validate_phase_block(*, layout="materialized_exact"):
     """Compare only the new phase component against packed boundary fixtures."""
     import numpy as np
     import time
@@ -742,7 +927,8 @@ def validate_phase_block():
     masks = [b.create_classical_register(12,'M'+str(j)) for j in range(4095)]
     started = time.monotonic()
     metrics = {}
-    _aligned_phase(b,sigma,omega,masks,metrics=metrics)
+    phase=_aligned_streamed_phase if layout=='streamed_exact' else _aligned_phase
+    phase(b,sigma,omega,masks,metrics=metrics)
     circuit = b.finish_circuit()
     sim = km.Simulator(len(cases),debug_print=False,seed=2104)
     sim.use_same_registers_as(circuit)
@@ -761,7 +947,7 @@ def validate_phase_block():
     _assert_clean_except(sim,circuit,sigma+omega)
     assert np.array_equal(sim.read_phase_flipped_across_shots(),expected), 'phase block wrong sign'
     return {'verification_level':'phase block boundary unit test, not full decoder grading',
-            'cases':len(cases),'points_per_case':4095,'value_errors':0,'phase_errors':0,
+            'layout':layout,'cases':len(cases),'points_per_case':4095,'value_errors':0,'phase_errors':0,
             'workspace_errors':0,'component_qubits':circuit.num_qubits,
             'component_static_toffoli_like':circuit.operation_statistics().num_toffoli_like,
             'component_instructions':circuit.operation_statistics().num_instructions,
@@ -789,15 +975,16 @@ def main():
     config=json.loads(path.read_text())
     probe={'m':4095,'n':70,'degree':12,'layout':'materialized_probe'}
     reference={'m':4095,'n':70,'degree':12,'layout':'materialized_exact','aux_steps':36}
-    if config not in (probe,reference): raise ValueError('Unsupported exact config')
+    streamed={'m':4095,'n':70,'degree':12,'layout':'streamed_exact','aux_steps':36,'compact_degree_history':True}
+    if config not in (probe,reference,streamed): raise ValueError('Unsupported exact config')
     actions={'validate_packed':validate_packed_mapping,'validate_model':validate_model,
-             'validate_kernel':validate_kernel,'audit_resources':audit_resources,
-             'validate_aux_model':validate_aux_model,'validate_aux_circuit':validate_aux_circuit,
-             'validate_phase_block':validate_phase_block}
+             'validate_kernel':lambda:validate_streamed_kernel() if config==streamed else validate_kernel(),'audit_resources':audit_resources,
+             'validate_aux_model':validate_aux_model,'validate_aux_circuit':lambda:validate_aux_circuit(compact=config==streamed),
+             'validate_phase_block':lambda:validate_phase_block(layout=config['layout'])}
     for flag,func in actions.items():
         if getattr(args,flag):
             print(json.dumps(func(),indent=2)); return
-    if config!=reference: raise ValueError('Probe config is not a decoder build config')
+    if config==probe: raise ValueError('Probe config is not a decoder build config')
     track=directory.parent.name; experiment_id=directory.name; root=directory.parents[2]
     if directory.parent.parent.name!='src' or track!='dqi':
         raise ValueError('Expected src/dqi/<ID>/solution.py')
@@ -805,7 +992,7 @@ def main():
     if output.name!=path.stem+'.kmb': raise ValueError('Output must match config stem')
     if output.exists() and not args.overwrite: raise FileExistsError('Pass --overwrite for intentional rebuild')
     output.parent.mkdir(parents=True,exist_ok=True)
-    circuit=build_candidate()
+    circuit=build_candidate(layout=config["layout"])
     circuit.to_file(str(output),format='kmb')
     print(json.dumps({'status':'BUILT','artifact_path':str(output),'num_qubits':circuit.num_qubits,
                      'static_toffoli_like':circuit.operation_statistics().num_toffoli_like,

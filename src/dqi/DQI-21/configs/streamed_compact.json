@@ -1,0 +1,8 @@
+{
+  "m": 4095,
+  "n": 70,
+  "degree": 12,
+  "layout": "streamed_exact",
+  "aux_steps": 36,
+  "compact_degree_history": true
+}
