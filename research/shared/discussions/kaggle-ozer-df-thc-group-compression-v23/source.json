@@ -1,0 +1,12 @@
+{
+  "track": "shared",
+  "kind": "discussions",
+  "source_id": "kaggle-ozer-df-thc-group-compression-v23",
+  "title": "Quantum AI - DF-THC Group Compression",
+  "source_url": "https://www.kaggle.com/code/ahmedberatozer/quantum-ai-df-thc-group-compression?scriptVersionId=366387300",
+  "version": "Kaggle v23 (scriptVersionId 366387300)",
+  "accessed_at": "2026-11-08",
+  "source_file": "source.md",
+  "source_sha256": "ef14ec86334bd1a3c70cdb844fe04c5456abbac3cec460177c75da076e1e9438",
+  "coverage": "Diễn giải các mục Markdown v23 và ghi lại output hiển thị của ba cell, gồm chuẩn bị dữ liệu, PASS, ZIP và bảng kết quả. Không lưu mã, tab bình luận, dữ liệu hay artifact. Không chạy lại notebook."
+}
