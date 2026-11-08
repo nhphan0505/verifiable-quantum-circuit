@@ -65,6 +65,41 @@ hợp Z_POW. Giá trị hằng số thay đổi cũng có thể thay số cổng
   hoặc tập/seed bổ sung và đối chứng tương thích trước khẳng định chất lượng;
   dev không thay thế full. Không đổi verifier hay hạ tầng trong Issue này.
 
+## Vòng thử tiếp: delta12
+
+Theo yêu cầu bước 05, tạm hoãn full và mở đúng một vòng config bổ sung; đây là
+thay đổi kế hoạch sau dev balanced, không sửa tiêu chí của lần thử balanced.
+Không chọn theo bộ mẫu dev. Giữ balanced/dev tại source commit cũ làm mốc.
+
+Ứng viên delta12 lấy bộ đã sàng lọc bằng lưới mô hình trước dev: widths
+(12,16,27,27,28), c0 bias=-3 ở cả bốn khoảng, z_bias=-2, các hệ số khác bias=0.
+Chỉ giảm delta_bits một bit so balanced, bù lại bằng bias đã chọn trên lưới cũ;
+giữ nguyên lịch cấp phát, model/circuit implementation và độ rộng Newton.
+Trên lưới sàng lọc cũ max ratio khoảng 0.8093, chưa là bảo đảm toàn miền.
+
+Trước build phải chạy validate_model trên toàn miền, không overflow và
+max ratio <0.95, rồi mô phỏng biên/random với sample-seed=20261109 và ba seed
+đo đã có. Không nới ngưỡng nếu thất bại. Nếu không đạt thì loại delta12 trước
+build và ưu tiên một config bù bias tăng margin ở cùng widths balanced thay vì
+quét thêm độ rộng Newton. Tối đa một artifact bàn giao cho vòng này.
+
+Dự đoán trước build: giảm hàng nhân Horner nên Toffoli có thể giảm, Q có thể
+không đổi vì độ rộng thanh ghi vật lý không đổi; bias hằng Newton có thể đổi
+chi phí cộng hằng. Không suy ra tổng score từ giảm Toffoli vì synthesis phụ
+thuộc margin. Đối chứng dev: balanced run 20261108T015743Z-local-dev_5min-d222d7,
+seed=20261106, samples=4096, repeats=2. Chỉ chọn thay balanced nếu dev PASS và
+score nhỏ hơn 1843434.5705617426; nếu kém hoặc FAIL thì giữ balanced và dừng
+vòng này. Không sửa điểm hoặc mapping balanced khi chưa có run mới.
+
+Kiểm tra trước build delta12: max ratio mô hình toàn miền 0.9309830032 tại
+x=284671, khoảng có dấu [-0.9309830032,0.8817613535], không overflow.
+Cùng widths nhưng bias=0 có max ratio 1.5035512019. Mô phỏng 374 đầu vào với
+sample-seed=20261109 và ba measurement seeds khớp output/pha mô hình, x phục hồi,
+scratch=0. Tài nguyên đo local Q=251, Toffoli=6989, giảm 108 Toffoli so balanced;
+Q không đổi như dự đoán. Chưa có điểm hoặc kết quả verifier cho delta12.
+validate_model.py nhận --config và --sample-seed để tái lập từng cấu hình;
+solution.py giữ nguyên, mapping/source commit của balanced không đổi.
+
 ## Kết luận và phiên bản tái lập
 
 Balanced đạt dev_5min PASS trong run `20261108T015743Z-local-dev_5min-d222d7`, 4096 đầu vào x 2

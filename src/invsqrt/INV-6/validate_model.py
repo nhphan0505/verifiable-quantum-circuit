@@ -33,14 +33,20 @@ def values(bs):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--config', type=Path, default=Path(__file__).resolve().parent/'configs/balanced.json')
+    parser.add_argument('--sample-seed', type=int, default=20261108)
     args = parser.parse_args()
     here = Path(__file__).resolve().parent
     m = load(here/'solution.py', 'inv6_validation_solution')
     baseline = load(here.parent/'INV-BASELINE/solution.py', 'inv6_validation_baseline')
-    config = json.loads((here/'configs/balanced.json').read_text())
+    config_path = args.config.resolve()
+    if config_path.parent != (here/'configs').resolve() or config_path.suffix != '.json':
+        raise ValueError('Config must belong to this experiment configs directory')
+    config = json.loads(config_path.read_text())
+    candidate = config_path.stem
     prec = m.Precision(**config['precision'])
-    variants = [('balanced', m, prec), ('reduced_zero_bias', m, dataclasses.replace(prec, coefficient_bias=((0,0,0,0),)*4, z_bias=0)), ('baseline', baseline, baseline.Precision())]
-    report = {'kind': 'local_model_and_simulation_checks', 'not_verifier_result': True, 'exhaustive_domain': [1,3133452], 'model': {}}
+    variants = [(candidate, m, prec), ('reduced_zero_bias', m, dataclasses.replace(prec, coefficient_bias=((0,0,0,0),)*4, z_bias=0)), ('baseline', baseline, baseline.Precision())]
+    report = {'kind': 'local_model_and_simulation_checks', 'not_verifier_result': True, 'config_name': candidate, 'exhaustive_domain': [1,3133452], 'model': {}}
     for name, module, p in variants:
         low, high, worst, wx = float('inf'), -float('inf'), -1, None
         for start in range(1,3133453,131072):
@@ -51,9 +57,9 @@ def main():
             if abs(error[idx])>worst: worst=float(abs(error[idx]));wx=int(xs[idx])
         report['model'][name] = {'min_signed_ratio':low,'max_signed_ratio':high,'worst_ratio':worst,'worst_x':wx,'overflow':False}
         print(name,report['model'][name],flush=True)
-    assert report['model']['balanced']['worst_ratio']<0.95
-    assert report['model']['balanced']['worst_ratio']<report['model']['reduced_zero_bias']['worst_ratio']
-    rng = np.random.default_rng(20261108)
+    assert report['model'][candidate]['worst_ratio']<0.95
+    assert report['model'][candidate]['worst_ratio']<report['model']['reduced_zero_bias']['worst_ratio']
+    rng = np.random.default_rng(args.sample_seed)
     boundary = [1,2,3,3133452]
     for k in range(0,11):
         for a in (1,1.5,2,3,4):
@@ -77,7 +83,7 @@ def main():
         for i,y in enumerate(expected):
             phase=sim.read_shot_phase(i)
             assert (phase/2-int(y)/2**prec.output_bits(10))%1==0, ('phase differs',i,phase)
-    report['simulation']={'inputs':len(xs),'rng_seed':20261108,'measurement_seeds':[17,982451653,20261108],'compute_matches_model':True,'phase_matches_model':True,'x_restored':True,'scratch_zero':True,'num_qubits':circ.num_qubits,'static_toffoli':int(circ.operation_statistics().num_toffoli_like)}
+    report['simulation']={'inputs':len(xs),'rng_seed':args.sample_seed,'measurement_seeds':[17,982451653,20261108],'compute_matches_model':True,'phase_matches_model':True,'x_restored':True,'scratch_zero':True,'num_qubits':circ.num_qubits,'static_toffoli':int(circ.operation_statistics().num_toffoli_like)}
     args.output.parent.mkdir(parents=True,exist_ok=True)
     args.output.write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
     print(json.dumps(report['simulation']),flush=True)
