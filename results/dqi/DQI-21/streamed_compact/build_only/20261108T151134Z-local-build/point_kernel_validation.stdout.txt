@@ -1,0 +1,16 @@
+{
+  "verification_level": "streamed point kernel unit test, not decoder grading",
+  "cases_checked": 49152,
+  "measurement_seeds": [
+    2105,
+    2106,
+    2107
+  ],
+  "all_predicate_words_covered": true,
+  "all_runtime_mask_words_covered": true,
+  "static_toffoli_like": 23,
+  "qubits_including_36_inputs": 59,
+  "value_errors": 0,
+  "phase_errors": 0,
+  "workspace_errors": 0
+}
