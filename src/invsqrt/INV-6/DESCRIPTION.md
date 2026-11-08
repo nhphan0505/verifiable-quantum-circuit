@@ -100,6 +100,14 @@ Q không đổi như dự đoán. Chưa có điểm hoặc kết quả verifier 
 validate_model.py nhận --config và --sample-seed để tái lập từng cấu hình;
 solution.py giữ nguyên, mapping/source commit của balanced không đổi.
 
+Artifact delta12 đã BUILT từ source/config commit `8d14de54075cf006040358a5bf91a1ef48adbb17`.
+[Provenance delta12](../../../results/invsqrt/INV-6/delta12/build_only/20261108T020740Z-local-build/provenance.json),
+[báo cáo kiểm tra delta12](../../../results/invsqrt/INV-6/delta12/build_only/20261108T020740Z-local-build/model_validation.json).
+Chấm notebook local trong D:/GQA: TRACK=invsqrt, MODE=dev_5min,
+EXPERIMENT_ID=INV-6, OWNER=nhphan0505, CONFIG_NAME=delta12. Results mới dự kiến
+ở results/invsqrt/INV-6/delta12/dev_5min/. Chưa có dev/full PASS cho delta12;
+config tốt nhất đã chấm vẫn là balanced với mapping được giữ bên dưới.
+
 ## Kết luận và phiên bản tái lập
 
 Balanced đạt dev_5min PASS trong run `20261108T015743Z-local-dev_5min-d222d7`, 4096 đầu vào x 2
