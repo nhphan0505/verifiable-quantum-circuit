@@ -62,8 +62,13 @@ class SchurDecoder:
     def quadratic_add(self, left, right, mask, target, work):
         if mask:
             self.b.init_and(left, right, work)
-            self.b.gf2_iadd(mask, target=target, control=work)
+            self.constant_add(mask, target, work)
             self.b.del_and(left, right, work)
+
+    def constant_add(self, mask, target, control):
+        if mask:
+            selected = km.array([bit for i, bit in enumerate(target) if mask >> i & 1])
+            self.b.cx(control, selected)
 
     def inverse_add(self, word, target, *, undo=False):
         """XOR the inverse using conjugate/norm, including inverse(0)=0."""
@@ -74,14 +79,20 @@ class SchurDecoder:
             else:
                 b.init_gf2_inverse(word, target=target, field=gf)
             return
-        linear, quadratic, inverse, product = self.inverse_tables
+        with self.inverse_norm(word) as (inverse_norm, work):
+            self.conjugate_product_add(word, inverse_norm, target, work)
+
+    @contextmanager
+    def inverse_norm(self, word):
+        b = self.b
+        linear, quadratic, inverse, _ = self.inverse_tables
         norm = b.alloc_qubits(6)
         inverse_norm = b.alloc_qubits(6)
         work = b.alloc_qubits(1)[0]
 
         def norm_add():
             for bit, mask in zip(word, linear):
-                b.gf2_iadd(mask, target=norm, control=bit)
+                self.constant_add(mask, norm, bit)
             for i, j, mask in quadratic:
                 self.quadratic_add(word[i], word[j], mask, norm, work)
 
@@ -89,16 +100,31 @@ class SchurDecoder:
             # Reuse the address prefix between adjacent GF(64) table entries.
             with b.unary_iteration(norm, range(1, len(inverse))) as cursor:
                 for address, selected in cursor:
-                    b.gf2_iadd(inverse[address], target=inverse_norm, control=selected)
+                    self.constant_add(inverse[address], inverse_norm, selected)
 
         norm_add()
         lookup()
-        for bit, row in zip(word, product):
-            for coeff, mask in zip(inverse_norm, row):
-                self.quadratic_add(bit, coeff, mask, target, work)
+        yield inverse_norm, work
         lookup()
         norm_add()
         b.free(norm + inverse_norm + km.array([work]))
+
+    def conjugate_product_add(self, word, inverse_norm, target, work):
+        for bit, row in zip(word, self.inverse_tables[3]):
+            for coeff, mask in zip(inverse_norm, row):
+                self.quadratic_add(bit, coeff, mask, target, work)
+
+    @contextmanager
+    def computed_inverse(self, word, target):
+        if self.inverse_tables is None:
+            self.inverse_add(word, target)
+            yield
+            self.inverse_add(word, target, undo=True)
+        else:
+            with self.inverse_norm(word) as (inverse_norm, work):
+                self.conjugate_product_add(word, inverse_norm, target, work)
+                yield
+                self.conjugate_product_add(word, inverse_norm, target, work)
 
     @contextmanager
     def flag(self, toggle):
@@ -172,9 +198,20 @@ class SchurDecoder:
 
     def scale(self, word, factor, inverse, temp, control):
         """Controlled in-place multiplication with clean product workspace."""
-        self.b.ixor_gf2_mul(word, factor, target=temp, field=self.gf, control=control)
+        self.multiply_add(word, factor, temp, control)
         self.b.cswap(control, word, temp)
-        self.b.ixor_gf2_mul(word, inverse, target=temp, field=self.gf, control=control)
+        self.multiply_add(word, inverse, temp, control)
+
+    def multiply_add(self, lhs, rhs, target, control):
+        b = self.b
+        if control is True:
+            b.ixor_gf2_mul(lhs, rhs, target=target, field=self.gf)
+            return
+        masked = b.alloc_qubits(self.gf.degree)
+        b.ccx(control, lhs, masked)
+        b.ixor_gf2_mul(masked, rhs, target=target, field=self.gf)
+        b.ccx(control, lhs, masked)
+        b.free(masked)
 
     def square_add(self, word, target, control):
         masked = self.b.alloc_qubits(1)[0]
@@ -203,8 +240,7 @@ class SchurDecoder:
         for i in range(1, length // 2):
             for k in range(2 * i + 1, length):
                 with self.between(jump, 1, length - k) as valid:
-                    b.ixor_gf2_mul(words[i], words[k-i], target=words[k],
-                                   field=gf, control=valid)
+                    self.multiply_add(words[i], words[k-i], words[k], valid)
         # Form the inverse unit series from the factors, largest i first.
         # b[2*i] gets p_i^2 and no variable product is needed there.
         for i in reversed(range(1, (length + 1) // 2)):
@@ -212,8 +248,7 @@ class SchurDecoder:
                 self.square_add(words[i], words[2*i], valid)
             for k in range(2 * i + 1, length):
                 with self.between(jump, 1, length - k) as valid:
-                    b.ixor_gf2_mul(words[i], words[k-i], target=words[k],
-                                   field=gf, control=valid)
+                    self.multiply_add(words[i], words[k-i], words[k], valid)
 
         temp = b.alloc_qubits(degree)
         for k in range(1, length):
@@ -282,7 +317,7 @@ class SchurDecoder:
 
     def convolve(self, a, den, jump, reverse):
         """Add normalized q*B into the new denominator, omitting p_k*B_0."""
-        b, gf = self.b, self.gf
+        b = self.b
         cap = len(a)
         terms = range(1, cap + 1)
         for k in terms if reverse else reversed(terms):
@@ -291,8 +326,7 @@ class SchurDecoder:
                     b.gf2_iadd(a[k], target=den[k-1], control=active)
             for j in range(1, k):
                 with self.between(jump, j, cap) as valid:
-                    b.ixor_gf2_mul(den[j-1], a[k-j], target=den[k-1],
-                                   field=gf, control=valid)
+                    self.multiply_add(den[j-1], a[k-j], den[k-1], valid)
 
     def convert_block(self, den, a, jump, reverse):
         b, gf = self.b, self.gf
@@ -373,11 +407,10 @@ class SchurDecoder:
             if pairs:
                 b.cx(left, right)
             b.flip_if_equal(sigma, 1, target=root)
-            self.inverse_add(odd, inverse)
-            b.init_and(root, omega, located)
-            b.gf2_phase_by_product(located, inverse, mask=mask, field=gf)
-            b.del_and(root, omega, located)
-            self.inverse_add(odd, inverse, undo=True)
+            with self.computed_inverse(odd, inverse):
+                b.init_and(root, omega, located)
+                b.gf2_phase_by_product(located, inverse, mask=mask, field=gf)
+                b.del_and(root, omega, located)
             b.flip_if_equal(sigma, 1, target=root)
             if pairs:
                 b.cx(back_left, back_right)
