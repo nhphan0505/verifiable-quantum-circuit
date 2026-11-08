@@ -1,0 +1,11 @@
+{
+  "status": "BUILT",
+  "num_qubits": 1889,
+  "static_toffoli_like": 5788553,
+  "static_q2t": 20655415229513,
+  "baseline_run": "results/dqi/DQI-BASELINE/baseline/dev_5min/20261107T092603Z-local-dev_5min-f901a5/verifier.json",
+  "baseline_num_qubits": 1893,
+  "baseline_max_toffoli_count": 5725461,
+  "candidate_static_over_baseline_max_q2t": 1.0067513976983036,
+  "limitations": "Static candidate vs baseline sampled maximum, not matched verifier measurement. Candidate has not been graded. No score or PASS claimed."
+}

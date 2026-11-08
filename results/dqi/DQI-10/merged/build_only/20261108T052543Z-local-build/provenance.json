@@ -1,0 +1,25 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-10",
+  "config_name": "merged",
+  "source_commit": "394396f16bffa0c4bcf9fe7eea9fa4bca39e31f3",
+  "source_path": "src/dqi/DQI-10/solution.py",
+  "source_sha256": "61252abab8e78de9af230655e08319219ffaec2fe6edfc1d52dcb17a08fe719c",
+  "build_config_path": "src/dqi/DQI-10/configs/merged.json",
+  "build_config_sha256": "74055cda362a06faece1aa628efa072d1b6ecce8898934143c2b0fb40985466d",
+  "artifact_path": "artifacts/dqi/DQI-10/merged.kmb",
+  "artifact_sha256": "a8256b3af3695f112656af1a7af5eb81e953577a802b463f8383a6d278cd2924",
+  "build_command": ".\\.venv\\Scripts\\python.exe src/dqi/DQI-10/solution.py --config src/dqi/DQI-10/configs/merged.json",
+  "environment": {
+    "python": "3.13.14",
+    "executable": "D:\\GQA\\.venv\\Scripts\\python.exe",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    },
+    "dependencies": "Standalone inherited implementation; no helper imports beyond standard library and kickmix."
+  },
+  "build_run": null
+}
