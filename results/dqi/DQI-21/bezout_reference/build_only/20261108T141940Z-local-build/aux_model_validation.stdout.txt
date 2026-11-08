@@ -1,0 +1,9 @@
+{
+  "verification_level": "classical fixed-step invariant check, not decoder grading",
+  "cases": 114,
+  "aux_steps": 36,
+  "max_active_cancellations": 35,
+  "max_cofactor_degree": 17,
+  "wrap_errors": 0,
+  "bezout_errors": 0
+}

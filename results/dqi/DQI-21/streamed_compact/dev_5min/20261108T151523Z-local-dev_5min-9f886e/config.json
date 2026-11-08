@@ -1,0 +1,24 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-21",
+  "config_name": "streamed_compact",
+  "mode": "dev_5min",
+  "command": [
+    "/Users/tranxuanhoa/Documents/research/GQA/.venv/bin/python",
+    "/Users/tranxuanhoa/Documents/research/GQA-DQI-21/src/common/dev_verify.py",
+    "--track",
+    "dqi",
+    "--submission",
+    "/Users/tranxuanhoa/Documents/research/GQA-DQI-21/artifacts/dqi/DQI-21/streamed_compact.kmb",
+    "--seed",
+    "20261106",
+    "--invsqrt-samples",
+    "4096",
+    "--invsqrt-repeats",
+    "2",
+    "--dqi-shots",
+    "4096",
+    "--dfthc-repeats",
+    "4"
+  ]
+}

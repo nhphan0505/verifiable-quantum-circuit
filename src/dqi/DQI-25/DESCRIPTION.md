@@ -147,3 +147,12 @@ Tại Q=1893, thêm chỉ một qubit làm Q² tăng khoảng 0.10568%, khoảng
 Cả dev và full hiện dùng config [control_cache.json](configs/control_cache.json), source `755ead9c879fb2a426ce36f3c6a7c6e3946b1bcb`, helper DQI-19 c0cf9df đúng hash trong provenance. Các run và provenance ở bảng trên là mốc tốt nhất duy nhất của ID này. Checkout source đó và chạy build command đã ghi trong provenance để tái lập; không dùng HEAD tương lai thay SHA nguồn. Full là bằng chứng thống kê độc lập với dev cố định, không chứng minh mọi syndrome.
 
 Các ghi chú “chưa chấm/chờ bước 04” ở phần kế hoạch và bàn giao là trạng thái lịch sử, đã được phân tích này thay thế. Commit bước 04 lưu build records, hai raw runs, review sidecars, score và phân tích; giữ local theo yêu cầu không push tùy chọn của người dùng.
+
+
+## Tổng kết bước 06
+
+Sau phân tích, người dùng giao bước 05–06 và chấp nhận đề xuất kết thúc vòng config thường lệ. Không mở vòng build/chấm mới ở bước 05 vì chưa có tuyến cache mới có chứng chỉ/lợi ích định lượng; không coi config trùng hoặc ablation yếu hơn là một cải thiện mới. Chuyển trực tiếp từ kết quả bước 04 sang tổng kết bước 06, giữ nguyên source/config đã chấm.
+
+Phạm vi nghiên cứu hữu hạn của hướng đã hoàn tất: tuyến reuse control có chứng minh, kiểm component và dev/full PASS; lợi ích nhỏ được báo đúng, chưa kết luận các kiến trúc product caching khác không có lợi. Gợi ý cho reviewer tiếp theo là tìm thêm tuyến cục bộ có factor bất biến hoặc tương đương affine có chứng chỉ và không tăng Q, trước khi cấp ngân sách build/chấm mới. Không có implementation cho gợi ý đó.
+
+Bước 06 đồng bộ main bằng merge, giữ nguyên các SHA nguồn/run và mọi dòng hướng khác trong mục lục/score; push các commit source/kết quả đã lưu và chuẩn bị PR review. Những ghi chú “local/chưa push” ở các mốc trước là lịch sử tại thời điểm bàn giao, được bước công bố này thay thế sau push. Reviewer độc lập dùng bước 07/07b trên HEAD cuối; chưa approve, merge PR hoặc đóng Issue ở bước này.

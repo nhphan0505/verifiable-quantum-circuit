@@ -1,0 +1,29 @@
+{
+  "status": "BUILT",
+  "artifact_path": "artifacts/dqi/DQI-21/streamed_compact.kmb",
+  "num_qubits": 3876,
+  "static_toffoli_like": 4976652,
+  "num_instructions": 80902255,
+  "track": "dqi",
+  "experiment_id": "DQI-21",
+  "config_name": "streamed_compact",
+  "source_commit": "2bfda079587dfdc4b85b1245417b7acca52362ff",
+  "artifact_sha256": "1f81db5ac6685ce8b742b600a1e0fdb99feb27314cf301d75afbb0edfe322d46",
+  "artifact_size_bytes": 825336486,
+  "verification_level": "build_only",
+  "point_static_toffoli_like": 23,
+  "reference_source_commit": "433dd403bc03a2b346c36314967a4d9665cefbbb",
+  "reference_num_qubits": 5042,
+  "reference_static_toffoli_like": 5009520,
+  "qubit_reduction_fraction": 0.23125743752479178,
+  "static_toffoli_reduction_fraction": 0.006561107651032461,
+  "static_q2t_ratio_to_reference": 0.5870877415423281,
+  "static_q2t_reduction_fraction": 0.4129122584576719,
+  "static_q2t_ratio_to_baseline": 3.6441237879856203,
+  "limitations": [
+    "Intermediate ablation, still predicted worse than baseline; not a competitive in-place Bezout/Hankel design.",
+    "23 Toffoli-like/point, not the 11-point target of materialized reference.",
+    "No decoder grading of this setting yet; unit tests and BUILT are not dev/full PASS."
+  ],
+  "publication_status_at_handoff": "Local only; optional push not requested. Build records pending the next mandatory results commit."
+}

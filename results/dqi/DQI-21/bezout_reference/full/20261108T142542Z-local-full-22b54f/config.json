@@ -1,0 +1,13 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-21",
+  "config_name": "bezout_reference",
+  "mode": "full",
+  "command": [
+    "/Users/tranxuanhoa/Documents/research/GQA/.venv/bin/python",
+    "/Users/tranxuanhoa/Documents/research/GQA-DQI-21/verifiers/dqi/verify_submission_dqi.py",
+    "/Users/tranxuanhoa/Documents/research/GQA-DQI-21/artifacts/dqi/DQI-21/bezout_reference.kmb",
+    "--max-workers",
+    "1"
+  ]
+}
