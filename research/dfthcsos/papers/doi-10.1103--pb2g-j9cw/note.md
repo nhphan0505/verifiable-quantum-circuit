@@ -51,7 +51,7 @@ Lưu ý tên hệ: FeMoco-54 [37] là Reiher et al. 2017 ([note](../doi-10.1073-
 
 Ba thành phần chiếm ~90% Toffoli, trong đó Sel chiếm ~60% (tr. 11):
 
-1. **Rot** — table lookup theo $N+RB$ chỉ số, xuất $(N-1)$ góc, mỗi góc $b_{rot}$ bit, quay $\gamma_{0\sigma x}$ thành $\gamma_{\vec u\sigma x}$ (tr. 9). App. B mục 5 (tr. 26–27): unary iteration với chi phí $N+RB$ (Eq. B41–B42: N cho D₁/Q₁, $B(R-1)+(B-1)=RB$ cho SF; vector chỉ chọn theo $(r,b)$, **không theo c**). Xóa bằng phase fixup với chi phí $R+B$ (Eq. B47). Persistent ancilla $(N-1)b_{rot}$ (Eq. B43). Table IX: mỗi thứ 2 lần gọi/walk.
+1. **Rot** — table lookup theo $N+RB$ chỉ số, xuất $(N-1)$ góc, mỗi góc $b_{rot}$ bit, quay $\gamma_{0\sigma x}$ thành $\gamma_{\vec u\sigma x}$ (tr. 9). App. B mục 5 (tr. 26–27): unary iteration với chi phí $N+RB$ (Eq. B41–B42: N cho D₁/Q₁, $B(R-1)+(B-1)=RB$ cho SF; vector chỉ chọn theo $(r,b)$, **không theo c**). Xóa bằng phase fixup với chi phí $R+B$ (Eq. B47, tr. 27). Eq. B47 mô tả xóa "the second QROM from Item 5", tức lookup SF trên $(r,b)$. Phần N địa chỉ D₁/Q₁ được xuất trong unary iteration của state preparation và được phase fixup ở bước 8 (Eq. B50–B51). Table IX gộp QROM† thành $R+B$. Persistent ancilla $(N-1)b_{rot}$ (Eq. B43). Table IX: mỗi thứ 2 lần gọi/walk.
 2. **Qroam** cho hệ số alias sampling: theo $N+R(B+1)C$ chỉ số, xuất $b_Q=\lceil\log_2B\rceil+b_{coeff}$ bit; chi phí ≈ $RBC/(\lambda+1)+\lambda b_Q$ với $\lambda\le(N-1)b_{rot}/b_Q$, tận dụng qubit rảnh sẽ chứa output của Rot sau này (tr. 11).
 3. **Sel**: Givens rotation điều khiển bởi góc, $U_{Rot}$ tốn $2(N-1)b_{rot}$ Toffoli (Eq. B20–B21, B46: forward + reverse), cộng 4 CSWAP spin $4(N+1)$ và Majorana 7 Toffoli. Table X dùng $8(N-1)b_{rot}$ cho hai select unitary (tr. 29–30).
 
@@ -78,10 +78,14 @@ Table X (tr. 30), FeMoco-76o113e, $(b_{coeff},b_{rot})=(9,15)$. Các cột C = �
 - Tiêu chí chính xác: $\sigma_E\le\sigma_{PEA}+|\epsilon_{corr}|\le\epsilon_{chem}=1.6$ mHa (Eq. 3), $\sigma_{PEA}=1.0$ mHa, $|\epsilon_{corr}|\le0.3$ mHa theo CCSD(T) high-spin (IV.B, tr. 13; FeMoco-76 dùng $n_\uparrow-n_\downarrow=35$). Biến thể thống kê (Eq. 4, 44, 45, D1–D2) cho phép $\sigma_{PEA}=1.4$ mHa (Table XI). Ở bản này FeMoco-76 dùng (15, 64, 32), (11, 16) bit, 1560 qubit, vẫn 1.00×10⁹ Toffoli.
 - Tác giả tự cảnh báo (V, tr. 15–16; Table VI): sai số tương quan CCSD(T) high-spin có thể khác hàng bậc độ lớn so với DMRG low-spin; ngưỡng truncation thấp có thể biểu diễn "physics khác". Đây là giới hạn mở, chưa có metric thay thế.
 - $E_{gap}$ từ SDP là cận dưới cho Fock space, còn năng lượng biến phân là cho sector hạt cố định (Table II). $E_{gap}$ trong Table V được tính lại bằng CCSD(T), không phải cận trên chặt (tr. 13).
-- Mô hình chi phí paper: Toffoli logic của **một walk** (Cost[BE]) × số lần gọi $\lceil\pi\lambda/(2\sigma_{PEA})\rceil$; qubit logic gồm persistent + max temporary + hệ thống $2N$. Không giới hạn số qubit cho từng lookup.
+- Mô hình chi phí paper: Toffoli logic của **một walk** (Cost[BE]) × số lần gọi $\lceil\pi\lambda_{eff}/(2\sigma_{PEA})\rceil$ (Eq. 11, tr. 6; chú thích Table V tr. 14 và Table XI tr. 33). Hàng DF/THC trong Table V dùng λ của phương pháp tương ứng. Với SA phải dùng $\lambda_{eff}$, không dùng $\Lambda$ thô: ở FeMoco-76, $\Lambda$ = 179.7296 Ha còn $\lambda_{eff}$ = 43.6538 Ha, nên dùng nhầm $\Lambda$ sẽ phóng đại số lần gọi khoảng 4.12 lần; qubit logic gồm persistent + max temporary + hệ thống $2N$. Không giới hạn số qubit cho từng lookup.
 - **Khác biệt với verifier project** (đối chiếu README/code verifier, không phải kết quả paper):
   - Điểm $=\lambda_{eff}\times T_{total}\times Q_{total}$, không nhân số lần gọi PEA hay $\sigma_{PEA}$.
-  - Góc: verifier dùng $\theta=\pi w/2^{b_{rot}-1}$ với word $b_{rot}$ bit (phủ [0, 2π)). Paper dùng $b_{rot}-1$ bit cộng một bit ngẫu nhiên, **cùng độ phân giải** $2\pi/2^{b_{rot}-1}$ theo công thức trên; note chưa kiểm chứng hai quy ước có tương đương hoàn toàn hay không.
+  - Góc: hai quy ước **không cùng độ phân giải** với cùng giá trị $b_{rot}$.
+    - Verifier (SCORING_README, mục Submission files; `dfthc_math.py` nhân word đã chuẩn hóa với π) giải mã $\theta=\pi w/2^{b_{rot}-1}$ với word $b_{rot}$ bit. Bước lưới là $\pi/2^{b_{rot}-1}=2\pi/2^{b_{rot}}$, phủ [0, 2π).
+    - Paper (App. D, tr. 36) cho góc làm tròn $2\pi(x+\mathbb B(p))/2^{b_{rot}-1}$. Bước lưới là $2\pi/2^{b_{rot}-1}$, thô hơn verifier hệ số 2, tức lệch một bit.
+    - Ví dụ $b_{rot}=12$: paper có bước $2\pi/2048$, verifier có bước $2\pi/4096$.
+    - Vì vậy không chuyển trực tiếp $b_{rot}$ của paper (ví dụ 15 cho FeMoco-76) sang word của verifier. Note chưa xác minh ánh xạ bit/góc: cách paper đếm bit Bernoulli cuối và overflow khi $x+\mathbb B(p)=2^{b_{rot}-1}$ chưa được kiểm chứng. Chỉ coi hai quy ước tương đương sau khi đã kiểm chứng ánh xạ này.
   - Givens: verifier tính $2(N-1)(2b_{rot}-1)$ (adder $2\beta-1$ mỗi lượt, `costs_prepare.py::givens_rotations`), còn paper dùng $2(N-1)b_{rot}$ cho mỗi $U_{Rot}$ (Eq. B46).
   - Tải góc: paper xuất **toàn bộ** $(N-1)b_{rot}$ bit một lần (FeMoco-76, b_rot = 15: 1125 qubit persistent). Verifier giới hạn mỗi ANGLE_k ≤ 128 qubit, nên baseline chia thành batch J word (J = 8, 12 bit, 10 mạch) và cộng $J\cdot b_{rot}$ vào $Q_{total}$.
   - Verifier từ chối nếu error_1 hoặc error_2 > 20 mHa, $\Lambda\le49.0$, hoặc $E_{gap}\le3.914898$ Ha. Đây là tiêu chí Frobenius/tái dựng của cuộc thi, không phải $\epsilon_{corr}$ CCSD(T) của paper.
@@ -99,7 +103,7 @@ Snapshot đối chiếu: commit `cd4f4ac58360aad26e634a29c13cc6046298dbd5`. SHA-
 
 Ánh xạ (suy luận của nhóm từ đối chiếu, chưa đo):
 
-- Mạch ANGLE_k của project tương ứng với **RPrep/QROM($\vec u$)** của paper: bảng $N+RB$ địa chỉ (76 + 65·60 = 3976 ở baseline), mỗi địa chỉ $N-1=75$ góc. Paper cost lookup này $N+RB$ Toffoli cho một lần tính (unary iteration) và $R+B$ cho xóa bằng phase fixup. Baseline lặp QROM trên toàn 3976 địa chỉ cho mỗi batch delta, cả thuận lẫn ngược (DESCRIPTION).
+- Mạch ANGLE_k của project tương ứng với **RPrep/QROM($\vec u$)** của paper: bảng $N+RB$ địa chỉ (76 + 65·60 = 3976 ở baseline), mỗi địa chỉ $N-1=75$ góc. Paper cost lookup này $N+RB$ Toffoli cho một lần tính (unary iteration). Phần xóa $R+B$ chỉ áp cho lookup SF trên $(r,b)$; N địa chỉ D₁/Q₁ được xuất và xóa ghép với state preparation (Eq. B50–B51). Vì vậy $R+B$ không phải chi phí xóa trọn vẹn cho toàn bảng $N+RB$ của một mạch ANGLE_k độc lập. Baseline lặp QROM trên toàn 3976 địa chỉ cho mỗi batch delta, cả thuận lẫn ngược (DESCRIPTION).
 - Chỉ số $(r,b)$ có cấu trúc tích: paper lặp b ngoài, r trong, với chi phí $B(R-1)+(B-1)$ (Eq. B42). Baseline dùng địa chỉ phẳng `76 + R·B` theo thứ tự `(rho, b)` (SCORING_README).
 - Phần state prep và Givens được verifier tính bằng heuristic cố định theo $(N,R,B,C,b_{rot})$; chỉ ANGLES được đếm thực từ mạch. Vì vậy $b_{rot}$, $J$, $(R,B,C)$ và chất lượng factorization (qua $\Lambda$, $E_{gap}$) ảnh hưởng đồng thời cả ba thừa số.
 - Không có code của tác giả trong PDF; không kế thừa code.
@@ -108,16 +112,16 @@ Snapshot đối chiếu: commit `cd4f4ac58360aad26e634a29c13cc6046298dbd5`. SHA-
 
 Các mục dưới là **suy luận của nhóm**, chưa thử, cần Issue riêng theo luồng experiment:
 
-1. **Xóa bảng góc bằng phase fixup thay vì chạy lại QROM.** Paper xóa output Rot với chi phí $R+B$ thay vì $N+RB$ (Eq. B47). Ở project, lượt ngược hiện chạy lại các oracle XOR. Cần kiểm tra verifier có chấp nhận đo X + sửa pha có điều kiện trong lượt ngược hay không (README nói gate điều kiện theo bit đo chỉ tính trên shot bit = 1) và mạch có còn tải đúng góc. Đối chứng: Toffoli ANGLES của baseline; bác bỏ nếu verifier từ chối hoặc không giảm T_total.
+1. **Xóa bảng góc bằng phase fixup thay vì chạy lại QROM.** Paper xóa output lookup SF trên $(r,b)$ với chi phí $R+B$ (Eq. B47); N địa chỉ một hạt được xóa ghép với phase fixup của state preparation (Eq. B50–B51), nên chưa có căn cứ coi $R+B$ là chi phí thay thế trọn vẹn cho bảng $N+RB$. Khi áp dụng sang ANGLE_k độc lập phải hạch toán thêm phần một hạt (76 địa chỉ đầu), việc chuyển địa chỉ phẳng `76 + R·B` sang cặp $(r,b)$, và workspace của binary-to-unary (tạm thời $\min(R,B)$, tr. 27) trong giới hạn 128 qubit. Ở project, lượt ngược hiện chạy lại các oracle XOR. Cần kiểm tra verifier có chấp nhận đo X + sửa pha có điều kiện trong lượt ngược hay không (README nói gate điều kiện theo bit đo chỉ tính trên shot bit = 1) và mạch có còn tải đúng góc. Đối chứng: Toffoli ANGLES của baseline; bác bỏ nếu verifier từ chối hoặc không giảm T_total.
 2. **Unary iteration theo cấu trúc (b, r)** thay cho iteration trên địa chỉ phẳng, theo Eq. B42. Kiểm chứng bằng đếm Toffoli ANGLE_k ở cùng bảng delta.
-3. **Chọn b_rot / J và làm tròn ngẫu nhiên không thiên lệch** (App. D) để giảm b_rot mà vẫn giữ error_1/error_2 < 20 mHa và $\Lambda$, $E_{gap}$ hợp lệ. Lưu ý paper đo bằng $\epsilon_{corr}$ CCSD(T), không phải metric verifier; phải đo lại bằng verifier. Rủi ro: $E_{gap}$ hoặc $\Lambda$ chạm ngưỡng sàn strict.
+3. **Chọn b_rot / J và làm tròn ngẫu nhiên không thiên lệch** (App. D) để giảm b_rot. Lưu ý quy ước góc của paper và verifier lệch một bit (mục "Điều kiện đúng"), nên phải tính lại số bit theo $\theta=\pi w/2^{b_{rot}-1}$ của verifier, mà vẫn giữ error_1/error_2 < 20 mHa và $\Lambda$, $E_{gap}$ hợp lệ. Lưu ý paper đo bằng $\epsilon_{corr}$ CCSD(T), không phải metric verifier; phải đo lại bằng verifier. Rủi ro: $E_{gap}$ hoặc $\Lambda$ chạm ngưỡng sàn strict.
 4. **Tối ưu lại (R, B, C)** theo heuristic tr. 11 (C = Θ(N), B = Θ(N), R = Θ̃(1); paper dùng (15, 57, 19) cho FeMoco-76 so với (65, 60, 60) baseline). R nhỏ hơn giảm số địa chỉ $N+RB$ và giảm ANGLES. Cần huấn luyện lại factorization và chịu thay đổi $\Lambda$, $E_{gap}$. Kiểm tra cả hai ngưỡng sàn của verifier; đây có thể là ràng buộc chặn, chưa biết.
 
 ## Bằng chứng trong project và câu hỏi còn mở
 
 - Chưa có Issue/run dùng nguồn này. SCORES.md chỉ có DEV_5MIN của DFT-BASELINE (3355599588.3155365); chưa có FULL.
 - Câu hỏi mở:
-  - Quy ước góc của verifier có tương đương với paper không?
+  - Ánh xạ bit/góc giữa paper (bước $2\pi/2^{b_{rot}-1}$) và verifier (bước $2\pi/2^{b_{rot}}$): cách paper đếm bit Bernoulli cuối và xử lý overflow chưa được kiểm chứng.
   - Vì sao Table III (9997) và Table V (10203) khác nhau?
   - Cột Rot Toffolis của Table X được tính thế nào?
   - Chi tiết App. A, C, F, G chưa đọc.
