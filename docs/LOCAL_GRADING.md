@@ -31,7 +31,7 @@ hash artifact local thực tế. Task 3 được giải nén tạm dưới artif
 
 Đúng một provenance build_only khớp hash sẽ được nối vào run. Nếu thiếu/mơ hồ,
 review.json nêu phần agent cần đối chiếu; không suy đoán commit từ HEAD. Notebook
-không cập nhật SCORES hay tự commit; báo agent thư mục Saved để phân tích ở prompt 04.
+không cập nhật SCORES hay tự commit; báo agent thư mục Saved để phân tích ở bước 04.
 Không sửa log/JSON gốc. Kết quả lịch sử vẫn giữ nguyên.
 
 Dev PASS không thay full PASS. So cải thiện với baseline cùng môi trường local,

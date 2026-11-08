@@ -1,14 +1,17 @@
 # 08 — Merge và hoàn thành hướng
 
-```text
-Đọc AGENTS.md, CONTRIBUTING.md và docs/EXPERIMENT_WORKFLOW.md trước khi làm.
+Áp dụng [quy tắc chung và ngữ cảnh](../README.md), AGENTS.md, CONTRIBUTING.md và
+[workflow thử nghiệm](../../docs/EXPERIMENT_WORKFLOW.md).
+Lấy thông tin từ chat/project/GitHub; không yêu cầu điền lại form.
 
-PR: <URL>
-ISSUE: <URL>
-REVIEW: <URL approval GitHub do teammate đăng ở 07b>
+## Ràng buộc và quyền thao tác
 
-Tôi giao bạn merge PR này và hoàn thành Issue nếu đúng phạm vi đã xong.
-Tôi là tác giả PR. Kiểm tra PR head, approval của teammate trên GitHub và
+Tác giả chỉ xử lý PR/Issue của hướng được giao, trên branch đúng owner. Được sửa conflict đúng phạm vi, commit/push, merge commit khi đủ review/check và đóng Issue thực sự hoàn tất. Không bypass rule, squash/rebase, force-push hoặc xóa branch/worktree.
+
+## Yêu cầu thực hiện
+
+Thực hiện merge PR này và hoàn thành Issue nếu đúng phạm vi đã xong.
+Bước này dành cho tác giả PR. Kiểm tra PR head, approval của teammate trên GitHub và
 các check/branch rules bắt buộc. Approval phải còn hiệu lực và gắn với HEAD
 hiện tại; nếu HEAD đã đổi, bàn giao teammate review lại phần mới và đăng
 approval qua 07b trước khi merge. Kết luận trong chat chưa thay thế approval.
@@ -28,4 +31,9 @@ liên kết PR. Nếu phạm vi còn dang dở thì giữ Issue mở, không đ�
 Không xóa branch/worktree hoặc dữ liệu local nếu chưa được giao dọn chúng.
 
 Báo PR URL, merge commit, trạng thái Issue và việc còn lại. Không mở hướng mới.
-```
+
+## Danh sách nghiệm thu
+
+- [ ] Approval GitHub của teammate còn hiệu lực và đúng HEAD, mọi check/rule bắt buộc đạt.
+- [ ] Nếu sửa conflict/đổi HEAD, đã có review và approval lại trước merge.
+- [ ] PR thật đã merged bằng merge commit; báo merge SHA và Issue đóng hoặc còn mở đúng phạm vi.

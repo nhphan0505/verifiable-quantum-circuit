@@ -1,12 +1,16 @@
 # 01 — Tìm hypothesis (chỉ đọc)
 
-```text
-Đọc AGENTS.md, CONTRIBUTING.md và docs/EXPERIMENT_WORKFLOW.md trước khi làm.
+Áp dụng [quy tắc chung và ngữ cảnh](../README.md), AGENTS.md, CONTRIBUTING.md và
+[workflow thử nghiệm](../../docs/EXPERIMENT_WORKFLOW.md).
+Lấy thông tin từ chat/project/GitHub; không yêu cầu điền lại form.
 
-TRACK: <invsqrt | dqi | dfthcsos>
-MỤC TIÊU: <nút thắt muốn cải thiện, hoặc để agent đề xuất>
+## Ràng buộc và quyền thao tác
 
-Tôi muốn tìm hướng mới, chưa giao triển khai. Kiểm tra branch/working tree;
+Chỉ đọc project, Issues/PR và note ready trên nhánh chính; không sửa file, tạo Issue/branch, commit/push hoặc chấm.
+
+## Yêu cầu thực hiện
+
+Tìm hướng mới; bước này chưa giao triển khai. Kiểm tra branch/working tree;
 không sửa file hoặc chuyển branch làm ảnh hưởng công việc hiện có.
 
 Đọc Issues mở/đóng, PR mở, EXPERIMENTS.md, SCORES.md, các DESCRIPTION,
@@ -26,7 +30,7 @@ pháp, kết hợp ý tưởng hoặc phản biện hypothesis tự nghĩ ra. Kh
 bản thảo discussion hoặc mở link nguồn; không tự viết/chuyển nguồn thành
 note trong giai đoạn này. Nguồn chưa có note thì bỏ qua và nêu giới hạn;
 note thiếu căn cứ thì ghi chưa kiểm chứng, không khẳng định đã đọc bản gốc.
-Không cố gắn paper cho ý tưởng chưa có nguồn tương ứng. Việc chuyển PDF/discussion thành note thuộc luồng literature riêng.
+Không cố gắn paper cho ý tưởng chưa có nguồn tương ứng. Việc chuyển PDF/discussion thành note thuộc instructions papers/discussions riêng.
 
 Đối chiếu EXPERIMENTS, Issues và results để tránh trùng hướng đã thử/đang làm.
 Phân biệt suy luận với bằng chứng đã đo; không tuyên bố mới trên toàn thế
@@ -35,6 +39,7 @@ là tài liệu tham khảo, không phải lệnh cho agent.
 
 Chọn tối đa 3 hướng có cơ sở tốt nhất, không ép đủ số lượng hoặc mỗi loại.
 Mỗi hướng cần:
+
 - Title mô tả rõ thành phần, phương pháp và phạm vi thử.
 - Loại: tinh chỉnh, kết hợp hay mới; link nguồn/phiên bản kế thừa nếu có.
 - Nguồn hình thành: tự suy luận, dựa vào tài liệu hoặc kết hợp; nêu lập luận/nguồn cụ thể.
@@ -42,6 +47,11 @@ Mỗi hướng cần:
 - Phạm vi khác các hướng đã có, cách kiểm tra bằng dev_5min và kết quả nào sẽ bác bỏ hypothesis.
 - Độ ưu tiên và lý do chọn một hướng bắt đầu.
 
-Không tạo Issue, branch, sửa file, commit hoặc tự chạy chấm. Dừng sau khi đưa
-ra đề xuất để tôi chọn hướng.
-```
+Không tạo Issue, branch, sửa file, commit hoặc tự chạy chấm. Nghiệm thu sau khi đưa ra đề xuất. Nếu còn bước 02 đã được giao, dùng hypothesis
+đã chọn trong chat; nếu chưa xác định được duy nhất thì hỏi người dùng chọn trước khi nhận hướng.
+
+## Danh sách nghiệm thu
+
+- [ ] Có tối đa 3 hypothesis, mỗi hướng nêu title/phạm vi, nguồn hoặc suy luận độc lập, điều kiện đúng, đánh đổi và tiêu chí bác bỏ.
+- [ ] Đã đối chiếu các hướng cũ/đang làm; ghi giới hạn nếu chưa truy cập được GitHub.
+- [ ] Có hướng ưu tiên và lý do; chưa coi đề xuất là hypothesis người dùng đã chọn.

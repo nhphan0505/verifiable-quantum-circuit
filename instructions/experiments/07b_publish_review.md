@@ -1,19 +1,23 @@
 # 07b — Teammate đăng kết luận review lên GitHub
 
-```text
-Đọc AGENTS.md, CONTRIBUTING.md và docs/EXPERIMENT_WORKFLOW.md trước khi làm.
+Áp dụng [quy tắc chung và ngữ cảnh](../README.md), AGENTS.md, CONTRIBUTING.md và
+[workflow thử nghiệm](../../docs/EXPERIMENT_WORKFLOW.md).
+Lấy thông tin từ chat/project/GitHub; không yêu cầu điền lại form.
 
-PR: <URL>
-REVIEW GIAI ĐOẠN 07: <kết luận/findings và SHA đã review, hoặc tham chiếu trong chat này>
+## Ràng buộc và quyền thao tác
 
-Tôi là teammate reviewer, giao bạn đăng kết luận review lên PR này. Kiểm tra
+Reviewer bằng tài khoản GitHub khác tác giả; chỉ được đăng review lên PR được giao. Không sửa branch tác giả, tự đổi tài khoản, merge hoặc đóng Issue.
+
+## Yêu cầu thực hiện
+
+Đăng kết luận review lên PR được giao bằng vai trò teammate reviewer. Kiểm tra
 tài khoản GitHub đang dùng là của reviewer và khác tác giả PR; nếu sai tài
 khoản hoặc thiếu quyền thì báo rõ, không tự đổi tài khoản để approve.
 
 Đọc lại PR head, diff và bằng chứng review; không chỉ dựa vào lời tác giả rằng
 đã sửa. Nếu HEAD khác SHA đã review, kiểm tra phần thay đổi và các findings
 liên quan trên HEAD mới trước khi quyết định. Nếu thiếu ngữ cảnh review cũ,
-thực hiện lại việc review theo prompt 07. Ghi rõ SHA thực sự đã kiểm tra.
+thực hiện lại việc review theo bước 07. Ghi rõ SHA thực sự đã kiểm tra.
 
 Chỉ đăng Approve khi các findings cần sửa đã giải quyết, bằng chứng đủ và
 các check kỹ thuật bắt buộc của repository đã đạt trên phiên bản hiện tại.
@@ -30,5 +34,10 @@ Nếu review phù hợp đã được đăng cho đúng SHA, báo URL thay vì �
 
 Kết thúc báo URL review, SHA đã review, Approve/Request changes và việc còn
 lại. Không sửa branch tác giả, tự resolve findings chưa kiểm chứng, merge
-hoặc đóng Issue. Tôi giao riêng bước merge cho tác giả sau khi review đạt.
-```
+hoặc đóng Issue. Bước merge dành riêng cho tác giả khi được giao, sau review đạt.
+
+## Danh sách nghiệm thu
+
+- [ ] HEAD hiện tại đã review, findings được kiểm chứng; khi thiếu ngữ cảnh thì thực hiện lại bước 07.
+- [ ] Approve chỉ khi đủ bằng chứng và check kỹ thuật bắt buộc đạt; Request changes có lỗi thực, chờ CI thì chưa approve.
+- [ ] Đã đọc lại review URL/tài khoản/commit_id; không đăng trùng review phù hợp cho cùng SHA.

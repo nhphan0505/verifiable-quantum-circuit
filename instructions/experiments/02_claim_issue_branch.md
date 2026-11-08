@@ -1,14 +1,20 @@
-# 02 — Tạo Issue mới và branch cho hướng đã chọn
+# 02 — Nhận Issue và branch cho hướng đã chọn
 
-```text
-Đọc AGENTS.md, CONTRIBUTING.md và docs/EXPERIMENT_WORKFLOW.md trước khi làm.
+Áp dụng [quy tắc chung và ngữ cảnh](../README.md), AGENTS.md, CONTRIBUTING.md và
+[workflow thử nghiệm](../../docs/EXPERIMENT_WORKFLOW.md).
+Lấy thông tin từ chat/project/GitHub; không yêu cầu điền lại form.
 
-TRACK: <invsqrt | dqi | dfthcsos>
-HYPOTHESIS ĐÃ CHỌN: <ý tưởng và phạm vi cụ thể>
-OWNER: <GitHub username của thành viên phụ trách>
+## Ràng buộc và quyền thao tác
 
-Tôi giao bạn tự tạo một Issue mới cho hướng này, gán owner, tạo branch riêng,
-commit mô tả/mục lục, push và mở draft PR. Tôi không cung cấp Issue URL sẵn.
+Tạo/nhận Issue trong phạm vi được giao, tạo branch `exp/<ID>-<slug>` của owner từ nhánh chính; chỉ sửa `src/<TRACK>/<ID>/DESCRIPTION.md` và dòng của ID trong `src/<TRACK>/EXPERIMENTS.md`. Được commit/push, mở/cập nhật draft PR; chưa viết code/config hoặc compile.
+
+## Yêu cầu thực hiện
+
+Nếu chưa có Issue, tạo Issue thật cho hướng đã chọn, gán owner, tạo branch riêng,
+commit mô tả/mục lục, push và mở draft PR. Không yêu cầu người dùng cấp Issue URL mới.
+Nếu người dùng đã giao tiếp tục/nhận một Issue có sẵn, xác minh owner và phạm vi rồi
+dùng đúng Issue/ID/branch đó; bỏ thao tác tạo mới, vẫn nghiệm thu các mục còn lại.
+Không tự nhận Issue của người khác hoặc tạo trùng chỉ vì chưa được gửi URL.
 
 Trước khi tạo, kiểm tra Issues mở/đóng và PR đang mở. Nếu đã có cùng phạm vi
 hoặc một người đang làm hướng trùng, báo xung đột để thống nhất lại; không
@@ -76,9 +82,14 @@ Chưa viết solution hoặc compile ở giai đoạn này. Kết thúc báo ngu
 đã đọc lại, ID, owner, Issue URL, branch, draft PR URL, commit và phạm vi đã nhận.
 Không merge hoặc đóng Issue. Nếu không tạo/đọc lại được qua GitHub, báo phần
 chưa làm; không tạo số/URL giả và không khẳng định kiểm tra đã đạt.
-Cuối lượt liệt kê file thực sự đã tạo/sửa kèm link thật để tôi kiểm tra thủ công.
+Cuối lượt liệt kê file thực sự đã tạo/sửa kèm link thật để người dùng kiểm tra thủ công.
 
-```
+## Danh sách nghiệm thu
+
+- [ ] Issue thật, ID/prefix/số/owner đúng; không trùng hướng đang có người nhận.
+- [ ] Title Issue = H1 DESCRIPTION = title mục lục; body Issue đủ nội dung dưới H1, link GitHub thật đã đọc lại.
+- [ ] DESCRIPTION đủ chi tiết để triển khai, có kế hoạch kiểm chứng/điều kiện dừng và nguồn kế thừa có phiên bản.
+- [ ] Commit mô tả/mục lục, branch và draft PR thật đã được xác minh.
 
 Ví dụ title cuối (số chỉ minh họa, không phải Issue đã tạo):
 

@@ -29,7 +29,7 @@ class RepositoryChecks(unittest.TestCase):
         self.root = Path(self.temp.name).resolve()
         assert self.root.parent == base
         self.addCleanup(self.temp.cleanup)
-        for folder in ['src', 'scripts', 'results', 'verifiers', 'docs', 'templates', 'notebooks', 'research']:
+        for folder in ['src', 'scripts', 'results', 'verifiers', 'docs', 'instructions', 'templates', 'notebooks', 'research']:
             for source in (REPO / folder).rglob('*'):
                 if source.is_file() and source.suffix in {'.py', '.md', '.json', '.ipynb', '.txt', '.pdf'}:
                     target = self.root / source.relative_to(REPO)

@@ -1,15 +1,16 @@
 # 06 — Tổng kết hướng và chuẩn bị PR
 
-```text
-Đọc AGENTS.md, CONTRIBUTING.md và docs/EXPERIMENT_WORKFLOW.md trước khi làm.
+Áp dụng [quy tắc chung và ngữ cảnh](../README.md), AGENTS.md, CONTRIBUTING.md và
+[workflow thử nghiệm](../../docs/EXPERIMENT_WORKFLOW.md).
+Lấy thông tin từ chat/project/GitHub; không yêu cầu điền lại form.
 
-TRACK: <bài>
-EXPERIMENT_ID: <ID>
-ISSUE: <URL>
-BRANCH: <branch>
-KẾT LUẬN CỦA THÀNH VIÊN: <đã thử đủ / dừng vì không hiệu quả / bàn giao một phần>
+## Ràng buộc và quyền thao tác
 
-Tôi giao bạn tổng kết, commit phần hoàn thiện, push và tạo/cập nhật PR để review.
+Trên branch `exp/<ID>-<slug>` đúng owner; chỉ hoàn thiện source/config/DESCRIPTION của ID, dòng ID trong EXPERIMENTS/SCORES và thêm results/sidecar hợp lệ. Được merge nhánh chính vào branch, commit/push và tạo/cập nhật PR sẵn sàng review. Không sửa run cũ, tự approve/merge PR hay đóng Issue.
+
+## Yêu cầu thực hiện
+
+Thực hiện tổng kết, commit phần hoàn thiện, push và tạo/cập nhật PR để review.
 Rà code, docstring, config, DESCRIPTION, mục lục, score và results/provenance;
 kiểm tra link và điểm khớp JSON. Đối chiếu kế hoạch kiểm chứng/điều kiện dừng;
 ghi config/run tốt nhất của từng mode với SHA nguồn/provenance. Nêu kiểm tra
@@ -29,6 +30,10 @@ theo docs/REPOSITORY_CHECKS.md; sửa lỗi thuộc phạm vi trước khi báo 
 
 Đưa PR khỏi draft nếu sẵn sàng review. Không tự approve, merge hoặc đóng Issue
 ở giai đoạn này. Báo PR URL, check đã chạy và nội dung cần reviewer xem.
-Cuối lượt liệt kê file thực sự đã tạo/sửa kèm link thật để tôi kiểm tra thủ công.
+Cuối lượt liệt kê file thực sự đã tạo/sửa kèm link thật để người dùng kiểm tra thủ công.
 
-```
+## Danh sách nghiệm thu
+
+- [ ] Mô tả/code/config/điểm/results nhất quán; giữ kết quả âm, mapping nguồn và giới hạn kiểm chứng.
+- [ ] Checker, tests và diff scope đạt theo REPOSITORY_CHECKS; conflict không làm mất công việc nhóm.
+- [ ] PR thật mô tả giải pháp cuối, bằng chứng/tái lập/giới hạn; chỉ dùng Closes khi phạm vi hoàn tất.

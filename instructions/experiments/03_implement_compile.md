@@ -1,14 +1,16 @@
 # 03 — Viết code/config và compile để bàn giao chấm
 
-```text
-Đọc AGENTS.md, CONTRIBUTING.md và docs/EXPERIMENT_WORKFLOW.md trước khi làm.
+Áp dụng [quy tắc chung và ngữ cảnh](../README.md), AGENTS.md, CONTRIBUTING.md và
+[workflow thử nghiệm](../../docs/EXPERIMENT_WORKFLOW.md).
+Lấy thông tin từ chat/project/GitHub; không yêu cầu điền lại form.
 
-TRACK: <bài>
-EXPERIMENT_ID: <ID>
-ISSUE: <URL>
-BRANCH: <branch của hướng>
+## Ràng buộc và quyền thao tác
 
-Tôi giao bạn triển khai hướng đã nhận và commit source/config. Kiểm tra đúng
+Chỉ sửa `src/<TRACK>/<ID>/{DESCRIPTION.md,solution.py,configs/*.json}`, dòng ID ở EXPERIMENTS khi cần đồng bộ title, artifact của ID và record `results/<TRACK>/<ID>/<config>/build_only/<run_id>/` mới. Làm trên branch `exp/<ID>-<slug>` đúng owner; được commit/push và đồng bộ Issue/PR của hướng. Không sửa SCORES, verifier, notebook, hạ tầng hoặc run cũ; không tự chấm.
+
+## Yêu cầu thực hiện
+
+Triển khai hướng đã nhận và commit source/config. Kiểm tra đúng
 branch/owner; đọc DESCRIPTION.md và nguồn kế thừa trước khi code. Nếu phát hiện
 ý tưởng không đúng hoặc ngoài phạm vi, giải thích thay vì tự đổi hypothesis.
 
@@ -17,9 +19,9 @@ Viết solution.py có docstring chi tiết, đọc --config từ configs/<name>
 Đồng bộ mô tả với implementation và Issue. Không sửa verifier, notebook hoặc
 hạ tầng chung. Mỗi setting dùng JSON riêng, không sao chép Python.
 
-Tự chọn config ban đầu phù hợp nhất để kiểm tra hypothesis; tôi không cung
+Tự chọn config ban đầu phù hợp nhất để kiểm tra hypothesis; không yêu cầu người dùng
 cấp tên hoặc setting. Đọc DESCRIPTION/Issue, config của nguồn kế thừa, kết quả
-đã có và các ràng buộc verifier trước khi chọn. Không hỏi tôi chọn tham số
+đã có và các ràng buộc verifier trước khi chọn. Không hỏi người dùng chọn tham số
 thường lệ nếu có thể quyết định từ những thông tin này.
 
 Ưu tiên một config đầu tiên có sức kiểm chứng rõ: chỉ thay các tham số liên
@@ -50,12 +52,18 @@ Nếu compile lỗi, tự đọc lỗi và sửa code/config trong phạm vi Iss
 phiên bản mới rồi compile lại bằng .venv đến khi thành công. Không bàn giao
 artifact cũ hoặc file sinh dở như kết quả lần build mới. Chỉ báo BUILT khi
 compile không lỗi và artifact mới đã được tạo đúng tên/đường dẫn. Nếu bị chặn
-hoặc cần đổi hypothesis, báo nguyên nhân và trao đổi với tôi.
+hoặc cần đổi hypothesis, báo nguyên nhân và trao đổi với người dùng.
 
-Dừng khi có artifact BUILT và provenance. Báo artifact local, hash, TRACK,
+Nghiệm thu khi có artifact BUILT và provenance; dừng chờ chấm local trước bước phụ thuộc results. Báo artifact local, hash, TRACK,
 ID/config/mode đề xuất, lý do chọn config và đường dẫn results tự lưu. Nếu có hơn
-một artifact, chỉ rõ thứ tự chấm và mục đích của từng config. Tôi tự chạy notebook local: không tự chấm, không mở browser,
+một artifact, chỉ rõ thứ tự chấm và mục đích của từng config. Thành viên tự chạy notebook local: không tự chấm, không mở browser,
 không chạy Colab/MCP, không theo dõi runtime, không gọi BUILT là PASS.
-Cuối lượt liệt kê file đã tạo/sửa kèm link thật để tôi kiểm tra thủ công.
+Cuối lượt liệt kê file đã tạo/sửa kèm link thật để người dùng kiểm tra thủ công.
 Không merge hoặc đóng Issue.
-```
+
+## Danh sách nghiệm thu
+
+- [ ] Có solution.py/docstring và JSON config đúng phạm vi; DESCRIPTION/Issue khớp implementation, có lý do chọn config và tiêu chí kiểm chứng.
+- [ ] Checks local phù hợp đạt; source/config đã commit và bytes khớp snapshot trước build.
+- [ ] Build thành công, artifact mới đúng tên/định dạng, hash thật và provenance build_only đầy đủ.
+- [ ] Bàn giao artifact/hash, TRACK/MODE/ID/OWNER/CONFIG_NAME và đường dẫn results; chỉ báo BUILT.

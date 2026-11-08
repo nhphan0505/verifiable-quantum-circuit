@@ -4,7 +4,7 @@
 Đọc bản gốc, điền mục phù hợp,
 xóa hướng dẫn/placeholder. Phần chưa kiểm chứng phải ghi rõ, không tự bổ sung
 công thức hoặc kết quả paper không có. Link tương đối tính từ vị trí note.md.
-Đọc theo bộ prompt literature và research/AGENTS.md. Không dùng bước sinh
+Đọc theo instructions papers/discussions và research/AGENTS.md. Không dùng bước sinh
 hypothesis để đọc PDF hoặc tự chuyển nguồn thành note. -->
 
 Status: draft
