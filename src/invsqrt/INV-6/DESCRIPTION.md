@@ -83,7 +83,12 @@ không sửa lại dự đoán sau khi đo. Chưa có score vì chi phí rotatio
 còn phụ thuộc margin của run chấm. Margin mô hình chỉ còn khoảng 6.45% ở điểm
 xấu nhất toàn miền; cần kiểm tra full trước khi khẳng định chất lượng.
 Kiểm tra mô hình và simulation local được ghi riêng; không ghi vào SCORES khi
-chưa có dev/full PASS. Mốc nguồn build được lưu trong provenance build_only.
+chưa có dev/full PASS. Mốc nguồn build: `f8083621416e45354f8c89015cd72bb39b7b2bd4`.
+[Provenance build_only](../../../results/invsqrt/INV-6/balanced/build_only/20261108T014525Z-local-build/provenance.json),
+[báo cáo mô hình và simulation](../../../results/invsqrt/INV-6/balanced/build_only/20261108T014525Z-local-build/model_validation.json).
+Artifact balanced đã BUILT; chưa chấm dev/full. Tái lập dùng source/config tại
+commit trên (`git show <commit>:src/invsqrt/INV-6/solution.py` và config cùng commit),
+không suy ra phiên bản build từ HEAD sau các commit phân tích.
 
 | Mốc tốt nhất | Config | Commit nguồn | Run / provenance |
 | --- | --- | --- | --- |

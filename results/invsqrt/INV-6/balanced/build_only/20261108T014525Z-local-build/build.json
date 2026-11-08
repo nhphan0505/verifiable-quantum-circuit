@@ -1,0 +1,6 @@
+{
+  "status": "BUILT",
+  "num_qubits": 251,
+  "static_toffoli": 7097,
+  "not_verifier_result": true
+}

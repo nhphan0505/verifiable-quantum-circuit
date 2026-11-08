@@ -1,0 +1,46 @@
+{
+  "kind": "local_model_and_simulation_checks",
+  "not_verifier_result": true,
+  "exhaustive_domain": [
+    1,
+    3133452
+  ],
+  "model": {
+    "balanced": {
+      "min_signed_ratio": -0.8730520848184824,
+      "max_signed_ratio": 0.9355210699141026,
+      "worst_ratio": 0.9355210699141026,
+      "worst_x": 3103229,
+      "overflow": false
+    },
+    "reduced_zero_bias": {
+      "min_signed_ratio": -1.2582547012716532,
+      "max_signed_ratio": 0.9432428106665611,
+      "worst_ratio": 1.2582547012716532,
+      "worst_x": 188134,
+      "overflow": false
+    },
+    "baseline": {
+      "min_signed_ratio": -0.4756811112165451,
+      "max_signed_ratio": 0.47691161185503006,
+      "worst_ratio": 0.47691161185503006,
+      "worst_x": 2588411,
+      "overflow": false
+    }
+  },
+  "simulation": {
+    "inputs": 374,
+    "rng_seed": 20261108,
+    "measurement_seeds": [
+      17,
+      982451653,
+      20261108
+    ],
+    "compute_matches_model": true,
+    "phase_matches_model": true,
+    "x_restored": true,
+    "scratch_zero": true,
+    "num_qubits": 251,
+    "static_toffoli": 7097
+  }
+}

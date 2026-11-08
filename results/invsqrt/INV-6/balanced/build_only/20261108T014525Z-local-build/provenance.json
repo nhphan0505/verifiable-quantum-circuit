@@ -1,0 +1,36 @@
+{
+  "track": "invsqrt",
+  "experiment_id": "INV-6",
+  "config_name": "balanced",
+  "source_commit": "f8083621416e45354f8c89015cd72bb39b7b2bd4",
+  "source_path": "src/invsqrt/INV-6/solution.py",
+  "source_sha256": "05d3222ca7ba0031c96506729b7b3fb4434a69a7854bccd65929152e90626300",
+  "build_config_path": "src/invsqrt/INV-6/configs/balanced.json",
+  "build_config_sha256": "e924432467991a0dd63723cc27594a349407ee9085bb94135369f6f52131b49a",
+  "artifact_path": "artifacts/invsqrt/INV-6/balanced.kmb",
+  "artifact_sha256": "ff917b20f717f0a1151f898460c849b9bfd8e6d085ab46da80ba36b259ef8fa2",
+  "build_command": [
+    "D:/GQA/.venv/Scripts/python.exe",
+    "src/invsqrt/INV-6/solution.py",
+    "--config",
+    "src/invsqrt/INV-6/configs/balanced.json"
+  ],
+  "environment": {
+    "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    },
+    "validation_script_path": "src/invsqrt/INV-6/validate_model.py",
+    "validation_script_sha256": "ca1101dec3cc4072aca7cb0ff5b7ccfaca7168599a52dc706c24cdb9a554928c",
+    "validation_command": [
+      "D:/GQA/.venv/Scripts/python.exe",
+      "src/invsqrt/INV-6/validate_model.py",
+      "--output",
+      "results/invsqrt/INV-6/balanced/build_only/20261108T014525Z-local-build/model_validation.json"
+    ]
+  },
+  "build_run": null
+}
