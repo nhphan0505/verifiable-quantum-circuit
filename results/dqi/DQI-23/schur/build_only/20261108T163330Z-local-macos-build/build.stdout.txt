@@ -1,0 +1,2 @@
+Compiled Q=900, emitted T=12,565,900
+Wrote /Users/tranxuanhoa/Documents/research/GQA-DQI-23/artifacts/dqi/DQI-23/schur.kmb

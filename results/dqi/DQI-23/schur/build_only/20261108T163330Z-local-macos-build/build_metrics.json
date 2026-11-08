@@ -1,0 +1,21 @@
+{
+  "status": "BUILT",
+  "track": "dqi",
+  "experiment_id": "DQI-23",
+  "config_name": "schur",
+  "source_commit": "fabb0298c7976b6a7f8d0db0ef5a1cd6c8b55f5b",
+  "num_qubits": 900,
+  "emitted_toffoli_like": 12565900,
+  "artifact_bytes": 1096210127,
+  "artifact_sha256": "876e9b376ed5964aaac7989eae7dc4cf885345c6dc705a713656dd4a109035b8",
+  "prior_windows_build": "results/dqi/DQI-23/schur/build_only/20261108T160851Z-local-build",
+  "matches_prior_windows_artifact_sha256": true,
+  "verification_level": "build_only",
+  "limitations": [
+    "No local decoder grading was run by the agent. BUILT is not dev/full PASS.",
+    "Previous component/256-shot probes belong to the Windows build; no claim they were rerun on macOS.",
+    "The branch predates current main. Checker against its common ancestor passes; synchronizing new main records is reserved for stage 06.",
+    "If artifact hash matches multiple build records, notebook cannot choose provenance automatically. Preserve its raw review and attach the matching macOS provenance in stage 04.",
+    "Local plan commit/build records/handoff notes have not been pushed."
+  ]
+}

@@ -61,3 +61,35 @@ Kế hoạch trước rebuild/chấm:
 - Kiểm tra ứng viên cuối: sau dev, thành viên chạy full chính thức hoặc bộ seed giữ lại độc lập trước khi khẳng định chất lượng; lưu cả ca biên trọng số 0/1/35 và valuation jumps đã nêu. Agent không tự chạy notebook/grader. Đổi bytes artifact có thể đổi seed full mặc định, nên không gọi so sánh full paired nếu chưa có seed chung thực tế.
 
 Build local dùng `.venv` Python 3.13.7, kickmix 1.0.0, numpy 2.5.4, scipy 1.18.1. Source/config đã commit, bytes phải khớp snapshot trước và sau compile; build record/provenance macOS mới được lưu riêng. GitHub vẫn giữ attribution/owner gốc; việc tiếp nhận do người dùng giao không sửa danh tính hay log cũ. Không push tùy chọn ở stage 03.
+
+### Bàn giao rebuild macOS
+
+Artifact local đã BUILT từ snapshot `fabb0298c7976b6a7f8d0db0ef5a1cd6c8b55f5b` (implementation không đổi từ `1fed986e9e736a15195fc654c48cf85dc53620c7`). Source/config bytes khớp snapshot trước/sau compile. [Provenance macOS](../../../results/dqi/DQI-23/schur/build_only/20261108T163330Z-local-macos-build/provenance.json), [build metrics](../../../results/dqi/DQI-23/schur/build_only/20261108T163330Z-local-macos-build/build_metrics.json). Artifact `artifacts/dqi/DQI-23/schur.kmb` có 1096210127 bytes, SHA-256 `876e9b376ed5964aaac7989eae7dc4cf885345c6dc705a713656dd4a109035b8`, trùng chính xác bản Windows mới nhất. Compiler báo Q=900, T tĩnh=12565900. Không chạy lại grader hoặc gọi đây là dev/full PASS.
+
+Checker thường và checker scope với common ancestor `bb3a6311113217a69c64e88e9c3bb0513237a1f9` đạt; 21 tests đạt. Check với origin/main mới báo thiếu 68 result files DQI-21 vì branch được tạo trước lần merge đó, không phải thao tác xóa run ở DQI-23; chưa coi là đạt điều kiện PR. Đồng bộ main/check lại thuộc bước 06, chưa tự merge vào branch ở bước 03. Các probe 256 shots và kiểm model/component được báo ở phần trước thuộc công việc trên máy Windows, không tuyên bố đã chạy lại tại đây; hash khớp xác nhận tái lập artifact bytes.
+
+Thành viên mở notebook trong worktree **GQA-DQI-23**, kernel `.venv` Python 3.13.7, chọn TRACK=dqi, MODE=dev_5min, EXPERIMENT_ID=DQI-23, CONFIG_NAME=schur, OWNER=trng-hminh (người chạy local hiện tại; attribution/assignee GitHub gốc giữ nguyên). Giữ profile v1/seed20261106/4096 shots. Results tự lưu `results/dqi/DQI-23/schur/dev_5min/<run-id>/`. Khi có hai build cùng hash, notebook sẽ giữ review báo nhiều matching builds và chưa tự chọn provenance; agent dùng record macOS nêu trên để thêm provenance đúng ở bước 04, giữ raw review cũ nguyên bytes.
+
+Source/plan commit là mốc bắt buộc trước build; build records và annotation bàn giao giữ local để gộp cùng mốc kết quả bước 04. Không push tùy chọn, không sửa source/config/verifier/notebook/SCORES hay record Windows, không tự chuyển bước hoặc chấm thay thành viên.
+
+
+## Kết quả macOS và phân tích bước 04
+
+Dev và full thật do thành viên chạy đều PASS, artifact hash `876e9b376ed5964aaac7989eae7dc4cf885345c6dc705a713656dd4a109035b8` khớp rebuild macOS tại source `fabb0298c7976b6a7f8d0db0ef5a1cd6c8b55f5b` (implementation `1fed986`). Notebook không tự chọn provenance vì hai build Windows/macOS cùng hash; agent thêm provenance nối đúng lần build đã thực hiện trên máy này. Raw review.json báo ambiguity được giữ nguyên; nhận xét mới ở review_v2.json. Không suy source từ HEAD, không sửa raw stdout/JSON/config/metadata.
+
+| Mode | Run / provenance / review | Score ↓ | Mean Toffoli | Q | Shots | Value/phase errors |
+| --- | --- | ---: | ---: | ---: | ---: | --- |
+| dev_5min | [run](../../../results/dqi/DQI-23/schur/dev_5min/20261108T163610Z-local-dev_5min-88b8e2/verifier.json), [provenance](../../../results/dqi/DQI-23/schur/dev_5min/20261108T163610Z-local-dev_5min-88b8e2/provenance.json), [review_v2](../../../results/dqi/DQI-23/schur/dev_5min/20261108T163610Z-local-dev_5min-88b8e2/review_v2.json) | 30379145822809.52 | 12565473.3671875 | 900 | 4096 | 0/0 |
+| full | [run](../../../results/dqi/DQI-23/schur/full/20261108T163718Z-local-full-272d25/verifier.json), [provenance](../../../results/dqi/DQI-23/schur/full/20261108T163718Z-local-full-272d25/provenance.json), [review_v2](../../../results/dqi/DQI-23/schur/full/20261108T163718Z-local-full-272d25/review_v2.json) | 12124679698528.295 | 12565463.902070312 | 900 | 102400 | 0/0 |
+
+Dev giữ profile v1/seed20261106/4096 shots; full dùng defaults chính thức m/n/degree/r=4095/70/12/2016, 102400 shots, log2_delta=-128, chỉ thêm max-workers=1. Agent đối chiếu stdout bằng verifier JSON, exit code 0, hashes verifier/harness, config/mode/shots và source/config snapshot. Không chạy grader lại.
+
+So DQI-19 control_input dev cùng môi trường/giao thức, Q giảm 1893→900; Q² còn khoảng 0.2260 lần, T tăng khoảng 2.491 lần, R giữ nguyên. Tổng score còn khoảng 0.5630 lần: giảm khoảng 43.70%, cải thiện khoảng 1.7761×. Full có xu hướng tương tự so incumbent DQI-19 rank42/product, nhưng source/config đối chứng khác và default seeds phụ thuộc artifact, không gọi paired common-seed ablation. Full PASS bổ sung bằng chứng ngoài dev cố định, không chứng minh mọi syndrome.
+
+Kết quả ủng hộ đánh đổi dùng ít qubit của implementation hiện tại theo tiêu chí Q<=900 và score thấp hơn đối chứng. Không chứng minh riêng một determinant block-Wronskian kernel: source hiện dùng valuation routing, reciprocal unit-series và converter đã mô tả. Formal gain so baseline toàn repo vẫn `—` vì baseline chính thức khác Python patch/harness; không đổi tỷ số vs DQI-19 thành tỷ số vs baseline. Các lỗi string-too-long/MemoryError lịch sử có mô tả và build records, nhưng raw grading logs cũ không có trong branch đã nhận; giữ giới hạn này, không tạo lại log.
+
+### Mốc tốt nhất đã chấm và vòng tiếp theo
+
+Cả dev và full tốt nhất hiện là config [schur.json](configs/schur.json), source snapshot `fabb0298c7976b6a7f8d0db0ef5a1cd6c8b55f5b`, source hash `d2461e322a413a6463cba13741f1434e83c96577a70d6e3b5a0240ae44e1637f`, config hash `74055cda362a06faece1aa628efa072d1b6ecce8898934143c2b0fb40985466d`. Run/provenance ở bảng trên. Lấy source/config tại đúng SHA và dùng build_command trong provenance; JSON cùng tên chạy với implementation tương lai không mặc nhiên tái lập mốc này.
+
+Người dùng chọn rõ thử một config mới ở bước 05 trước khi tổng kết bước 06. Vì vậy giữ PR draft và giữ nguyên mốc schur đã PASS; không tự gọi bước 06 hoàn tất khi config mới chưa có grading thật. Các dòng “chưa chấm/chờ bước 04” phía trên là lịch sử bàn giao đã được kết quả này thay thế.
