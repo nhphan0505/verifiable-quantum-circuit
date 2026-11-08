@@ -28,7 +28,7 @@ Config schur giữ 4095 vị trí, 70 syndrome và word 12 bit. Dùng đủ kíc
 
 ## Kết luận và phiên bản tái lập
 
-Ứng viên đầu tiên dùng Schur theo valuation. Kết quả chấm notebook chưa có.
+Config schur đã dựng đủ 4095 vị trí với 900 qubit. Mạch phát ra 24.424.740 cổng Toffoli-like và artifact có dung lượng 2,19 GB. Đây là số đếm cổng tĩnh của build. Kết quả chấm notebook chưa có. Source dựng tại f7640b3. [Provenance](../../../results/dqi/DQI-23/schur/build_only/20261108T153618Z-local-build/provenance.json) · [Build metrics](../../../results/dqi/DQI-23/schur/build_only/20261108T153618Z-local-build/build_metrics.json)
 
 ### Kiểm tra khả thi trước build
 
