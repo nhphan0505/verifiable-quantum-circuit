@@ -82,13 +82,34 @@ Commit source/config trước compile; dùng `.venv` Python 3.13.7, kickmix 1.0.
 
 Các phần aligned phase đo tĩnh riêng: Bézout thuận 313011, H convolution 52920, sweep 4095 điểm 45045, H erase 0, Bézout reverse 310428 Toffoli-like, tổng 721404. Alignment gốc thêm 7392, tổng replacement 728796 so với Chien/Forney gốc 1444737. Giữ cả chi phí thuận/đảo/preprocessing, không chỉ công bố 11/điểm. Các báo cáo unit và 21 tests repo nằm cùng record build; source/config được đối chiếu snapshot trước/sau compile.
 
-Sau build, thành viên mở notebook trong worktree **GQA-DQI-21**, kernel `.venv` Python 3.13.7, chọn TRACK=dqi, MODE=dev_5min, EXPERIMENT_ID=DQI-21, CONFIG_NAME=bezout_reference, OWNER=trng-hminh. Giữ profile v1/seed 20261106/4096 shots. Results tự lưu `results/dqi/DQI-21/bezout_reference/dev_5min/<run-id>/`. Agent dừng sau bàn giao; bước 04 chỉ thực hiện khi có results thật. Không tự chạy grader, không sửa verifier/harness/notebook/SCORES hoặc tạo score trong bước 03.
+### Kết quả bước 04 và quyết định kết thúc layout
 
-Chưa có run dev/full của decoder DQI-21. Baseline local cùng môi trường từ DQI-19 vẫn thiếu provenance build và chưa đăng ký chính thức; không suy đoán SHA hoặc tính hệ số formal từ baseline khác patch/harness. Khi phân tích phải giữ cả giới hạn đối chứng và kết quả âm nếu có.
+Thành viên đã chạy notebook local; cả dev và full đều PASS, hash artifact khớp build `381b187b980a3ddfa0337e0c3ded9fe8b72cc897788184320e1f44d83a0b0669`. Agent chỉ đọc/đối chiếu results, không chạy grader lại. Source/config đúng snapshot `433dd403bc03a2b346c36314967a4d9665cefbbb`; dependency closure giữ nguyên. Metadata, config, verifier JSON, stdout/stderr và provenance gốc giữ nguyên bytes; thêm review riêng cho mỗi run.
 
-| Mốc tốt nhất | Config | Commit nguồn | Run / provenance |
+| Mode | Run | Score ↓ | Shots | Value/phase errors | Mean Toffoli-like | Q |
+| --- | --- | ---: | ---: | --- | ---: | ---: |
+| dev_5min | [run](../../../results/dqi/DQI-21/bezout_reference/dev_5min/20261108T142410Z-local-dev_5min-8dc872/verifier.json) | 380112848703934.6 | 4096 | 0/0 | 5009509.236328125 | 5042 |
+| full | [run](../../../results/dqi/DQI-21/bezout_reference/full/20261108T142542Z-local-full-22b54f/verifier.json) | 151707682074693.16 | 102400 | 0/0 | 5009509.002363281 | 5042 |
+
+Dev dùng profile v1, seed 20261106, 4096 shots. Full dùng verifier chính thức với defaults m/n/degree/r=4095/70/12/2016, num_shots=102400, log2_delta=-128, chỉ bổ sung max-workers=1. Full là kiểm tra thống kê bổ sung cho implementation, không chứng minh mọi syndrome. [Review dev](../../../results/dqi/DQI-21/bezout_reference/dev_5min/20261108T142410Z-local-dev_5min-8dc872/review.json) và [review full](../../../results/dqi/DQI-21/bezout_reference/full/20261108T142542Z-local-full-22b54f/review.json) đối chiếu stdout JSON, exit code, mode/shots, artifact/source/config/helper hashes, verifier/harness và build record.
+
+#### Diễn giải so với tiêu chí trước thử
+
+Phần correctness được ủng hộ trên các unit/dev/full đã kiểm: không phát hiện lỗi pha/giá trị/workspace. Mục tiêu local 11 Toffoli/điểm và giảm T của toàn khối phase cũng được hỗ trợ bởi block counts và mean T toàn decoder. Tuy nhiên **hypothesis cải thiện score bị bác bỏ cho layout materialized reference này**: Q tăng từ 1893 lên 5042, nên Q² tăng 7.0942168×; mean T chỉ giảm khoảng 12.4995%; hệ số lặp R không thay đổi trong cùng mode. Kết quả là chi phí score tăng khoảng 6.2075× (cao hơn khoảng 520.75%), tương đương baseline/candidate khoảng 0.1611×.
+
+So sánh dùng baseline chạy lại của thành viên tại worktree DQI-19: dev `20261108T113442Z-local-dev_5min-1aa90c` và full `20261108T113523Z-local-full-ecd8e5`. Python 3.13.7, packages, verifier hash khớp; dev còn khớp harness/profile/seed/shots. Tỷ số cost dev=6.207478570155×, full=6.207487173916×. Bản sao nguyên bytes metadata/verifier/config/stdout baseline nằm trong từng run ứng viên dưới tên `baseline_recheck_*`; review lưu phép tính và giới hạn. Full dùng default seed suy từ artifact ở cả hai phía, không có seed chung tường minh, nên không gọi đây là paired test cùng seed.
+
+Các baseline rerun vẫn thiếu build provenance và chưa được đăng ký vào dòng baseline chính thức toàn repo; không tự gán SHA từ HEAD hoặc sửa log/metadata. Dòng baseline chính thức dùng Python 3.13.14 và dev harness khác. Vì vậy SCORES ghi hai score PASS chính xác, cột gain formal giữ `—`, đồng thời chú thích tỷ số quan sát với recheck (~cost 6.2075×, gain 0.1611×). Không công bố tỷ số đó như hệ số đã qua đủ điều kiện provenance/checker baseline.
+
+Q peak được giải thích bởi 1803 qubit state EEA chính, 1296 qubit cho sáu polynomial phụ, 1008 qubit transcript 36 vòng, 840 qubit H và 95 qubit temporary/peak còn lại, tổng 5042. Giảm vài phép field hoặc chỉ rút ngắn sweep không bù được Q²; tại T hiện tại cần Q khoảng 2023 hoặc thấp hơn để thắng baseline. Nếu giữ Q=5042 thì T phải dưới khoảng 807012, thấp hơn nhiều so với riêng EEA chính (~4280724 tĩnh). Đây là giới hạn cấu trúc cho hướng tối ưu chỉ khối Forney của layout này.
+
+**Quyết định bước 04: dừng materialized reference, không thử thêm config hoặc mở stage 05.** Giữ code, model/unit, artifact provenance và kết quả âm để tránh lặp lại hướng này. Không bác bỏ mọi thiết kế H2: một biến đổi Bézout/Hankel tại chỗ dùng lại evaluator/workspace có thể là nghiên cứu tiếp, nhưng cần bound Q/T mới trước build; không triển khai trong lượt wrap-up. Không merge, đóng Issue hoặc đưa PR ready trong bước 04.
+
+### Mốc tái lập đã chấm
+
+| Mốc tốt nhất trong ID này | Config tại source commit | Commit nguồn | Run / provenance |
 | --- | --- | --- | --- |
-| Dev | Chưa có | Chưa chấm | Chưa chấm |
-| Full | Chưa có | Chưa chấm | Chưa chấm |
+| Dev | [bezout_reference](https://github.com/nhphan0505/verifiable-quantum-circuit/blob/433dd403bc03a2b346c36314967a4d9665cefbbb/src/dqi/DQI-21/configs/bezout_reference.json) | `433dd403bc03a2b346c36314967a4d9665cefbbb` | [run](../../../results/dqi/DQI-21/bezout_reference/dev_5min/20261108T142410Z-local-dev_5min-8dc872/verifier.json), [provenance](../../../results/dqi/DQI-21/bezout_reference/dev_5min/20261108T142410Z-local-dev_5min-8dc872/provenance.json) |
+| Full | [bezout_reference](https://github.com/nhphan0505/verifiable-quantum-circuit/blob/433dd403bc03a2b346c36314967a4d9665cefbbb/src/dqi/DQI-21/configs/bezout_reference.json) | `433dd403bc03a2b346c36314967a4d9665cefbbb` | [run](../../../results/dqi/DQI-21/bezout_reference/full/20261108T142542Z-local-full-22b54f/verifier.json), [provenance](../../../results/dqi/DQI-21/bezout_reference/full/20261108T142542Z-local-full-22b54f/provenance.json) |
 
-Mã: [solution.py](solution.py). Config build: [bezout_reference.json](configs/bezout_reference.json). Probe: [exact_probe.json](configs/exact_probe.json). Điểm: [SCORES.md](../SCORES.md).
+Đây là config duy nhất đã chấm của DQI-21, không phải phương án tốt hơn baseline hoặc DQI-19. Tái lập bằng source/config và hai helper tại đúng SHA/hash trong provenance; không amend/rebase các commit nguồn. Mã: [solution.py](solution.py). Config build: [bezout_reference.json](configs/bezout_reference.json). Probe: [exact_probe.json](configs/exact_probe.json). Điểm: [SCORES.md](../SCORES.md).
