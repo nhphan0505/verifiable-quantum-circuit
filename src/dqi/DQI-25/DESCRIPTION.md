@@ -101,3 +101,49 @@ Khảo sát phạm vi đầu bằng đa thức chuẩn hóa trên hai input 12 b
 Chứng chỉ Boolean độc lập được kiểm trên đủ 256 đầu vào (c0,c3,flag và năm target tùy ý), 32 seed HMR, tổng 8192 ca; không lỗi value/phase/workspace. Các seed chỉ lấy mẫu outcome, không gọi là đã ép mọi nhánh đo. Tính đúng trên mọi outcome dựa trên factor bất biến và identity del_and, kết hợp kiểm thực thi component. Các probe không phải dev/full submission PASS.
 
 Compile phải từ source/config đã commit và khớp bytes, dùng Python .venv 3.13.7 cùng packages pin. Build từ chối nếu Q>1893 hoặc T tĩnh khác 5043561; khi đạt mới ghi artifact `artifacts/dqi/DQI-25/control_cache.kmb` và provenance/helper hash. Chưa có score hoặc run decoder cho config này. Dev bàn giao giữ profile v1/seed20261106/4096 shots để so DQI-19 control_input; gain formal với baseline toàn repo vẫn cần môi trường/provenance tương thích. Giữ nguyên điều kiện dừng và yêu cầu kiểm tra full/seed giữ lại đã nêu, không nâng dự đoán thành kết quả.
+
+### Bàn giao BUILT bước 03
+
+Source/config đã commit trước compile tại `755ead9c879fb2a426ce36f3c6a7c6e3946b1bcb`; bytes local khớp snapshot trước và sau build. [Build record](../../../results/dqi/DQI-25/control_cache/build_only/20261108T155840Z-local-build/build.json), [provenance](../../../results/dqi/DQI-25/control_cache/build_only/20261108T155840Z-local-build/provenance.json), [segment checks](../../../results/dqi/DQI-25/control_cache/build_only/20261108T155840Z-local-build/segment_validation.json), [tensor audit](../../../results/dqi/DQI-25/control_cache/build_only/20261108T155840Z-local-build/tensor_audit.json).
+
+Artifact `artifacts/dqi/DQI-25/control_cache.kmb`, 895956444 bytes, SHA-256 `9aacc7e5ca5c4fb0e5c4cb247e407860a9e3395c8d792822dbc78b76f3cd6860`. Toàn mạch Q=1893, T tĩnh=5043561, 90582806 instructions; giảm đúng 1332 T (0.0264029%) tại Q không đổi. Đây là số build, chưa phải mean T/score hay PASS của grader. Các invariant toán học và component checks hỗ trợ rewrite, không thay kết quả decoder trên syndrome hợp lệ.
+
+21 tests repo đạt; checker thường và scope đạt, không sửa verifier/notebook/SCORES hoặc raw run cũ. Build records và annotation sau build giữ local để gộp trong commit kết quả bước 04 tiếp theo; không push tùy chọn. Issue đồng bộ thiết kế kèm trạng thái source chưa công bố; draft PR vẫn chứa stage 2 trên remote. Các dòng “cần giao stage 3/chưa triển khai” phía trên là lịch sử kế hoạch, đã được phần triển khai/bàn giao này thay thế.
+
+Thành viên mở notebook ở worktree **GQA-DQI-25**, kernel `.venv` Python 3.13.7, chọn TRACK=dqi, MODE=dev_5min, EXPERIMENT_ID=DQI-25, CONFIG_NAME=control_cache, OWNER=trng-hminh. Giữ profile v1/seed20261106/4096 shots; results tự lưu `results/dqi/DQI-25/control_cache/dev_5min/<run-id>/`. Sau dev có thể chạy full để bổ sung bằng chứng trước tổng kết; hai mode không so điểm trực tiếp. Agent dừng chờ kết quả thật trước bước 04, không tự chấm hoặc chuyển bước 05/06.
+
+
+## Phân tích bước 04 — lợi ích nhỏ nhưng đo được
+
+Thành viên đã chấm dev và full. Hai run đều PASS, hash artifact khớp build và source `755ead9c879fb2a426ce36f3c6a7c6e3946b1bcb`. Raw stdout bằng verifier JSON, metadata exit code 0, provenance/config/helper/verifier hashes và mode/shots đã đối chiếu. Giữ nguyên raw records; review sidecar ghi phép so sánh và giới hạn.
+
+| Mode | Run / provenance / review | Score ↓ | Mean Toffoli-like | Q | Shots | Value/phase errors |
+| --- | --- | ---: | ---: | ---: | ---: | --- |
+| dev_5min | [run](../../../results/dqi/DQI-25/control_cache/dev_5min/20261108T160148Z-local-dev_5min-397221/verifier.json), [provenance](../../../results/dqi/DQI-25/control_cache/dev_5min/20261108T160148Z-local-dev_5min-397221/provenance.json), [review](../../../results/dqi/DQI-25/control_cache/dev_5min/20261108T160148Z-local-dev_5min-397221/review.json) | 53941201474428.805 | 5043217.541015625 | 1893 | 4096 | 0/0 |
+| full | [run](../../../results/dqi/DQI-25/control_cache/full/20261108T160249Z-local-full-a97a1a/verifier.json), [provenance](../../../results/dqi/DQI-25/control_cache/full/20261108T160249Z-local-full-a97a1a/provenance.json), [review](../../../results/dqi/DQI-25/control_cache/full/20261108T160249Z-local-full-a97a1a/review.json) | 21528568859278.418 | 5043211.755 | 1893 | 102400 | 0/0 |
+
+### Vì sao mức cải thiện rất nhỏ
+
+Dev so đúng DQI-19 control_input cùng Python 3.13.7/packages/verifier/harness/profile v1/seed 20261106/4096 shots: mean T từ 5044549.541015625 xuống 5043217.541015625, giảm đúng **1332**, tương đương **0.0264047%**. Score từ 53955448268222.56 xuống 53941201474428.805; hệ số DQI-19/candidate khoảng **1.00026412×**. Q=1893 và R=2.9847755992784792 không đổi, nên giảm score đến hoàn toàn từ T. Đây là lợi ích nhỏ đúng như dự đoán trước thử, không phải thất bại cleanup hoặc nhiễu score che mất một cải thiện lớn.
+
+Toàn mạch còn khoảng 5.04 triệu Toffoli; tuyến này chỉ bỏ ba compute AND ở mỗi tail ×444 bước. Phần nhân field, nghịch đảo/division và các xử lý decoder còn lại giữ nguyên. Muốn giảm 1% T cần khoảng 50445 Toffoli, tức gần 38 lần mức tiết kiệm hiện tại; đây là phép định cỡ, không phải bằng chứng có thêm 38 tuyến.
+
+Full PASS 102400 shots bổ sung kiểm tra ngoài dev: mean T=5043211.755, Q=1893, R=1.1912604648115832. So full incumbent DQI-19 rank42, score giảm khoảng 0.0263667%; đây không là full ablation control_input hoàn toàn giống source/config. Hai full defaults dùng seed phụ thuộc artifact nên không gọi paired common-seed. Không suy luận tốc độ thực từ wall time: dev mới khoảng 40.25 giây so 30.58 giây lịch sử nhưng không chạy cặp trên môi trường tải được kiểm soát, và hàm điểm không dùng elapsed_seconds.
+
+Cột gain formal so baseline toàn repo giữ `—` vì metadata baseline chính thức khác Python patch/harness. Hệ số 1.00026412× ở đây là so DQI-19 tương thích, không đổi nghĩa thành gain so baseline. Không sửa baseline hoặc suy đoán provenance.
+
+### Có config khác đáng chấm không?
+
+**Chưa có config mới có cơ sở định lượng tốt hơn.** JSON hiện tại chọn một tuyến chứng minh được và implementation chỉ hỗ trợ tuyến đó; tăng cache budget/window hay số tuyến không tự tạo tích lặp. Hai tích p/q đã dùng cho shift và metadata, còn swap đã dùng quan hệ affine; không còn lần compute trùng trong nhóm ba khối để bỏ bằng một setting khác. Cache một trong hai tích riêng chỉ là ablation, tiết kiệm ít hơn; không đáng build/chấm thường lệ nếu không cần tách tác động.
+
+Khảo sát tensor trong mô hình hai input độc lập không thấy quadratic signatures lặp/khác nhau bởi affine; tăng số cache ở chính tensor không có chứng chỉ mới. Điều này không chứng minh mọi cache qua nhiều call là bất khả thi. Cơ hội tiếp theo, nếu có, cần phân tích code/guard/dataflow rộng hơn để tìm product giữ nguyên qua các lần dùng, không thể suy từ cùng ID dây khi dữ liệu đã bị ghi. Đây là sửa implementation cần stage 05 được giao và chứng chỉ liveness/pha mới; chưa thực hiện.
+
+Tại Q=1893, thêm chỉ một qubit làm Q² tăng khoảng 0.10568%, khoảng bốn lần lợi ích hiện tại. Một tuyến làm tăng Q cần tiết kiệm khoảng 5325 T chỉ để bù mức tăng đó ở T hiện tại; điều kiện của hướng vẫn nghiêm hơn: không tăng Q. Vì thế tăng dung lượng cache thiếu chứng chỉ rất dễ kém đi.
+
+**Đề xuất:** giữ kết quả đúng và lợi ích nhỏ, kết thúc vòng tối ưu config thường lệ; chỉ mở vòng tiếp nếu tìm được tuyến mới có bound T ròng và Q rõ ràng. Không triển khai thêm config, không chuyển stage 06 hoặc ready/merge PR trong bước phân tích này. Chưa kết luận product caching không thể có lợi trên kiến trúc khác; kết luận chỉ áp cho phạm vi khảo sát hiện tại.
+
+### Mốc tái lập tốt nhất
+
+Cả dev và full hiện dùng config [control_cache.json](configs/control_cache.json), source `755ead9c879fb2a426ce36f3c6a7c6e3946b1bcb`, helper DQI-19 c0cf9df đúng hash trong provenance. Các run và provenance ở bảng trên là mốc tốt nhất duy nhất của ID này. Checkout source đó và chạy build command đã ghi trong provenance để tái lập; không dùng HEAD tương lai thay SHA nguồn. Full là bằng chứng thống kê độc lập với dev cố định, không chứng minh mọi syndrome.
+
+Các ghi chú “chưa chấm/chờ bước 04” ở phần kế hoạch và bàn giao là trạng thái lịch sử, đã được phân tích này thay thế. Commit bước 04 lưu build records, hai raw runs, review sidecars, score và phân tích; giữ local theo yêu cầu không push tùy chọn của người dùng.

@@ -1,0 +1,24 @@
+{
+  "status": "BUILT",
+  "artifact_path": "artifacts/dqi/DQI-25/control_cache.kmb",
+  "num_qubits": 1893,
+  "static_toffoli_like": 5043561,
+  "num_instructions": 90582806,
+  "reference_t": 5044893,
+  "saved_t": 1332,
+  "track": "dqi",
+  "experiment_id": "DQI-25",
+  "config_name": "control_cache",
+  "source_commit": "755ead9c879fb2a426ce36f3c6a7c6e3946b1bcb",
+  "artifact_sha256": "9aacc7e5ca5c4fb0e5c4cb247e407860a9e3395c8d792822dbc78b76f3cd6860",
+  "artifact_size_bytes": 895956444,
+  "reference_num_qubits": 1893,
+  "static_t_reduction_fraction": 0.0002640293857570418,
+  "verification_level": "build_only",
+  "limitations": [
+    "No decoder grader has been run for this artifact; BUILT and segment checks are not dev/full PASS.",
+    "Predicted improvement is small (~0.0264% T at fixed Q); member must grade with matching dev environment/profile before score conclusion.",
+    "Segment tests use reduced valid cursor domains and seeded HMR outcomes; unchanged-factor algebra supplies cleanup identity.",
+    "Source commit is local at handoff; no optional push requested. Build records remain local for the next required results commit."
+  ]
+}
