@@ -67,7 +67,27 @@ hợp Z_POW. Giá trị hằng số thay đổi cũng có thể thay số cổng
 
 ## Kết luận và phiên bản tái lập
 
-Chưa có kết quả verifier của INV-6. Balanced là ứng viên ban đầu, chưa gọi tối ưu.
+Balanced đạt dev_5min PASS trong run `20261108T015743Z-local-dev_5min-d222d7`, 4096 đầu vào x 2
+lần đo (8192 shots), seed=20261106. Hash artifact, provenance build, source/config
+commit, môi trường Python/package và toàn bộ hash verifier/dev harness khớp mốc
+đối chứng; stdout JSON khớp verifier.json. [Phân tích đối chiếu](../../../results/invsqrt/INV-6/balanced/dev_5min/20261108T015743Z-local-dev_5min-d222d7/analysis.json).
+
+Kết quả ủng hộ hypothesis: bù bias cho phép dùng bộ widths hẹp vốn không đủ dung
+sai khi bias=0 trong mô hình toàn miền, và chi phí dev thực tế thấp hơn baseline.
+Q giảm 260 xuống 251 (3.46%), Toffoli giảm 7735 xuống 7097 (8.25%), số phép quay
+bậc cao giảm 37 xuống 36. Sai số/dung sai trên dev tăng từ
+0.37839383360236045 lên 0.607265916966737 tại x=2588367; rotation_eps giảm từ
+1.813003214175951e-12 xuống 1.2290081659190529e-12. Tổng chi phí quy đổi C vẫn
+giảm từ 7986.319634297497 xuống 7344.360838891405, nên score giảm
+11.22% (hệ số 1.1264 lần). Mức giảm thấp hơn dự đoán ban đầu 15–22%;
+không coi đây là cấu hình tối ưu hoặc full PASS. So với INV-3 pebble_square đã
+có trong bảng, INV-6 vẫn có điểm dev cao hơn khoảng 1.87%; ghép hai ý tưởng cần
+Issue kết hợp riêng và chưa thực hiện trong hướng này.
+
+Đề xuất dừng chọn config trên dev, kiểm tra full balanced trước khi xác nhận
+ứng viên cuối. Vì baseline full hiện tại khác môi trường Colab, muốn ghi hệ số
+full cần chấm đối chứng full với môi trường hiện tại; không dùng điểm dev làm
+hệ số full. Issue giữ mở, chưa tạo PR hoặc merge.
 
 Kiểm tra mô hình exhaustive toàn miền: baseline max ratio 0.476911612;
 cùng widths giảm nhưng bias=0 là 1.258254701 (không đủ dung sai);
@@ -79,20 +99,20 @@ Mô phỏng compute_only và mạch pha trên 374 đầu vào (biên và random 
 ra mô hình, pha bằng mô hình, khôi phục x và toàn bộ scratch=0.
 Tài nguyên tĩnh đo trong kiểm tra local: Q=251 và Toffoli=7097, so baseline
 Q=260 và Toffoli=7735. Giảm 9 qubit và 638 Toffoli, thấp hơn dự đoán ban đầu;
-không sửa lại dự đoán sau khi đo. Chưa có score vì chi phí rotation synthesis
-còn phụ thuộc margin của run chấm. Margin mô hình chỉ còn khoảng 6.45% ở điểm
+không sửa lại dự đoán sau khi đo. Chi phí rotation synthesis thực tế đã được
+tính trong kết quả dev ở trên. Margin mô hình chỉ còn khoảng 6.45% ở điểm
 xấu nhất toàn miền; cần kiểm tra full trước khi khẳng định chất lượng.
-Kiểm tra mô hình và simulation local được ghi riêng; không ghi vào SCORES khi
-chưa có dev/full PASS. Mốc nguồn build: `f8083621416e45354f8c89015cd72bb39b7b2bd4`.
+Kiểm tra mô hình và simulation local được ghi riêng; SCORES chỉ ghi dev PASS,
+full để trống. Mốc nguồn build: `f8083621416e45354f8c89015cd72bb39b7b2bd4`.
 [Provenance build_only](../../../results/invsqrt/INV-6/balanced/build_only/20261108T014525Z-local-build/provenance.json),
 [báo cáo mô hình và simulation](../../../results/invsqrt/INV-6/balanced/build_only/20261108T014525Z-local-build/model_validation.json).
-Artifact balanced đã BUILT; chưa chấm dev/full. Tái lập dùng source/config tại
+Artifact balanced đã BUILT và dev PASS; chưa chấm full. Tái lập dùng source/config tại
 commit trên (`git show <commit>:src/invsqrt/INV-6/solution.py` và config cùng commit),
 không suy ra phiên bản build từ HEAD sau các commit phân tích.
 
 | Mốc tốt nhất | Config | Commit nguồn | Run / provenance |
 | --- | --- | --- | --- |
-| Dev | Chưa chấm | Chưa có mốc dev | Chưa chấm |
+| Dev | [balanced.json tại commit nguồn](https://github.com/nhphan0505/verifiable-quantum-circuit/blob/f8083621416e45354f8c89015cd72bb39b7b2bd4/src/invsqrt/INV-6/configs/balanced.json) | `f8083621416e45354f8c89015cd72bb39b7b2bd4` | [verifier.json](../../../results/invsqrt/INV-6/balanced/dev_5min/20261108T015743Z-local-dev_5min-d222d7/verifier.json) / [provenance.json](../../../results/invsqrt/INV-6/balanced/dev_5min/20261108T015743Z-local-dev_5min-d222d7/provenance.json) |
 | Full | Chưa chấm | Chưa có mốc full | Chưa chấm |
 
 Kiểm tra tái lập: [validate_model.py](validate_model.py), chạy `python src/invsqrt/INV-6/validate_model.py --output artifacts/invsqrt/INV-6/model_validation.json`.

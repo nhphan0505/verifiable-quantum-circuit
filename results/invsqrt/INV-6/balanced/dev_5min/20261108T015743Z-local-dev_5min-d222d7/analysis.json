@@ -1,0 +1,33 @@
+{
+  "kind": "result_analysis",
+  "baseline_run": "results/invsqrt/INV-BASELINE/baseline/dev_5min/20261107T180810Z-local-dev_5min-eb9c85",
+  "build_run": "results/invsqrt/INV-6/balanced/build_only/20261108T014525Z-local-build",
+  "source_commit": "f8083621416e45354f8c89015cd72bb39b7b2bd4",
+  "artifact_sha256": "ff917b20f717f0a1151f898460c849b9bfd8e6d085ab46da80ba36b259ef8fa2",
+  "comparability": {
+    "same_profile": true,
+    "same_inputs": true,
+    "same_environment": true,
+    "same_verifier_hashes": true,
+    "same_dev_harness": true,
+    "stdout_matches_verifier_json": true,
+    "artifact_and_build_match": true
+  },
+  "baseline_score": 2076443.1049173493,
+  "candidate_score": 1843434.5705617426,
+  "improvement_factor": 1.1263991345700992,
+  "score_reduction_percent": 11.221522699264197,
+  "raw_sha256": {
+    "config.json": "77c95e7d19a995bcb73b407270ab3dcfdd634c3c221c52f84fcbbd53487f8730",
+    "metadata.json": "d1392df68b9709a7bc629b04b05f82fc4cca3cd5d46cb073ae98899d5ffdb3e0",
+    "provenance.json": "762405186afe4ecef44780bd5a0a5fa3846b450d2018bee1a36356df09e20d3f",
+    "verifier.json": "53ac7313f1789ed4576753ab35a7d4a8b18c3a3fb625c0c52633f9aa812ac60b",
+    "verify.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "verify.stdout.txt": "53ac7313f1789ed4576753ab35a7d4a8b18c3a3fb625c0c52633f9aa812ac60b"
+  },
+  "limitations": [
+    "dev_5min only, not full",
+    "full-domain model worst ratio 0.9355210699141026; arithmetic margin is narrow",
+    "full or additional independent grading remains necessary"
+  ]
+}
