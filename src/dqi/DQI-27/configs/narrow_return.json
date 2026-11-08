@@ -1,0 +1,6 @@
+{
+  "m": 4095,
+  "n": 70,
+  "degree": 12,
+  "use_extra_converter_qubit": true
+}

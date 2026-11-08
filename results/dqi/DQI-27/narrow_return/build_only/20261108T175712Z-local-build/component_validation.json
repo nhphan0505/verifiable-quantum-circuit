@@ -1,0 +1,171 @@
+{
+  "verification_level": "local metadata/reduced component validation, not official grading",
+  "jump": {
+    "cases": 9288,
+    "domains": [
+      {
+        "length": 1,
+        "zero_patterns_exhaustive": true,
+        "active_values": [
+          0,
+          1
+        ]
+      },
+      {
+        "length": 2,
+        "zero_patterns_exhaustive": true,
+        "active_values": [
+          0,
+          1
+        ]
+      },
+      {
+        "length": 8,
+        "zero_patterns_exhaustive": true,
+        "active_values": [
+          0,
+          1
+        ]
+      },
+      {
+        "length": 35,
+        "zero_patterns_exhaustive": false,
+        "active_values": [
+          0,
+          1
+        ]
+      }
+    ],
+    "seeds": [
+      2701,
+      2702,
+      2703
+    ],
+    "value_errors": 0,
+    "phase_errors": 0,
+    "workspace_errors": 0
+  },
+  "cursor": {
+    "scope": "full-width extraction/cursor/reverse component only, not submission grading",
+    "cases": 384,
+    "weights": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35
+    ],
+    "forced_initial_jumps": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35
+    ],
+    "measurement_seeds": [
+      2701,
+      2702,
+      2703
+    ],
+    "value_errors": 0,
+    "phase_errors": 0,
+    "workspace_errors": 0
+  },
+  "reduced_decoders": {
+    "cases_per_variant": 1152,
+    "decoder_shapes": [
+      {
+        "degree": 3,
+        "n": 6,
+        "m": 7,
+        "low_q": 33,
+        "extra_q": 33,
+        "low_t": 3208,
+        "extra_t": 3184
+      },
+      {
+        "degree": 4,
+        "n": 8,
+        "m": 15,
+        "low_q": 52,
+        "extra_q": 52,
+        "low_t": 9012,
+        "extra_t": 8964
+      },
+      {
+        "degree": 12,
+        "n": 8,
+        "m": 31,
+        "low_q": 142,
+        "extra_q": 143,
+        "low_t": 52952,
+        "extra_t": 52808
+      }
+    ],
+    "value_errors": 0,
+    "phase_errors": 0,
+    "workspace_errors": 0
+  },
+  "limitation": "Sampled coherent cases supplement reachable-state identities; not universal syndrome or measurement enumeration."
+}

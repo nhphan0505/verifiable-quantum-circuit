@@ -1,0 +1,29 @@
+{
+  "status": "BUILT",
+  "artifact_path": "artifacts/dqi/DQI-27/narrow_return.kmb",
+  "num_qubits": 890,
+  "static_toffoli_like": 11647130,
+  "num_instructions": 115421122,
+  "reference_q": 900,
+  "reference_static_t": 11620060,
+  "track": "dqi",
+  "experiment_id": "DQI-27",
+  "config_name": "narrow_return",
+  "source_commit": "96a39559419067f98dc7cde47ed03ee615de075e",
+  "artifact_sha256": "a9f187164928279110f9be458209da13d41ef691c5f7f95542e3954622f832a8",
+  "artifact_size_bytes": 1110713537,
+  "reference_experiment": "DQI-23",
+  "reference_config": "schur_hmr",
+  "reference_source_commit": "c5b70b1a7618057000cc9af35794c8e733e5eb1c",
+  "static_t_increase_fraction": 0.0023295921019341748,
+  "static_q2t_ratio_to_reference": 0.9801793455604222,
+  "static_q2t_reduction_fraction": 0.01982065443957781,
+  "verification_level": "build_only",
+  "limitations": [
+    "No member grading for this artifact yet. BUILT/component checks do not establish dev/full PASS.",
+    "Q2T comparison uses static counts, not observed verifier T/R/score.",
+    "No new long-lived measurement-based Flag Carry was implemented; this variant returns cursor, streams jump history and retains one local converter predicate.",
+    "Only the extra-flag true config was fully built. False mode has component counts and reduced validation only.",
+    "Source/config were committed before build; build record/handoff remain local for the next required results commit. No optional push requested."
+  ]
+}

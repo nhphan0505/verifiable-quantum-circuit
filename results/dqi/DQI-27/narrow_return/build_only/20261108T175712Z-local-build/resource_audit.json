@@ -1,0 +1,260 @@
+{
+  "scope": "isolated components and metadata composition, not full decoder grading",
+  "component_peaks": {
+    "encode": {
+      "reference": {
+        "q": 900,
+        "t": 910
+      },
+      "narrow": {
+        "q": 868,
+        "t": 1127
+      },
+      "extra": {
+        "q": 868,
+        "t": 1127
+      }
+    },
+    "convert_forward": {
+      "reference": {
+        "q": 895,
+        "t": 97697
+      },
+      "narrow": {
+        "q": 889,
+        "t": 97697
+      },
+      "extra": {
+        "q": 890,
+        "t": 97697
+      }
+    },
+    "convert_reverse": {
+      "reference": {
+        "q": 895,
+        "t": 97697
+      },
+      "narrow": {
+        "q": 889,
+        "t": 97697
+      },
+      "extra": {
+        "q": 890,
+        "t": 97697
+      }
+    },
+    "reciprocal": {
+      "reference": {
+        "q": 890,
+        "t": 246182
+      },
+      "narrow": {
+        "q": 890,
+        "t": 246182
+      },
+      "extra": {
+        "q": 890,
+        "t": 246182
+      }
+    },
+    "phase": {
+      "reference": {
+        "q": 890,
+        "t": 436
+      },
+      "narrow": {
+        "q": 884,
+        "t": 436
+      },
+      "extra": {
+        "q": 884,
+        "t": 436
+      }
+    }
+  },
+  "encode_counts": [
+    {
+      "length": 1,
+      "old_t": 26,
+      "new_t": 27
+    },
+    {
+      "length": 2,
+      "old_t": 52,
+      "new_t": 59
+    },
+    {
+      "length": 3,
+      "old_t": 78,
+      "new_t": 87
+    },
+    {
+      "length": 4,
+      "old_t": 104,
+      "new_t": 120
+    },
+    {
+      "length": 5,
+      "old_t": 130,
+      "new_t": 149
+    },
+    {
+      "length": 6,
+      "old_t": 156,
+      "new_t": 178
+    },
+    {
+      "length": 7,
+      "old_t": 182,
+      "new_t": 207
+    },
+    {
+      "length": 8,
+      "old_t": 208,
+      "new_t": 245
+    },
+    {
+      "length": 9,
+      "old_t": 234,
+      "new_t": 275
+    },
+    {
+      "length": 10,
+      "old_t": 260,
+      "new_t": 305
+    },
+    {
+      "length": 11,
+      "old_t": 286,
+      "new_t": 335
+    },
+    {
+      "length": 12,
+      "old_t": 312,
+      "new_t": 365
+    },
+    {
+      "length": 13,
+      "old_t": 338,
+      "new_t": 395
+    },
+    {
+      "length": 14,
+      "old_t": 364,
+      "new_t": 425
+    },
+    {
+      "length": 15,
+      "old_t": 390,
+      "new_t": 455
+    },
+    {
+      "length": 16,
+      "old_t": 416,
+      "new_t": 502
+    },
+    {
+      "length": 17,
+      "old_t": 442,
+      "new_t": 533
+    },
+    {
+      "length": 18,
+      "old_t": 468,
+      "new_t": 564
+    },
+    {
+      "length": 19,
+      "old_t": 494,
+      "new_t": 595
+    },
+    {
+      "length": 20,
+      "old_t": 520,
+      "new_t": 626
+    },
+    {
+      "length": 21,
+      "old_t": 546,
+      "new_t": 657
+    },
+    {
+      "length": 22,
+      "old_t": 572,
+      "new_t": 688
+    },
+    {
+      "length": 23,
+      "old_t": 598,
+      "new_t": 719
+    },
+    {
+      "length": 24,
+      "old_t": 624,
+      "new_t": 750
+    },
+    {
+      "length": 25,
+      "old_t": 650,
+      "new_t": 781
+    },
+    {
+      "length": 26,
+      "old_t": 676,
+      "new_t": 812
+    },
+    {
+      "length": 27,
+      "old_t": 702,
+      "new_t": 843
+    },
+    {
+      "length": 28,
+      "old_t": 728,
+      "new_t": 874
+    },
+    {
+      "length": 29,
+      "old_t": 754,
+      "new_t": 905
+    },
+    {
+      "length": 30,
+      "old_t": 780,
+      "new_t": 936
+    },
+    {
+      "length": 31,
+      "old_t": 806,
+      "new_t": 967
+    },
+    {
+      "length": 32,
+      "old_t": 832,
+      "new_t": 1031
+    },
+    {
+      "length": 33,
+      "old_t": 858,
+      "new_t": 1063
+    },
+    {
+      "length": 34,
+      "old_t": 884,
+      "new_t": 1095
+    },
+    {
+      "length": 35,
+      "old_t": 910,
+      "new_t": 1127
+    }
+  ],
+  "cursor_scan_t": 1091,
+  "word_predicate_t": 12,
+  "predicted_static_t_low": 11648762,
+  "predicted_static_t_extra": 11647130,
+  "baseline_q": 900,
+  "baseline_t": 11620060,
+  "predicted_q": 890,
+  "limitation": "Isolated allocator peaks predict whole-circuit Q; actual full build is authoritative."
+}

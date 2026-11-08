@@ -1,0 +1,13 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-27",
+  "config_name": "narrow_return",
+  "mode": "full",
+  "command": [
+    "/Users/tranxuanhoa/Documents/research/GQA/.venv/bin/python",
+    "/Users/tranxuanhoa/Documents/research/GQA-DQI-27/verifiers/dqi/verify_submission_dqi.py",
+    "/Users/tranxuanhoa/Documents/research/GQA-DQI-27/artifacts/dqi/DQI-27/narrow_return.kmb",
+    "--max-workers",
+    "1"
+  ]
+}
