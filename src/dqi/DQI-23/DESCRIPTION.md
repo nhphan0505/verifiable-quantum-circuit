@@ -157,6 +157,6 @@ Main đã được fetch và merge trước tổng kết theo yêu cầu ngườ
 
 ### Quy ước hiển thị hệ số sau tổng kết
 
-Theo yêu cầu cập nhật toàn bảng DQI, hai cột hệ số trong SCORES đều dùng score DQI-BASELINE cùng mode chia score ứng viên, làm tròn 4 chữ số thập phân. DQI-23 hiển thị full 2.1798× và dev 2.1798×, kèm chú thích đây là tỷ số số học so baseline lịch sử khác môi trường; chưa gọi là phép so sánh cùng môi trường được checker xác nhận. Các tỷ số so DQI-19 ở phần phân tích vẫn là 1.9206396378089878× full và 1.920640911358237× dev, có đối chứng khác với hai cột bảng điểm.
+Hai cột gain trong SCORES giữ `—` khi chưa có baseline cùng môi trường/provenance theo schema. Tỷ số số học của DQI-23 so baseline lịch sử vẫn khoảng 2.1798× cả full/dev, được giữ ở chú thích ngay cạnh run, với giới hạn Python patch/harness. Tỷ số so DQI-19 ở phần phân tích vẫn khoảng 1.9206×; hai phép so có đối chứng khác nhau.
 
-Thay đổi hiển thị này được người dùng giao rõ cho toàn bộ bảng DQI, gồm các dòng của hướng khác; không sửa score gốc, JSON/log/provenance hoặc verifier/checker. Các mốc trước ghi hệ số để trống là lịch sử trước quyết định hiển thị số học. Checker hiện vẫn yêu cầu môi trường tương thích và phạm vi exp branch chỉ thay dòng của ID, nên thay đổi toàn bảng này không được coi là đạt schema/scope hiện tại; không tuyên bố CI xanh hoặc PR đủ điều kiện merge khi các check đó còn lỗi.
+Lần thử điền tỷ số lịch sử vào toàn bộ bảng bị checker từ chối về môi trường/harness và phạm vi branch. Sau yêu cầu khôi phục CI, các dòng khác được hoàn nguyên đúng main, dòng DQI-23 giữ score/run hợp lệ cùng chú thích số học, không đổi verifier/checker hoặc raw JSON/log/provenance. Những số học trên không được công bố như hệ số cùng môi trường đã xác nhận.
