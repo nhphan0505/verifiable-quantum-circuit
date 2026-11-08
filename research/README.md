@@ -25,7 +25,7 @@ Luôn đối chiếu với EXPERIMENTS, Issues và results
 | Câu hỏi / hướng thảo luận | Track | Từ khóa / thành phần | Nội dung | Issue / hướng liên quan |
 | --- | --- | --- | --- | --- |
 | Vòng lặp verifier và tình hình tối ưu ba bài thi | shared | Invsqrt, DQI, DFTHCSOS; chi phí, sai số và vòng lặp kiểm chứng | [note.md — ready](shared/discussions/kaggle-752897-verifier-in-the-loop/note.md) | — |
-| Portfolio mạch VQCC của Syed Asad Ali (Kaggle v11) | shared | Invsqrt, DQI, DFTHCSOS; lookup, uncompute, lượng tử hóa | [source.md — source_only](shared/discussions/kaggle-vqcc-own-circuit-portfolio/source.md) | — |
+| Portfolio mạch VQCC của Syed Asad Ali (Kaggle v11) | shared | Invsqrt, DQI, DFTHCSOS; lookup, uncompute, lượng tử hóa | [note.md — draft](shared/discussions/kaggle-vqcc-own-circuit-portfolio/note.md) | — |
 
 Chưa có discussion được lưu.
 
