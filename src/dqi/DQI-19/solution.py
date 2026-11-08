@@ -21,6 +21,15 @@ own measurement/phase fixup. Arithmetic is exact, with no truncation or
 intentional error. The tensor identity proves the value map; simulator tests
 also check phase and workspace for all operand pairs and both controls.
 
+The optional JSON multiplication_strategy="control_input" masks lhs with the
+quantum accumulation control using 12 init_and operations, streams 42 bilinear
+ANDs directly into the arbitrary target with per-term del_and, restores parity
+scratch and deletes the masked lhs using its original control/lhs. This keeps
+54 Toffoli-like operations but omits the product measurement/correction sweep.
+No inputs used by del_and may change before deletion; the EEA call sites have
+disjoint lhs, rhs, target and control. Old configs default to "product" and the
+historical source/run mappings remain attached to their original commit.
+
 Tradeoff: fewer EEA multiplication Toffolis versus more CX/CZ operations,
 measurement feedback and up to 15 kernel workspace qubits. Neither the
 primitive reduction nor BUILT implies a better R(epsilon_plus)*Q^2*T score.
@@ -181,7 +190,7 @@ def _xor_mask(builder, register, mask, target):
         builder.cx(km.array(controls), target)
 
 
-def rank42_ixor(builder, lhs, rhs, *, target, field, control=True):
+def rank42_ixor(builder, lhs, rhs, *, target, field, control=True, strategy="product"):
     """Exact controlled target ^= lhs*rhs; 42 compute + 12 controlled-copy T.
 
     Inputs and arbitrary initial target are restored/preserved as required.
@@ -193,6 +202,10 @@ def rank42_ixor(builder, lhs, rhs, *, target, field, control=True):
         raise ValueError('Rank-42 kernel requires the default Kickmix GF(2^12)')
     if not all(len(reg) == 12 for reg in (lhs, rhs, target)):
         raise ValueError('All multiplication registers must have 12 bits')
+    if strategy == 'control_input':
+        return _rank42_control_input(builder, lhs, rhs, target=target, control=control)
+    if strategy != 'product':
+        raise ValueError('Unknown multiplication strategy')
     tensor = rank42_tensor()
     product = builder.alloc_qubits(12)
     scratch = builder.alloc_qubits(3)
@@ -230,6 +243,33 @@ def rank42_ixor(builder, lhs, rhs, *, target, field, control=True):
     builder.free(product + scratch)
 
 
+def _rank42_control_input(builder, lhs, rhs, *, target, control):
+    """Mask the input once, stream 42 temporary ANDs into arbitrary target.
+
+    Each temporary AND is deleted immediately by HMR/CZ. The 12 masked-input
+    bits are deleted using their original control/lhs after restoring parity
+    scratches. No long-lived product or product phase-correction sweep exists.
+    For a quantum control this has exactly 12+42 Toffoli-like operations.
+    """
+    masked = builder.alloc_qubits(12)
+    scratch = builder.alloc_qubits(3)
+    a, b, temporary = scratch
+    builder.init_and(control, lhs, masked)
+    previous_l = previous_r = 0
+    for left, right, output in rank42_tensor():
+        _xor_mask(builder, masked, left ^ previous_l, a)
+        _xor_mask(builder, rhs, right ^ previous_r, b)
+        builder.init_and(a, b, temporary)
+        builder.cx(temporary, km.array([target[i] for i in range(12)
+                                        if output >> i & 1]))
+        builder.del_and(a, b, temporary)
+        previous_l, previous_r = left, right
+    _xor_mask(builder, masked, previous_l, a)
+    _xor_mask(builder, rhs, previous_r, b)
+    builder.del_and(control, lhs, masked)
+    builder.free(masked + scratch)
+
+
 # Out-of-range address value used to park unary iteration cursors with match_qubit = |0>.
 _UNREACHABLE = 1 << 63
 
@@ -265,11 +305,12 @@ def _xor_threshold(builder: km.CircuitBuilder, cursor: km.UnaryIterationCursor,
 class ProosAndZalkaDecoder:
     """Builds the reversible Reed-Solomon MBUC decoder circuit (arXiv:2510.10967)."""
 
-    def __init__(self, n_syndromes: int, field: km.GF2Field):
+    def __init__(self, n_syndromes: int, field: km.GF2Field, *, multiplication_strategy="product"):
         if n_syndromes < 2:
             raise ValueError(f'n_syndromes must be at least 2, got {n_syndromes}.')
         self.n_syndromes = n_syndromes
         self.field = field
+        self.multiplication_strategy = multiplication_strategy
 
     def build_syndrome_decoding_mbuc(self, builder: km.CircuitBuilder, *,
                                      syndromes: Sequence[km.array],
@@ -550,7 +591,7 @@ class ProosAndZalkaDecoder:
 
                         if is_adjoint and multiplies:
                             rank42_ixor(builder, q_i, reg_a[i], target=reg_b[i], field=gf,
-                                                 control=mul)
+                                                 control=mul, strategy=self.multiplication_strategy)
                         if len(swaps) == 1:
                             builder.cswap(swaps[0], q_i, reg_a[i])
                         elif swaps:
@@ -561,7 +602,7 @@ class ProosAndZalkaDecoder:
                             builder.free(both)
                         if not is_adjoint and multiplies:
                             rank42_ixor(builder, q_i, reg_a[i], target=reg_b[i], field=gf,
-                                                 control=mul)
+                                                 control=mul, strategy=self.multiplication_strategy)
 
                     endpoint(prev)
                     builder.free(mul)
@@ -816,17 +857,17 @@ def default_n_iters(n_syndromes: int) -> int:
     return 3 * (n_syndromes + 1) + 9
 
 
-def build_reference_circuit(m: int, n: int, degree: int) -> km.Circuit:
+def build_reference_circuit(m: int, n: int, degree: int, *, multiplication_strategy="product") -> km.Circuit:
     """Builds the standalone reference Reed-Solomon MBUC decoder circuit."""
     builder = km.CircuitBuilder()
     syndromes = [builder.create_quantum_register(degree, name=f'S{i}') for i in range(n)]
     error_mbuc = [builder.create_classical_register(degree, name=f'E{j}') for j in range(m)]
-    ProosAndZalkaDecoder(n, km.GF2Field(degree)).build_syndrome_decoding_mbuc(
+    ProosAndZalkaDecoder(n, km.GF2Field(degree), multiplication_strategy=multiplication_strategy).build_syndrome_decoding_mbuc(
         builder, syndromes=syndromes, error_mbuc=error_mbuc, n_iters=default_n_iters(n))
     return builder.finish_circuit()
 
 
-def validate_kernel(*, exhaustive=False):
+def validate_kernel(*, exhaustive=False, strategy="product"):
     """Test emitted value/phase/workspace, independently of the decoder verifier.
 
     Exhaustive covers every ordered operand pair with each control value and
@@ -841,7 +882,7 @@ def validate_kernel(*, exhaustive=False):
     y = builder.create_quantum_register(12, 'y')
     z = builder.create_quantum_register(12, 'z')
     c = builder.create_quantum_register(1, 'c')[0]
-    rank42_ixor(builder, x, y, target=z, field=field, control=c)
+    rank42_ixor(builder, x, y, target=z, field=field, control=c, strategy=strategy)
     circuit = builder.finish_circuit()
     native = km.CircuitBuilder()
     nx = native.create_quantum_register(12, 'x')
@@ -910,7 +951,7 @@ def validate_kernel(*, exhaustive=False):
                 shots_checked += len(indexes)
             if exhaustive and (start // batch + 1) % 32 == 0:
                 print(f'Kernel validation: {shots_checked:,} cases checked', flush=True)
-    return {'tensor_basis_pairs': 144, 'rank': len(rank42_tensor()),
+    return {'strategy': strategy, 'kernel_instructions': circuit.operation_statistics().num_instructions, 'tensor_basis_pairs': 144, 'rank': len(rank42_tensor()),
             'exhaustive_operand_pairs': exhaustive, 'control_values': [0, 1],
             'shots_checked': shots_checked, 'measurement_seeds': list(seeds),
             'value_errors': 0, 'phase_errors': 0, 'workspace_errors': 0,
@@ -932,13 +973,14 @@ def main() -> None:
     if experiment_dir.parent.parent.name != 'src' or track not in {'invsqrt', 'dqi', 'dfthcsos'}:
         raise ValueError('solution.py must be located at src/<TRACK>/<ID>/solution.py')
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--kernel-strategy', choices=('product', 'control_input'), default='product', help='Strategy for isolated kernel validation only; builds use JSON setting')
     parser.add_argument('--validate-kernel', choices=('sampled', 'exhaustive'), help='Only test the isolated multiplication kernel; no decoder grading')
     parser.add_argument('--config', type=Path, default=Path(__file__).parent/'configs/rank42.json')
     parser.add_argument('--output', type=Path, help='Optional output path; filename must match config stem')
     parser.add_argument('--overwrite', action='store_true', help='Replace an existing generated artifact')
     args = parser.parse_args()
     if args.validate_kernel:
-        print(json.dumps(validate_kernel(exhaustive=args.validate_kernel == 'exhaustive'), indent=2))
+        print(json.dumps(validate_kernel(exhaustive=args.validate_kernel == 'exhaustive', strategy=args.kernel_strategy), indent=2))
         return
     args.config = args.config.resolve()
     config_dir = (experiment_dir/'configs').resolve()
@@ -948,15 +990,20 @@ def main() -> None:
     if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]*', args.config.stem):
         raise ValueError('Config name must contain only letters, digits, hyphens or underscores and start with a letter/digit')
     config = json.loads(args.config.read_text(encoding='utf-8'))
-    if config != {'m': 4095, 'n': 70, 'degree': 12}: 
+    if set(config) not in ({'m', 'n', 'degree'}, {'m', 'n', 'degree', 'multiplication_strategy'}):
+        raise ValueError('Config allows only m, n, degree and optional multiplication_strategy')
+    if {k: config[k] for k in ('m', 'n', 'degree')} != {'m': 4095, 'n': 70, 'degree': 12}:
         raise ValueError('This experiment requires m=4095, n=70, degree=12')
+    strategy = config.get('multiplication_strategy', 'product')
+    if strategy not in ('product', 'control_input'):
+        raise ValueError('multiplication_strategy must be product or control_input')
     output = args.output or root/'artifacts'/track/experiment_id/f'{args.config.stem}.kmb'
     if output.name != args.config.stem+'.kmb':
         raise ValueError('Output filename must be <config-name>.kmb')
     if output.exists() and not args.overwrite:
         raise FileExistsError(f'{output} exists; pass --overwrite to rebuild')
     output.parent.mkdir(parents=True, exist_ok=True)
-    circuit = build_reference_circuit(config['m'], config['n'], config['degree'])
+    circuit = build_reference_circuit(config['m'], config['n'], config['degree'], multiplication_strategy=strategy)
     circuit.to_file(str(output), format='kmb')
     print(f'Wrote {output}: {circuit.operation_statistics().num_toffoli_like:,} Toffolis, {circuit.num_qubits} qubits.')
 
