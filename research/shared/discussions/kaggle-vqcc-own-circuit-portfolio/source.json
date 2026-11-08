@@ -1,0 +1,12 @@
+{
+  "track": "shared",
+  "kind": "discussions",
+  "source_id": "kaggle-vqcc-own-circuit-portfolio",
+  "title": "VQCC Own-Circuit Portfolio Notebook",
+  "source_url": "https://www.kaggle.com/code/syed3000/vqcc-own-circuit-portfolio-notebook?scriptVersionId=366611575",
+  "version": "Kaggle v11 (scriptVersionId 366611575)",
+  "accessed_at": "2026-11-08",
+  "source_file": "source.md",
+  "source_sha256": "967cba85b9418972891ce11a89212884b994529d1b029c074a033a714d0ecf8a",
+  "coverage": "Đã đọc phần mô tả kỹ thuật ba bài, kết quả âm, metadata Kaggle và output đóng gói của v11. Snapshot chỉ lưu diễn giải nội dung và số liệu chọn lọc. Không lưu cell code, log đầy đủ, dữ liệu hoặc artifact, không chạy lại verifier."
+}
