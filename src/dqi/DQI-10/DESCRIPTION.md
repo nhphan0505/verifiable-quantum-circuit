@@ -86,6 +86,24 @@ không suy ra cải thiện chỉ từ số cursor hoặc kích thước artifac
 
 ## Kết luận và phiên bản tái lập
 
+Build đầu tiên đã thành công tại source commit
+`394396f16bffa0c4bcf9fe7eea9fa4bca39e31f3`:
+[provenance](../../../results/dqi/DQI-10/merged/build_only/20261108T052543Z-local-build/provenance.json),
+[metrics cấu trúc](../../../results/dqi/DQI-10/merged/build_only/20261108T052543Z-local-build/build_metrics.json),
+[kiểm tra đại số và compile nhỏ](../../../results/dqi/DQI-10/merged/build_only/20261108T052543Z-local-build/local_checks.json).
+Đạt 1.004.850 assertion predicate/địa chỉ trên m=5..79 và compile nhỏ
+(m,n,degree)=(15,4,4). Các kiểm tra này không mô phỏng pha hoặc xác nhận
+invariant bậc trên toàn EEA. Source/config local khớp bytes commit trước build.
+
+Số qubit giảm nhẹ nhưng Toffoli-like tăng. Q²T tĩnh ứng viên cao hơn
+Q²T dùng max_toffoli_count quan sát của baseline khoảng 0,675%.
+Đây là phép sàng lọc cấu trúc, chưa phải so sánh hai run cùng verifier;
+không đủ để xác nhận điểm hoặc tính đúng, và chưa ủng hộ dự đoán giảm tài nguyên.
+Giữ nguyên tiêu chí bác bỏ đã đặt. Không thêm cấu hình hoặc tự chạy chấm.
+Bàn giao smoke để kiểm tra lỗi trước; dev_5min cùng profile nếu cần đo chính
+xác chi phí. Nếu dev xác nhận Q²T không giảm thì bác bỏ bản triển khai này;
+không khẳng định mọi phương án ghép cursor đều thất bại.
+
 Chưa chấm; chưa xác nhận hypothesis. Config đầu tiên [merged.json](configs/merged.json) giữ nguyên kích thước baseline;
 [mã triển khai](solution.py) thực hiện các biến đổi ở trên. Chờ build và chấm local.
 
