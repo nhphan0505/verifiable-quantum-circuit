@@ -17,7 +17,7 @@ Luôn đối chiếu với EXPERIMENTS, Issues và results
 | Verifiable Quantum Advantage via Optimized DQI Circuits | dqi | EEA đồng bộ, Dialog, RS/MBUC trên GF(2^b); arXiv:2510.10967v1 | [note.md — ready](dqi/papers/arxiv-2510.10967/note.md) | [PDF v1](dqi/papers/arxiv-2510.10967/paper.pdf) |
 | Elucidating reaction mechanisms on quantum computers (FeMoco resource estimate) | dfthcsos | Mô hình hoạt động FeMoco, ước lượng tài nguyên phase estimation/Trotter, chi phí T-gate; doi:10.1073/pnas.1619152114 | [note.md — ready](dfthcsos/papers/doi-10.1073--pnas.1619152114/note.md) | [PDF PNAS 2017](dfthcsos/papers/doi-10.1073--pnas.1619152114/paper.pdf) |
 | Fast Quantum Simulation of Electronic Structure by Spectral Amplification | dfthcsos | Spectral amplification, Hamiltonian sum-of-squares, DF/THC block encoding, FeMoco/P450; doi:10.1103/pb2g-j9cw | [note.md — ready](dfthcsos/papers/doi-10.1103--pb2g-j9cw/note.md) | [PDF PRX 2025](dfthcsos/papers/doi-10.1103--pb2g-j9cw/paper.pdf) |
-| Discovering state-of-the-art quantum circuits with large language models | shared | LLM-guided circuit discovery, independent evaluator, reversible arithmetic; arXiv:2610.22367v1 | [note.md — draft](shared/papers/arxiv-2610.22367/note.md) | [PDF v1](shared/papers/arxiv-2610.22367/paper.pdf) |
+| Discovering state-of-the-art quantum circuits with large language models | dqi | LLM-guided circuit discovery, independent evaluator, reversible arithmetic; arXiv:2610.22367v1 | [note.md — draft](dqi/papers/arxiv-2610.22367/note.md) | [PDF v1](dqi/papers/arxiv-2610.22367/paper.pdf) |
 
 
 ## Discussions

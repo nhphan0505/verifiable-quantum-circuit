@@ -1,7 +1,7 @@
 # Discovering state-of-the-art quantum circuits with large language models
 
 Status: draft
-Track: shared
+Track: dqi
 Source: https://arxiv.org/abs/2610.22367v1
 Version: arXiv:2610.22367v1 (2026-10-15)
 
@@ -13,9 +13,11 @@ Version: arXiv:2610.22367v1 (2026-10-15)
 
 ## Phạm vi đã đọc và giới hạn
 
-Đọc main text PDF pp.1-11, gồm nguyên lý thiết kế, ví dụ divsteps và Methods; Table I PDF p.7; Extended Data Table 1 PDF p.17; SI I mở đầu và I.1 PDF pp.18-23; SI III và IV PDF pp.33-39 (p.33 chỉ từ đầu SI III). Kiểm tra trực quan PDF pp.7,21,23,34,36,38 để đối chiếu bảng và công thức. Đã xem mục lục SI p.1.
+Đọc main text PDF pp.1-11, gồm nguyên lý thiết kế, ví dụ divsteps và Methods; Table I PDF p.7; Extended Data Table 1 PDF p.17; SI I mở đầu và I.1 PDF pp.18-23; SI III và IV PDF pp.33-39 (p.33 chỉ từ đầu SI III). Kiểm tra trực quan PDF pp.7,17,19,21,23,34,36,37,38,39 để đối chiếu bảng và công thức (pp.17,19,37,39 được kiểm tra bổ sung ở bước 03). Đã xem mục lục SI p.1.
 
-Chưa đọc chi tiết references PDF pp.12-14, Extended Data Figures PDF pp.15-16, Hermitian decoder SI I.2 PDF pp.24-27, modular-inversion SI II PDF pp.27-33, lattice gauge SI V PDF pp.40-43, hoặc chứng minh Appendix A PDF pp.44-46. Các trang biên chỉ đọc phần đã nêu; không coi phần divsteps main text là đã kiểm tra chứng minh. Không mở nguồn ngoài, code tác giả hoặc chạy evaluator của paper. Không khẳng định tái lập kết quả. Nội dung dưới đây là bản draft bước 02, chưa tự rà bước 03 hoặc review độc lập bước 04.
+Chưa đọc chi tiết references PDF pp.12-14, Extended Data Figures PDF pp.15-16, Hermitian decoder SI I.2 PDF pp.24-27, modular-inversion SI II PDF pp.27-33, lattice gauge SI V PDF pp.40-43, hoặc chứng minh Appendix A PDF pp.44-46. Các trang biên chỉ đọc phần đã nêu; không coi phần divsteps main text là đã kiểm tra chứng minh. Không mở nguồn ngoài, code tác giả hoặc chạy evaluator của paper. Không khẳng định tái lập kết quả. Bản draft đã được tác giả tự rà và sửa ở bước 03 trên đầu vào `e04341630595f40fe30afa2d2f2bade8cf1e57dc`; chưa có review độc lập bước 04. Phạm vi và findings tự rà được ghi ở cuối note.
+
+Paper được người dùng phân loại vào **dqi** trong bước 03; trọng tâm áp dụng là decoder Reed-Solomon. Phần hàm số và hóa học dưới đây giữ làm bối cảnh kỹ thuật dùng chung đã đọc, không đổi phạm vi hay ghi đè nguồn.
 
 ## Vấn đề và kết quả của paper
 
@@ -69,9 +71,9 @@ Figure S1 (PDF p.22): hơn một stack entry xuất hiện khoảng 1.0e-4; trê
 
 Sau BM, chuẩn hóa sigma_0=1. Eq.35-36 (PDF p.22) cho phép ghi đè syndrome bằng tích tam giác:
 
-`omega_i = S_{i+1} + sum_{j=1}^{i} sigma_j S_{i-j+1}`.
+`omega_i = S_{i+1} + sum_{j=1}^{i} sigma_j S_{i-j+1}`, 0<=i<35, với sigma_j=0 khi j>deg sigma. Các S ở vế phải là syndrome ban đầu.
 
-Phải lập lịch để còn dùng được các syndrome cũ khi ghi đè. Mở rộng map lên cả 70 word làm 35 word cao thành 0 trên decode đúng; dùng làm workspace rồi đảo để khôi phục input. Không được giả định các word này bằng 0 trên một decode đã bị cutoff làm sai.
+Một lịch khả thi suy trực tiếp từ tính tam giác (không phải lịch gate-level do paper cung cấp) là cập nhật i giảm dần: các S có chỉ số thấp hơn đích còn nguyên; khi đảo, đi i tăng dần để khôi phục các nguồn thấp trước khi dùng chúng. Mỗi cập nhật cộng một hàm của các thanh ghi khác nên đảo được; trong trường đặc trưng 2, cộng và trừ giống nhau. Mở rộng cùng công thức cho 0<=i<70 trên cả 70 word làm 35 word cao thành 0 trên decode đúng; dùng làm workspace rồi đảo để khôi phục input. Không được giả định các word này bằng 0 trên một decode đã bị cutoff làm sai.
 
 Forney cần `e_j = kappa_j omega(beta_j)/sigma'(beta_j)` tại nghiệm (Eq.30); kappa_j là hệ số cố định theo convention vị trí. Binary parity biểu diễn được bằng field trace `Tr(mu_j e_j)`, với `Tr(a)=sum_{r=0}^{11}a^{2^r}` và mu_j là dual-basis mask tương ứng (Eq.37). Paper dùng **mask c cố định ngẫu nhiên**, chọn offline một phần pha tuyến tính trên syndrome để bỏ 71 vị trí, còn 4024 vị trí (PDF pp.18,23).
 
@@ -99,7 +101,13 @@ Gaussian (PDF p.36, Eq.67): X_s signed 39 bit, x=X_s/2^32 thuộc [-8,8), cộng
 
 SI IV (PDF pp.36-39): `H=sum_l w_l P_l`, `lambda=sum_l |w_l|`. Prepare biên độ sqrt(|w_l|/lambda), Select áp dụng sign(w_l)P_l; block encoding cho H/lambda (Eqs.68-71). Benchmark là Fe2S2 20 orbital không gian/40 spin-orbital, 41052 Pauli term sau bỏ |w|<1e-4 Ha. Paper chủ động **không** benchmark mạng Givens DFTHC vì vượt mô hình kickmix (PDF p.37).
 
-Alias method dùng bucket i và số tau 16 bit: chọn i nếu tau<keep(i), ngược lại alt(i) (Eq.72). Benchmark chỉ gồm `U_alias† Select U_alias`, giữ i/tau; không gồm chuẩn bị superposition đồng đều hay reflection của walk. Alias word rộng 34 bit chứa threshold, alternate index và dấu hai hệ số. Tính đúng cần cả bit permutation trên system và pha (PDF pp.37-38, Eqs.74-75).
+Alias method dùng bucket i và số tau 16 bit: chọn i nếu tau<keep(i), ngược lại alt(i) (Eq.72). Benchmark chỉ gồm `U_alias† Select U_alias`, giữ i/tau; không gồm chuẩn bị superposition đồng đều hay reflection của walk. Alias word rộng 34 bit chứa threshold, alternate index và dấu hai hệ số. Tính đúng cần cả bit permutation trên system và pha (PDF pp.37-38, Eqs.73-75). Cụ thể, a_l đánh dấu vị trí X/Y, z_l đánh dấu Z/Y, theta_l=0/1 cho dấu hệ số dương/âm. Các Pauli trong bảng này có số lượng Y chẵn, nên `eta_l=(n_Y(P_l) mod 4)/2` là bit và pha chỉ là dấu thực. Đặt sel=sel(i,tau), mạch cần:
+
+`|i>|tau>|x> -> (-1)^phi |i>|tau>|x XOR a_sel>`,
+
+`phi = theta_sel XOR eta_sel XOR parity(x AND z_sel)`.
+
+x trong công thức pha là system state trước khi flip. Ancilla h/sel phải được xóa, i/tau giữ nguyên. Điều kiện Y chẵn thuộc benchmark cụ thể; không áp dạng pha ±1 này cho Pauli tổng quát có số Y lẻ.
 
 Hai tự do preprocessing: đổi thứ tự term cùng hệ số/Pauli không đổi H; alias pairing khác nhau có thể giữ cùng phân bố đã làm tròn 16 bit. Nhóm các Pauli liên hệ bởi fixed Clifford frame thành block 2^k, dùng bit địa chỉ chọn conjugation của representative. Bảy frame giao hoán tạo 3221 block từ 41052 term; representative Select 3327 Toffoli, điều khiển/frame 534 (PDF p.38). Chỉ hai frame spin là symmetry bảo toàn độ lớn hệ số; các frame môi trường gần giống không bảo đảm hệ số bằng nhau, phải giữ từng hệ số độc lập. Quan hệ Pauli qua conjugation vẫn phải exact.
 
@@ -111,7 +119,11 @@ Methods PDF pp.9-11, Eqs.10-22: trên mỗi basis input, circuit phải giữ pe
 
 Nếu mọi trajectory (input x, measurement record m) đúng thì linearity cho coherent correctness. Sampling không chứng minh điều đó cho mọi trajectory. Với defective probability epsilon theo đúng input distribution và measurement record uniform, Eq.19 chặn norm sai khác bởi `2 sqrt(epsilon)`. Với candidate cố định trước khi lấy k mẫu độc lập và không lỗi, upper bound một phía tại confidence 1-delta là `epsilon <= 1-delta^(1/k)` (Eq.20); cho phép b lỗi thì dùng binomial tail Eq.21. Không áp bound ấy trực tiếp lên candidate được chọn bằng chính test draw sau nhiều vòng search.
 
-Riêng SI I (PDF p.19) chấp nhận <=100 wrong-sign/100000 test. Tác giả lập luận failure bị phát hiện với xác suất ít nhất 1/2; suy ra epsilon<=2.434e-3 ở confidence 97.5%, và bound thay đổi expected satisfied fraction trong Eq.25. Các con số này khác confidence 1-2^-128 của verifier project; budget 10^-3 trong bảng không thay cho epsilon upper bound thống kê. Numerical tasks có bound sai số uniform riêng; phase và cleanup vẫn cần đúng, không được dùng numerical tolerance để bỏ sửa pha MBU.
+Cần tách hai xác suất: epsilon_traj của Methods là tỷ lệ sai trên cặp (x,m); còn epsilon_input của SI I (PDF p.19) là trọng số các input mà circuit có thể sai pha/reset dirty ancilla. SI I chấp nhận <=100 wrong-sign/100000 test; với tính chất sign là hàm affine theo measurement record, một input lỗi bị phát hiện với xác suất ít nhất 1/2. Nếu p_det là tỷ lệ wrong-sign quan sát theo cả input và record, lập luận cho `epsilon_input <= 2 p_det`; vì vậy upper bound thống kê cho p_det phải được chuyển qua hệ số 2 trước khi áp cho input lỗi. Tác giả báo `epsilon_input <= 2.434e-3` tại confidence 97.5%, cùng Eq.25:
+
+`|<f>_impl - <f>| <= 4 epsilon_input <f>`.
+
+f là số constraint được thỏa, <f> là kỳ vọng DQI lý tưởng trên benchmark. Đây là bound riêng tác giả nêu cho circuit của họ (dẫn [16]); chưa kiểm tra lại chứng minh nguồn [16], không coi là hệ quả tự động của bound norm Methods cho mọi decoder. Các con số này khác confidence 1-2^-128 của verifier project; budget 10^-3 trong bảng không thay cho epsilon_input upper bound thống kê. Điều kiện candidate cố định trước test vẫn cần giữ khi diễn giải confidence sau search. Numerical tasks có bound sai số uniform riêng; phase và cleanup vẫn cần đúng, không được dùng numerical tolerance để bỏ sửa pha MBU.
 
 ## Khả năng áp dụng vào project
 
@@ -126,7 +138,7 @@ Snapshot đọc là commit `215bc3d10bbdcc59b9c860e9b3acf077703dfcd1`; các link
 Mô hình điểm thực trong snapshot:
 
 - DQI: `R(eps_plus) Q^2 T`, `R(eps)=ln(2)/[-ln(1/2+2 sqrt(eps))]`, yêu cầu eps_plus<1/16, full mặc định 102400 shots, log2_delta=-128. T là mean Toffoli-like thực thi; Q dùng circuit.num_qubits. Đừng suy gain project từ TQ gain paper.
-- Invsqrt: `Q (Toffoli + T_synthesis/4)`. Dung sai còn sau sai số số học quyết định chi phí tổng hợp Z_POW, nên giảm arithmetic T có thể tăng rotation cost.
+- Invsqrt: `Q (Toffoli + T_Z_POW/4)`, trong đó T_Z_POW gồm cả góc T chính xác và chi phí tổng hợp góc không Clifford/T theo verifier (góc Clifford miễn phí). Dung sai còn sau sai số số học quyết định chi phí tổng hợp Z_POW, nên giảm arithmetic T có thể tăng rotation cost.
 - DFTHC: `lambda_eff T_total Q_total`, gồm chi phí mô hình hóa ngoài ANGLE oracle và giới hạn từng mạch; qubit toàn thuật toán khác Q cục bộ. Cần đánh giá vector giải mã từ góc và Hamiltonian accuracy, không chỉ QROM.
 
 ## Hypothesis gợi ý và cách kiểm chứng
@@ -136,7 +148,7 @@ Mô hình điểm thực trong snapshot:
 1. **BM trước, phase scan sau:** so một BM locator có routing/invariant sigma_0 delta=1 với EEA baseline, giữ runtime-mask scan hiện có làm đối chứng tách phần thay đổi. Thử bản không cutoff trước trên trường nhỏ và các trọng số biên; sau đó khảo sát stack/prefix trên đúng distribution verifier. Bác bỏ nếu lỗi cleanup/pha hoặc `R Q²T` không giảm dù T giảm. Cần riêng test syndrome 0, Delta=0, tie replace/retain, stack overflow và suffix coefficient bị cắt; không lấy input làm lỗi rồi vẫn suy word cao bằng 0.
 2. **Reciprocal polynomial với mask runtime:** kiểm tra lợi ích bỏ inverse tại từng scan point khi tính Psi từ locator; thiết kế trace/product nhận mask như dữ liệu classical, giữ chính xác field basis/prefactor của project. So chi phí EEA phụ, root test, phase correction và qubit sống đồng thời với baseline; bác bỏ nếu chuẩn bị reciprocal/điều khiển mask triệt tiêu lợi ích. Không mặc định offline cancel được 71 vị trí hoặc 23 Toffoli/point. Kiểm chứng root đơn, sigma hằng, error weight 0/1/35 và đảo toàn map syndrome.
 3. **Invsqrt fit theo integer model:** so bảng nhiều đoạn/đa thức bậc thấp với baseline cubic+Newton, fit cả truncation vào một end-to-end error budget. Tính đủ lookup/MBU, normalization và Z_POW synthesis; kiểm tra mọi x hoặc bound chắc chắn trên miền, đặc biệt biên interval/power-of-four và margin tuyệt đối nhỏ nhất. Bác bỏ nếu không đạt tol(x) hoặc điểm Q*C tăng. Bảng/coefficients Coulomb của paper không phải cấu hình sẵn cho project.
-4. **Prune repeated subtree của bảng angle delta:** đếm các subtree có hai nửa là cùng chuỗi word, không đổi data/địa chỉ. So với `build_angle_k_circuit` hiện có trên cùng batch/brot, giữ f_k(a) exact cho mọi a hợp lệ, mọi word đầu vào và phase sạch; kiểm tra padding, thứ tự forward/reverse và giới hạn 128 qubit/mạch. Bác bỏ nếu không có repetition hoặc logic phát hiện/điều khiển làm tăng tổng cost. Chưa kết luận bảng thật có đủ cấu trúc; không tự chạy dữ liệu/thí nghiệm ở bước 02.
+4. **Prune repeated subtree của bảng angle delta:** đếm các subtree có hai nửa là cùng chuỗi word, không đổi data/địa chỉ. So với `build_angle_k_circuit` hiện có trên cùng batch/brot, giữ f_k(a) exact cho mọi a hợp lệ, mọi word đầu vào và phase sạch; kiểm tra padding, thứ tự forward/reverse và giới hạn 128 qubit/mạch. Bác bỏ nếu không có repetition hoặc logic phát hiện/điều khiển làm tăng tổng cost. Chưa kết luận bảng thật có đủ cấu trúc; không chạy dữ liệu/thí nghiệm trong luồng tài liệu.
 
 Ứng viên được chọn bằng dev cần lượt kiểm chứng độc lập chưa dùng để chọn config, cùng đối chứng/profile/hash phù hợp; full hoặc seed mới theo quy trình experiment. Mô hình số học hoặc test trường nhỏ không thay full verifier.
 
@@ -154,3 +166,21 @@ Chưa có run trong nhiệm vụ này triển khai BM/reciprocal hay tái lập 
 - [Note Optimized DQI Circuits](../../../dqi/papers/arxiv-2510.10967/note.md), nguồn baseline [13] trong paper; không đọc lại nguồn đó trong lượt này.
 - [Note spectral amplification/DFTHC](../../../dfthcsos/papers/doi-10.1103--pb2g-j9cw/note.md) để định vị khác biệt với sparse Pauli benchmark; chưa đọc lại trong lượt này.
 - Metadata PDF ghi license CC BY-NC-SA 4.0. Chưa tải/kế thừa code tác giả và chưa xác minh license code; note diễn giải kết quả kèm citation, không khẳng định PDF license áp dụng cho mọi repository bên ngoài.
+
+
+## Tự rà bước 03 và bàn giao review độc lập
+
+Tác giả tự rà trên draft đầu vào `e04341630595f40fe30afa2d2f2bade8cf1e57dc`, ngày 2026-11-08; đây không phải kết luận reviewer độc lập.
+
+| Finding tự rà | Căn cứ | Xử lý |
+| --- | --- | --- |
+| Chưa tách tỷ lệ trajectory sai và trọng số input lỗi DQI | Methods Eqs.18-21 PDF p.10; SI I Eq.25 PDF p.19 | Đã tách epsilon_traj/epsilon_input, p_det và hệ số phát hiện 1/2; thêm Eq.25 cùng giới hạn chưa kiểm chứng nguồn [16]. |
+| Công thức ghi đè syndrome thiếu miền i và lịch tránh dùng nguồn đã bị ghi đè | SI I.1 Eqs.35-36 PDF p.22 | Đã thêm miền 0<=i<35, mở rộng <70, zero-extension sigma và lịch giảm/tăng i; ghi rõ lịch là suy luận từ map tam giác. |
+| Alias-Select thiếu điều kiện để pha là dấu thực và công thức pha đầy đủ | SI IV Eqs.73-75 PDF pp.37-38 | Đã thêm điều kiện Y chẵn, định nghĩa a/z/theta/eta, map x và phi tính trên x ban đầu. |
+| Ký hiệu T_synthesis có thể khiến bỏ sót góc T chính xác trong điểm invsqrt | Docstring verifier tại snapshot đọc | Đã đổi thành T_Z_POW và nêu đủ thành phần; không đổi công thức chấm. |
+| Phân loại shared chưa khớp mục đích DQI người dùng xác nhận | Chỉ dẫn người dùng trong bước 03 | Đã chuyển nguyên PDF/note/source.json sang research/dqi/papers/arxiv-2610.22367, đổi Track và mục lục; hash PDF giữ nguyên. |
+| Coverage/trạng thái còn ghi chưa tự rà bước 03 | Metadata note/source.json | Đã đồng bộ, giữ draft, thêm các trang kiểm tra trực quan và hash Git blob cho file project đối chiếu bổ sung. |
+
+Đã đối chiếu bảng tài nguyên, số test, BM/routing/invariant, reciprocal identity, numerical domains/error bounds, alias ordering/pruning và mô hình điểm với nguồn trong coverage. PDF và snapshot blob đã kiểm hash; các số DQI-10 đã đối chiếu [review.json lịch sử](../../../../results/dqi/DQI-10/merged/dev_5min/20261108T052816Z-local-dev_5min-619295/review.json), INV-6 đối chiếu [model_validation.json](../../../../results/invsqrt/INV-6/delta12/build_only/20261108T020740Z-local-build/model_validation.json). Không sửa hay chạy lại run.
+
+Giới hạn còn mở cho reviewer: cutoff BM/gate schedule chưa đủ để tái lập; locator hằng cần xử lý biên; mask runtime khác fixed-mask benchmark; chưa kiểm chứng [16]/Appendix A, code tác giả hay full verification. Các mục này đã được khai là giới hạn, chưa coi là kết quả đã xác nhận. Phiên độc lập bước 04 cần đọc trực tiếp PDF, note và source.json tại SHA cuối PR; chưa có SHA review độc lập và chưa đủ căn cứ đặt ready/merge.

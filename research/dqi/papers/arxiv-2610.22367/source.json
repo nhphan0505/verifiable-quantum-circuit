@@ -1,5 +1,5 @@
 {
-  "track": "shared",
+  "track": "dqi",
   "kind": "papers",
   "source_id": "arxiv-2610.22367",
   "title": "Discovering state-of-the-art quantum circuits with large language models",
@@ -8,7 +8,7 @@
   "accessed_at": "2026-11-08",
   "source_file": "paper.pdf",
   "source_sha256": "3607f457c3349db74e10b131abadef23a4a2dea0fefa0cf6ac6d0ed9f37fdfd9",
-  "coverage": "Read main text PDF pp.1-11, Table I p.7, Extended Data Table 1 p.17; SI I introduction/I.1 pp.18-23; SI III/IV pp.33-39 (p.33 only SI III). Visually checked PDF pp.7,21,23,34,36,38. SI contents p.18 inspected. Not read in detail: references pp.12-14, Extended Data Figures pp.15-16, SI I.2 pp.24-27, SI II pp.27-33, SI V pp.40-43, Appendix A pp.44-46. Boundary pages only covered as specified. Main-text divsteps illustration is not a proof review. No external sources or author code accessed; no circuits built or graded. Draft step 02; step 03 and independent step 04 pending.",
+  "coverage": "Read main text PDF pp.1-11, Table I p.7, Extended Data Table 1 p.17; SI I introduction/I.1 pp.18-23; SI III/IV pp.33-39 (p.33 only SI III). Visually checked PDF pp.7,17,19,21,23,34,36,37,38,39; pp.17,19,37,39 added during step 03 self-check. SI contents p.18 inspected. Not read in detail: references pp.12-14, Extended Data Figures pp.15-16, SI I.2 pp.24-27, SI II pp.27-33, SI V pp.40-43, Appendix A pp.44-46. Boundary pages only covered as specified. Main-text divsteps illustration is not a proof review. No external sources or author code accessed; no circuits built or graded. Draft self-checked and revised at step 03 from e04341630595f40fe30afa2d2f2bade8cf1e57dc; independent step 04 pending. User classified this paper under dqi at step 03; numerical/chemistry sections retained as background, with Reed-Solomon decoding the application focus.",
   "project_snapshot": {
     "commit": "215bc3d10bbdcc59b9c860e9b3acf077703dfcd1",
     "files": {
@@ -20,7 +20,10 @@
       "verifiers/dfthcsos/SCORING_README.md": "c2228569f96e58e118419bc32be2be9e33d6abffb8117cb0b91e1fc25b2a0230",
       "verifiers/dfthcsos/scoreinfra/circuits.py": "fc027b52fdcebe14404f403a089122485d097ed65d03e6d989623d620b1ab68c",
       "src/dqi/DQI-10/DESCRIPTION.md": "e502091e0f63c9d569820e7b14a120eb26a9c7bada99d71fe107581f9092e029",
-      "src/invsqrt/INV-6/DESCRIPTION.md": "173c71c3f808887ea6cb92876de4567afafea8f4d3c385bb92762500c1dc9901"
+      "src/invsqrt/INV-6/DESCRIPTION.md": "173c71c3f808887ea6cb92876de4567afafea8f4d3c385bb92762500c1dc9901",
+      "verifiers/dfthcsos/verify.py": "0775be7a528922367caebe9e4d051d6199811f1aefeaa4b793eaaa4621b8ec9d",
+      "results/dqi/DQI-10/merged/dev_5min/20261108T052816Z-local-dev_5min-619295/review.json": "c782176c2111d1ebf288f243a3bfcd66b337b86499b89a754c67f49e79e6d8b2",
+      "results/invsqrt/INV-6/delta12/build_only/20261108T020740Z-local-build/model_validation.json": "a372424b207d6eb9f769c19088bc1818e6a8d6a7320b5540fa62fd850fab6b9f"
     },
     "hash_basis": "Raw Git blob bytes at project_snapshot.commit; read snapshot, not historical build provenance."
   }
