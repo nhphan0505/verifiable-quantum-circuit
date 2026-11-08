@@ -1,0 +1,26 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-19",
+  "config_name": "rank42",
+  "source_commit": "9918ac4f0cc2ae695180bc93ef1d1bf99613d168",
+  "source_path": "src/dqi/DQI-19/solution.py",
+  "source_sha256": "9cff8eb0f38029e4e0530907c80ceb4716af8178756fdefb6684e13a487595ae",
+  "build_config_path": "src/dqi/DQI-19/configs/rank42.json",
+  "build_config_sha256": "74055cda362a06faece1aa628efa072d1b6ecce8898934143c2b0fb40985466d",
+  "artifact_path": "artifacts/dqi/DQI-19/rank42.kmb",
+  "artifact_sha256": "ae5d79c2ade1f04ce5937581fae10bbb14f5cd992224c6c202c0b976f6d28627",
+  "build_command": "/Users/tranxuanhoa/Documents/research/GQA/.venv/bin/python src/dqi/DQI-19/solution.py --config src/dqi/DQI-19/configs/rank42.json",
+  "environment": {
+    "python": "3.13.7",
+    "python_executable": "/Users/tranxuanhoa/Documents/research/GQA/.venv/bin/python",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    },
+    "baseline_decoder_source_commit": "e3827988aee8bd7731bbdcf6c5376cd2d5413aa5",
+    "dependency_notes": "Decoder copied into self-contained solution.py; only external compile dependency is pinned kickmix 1.0.0. NumPy is used for kernel validation. Shared .venv linked locally, excluded via Git info/exclude."
+  },
+  "build_run": "results/dqi/DQI-19/rank42/build_only/20261108T110144Z-local-build"
+}
