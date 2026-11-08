@@ -143,8 +143,8 @@ config trong lượt hiện tại. Người dùng hoãn full; không chạy ho�
 như điều kiện hoàn thành bước phân tích này. Hai config đã có dev PASS, mô hình
 exhaustive và kiểm tra simulation mẫu biên/random riêng. Chưa có verifier full
 hoặc lượt chấm bổ sung với profile/seed độc lập cho ứng viên cuối; giới hạn này
-được giữ rõ khi bàn giao. Không khẳng định đã tìm tối ưu. Issue giữ mở, chưa tạo
-PR hoặc merge; bước chuẩn bị PR là giai đoạn tiếp theo nếu được giao. Khi cần
+được giữ rõ khi bàn giao. Không khẳng định đã tìm tối ưu. Tổng kết hướng với
+config delta12 để review PR; Issue giữ mở trong giai đoạn review, chưa merge. Khi cần
 xác nhận full sau này, hệ số full cần đối chứng cùng môi trường, không dùng
 baseline full Colab hiện tại để suy ra cải thiện tương thích.
 
