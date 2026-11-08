@@ -274,11 +274,10 @@ class SchurDecoder:
             with self.between(jump, 1, k-1) as selected:
                 self.b.cswap(selected, a[k-1], den[k-1])
 
-    def scale_row(self, row, jump, factor, inverse):
+    def scale_row(self, row, factor, inverse):
         temp = self.b.alloc_qubits(self.gf.degree)
-        with self.between(jump, 1, len(row)) as active:
-            for word in row:
-                self.scale(word, factor, inverse, temp, active)
+        for word in row:
+            self.scale(word, factor, inverse, temp, True)
         self.b.free(temp)
 
     def convolve(self, a, den, jump, reverse):
@@ -298,34 +297,39 @@ class SchurDecoder:
     def convert_block(self, den, a, jump, reverse):
         b, gf = self.b, self.gf
         cap = len(a)
+        # Use the unit scale on inactive blocks so row scaling needs no flag.
         if reverse:
             inv = b.alloc_qubits(gf.degree)
             self.at_jump_slot(a, jump, lambda word, flag: b.gf2_iadd(word, target=inv, control=flag))
+            b.flip_if_equal(jump, 0, target=inv[0])
             lead = b.alloc_qubits(gf.degree)
             self.inverse_add(inv, lead)
             self.rotate(a, jump, cap)
-            self.scale_row(a, jump, lead, inv)
+            self.scale_row(a, lead, inv)
             self.convolve(a, den, jump, True)
-            self.scale_row(den, jump, lead, inv)
+            self.scale_row(den, lead, inv)
             self.rotate(a, jump, cap, True)
             self.swap_tail(a, den, jump)
             self.inverse_add(lead, inv, undo=True)
             self.at_jump_slot(a, jump, lambda word, flag: b.cx(flag, word[0]))
             self.at_jump_slot(a, jump, lambda word, flag: b.cswap(flag, word, lead))
+            b.flip_if_equal(jump, 0, target=lead[0])
         else:
             lead = b.alloc_qubits(gf.degree)
             self.at_jump_slot(a, jump, lambda word, flag: b.cswap(flag, word, lead))
+            b.flip_if_equal(jump, 0, target=lead[0])
             self.at_jump_slot(a, jump, lambda word, flag: b.cx(flag, word[0]))
             inv = b.alloc_qubits(gf.degree)
             self.inverse_add(lead, inv)
             self.swap_tail(a, den, jump)
             self.rotate(a, jump, cap)
-            self.scale_row(den, jump, inv, lead)
+            self.scale_row(den, inv, lead)
             self.convolve(a, den, jump, False)
-            self.scale_row(a, jump, inv, lead)
+            self.scale_row(a, inv, lead)
             self.rotate(a, jump, cap, True)
             self.inverse_add(inv, lead, undo=True)
             self.at_jump_slot(a, jump, lambda word, flag: b.gf2_iadd(word, target=inv, control=flag))
+            b.flip_if_equal(jump, 0, target=inv[0])
         b.free(inv + lead)
 
     def conversion(self, reverse=False):
@@ -336,7 +340,8 @@ class SchurDecoder:
             jump = self.b.alloc_qubits(len(den).bit_length())
             with self.flag(lambda bit: self.toggle_start(start, bit)) as active:
                 self.encode_jump(num, active, jump)
-                self.convert_block(den, num, jump, reverse)
+            self.convert_block(den, num, jump, reverse)
+            with self.flag(lambda bit: self.toggle_start(start, bit)) as active:
                 self.encode_jump(num, active, jump)
             self.b.free(jump)
 
