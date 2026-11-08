@@ -51,11 +51,32 @@ Mục tiêu scan 11 Toffoli-like/điểm (45045 cho 4095 điểm) chỉ sau khi 
 
 ## Kết luận và phiên bản tái lập
 
-Chưa triển khai/chấm, chưa có artifact hoặc kết luận cải thiện. Bước 03 phải hoàn thiện mapping packed, model/kernel tests và tham số trước source commit/build; nếu không đạt thì ghi rõ điều kiện chặn, không dựng baseline rồi gắn tên ứng viên.
+Đã triển khai **probe tính khả thi**, không phải compiler submission đầy đủ, tại source commit `6b3318a36bbedf0abc62cf763efdb4fedc2ff786`. Probe không chạy verifier, không xuất artifact decoder hoặc ghi điểm. Kế hoạch materialize H riêng bị loại ở resource screening; H2 tổng quát chưa bị bác bỏ.
+
+### Bằng chứng đã kiểm tra
+
+- `--validate-packed`: tái tạo fixture từ EEA baseline đúng hash source `3bba2c941021749393d322c1b779e02dd7ec987c61c7b253a54fd2173968cdb4`, commit bb3a631. Sáu ca trọng số 0/1/1/1/7/35, gồm vị trí biên 0/4094 và các coset GF(8) tạo khoảng trống hệ số lớn. Sigma/omega khớp snapshot, syndrome được phục hồi. Không xuất submission từ mạch extraction.
+- `--validate-model`: trên sáu fixture, kiểm identity A*E+B*O=1 và Psi*f'=1+A²*f; quét đủ 4095 điểm mỗi ca, ba mask runtime/điểm (zero/full/mask thay đổi), không mismatch giá trị hoặc parity so với native w/(z*s'). Cả sáu locator packed quan sát có valuation=0, degree bằng trọng số; no-error là locator hằng. Đây là kiểm tra ca, chưa phải chứng minh mapping cho mọi trạng thái EEA.
+- `--validate-kernel`: kiểm đủ mọi cặp sigma/value 12 bit với mask thay đổi, cộng đủ mọi value/mask khi sigma=0, tổng 33554432 trường hợp. Không lỗi value/phase/workspace; point kernel dùng đúng 11 Toffoli-like, 35 qubit bao gồm 24 input. Con số này giả thiết error_value đã có, chưa tính tiền xử lý H/reciprocal.
+- `--audit-resources`: build các block baseline trong bộ nhớ để đếm tĩnh, không chạy grader hoặc viết artifact. Baseline có Q=1893, T tĩnh=5725461; riêng khối Chien/Forney cũ=1444737. Giữ EEA chính cần 1803 quantum wire sống qua sweep (hai mảng 73x12 bit và metadata).
+
+### Quyết định và điều kiện chặn bước 03
+
+Với layout giữ riêng 70 hệ số H (840 qubit), Q ít nhất 2643 chỉ tính state EEA còn sống và H. Coi **mọi** chi phí/workspace tiền xử lý, evaluation và cleanup bổ sung là zero, thay toàn block Forney bằng 4095x11=45045 Toffoli thì T tĩnh lạc quan vẫn là 4325769. Proxy Q²T của layout này bằng 1.4728074136 lần baseline, tức cao hơn 47.2807%. Ngay cả giả thiết reduction H mod f xuống 35 hệ số (420 qubit), Q=2223 cho tỷ số lạc quan 1.0419108503, cao hơn 4.1911%.
+
+Đây là **screening cấu trúc tĩnh** cho cách lưu riêng hệ số trong khi giữ nguyên state EEA, không phải score verifier hoặc định lý bác bỏ mọi H2; classical mask skips/cận lỗi/chi phí thực thi cần grader thật nếu có decoder. Tuy vậy ngay mô hình lạc quan đã không có lợi, nên không compile decoder theo layout này hoặc bàn giao baseline giả làm ứng viên. Tăng workspace Bézout/tape/convolution chỉ làm thiết kế lưu riêng tệ hơn mô hình này.
+
+Bước 02 đã có Issue/branch/draft PR và thiết kế. Bước 03 hiện **chưa nghiệm thu artifact BUILT**: còn cần biến đổi Bézout/Hankel tại chỗ (ví dụ thay đổi evaluator trong register sống rồi đảo được), với lịch gate đầy đủ, invariant cofactor/degree-drop/no-error, workspace bound và phase cleanup. Note cung cấp identity và số liệu tham khảo nhưng chưa cung cấp lịch này; classical xgcd trong probe không được coi là quantum preprocessing. Không tự đổi hypothesis, giảm EEA chính hoặc mở rộng sang BM trong Issue này.
+
+Không có JSON verifier, dev/full PASS, score hoặc build_only provenance cho decoder chưa tồn tại. Giữ Issue mở và PR draft để hoàn thiện biến đổi tại chỗ; nếu tiếp tục cần thay thế phần preprocessing rồi kiểm lại tổng Q²T, không chỉ 11/vị trí.
+
+### Tái lập probe
+
+Dùng Python 3.13.7, kickmix 1.0.0, numpy 2.5.4 tại source commit `6b3318a36bbedf0abc62cf763efdb4fedc2ff786`, baseline helper tại bb3a631/hash nêu trên. Chạy từ root với `--config src/dqi/DQI-21/configs/exact_probe.json` và một trong các option `--validate-packed`, `--validate-model`, `--validate-kernel`, `--audit-resources`. Output là JSON probe qua stdout, không phải verifier result; config này không có artifact để chấm notebook. Code/config đã commit; các số trong phần này được đo lại bằng đúng snapshot đó.
 
 | Mốc tốt nhất | Config | Commit nguồn | Run / provenance |
 | --- | --- | --- | --- |
 | Dev | Chưa có | Chưa có | Chưa chấm |
 | Full | Chưa có | Chưa có | Chưa chấm |
 
-Mã triển khai dự kiến: [solution.py](solution.py). Cấu hình dự kiến: [configs](configs/). Điểm: [SCORES.md](../SCORES.md).
+Probe model/kernel/resource: [solution.py](solution.py). Config chỉ cho probe: [exact_probe.json](configs/exact_probe.json). Điểm: [SCORES.md](../SCORES.md).
