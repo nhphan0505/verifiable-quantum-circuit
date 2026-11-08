@@ -79,3 +79,25 @@ Chưa triển khai hoặc chấm hypothesis này. Chứng cứ hiện có là co
 | Full | Chưa tạo | Chưa có | Chưa chấm |
 
 Điểm toàn track: [SCORES.md](../SCORES.md). Chưa thêm dòng score cho hướng chưa có run PASS.
+
+## Triển khai bước 03 — control_cache
+
+Config đầu tiên [control_cache.json](configs/control_cache.json) giữ m/n/degree=4095/70/12 và strategy control_input, bật duy nhất tuyến `eea_tail_pair`. [solution.py](solution.py) import DQI-19 read-only sau khi đối chiếu SHA-256 nêu trên; subclass chỉ thay lịch tail của `_synchronized_eea` cùng ba helper shift/metadata/swap. Không sửa source DQI-19. Hướng vẫn nằm trong phạm vi thứ hai đã chọn: control EEA lân cận multiply/add.
+
+Khảo sát phạm vi đầu bằng đa thức chuẩn hóa trên hai input 12 bit độc lập cho tensor rank42: 42 quadratic signatures khác nhau trong 861 cặp; không có hai term chênh nhau chỉ bởi affine trong mô hình boundary này. Đây không là chứng minh không có cache trên mọi reachable input/cross-call; không mở rộng tìm kiếm sang compiler toàn mạch. Chọn tuyến control có chứng minh trực tiếp thay vì ép term tensor trùng.
+
+### Chứng chỉ tuyến cache được bật
+
+- Boundary: ngay trước nhóm shift → metadata → swap của forward, hoặc swap → metadata → shift của reverse. Multiply/add và update_flag ở ngoài khoảng giữ cache. Hai dây cache mới alloc sạch, giữ được allocator reserve trong toàn nhóm.
+- Factor bất biến: `c0=ctrl[0]`, `c3=ctrl[3]`, `f=flag`. Ba khối chỉ đọc ctrl/flag; hai lần X(flag) dùng để compute/cleanup đều khôi phục ngay. Swap chỉ ghi các polynomial/metadata, không ghi ctrl/flag. Vì thế chứng chỉ áp cho cả thứ tự thuận/ngược, không suy từ trạng thái một mẫu.
+- Compute hai bit `p=c0*(1+f)` và `q=c3*(1+f)`. Shift dùng p/q cho điều khiển cursor như bản gốc. Metadata dùng lại cùng p/q thay vì init_and mới. Swap dùng CX từ c3 và q vào scratch sạch, vì `c3 XOR q=c3*f`; đây là equivalence affine giữa hai tích dưới phép complement f, không dùng điều kiện one-hot để suy công thức.
+- Sau khối cuối, X(flag), del_and với chính c0/c3 và complemented flag ban đầu, X(flag), free hai cache. Các factor không đổi nên HMR/CZ của del_and bù đúng `(-1)^(h*p)` và `(-1)^(h*q)` trên mọi nhánh đo. Không đo dưới quantum control. Không còn tuyến sống khi update_counter/update_halting_counter chạy.
+- Bản gốc compute 2 AND ở shift, 2 ở metadata và 1 ở swap; bản mới compute 2 và tái dùng. Dự đoán tĩnh trước build: tiết kiệm 3 mỗi bước ×222×2=1332 Toffoli-like; T=5043561 so 5044893 của đối chứng, giảm khoảng 0.0264%. Dự đoán Q không tăng vì cache thay nf của shift; giữ chúng trong metadata/swap phải được full build xác nhận, không suy từ số alloc tại điểm compute.
+
+### Kiểm tra component và tiêu chí build
+
+`--validate-segments`: 73728 ca trên tail thu nhỏ, cả thứ tự thuận/ngược, it=0/2/221, ba seed HMR; input array tùy ý, các tổ hợp control one-hot-or-zero/flag và metadata nằm trong bound cursor kế thừa. Output từng dây khớp reference, pha khớp, workspace sạch; mỗi segment giảm đúng 3 T, Q=83 ở cả hai. Thử đầu với metadata tùy ý ngoài bound đã làm reference có workspace dư; vì thế không dùng miền ngoài contract helper làm bằng chứng correctness của rewrite. Không thay verifier hoặc che lỗi decoder; full syndrome domain cần grader thật.
+
+Chứng chỉ Boolean độc lập được kiểm trên đủ 256 đầu vào (c0,c3,flag và năm target tùy ý), 32 seed HMR, tổng 8192 ca; không lỗi value/phase/workspace. Các seed chỉ lấy mẫu outcome, không gọi là đã ép mọi nhánh đo. Tính đúng trên mọi outcome dựa trên factor bất biến và identity del_and, kết hợp kiểm thực thi component. Các probe không phải dev/full submission PASS.
+
+Compile phải từ source/config đã commit và khớp bytes, dùng Python .venv 3.13.7 cùng packages pin. Build từ chối nếu Q>1893 hoặc T tĩnh khác 5043561; khi đạt mới ghi artifact `artifacts/dqi/DQI-25/control_cache.kmb` và provenance/helper hash. Chưa có score hoặc run decoder cho config này. Dev bàn giao giữ profile v1/seed20261106/4096 shots để so DQI-19 control_input; gain formal với baseline toàn repo vẫn cần môi trường/provenance tương thích. Giữ nguyên điều kiện dừng và yêu cầu kiểm tra full/seed giữ lại đã nêu, không nâng dự đoán thành kết quả.
