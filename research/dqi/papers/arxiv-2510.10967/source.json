@@ -1,0 +1,24 @@
+{
+  "track": "dqi",
+  "kind": "papers",
+  "source_id": "arxiv-2510.10967",
+  "title": "Verifiable Quantum Advantage via Optimized DQI Circuits",
+  "source_url": "https://arxiv.org/abs/2510.10967v1",
+  "version": "v1 (arXiv 2025-10-13; title page dated 2025-10-09)",
+  "accessed_at": "2026-11-08",
+  "source_file": "paper.pdf",
+  "source_sha256": "dcbbd0034ebcc3918a31ecc211ab108ec3a11d02840a78f504f915b73a5370ca",
+  "coverage": "Read abstract/contents pp. 1-2; Sections I-II pp. 2-15; V.A-B pp. 27-28; Appendix C pp. 39-41; D pp. 41-43; F pp. 48-52 (algorithm-level, not line-by-line circuit verification); B.3 on p. 39 for context. Visually checked pp. 14,15,27,40,43. Not fully read/audited: III-IV classical attacks/asymptotic proofs pp. 15-27; physical layouts pp. 29-31; conclusion/references pp. 32-34; Appendices A, B.1-2, E. No external assets, supplementary sources, or alternate PDF versions accessed; no reference code executed. Caveats in note cover C.3 phase notation, D.6 degree-jump argument, Forney conventions, and Dialog space assumptions.",
+  "project_snapshot": {
+    "commit": "9e4a371da8c952bdc6f96090562efeff8d71bf59",
+    "files": {
+      "src/dqi/DQI-BASELINE/solution.py": "3bba2c941021749393d322c1b779e02dd7ec987c61c7b253a54fd2173968cdb4",
+      "src/dqi/DQI-BASELINE/configs/baseline.json": "74055cda362a06faece1aa628efa072d1b6ecce8898934143c2b0fb40985466d",
+      "verifiers/dqi/verify_submission_dqi.py": "f14274bc0943fb9769ddb01131be6063191a15009fe1caf1d4bdd9fd25194e65",
+      "verifiers/dqi/dqi_reference_circuit.py": "2b8e1b80a806157c333a7e308eaf2499ee09de499efbc05875202c327959959e",
+      "results/dqi/DQI-BASELINE/baseline/full/20261107T094931Z-local-full-5ed1c6/verifier.json": "b3a7a9bba554f7d0a3c5e99573d6cd71c3c59f97db6f6ef5a512c4691f33de34",
+      "results/dqi/DQI-BASELINE/baseline/full/20261107T094931Z-local-full-5ed1c6/provenance.json": "09a9e61532361596f74a370abc36969dc511e619c359f77121b647189e62c646"
+    },
+    "hash_basis": "Raw Git blob bytes at project_snapshot.commit, independent of checkout line endings; read snapshot, not historical build provenance."
+  }
+}
