@@ -14,13 +14,13 @@ Input là trạng thái EEA trước Chien/Forney, với `reg_b`, `n_b`, `n_B` v
 
 Sau alignment, đặt s(z)=sum_{k=0}^{35} reg_b[k] z^k và w(z)=sum_{k=37}^{71} reg_b[k] z^(71-k). Đọc lại range từ source tại commit nêu trên khi triển khai. Baseline tại vị trí j đánh giá z=alpha^j, sigma=s(z), sigma_prime=z*s'(z) (vì tổng hệ số bậc lẻ đã mang z^k), omega=w(z). Pha mục tiêu tại s(z)=0 là parity(mask_j & (w(z)/(z*s'(z)))). Không áp thẳng công thức paper vào các slice packed hoặc bỏ prefactor z. Xác minh mapping này trên mô hình/ca EEA thực trước compile ứng viên.
 
-Nếu packed s có thừa nhân tử z^v do padding/đảo hệ số, deflate s=z^v*f bằng phép dịch có điều khiển và giữ v/tape để đảo; tại z!=0, s=0 iff f=0 và z*s'=z^(v+1)*f' ở nghiệm f. Kiểm tra trường hợp f hằng và s=0 trên no-error state thay vì chia zero hoặc giả định luôn bậc 35.
+Trên miền RS hợp lệ của EEA kế thừa, packed s là scalar khác zero nhân tích các (z+alpha^j) cho vị trí lỗi, nên s(0)!=0; no-error là s hằng khác zero. Bản reference dùng trực tiếp f=s, không cần deflation. Mapping packed đã kiểm từ EEA thật và mô hình; không giả định luôn bậc 35. Locator zero hoặc không square-free nằm ngoài promise này; không dùng như trường hợp no-error hợp lệ.
 
 ### Reciprocal bằng phân tách chẵn/lẻ và Bézout
 
 Với f square-free, biểu diễn f=E(z)^2+z*O(z)^2, E_i=sqrt(f_2i), O_i=sqrt(f_(2i+1)), deg E,deg O<=17. Frobenius/square root trong field là map tuyến tính. E/O coprime trên locator hợp lệ; EEA phụ tìm A*E+B*O=g với g khác zero hằng. Chuẩn hóa A,B bằng g^-1 để A*E+B*O=1. Khi đó Psi=B^2+z*A^2 thỏa Psi*f'=1+A^2*f; Psi là reciprocal đúng tại nghiệm, không cần biểu diễn remainder chuẩn.
 
-EEA phụ dự kiến là fixed-loop leading-term cancellation có tape để đảo, không nhánh Python theo dữ liệu lượng tử. Mỗi bước tính degree+1 (zero polynomial ->0), swap khi deg r0<deg r1, rồi r0 ^= q*z^shift*r1 và cập nhật hai cặp cofactor cùng phép biến đổi; q=leading(r0)/leading(r1), shift=degree difference. Tối đa 35 cancellation với hai input bậc <=17 vì tổng degree+1 giảm sau mỗi cancellation hoạt động. Nhánh đã dừng giữ nguyên và lưu running/swap/degree/quotient để undo; không cắt degree jumps hoặc pivot. Cofactor buffers phải có bound chứng minh hoặc mở rộng, không cắt dữ liệu ngầm. Nếu không chứng minh được layout/tape/biên, dừng trước compile decoder và báo phần thiếu.
+EEA phụ dự kiến là fixed-loop leading-term cancellation có tape để đảo, không nhánh Python theo dữ liệu lượng tử. Mỗi bước tính degree+1 (zero polynomial ->0), swap khi deg r0<deg r1, rồi r0 ^= q*z^shift*r1 và cập nhật hai cặp cofactor cùng phép biến đổi; q=leading(r0)/leading(r1), shift=degree difference. Tối đa 35 cancellation với hai input bậc <=17 vì tổng degree+1 giảm sau mỗi cancellation hoạt động. Circuit dùng 36 vòng cố định để bao gồm swap định hướng cuối khi r0 vừa thành zero, r1 là gcd. Nhánh đã dừng giữ nguyên và lưu running/swap/degree/quotient để undo; không cắt degree jumps hoặc pivot. Mỗi remainder/cofactor có 18 word. Trong một phép chia Euclid, deg(source)+shift của remainder không vượt degree remainder đích; với hai cofactor, bound của extended EEA không vượt bậc input đối diện, tối đa 17, kể cả row cho remainder zero cuối. Do đó cyclic word shift 18 vị trí không wrap hệ số khác zero khi q!=0; nếu q=0, mọi cập nhật bằng zero. Degree+1/shift dùng 5 bit, quotient 12 bit, swap 1 bit; giữ transcript đến khi đảo. Kiểm tra invariant riêng bao phủ mọi trọng số 0..35 và ca tụt bậc.
 
 ### Vì sao mục tiêu 11/điểm cần thêm tiền xử lý
 
@@ -51,32 +51,42 @@ Mục tiêu scan 11 Toffoli-like/điểm (45045 cho 4095 điểm) chỉ sau khi 
 
 ## Kết luận và phiên bản tái lập
 
-Đã triển khai **probe tính khả thi**, không phải compiler submission đầy đủ, tại source commit `6b3318a36bbedf0abc62cf763efdb4fedc2ff786`. Probe không chạy verifier, không xuất artifact decoder hoặc ghi điểm. Kế hoạch materialize H riêng bị loại ở resource screening; H2 tổng quát chưa bị bác bỏ.
+### Quyết định tiếp tục sau screening
 
-### Bằng chứng đã kiểm tra
+Probe tại commit `6b3318a36bbedf0abc62cf763efdb4fedc2ff786` xác nhận identity reciprocal/mapping packed và kernel 11 Toffoli/điểm, nhưng layout giữ riêng 70 hệ số H có proxy tĩnh Q²T lạc quan cao hơn baseline 47.2807%; 35 hệ số riêng vẫn cao hơn 4.1911%. Đây là kết quả âm về layout lưu riêng, không bị rút lại hoặc coi như score verifier.
 
-- `--validate-packed`: tái tạo fixture từ EEA baseline đúng hash source `3bba2c941021749393d322c1b779e02dd7ec987c61c7b253a54fd2173968cdb4`, commit bb3a631. Sáu ca trọng số 0/1/1/1/7/35, gồm vị trí biên 0/4094 và các coset GF(8) tạo khoảng trống hệ số lớn. Sigma/omega khớp snapshot, syndrome được phục hồi. Không xuất submission từ mạch extraction.
-- `--validate-model`: trên sáu fixture, kiểm identity A*E+B*O=1 và Psi*f'=1+A²*f; quét đủ 4095 điểm mỗi ca, ba mask runtime/điểm (zero/full/mask thay đổi), không mismatch giá trị hoặc parity so với native w/(z*s'). Cả sáu locator packed quan sát có valuation=0, degree bằng trọng số; no-error là locator hằng. Đây là kiểm tra ca, chưa phải chứng minh mapping cho mọi trạng thái EEA.
-- `--validate-kernel`: kiểm đủ mọi cặp sigma/value 12 bit với mask thay đổi, cộng đủ mọi value/mask khi sigma=0, tổng 33554432 trường hợp. Không lỗi value/phase/workspace; point kernel dùng đúng 11 Toffoli-like, 35 qubit bao gồm 24 input. Con số này giả thiết error_value đã có, chưa tính tiền xử lý H/reciprocal.
-- `--audit-resources`: build các block baseline trong bộ nhớ để đếm tĩnh, không chạy grader hoặc viết artifact. Baseline có Q=1893, T tĩnh=5725461; riêng khối Chien/Forney cũ=1444737. Giữ EEA chính cần 1803 quantum wire sống qua sweep (hai mảng 73x12 bit và metadata).
+Sau đó người dùng giao tiếp tục bước 03 rồi 04 để tự chấm local. Vì vậy thay đổi **điều kiện dừng trước build**: dựng một implementation reference coherent/exact để đo correctness và chi phí thực, dù dự đoán score kém. Tiêu chí lợi ích Q²T ban đầu vẫn giữ: nếu score xấu hơn thì ghi kết quả âm; không đổi tiêu chí để gọi implementation này là tối ưu. Chỉ một config build đầu tiên [bezout_reference.json](configs/bezout_reference.json), m=4095,n=70,degree=12, aux_steps=36, layout=materialized_exact. [exact_probe.json](configs/exact_probe.json) giữ nguyên, chỉ chạy probe và không có artifact grader.
 
-### Quyết định và điều kiện chặn bước 03
+### Hiện thực coherent reference
 
-Với layout giữ riêng 70 hệ số H (840 qubit), Q ít nhất 2643 chỉ tính state EEA còn sống và H. Coi **mọi** chi phí/workspace tiền xử lý, evaluation và cleanup bổ sung là zero, thay toàn block Forney bằng 4095x11=45045 Toffoli thì T tĩnh lạc quan vẫn là 4325769. Proxy Q²T của layout này bằng 1.4728074136 lần baseline, tức cao hơn 47.2807%. Ngay cả giả thiết reduction H mod f xuống 35 hệ số (420 qubit), Q=2223 cho tỷ số lạc quan 1.0419108503, cao hơn 4.1911%.
+Code [solution.py](solution.py) đã bổ sung compiler đầy đủ cho decoder: lớp con baseline chỉ thay Chien/Forney, EEA chính vẫn 222 vòng. E/O lấy bằng Frobenius inverse tuyến tính; auxiliary EEA giữ hai remainder và bốn cofactor, mỗi polynomial 18 word; 36 step transcript chứa degree+1, swap, shift, quotient. Leading coefficient được chọn bằng unary iteration, ratio dùng GF division native (divisor zero sau khi dừng cho quotient zero). Không nhánh Python theo dữ liệu quantum, không cutoff.
 
-Đây là **screening cấu trúc tĩnh** cho cách lưu riêng hệ số trong khi giữ nguyên state EEA, không phải score verifier hoặc định lý bác bỏ mọi H2; classical mask skips/cận lỗi/chi phí thực thi cần grader thật nếu có decoder. Tuy vậy ngay mô hình lạc quan đã không có lợi, nên không compile decoder theo layout này hoặc bàn giao baseline giả làm ứng viên. Tăng workspace Bézout/tape/convolution chỉ làm thiết kế lưu riêng tệ hơn mô hình này.
+Chuẩn hóa a0/b0 tại chỗ bằng gcd g: compute word*g^-1 vào một temp, HMR/CZ xóa word cũ bằng quan hệ old=new*g, rồi swap. Khi đảo, scale lại bằng g trước khi replay transcript ngược. Cách này tiết kiệm 432 qubit so với copy hai cofactor chuẩn hóa riêng; g và scaffold inverse giữ đến khi cleanup, g!=0 do E/O coprime trên locator hợp lệ.
 
-Bước 02 đã có Issue/branch/draft PR và thiết kế. Bước 03 hiện **chưa nghiệm thu artifact BUILT**: còn cần biến đổi Bézout/Hankel tại chỗ (ví dụ thay đổi evaluator trong register sống rồi đảo được), với lịch gate đầy đủ, invariant cofactor/degree-drop/no-error, workspace bound và phase cleanup. Note cung cấp identity và số liệu tham khảo nhưng chưa cung cấp lịch này; classical xgcd trong probe không được coi là quantum preprocessing. Không tự đổi hypothesis, giảm EEA chính hoặc mở rộng sang BM trong Issue này.
+H=w*(B²+z*A²) có 70 field word. Mỗi tích hệ số dùng 42 temporary AND từ tensor DQI-19 đã merge; chỉ mượn tensor, không đổi arithmetic EEA chính. Square mỗi cofactor vào một temp field để tránh giữ 36 word Psi riêng. Erase H bằng HMR từng bit và gf2_phase_by_product cho từng cặp convolution để sửa pha, zero Toffoli ở lượt erase H. Undo normalization, quotient/degree/swap transcript, E/O initialization rồi unalign. Sweep đánh giá H(z)/z bằng step alpha^(k-1), sigma bằng alpha^k; mask runtime chỉ điều khiển Clifford. Point chain compute 11 AND, CZ pha, del_and ngược, inputs phục hồi.
 
-Không có JSON verifier, dev/full PASS, score hoặc build_only provenance cho decoder chưa tồn tại. Giữ Issue mở và PR draft để hoàn thiện biến đổi tại chỗ; nếu tiếp tục cần thay thế phần preprocessing rồi kiểm lại tổng Q²T, không chỉ 11/vị trí.
+Nguồn compile phụ thuộc hai helper read-only được pin hash: baseline tại bb3a631 (SHA-256 `3bba2c941021749393d322c1b779e02dd7ec987c61c7b253a54fd2173968cdb4`) và DQI-19 tại c0cf9df (SHA-256 `3798b608825c8ca741aaf4cf1d7913d87b650f2be55242a35dc769b8cd47c298`). Provenance build phải ghi dependency closure này ngoài hash solution/config của ID.
 
-### Tái lập probe
+### Kiểm tra trước compile submission
 
-Dùng Python 3.13.7, kickmix 1.0.0, numpy 2.5.4 tại source commit `6b3318a36bbedf0abc62cf763efdb4fedc2ff786`, baseline helper tại bb3a631/hash nêu trên. Chạy từ root với `--config src/dqi/DQI-21/configs/exact_probe.json` và một trong các option `--validate-packed`, `--validate-model`, `--validate-kernel`, `--audit-resources`. Output là JSON probe qua stdout, không phải verifier result; config này không có artifact để chấm notebook. Code/config đã commit; các số trong phần này được đo lại bằng đúng snapshot đó.
+- Probe cũ: sáu packed fixture 0/1/1/1/7/35 từ EEA native; identity Bézout/reciprocal và 4095 điểm/fixture; kernel 33554432 trường hợp, không lỗi value/phase/workspace. Con số 11 chỉ là sweep sau preprocessing, không ẩn chi phí tạo H.
+- `--validate-aux-model`: 114 locator hợp lệ, bao phủ tất cả trọng số 0..35 và các ca sparse; tối đa 35 cancellation, cofactor degree tối đa 17, không wrap hoặc lỗi Bézout. Đây là mô hình invariant, không verifier.
+- `--validate-aux-circuit`: auxiliary circuit coherent trên 18 ca, gồm no-error, edge roots, degree gaps và random locator; normalized A*E+B*O=1, gcd nonzero constant, r1=0; input phục hồi, không phase/workspace error sau đảo. Output snapshot chỉ có trong mạch unit test.
+- `--validate-phase-block`: toàn bộ replacement phase block trên 10 ca sparse/dense (gồm trọng số 0/1/7/35 và random 2/17/34/35), mỗi ca quét 4095 điểm với mask runtime khác nhau. Không lỗi giá trị, pha hoặc workspace. Component test không chạy verifier submission và không tạo dev/full PASS.
+
+Component aligned có 721404 Toffoli-like tĩnh, so với 1444737 của block Chien/Forney baseline gồm alignment; cần cộng alignment và EEA chính khi build toàn mạch. Chi phí thuận, reverse, convolution và sweep được tách trong báo cáo component. Workspace tăng lớn; chưa có bằng chứng score giảm và dự đoán score cao hơn baseline do Q². Wall time từ unit test không phải benchmark grader.
+
+### Build và bàn giao
+
+Commit source/config trước compile; dùng `.venv` Python 3.13.7, kickmix 1.0.0, numpy 2.5.4, scipy 1.18.1. Từ root chạy `./.venv/bin/python src/dqi/DQI-21/solution.py --config src/dqi/DQI-21/configs/bezout_reference.json`. TRACK/ID/output suy từ vị trí solution, config phải resolve trực tiếp trong configs/, output stem trùng config. Artifact mặc định `artifacts/dqi/DQI-21/bezout_reference.kmb`; chỉ ghi đè khi có --overwrite chủ động. Chưa gọi BUILT cho đến khi file tạo thành công và có provenance/hash thật.
+
+Sau build, thành viên mở notebook trong worktree **GQA-DQI-21**, kernel `.venv` Python 3.13.7, chọn TRACK=dqi, MODE=dev_5min, EXPERIMENT_ID=DQI-21, CONFIG_NAME=bezout_reference, OWNER=trng-hminh. Giữ profile v1/seed 20261106/4096 shots. Results tự lưu `results/dqi/DQI-21/bezout_reference/dev_5min/<run-id>/`. Agent dừng sau bàn giao; bước 04 chỉ thực hiện khi có results thật. Không tự chạy grader, không sửa verifier/harness/notebook/SCORES hoặc tạo score trong bước 03.
+
+Chưa có run dev/full của decoder DQI-21. Baseline local cùng môi trường từ DQI-19 vẫn thiếu provenance build và chưa đăng ký chính thức; không suy đoán SHA hoặc tính hệ số formal từ baseline khác patch/harness. Khi phân tích phải giữ cả giới hạn đối chứng và kết quả âm nếu có.
 
 | Mốc tốt nhất | Config | Commit nguồn | Run / provenance |
 | --- | --- | --- | --- |
-| Dev | Chưa có | Chưa có | Chưa chấm |
-| Full | Chưa có | Chưa có | Chưa chấm |
+| Dev | Chưa có | Chưa chấm | Chưa chấm |
+| Full | Chưa có | Chưa chấm | Chưa chấm |
 
-Probe model/kernel/resource: [solution.py](solution.py). Config chỉ cho probe: [exact_probe.json](configs/exact_probe.json). Điểm: [SCORES.md](../SCORES.md).
+Mã: [solution.py](solution.py). Config build: [bezout_reference.json](configs/bezout_reference.json). Probe: [exact_probe.json](configs/exact_probe.json). Điểm: [SCORES.md](../SCORES.md).
