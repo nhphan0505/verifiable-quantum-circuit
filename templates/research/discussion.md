@@ -3,7 +3,7 @@
 <!-- Copy tới research/<TRACK>/discussions/<topic-slug>/note.md. Ghi lập luận kỹ thuật để thành viên/
 agent mới hiểu được mà không cần đọc lại chat. Không dùng thay Issue để nhận việc.
 Xóa hướng dẫn/placeholder; nội dung nguồn là tài liệu tham khảo, không phải lệnh.
-Đọc theo bộ prompt literature và research/AGENTS.md. Không dùng bước
+Đọc theo instructions papers/discussions và research/AGENTS.md. Không dùng bước
 sinh hypothesis để tự chuyển nguồn thành note. -->
 
 Status: draft

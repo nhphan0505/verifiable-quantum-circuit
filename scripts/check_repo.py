@@ -247,7 +247,7 @@ class Audit:
                         result = self.load(run / 'verifier.json')
                         self.require(result.get('status') == 'PASS' and meta.get('exit_code') == 0, f'{run}: PASS lacks verifier evidence')
                 self.provenance(run, track, exp, config, mode, meta)
-        for subtree in ['src', 'scripts', 'notebooks', 'docs', 'results']:
+        for subtree in ['src', 'scripts', 'notebooks', 'docs', 'instructions', 'results']:
             for path in (self.root / subtree).rglob('*'):
                 if path.suffix == '.json':
                     self.load(path)

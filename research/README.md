@@ -33,7 +33,7 @@ Chưa có discussion được lưu.
    `invsqrt`, `dqi`, `dfthcsos` hoặc `shared` cho tài liệu dùng chung. Mỗi nguồn chỉ
    lưu một bản, track khác dẫn link. Có thể chỉ lưu PDF trước; chưa đọc thì ghi
    rõ chưa viết note. Khi phân tích, dùng [template notes](../templates/research/notes.md)
-   để tạo `note.md` cùng thư mục. Luồng đọc nguồn: [literature](../templates/prompts/literature/README.md).
+   để tạo `note.md` cùng thư mục. Luồng đọc nguồn: [paper](../instructions/papers/README.md) và [discussion](../instructions/discussions/README.md).
    Quy chuẩn PAPER_ID:
    - Có arXiv: dùng `arxiv-<mã>`, ví dụ `arxiv-2308.12352`; mã kiểu cũ thay `/`
      bằng `--`, ví dụ `arxiv-quant-ph--9508027`.
@@ -73,7 +73,7 @@ Mục lục ghi trạng thái cạnh link note; trạng thái trong note là b�
 Mỗi note có source.json cùng thư mục theo [schema mẫu](../templates/research/source.json).
 
 Quy trình đầy đủ: [hướng dẫn agent tài liệu](AGENTS.md),
-[bộ prompt](../templates/prompts/literature/README.md).
+[paper](../instructions/papers/README.md) và [discussion](../instructions/discussions/README.md).
 
 ## Đợt research của thành viên
 

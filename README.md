@@ -39,7 +39,7 @@ GQA/
 
 ## Làm việc
 
-Dùng coding agent: yêu cầu đọc [AGENTS.md](AGENTS.md) trước khi bắt đầu. Chọn [prompt theo giai đoạn](templates/prompts/experiments/README.md) để giao việc.
+Dùng coding agent: yêu cầu đọc [AGENTS.md](AGENTS.md) trước khi bắt đầu. Chọn [instructions theo bước](instructions/experiments/README.md) để giao việc.
 
 1. Chuẩn bị workspace
 2. Kiểm tra các hướng đã có
@@ -117,8 +117,8 @@ git status --short --branch
 ```
 
 Nếu thiếu tên/email, cấu hình danh tính Git của mình trước khi commit.
-Bắt đầu bằng [prompt 01 — tìm hypothesis](templates/prompts/experiments/01_find_hypothesis.md),
-sau đó làm theo [bộ prompt từng giai đoạn](templates/prompts/experiments/README.md).
+Bắt đầu bằng [bước 01 — tìm hypothesis](instructions/experiments/01_find_hypothesis.md),
+sau đó làm theo [instructions từng bước](instructions/experiments/README.md).
 Agent sẽ tạo branch, code/config và compile artifact khi được giao hướng;
 người clone mới chưa có sẵn artifact baseline trong máy.
 
@@ -134,15 +134,21 @@ Kho tài nguyên: [paper và thảo luận nghiên cứu](research/README.md).
 
 ## Hai luồng dùng agent
 
-| Luồng | Hướng dẫn | Bộ prompt |
+| Luồng | Hướng dẫn | Instructions |
 | --- | --- | --- |
-| Nghiên cứu thử nghiệm | [Workflow](docs/EXPERIMENT_WORKFLOW.md) | [experiments](templates/prompts/experiments/README.md) |
-| Đọc paper/discussion thành note | [Agent tài liệu](research/AGENTS.md) | [literature](templates/prompts/literature/README.md) |
+| Nghiên cứu thử nghiệm | [Workflow](docs/EXPERIMENT_WORKFLOW.md) | [experiments](instructions/experiments/README.md) |
+| Đọc paper thành note | [Agent tài liệu](research/AGENTS.md) | [papers](instructions/papers/README.md) |
+| Đọc discussion thành note | [Agent tài liệu](research/AGENTS.md) | [discussions](instructions/discussions/README.md) |
 
 Dùng chat và workspace riêng khi chạy đồng thời. Agent tài liệu xuất bản note;
 agent nghiên cứu chỉ dùng note ready đã review và merge. Chấm notebook local vẫn
-thực hiện thủ công. Xem [điểm vào chung](templates/prompts/README.md).
+thực hiện thủ công. Xem [điểm vào chung](instructions/README.md).
 
 Luồng tài liệu: mỗi thành viên thêm nhiều nguồn/note trên `research/<username>`,
-mở PR để nhóm xem và họp quyết định đợt nhập vào main. Issue nguồn là tùy chọn.
+mở PR cho đợt; sau review độc lập bước 04 và checks đạt, tác giả được merge ở
+bước 05 theo research/AGENTS.md. Issue nguồn là tùy chọn.
 Workflow experiment vẫn dùng `exp/<ID>-...` như trước.
+
+Trong chat đã xác định luồng, chỉ cần nói “thực hiện các bước 1 2 3”. Agent đọc
+instructions, dùng lại ngữ cảnh và tra project/GitHub; chỉ hỏi thông tin chưa biết
+hoặc chưa rõ, không yêu cầu chép prompt/điền lại tham số. Xem [quy tắc giao việc](instructions/README.md).

@@ -4,13 +4,13 @@ Một hướng nghiên cứu tương ứng một GitHub Issue, một branch và 
 
 **Chuẩn bị → kiểm tra hướng cũ → nhận Issue → tạo branch → mô tả/code/config → commit nguồn → dựng/chấm → lưu và phân tích → commit kết quả → thử tiếp hoặc PR → review/merge → đóng Issue.**
 
-Mẫu giao việc cho coding agent: [templates/prompts/README.md](templates/prompts/experiments/README.md).
+Instructions cho coding agent: [instructions/README.md](instructions/README.md).
 
 ## Hai luồng cộng tác
 
 - **Nghiên cứu thử nghiệm:** [agent](docs/EXPERIMENT_WORKFLOW.md),
-  [prompts](templates/prompts/experiments/README.md); thực hiện 12 bước bên dưới.
-- **Đọc tài liệu:** [agent](research/AGENTS.md), [prompts](templates/prompts/literature/README.md).
+  [instructions](instructions/experiments/README.md); thực hiện 12 bước bên dưới.
+- **Đọc tài liệu:** [agent](research/AGENTS.md), [paper](instructions/papers/README.md) và [discussion](instructions/discussions/README.md).
   Tạo/tiếp tục branch `research/<username>` → thêm nhiều resource → viết note →
   review độc lập bước 04 → tác giả hoàn thiện và merge PR vào main ở bước 05. Issue cho nguồn
   là tùy chọn; không có yêu cầu một nguồn một branch/Issue.
@@ -25,6 +25,13 @@ Mẫu giao việc cho coding agent: [templates/prompts/README.md](templates/prom
   Vẫn tuân thủ rules GitHub thực tế, không bypass nếu repo yêu cầu approval.
 - CI yêu cầu mỗi thư mục resource có note.md không rỗng; PDF/link-only chỉ lưu nháp,
   chưa được merge. Chạy scripts/check_research_notes.py trước bàn giao PR.
+
+Giao agent bằng số bước theo [instructions](instructions/README.md), ví dụ
+“thực hiện các bước 1 2 3” trong luồng đang làm; không cần chép prompt hay truyền lại
+tham số đã biết. Agent tra chat/project/GitHub, chỉ hỏi phần thiếu hoặc mơ hồ.
+Mỗi bước có ràng buộc file/branch/quyền, yêu cầu đầu ra và danh sách nghiệm thu.
+Các mục 1–12 dưới đây giải thích quy trình experiment; số dùng trong lệnh giao việc
+là số ở instructions của luồng tương ứng.
 
 ## 1. Chuẩn bị workspace
 
@@ -89,8 +96,8 @@ git status --short --branch
 ```
 
 Nếu thiếu tên/email, cấu hình danh tính Git của mình trước khi commit.
-Bắt đầu bằng [prompt 01 — tìm hypothesis](templates/prompts/experiments/01_find_hypothesis.md),
-sau đó làm theo [bộ prompt từng giai đoạn](templates/prompts/experiments/README.md).
+Bắt đầu bằng [bước 01 — tìm hypothesis](instructions/experiments/01_find_hypothesis.md),
+sau đó làm theo [instructions từng bước](instructions/experiments/README.md).
 Agent sẽ tạo branch, code/config và compile artifact khi được giao hướng;
 người clone mới chưa có sẵn artifact baseline trong máy.
 
@@ -252,14 +259,14 @@ Trước PR, agent chạy `.\.venv\Scripts\python.exe scripts/check_repo.py`, b�
 
 Reviewer kiểm tra mô tả/Issue đã đồng bộ, code đọc config, commit nguồn/provenance, hash và bằng chứng chấm, điểm đúng cột và link kết quả mở được. Các kiểm tra nhỏ hoặc CI chỉ chạy nếu phù hợp; không tuyên bố full PASS khi chỉ có dev. Hướng thất bại vẫn có thể merge để lưu tri thức, nhưng phải ghi kết luận rõ.
 
-Phân công review: tác giả dùng prompt 06 chuẩn bị PR; teammate dùng phiên agent
-riêng chạy [07](templates/prompts/experiments/07_review_pr.md), ghi findings và SHA đã review.
+Phân công review: tác giả dùng bước 06 chuẩn bị PR; teammate dùng phiên agent
+riêng chạy [07](instructions/experiments/07_review_pr.md), ghi findings và SHA đã review.
 Tác giả sửa/push nếu cần; teammate kiểm tra lại commit mới rồi dùng
-[07b](templates/prompts/experiments/07b_publish_review.md) để đăng Approve hoặc Request changes.
+[07b](instructions/experiments/07b_publish_review.md) để đăng Approve hoặc Request changes.
 Tài khoản reviewer phải khác tác giả. CI đang chờ thì chưa approve; thiếu approval
 không phải lỗi check kỹ thuật. Findings trong chat chưa thay thế review GitHub.
 Nếu HEAD đổi sau review, teammate review lại phần mới và đăng approval cho HEAD đó,
-kể cả khi thay đổi chỉ để xử lý conflict. Tác giả dùng prompt 08 để merge sau cùng.
+kể cả khi thay đổi chỉ để xử lý conflict. Tác giả dùng bước 08 để merge sau cùng.
 
 ## 12. Merge và hoàn thành Issue
 

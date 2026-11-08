@@ -6,16 +6,28 @@
 ## Chọn luồng
 
 - **Nghiên cứu thử nghiệm:** đọc [hướng dẫn](docs/EXPERIMENT_WORKFLOW.md) và
-  [bộ prompt](templates/prompts/experiments/README.md). Trong research chỉ đọc
+  [instructions](instructions/experiments/README.md). Trong research chỉ đọc
   `note.md` có `Status: ready` đã merge vào nhánh chính; không mở nguồn gốc.
   Vẫn tự suy luận từ verifier, code và results, không chỉ dựa vào note.
 - **Đọc tài liệu:** đọc [research/AGENTS.md](research/AGENTS.md) và
-  [bộ prompt](templates/prompts/literature/README.md). Được đọc PDF/discussion,
+  instructions riêng cho [paper](instructions/papers/README.md) và
+  [discussion](instructions/discussions/README.md). Được đọc PDF/discussion,
   viết và review note trên branch `research/<username>` cá nhân, có thể thêm nhiều
   nguồn trong một đợt. Sau review độc lập bước 04 đạt và checks đạt, tác giả được merge
   vào main theo research/AGENTS.md; không sửa thí nghiệm.
 - Hai luồng dùng chat/agent riêng. Khi chạy đồng thời, dùng workspace/worktree
   riêng; không chuyển branch trong workspace có công việc của chat khác.
+
+## Giao việc bằng số bước
+
+Đọc [instructions/README.md](instructions/README.md). Người dùng có thể chỉ nói
+“thực hiện các bước 1 2 3” trong luồng đã xác định; số bước theo instructions của
+luồng, không theo 12 mục giải thích trong CONTRIBUTING.md. Dùng lại dữ kiện đã biết
+trong chat, xác minh bằng repo/GitHub. Không bắt điền form hoặc lặp tham số. Tra trước,
+hỏi đúng thông tin còn thiếu/mơ hồ (username, PR, nguồn, hypothesis...), không tự bịa.
+Làm liên tiếp các bước đã giao khi đủ đầu vào/nghiệm thu; không xin lại quyền đã giao.
+Chấm local, review độc lập và checks vẫn là điều kiện chuyển bước. Chat mới khôi phục
+từ bằng chứng thật, không giả định nhớ chat cũ hoặc tự cấp thêm quyền.
 
 ## Quy tắc chung
 

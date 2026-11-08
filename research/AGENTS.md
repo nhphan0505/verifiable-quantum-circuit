@@ -4,9 +4,16 @@
 quyền đọc; agent tài liệu được mở PDF, discussion và nguồn dẫn cần thiết. Agent sinh
 hypothesis vẫn chỉ đọc note ready đã merge. Không áp quy trình compile/chấm cho tài liệu.
 
+Số bước theo instructions riêng cho [paper](../instructions/papers/README.md) và
+[discussion](../instructions/discussions/README.md): 01 nhận nguồn, 02 đọc/viết note,
+03 tác giả tự rà/sửa findings, 04 review độc lập, 05 hoàn thiện/merge, 06 khôi phục.
+Dùng lại thông tin trong chat và xác minh project/GitHub; chỉ hỏi phần thiếu/mơ hồ,
+không yêu cầu điền form. Giao nhiều bước thì tiếp tục khi đủ đầu vào/nghiệm thu;
+bước 03 không thay review độc lập bước 04.
+
 ## Nhận nguồn và phạm vi
 
-- Đọc CONTRIBUTING.md, mục lục research và prompts/literature. Trước sửa kiểm tra
+- Đọc CONTRIBUTING.md, mục lục research và instructions/papers hoặc instructions/discussions. Trước sửa kiểm tra
   owner, branch/working tree; kiểm tra Issue/PR mở và đóng để tránh nhận trùng.
 - Mỗi thành viên dùng branch cá nhân `research/<username>` (GitHub username thật).
   Một branch có thể thêm nhiều nguồn, nhiều track và nhiều note trong một đợt.
