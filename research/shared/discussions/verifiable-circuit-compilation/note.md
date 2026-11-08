@@ -1,6 +1,6 @@
 # Biên dịch mạch lượng tử có thể kiểm chứng bằng mô phỏng cổ điển
 
-Status: draft
+Status: ready
 Track: shared
 Source: https://arxiv.org/abs/2610.23832v2
 Version: arXiv:2610.23832v2

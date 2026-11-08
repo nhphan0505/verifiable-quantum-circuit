@@ -29,7 +29,7 @@ Luôn đối chiếu với EXPERIMENTS, Issues và results
 | SomeJoint v36: hai bit pha, DQI của yoyobar và refit trọng số FeMoCo | shared | Invsqrt, DQI, DFTHCSOS | [note.md — ready](shared/discussions/kaggle-somejoint-chem-refit-v36/note.md) | — |
 | Özer v23 — refit DF-THC, tái dùng tích DQI và pha invsqrt | shared | Invsqrt, DQI, DFTHCSOS | [note.md — ready](shared/discussions/kaggle-ozer-df-thc-group-compression-v23/note.md) | — |
 | mrmeows v3 — mạch mở và kết quả âm của ba bài | shared | Invsqrt, DQI, DFTHCSOS | [note.md — ready](shared/discussions/kaggle-mrmeows-open-circuits-v3/note.md) | — |
-| Biên dịch mạch lượng tử với cấu trúc kiểm chứng được | shared | Invsqrt, DQI, DFTHCSOS | [note.md — draft](shared/discussions/verifiable-circuit-compilation/note.md) | — |
+| Biên dịch mạch lượng tử với cấu trúc kiểm chứng được | shared | Invsqrt, DQI, DFTHCSOS | [note.md — ready](shared/discussions/verifiable-circuit-compilation/note.md) | — |
 
 Chưa có discussion được lưu.
 
