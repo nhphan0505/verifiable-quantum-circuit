@@ -1,0 +1,12 @@
+{
+    "track":  "shared",
+    "kind":  "discussions",
+    "source_id":  "verifiable-circuit-compilation",
+    "title":  "Leveraging verifiable structure in quantum circuits to find more efficient compilations with agentic AI",
+    "source_url":  "https://arxiv.org/abs/2610.23832v2",
+    "version":  "arXiv:2610.23832v2",
+    "accessed_at":  "2026-11-08",
+    "source_file":  "verifiable_circuit_compilation.pdf",
+    "source_sha256":  "1aa5e545e641338a7a40d9f689e78d2805766848fa650f0d40da839fbab40618",
+    "coverage":  "Đã đối chiếu metadata, phần II về Kickmix và lấy mẫu kiểm chứng, cùng các mục chính của phần III về ba benchmark. Note tóm tắt phương pháp và điều kiện kiểm chứng. Phụ lục triển khai ngoài phạm vi."
+}
