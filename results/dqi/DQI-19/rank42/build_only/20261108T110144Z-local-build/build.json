@@ -1,0 +1,17 @@
+{
+  "status": "BUILT",
+  "track": "dqi",
+  "experiment_id": "DQI-19",
+  "config_name": "rank42",
+  "source_commit": "9918ac4f0cc2ae695180bc93ef1d1bf99613d168",
+  "artifact_path": "artifacts/dqi/DQI-19/rank42.kmb",
+  "artifact_sha256": "ae5d79c2ade1f04ce5937581fae10bbb14f5cd992224c6c202c0b976f6d28627",
+  "artifact_size_bytes": 1143210844,
+  "num_qubits": 1893,
+  "static_toffoli_like": 5044893,
+  "verification_level": "build_only",
+  "limitations": [
+    "No decoder verification or score; static instruction count is not mean executed Toffoli-like per shot.",
+    "Python patch 3.13.7 differs from historical baseline 3.13.14; gain requires a compatible baseline."
+  ]
+}

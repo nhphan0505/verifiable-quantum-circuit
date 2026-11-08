@@ -1,0 +1,1 @@
+Wrote /Users/tranxuanhoa/Documents/research/GQA-DQI-19/artifacts/dqi/DQI-19/rank42_control_input.kmb: 5,044,893 Toffolis, 1893 qubits.

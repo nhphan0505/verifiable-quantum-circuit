@@ -1,0 +1,32 @@
+Kernel validation: 4,194,304 cases checked
+Kernel validation: 8,388,608 cases checked
+Kernel validation: 12,582,912 cases checked
+Kernel validation: 16,777,216 cases checked
+Kernel validation: 20,971,520 cases checked
+Kernel validation: 25,165,824 cases checked
+Kernel validation: 29,360,128 cases checked
+Kernel validation: 33,554,432 cases checked
+{
+  "strategy": "control_input",
+  "kernel_instructions": 1022,
+  "tensor_basis_pairs": 144,
+  "rank": 42,
+  "exhaustive_operand_pairs": true,
+  "control_values": [
+    0,
+    1
+  ],
+  "shots_checked": 33554432,
+  "measurement_seeds": [
+    1901
+  ],
+  "value_errors": 0,
+  "phase_errors": 0,
+  "workspace_errors": 0,
+  "kernel_toffoli_like": 54,
+  "native_toffoli_like": 75,
+  "kernel_qubits": 52,
+  "native_qubits": 49,
+  "elapsed_seconds": 7.708634375128895,
+  "verification_level": "isolated multiplication kernel, not decoder grading"
+}

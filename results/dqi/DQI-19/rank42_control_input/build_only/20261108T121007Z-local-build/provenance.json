@@ -1,0 +1,25 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-19",
+  "config_name": "rank42_control_input",
+  "source_commit": "c0cf9dfb45b62ba7eeb8588c87b0066409880046",
+  "source_path": "src/dqi/DQI-19/solution.py",
+  "source_sha256": "3798b608825c8ca741aaf4cf1d7913d87b650f2be55242a35dc769b8cd47c298",
+  "build_config_path": "src/dqi/DQI-19/configs/rank42_control_input.json",
+  "build_config_sha256": "ccf16a535e7d65bdeefe550eaee77a0e41c6f4d947566a59b1e8fa9dfee2e565",
+  "artifact_path": "artifacts/dqi/DQI-19/rank42_control_input.kmb",
+  "artifact_sha256": "8a7a9de680e4918ffdf949c529643e6cded8f7b06e023b0ebc7db994b42e7b7d",
+  "build_command": "./.venv/bin/python src/dqi/DQI-19/solution.py --config src/dqi/DQI-19/configs/rank42_control_input.json",
+  "environment": {
+    "python": "3.13.7",
+    "python_executable": "/Users/tranxuanhoa/Documents/research/GQA/.venv/bin/python",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    },
+    "dependencies": "Self-contained solution.py; pinned Kickmix for compilation, NumPy for isolated kernel validation."
+  },
+  "build_run": null
+}

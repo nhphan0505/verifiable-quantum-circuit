@@ -1,0 +1,11 @@
+{
+  "purpose": "Record user-requested historical arithmetic score ratio; not a controlled improvement claim",
+  "baseline_score": 61234661450380.1,
+  "candidate_score": 53955451017897.38,
+  "historical_arithmetic_ratio": 1.134911492632471,
+  "displayed_ratio": "1.1349\u00d7",
+  "baseline_comparable": false,
+  "checker_comparison_expected": "FAIL: Python patch and dev harness hash differ",
+  "original_review": "review.json",
+  "raw_evidence_modified": false
+}

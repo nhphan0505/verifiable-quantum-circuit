@@ -1,0 +1,23 @@
+{
+  "status": "BUILT",
+  "track": "dqi",
+  "experiment_id": "DQI-19",
+  "config_name": "rank42_control_input",
+  "source_commit": "c0cf9dfb45b62ba7eeb8588c87b0066409880046",
+  "artifact_path": "artifacts/dqi/DQI-19/rank42_control_input.kmb",
+  "artifact_sha256": "8a7a9de680e4918ffdf949c529643e6cded8f7b06e023b0ebc7db994b42e7b7d",
+  "artifact_size_bytes": 896002620,
+  "num_qubits": 1893,
+  "static_toffoli_like": 5044893,
+  "verification_level": "build_only",
+  "old_rank42_artifact_size_bytes": 1143210844,
+  "artifact_size_reduction_fraction": 0.21624027212254116,
+  "kernel_instructions": 1022,
+  "old_kernel_instructions": 1926,
+  "kernel_toffoli_like": 54,
+  "limitations": [
+    "No decoder verification of control_input setting yet. BUILT and kernel tests are not dev/full PASS.",
+    "Original rank42 remains the only graded setting; its source/run mapping remains at 9918ac4f0cc2ae695180bc93ef1d1bf99613d168.",
+    "Baseline reruns match environment but lack build provenance and separate registration."
+  ]
+}

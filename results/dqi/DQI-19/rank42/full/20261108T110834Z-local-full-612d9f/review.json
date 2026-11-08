@@ -1,0 +1,30 @@
+{
+  "verification_level": "full",
+  "status_observed": "PASS",
+  "verified_shots": 102400,
+  "value_errors": 0,
+  "phase_errors": 0,
+  "official_verifier_command_checked": true,
+  "official_parameters_checked": true,
+  "raw_stdout_matches_verifier_json": true,
+  "artifact_matches_build": true,
+  "verifier_hashes_match_checkout": true,
+  "source_commit": "9918ac4f0cc2ae695180bc93ef1d1bf99613d168",
+  "build_run": "results/dqi/DQI-19/rank42/build_only/20261108T110144Z-local-build",
+  "score": 21534246734876.543,
+  "historical_arithmetic_ratio": 1.1349114684420858,
+  "baseline_comparable": false,
+  "improvement_factor": null,
+  "limitations": [
+    "Historical baseline uses Python 3.13.14 versus candidate 3.13.7.",
+    "Full PASS supports correctness under the official statistical test, not a proof on all syndromes."
+  ],
+  "raw_evidence_sha256": {
+    "provenance.json": "cf7f677cf515267984d4f3714de038f170772b97d01681653fdc9331458d0ca9",
+    "config.json": "1b2ffa60aa00d9dcabdc4e4e3cf3791b212ce2949aa1ff61ad268fbfeef98412",
+    "metadata.json": "d5865fe1ef349825b89d7bb3851b00cff148a5b7b0bc098bf5a3fa1d24ceb97e",
+    "verify.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "verifier.json": "fef4d95ecc18f9f6641a53eea11affeef31809293bdf548fe42c297cb6da534f",
+    "verify.stdout.txt": "fef4d95ecc18f9f6641a53eea11affeef31809293bdf548fe42c297cb6da534f"
+  }
+}

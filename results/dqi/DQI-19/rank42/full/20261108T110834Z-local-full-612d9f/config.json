@@ -1,0 +1,13 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-19",
+  "config_name": "rank42",
+  "mode": "full",
+  "command": [
+    "/Users/tranxuanhoa/Documents/research/GQA/.venv/bin/python",
+    "/Users/tranxuanhoa/Documents/research/GQA-DQI-19/verifiers/dqi/verify_submission_dqi.py",
+    "/Users/tranxuanhoa/Documents/research/GQA-DQI-19/artifacts/dqi/DQI-19/rank42.kmb",
+    "--max-workers",
+    "1"
+  ]
+}
