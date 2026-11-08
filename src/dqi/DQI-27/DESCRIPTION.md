@@ -86,3 +86,37 @@ Chưa có implementation/config/artifact/run của hướng này. Đánh giá tr
 | Full | Chưa tạo | Chưa có | Chưa chấm |
 
 Điểm toàn track: [SCORES.md](https://github.com/nhphan0505/verifiable-quantum-circuit/blob/a2d6d964eb9760e2b7324668ce7e3ba2fc228a4c/src/dqi/SCORES.md). Không thêm score cho hướng chưa chấm.
+
+## Triển khai bước 03 — narrow_return
+
+Source DQI-23 c5b70b1 được chép theo đúng snapshot vào [solution.py](solution.py), giữ attribution; compilation không phụ thuộc file DQI-23 ngoài main hoặc notebook tác giả. Chỉ diagnostic `--audit-resources` đọc Git blob pin/hash để so các component gốc; build candidate dùng source tự chứa và Kickmix pin. Config đầu tiên [narrow_return.json](configs/narrow_return.json) giữ 4095/70/12, HMR masked-product cleanup như đối chứng và `use_extra_converter_qubit=true` theo resource audit.
+
+### Chứng chỉ streamed jump history
+
+Encode cũ giữ tới 35 prefix flags. Encode mới chỉ giữ live/zero/hit (3 qubit) và dùng chính jump làm history. Tiền điều kiện khi tính là jump=0; khi xóa là jump đã chứa tag đúng (khác primitive XOR vào target tùy ý cũ). Mọi call site được định hướng compute/erase rõ ràng: extraction tính trên syndrome prefix rồi xóa từ quotient markers; inverse theo thứ tự ngược; conversion tính trước và xóa sau từ marker tương ứng. Không tự áp routine mới lên jump tùy ý.
+
+Với tag c_i dương, khác nhau và vừa độ rộng jump, trước bước i invariant là jump=0 nếu chưa có hit; nếu đã hit thì jump là tag của bước trước, do đó không bằng c_i. Tính zero=(word_i==0), hit=live*(1+zero), jump ^= c_i*hit, live ^= hit. Tag mới trong jump cho phép xóa hit bằng [jump==c_i]*active dù live đã đổi. Xóa zero bằng word không đổi. Cuối scan, live=active*[jump==0] nên được xóa từ jump. Chiều đảo tái tạo live từ jump==0, đọc hit từ tag theo thứ tự ngược, khôi phục live/jump rồi xóa hit từ live và word. Mọi scratch sạch, không cần tape hoặc giả thiết đo theo một trajectory cụ thể. Tag cursor dùng thứ tự 35..1 khi quét ngược marker; cũng dương/khác nhau, không overflow 6 bit.
+
+### Chứng chỉ trả sớm cursor
+
+Sau extraction đầy đủ trên rational function hợp lệ có w lỗi, tổng bậc quotient là w; mỗi leading quotient coefficient khác zero đánh dấu block end ở odd slot, block cuối tại odd slot w-1. Các slot odd từ w trở đi bằng zero vì không còn remainder; w=0 cho toàn syndrome/quotient zero. Đây là quan hệ trên trạng thái reachable từ syndrome hợp lệ, không giả định trên mọi packed polynomial tùy ý. Từ đó cursor = max({k+1: words[2*k+1]!=0} union {0}).
+
+Trước converter, scan odd slots ngược với tag 35..1 để xóa cursor=w về zero rồi free đúng 6 dây. Converter và phase không nhận cursor. Sau reverse converter, packed quotients đã phục hồi; alloc 6 dây sạch, tính lại w bằng cùng scan trước reverse extraction. Không hủy hoặc đo coefficient, không dùng cutoff theo phân bố, vẫn khôi phục đầy đủ input. Probe metadata 70 word kiểm cả cursor trước xóa/đã xóa/tái tạo và syndrome sau đảo, tránh chỉ kiểm một round-trip có thể che lỗi ở boundary.
+
+### Extra converter flag và giới hạn Flag Carry đo X
+
+`toggle_start(start)` chỉ đọc odd slot trước slice đang convert (hoặc hằng true tại start=0). Slot đó không bị convert_block ghi, nên có thể giữ active trong một context bao quanh cả hai encode_jump và converter, rồi cleanup với đúng source bit ban đầu. So lịch cũ dọn/tính lại active hai lần, lịch này tiết kiệm tổng 1632 T tĩnh ở 70 block thuận/ngược. Cờ làm peak riêng converter tăng một qubit, nhưng audit dự kiến vẫn không vượt peak reciprocal 890; vì vậy chọn true cho config đầu tiên. Không tạo config false cần chấm thêm chỉ để so một tradeoff mà audit cho thấy Q tổng không đổi.
+
+Không thêm phép đo X sớm cho một cờ history qua toàn forward/reverse: source này không có tape cờ dài, và chưa có phase oracle rẻ hơn cho predicate nhiều bit. HMR cleanup của arithmetic kế thừa giữ nguyên. Biến thể này hiện thực Narrow Return/history decoding và giữ một converter predicate cục bộ; không gọi đó là đã tái lập Flag Carry/C1 hoặc mốc 891/892 của nguồn.
+
+### Resource audit và tiêu chí trước submission build
+
+Component audit trên frame 840 input (native scratch được tính qua circuit.num_qubits) đo: encode peak 900→868; converter không cache active 895→889 do trả cursor, có cache active 890; reciprocal 890 giữ nguyên; phase một điểm 890→884. Đây là component peaks, không khẳng định đã đo Q toàn candidate. Full build phải xác nhận allocator và gate count cuối.
+
+Chi phí metadata được ghép exact từ emitted encode_jumps của mọi chiều dài 1..35: 8 lần mỗi độ dài cho extraction/conversion hai chiều, cộng hai scan cursor. Dự đoán low T=11648762, extra T=11647130 so baseline 11620060. T tăng 27070 (khoảng 0.2330%), Q dự kiến 900→890. Proxy Q²T extra/reference dự kiến 0.98017935 (giảm khoảng 1.9821%); đây là dự đoán trước build/grading, không là score mới. Resource gate khi compile: Q<900, T đúng composition và Q²T thấp hơn đối chứng; nếu không đạt thì không bàn giao như phương án cải thiện.
+
+Không mở thêm vùng/setting ngoài kế hoạch: hai audit areas đã cho một layout có chứng chỉ, chọn đúng một config đầu tiên. Dự đoán grading giữ R/0 lỗi và giảm score khoảng 2% so schur_hmr nếu Q/T thực thi khớp xu hướng static. Dev cùng profile v1/seed20261106/4096 shots và environment/hashes; independent/full cho ứng viên cuối do member chạy. Không nâng mục tiêu thành cải thiện lớn hoặc khẳng định đã đạt score khi chỉ có component.
+
+### Kiểm tra trước commit/build
+
+`--validate-components` mới: 9288 ca jump với active false/true, tag thuận/ngược, mọi zero/nonzero pattern ở length<=8 và sampled length35; 384 ca metadata-only extraction/cursor/reverse đủ 70 word GF(2^12), bao phủ weight0..35, single errors đầu/cuối và cưỡng bức initial valuation jump1..35; 1152 ca mỗi biến thể low/extra decoder thu nhỏ (degree/n/m=3/6/7,4/8/15,12/8/31). Ba seed HMR 2701/2702/2703. Đối chiếu syndrome/pha/mask từ error data độc lập, snapshot cursor đã xóa phải zero; không lỗi value/phase/workspace. Probe metadata đủ 70 word không chạy phase submission hoặc grader; reduced decoders không thay dev/full chính thức. Sampling không là exhaustive mọi syndrome/outcome; các invariant reachable-state nêu trên là điều kiện correctness.
