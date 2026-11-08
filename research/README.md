@@ -26,6 +26,8 @@ Luôn đối chiếu với EXPERIMENTS, Issues và results
 | --- | --- | --- | --- | --- |
 | Vòng lặp verifier và tình hình tối ưu ba bài thi | shared | Invsqrt, DQI, DFTHCSOS; chi phí, sai số và vòng lặp kiểm chứng | [source.md — source_only](shared/discussions/kaggle-752897-verifier-in-the-loop/source.md) | — |
 
+Chưa có discussion được lưu.
+
 ## Thêm tài nguyên
 
 1. Kiểm tra mục lục và tìm trong kho để tránh trùng nguồn/chủ đề.
