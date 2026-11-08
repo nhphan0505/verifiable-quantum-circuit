@@ -86,8 +86,8 @@ không suy ra cải thiện chỉ từ số cursor hoặc kích thước artifac
 
 ## Kết luận và phiên bản tái lập
 
-Chưa chấm; chưa xác nhận hypothesis. Config cụ thể và phiên bản build
-sẽ được bổ sung ở giai đoạn triển khai trước compile.
+Chưa chấm; chưa xác nhận hypothesis. Config đầu tiên [merged.json](configs/merged.json) giữ nguyên kích thước baseline;
+[mã triển khai](solution.py) thực hiện các biến đổi ở trên. Chờ build và chấm local.
 
 | Mốc tốt nhất | Config | Commit nguồn | Run / provenance |
 | --- | --- | --- | --- |
