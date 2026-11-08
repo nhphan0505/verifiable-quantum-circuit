@@ -1,0 +1,12 @@
+{
+  "track": "shared",
+  "kind": "discussions",
+  "source_id": "kaggle-mrmeows-open-circuits-v3",
+  "title": "QCC 14.50 | Everything I learned + open circuits",
+  "source_url": "https://www.kaggle.com/code/mrmeows/qcc-14-50-everything-i-learned-open-circuits?scriptVersionId=362387953",
+  "version": "Kaggle v3 (scriptVersionId 362387953)",
+  "accessed_at": "2026-11-08",
+  "source_file": "source.md",
+  "source_sha256": "9c41c9eea4baf6726ab0ea55384be5decab4d45a242d6ffe8496d44f488ba9e4",
+  "coverage": "Diễn giải các ô Markdown v3 về động lực, kết quả ba bài, kết quả âm, hướng mở, ghi chú thực hành và ghi công. Không lưu code, output của cell code, bình luận, dữ liệu, mạch hoặc artifact. Không chạy lại notebook."
+}
