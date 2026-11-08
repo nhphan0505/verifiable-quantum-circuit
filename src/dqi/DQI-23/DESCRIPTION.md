@@ -32,6 +32,8 @@ Config schur dựng đủ 4095 vị trí với 900 qubit. Bản từ f7640b3 có
 
 Bản từ b87d51d dùng unary iteration cho lookup nghịch đảo norm GF(64) để tái sử dụng tiền tố địa chỉ. Artifact còn 1,60 GB và vẫn dùng 900 qubit. Số đếm tĩnh là 12.668.380 cổng Toffoli-like. Hàm băm của verifier hoàn thành và cho SHA-256 trùng file. Chờ lượt chấm notebook cho bản mới. [Provenance](../../../results/dqi/DQI-23/schur/build_only/20261108T155439Z-local-build/provenance.json) · [Build metrics](../../../results/dqi/DQI-23/schur/build_only/20261108T155439Z-local-build/build_metrics.json)
 
+Bản 1,60 GB báo MemoryError: bad allocation trong lượt dev_5min 20261108T155643Z-local-dev_5min-6b6368. Bản từ 1fed986 giảm số lệnh từ 151.558.097 xuống 113.341.248 bằng cách tạo tích có điều khiển qua một toán hạng được mask và tái dùng nghịch đảo norm qua pha Forney. KMB còn 1,10 GB với 900 qubit. Probe cùng tiến trình đã nạp, băm, mô phỏng 256 shot đúng pha và trạng thái, rồi tính reaction depth 471.805. Chờ chạy lại dev_5min. [Provenance](../../../results/dqi/DQI-23/schur/build_only/20261108T160851Z-local-build/provenance.json) · [Build metrics](../../../results/dqi/DQI-23/schur/build_only/20261108T160851Z-local-build/build_metrics.json)
+
 ### Kiểm tra khả thi trước build
 
 - Mô hình cổ điển GF(2^12) khôi phục đúng syndrome, locator, numerator và biên độ lỗi trên 432 ca với trọng số 0–35, seed 20261108, gồm lỗi đơn tại vị trí 0 và 4094. Kiểm 630 leading minor; các prefix khả nghịch khớp tổng bậc quotient tích lũy trong những ca kiểm. Khi đổi A sang omega phải đệm A đủ w hệ số trước khi đảo thứ tự. Bỏ đệm làm sai omega khi syndrome đầu bằng zero.
