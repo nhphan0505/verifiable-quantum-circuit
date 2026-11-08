@@ -153,3 +153,10 @@ Cả dev và full tốt nhất DQI-23 hiện dùng [schur_hmr.json](configs/schu
 Mốc schur cũ vẫn dùng source fabb029 (implementation 1fed986) và hai run/provenance riêng ở phần bước 04; không thay SHA cũ bằng HEAD mới. Artifact lớn ignore, raw results/build records/provenance được commit. Notebook do người dùng chấm giữ local, không commit/push hoặc sửa thay người dùng.
 
 Main đã được fetch và merge trước tổng kết theo yêu cầu người dùng, merge commit `b9e60d7`; chỉ conflict hai bảng EXPERIMENTS/SCORES và đã giữ đủ các dòng hướng khác. Giữ các SHA nguồn bằng merge, không amend/rebase. Bước 06 hoàn thiện checks và push branch/PR để review độc lập; chưa approve/merge PR hoặc đóng Issue. Những dòng “chưa chấm/chưa push/chờ stage 04/06” trong phần lịch sử được kết quả/tổng kết này thay thế ở thời điểm công bố; không sửa record lịch sử.
+
+
+### Quy ước hiển thị hệ số sau tổng kết
+
+Theo yêu cầu cập nhật toàn bảng DQI, hai cột hệ số trong SCORES đều dùng score DQI-BASELINE cùng mode chia score ứng viên, làm tròn 4 chữ số thập phân. DQI-23 hiển thị full 2.1798× và dev 2.1798×, kèm chú thích đây là tỷ số số học so baseline lịch sử khác môi trường; chưa gọi là phép so sánh cùng môi trường được checker xác nhận. Các tỷ số so DQI-19 ở phần phân tích vẫn là 1.9206396378089878× full và 1.920640911358237× dev, có đối chứng khác với hai cột bảng điểm.
+
+Thay đổi hiển thị này được người dùng giao rõ cho toàn bộ bảng DQI, gồm các dòng của hướng khác; không sửa score gốc, JSON/log/provenance hoặc verifier/checker. Các mốc trước ghi hệ số để trống là lịch sử trước quyết định hiển thị số học. Checker hiện vẫn yêu cầu môi trường tương thích và phạm vi exp branch chỉ thay dòng của ID, nên thay đổi toàn bảng này không được coi là đạt schema/scope hiện tại; không tuyên bố CI xanh hoặc PR đủ điều kiện merge khi các check đó còn lỗi.
