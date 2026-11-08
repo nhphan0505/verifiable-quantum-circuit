@@ -18,6 +18,19 @@ The verifier's runtime masks are classical and the syndrome remains quantum.
 Run with --config src/dqi/DQI-23/configs/schur.json. The artifact is intended
 for the notebook verifier. Build statistics count emitted gates, rather than
 a verifier score.
+
+Optional masked_cleanup="hmr" replaces compute/uncompute CCX on a clean
+masked lhs by init_and/del_and. The quantum control and lhs are unchanged
+inside multiply_add; target disjointness is checked. Kickmix del_and measures
+in X and corrects the induced phase with CZ, with no quantum-controlled HMR.
+The mask is still clean after cleanup. This saves degree Toffoli-like gates
+per controlled multiply_add, with the same reserved quantum workspace.
+Default ccx retains the graded schur circuit; schur_hmr.json selects the new
+stage-5 variant. No other arithmetic/routing/iterations change.
+--validate-components checks isolated products and reduced decoders, not the
+submission grader. Commit source/config before building a new artifact;
+member runs dev/full in the local notebook. Source/helper attribution and
+historical source/run mapping are in DESCRIPTION.md.
 """
 
 import argparse
@@ -32,7 +45,10 @@ import kickmix as km
 class SchurDecoder:
     """Emit the packed block extraction, converter and phase sweep."""
 
-    def __init__(self, builder, field, syndromes):
+    def __init__(self, builder, field, syndromes, *, masked_cleanup="ccx"):
+        if masked_cleanup not in {"ccx", "hmr"}:
+            raise ValueError("masked_cleanup must be ccx or hmr")
+        self.masked_cleanup = masked_cleanup
         self.b = builder
         self.gf = field
         self.words = syndromes
@@ -208,9 +224,17 @@ class SchurDecoder:
             b.ixor_gf2_mul(lhs, rhs, target=target, field=self.gf)
             return
         masked = b.alloc_qubits(self.gf.degree)
-        b.ccx(control, lhs, masked)
-        b.ixor_gf2_mul(masked, rhs, target=target, field=self.gf)
-        b.ccx(control, lhs, masked)
+        # target must be disjoint from the factors needed by del_and.
+        if self.masked_cleanup == "hmr":
+            if set(target) & (set(lhs) | {control}):
+                raise ValueError("HMR cleanup requires unchanged control/lhs")
+            b.init_and(control, lhs, masked)
+            b.ixor_gf2_mul(masked, rhs, target=target, field=self.gf)
+            b.del_and(control, lhs, masked)
+        else:
+            b.ccx(control, lhs, masked)
+            b.ixor_gf2_mul(masked, rhs, target=target, field=self.gf)
+            b.ccx(control, lhs, masked)
         b.free(masked)
 
     def square_add(self, word, target, control):
@@ -441,14 +465,103 @@ class SchurDecoder:
         b.free(cursor)
 
 
-def build_circuit(m, n, degree):
+def build_circuit(m, n, degree, *, masked_cleanup="ccx"):
     if not (degree >= 2 and 2 <= n <= m < 1 << degree and n % 2 == 0):
         raise ValueError("Require an even syndrome count with 2 <= n <= m < 2**degree")
     b = km.CircuitBuilder()
     syndromes = [b.create_quantum_register(degree, name=f"S{i}") for i in range(n)]
     masks = [b.create_classical_register(degree, name=f"E{j}") for j in range(m)]
-    SchurDecoder(b, km.GF2Field(degree), syndromes).build(masks)
+    SchurDecoder(b, km.GF2Field(degree), syndromes, masked_cleanup=masked_cleanup).build(masks)
     return b.finish_circuit()
+
+
+def validate_components():
+    """Local exact-product and reduced-decoder checks; never invokes a grader."""
+    import numpy as np
+    def bits(values, degree):
+        return np.array([(values >> i) & 1 for i in range(degree)], dtype=bool)
+    def product(a, b, degree, modulus):
+        a=a.copy(); out=np.zeros_like(a)
+        for i in range(degree):
+            out ^= np.where((b >> i) & 1, a, 0).astype(a.dtype)
+            a <<= 1
+            a ^= np.where(a & (1 << degree), modulus, 0).astype(a.dtype)
+        return out
+    kernels=[]
+    for mode in ('ccx','hmr'):
+        b=km.CircuitBuilder()
+        regs=[b.create_quantum_register(12,name=k) for k in ('x','y','z')]
+        control=b.create_quantum_register(1,name='c')[0]
+        SchurDecoder(b,km.GF2Field(12),[],masked_cleanup=mode).multiply_add(*regs,control)
+        circuit=b.finish_circuit(); kernels.append((circuit,regs,control))
+    before,after=[c.operation_statistics().num_toffoli_like for c,_,_ in kernels]
+    assert before-after==12
+    assert kernels[1][0].num_qubits<=kernels[0][0].num_qubits
+    checked=0
+    for seed in (23051,23052,23053):
+        count=65536; rng=np.random.default_rng(seed)
+        x=rng.integers(0,4096,count,dtype=np.uint32);y=rng.integers(0,4096,count,dtype=np.uint32)
+        x[:4096]=np.arange(4096);y[:4096]=0
+        x[4096:8192]=0;y[4096:8192]=np.arange(4096)
+        x[8192:12288]=np.arange(4096);y[8192:12288]=np.arange(4096)
+        z=rng.integers(0,4096,count,dtype=np.uint32)
+        prod=product(x,y,12,km.GF2Field(12).modulus)
+        for cvalue in (False,True):
+            for circuit,regs,control in kernels:
+                sim=km.Simulator(count,seed=seed,debug_print=False);sim.use_same_registers_as(circuit)
+                for reg,value in zip(regs,(x,y,z)):sim.write_across_shots(reg,bits(value,12))
+                sim.write_across_shots(control,np.full(count,cvalue,dtype=bool));sim.do(circuit)
+                for reg,expected in zip(regs,(x,y,z ^ prod if cvalue else z)):
+                    if not np.array_equal(sim.read_across_shots(reg),bits(expected,12)):raise AssertionError('Product value/input mismatch')
+                if not np.all(sim.read_across_shots(control)==cvalue):raise AssertionError('Changed control')
+                anc=km.array([km.q(i) for i in range(37,circuit.num_qubits)])
+                if sim.read_across_shots(anc).any() or sim.read_phase_flipped_across_shots().any():raise AssertionError('Product cleanup/phase mismatch')
+            checked+=count
+    reports=[]; decoder_cases=0
+    for degree,n in ((2,2),(3,2),(3,4),(3,6),(4,8)):
+        m=(1<<degree)-1; gf=km.GF2Field(degree)
+        circuits=[build_circuit(m,n,degree,masked_cleanup=mode) for mode in ('ccx','hmr')]
+        for seed in (23051,23052,23053):
+            count=128;rng=np.random.default_rng(seed)
+            synd=np.zeros((n,count),dtype=np.uint32)
+            masks=rng.integers(0,1<<degree,(m,count),dtype=np.uint32)
+            phase=np.zeros(count,dtype=bool)
+            for case in range(count):
+                weight=case%(n//2+1)
+                pos=list(map(int,rng.choice(m,weight,replace=False)))
+                vals=list(map(int,rng.integers(1,1<<degree,weight)))
+                if case==0: pos=[];vals=[]
+                elif case==1:pos=[0];vals=[1]
+                elif case==2:pos=[m-1];vals=[(1<<degree)-1]
+                elif 3<=case<3+n//2:
+                    # Force valuation jumps 1..n/2 using inverse Vandermonde weights.
+                    weight=case-2;pos=list(range(weight));vals=[]
+                    roots=[gf.pow(gf.primitive_element,j) for j in pos]
+                    for i,a in enumerate(roots):
+                        den=a
+                        for j,other in enumerate(roots):
+                            if i!=j:den=gf.mul(den,a ^ other)
+                        vals.append(gf.invert(den))
+                for j,e in zip(pos,vals):
+                    for i in range(n):synd[i,case]^=gf.mul(e,gf.pow(gf.primitive_element,(i+1)*j))
+                    phase[case]^=bool((e & int(masks[j,case])).bit_count()&1)
+            for circuit in circuits:
+                sim=km.Simulator(count,seed=seed,debug_print=False);sim.use_same_registers_as(circuit)
+                for i in range(n):sim.write_across_shots(circuit.register_data[f'S{i}'],bits(synd[i],degree))
+                for j in range(m):sim.write_across_shots(circuit.register_data[f'E{j}'],bits(masks[j],degree))
+                sim.do(circuit)
+                for i in range(n):
+                    if not np.array_equal(sim.read_across_shots(circuit.register_data[f'S{i}']),bits(synd[i],degree)):raise AssertionError('Reduced syndrome restoration')
+                anc=km.array([km.q(i) for i in range(n*degree,circuit.num_qubits)])
+                if sim.read_across_shots(anc).any():raise AssertionError('Reduced decoder junk')
+                if not np.array_equal(sim.read_phase_flipped_across_shots(),phase):raise AssertionError('Reduced decoder phase')
+            decoder_cases+=count
+        reports.append({'degree':degree,'n':n,'ccx_q':circuits[0].num_qubits,'hmr_q':circuits[1].num_qubits,
+                        'ccx_t':circuits[0].operation_statistics().num_toffoli_like,'hmr_t':circuits[1].operation_statistics().num_toffoli_like})
+    return {'verification_level':'component tests, not official decoder grading','product_cases_per_variant':checked,
+            'product_ccx_t':before,'product_hmr_t':after,'product_ccx_q':kernels[0][0].num_qubits,'product_hmr_q':kernels[1][0].num_qubits,
+            'decoder_cases_per_variant':decoder_cases,'measurement_seeds':[23051,23052,23053],'value_errors':0,'phase_errors':0,'workspace_errors':0,
+            'reduced_decoders':reports,'limitations':['Seeded HMR checks are not exhaustive outcome enumeration; unchanged-factor del_and identity supplies cleanup proof.','Reduced decoder tests do not replace full-size member dev/full grading.']}
 
 
 def main():
@@ -457,14 +570,21 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, default=config_dir / "schur.json")
     parser.add_argument("--overwrite", action="store_true")
+    parser.add_argument("--validate-components", action="store_true", help="Run local kernel and reduced decoder checks only; not grading")
     args = parser.parse_args()
     config = args.config.resolve()
     if (config.parent != config_dir or config.suffix != ".json"
             or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_-]*", config.stem)):
         raise ValueError("Use a named JSON config directly inside this experiment's configs directory")
     params = json.loads(config.read_text(encoding="utf-8"))
-    if set(params) != {"m", "n", "degree"} or any(type(v) is not int for v in params.values()):
-        raise ValueError("Config must specify integer m, n and degree")
+    if (set(params) not in ({"m", "n", "degree"}, {"m", "n", "degree", "masked_cleanup"})
+            or any(type(params[k]) is not int for k in ("m", "n", "degree"))):
+        raise ValueError("Config must specify integer m/n/degree and optional masked_cleanup")
+    if params.get("masked_cleanup", "ccx") not in {"ccx", "hmr"}:
+        raise ValueError("masked_cleanup must be ccx or hmr")
+    if args.validate_components:
+        print(json.dumps(validate_components(), indent=2))
+        return
     root = experiment.parents[2]
     output = root / "artifacts" / experiment.parent.name / experiment.name / (config.stem + ".kmb")
     if output.exists() and not args.overwrite:

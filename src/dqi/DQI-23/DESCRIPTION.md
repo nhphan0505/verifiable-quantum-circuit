@@ -93,3 +93,25 @@ Kết quả ủng hộ đánh đổi dùng ít qubit của implementation hiện
 Cả dev và full tốt nhất hiện là config [schur.json](configs/schur.json), source snapshot `fabb0298c7976b6a7f8d0db0ef5a1cd6c8b55f5b`, source hash `d2461e322a413a6463cba13741f1434e83c96577a70d6e3b5a0240ae44e1637f`, config hash `74055cda362a06faece1aa628efa072d1b6ecce8898934143c2b0fb40985466d`. Run/provenance ở bảng trên. Lấy source/config tại đúng SHA và dùng build_command trong provenance; JSON cùng tên chạy với implementation tương lai không mặc nhiên tái lập mốc này.
 
 Người dùng chọn rõ thử một config mới ở bước 05 trước khi tổng kết bước 06. Vì vậy giữ PR draft và giữ nguyên mốc schur đã PASS; không tự gọi bước 06 hoàn tất khi config mới chưa có grading thật. Các dòng “chưa chấm/chờ bước 04” phía trên là lịch sử bàn giao đã được kết quả này thay thế.
+
+## Kế hoạch bước 05 — schur_hmr
+
+Người dùng chọn rõ thử một config mới thay vì kết thúc ở schur. Chỉ thêm [schur_hmr.json](configs/schur_hmr.json): m/n/degree=4095/70/12, masked_cleanup=hmr. Config schur cũ mặc định masked_cleanup=ccx; không đổi JSON, artifact hay source/run mapping đã chấm. Chưa tuyên bố config mới tốt nhất; score tiếp tục trỏ mốc schur PASS cho tới khi có kết quả thật.
+
+### Thay đổi và chứng chỉ cleanup
+
+`multiply_add(lhs,rhs,target,control)` bản trước alloc masked sạch, CCX tính masked_i=control*lhs_i, nhân field XOR vào target, rồi CCX đảo masked. Biến thể dùng init_and(control,lhs,masked), cùng phép nhân field, rồi del_and(control,lhs,masked). Control/lhs không bị ghi trong phép nhân; target phải disjoint với control/lhs, được assert tại call site trong mode hmr. Phép nhân không thay masked/rhs. del_and dùng HMR và hiệu chỉnh CZ với chính factor ban đầu nên xóa masked về zero, bảo toàn pha với mọi nhánh đo. Không đặt HMR dưới quantum control; khi control=False, phép nhân với masked=0 vẫn xử lý đúng và cleanup độc lập kết quả đo.
+
+Các call ở reciprocal/convolution dùng target bậc cao khác các factor; scale gọi multiply_add trước/sau cswap, nên factor chỉ cần không đổi trong từng lời gọi. Trường hợp control=True literal giữ đường nhân field gốc, không thêm masked/HMR. Không thay inverse norm, lookup, routing, converter, polynomial layout hoặc khối Forney. Thêm keyword masked_cleanup cho SchurDecoder/build_circuit; mặc định ccx duy trì gate schedule cũ. Mọi helper nằm trong solution.py của ID này; không import hướng mới hoặc sửa hạ tầng.
+
+### Dự đoán, đối chứng và tiêu chí trước build
+
+- Đối chứng chính: schur đã PASS, source fabb029, dev/full và provenance ở phần bước 04. Cùng environment Python 3.13.7/packages pin/verifier/harness; dev giữ profile v1/seed20261106/4096 shots.
+- Mỗi controlled multiply_add 12 bit giảm 12 Toffoli-like, từ 87 xuống 75; kernel Q=49 ở cả hai mode. Q peak toàn decoder dự kiến giữ 900. T toàn mạch dự kiến giảm theo số lời gọi có control lượng tử, nhưng chưa đặt số tiết kiệm toàn mạch khi chưa build. Không nhập 13.79% giảm của kernel thành mức giảm score toàn decoder.
+- Build chỉ bàn giao nếu Q<=900 và T tĩnh thấp hơn 12565900 của schur. Member dev PASS không lỗi value/phase và score thấp hơn schur tương thích ủng hộ biến thể. Nếu lỗi thì loại implementation; nếu không giảm score thì kiểm tra Q/T/R và giới hạn đo trước kết luận.
+- Đúng một config mới; không mở sweep mask/lookup khác. Sau build dừng chờ member grading. Bước 06 đã được giao nhưng chưa đủ điều kiện hoàn tất trước khi config mới được chấm và phân tích; không tự chạy grader để vượt điểm dừng.
+- Ứng viên cuối cần full chính thức hoặc seed giữ lại độc lập do thành viên chạy, với giới hạn statistical/default artifact seed như đã ghi. Không sửa tiêu chí sau khi có score.
+
+### Kiểm tra trước compile submission
+
+`--validate-components` kiểm độc lập GF polynomial multiply trên 393216 ca/kernel cho cả ccx và hmr, gồm zero/equal/random operands, arbitrary target, control false/true và ba seed HMR. Không lỗi input/value/phase/workspace; giảm đúng 12 T tại Q không đổi. Năm decoder thu nhỏ (degree/n=2/2,3/2,3/4,3/6,4/8), mỗi biến thể 1920 ca tổng qua ba seed, đối chiếu syndrome/pha trực tiếp từ error/mask; có trọng số 0, single errors ở đầu/cuối, max weight và ca cưỡng bức valuation jumps 1..n/2. Không lỗi khôi phục syndrome/pha/ancilla. Seeded HMR không phải exhaustive outcome enumeration; chứng minh cleanup dựa trên factor bất biến. Đây là component checks, không phải official full-size dev/full PASS. Dùng source/config commit mới trước build, giữ mốc source cũ để tái lập schur.
