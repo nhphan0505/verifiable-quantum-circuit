@@ -42,7 +42,21 @@ Run **full PASS** dùng verifier chính thức/default với 102400 shots, khôn
 
 Giới hạn so sánh: đối chứng lịch sử dùng Python 3.13.14, ứng viên dùng 3.13.7; riêng dev, hash harness cũng khác (`cafdade408fda55072d7f305b0e9ad755636b59c5c3430b901e59e47e38ff242` so với `33402313455f76532bf856a6814702e89e5a9b30982cf49ff56321b1086d6d1c`). Chưa có đối chứng cùng môi trường để xác nhận cải thiện T/score toàn decoder. Cột hệ số cải thiện đã kiểm chứng giữ `—`; vẫn hiển thị tỷ số số học lịch sử trong ô dẫn run theo yêu cầu người dùng: dev `61234661450380.1 / 53955451017897.38 = 1.134911492632471...`, full `24439463583672.93 / 21534246734876.543 = 1.134911468442086...`; cả hai làm tròn **1.1349×**. Hai tỷ số này không được trình bày như cải thiện đã kiểm chứng trong môi trường tương thích. Không sửa metadata, run cũ hoặc checker để hợp thức hóa so sánh.
 
-Đánh đổi quan sát được: Q cực đại 1893, bằng con số Q lịch sử; mạng CNOT/HMR/classical feedback và artifact lớn hơn vẫn là chi phí cần cân nhắc. Đề xuất giữ nguyên config, chấm lại baseline bằng cùng .venv/harness/verifier/profile rồi mới điền cột cải thiện chính thức. Chưa triển khai hoặc tự chấm vòng mới, chưa merge. Full đã bổ sung bằng chứng đúng nhưng chưa giải quyết giới hạn đối chứng hiệu năng.
+### Phân tích bước 04 với baseline chạy lại
+
+Hai run baseline mới của thành viên (dev `20261108T113442Z-local-dev_5min-1aa90c`, full `20261108T113523Z-local-full-ecd8e5`) đều PASS, không lỗi giá trị/pha. Python 3.13.7, packages, toàn bộ hash verifier và hash dev harness khớp ứng viên; dev cùng profile v1/seed 20261106/4096 shots, full 102400 shots. Tỷ số score mới là dev 1.1349114926324711×, full 1.1349116583363048×; T ứng viên giảm khoảng 11.8874% trên các run này, Q giữ 1893. Đây là bằng chứng thực nghiệm ủng hộ giảm chi phí Toffoli toàn decoder theo tiêu chí ban đầu. [Đối chiếu dev](../../../results/dqi/DQI-19/rank42/dev_5min/20261108T110610Z-local-dev_5min-9b8900/comparison_v4.json), [đối chiếu full](../../../results/dqi/DQI-19/rank42/full/20261108T110834Z-local-full-612d9f/comparison_v2.json) kèm bản sao nguyên bytes metadata/verifier/config/stdout baseline trong cùng thư mục ứng viên.
+
+Giới hạn provenance đối chứng: hai run baseline mới không có record build_only khớp hash `5dfb9991335e41f709a2b2cd0c1e8b28f5ad50e9672b11539d77480b39e9f98f`; không gán SHA nguồn từ HEAD. Chưa đăng ký các run đó vào dòng baseline toàn repo, nên cột cải thiện chính thức vẫn để trống. Mọi run và sidecar cũ được giữ nguyên; không sửa dữ liệu baseline ngoài phạm vi nhánh.
+
+Đánh đổi quan sát được: dev ứng viên mất khoảng 53.85 giây so với 28.97 giây của baseline chạy lại. Vì vậy giảm T chưa đồng nghĩa simulator nhanh hơn. Mạng CNOT/CZ, feedback và artifact là mục tiêu của vòng tiếp, giữ nguyên thuật toán rank 42 và m/n/degree.
+
+### Kế hoạch vòng 05 đã được giao
+
+Mở rộng điều kiện dừng ban đầu một config vì bước 05 đã được giao và results cho thấy bottleneck Clifford/runtime. Chỉ thêm một setting `rank42_control_input`: thay vì tính product 12 bit, copy có điều khiển rồi đo/xóa product, compute `masked_x = control AND x` bằng 12 init_and, dùng 42 tích bilinear giữa masked_x và y để XOR trực tiếp vào target bất kỳ; từng tích tạm được del_and ngay sau fanout. Dọn parity scratch, rồi del_and 12 bit masked_x. Mỗi phép có điều khiển vẫn 54 Toffoli-like, giữ chính xác value/phase/cleanup và workspace tối đa 15 qubit; bỏ lượt quét sửa pha của product nên dự kiến giảm Clifford/feedback/size và thời gian simulator. Không đổi inverse/division/EEA/Chien/Forney. Config `rank42` và mapping source/run cũ vẫn nguyên.
+
+Trước build kiểm tra tensor và primitive exhaustive trên cả hai control như vòng trước; dùng reference polynomial độc lập. Kiểm tra operation statistics để xác nhận 54 Toffoli và giảm số instruction. Sau source commit → compile → provenance, bàn giao cùng dev profile/seed 4096 shots. Bác bỏ setting mới nếu phát sinh value/phase/workspace errors, T tăng, hoặc không giảm overhead như dự đoán. Chưa có dev/full của setting mới; bước 06 chờ chấm và phân tích trước khi chọn ứng viên cuối. Không tự chấm.
+
+Đánh đổi quan sát được: Q cực đại 1893, bằng con số Q lịch sử; mạng CNOT/HMR/classical feedback và artifact lớn hơn vẫn là chi phí cần cân nhắc. Giữ mốc rank42 đã PASS; vòng 05 được triển khai theo kế hoạch bổ sung phía trên. Chưa tự chấm hoặc merge. Full đã bổ sung bằng chứng đúng nhưng chưa giải quyết giới hạn đối chứng hiệu năng.
 
 | Mốc tốt nhất | Config | Commit nguồn | Run / provenance |
 | --- | --- | --- | --- |

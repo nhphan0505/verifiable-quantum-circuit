@@ -1,0 +1,32 @@
+{
+  "mode": "dev_5min",
+  "baseline_original_run": "results/dqi/DQI-BASELINE/baseline/dev_5min/20261108T113442Z-local-dev_5min-1aa90c",
+  "candidate_run": "results/dqi/DQI-19/rank42/dev_5min/20261108T110610Z-local-dev_5min-9b8900",
+  "environment_and_verifier_match": true,
+  "dev_harness_match": true,
+  "profile_and_shots_match": true,
+  "baseline_status": "PASS",
+  "candidate_status": "PASS",
+  "baseline_score": 61234661450380.1,
+  "candidate_score": 53955451017897.38,
+  "score_ratio": 1.134911492632471,
+  "toffoli_reduction_fraction": 0.1188740210212681,
+  "baseline_toffoli_mean": 5725117.541015625,
+  "candidate_toffoli_mean": 5044549.798095703,
+  "num_qubits_baseline": 1893,
+  "num_qubits_candidate": 1893,
+  "baseline_artifact_sha256": "5dfb9991335e41f709a2b2cd0c1e8b28f5ad50e9672b11539d77480b39e9f98f",
+  "baseline_build_provenance_missing": true,
+  "baseline_source_commit": null,
+  "baseline_registered_for_official_score_column": false,
+  "evidence_copies_sha256": {
+    "baseline_recheck_metadata.json": "4eddab08a0509202fe68cf1321e09d078e89265c32a18ecd9f1e4c7ae1f76b1a",
+    "baseline_recheck_verifier.json": "11924d38d67583c62f8b7f78b3588d700ec43590288f136b4ec83a1880d67ead",
+    "baseline_recheck_config.json": "1f04eef358ec69e5ebfac0bfdb159a10b41d00444ada3530b6cfd099552834f6",
+    "baseline_recheck_verify.stdout.txt": "11924d38d67583c62f8b7f78b3588d700ec43590288f136b4ec83a1880d67ead"
+  },
+  "limitations": [
+    "The rerun matches environment/verifier/harness/profile, but its build provenance is missing. Do not infer source commit from current HEAD.",
+    "Global baseline row still references historical runs; formal improvement column remains unset pending separate baseline registration."
+  ]
+}
