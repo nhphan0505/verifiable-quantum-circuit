@@ -1,0 +1,12 @@
+{
+  "track": "shared",
+  "kind": "discussions",
+  "source_id": "kaggle-752897-verifier-in-the-loop",
+  "title": "Verifier-in-the-loop optimization across the three Kaggle tasks",
+  "source_url": "https://www.kaggle.com/competitions/google-verifiable-quantum-circuit-compilation/discussion/752897",
+  "version": "snapshot 2026-11-08",
+  "accessed_at": "2026-11-08",
+  "source_file": "source.md",
+  "source_sha256": "c3be5fb829bea7b3139a4b98a1987105cdfa56d94c4c64ecf18462ab69d41ca2",
+  "coverage": "Đã đọc mọi mục hiển thị của bài đăng 752897 và thấy 0 bình luận. Snapshot diễn giải bằng tiếng Việt. Chưa kiểm chứng độc lập các paper, notebook, artifact và phép đo được bài đăng nhắc đến."
+}
