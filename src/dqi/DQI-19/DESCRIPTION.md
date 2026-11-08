@@ -58,6 +58,14 @@ Trước build kiểm tra tensor và primitive exhaustive trên cả hai control
 
 Đánh đổi quan sát được: Q cực đại 1893, bằng con số Q lịch sử; mạng CNOT/HMR/classical feedback và artifact lớn hơn vẫn là chi phí cần cân nhắc. Giữ mốc rank42 đã PASS; vòng 05 được triển khai theo kế hoạch bổ sung phía trên. Chưa tự chấm hoặc merge. Full đã bổ sung bằng chứng đúng nhưng chưa giải quyết giới hạn đối chứng hiệu năng.
 
+### Bàn giao vòng 05 và trạng thái bước 06
+
+Setting [rank42_control_input](configs/rank42_control_input.json) đã **BUILT** tại commit `c0cf9dfb45b62ba7eeb8588c87b0066409880046`. [Build provenance](../../../results/dqi/DQI-19/rank42_control_input/build_only/20261108T121007Z-local-build/provenance.json), [build record](../../../results/dqi/DQI-19/rank42_control_input/build_only/20261108T121007Z-local-build/build.json), [kiểm tra kernel](../../../results/dqi/DQI-19/rank42_control_input/build_only/20261108T121007Z-local-build/kernel_validation.json), [regression strategy cũ](../../../results/dqi/DQI-19/rank42_control_input/build_only/20261108T121007Z-local-build/product_regression.json). Cả hai kernel đã kiểm tra exhaustive 33554432 trường hợp, không lỗi value/phase/workspace. Source/config local khớp bytes snapshot commit trước build.
+
+Artifact `artifacts/dqi/DQI-19/rank42_control_input.kmb` có SHA-256 `8a7a9de680e4918ffdf949c529643e6cded8f7b06e023b0ebc7db994b42e7b7d`, 896002620 bytes; nhỏ hơn artifact rank42 21.6240%, Q=1893, T đếm tĩnh=5044893. Giảm kích thước/instruction chưa chứng minh dev nhanh hơn hoặc pha toàn decoder đúng; chưa có điểm verifier cho setting mới. Mốc tốt dev/full vẫn là `rank42` tại source commit `9918ac4f0cc2ae695180bc93ef1d1bf99613d168` bên dưới.
+
+Thành viên mở notebook trong worktree GQA-DQI-19, chọn TRACK=dqi, MODE=dev_5min, EXPERIMENT_ID=DQI-19, OWNER=trng-hminh, CONFIG_NAME=rank42_control_input; giữ profile v1/seed 20261106/4096 shots. Kết quả tự lưu `results/dqi/DQI-19/rank42_control_input/dev_5min/<run-id>/`. Không tự chấm hoặc theo dõi runtime. Bước 06 đã đồng bộ main (không có thay đổi mới), kiểm tra phần commit trên checkout sạch và cập nhật draft PR; chưa đưa PR sẵn sàng review vì vòng 05 chờ kết quả và phân tích. Hai run baseline chưa đăng ký vẫn được giữ nguyên ở worktree của thành viên; không đưa thay đổi ngoài phạm vi DQI-19 vào PR.
+
 | Mốc tốt nhất | Config | Commit nguồn | Run / provenance |
 | --- | --- | --- | --- |
 | Dev | [rank42](https://github.com/nhphan0505/verifiable-quantum-circuit/blob/9918ac4f0cc2ae695180bc93ef1d1bf99613d168/src/dqi/DQI-19/configs/rank42.json) | `9918ac4f0cc2ae695180bc93ef1d1bf99613d168` | [run](../../../results/dqi/DQI-19/rank42/dev_5min/20261108T110610Z-local-dev_5min-9b8900/verifier.json), [provenance](../../../results/dqi/DQI-19/rank42/dev_5min/20261108T110610Z-local-dev_5min-9b8900/provenance.json) |
