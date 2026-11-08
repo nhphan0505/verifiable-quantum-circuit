@@ -1,6 +1,6 @@
 # Elucidating reaction mechanisms on quantum computers — ước lượng tài nguyên FeMoco bằng Trotter/QPE (mốc 2017)
 
-Status: draft
+Status: ready
 Track: dfthcsos
 Source: doi:10.1073/pnas.1619152114; paper.pdf; metadata và SHA-256 trong source.json
 Version: bản xuất bản PNAS 114(29):7555–7560 (2017), PDF tải ngày 2026-11-07 theo chân trang; truy cập 2026-11-08

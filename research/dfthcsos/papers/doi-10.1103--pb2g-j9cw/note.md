@@ -1,6 +1,6 @@
 # Fast Quantum Simulation of Electronic Structure by Spectral Amplification — DFTHC-SOS, λ_eff và chi phí tải góc Givens
 
-Status: draft
+Status: ready
 Track: dfthcsos
 Source: doi:10.1103/pb2g-j9cw; paper.pdf; metadata và SHA-256 trong source.json
 Version: Phys. Rev. X 15, 041016 (2025), xuất bản 2025-10-31, bản PDF APS 41 trang; truy cập 2026-11-08
