@@ -1,0 +1,12 @@
+{
+  "track": "shared",
+  "kind": "discussions",
+  "source_id": "kaggle-somejoint-chem-refit-v36",
+  "title": "Quantum Circuits | 24.65 Local GM: Chem Refit",
+  "source_url": "https://www.kaggle.com/code/somejoint/quantum-circuits-24-65-local-gm-chem-refit?scriptVersionId=365753941",
+  "version": "Kaggle v36 (scriptVersionId 365753941)",
+  "accessed_at": "2026-11-08",
+  "source_file": "source.md",
+  "source_sha256": "c9bc7ebe727512f09d9d2f779b8a68cde1eecf64199569b374cd29ece8e493e8",
+  "coverage": "Phần mô tả kỹ thuật invsqrt, DQI, DFTHCSOS, số liệu chọn lọc và các phản hồi liên quan trên phiên bản cũ. Không lưu mục hướng dẫn chấm điểm, quy trình chạy hoặc đóng gói, cell code, dữ liệu, mạch hay artifact. Không tái chạy verifier."
+}
