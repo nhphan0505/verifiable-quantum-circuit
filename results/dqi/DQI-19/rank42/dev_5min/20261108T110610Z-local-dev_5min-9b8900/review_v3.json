@@ -1,0 +1,12 @@
+{
+  "purpose": "Correct placement of historical arithmetic ratio to preserve comparison semantics and CI",
+  "historical_arithmetic_ratio": 1.134911492632471,
+  "displayed_ratio": "1.1349\u00d7",
+  "display_location": "SCORES.md run-link cell qualification; validated improvement cell remains \u2014",
+  "baseline_comparable": false,
+  "original_evidence_modified": false,
+  "previous_sidecars": [
+    "review.json",
+    "review_v2.json"
+  ]
+}
