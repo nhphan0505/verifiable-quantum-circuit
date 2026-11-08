@@ -8,5 +8,20 @@
   "accessed_at": "2026-11-08",
   "source_file": "paper.pdf",
   "source_sha256": "3607f457c3349db74e10b131abadef23a4a2dea0fefa0cf6ac6d0ed9f37fdfd9",
-  "coverage": "Registration only: PDF metadata and pages 1-2 (title, authors, arXiv version/date, abstract, introduction and Figure 1). Remaining pages 3-46 not read; no technical note or validation of results yet."
+  "coverage": "Read main text PDF pp.1-11, Table I p.7, Extended Data Table 1 p.17; SI I introduction/I.1 pp.18-23; SI III/IV pp.33-39 (p.33 only SI III). Visually checked PDF pp.7,21,23,34,36,38. SI contents p.18 inspected. Not read in detail: references pp.12-14, Extended Data Figures pp.15-16, SI I.2 pp.24-27, SI II pp.27-33, SI V pp.40-43, Appendix A pp.44-46. Boundary pages only covered as specified. Main-text divsteps illustration is not a proof review. No external sources or author code accessed; no circuits built or graded. Draft step 02; step 03 and independent step 04 pending.",
+  "project_snapshot": {
+    "commit": "215bc3d10bbdcc59b9c860e9b3acf077703dfcd1",
+    "files": {
+      "src/dqi/DQI-BASELINE/solution.py": "3bba2c941021749393d322c1b779e02dd7ec987c61c7b253a54fd2173968cdb4",
+      "verifiers/dqi/verify_submission_dqi.py": "f14274bc0943fb9769ddb01131be6063191a15009fe1caf1d4bdd9fd25194e65",
+      "src/invsqrt/INV-BASELINE/solution.py": "fddc7ecc89a67a4a897a5bf509c902805383b31c94964221f8ae70c2f695cfad",
+      "verifiers/invsqrt/verify_submission_invsqrt.py": "ddef520dec6b68d1cf0a6f328ddd36d79eb84570b9192cf3f7acaf073f06733a",
+      "src/dfthcsos/DFT-BASELINE/solution.py": "5c4599510c1bf0a1a26873e08edb05127534b91fb079e0ac7eae904d9ad7327b",
+      "verifiers/dfthcsos/SCORING_README.md": "c2228569f96e58e118419bc32be2be9e33d6abffb8117cb0b91e1fc25b2a0230",
+      "verifiers/dfthcsos/scoreinfra/circuits.py": "fc027b52fdcebe14404f403a089122485d097ed65d03e6d989623d620b1ab68c",
+      "src/dqi/DQI-10/DESCRIPTION.md": "e502091e0f63c9d569820e7b14a120eb26a9c7bada99d71fe107581f9092e029",
+      "src/invsqrt/INV-6/DESCRIPTION.md": "173c71c3f808887ea6cb92876de4567afafea8f4d3c385bb92762500c1dc9901"
+    },
+    "hash_basis": "Raw Git blob bytes at project_snapshot.commit; read snapshot, not historical build provenance."
+  }
 }
