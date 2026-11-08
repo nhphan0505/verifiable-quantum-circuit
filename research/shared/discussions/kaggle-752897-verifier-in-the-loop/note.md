@@ -1,6 +1,6 @@
 # Vòng lặp verifier trong tối ưu ba bài thi Kaggle
 
-Status: draft
+Status: ready
 Track: shared
 Source: https://www.kaggle.com/competitions/google-verifiable-quantum-circuit-compilation/discussion/752897
 Version: snapshot 2026-11-08
