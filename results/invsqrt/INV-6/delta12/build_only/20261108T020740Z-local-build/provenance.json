@@ -1,0 +1,40 @@
+{
+  "track": "invsqrt",
+  "experiment_id": "INV-6",
+  "config_name": "delta12",
+  "source_commit": "8d14de54075cf006040358a5bf91a1ef48adbb17",
+  "source_path": "src/invsqrt/INV-6/solution.py",
+  "source_sha256": "05d3222ca7ba0031c96506729b7b3fb4434a69a7854bccd65929152e90626300",
+  "build_config_path": "src/invsqrt/INV-6/configs/delta12.json",
+  "build_config_sha256": "5f9886c41f327f65be2bf86656903bbb14367214b136550f40485ceab407373d",
+  "artifact_path": "artifacts/invsqrt/INV-6/delta12.kmb",
+  "artifact_sha256": "b61257ee4566c5edb9b348e0e093ccf197e538cef642c8d7c03a065b88d69325",
+  "build_command": [
+    ".\\.venv\\Scripts\\python.exe",
+    "src/invsqrt/INV-6/solution.py",
+    "--config",
+    "src/invsqrt/INV-6/configs/delta12.json"
+  ],
+  "environment": {
+    "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    },
+    "validation_script_path": "src/invsqrt/INV-6/validate_model.py",
+    "validation_script_sha256": "740621d3bc7e9ed27cd1fff2bc60f4bf81cb694623c40056a6d751d698f78474",
+    "validation_command": [
+      ".\\.venv\\Scripts\\python.exe",
+      "src/invsqrt/INV-6/validate_model.py",
+      "--config",
+      "src/invsqrt/INV-6/configs/delta12.json",
+      "--sample-seed",
+      "20261109",
+      "--output",
+      "artifacts/agent-tools/delta12_model_validation.json"
+    ]
+  },
+  "build_run": null
+}
