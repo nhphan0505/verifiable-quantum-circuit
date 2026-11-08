@@ -1,6 +1,6 @@
 # Portfolio VQCC v11: tối ưu lookup, uncompute và lượng tử hóa
 
-Status: draft
+Status: ready
 Track: shared
 Source: https://www.kaggle.com/code/syed3000/vqcc-own-circuit-portfolio-notebook?scriptVersionId=366611575
 Version: Kaggle v11 (scriptVersionId 366611575)
