@@ -1,6 +1,6 @@
 # SomeJoint v36: bỏ hiệu chỉnh pha và refit trọng số FeMoCo
 
-Status: draft
+Status: ready
 Track: shared
 Source: https://www.kaggle.com/code/somejoint/quantum-circuits-24-65-local-gm-chem-refit?scriptVersionId=365753941
 Version: Kaggle v36 (scriptVersionId 365753941)
