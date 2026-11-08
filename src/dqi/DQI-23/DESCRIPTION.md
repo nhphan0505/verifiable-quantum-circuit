@@ -115,3 +115,41 @@ Các call ở reciprocal/convolution dùng target bậc cao khác các factor; s
 ### Kiểm tra trước compile submission
 
 `--validate-components` kiểm độc lập GF polynomial multiply trên 393216 ca/kernel cho cả ccx và hmr, gồm zero/equal/random operands, arbitrary target, control false/true và ba seed HMR. Không lỗi input/value/phase/workspace; giảm đúng 12 T tại Q không đổi. Năm decoder thu nhỏ (degree/n=2/2,3/2,3/4,3/6,4/8), mỗi biến thể 1920 ca tổng qua ba seed, đối chiếu syndrome/pha trực tiếp từ error/mask; có trọng số 0, single errors ở đầu/cuối, max weight và ca cưỡng bức valuation jumps 1..n/2. Không lỗi khôi phục syndrome/pha/ancilla. Seeded HMR không phải exhaustive outcome enumeration; chứng minh cleanup dựa trên factor bất biến. Đây là component checks, không phải official full-size dev/full PASS. Dùng source/config commit mới trước build, giữ mốc source cũ để tái lập schur.
+
+### Bàn giao BUILT schur_hmr
+
+Config mới BUILT từ source `c5b70b1a7618057000cc9af35794c8e733e5eb1c`; [provenance](../../../results/dqi/DQI-23/schur_hmr/build_only/20261108T165644Z-local-build/provenance.json), [build metrics](../../../results/dqi/DQI-23/schur_hmr/build_only/20261108T165644Z-local-build/build_metrics.json), [component checks](../../../results/dqi/DQI-23/schur_hmr/build_only/20261108T165644Z-local-build/component_validation.json). Source/config bytes khớp snapshot trước/sau compile. Artifact `artifacts/dqi/DQI-23/schur_hmr.kmb`, 1109451887 bytes, SHA-256 `77d44574ee606aee7eae312e5dfd5b9f4353a0db2b63be53a2addf42b16e1458`.
+
+Toàn mạch Q=900, T tĩnh=11620060, giảm 945840 T (7.5270%) so schur tĩnh=12565900, proxy Q²T còn 0.9247296 lần ở Q không đổi. Đạt điều kiện bàn giao Q<=900/T giảm đã đặt trước build. File lớn hơn nhẹ do phép đo/hiệu chỉnh cần thêm instructions; không suy tốc độ hay score grader từ dung lượng file. Chưa có mean T/R/score của config mới. Hash artifact schur cũ vẫn `876e9b376ed5964aaac7989eae7dc4cf885345c6dc705a713656dd4a109035b8`, không ghi đè.
+
+Checker thường/scope theo common ancestor đạt; 21 tests repo đạt. Notebook do người dùng vừa chạy giữ nguyên bytes, không stage/commit. Source/config/plan đã commit trước build; records mới và annotation bàn giao giữ local để gộp với kết quả ở mốc bước 04 tiếp theo. Không push tùy chọn hoặc đưa PR ready khi config mới chưa được chấm.
+
+Thành viên mở notebook trong **GQA-DQI-23**, kernel `.venv` Python 3.13.7, chọn TRACK=dqi, MODE=dev_5min, EXPERIMENT_ID=DQI-23, CONFIG_NAME=schur_hmr, OWNER=trng-hminh; giữ profile v1/seed20261106/4096 shots. Results tự lưu `results/dqi/DQI-23/schur_hmr/dev_5min/<run-id>/`. Nếu dev PASS, nên chạy full config schur_hmr để kiểm bổ sung ứng viên cuối trước bước 06. Mốc schur đã PASS vẫn giữ nguyên trong SCORES/source mapping; không ghi score cho setting chưa chấm. Agent dừng chờ grading thật rồi phân tích bước 04 và tiếp tục bước 06 đã giao khi đủ nghiệm thu; không tự chấm, approve/merge hoặc đóng Issue.
+
+
+## Kết quả schur_hmr và tổng kết bước 06
+
+Sau lựa chọn dev-only ban đầu, người dùng đã chạy thêm full và giao tổng kết. Cả dev/full schur_hmr đều PASS, không lỗi value/phase, hash khớp build `77d44574ee606aee7eae312e5dfd5b9f4353a0db2b63be53a2addf42b16e1458`, source `c5b70b1a7618057000cc9af35794c8e733e5eb1c`. Đối chiếu source/config snapshot, artifact, provenance/build_run, metadata/command/shots/mode, verifier/harness và raw stdout JSON. Raw records giữ nguyên, review mới lưu riêng; không chạy grader lại.
+
+| Mode | Run / provenance / review | Score ↓ | Mean Toffoli | Q | Shots | Value/phase errors |
+| --- | --- | ---: | ---: | ---: | ---: | --- |
+| dev_5min | [run](../../../results/dqi/DQI-23/schur_hmr/dev_5min/20261108T165822Z-local-dev_5min-41cf1d/verifier.json), [provenance](../../../results/dqi/DQI-23/schur_hmr/dev_5min/20261108T165822Z-local-dev_5min-41cf1d/provenance.json), [review](../../../results/dqi/DQI-23/schur_hmr/dev_5min/20261108T165822Z-local-dev_5min-41cf1d/review.json) | 28092418499024.06 | 11619633.3671875 | 900 | 4096 | 0/0 |
+| full | [run](../../../results/dqi/DQI-23/schur_hmr/full/20261108T170045Z-local-full-f8c7d3/verifier.json), [provenance](../../../results/dqi/DQI-23/schur_hmr/full/20261108T170045Z-local-full-f8c7d3/provenance.json), [review](../../../results/dqi/DQI-23/schur_hmr/full/20261108T170045Z-local-full-f8c7d3/review.json) | 11212018283368.457 | 11619623.323007813 | 900 | 102400 | 0/0 |
+
+Dev giữ profile v1/seed20261106/4096 shots cùng schur; mean T giảm đúng 945840, score giảm khoảng 7.5273%, Q=900 và R không đổi. Full 102400 shots xác nhận xu hướng tương tự trên verifier chính thức defaults, chỉ thêm max-workers=1; full là kiểm tra thống kê bổ sung cho config mới. Default seeds full phụ thuộc artifact, không gọi paired common-seed test hoặc chứng minh mọi syndrome.
+
+So DQI-19 cùng mode/môi trường, score cải thiện khoảng 1.9206× (giảm khoảng 47.93%). Full DQI-19 vẫn là rank42/product, dev là control_input; phép so có giới hạn source/config và seed như review ghi. Formal gain so baseline toàn repo giữ `—` vì baseline chính thức khác Python patch/harness. Không sửa baseline/provenance cũ hoặc coi tỷ số vs DQI-19 là gain chính thức vs baseline.
+
+Tiêu chí vòng 05 đạt trên các ca đã kiểm: Q không tăng, T/score giảm, dev/full PASS không lỗi; HMR cleanup giữ nguyên contract của factor trong mỗi multiply_add. Chốt đúng một config mới schur_hmr, không mở thêm vòng. Lợi ích tài nguyên của Schur in-place và giảm thêm bằng cleanup được hỗ trợ bằng số đo, không chứng minh một determinant block-Wronskian kernel đã được triển khai; source dùng valuation/block routing như phần thiết kế đã nêu. Các probe/model lịch sử thuộc máy Windows và raw logs lỗi trước đây không được đưa vào branch vẫn là giới hạn bằng chứng; không tạo lại log.
+
+### Mốc tốt nhất và tái lập cuối
+
+Cả dev và full tốt nhất DQI-23 hiện dùng [schur_hmr.json](configs/schur_hmr.json), source `c5b70b1a7618057000cc9af35794c8e733e5eb1c`, source SHA-256 `18f7e197dc832236b95cef3b87013cce15373d7327554efb1fdb2bd2f618f492`, config SHA-256 `e684813da2f18212eca5ea21edb7cdfaee998578f8cbdf8a1fb396f523f372f1`; run/provenance nằm ở bảng trên. Checkout đúng source đó, Python 3.13.7/kickmix1.0.0/numpy2.5.4/scipy1.18.1 rồi chạy:
+
+```sh
+./.venv/bin/python src/dqi/DQI-23/solution.py --config src/dqi/DQI-23/configs/schur_hmr.json
+```
+
+Mốc schur cũ vẫn dùng source fabb029 (implementation 1fed986) và hai run/provenance riêng ở phần bước 04; không thay SHA cũ bằng HEAD mới. Artifact lớn ignore, raw results/build records/provenance được commit. Notebook do người dùng chấm giữ local, không commit/push hoặc sửa thay người dùng.
+
+Main đã được fetch và merge trước tổng kết theo yêu cầu người dùng, merge commit `b9e60d7`; chỉ conflict hai bảng EXPERIMENTS/SCORES và đã giữ đủ các dòng hướng khác. Giữ các SHA nguồn bằng merge, không amend/rebase. Bước 06 hoàn thiện checks và push branch/PR để review độc lập; chưa approve/merge PR hoặc đóng Issue. Những dòng “chưa chấm/chưa push/chờ stage 04/06” trong phần lịch sử được kết quả/tổng kết này thay thế ở thời điểm công bố; không sửa record lịch sử.

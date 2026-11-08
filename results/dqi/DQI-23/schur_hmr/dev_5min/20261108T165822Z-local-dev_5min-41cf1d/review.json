@@ -1,0 +1,42 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-23",
+  "config_name": "schur_hmr",
+  "verification_level": "dev_5min",
+  "status_observed": "PASS",
+  "source_commit": "c5b70b1a7618057000cc9af35794c8e733e5eb1c",
+  "build_run": "results/dqi/DQI-23/schur_hmr/build_only/20261108T165644Z-local-build",
+  "artifact_matches_build": true,
+  "raw_stdout_matches_verifier_json": true,
+  "verifier_hashes_match_checkout": true,
+  "verified_shots": 4096,
+  "value_errors": 0,
+  "phase_errors": 0,
+  "score": 28092418499024.06,
+  "num_qubits": 900,
+  "mean_toffoli_like": 11619633.3671875,
+  "reference_schur_run": "results/dqi/DQI-23/schur/dev_5min/20261108T163610Z-local-dev_5min-88b8e2",
+  "reference_environment_verifier_match": true,
+  "reference_over_candidate": 1.0814001586892528,
+  "score_reduction_from_schur": 0.07527293022401316,
+  "mean_t_saved": 945840.0,
+  "dqi19_run": "results/dqi/DQI-19/rank42_control_input/dev_5min/20261108T122637Z-local-dev_5min-3fdc53",
+  "dqi19_over_candidate": 1.920640911358237,
+  "score_reduction_from_dqi19": 0.4793404669835857,
+  "formal_baseline_gain": null,
+  "limitations": [
+    "Formal global baseline differs in Python patch/harness; gain columns remain blank.",
+    "Full default seeds are artifact-derived; full comparisons are not paired common-seed tests. DQI-19 full reference uses rank42/product.",
+    "PASS is statistical evidence on sampled syndromes, not universal correctness proof.",
+    "Runtime/elapsed comparisons were not controlled or paired."
+  ],
+  "decision": "Complete this bounded experiment with schur_hmr as best full/dev; no further config. Independent review next.",
+  "raw_evidence_sha256": {
+    "provenance.json": "8fc399c439c32ee8c2ca19d28964be8b3d2c161e39502eef2516e22ffcadda5d",
+    "config.json": "2888112bc05a033da3c9d02d648c187386f67b6250b5a2bc65704ca5a1eaba56",
+    "metadata.json": "a9a3d8574dfe17a0bd723f14d03b68ee81c70923febf6df5ba5dbeeb30b387c5",
+    "verify.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "verifier.json": "e14e5be2f6bf34ad392e97bffa09898a53e5cfd797ddd4e1f3808e43712bf87d",
+    "verify.stdout.txt": "e14e5be2f6bf34ad392e97bffa09898a53e5cfd797ddd4e1f3808e43712bf87d"
+  }
+}

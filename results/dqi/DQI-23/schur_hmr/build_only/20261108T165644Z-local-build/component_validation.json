@@ -1,0 +1,63 @@
+{
+  "verification_level": "component tests, not official decoder grading",
+  "product_cases_per_variant": 393216,
+  "product_ccx_t": 87,
+  "product_hmr_t": 75,
+  "product_ccx_q": 49,
+  "product_hmr_q": 49,
+  "decoder_cases_per_variant": 1920,
+  "measurement_seeds": [
+    23051,
+    23052,
+    23053
+  ],
+  "value_errors": 0,
+  "phase_errors": 0,
+  "workspace_errors": 0,
+  "reduced_decoders": [
+    {
+      "degree": 2,
+      "n": 2,
+      "ccx_q": 14,
+      "hmr_q": 14,
+      "ccx_t": 170,
+      "hmr_t": 154
+    },
+    {
+      "degree": 3,
+      "n": 2,
+      "ccx_q": 19,
+      "hmr_q": 19,
+      "ccx_t": 400,
+      "hmr_t": 376
+    },
+    {
+      "degree": 3,
+      "n": 4,
+      "ccx_q": 27,
+      "hmr_q": 27,
+      "ccx_t": 1454,
+      "hmr_t": 1340
+    },
+    {
+      "degree": 3,
+      "n": 6,
+      "ccx_q": 33,
+      "hmr_q": 33,
+      "ccx_t": 3314,
+      "hmr_t": 3014
+    },
+    {
+      "degree": 4,
+      "n": 8,
+      "ccx_q": 54,
+      "hmr_q": 54,
+      "ccx_t": 9462,
+      "hmr_t": 8646
+    }
+  ],
+  "limitations": [
+    "Seeded HMR checks are not exhaustive outcome enumeration; unchanged-factor del_and identity supplies cleanup proof.",
+    "Reduced decoder tests do not replace full-size member dev/full grading."
+  ]
+}
