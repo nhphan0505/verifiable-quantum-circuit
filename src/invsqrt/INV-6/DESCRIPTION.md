@@ -96,7 +96,7 @@ x=284671, khoảng có dấu [-0.9309830032,0.8817613535], không overflow.
 Cùng widths nhưng bias=0 có max ratio 1.5035512019. Mô phỏng 374 đầu vào với
 sample-seed=20261109 và ba measurement seeds khớp output/pha mô hình, x phục hồi,
 scratch=0. Tài nguyên đo local Q=251, Toffoli=6989, giảm 108 Toffoli so balanced;
-Q không đổi như dự đoán. Chưa có điểm hoặc kết quả verifier cho delta12.
+Q không đổi như dự đoán. Kết quả dev sau đó được phân tích bên dưới.
 validate_model.py nhận --config và --sample-seed để tái lập từng cấu hình;
 solution.py giữ nguyên, mapping/source commit của balanced không đổi.
 
@@ -105,60 +105,63 @@ Artifact delta12 đã BUILT từ source/config commit `8d14de54075cf006040358a5b
 [báo cáo kiểm tra delta12](../../../results/invsqrt/INV-6/delta12/build_only/20261108T020740Z-local-build/model_validation.json).
 Chấm notebook local trong D:/GQA: TRACK=invsqrt, MODE=dev_5min,
 EXPERIMENT_ID=INV-6, OWNER=nhphan0505, CONFIG_NAME=delta12. Results mới dự kiến
-ở results/invsqrt/INV-6/delta12/dev_5min/. Chưa có dev/full PASS cho delta12;
-config tốt nhất đã chấm vẫn là balanced với mapping được giữ bên dưới.
+ở results/invsqrt/INV-6/delta12/dev_5min/. Delta12 đã dev PASS trong run bên
+dưới và thay balanced làm mốc dev tốt nhất; chưa có kết quả full.
 
 ## Kết luận và phiên bản tái lập
 
-Balanced đạt dev_5min PASS trong run `20261108T015743Z-local-dev_5min-d222d7`, 4096 đầu vào x 2
-lần đo (8192 shots), seed=20261106. Hash artifact, provenance build, source/config
-commit, môi trường Python/package và toàn bộ hash verifier/dev harness khớp mốc
-đối chứng; stdout JSON khớp verifier.json. [Phân tích đối chiếu](../../../results/invsqrt/INV-6/balanced/dev_5min/20261108T015743Z-local-dev_5min-d222d7/analysis.json).
+Delta12 đạt dev_5min PASS trong run `20261108T021502Z-local-dev_5min-b9ca90`,
+4096 đầu vào x 2 lần đo (8192 shots), seed=20261106. Hash artifact, provenance
+build, source/config commit, môi trường Python/package và toàn bộ hash verifier/
+dev harness khớp cả baseline và balanced; tập input hash giống nhau và stdout
+JSON khớp verifier.json. [Phân tích đối chiếu](../../../results/invsqrt/INV-6/delta12/dev_5min/20261108T021502Z-local-dev_5min-b9ca90/analysis.json).
 
-Kết quả ủng hộ hypothesis: bù bias cho phép dùng bộ widths hẹp vốn không đủ dung
-sai khi bias=0 trong mô hình toàn miền, và chi phí dev thực tế thấp hơn baseline.
-Q giảm 260 xuống 251 (3.46%), Toffoli giảm 7735 xuống 7097 (8.25%), số phép quay
-bậc cao giảm 37 xuống 36. Sai số/dung sai trên dev tăng từ
-0.37839383360236045 lên 0.607265916966737 tại x=2588367; rotation_eps giảm từ
-1.813003214175951e-12 xuống 1.2290081659190529e-12. Tổng chi phí quy đổi C vẫn
-giảm từ 7986.319634297497 xuống 7344.360838891405, nên score giảm
-11.22% (hệ số 1.1264 lần). Mức giảm thấp hơn dự đoán ban đầu 15–22%;
-không coi đây là cấu hình tối ưu hoặc full PASS. So với INV-3 pebble_square đã
-có trong bảng, INV-6 vẫn có điểm dev cao hơn khoảng 1.87%; ghép hai ý tưởng cần
-Issue kết hợp riêng và chưa thực hiện trong hướng này.
+Kết quả đạt tiêu chí đã ghi trước vòng thử: Q giữ 251, Toffoli giảm 7097 xuống
+6989, C giảm 7344.360838891405 xuống 7235.947049161165, điểm giảm thêm 1.48%
+so balanced. So baseline, Q giảm 260 xuống 251 (3.46%), Toffoli giảm 7735 xuống
+6989 (9.64%), số phép quay bậc cao giảm 37 xuống 36. Điểm giảm 12.53%
+so baseline, tương đương 1.1433 lần. Mức này vẫn thấp hơn dự đoán ban đầu
+15–22%; không chỉnh lại dự đoán sau kết quả.
 
-Đề xuất dừng chọn config trên dev, kiểm tra full balanced trước khi xác nhận
-ứng viên cuối. Vì baseline full hiện tại khác môi trường Colab, muốn ghi hệ số
-full cần chấm đối chứng full với môi trường hiện tại; không dùng điểm dev làm
-hệ số full. Issue giữ mở, chưa tạo PR hoặc merge.
+Sai số/dung sai trên dev của delta12 là 0.71875 tại x=1, cao hơn balanced
+0.607265916966737. Tuy vậy rotation_eps tăng từ 1.2290081659190529e-12 lên
+1.3009771637362466e-12: verifier dùng margin pha tuyệt đối nhỏ nhất trên các x,
+không chỉ tỷ lệ sai số tương đối xấu nhất. Vì tol(x) phụ thuộc x nên hai đại
+lượng không nhất thiết biến thiên cùng chiều; không coi eps tăng là mâu thuẫn.
+Cùng 36 phép quay và 1 T cơ sở, phần chi phí synthesis không triệt tiêu lợi ích
+108 Toffoli tiết kiệm. Mô hình toàn miền max ratio 0.9309830032 so balanced
+0.9355210699; cả hai vẫn có margin toàn miền hẹp, không đồng nghĩa full PASS.
 
-Kiểm tra mô hình exhaustive toàn miền: baseline max ratio 0.476911612;
-cùng widths giảm nhưng bias=0 là 1.258254701 (không đủ dung sai);
-balanced là 0.935521070 tại x=3103229, khoảng sai số có dấu
-[-0.873052085, 0.935521070], không overflow. Các giá trị dùng float64 để
-ước lượng sai số, không thay cho so pha uint64 chính xác của verifier.
-Mô phỏng compute_only và mạch pha trên 374 đầu vào (biên và random seed
-20261108), với measurement seeds 17, 982451653, 20261108, khớp từng bit đầu
-ra mô hình, pha bằng mô hình, khôi phục x và toàn bộ scratch=0.
-Tài nguyên tĩnh đo trong kiểm tra local: Q=251 và Toffoli=7097, so baseline
-Q=260 và Toffoli=7735. Giảm 9 qubit và 638 Toffoli, thấp hơn dự đoán ban đầu;
-không sửa lại dự đoán sau khi đo. Chi phí rotation synthesis thực tế đã được
-tính trong kết quả dev ở trên. Margin mô hình chỉ còn khoảng 6.45% ở điểm
-xấu nhất toàn miền; cần kiểm tra full trước khi khẳng định chất lượng.
-Kiểm tra mô hình và simulation local được ghi riêng; SCORES chỉ ghi dev PASS,
-full để trống. Mốc nguồn build: `f8083621416e45354f8c89015cd72bb39b7b2bd4`.
-[Provenance build_only](../../../results/invsqrt/INV-6/balanced/build_only/20261108T014525Z-local-build/provenance.json),
-[báo cáo mô hình và simulation](../../../results/invsqrt/INV-6/balanced/build_only/20261108T014525Z-local-build/model_validation.json).
-Artifact balanced đã BUILT và dev PASS; chưa chấm full. Tái lập dùng source/config tại
-commit trên (`git show <commit>:src/invsqrt/INV-6/solution.py` và config cùng commit),
-không suy ra phiên bản build từ HEAD sau các commit phân tích.
+Hypothesis được ủng hộ trong phạm vi dev và mô hình: cùng widths delta12 nhưng
+bias=0 có max ratio toàn miền 1.5035512019, bù bias đưa xuống dưới 0.95 mà không
+đổi primitive số học hoặc lịch cấp phát. So với INV-3 pebble_square, điểm dev
+của delta12 vẫn cao hơn 0.37%; ghép precision/bias với lịch cấp phát cần
+Issue kết hợp riêng và chưa thực hiện.
 
-| Mốc tốt nhất | Config | Commit nguồn | Run / provenance |
+Quyết định sau vòng này: chọn delta12 làm config dev tốt nhất và dừng chọn thêm
+config trong lượt hiện tại. Người dùng hoãn full; không chạy hoặc yêu cầu full
+như điều kiện hoàn thành bước phân tích này. Hai config đã có dev PASS, mô hình
+exhaustive và kiểm tra simulation mẫu biên/random riêng. Chưa có verifier full
+hoặc lượt chấm bổ sung với profile/seed độc lập cho ứng viên cuối; giới hạn này
+được giữ rõ khi bàn giao. Không khẳng định đã tìm tối ưu. Issue giữ mở, chưa tạo
+PR hoặc merge; bước chuẩn bị PR là giai đoạn tiếp theo nếu được giao. Khi cần
+xác nhận full sau này, hệ số full cần đối chứng cùng môi trường, không dùng
+baseline full Colab hiện tại để suy ra cải thiện tương thích.
+
+### Các mốc tái lập được giữ lại
+
+| Mốc | Config | Commit nguồn | Run / provenance |
 | --- | --- | --- | --- |
-| Dev | [balanced.json tại commit nguồn](https://github.com/nhphan0505/verifiable-quantum-circuit/blob/f8083621416e45354f8c89015cd72bb39b7b2bd4/src/invsqrt/INV-6/configs/balanced.json) | `f8083621416e45354f8c89015cd72bb39b7b2bd4` | [verifier.json](../../../results/invsqrt/INV-6/balanced/dev_5min/20261108T015743Z-local-dev_5min-d222d7/verifier.json) / [provenance.json](../../../results/invsqrt/INV-6/balanced/dev_5min/20261108T015743Z-local-dev_5min-d222d7/provenance.json) |
+| Dev tốt nhất | [delta12.json tại commit nguồn](https://github.com/nhphan0505/verifiable-quantum-circuit/blob/8d14de54075cf006040358a5bf91a1ef48adbb17/src/invsqrt/INV-6/configs/delta12.json) | `8d14de54075cf006040358a5bf91a1ef48adbb17` | [verifier.json](../../../results/invsqrt/INV-6/delta12/dev_5min/20261108T021502Z-local-dev_5min-b9ca90/verifier.json) / [provenance.json](../../../results/invsqrt/INV-6/delta12/dev_5min/20261108T021502Z-local-dev_5min-b9ca90/provenance.json) |
+| Dev trước đó | [balanced.json tại commit nguồn](https://github.com/nhphan0505/verifiable-quantum-circuit/blob/f8083621416e45354f8c89015cd72bb39b7b2bd4/src/invsqrt/INV-6/configs/balanced.json) | `f8083621416e45354f8c89015cd72bb39b7b2bd4` | [verifier.json](../../../results/invsqrt/INV-6/balanced/dev_5min/20261108T015743Z-local-dev_5min-d222d7/verifier.json) / [provenance.json](../../../results/invsqrt/INV-6/balanced/dev_5min/20261108T015743Z-local-dev_5min-d222d7/provenance.json) |
 | Full | Chưa chấm | Chưa có mốc full | Chưa chấm |
 
-Kiểm tra tái lập: [validate_model.py](validate_model.py), chạy `python src/invsqrt/INV-6/validate_model.py --output artifacts/invsqrt/INV-6/model_validation.json`.
+Mô hình và simulation balanced: [biên bản](../../../results/invsqrt/INV-6/balanced/build_only/20261108T014525Z-local-build/model_validation.json).
+Mô hình và simulation delta12: [biên bản](../../../results/invsqrt/INV-6/delta12/build_only/20261108T020740Z-local-build/model_validation.json).
+Tái lập dùng source/config đúng commit của từng dòng; không suy từ HEAD sau
+các commit phân tích và không sửa run/provenance cũ theo mốc mới.
 
-Mã: [solution.py](solution.py). Config: [balanced.json](configs/balanced.json).
+Kiểm tra tái lập: [validate_model.py](validate_model.py), chạy `python src/invsqrt/INV-6/validate_model.py --config src/invsqrt/INV-6/configs/delta12.json --sample-seed 20261109 --output artifacts/invsqrt/INV-6/delta12_model_validation.json`.
+
+Mã: [solution.py](solution.py). Config: [delta12.json](configs/delta12.json) (dev tốt nhất), [balanced.json](configs/balanced.json) (mốc cũ).
 Điểm: [SCORES.md](../SCORES.md).

@@ -1,0 +1,38 @@
+{
+  "kind": "result_analysis",
+  "baseline_run": "results/invsqrt/INV-BASELINE/baseline/dev_5min/20261107T180810Z-local-dev_5min-eb9c85",
+  "previous_best_run": "results/invsqrt/INV-6/balanced/dev_5min/20261108T015743Z-local-dev_5min-d222d7",
+  "build_run": "results/invsqrt/INV-6/delta12/build_only/20261108T020740Z-local-build",
+  "source_commit": "8d14de54075cf006040358a5bf91a1ef48adbb17",
+  "artifact_sha256": "b61257ee4566c5edb9b348e0e093ccf197e538cef642c8d7c03a065b88d69325",
+  "comparability": {
+    "same_profile": true,
+    "same_inputs": true,
+    "same_environment": true,
+    "same_verifier_hashes": true,
+    "same_dev_harness": true,
+    "stdout_matches_verifier_json": true,
+    "artifact_and_build_match": true
+  },
+  "baseline_score": 2076443.1049173493,
+  "previous_best_score": 1843434.5705617426,
+  "candidate_score": 1816222.7093394522,
+  "improvement_factor": 1.1432755984383312,
+  "score_reduction_percent": 12.532026279056407,
+  "reduction_vs_balanced_percent": 1.47615009812897,
+  "score_increase_vs_INV3_percent": 0.36901559147834995,
+  "raw_sha256": {
+    "config.json": "0fd557b94a1c1bc78e8a046581c96c18b3a56429ef377503ef9a271b300a0df4",
+    "metadata.json": "28f62e3a06078bbab22a2574bab1e65ca80946a439437628d11abce87c8b3c7a",
+    "provenance.json": "bbdd86e3e29a3de4273c0dfdb93dc855552c361ed923381ee1f7f75cc6297618",
+    "verifier.json": "1c6c0ac3d8e742ef155534fe3b1676cb1fc894143ad98836ea68498eba4d6d34",
+    "verify.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "verify.stdout.txt": "1c6c0ac3d8e742ef155534fe3b1676cb1fc894143ad98836ea68498eba4d6d34"
+  },
+  "decision": "Select delta12 as best dev config; stop config selection for this round. Full deferred by user. No new config/PR/merge authorized in this results step.",
+  "limitations": [
+    "dev_5min only, not full",
+    "whole-domain float64 model worst ratio 0.9309830032289028; not an exact full verifier run",
+    "Do not infer rotation synthesis margin from worst relative ratio alone; verifier uses minimum absolute phase margin."
+  ]
+}
