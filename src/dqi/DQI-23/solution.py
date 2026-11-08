@@ -86,10 +86,10 @@ class SchurDecoder:
                 self.quadratic_add(word[i], word[j], mask, norm, work)
 
         def lookup():
-            for i, mask in enumerate(inverse):
-                if mask:
-                    with self.equal(norm, i) as selected:
-                        b.gf2_iadd(mask, target=inverse_norm, control=selected)
+            # Reuse the address prefix between adjacent GF(64) table entries.
+            with b.unary_iteration(norm, range(1, len(inverse))) as cursor:
+                for address, selected in cursor:
+                    b.gf2_iadd(inverse[address], target=inverse_norm, control=selected)
 
         norm_add()
         lookup()
