@@ -95,21 +95,36 @@ Build đầu tiên đã thành công tại source commit
 (m,n,degree)=(15,4,4). Các kiểm tra này không mô phỏng pha hoặc xác nhận
 invariant bậc trên toàn EEA. Source/config local khớp bytes commit trước build.
 
-Số qubit giảm nhẹ nhưng Toffoli-like tăng. Q²T tĩnh ứng viên cao hơn
-Q²T dùng max_toffoli_count quan sát của baseline khoảng 0,675%.
-Đây là phép sàng lọc cấu trúc, chưa phải so sánh hai run cùng verifier;
-không đủ để xác nhận điểm hoặc tính đúng, và chưa ủng hộ dự đoán giảm tài nguyên.
-Giữ nguyên tiêu chí bác bỏ đã đặt. Không thêm cấu hình hoặc tự chạy chấm.
-Bàn giao smoke để kiểm tra lỗi trước; dev_5min cùng profile nếu cần đo chính
-xác chi phí. Nếu dev xác nhận Q²T không giảm thì bác bỏ bản triển khai này;
-không khẳng định mọi phương án ghép cursor đều thất bại.
+Run [dev_5min](../../../results/dqi/DQI-10/merged/dev_5min/20261108T052816Z-local-dev_5min-619295/verifier.json) đã PASS trên 4096 shots,
+seed 20261106, không phát hiện value_errors hoặc phase_errors. Hash upload,
+artifact thực tế và build_only khớp; provenance tự nối từ notebook đã đúng,
+không chỉnh sửa JSON/log gốc. [Review và phép đối chiếu](../../../results/dqi/DQI-10/merged/dev_5min/20261108T052816Z-local-dev_5min-619295/review.json)
+xác nhận Python/package, toàn bộ hash verifier, dev harness và profile trùng baseline.
 
-Chưa chấm; chưa xác nhận hypothesis. Config đầu tiên [merged.json](configs/merged.json) giữ nguyên kích thước baseline;
-[mã triển khai](solution.py) thực hiện các biến đổi ở trên. Chờ build và chấm local.
+Qubit giảm từ 1893 xuống 1889; Toffoli trung bình tăng từ
+5725117.541015625 lên 5788209.541015625 (+63092,
++1.1020%). Q²T và score tăng
+0.6752%; hệ số baseline/candidate là 0.99329323×.
+Hệ số phạt lỗi và số shot bằng nhau, nên qubit tiết kiệm chưa bù chi phí T tăng.
+Reaction depth tăng từ 170757 lên 172939.
+
+Theo tiêu chí đặt trước, bác bỏ dự đoán cải thiện tài nguyên của bản kết hợp
+này trên profile dev. Kết quả chưa tách riêng tác động ghép cursor, thu hẹp
+metadata và tích lũy thương; không kết luận mọi cách ghép cursor đều thất bại.
+Đề xuất dừng ứng viên hiện tại và lưu kết quả âm. Nếu giao vòng 05, nên đối chứng
+tách phần tích lũy thương có điều khiển để xác định overhead, giữ profile dev.
+Chưa tự triển khai hoặc chấm vòng mới.
+
+Dev PASS chỉ là bằng chứng trên bộ mẫu cố định. Chưa có full hoặc seed độc lập;
+không coi đây là xác nhận đầy đủ. Không ưu tiên chạy full cho ứng viên đang kém
+baseline; ứng viên cải thiện trong tương lai cần full/seed chưa dùng chọn config
+cùng đối chứng tương thích và kiểm tra biên như kế hoạch.
 
 | Mốc tốt nhất | Config | Commit nguồn | Run / provenance |
 | --- | --- | --- | --- |
-| Dev | Chưa chấm | Chưa có build | Chưa chấm |
-| Full | Chưa chấm | Chưa có build | Chưa chấm |
+| Dev | [merged.json](configs/merged.json) | `394396f16bffa0c4bcf9fe7eea9fa4bca39e31f3` | [dev_5min](../../../results/dqi/DQI-10/merged/dev_5min/20261108T052816Z-local-dev_5min-619295/verifier.json), [provenance](../../../results/dqi/DQI-10/merged/dev_5min/20261108T052816Z-local-dev_5min-619295/provenance.json) |
+| Full | Chưa chấm | Chưa có run full | Chưa chấm |
 
+Tái lập source/config đúng build bằng `git show 394396f16bffa0c4bcf9fe7eea9fa4bca39e31f3:src/dqi/DQI-10/solution.py`
+và JSON tại cùng commit; không suy phiên bản build từ HEAD.
 Điểm và các run: [SCORES.md](../SCORES.md).

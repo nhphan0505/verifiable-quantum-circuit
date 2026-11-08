@@ -1,0 +1,32 @@
+{
+  "status": "REVIEWED",
+  "verification_level": "dev_5min",
+  "run": "results/dqi/DQI-10/merged/dev_5min/20261108T052816Z-local-dev_5min-619295",
+  "baseline_run": "results/dqi/DQI-BASELINE/baseline/dev_5min/20261107T092603Z-local-dev_5min-f901a5",
+  "raw_file_sha256": {
+    "config.json": "7e4f89c5e75cc2c20c8e7005b0f2f780653020a49c288d536843843366836c76",
+    "metadata.json": "a4c78fff8d202ce9316c93ebcc2fa893054ff16082fce026f40b3ebe0e68227c",
+    "provenance.json": "5b1c6b3c849a75e04d69b9c9e70a0feb0fcc82be7c07dfcad702043f5dbcd32a",
+    "verifier.json": "c921035193f51aa5e970dd74517f81b4be28c9aae1a66d46cc2eee9d810cf181",
+    "verify.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "verify.stdout.txt": "c921035193f51aa5e970dd74517f81b4be28c9aae1a66d46cc2eee9d810cf181"
+  },
+  "checks": {
+    "stdout_matches_verifier": true,
+    "artifact_matches_build_and_upload": true,
+    "source_config_match_commit": true,
+    "baseline_profile_matches": true,
+    "baseline_environment_verifier_harness_match": true
+  },
+  "comparison": {
+    "baseline_score": 61234661450380.1,
+    "candidate_score": 61648121312893.56,
+    "baseline_over_candidate": 0.9932932285087009,
+    "score_increase_percent": 0.6752055987906402,
+    "qubit_delta": -4,
+    "mean_toffoli_delta": 63092.0,
+    "mean_toffoli_increase_percent": 1.1020210423279275,
+    "reaction_depth_delta": 2182
+  },
+  "conclusion": "Dev PASS with zero value/phase errors; reject resource-improvement hypothesis for this combined implementation because Q2T and score increased. No ablation identifies the contribution of individual changes. No full or independent-seed validation. Recommend stopping this candidate."
+}
