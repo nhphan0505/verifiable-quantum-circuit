@@ -28,7 +28,9 @@ Config schur giữ 4095 vị trí, 70 syndrome và word 12 bit. Dùng đủ kíc
 
 ## Kết luận và phiên bản tái lập
 
-Config schur đã dựng đủ 4095 vị trí với 900 qubit. Mạch phát ra 24.424.740 cổng Toffoli-like và artifact có dung lượng 2,19 GB. Đây là số đếm cổng tĩnh của build. Kết quả chấm notebook chưa có. Source dựng tại f7640b3. [Provenance](../../../results/dqi/DQI-23/schur/build_only/20261108T153618Z-local-build/provenance.json) · [Build metrics](../../../results/dqi/DQI-23/schur/build_only/20261108T153618Z-local-build/build_metrics.json)
+Config schur dựng đủ 4095 vị trí với 900 qubit. Bản từ f7640b3 có kích thước 2,19 GB. Run dev_5min 20261108T154827Z-local-dev_5min-0b76a9 báo ValueError: string too long khi verifier ghi KMB vào bộ nhớ để tính SHA-256, trước mô phỏng shot. [Provenance bản đầu](../../../results/dqi/DQI-23/schur/build_only/20261108T153618Z-local-build/provenance.json)
+
+Bản từ b87d51d dùng unary iteration cho lookup nghịch đảo norm GF(64) để tái sử dụng tiền tố địa chỉ. Artifact còn 1,60 GB và vẫn dùng 900 qubit. Số đếm tĩnh là 12.668.380 cổng Toffoli-like. Hàm băm của verifier hoàn thành và cho SHA-256 trùng file. Chờ lượt chấm notebook cho bản mới. [Provenance](../../../results/dqi/DQI-23/schur/build_only/20261108T155439Z-local-build/provenance.json) · [Build metrics](../../../results/dqi/DQI-23/schur/build_only/20261108T155439Z-local-build/build_metrics.json)
 
 ### Kiểm tra khả thi trước build
 
