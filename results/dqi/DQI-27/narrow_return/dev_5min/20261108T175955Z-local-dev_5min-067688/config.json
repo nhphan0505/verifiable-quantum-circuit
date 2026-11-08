@@ -1,0 +1,24 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-27",
+  "config_name": "narrow_return",
+  "mode": "dev_5min",
+  "command": [
+    "/Users/tranxuanhoa/Documents/research/GQA/.venv/bin/python",
+    "/Users/tranxuanhoa/Documents/research/GQA-DQI-27/src/common/dev_verify.py",
+    "--track",
+    "dqi",
+    "--submission",
+    "/Users/tranxuanhoa/Documents/research/GQA-DQI-27/artifacts/dqi/DQI-27/narrow_return.kmb",
+    "--seed",
+    "20261106",
+    "--invsqrt-samples",
+    "4096",
+    "--invsqrt-repeats",
+    "2",
+    "--dqi-shots",
+    "4096",
+    "--dfthc-repeats",
+    "4"
+  ]
+}

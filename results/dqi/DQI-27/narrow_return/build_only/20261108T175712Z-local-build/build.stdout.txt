@@ -1,0 +1,9 @@
+{
+  "status": "BUILT",
+  "artifact_path": "artifacts/dqi/DQI-27/narrow_return.kmb",
+  "num_qubits": 890,
+  "static_toffoli_like": 11647130,
+  "num_instructions": 115421122,
+  "reference_q": 900,
+  "reference_static_t": 11620060
+}

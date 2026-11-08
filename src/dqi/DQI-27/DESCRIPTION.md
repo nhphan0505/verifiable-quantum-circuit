@@ -1,4 +1,4 @@
-# [DQI-27] Thu gọn workspace decoder Schur bằng Narrow Return và Flag Carry, khảo sát 883–892 qubit và converter thêm một qubit
+# [DQI-27] Thu gọn decoder Schur bằng Narrow Return cursor và giải mã lịch sử, giữ cờ converter ở 890 qubit
 
 Loại: Tinh chỉnh một phương án.
 
@@ -120,3 +120,49 @@ Không mở thêm vùng/setting ngoài kế hoạch: hai audit areas đã cho m�
 ### Kiểm tra trước commit/build
 
 `--validate-components` mới: 9288 ca jump với active false/true, tag thuận/ngược, mọi zero/nonzero pattern ở length<=8 và sampled length35; 384 ca metadata-only extraction/cursor/reverse đủ 70 word GF(2^12), bao phủ weight0..35, single errors đầu/cuối và cưỡng bức initial valuation jump1..35; 1152 ca mỗi biến thể low/extra decoder thu nhỏ (degree/n/m=3/6/7,4/8/15,12/8/31). Ba seed HMR 2701/2702/2703. Đối chiếu syndrome/pha/mask từ error data độc lập, snapshot cursor đã xóa phải zero; không lỗi value/phase/workspace. Probe metadata đủ 70 word không chạy phase submission hoặc grader; reduced decoders không thay dev/full chính thức. Sampling không là exhaustive mọi syndrome/outcome; các invariant reachable-state nêu trên là điều kiện correctness.
+
+### Bàn giao BUILT bước 03
+
+Source/config đã commit trước full build tại `96a39559419067f98dc7cde47ed03ee615de075e`; bytes khớp snapshot trước/sau compile. [Provenance](../../../results/dqi/DQI-27/narrow_return/build_only/20261108T175712Z-local-build/provenance.json), [build record](../../../results/dqi/DQI-27/narrow_return/build_only/20261108T175712Z-local-build/build.json), [component validation](../../../results/dqi/DQI-27/narrow_return/build_only/20261108T175712Z-local-build/component_validation.json), [resource audit](../../../results/dqi/DQI-27/narrow_return/build_only/20261108T175712Z-local-build/resource_audit.json). Audit dùng các component cô lập và chứng chỉ dataflow, không tuyên bố đã lưu trace nội bộ đầy đủ của native allocator; Q toàn mạch sau build là số quyết định.
+
+Artifact `artifacts/dqi/DQI-27/narrow_return.kmb`, 1110713537 bytes, SHA-256 `a9f187164928279110f9be458209da13d41ef691c5f7f95542e3954622f832a8`. Build thực có Q=890, T tĩnh=11647130, 115421122 instructions; khớp composition và nằm trong vùng khảo sát 883–892. So DQI-23 schur_hmr, Q giảm 10, T tăng 27070 (0.2330%), proxy Q²T giảm 1.9821%. Đây là static build comparison, chưa phải score/mean T/R hoặc decoder PASS. Chỉ config extra=true được full build; mode false chỉ có component audit và reduced checks.
+
+Checker thường/scope và 21 tests repo đạt. Source/plan commit là mốc bắt buộc trước build; build records và ghi chú sau build giữ local để gộp cùng kết quả chấm ở mốc bước 04, chưa push. Không sửa notebook/verifier/hạ tầng/SCORES hoặc run hướng khác. Các dòng “chưa triển khai/chưa có config” ở phần stage 02 là lịch sử, được phần triển khai/bàn giao này thay thế.
+
+Thành viên mở notebook trong **GQA-DQI-27**, kernel `.venv` Python3.13.7 với packages pin, chọn TRACK=dqi, MODE=dev_5min, EXPERIMENT_ID=DQI-27, CONFIG_NAME=narrow_return, OWNER=trng-hminh. Giữ profile v1/seed20261106/4096 shots. Results tự lưu `results/dqi/DQI-27/narrow_return/dev_5min/<run-id>/`; notebook nối provenance theo artifact hash. Sau grading thật agent mới phân tích bước 04; không tự chạy grader, mở vòng config mới, đưa PR ready, merge hoặc đóng Issue.
+
+
+## Phân tích results và tổng kết hướng
+
+Thành viên đã chấm dev và full thật cho narrow_return; hai run đều PASS, không lỗi value/phase và hash khớp artifact build `a9f187164928279110f9be458209da13d41ef691c5f7f95542e3954622f832a8`. Source/config đúng snapshot `96a39559419067f98dc7cde47ed03ee615de075e`; không lấy SHA merge sau đó làm nguồn build. Agent đối chiếu metadata/command, mode/shots, verifier/harness, source/config, build/provenance và stdout bằng verifier JSON; không chạy grader lại. Raw records giữ nguyên, nhận xét/phép tính mới ở review.json.
+
+| Mode | Run / provenance / review | Score ↓ | Mean Toffoli | Q | Shots | Value/phase errors |
+| --- | --- | ---: | ---: | ---: | ---: | --- |
+| dev_5min | [run](../../../results/dqi/DQI-27/narrow_return/dev_5min/20261108T175955Z-local-dev_5min-067688/verifier.json), [provenance](../../../results/dqi/DQI-27/narrow_return/dev_5min/20261108T175955Z-local-dev_5min-067688/provenance.json), [review](../../../results/dqi/DQI-27/narrow_return/dev_5min/20261108T175955Z-local-dev_5min-067688/review.json) | 27535610729355.516 | 11646703.3671875 | 890 | 4096 | 0/0 |
+| full | [run](../../../results/dqi/DQI-27/narrow_return/full/20261108T180220Z-local-full-ab83ca/verifier.json), [provenance](../../../results/dqi/DQI-27/narrow_return/full/20261108T180220Z-local-full-ab83ca/provenance.json), [review](../../../results/dqi/DQI-27/narrow_return/full/20261108T180220Z-local-full-ab83ca/review.json) | 10989790534961.473 | 11646694.204375 | 890 | 102400 | 0/0 |
+
+### Kết luận theo tiêu chí trước thử
+
+So DQI-23 schur_hmr, Q giảm 900→890; Q² còn 0.97790123 lần. Dev cùng profile v1/seed20261106/4096 shots, mean T tăng đúng 27070 (~0.2330%), R giữ nguyên; score giảm khoảng 1.9821%, cải thiện khoảng 1.0202×. Full chính thức 102400 shots, m/n/degree/r=4095/70/12/2016, log2_delta=-128, chỉ thêm max-workers=1, hỗ trợ cùng xu hướng. Full dùng seed mặc định phụ thuộc artifact nên không gọi paired common-seed test; PASS không chứng minh mọi syndrome/outcome.
+
+Resource/correctness gate đặt trước thử được hỗ trợ trên các ca đã kiểm: Q=890 trong vùng mục tiêu 883–892, T đúng composition, Q²T/score thấp hơn mốc và dev/full PASS không lỗi. Mức lợi ích nhỏ (~2%) đúng dự đoán thận trọng, không phải bước nhảy kiểu C1 ~395 nghìn T. Reaction depth giảm 471650→435898 (~7.58%) là số đo phụ, không là hệ số trực tiếp của score. Không suy speedup wall time từ các lượt không kiểm soát tải.
+
+Hai cột gain formal so DQI-BASELINE giữ `—` vì baseline chính thức khác Python patch/harness; tỷ số số học với baseline lịch sử chỉ giữ ở chú thích cạnh run, không gọi là phép so cùng môi trường. Không sửa dòng hướng khác, baseline, raw JSON/provenance hoặc checker để điền số vào cột formal.
+
+H5 hiện thực việc trả cursor trước converter/phase và streamed history thay prefix, cùng một flag converter cục bộ. Chưa có biến thể Flag Carry đo X xuyên forward/reverse mới; không gán lợi ích này cho kỹ thuật chưa triển khai hoặc cho mạch C1 của nguồn. Mode extra=false chỉ có audit/reduced checks; chỉ extra=true được full build và grading, không công bố full Pareto curve 891/892.
+
+**Quyết định:** kết thúc phạm vi khảo sát hữu hạn sau một config đã dev/full PASS; không mở vòng setting mới. Narrow return có lợi nhưng chỉ vài phần trăm. Nghiên cứu tiếp cần chứng chỉ cụ thể cho đỉnh reciprocal 890 hoặc T_reverse, giữ reachable-state invariant và so đầy đủ Q²T/R; chưa triển khai gợi ý đó.
+
+### Mốc tái lập tốt nhất
+
+Cả dev và full tốt nhất của ID dùng [narrow_return.json](configs/narrow_return.json), source `96a39559419067f98dc7cde47ed03ee615de075e`, extra converter flag=true. Các run/provenance ở bảng trên. Checkout đúng SHA rồi dùng Python3.13.7/kickmix1.0.0/numpy2.5.4/scipy1.18.1:
+
+```sh
+./.venv/bin/python src/dqi/DQI-27/solution.py --config src/dqi/DQI-27/configs/narrow_return.json
+```
+
+Compilation tự chứa source kế thừa đã pin; chỉ diagnostic audit đọc Git blob c5b70b1 để so reference. Artifact lớn ignore; records/provenance nhỏ được commit. Full đã bổ sung bằng chứng ngoài dev cố định; không khẳng định universal correctness. Không amend/rebase các SHA nguồn/run.
+
+### Chuẩn bị review bước 06
+
+DQI-23 đã merge vào main `9a91485`; branch H5 được đồng bộ bằng merge commit `315f0cf` theo yêu cầu người dùng, không có conflict và giữ hash artifact/source/config. Các dòng “DQI-23 chưa merge/chưa chấm/local chưa push” phía trên là lịch sử ở thời điểm nhận việc/bàn giao; kết quả và việc công bố bước 06 thay thế chúng mà không sửa record cũ. Push branch và chuẩn bị PR review; chưa tự approve/merge PR hay đóng Issue. Cần reviewer độc lập bước 07/07b trên HEAD cuối.
