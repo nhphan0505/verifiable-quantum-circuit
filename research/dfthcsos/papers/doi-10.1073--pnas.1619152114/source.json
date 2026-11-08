@@ -1,0 +1,12 @@
+{
+  "track": "dfthcsos",
+  "kind": "papers",
+  "source_id": "doi-10.1073--pnas.1619152114",
+  "title": "Elucidating reaction mechanisms on quantum computers",
+  "source_url": "https://doi.org/10.1073/pnas.1619152114",
+  "version": "PNAS published version, Proc. Natl. Acad. Sci. U.S.A. 114(29):7555-7560 (2017); PDF downloaded 2026-11-07 per page footer",
+  "accessed_at": "2026-11-08",
+  "source_file": "paper.pdf",
+  "source_sha256": "d364a2eb01cfb60255f0b2ec0d7e40ba9912c82635a0c07cd732eb43a393edf3",
+  "coverage": "Step 01 only: PDF metadata, title/authors/affiliations/DOI and opening paragraphs on p. 1 skimmed for identification and track classification. Not yet read in depth; no note written."
+}

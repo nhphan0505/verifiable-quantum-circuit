@@ -1,0 +1,12 @@
+{
+  "track": "dfthcsos",
+  "kind": "papers",
+  "source_id": "doi-10.1103--pb2g-j9cw",
+  "title": "Fast Quantum Simulation of Electronic Structure by Spectral Amplification",
+  "source_url": "https://doi.org/10.1103/pb2g-j9cw",
+  "version": "Phys. Rev. X 15, 041016 (2025), published 2025-10-31 (APS published PDF, 41 pp.)",
+  "accessed_at": "2026-11-08",
+  "source_file": "paper.pdf",
+  "source_sha256": "dc7b523f810a920b7ff71fa57328059c93cd4f0e05f8a11cdd3801eef5a55b26",
+  "coverage": "Step 01 only: PDF metadata, title/authors/DOI, abstract and start of Sec. I on p. 1 skimmed for identification and track classification. Not yet read in depth; no note written."
+}
