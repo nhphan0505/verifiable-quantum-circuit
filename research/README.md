@@ -14,7 +14,7 @@ Luôn đối chiếu với EXPERIMENTS, Issues và results
 | --- | --- | --- | --- | --- |
 | Quantum computation of stopping power for inertial fusion target design | invsqrt | Tài liệu BTC cung cấp cho task 1; arXiv:2308.12352v1 | [note.md — ready](invsqrt/papers/arxiv-2308.12352/note.md) | [PDF v1](invsqrt/papers/arxiv-2308.12352/paper.pdf) |
 | Optimization by decoded quantum interferometry | dqi | Thuật toán DQI gốc, bài toán OPI/max-LINSAT, giải mã Reed–Solomon; doi:10.1038/s41586-025-09527-5 | [note.md — ready](dqi/papers/doi-10.1038--s41586-025-09527-5/note.md) | [PDF Nature 2025](dqi/papers/doi-10.1038--s41586-025-09527-5/paper.pdf) |
-| Verifiable Quantum Advantage via Optimized DQI Circuits | dqi | EEA đồng bộ, Dialog, RS/MBUC trên GF(2^b); arXiv:2510.10967v1 | [note.md — draft, chờ review](dqi/papers/arxiv-2510.10967/note.md) | [PDF v1](dqi/papers/arxiv-2510.10967/paper.pdf) |
+| Verifiable Quantum Advantage via Optimized DQI Circuits | dqi | EEA đồng bộ, Dialog, RS/MBUC trên GF(2^b); arXiv:2510.10967v1 | [note.md — ready](dqi/papers/arxiv-2510.10967/note.md) | [PDF v1](dqi/papers/arxiv-2510.10967/paper.pdf) |
 
 
 ## Discussions

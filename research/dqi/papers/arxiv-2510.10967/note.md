@@ -1,6 +1,6 @@
 # Verifiable Quantum Advantage via Optimized DQI Circuits — EEA và giải mã RS thuận nghịch
 
-Status: draft
+Status: ready
 Track: dqi
 Source: arXiv:2510.10967v1; paper.pdf; metadata và SHA-256 trong source.json
 Version: v1 (arXiv 2025-10-13; trang đầu ghi 2025-10-09); truy cập 2026-11-08
@@ -10,7 +10,7 @@ Version: v1 (arXiv 2025-10-13; trang đầu ghi 2025-10-09); truy cập 2026-11-
 - Phân loại: paper, track `dqi`, vì mô tả trực tiếp decoder EEA/MBUC mà baseline DQI dẫn.
 - Phạm vi đọc kỹ: I–II (tr. 2–15), V.A–B (tr. 27–28), C (tr. 39–41), D (tr. 41–43), F (tr. 48–52). Đọc abstract/mục lục (tr. 1–2), phần B.3 trên tr. 39 để hiểu chỗ nối với C. Trực quan đối chiếu tr. 14, 15, 27, 40, 43 cho phương trình, bảng và giới hạn vòng lặp.
 - Chưa đọc đầy đủ: III–IV về classical attacks/chứng minh tiệm cận (tr. 15–27), các layout vật lý tr. 29–31, kết luận/references tr. 32–34, A, B.1–2, E. Không xác nhận độc lập chứng minh hardness, tối ưu tiệm cận, mạch Qualtran/Zenodo, hoặc chạy code trong F. F đã đọc ở mức thuật toán và đối chiếu cấu trúc; chưa kiểm chứng từng dòng/cổng.
-- Trạng thái: chờ review độc lập bước 04; chưa dùng làm note ready cho nghiên cứu.
+- Trạng thái: đã đạt review độc lập bước 04; dùng cho nghiên cứu sau khi merge vào main.
 
 ## Vấn đề và kết quả của paper
 
