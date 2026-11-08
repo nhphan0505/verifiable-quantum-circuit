@@ -1,0 +1,41 @@
+test_bad_title_and_config_fail (test_check_repo.RepositoryChecks.test_bad_title_and_config_fail) ... ok
+test_comparison_environment_and_hashes (test_check_repo.RepositoryChecks.test_comparison_environment_and_hashes) ... ok
+test_current_records_pass (test_check_repo.RepositoryChecks.test_current_records_pass) ... ok
+test_full_settings_for_all_tracks (test_check_repo.RepositoryChecks.test_full_settings_for_all_tracks) ... ok
+test_git_snapshots_and_scope (test_check_repo.RepositoryChecks.test_git_snapshots_and_scope) ... ok
+test_new_run_cannot_use_legacy_exemption (test_check_repo.RepositoryChecks.test_new_run_cannot_use_legacy_exemption) ... ok
+test_notebook_dependency_drift_fails (test_check_repo.RepositoryChecks.test_notebook_dependency_drift_fails) ... ok
+test_personal_research_scope_allows_multiple_sources_not_code (test_check_repo.RepositoryChecks.test_personal_research_scope_allows_multiple_sources_not_code) ... ok
+test_pre_git_build_requires_matching_historical_evidence (test_check_repo.RepositoryChecks.test_pre_git_build_requires_matching_historical_evidence) ... ok
+test_research_note_identity_and_hash (test_check_repo.RepositoryChecks.test_research_note_identity_and_hash) ... ok
+test_stdout_catches_matching_forged_table (test_check_repo.RepositoryChecks.test_stdout_catches_matching_forged_table) ... ok
+test_verifier_change_fails (test_check_repo.RepositoryChecks.test_verifier_change_fails) ... ok
+test_wrong_score_and_ratio_fail (test_check_repo.RepositoryChecks.test_wrong_score_and_ratio_fail) ... ok
+test_missing_config_never_creates_run (test_local_grade.LocalGrading.test_missing_config_never_creates_run) ... ok
+test_output_layout_and_missing_provenance (test_local_grade.LocalGrading.test_output_layout_and_missing_provenance) ... Historical runs exempt from new provenance schema: 8
+Historical runs exempt from new provenance schema: 8
+Historical runs exempt from new provenance schema: 8
+Historical runs exempt from new provenance schema: 8
+Historical runs exempt from new provenance schema: 8
+Historical runs exempt from new provenance schema: 8
+Historical runs exempt from new provenance schema: 8
+Running: ['/Users/tranxuanhoa/Documents/research/GQA/.venv/bin/python', '/Users/tranxuanhoa/Documents/research/GQA-DQI-23/artifacts/tmpg1_hd7v2/verifiers/invsqrt/verify_submission_invsqrt.py', '/Users/tranxuanhoa/Documents/research/GQA-DQI-23/artifacts/tmpg1_hd7v2/artifacts/invsqrt/INV-123/test.kmb', '--max-workers', '1', '--max-x', '4096', '--shots-per-x', '1']
+ok
+test_timeout_does_not_save_score (test_local_grade.LocalGrading.test_timeout_does_not_save_score) ... {
+  "status": "PASS",
+  "score": 1
+}
+PASS Saved: /Users/tranxuanhoa/Documents/research/GQA-DQI-23/artifacts/tmpg1_hd7v2/results/invsqrt/INV-123/test/smoke/20261108T163153Z-local-smoke-085d90
+Running: ['/Users/tranxuanhoa/Documents/research/GQA/.venv/bin/python', '/Users/tranxuanhoa/Documents/research/GQA-DQI-23/artifacts/tmpxzyj8rd3/src/common/dev_verify.py', '--track', 'invsqrt', '--submission', '/Users/tranxuanhoa/Documents/research/GQA-DQI-23/artifacts/tmpxzyj8rd3/artifacts/invsqrt/INV-123/test.kmb', '--seed', '20261106', '--invsqrt-samples', '4096', '--invsqrt-repeats', '2', '--dqi-shots', '4096', '--dfthc-repeats', '4']
+ok
+test_wrong_track_id_rejected (test_local_grade.LocalGrading.test_wrong_track_id_rejected) ... ok
+test_empty_or_wrong_filename_rejected (test_research_notes.ResearchNotes.test_empty_or_wrong_filename_rejected) ... ok
+test_loose_resources_rejected_but_placeholders_allowed (test_research_notes.ResearchNotes.test_loose_resources_rejected_but_placeholders_allowed) ... ok
+test_notes_for_all_tracks_pass (test_research_notes.ResearchNotes.test_notes_for_all_tracks_pass) ... ok
+test_pdf_only_and_link_only_rejected (test_research_notes.ResearchNotes.test_pdf_only_and_link_only_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 23.493s
+
+OK
+TIMEOUT Saved: /Users/tranxuanhoa/Documents/research/GQA-DQI-23/artifacts/tmpxzyj8rd3/results/invsqrt/INV-123/test/dev_5min/20261108T163153Z-local-dev_5min-c5dd04

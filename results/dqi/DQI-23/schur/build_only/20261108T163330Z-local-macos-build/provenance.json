@@ -1,0 +1,25 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-23",
+  "config_name": "schur",
+  "source_commit": "fabb0298c7976b6a7f8d0db0ef5a1cd6c8b55f5b",
+  "source_path": "src/dqi/DQI-23/solution.py",
+  "source_sha256": "d2461e322a413a6463cba13741f1434e83c96577a70d6e3b5a0240ae44e1637f",
+  "build_config_path": "src/dqi/DQI-23/configs/schur.json",
+  "build_config_sha256": "74055cda362a06faece1aa628efa072d1b6ecce8898934143c2b0fb40985466d",
+  "artifact_path": "artifacts/dqi/DQI-23/schur.kmb",
+  "artifact_sha256": "876e9b376ed5964aaac7989eae7dc4cf885345c6dc705a713656dd4a109035b8",
+  "build_command": "./.venv/bin/python src/dqi/DQI-23/solution.py --config src/dqi/DQI-23/configs/schur.json",
+  "environment": {
+    "python": "3.13.7",
+    "python_executable": "/Users/tranxuanhoa/Documents/research/GQA/.venv/bin/python",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    }
+  },
+  "build_run": null,
+  "implementation_origin_commit": "1fed986e9e736a15195fc654c48cf85dc53620c7"
+}

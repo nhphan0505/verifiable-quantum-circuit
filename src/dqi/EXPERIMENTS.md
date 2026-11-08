@@ -8,6 +8,7 @@ Mỗi tiêu đề bên dưới trùng H1 của mô tả và title GitHub Issue. 
 | DQI-10 | [[DQI-10] Hợp nhất con trỏ unary iteration và thu gọn ancilla bằng điều khiển xung khắc, giữ 222 bước EEA](DQI-10/DESCRIPTION.md) | https://github.com/nhphan0505/verifiable-quantum-circuit/issues/10 |
 | DQI-19 | [[DQI-19] Thay bộ nhân GF(2^12) bằng bilinear rank 42 và xóa tích tạm bằng đo X, giữ decoder EEA baseline](DQI-19/DESCRIPTION.md) | https://github.com/nhphan0505/verifiable-quantum-circuit/issues/19 |
 | DQI-21 | [[DQI-21] Thay nghịch đảo Forney từng vị trí bằng Bézout/reciprocal và quét pha, kiểm chứng mục tiêu 11 Toffoli mỗi điểm](DQI-21/DESCRIPTION.md) | https://github.com/nhphan0505/verifiable-quantum-circuit/issues/21 |
+| DQI-23 | [[DQI-23] Thay EEA đồng bộ 222 bước bằng Schur phân số liên tục tại chỗ với bước nhảy block-Wronskian trên vùng syndrome](DQI-23/DESCRIPTION.md) | https://github.com/nhphan0505/verifiable-quantum-circuit/issues/23 |
 | DQI-25 | [[DQI-25] Tái sử dụng các tích lặp và tương đương Boolean/affine bằng product caching và xóa đo X, giữ decoder DQI-19](DQI-25/DESCRIPTION.md) | https://github.com/nhphan0505/verifiable-quantum-circuit/issues/25 |
 | DQI-27 | [[DQI-27] Thu gọn workspace decoder Schur bằng Narrow Return và Flag Carry, khảo sát 883–892 qubit và converter thêm một qubit](DQI-27/DESCRIPTION.md) | https://github.com/nhphan0505/verifiable-quantum-circuit/issues/27 |
 

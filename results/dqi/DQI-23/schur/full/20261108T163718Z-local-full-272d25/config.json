@@ -1,0 +1,13 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-23",
+  "config_name": "schur",
+  "mode": "full",
+  "command": [
+    "/Users/tranxuanhoa/Documents/research/GQA/.venv/bin/python",
+    "/Users/tranxuanhoa/Documents/research/GQA-DQI-23/verifiers/dqi/verify_submission_dqi.py",
+    "/Users/tranxuanhoa/Documents/research/GQA-DQI-23/artifacts/dqi/DQI-23/schur.kmb",
+    "--max-workers",
+    "1"
+  ]
+}

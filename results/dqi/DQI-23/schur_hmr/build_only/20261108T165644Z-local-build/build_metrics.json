@@ -1,0 +1,28 @@
+{
+  "status": "BUILT",
+  "track": "dqi",
+  "experiment_id": "DQI-23",
+  "config_name": "schur_hmr",
+  "source_commit": "c5b70b1a7618057000cc9af35794c8e733e5eb1c",
+  "num_qubits": 900,
+  "emitted_toffoli_like": 11620060,
+  "artifact_bytes": 1109451887,
+  "artifact_sha256": "77d44574ee606aee7eae312e5dfd5b9f4353a0db2b63be53a2addf42b16e1458",
+  "reference_config": "schur",
+  "reference_source_commit": "fabb0298c7976b6a7f8d0db0ef5a1cd6c8b55f5b",
+  "reference_static_t": 12565900,
+  "reference_q": 900,
+  "saved_static_t": 945840,
+  "static_t_reduction_fraction": 0.07527037458518693,
+  "static_q2t_ratio_to_reference": 0.9247296254148131,
+  "verification_level": "build_only",
+  "old_schur_artifact_unchanged": true,
+  "limitations": [
+    "No decoder grading for schur_hmr yet. BUILT/component checks are not dev/full PASS.",
+    "Score/Q2T reduction predicted from static counts; actual T/R/score require member grading.",
+    "Old schur dev/full remain the only graded best runs and keep their own source mapping.",
+    "Stage 06 remains pending this config grading and stage 04 analysis.",
+    "No optional push; source/results commits and this build record remain local.",
+    "Branch awaits main synchronization in stage 06; scope checked against common ancestor."
+  ]
+}

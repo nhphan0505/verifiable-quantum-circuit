@@ -1,0 +1,8 @@
+{
+  "missing_provenance": true,
+  "matching_builds": [
+    "results/dqi/DQI-23/schur/build_only/20261108T160851Z-local-build",
+    "results/dqi/DQI-23/schur/build_only/20261108T163330Z-local-macos-build"
+  ],
+  "note": "Agent must identify build evidence; do not infer source commit from current HEAD."
+}

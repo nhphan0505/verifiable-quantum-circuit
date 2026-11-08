@@ -1,0 +1,6 @@
+{
+  "status": "BUILT",
+  "num_qubits": 900,
+  "emitted_toffoli_like": 12668380,
+  "artifact_bytes": 1601116272
+}

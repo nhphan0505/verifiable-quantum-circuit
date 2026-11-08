@@ -1,0 +1,42 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-23",
+  "config_name": "schur",
+  "verification_level": "full",
+  "status_observed": "PASS",
+  "source_commit": "fabb0298c7976b6a7f8d0db0ef5a1cd6c8b55f5b",
+  "build_run": "results/dqi/DQI-23/schur/build_only/20261108T163330Z-local-macos-build",
+  "artifact_matches_build": true,
+  "raw_stdout_matches_verifier_json": true,
+  "verifier_hashes_match_checkout": true,
+  "verified_shots": 102400,
+  "value_errors": 0,
+  "phase_errors": 0,
+  "score": 12124679698528.295,
+  "num_qubits": 900,
+  "mean_toffoli_like": 12565463.902070312,
+  "reference_run": "results/dqi/DQI-19/rank42/full/20261108T110834Z-local-full-612d9f",
+  "reference_config": "rank42",
+  "reference_environment_verifier_match": true,
+  "reference_over_candidate": 1.7760672669555462,
+  "score_reduction_fraction": 0.4369582624456817,
+  "qubit_squared_ratio": 0.22603921529230636,
+  "toffoli_ratio": 2.4909029029596104,
+  "repetition_ratio": 1.0,
+  "formal_baseline_gain": null,
+  "provenance_selection": "Local macOS rebuild was executed and recorded in this chat; artifact bytes match Windows build. Select actual macOS build, not current HEAD. Original notebook review preserved.",
+  "limitations": [
+    "Formal global baseline differs in Python patch/harness; no new formal baseline registration.",
+    "Full comparison is with DQI-19 rank42/product; default seeds are artifact-derived, no paired common seed.",
+    "PASS is statistical evidence on tested syndromes, not universal proof.",
+    "Earlier Windows failed-grading logs are described in inherited DESCRIPTION but were not present in fetched branch; do not fabricate them."
+  ],
+  "raw_evidence_sha256": {
+    "config.json": "b76a2568289583368e629d1f112c10722da3ab9903fb0a3f70c78403c9e307b7",
+    "metadata.json": "81e13a8bdbb59246496ef59c1421568aac41bc60f0e0e4586be0b0feae6fc9f7",
+    "verify.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "review.json": "ee49ac2d7c46f29c15b12a741d909660647e96498cca61c95e06db9b78e9a53a",
+    "verifier.json": "5403f58cf1cc884fbc0039b7b937798e1f4df9bdab3a8d1ab83b6c4fa5ae6b88",
+    "verify.stdout.txt": "5403f58cf1cc884fbc0039b7b937798e1f4df9bdab3a8d1ab83b6c4fa5ae6b88"
+  }
+}
