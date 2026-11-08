@@ -8,6 +8,8 @@ Mỗi tiêu đề bên dưới trùng H1 của mô tả và title GitHub Issue. 
 | DQI-10 | [[DQI-10] Hợp nhất con trỏ unary iteration và thu gọn ancilla bằng điều khiển xung khắc, giữ 222 bước EEA](DQI-10/DESCRIPTION.md) | https://github.com/nhphan0505/verifiable-quantum-circuit/issues/10 |
 | DQI-19 | [[DQI-19] Thay bộ nhân GF(2^12) bằng bilinear rank 42 và xóa tích tạm bằng đo X, giữ decoder EEA baseline](DQI-19/DESCRIPTION.md) | https://github.com/nhphan0505/verifiable-quantum-circuit/issues/19 |
 
+| DQI-25 | [[DQI-25] Tái sử dụng các tích lặp và tương đương Boolean/affine bằng product caching và xóa đo X, giữ decoder DQI-19](DQI-25/DESCRIPTION.md) | https://github.com/nhphan0505/verifiable-quantum-circuit/issues/25 |
+
 Tiêu đề phải nêu phần xử lý, cách làm/thay đổi và phạm vi phân biệt với các hướng khác. Không dùng tên chung như “tối ưu baseline” hay chỉ ghi tên file. Quy tắc và ví dụ: [CONTRIBUTING.md](../../CONTRIBUTING.md).
 
 Điểm full/dev_5min: [SCORES.md](SCORES.md). Kết quả từng lần chạy: [results](../../results/dqi/).
