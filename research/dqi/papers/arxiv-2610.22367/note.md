@@ -1,6 +1,6 @@
 # Discovering state-of-the-art quantum circuits with large language models
 
-Status: draft
+Status: ready
 Track: dqi
 Source: https://arxiv.org/abs/2610.22367v1
 Version: arXiv:2610.22367v1 (2026-10-15)
