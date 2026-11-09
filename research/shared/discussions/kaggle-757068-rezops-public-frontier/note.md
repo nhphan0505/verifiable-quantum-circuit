@@ -26,6 +26,8 @@ Bản tin đặt cạnh nhau ba cải thiện nhỏ trên mạch công khai. Câ
 - **DQI.** [Verifier](../../../../verifiers/dqi/verify_submission_dqi.py) dùng $R(ε_+)·Q^2·T$. Cận lỗi một phía $ε_+$ ảnh hưởng $R$ dù số qubit $Q$ giữ nguyên. Mức khoảng 0,15% trong mục 4b là ước tính điểm tổng tại mốc bài viết. [DQI-25](../../../../src/dqi/DQI-25/DESCRIPTION.md) đo giảm 1.332 mean Toffoli-like ở cùng profile dev và $Q=1893$, với đối chứng riêng của repo.
 - **DFTHCSOS.** [Tài liệu verifier](../../../../verifiers/dfthcsos/SCORING_README.md) tính $λ_{eff}·T_{total}·Q_{total}$ sau kiểm factorization và ANGLES. Có thể tách ảnh hưởng của refit lên $λ_{eff}$ nếu xác minh lại word, các điều kiện sai số và cả hai hệ số tài nguyên. Nếu shape hoặc layout đổi, cần đếm lại chi phí.
 
+**Kiểm lại chênh lệch DQI.** Chia các mean làm tròn trong bản tin cho mốc `3,7504 × 10¹¹` cho mức tăng khoảng 0,005–0,008%. Đây là phép tính lại từ số công bố. So sánh theo verifier của repo cần cùng cấu hình, số shot và bộ đầu vào đã xác định, đồng thời báo riêng số lỗi, $Q$ và mean $T$. Mean của tích $R·Q^2·T$ qua nhiều draw có thể khác tích tính từ các thành phần trung bình.
+
 ## Kết luận hiện tại
 
 RezOps báo một ví dụ cache DQI đổi thứ hạng giữa một salt và mean nhiều draw. Kết quả âm về hóa học cho thấy cấu hình sát ngưỡng trước làm tròn có thể trượt sau làm tròn. Giao diện hiển thị 0 phản hồi, nên chưa có phản biện trực tiếp trong thread. Các điều kiện ở bảng là phân tích của note hoặc kết quả âm được người đăng dẫn lại.
