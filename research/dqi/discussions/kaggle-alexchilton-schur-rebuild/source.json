@@ -8,5 +8,5 @@
   "accessed_at": "2026-11-10",
   "source_file": "source.md",
   "source_sha256": "44636918afb64ffc8c9d880dd874fb94058ae98a543840720f4a0cba0295dfeb",
-  "coverage": "Định danh notebook v129 và dataset v5, đọc mục 3, ghi công, manifest DQI và mô tả archive."
+  "coverage": "Notebook v129, mục 3, phần ghi công và manifest DQI. Dataset v5, mô tả dqi_oz882.qzip và điều khoản. Đối chiếu hash archive/member và kết quả local của bản phái sinh. Chưa đọc generator gốc, tái dựng mạch hoặc chạy lại public reference."
 }
