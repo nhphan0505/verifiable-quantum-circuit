@@ -8,7 +8,7 @@
   "accessed_at": "2026-11-09",
   "source_file": "survey.txt",
   "source_sha256": "c986cc4ec2ae014af07820a5910d3dd5d7d684ec301b2f17dc85bec7e4c53e14",
-  "coverage": "Đã đọc snapshot người dùng cung cấp, các đoạn companion v2 về Kickmix, DQI và DFTHCSOS, abstract arXiv:1209.5491, verifier và các note/run project được dẫn tại main b61293b. Không có permalink hoặc comment gốc của survey. Chưa đọc toàn văn nguồn layer-peeling, chưa đối chiếu generator hoặc tái lập số đo artifact/engine bên ngoài.",
+  "coverage": "Đã đọc snapshot nguyên văn, các đoạn companion v2 về Kickmix/DQI/DFTHCSOS, arXiv:1209.5491v1 §2.2–2.4 và §3.1, abstract/ref. 31 của Bruckstein–Kailath, mục Citron–Kailath trong danh mục Stanford, các đoạn README engine và rank được pin, verifier cùng các note/run project đã dẫn. Tìm theo tiêu đề và cụm đặc trưng chưa xác định được bản công khai của survey. Chưa đọc toàn văn nguồn layer-peeling hoặc tái lập artifact/engine.",
   "project_snapshot": {
     "commit": "b61293b7dec859a2cacd1ec64c54ef03dbaef5ac",
     "files": {
