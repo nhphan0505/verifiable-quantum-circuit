@@ -1,6 +1,6 @@
 # Bản tin RezOps 757068 — tối ưu sát mốc công khai của ba bài
 
-Status: draft
+Status: ready
 Track: shared
 Source: https://www.kaggle.com/competitions/google-verifiable-quantum-circuit-compilation/discussion/757068
 Version: snapshot 2026-11-09
