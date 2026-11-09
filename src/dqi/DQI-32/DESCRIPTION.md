@@ -64,7 +64,7 @@ Cộng các bản dịch z^j của evaluator nhân với từng hệ số Psi v�
 
 Trước build, kiểm riêng omega→R, R→omega và toàn khối pha trên fixture packed, locator square-free ngẫu nhiên ở các bậc khác nhau, nhiều outcome HMR và mask runtime. Chấm `dev_5min` trước để xác nhận trên syndrome thực, sau đó chấm full nếu cần dữ liệu cuối. Báo mean T, peak Q, R và lỗi tách riêng. Bản reference có thể cho kết quả âm về Q²T.
 
-Bản `modular_reference` BUILT từ source `e4280f5dad2c7c6b6233c44a87ef9084d2415177`, SHA-256 artifact `2959e8a00f52d29a6e3790d8860bd6a2a122dc78eaa2e4a833334db2c57d3635`. Mạch đầy đủ có 4.412 qubit và 6.257.729 Toffoli-like tĩnh, proxy Q²T cao gấp 5,937 lần baseline. Bản này vượt tiêu chí tài nguyên và được bàn giao để đo độ đúng cùng chi phí thực. Khối aligned có 975.514 T thuận, 45.045 T sweep và 949.054 T đảo. Ba kiểm tra riêng, mỗi kiểm tra 14 ca × 3 seed, đều khớp giá trị, pha và workspace. Build record, provenance và kiểm tra component nằm trong `results/dqi/DQI-32/modular_reference/build_only/20261109T094159Z-local-build/`. Chưa có điểm verifier.
+Bản `modular_reference` BUILT từ source `e4280f5dad2c7c6b6233c44a87ef9084d2415177`, SHA-256 artifact `2959e8a00f52d29a6e3790d8860bd6a2a122dc78eaa2e4a833334db2c57d3635`. Mạch đầy đủ có 4.412 qubit và 6.257.729 Toffoli-like tĩnh, proxy Q²T cao gấp 5,937 lần baseline. Bản này vượt tiêu chí tài nguyên và được bàn giao để đo độ đúng cùng chi phí thực. Khối aligned có 975.514 T thuận, 45.045 T sweep và 949.054 T đảo. Ba kiểm tra riêng, mỗi kiểm tra 14 ca × 3 seed, đều khớp giá trị, pha và workspace. Build record, provenance và kiểm tra component nằm trong `results/dqi/DQI-32/modular_reference/build_only/20261109T094159Z-local-build/`. Điểm verifier được ghi ở phần stage 04 bên dưới.
 
 ### Kết quả dev_5min và quyết định stage 04
 
@@ -93,3 +93,9 @@ Run `20261109T121950Z-local-dev_5min-dce377` của `borrowed_locator_staged` PAS
 Cùng profile v1, seed 20261106 và môi trường, giảm **571 qubit** với mean T và R giữ nguyên. Score giảm **24,209%** (gain **1,3194×**) so `modular_reference`, đúng mức dự báo từ thay đổi Q². Reaction depth tăng 103.632 → 105.345, khoảng 1,65%, là số đo riêng. Không suy ra tốc độ chạy từ thời gian của hai lượt chấm.
 
 Config đạt mục tiêu trung gian nhưng cost vẫn **4,5001×** baseline recheck và **1,2348×** DQI-21 `streamed_compact`. Gain chính thức tiếp tục để trống vì baseline recheck thiếu build provenance. Cả hai config DQI-32 bị bác bỏ như phương án thay baseline. Chốt vòng thử ở dev theo phạm vi đã chọn. Mục tiêu còn lại nếu mở vòng mới là chứng minh lịch packed replay để bỏ transcript/cofactor riêng và giảm chi phí biến đổi cả hai chiều. Với mục tiêu xấp xỉ 890 qubit, cần một hypothesis riêng về decoder và lịch sống của khối pha vì EEA hiện tại đã vượt mốc đó trước khi cấp workspace.
+
+### Kết luận phạm vi và bàn giao review
+
+Hai config coherent đã hoàn tất phạm vi chấm dev. `borrowed_locator_staged` xác nhận việc mượn locator và tách thời gian sống của transcript khỏi bank evaluator tiết kiệm 571 qubit. Cả hai config vẫn đắt hơn baseline recheck và bị bác bỏ như phương án thay baseline. Không có run full hay lượt chấm độc lập ngoài profile dev đã ghi. Kiểm tra component có ba seed phép đo và bao phủ các trường hợp biên đã liệt kê, nhưng chỉ là bằng chứng cấp khối.
+
+Reviewer cần kiểm tra thứ tự mượn và hoàn trả locator, phép XOR/xóa snapshot cofactor, và sửa pha khi ghi đè evaluator ở cả hai chiều. Giữ `structured_probe` như mô hình nghiên cứu có thể tái lập. Lịch cổng packed replay cho bậc biến thiên vẫn là hướng nghiên cứu riêng cho một vòng sau.
