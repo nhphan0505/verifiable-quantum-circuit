@@ -8,5 +8,5 @@
   "accessed_at": "2026-11-09",
   "source_file": "paper.pdf",
   "source_sha256": "c5b152e5dbfdbc767e49edaec45f3550e623fdefa269fdabed0ab578d7a392f0",
-  "coverage": "Trang PDF 1–4 (trang đầu, abstract, mục 1.1 và Bảng 1) để định danh nguồn và chọn track."
+  "coverage": "Trang PDF 1–4 (abstract, mục 1.1, Bảng 1); các đoạn liên quan ở mục 3.1–3.4, tr. 24–34 (Prop. 3.2, 3.9, 3.15, 3.18); mục 4–4.5, tr. 34–41 (Lemma 4.1, Hình 24–25, Thm. 4.2–4.13). Mục 2, các dẫn xuất khác của mục 3, tài liệu dẫn và mã bổ trợ chưa được rà đầy đủ."
 }
