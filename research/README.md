@@ -19,6 +19,7 @@ Luôn đối chiếu với EXPERIMENTS, Issues và results
 | Fast Quantum Simulation of Electronic Structure by Spectral Amplification | dfthcsos | Spectral amplification, Hamiltonian sum-of-squares, DF/THC block encoding, FeMoco/P450; doi:10.1103/pb2g-j9cw | [note.md — ready](dfthcsos/papers/doi-10.1103--pb2g-j9cw/note.md) | [PDF PRX 2025](dfthcsos/papers/doi-10.1103--pb2g-j9cw/paper.pdf) |
 | Discovering state-of-the-art quantum circuits with large language models | dqi | LLM-guided circuit discovery, independent evaluator, reversible arithmetic; arXiv:2610.22367v1 | [note.md — ready](dqi/papers/arxiv-2610.22367/note.md) | [PDF v1](dqi/papers/arxiv-2610.22367/paper.pdf) |
 | Measurement-based uncomputation of quantum circuits for modular arithmetic | shared | Đo cơ sở X, sửa pha, xóa cờ so sánh; arXiv:2407.20167v1 | [note.md — ready](shared/papers/arxiv-2407.20167/note.md) | [PDF v1](shared/papers/arxiv-2407.20167/paper.pdf) |
+| Quantum binary field inversion: improved circuit depth via choice of basis representation | dqi | Itoh–Tsujii, normal basis, ghost-bit và chi phí đảo trường nhị phân | [source.json — source_only](dqi/papers/arxiv-1209.5491/source.json) | [arXiv v1](https://arxiv.org/abs/1209.5491v1) |
 
 
 ## Discussions
@@ -32,7 +33,7 @@ Luôn đối chiếu với EXPERIMENTS, Issues và results
 | Özer v23 — refit DF-THC, tái dùng tích DQI và pha invsqrt | shared | Invsqrt, DQI, DFTHCSOS | [note.md — ready](shared/discussions/kaggle-ozer-df-thc-group-compression-v23/note.md) | — |
 | mrmeows v3 — mạch mở và kết quả âm của ba bài | shared | Invsqrt, DQI, DFTHCSOS | [note.md — ready](shared/discussions/kaggle-mrmeows-open-circuits-v3/note.md) | — |
 | Biên dịch mạch lượng tử với cấu trúc kiểm chứng được | shared | Invsqrt, DQI, DFTHCSOS | [note.md — ready](shared/discussions/verifiable-circuit-compilation/note.md) | — |
-| Survey về kiến trúc mạch và tối ưu VQCC | shared | Schur/continued fractions, HMR, QROM và chi phí verifier | [note.md — draft](shared/discussions/vqcc-frontier-compilation-survey/note.md) | — |
+| Hengck23 về đo từng khối và ghép mạch DQI | dqi | A/B test module, iter014 và giới hạn tái dựng | [source.md — source_only](dqi/discussions/kaggle-753607-hengck23-dqi-iteration/source.md) | — |
 
 Chưa có discussion được lưu.
 

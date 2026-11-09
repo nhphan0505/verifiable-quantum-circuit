@@ -1,0 +1,12 @@
+{
+  "track": "dqi",
+  "kind": "discussions",
+  "source_id": "kaggle-753607-hengck23-dqi-iteration",
+  "title": "DQI: The baselines RATIO: 60.11134658530358",
+  "source_url": "https://www.kaggle.com/competitions/google-verifiable-quantum-circuit-compilation/discussion/753607",
+  "version": "Kaggle thread 753607, snapshot 2026-11-09",
+  "accessed_at": "2026-11-09",
+  "source_file": "source.md",
+  "source_sha256": "01e3eba69b914d7822c4c31665c0b4370b063e87321e8bb6c4f32a4ffa15dfbf",
+  "coverage": "Bài và tám bình luận hiển thị. Snapshot diễn giải tập trung vào phân rã mạch, ghép module, giới hạn generator và lời báo kiểm iter014. Chưa đọc notebook, log hoặc artifact được nhắc."
+}
