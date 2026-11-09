@@ -1,0 +1,8 @@
+{
+  "m": 4095,
+  "n": 70,
+  "degree": 12,
+  "seed": 32026,
+  "cases_per_locator_degree": 6,
+  "measurement_seeds": [32, 320, 3200]
+}

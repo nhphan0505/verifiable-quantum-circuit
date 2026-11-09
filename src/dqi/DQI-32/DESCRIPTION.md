@@ -32,7 +32,22 @@ Chỉ thay nội dung `_chien_search_and_forney_mbuc` và helper riêng, giữ a
 
 ## Kết luận và phiên bản tái lập
 
-Giả thuyết ở giai đoạn thiết kế. Chưa có config, build hoặc run của hướng này.
+### Screening kernel ở stage 03
+
+Config `structured_probe` giữ m/n/degree 4095/70/12 và chốt sáu mẫu có locator split square-free ở mỗi bậc 0–35, sáu fixture packed EEA kế thừa, một fixture tụt bậc sâu và ba seed mô phỏng phép đo. Config dùng để kiểm riêng đại số, phép chia đóng gói và vòng quét. Nó không phải config build submission. Tái lập trong môi trường Python 3.13 của repo:
+
+```sh
+python src/dqi/DQI-32/solution.py --config src/dqi/DQI-32/configs/structured_probe.json --validate-phase-block
+```
+
+**Phân rã thử nghiệm.** Nếu `f=q*g+r` và `m=deg(g)`, ma trận P đổi tọa độ từ cặp (phần dư, phần thương) sang đa thức bằng `P(a,b)=a+g*b`, với `deg(a)<m`. Khi đó `B(f,g)=P diag(B(g,r), B(q,1)) P^T`. Để giải hệ, áp `P^-1` bằng chia đóng gói, giải khối `B(q,1)` theo tam giác và lặp trên phần dư, rồi áp `P^-T` khi trở lại. Cuối cùng nhân với `B(s,1)` để nhận R. Lịch trên evaluator chỉ gồm swap, scale khác zero và shear, mỗi phép có nghịch đảo xác định. Với `E=u*O+v`, bước Euclid đầu là `s=(z+u²)*D+v²`. Các bước sau là bình phương của Euclid trên `(O,v)`. Trong mô hình, mỗi lần chia lưu quotient vào phần cao của cùng bank, chỉ giữ degree/độ dài để phát lại theo thứ tự ngược. Mô hình vẫn tạo danh sách hệ số cho lịch evaluator bằng Python. Chưa có emitter lượng tử đọc các hệ số này từ bank đóng gói khi bậc là dữ liệu lượng tử.
+
+- **Đại số.** 223 ca khớp phép nhân reciprocal rồi rút gọn độc lập. Replay trả nguyên E/O và evaluator, bao gồm bậc 0 và ca quotient bậc 34. Các mẫu dùng evaluator đệm zero. Sáu fixture EEA kế thừa bao phủ trọng số 0, 1, 7, 35 và vị trí 0, 4094.
+- **Phép chia đóng gói.** Đã emit mạch với các hệ số lượng tử và divisor bậc cố định 0, 8, 17 trên bank 18 word. Kiểm từng chiều độc lập, 128 ca mỗi bậc và seed, tổng 2.304 ca mô phỏng. Kết quả giá trị, pha và scratch đều khớp. Tĩnh mỗi chiều lần lượt 1.071, 4.095, 1.071 Toffoli-like và 75 qubit scratch ngoài dữ liệu. Bậc trong mạch này là cấu hình lúc emit.
+- **Sweep.** Đã emit 4.095 điểm với 35 word evaluator, đo 45.045 Toffoli-like tĩnh và 887 qubit kể cả 852 qubit locator/evaluator. Sáu fixture packed đã biến đổi bằng mô hình cổ điển, kiểm ba seed với mask runtime và không lỗi pha, dữ liệu hoặc workspace. Phép biến đổi evaluator coherent chưa nằm trong mạch sweep này.
+- **Chi phí còn thiếu.** Lịch đại số đã thử có tối đa 1.768 shear và 140 scale một chiều. Nếu mọi toán hạng đã sẵn, tính 42 Toffoli-like mỗi phép và cộng sweep/alignment cho ra proxy 212.709 T hai chiều. Số này chưa tính sản xuất hệ số, inverse scaffold, điều khiển degree và định tuyến. Chỉ riêng cách phát một bản primitive cho mỗi cặp bậc ở lần chia E/O đầu đã phát khoảng 305.235 T mỗi chiều trước chi phí điều khiển, tính từ 171 cặp `0<=deg(O)<=deg(E)<=17` và chi phí primitive. Để dùng cơ chế packed cần một lịch dùng chung giữa các cặp bậc.
+
+**Quyết định sàng lọc.** Dừng trước compile toàn decoder theo điều kiện đã đặt. Layout transcript riêng có cận dưới 2.461 qubit và proxy Q²T khoảng 1,277 lần baseline ngay cả khi bỏ qua chi phí tiền xử lý, alignment và scratch. Phương án quotient đóng gói qua được kiểm tra đại số và primitive bậc cố định, nhưng chưa có lịch coherent bậc biến thiên cho cả solve, undo và routing để xác nhận peak và chi phí. Kết quả này bác bỏ việc dùng nguyên compact transcript trong layout đang xét, chưa bác bỏ phân rã đóng gói. Để tiếp tục cần chứng minh lịch degree/pivot đọc lại được quotient trong bank và đếm chi phí của một vòng điều khiển dùng chung trước khi mở rộng. Chưa có artifact hoặc run của hướng này.
 
 | Mốc tốt nhất | Config | Commit nguồn | Run / provenance |
 | --- | --- | --- | --- |
