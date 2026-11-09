@@ -1,0 +1,12 @@
+{
+  "track": "dqi",
+  "kind": "papers",
+  "source_id": "arxiv-2504.18334",
+  "title": "Quantum Circuit Design for Decoded Quantum Interferometry",
+  "source_url": "https://arxiv.org/pdf/2504.18334v2",
+  "version": "v2",
+  "accessed_at": "2026-11-09",
+  "source_file": "paper.pdf",
+  "source_sha256": "efe54d05283ba1630ee0e6aeccbcdf616ccccfcbe57a904c204b157397a3ad04",
+  "coverage": "Trang PDF 1 để định danh và xác nhận phạm vi Max-XORSAT."
+}
