@@ -8,5 +8,5 @@
   "accessed_at": "2026-11-09",
   "source_file": "paper.pdf",
   "source_sha256": "efe54d05283ba1630ee0e6aeccbcdf616ccccfcbe57a904c204b157397a3ad04",
-  "coverage": "Trang PDF 1 để định danh và xác nhận phạm vi Max-XORSAT."
+  "coverage": "Trang PDF 1–10: mục I–VII, tập trung mục II–IV (Eq. 4, 9–12 và Alg. 1), mục V–VI (Hình 1, Bảng I, Eq. 20–23) và mục VII (Bảng II, Hình 5, giới hạn mô phỏng). Đối chiếu mã Qiskit được dẫn tại ae7692318ecfb627a7100fbe9be8e3169bc99de9. Chưa tái lập mô phỏng, chưa đọc toàn bộ notebook, tài liệu dẫn hoặc bản IEEE."
 }
