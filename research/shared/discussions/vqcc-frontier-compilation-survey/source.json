@@ -8,5 +8,5 @@
   "accessed_at": "2026-11-09",
   "source_file": "survey.txt",
   "source_sha256": "c986cc4ec2ae014af07820a5910d3dd5d7d684ec301b2f17dc85bec7e4c53e14",
-  "coverage": "Đọc bản tổng hợp người dùng cung cấp: luật điểm, diễn tiến DQI, invsqrt, DFTHCSOS, verifier, bốn hypothesis và roadmap. Snapshot giữ nguyên văn bản đã dán. Không có permalink hoặc phiên bản của chính survey. Các nguồn được nhắc, circuit và số đo bên ngoài chưa được xác minh trong bước đăng ký."
+  "coverage": "Đã đọc snapshot người dùng cung cấp, các đoạn companion v2 về Kickmix, DQI và DFTHCSOS, abstract arXiv:1209.5491, verifier và các note/run project được dẫn tại main b61293b. Không có permalink hoặc comment gốc của survey. Chưa đọc toàn văn nguồn layer-peeling, chưa đối chiếu generator hoặc tái lập số đo artifact/engine bên ngoài."
 }

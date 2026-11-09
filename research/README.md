@@ -32,7 +32,7 @@ Luôn đối chiếu với EXPERIMENTS, Issues và results
 | Özer v23 — refit DF-THC, tái dùng tích DQI và pha invsqrt | shared | Invsqrt, DQI, DFTHCSOS | [note.md — ready](shared/discussions/kaggle-ozer-df-thc-group-compression-v23/note.md) | — |
 | mrmeows v3 — mạch mở và kết quả âm của ba bài | shared | Invsqrt, DQI, DFTHCSOS | [note.md — ready](shared/discussions/kaggle-mrmeows-open-circuits-v3/note.md) | — |
 | Biên dịch mạch lượng tử với cấu trúc kiểm chứng được | shared | Invsqrt, DQI, DFTHCSOS | [note.md — ready](shared/discussions/verifiable-circuit-compilation/note.md) | — |
-| Survey về kiến trúc mạch và tối ưu VQCC | shared | Schur/continued fractions, HMR, QROM và chi phí verifier | [source.md — source_only](shared/discussions/vqcc-frontier-compilation-survey/source.md) | — |
+| Survey về kiến trúc mạch và tối ưu VQCC | shared | Schur/continued fractions, HMR, QROM và chi phí verifier | [note.md — draft](shared/discussions/vqcc-frontier-compilation-survey/note.md) | — |
 
 Chưa có discussion được lưu.
 
