@@ -1,0 +1,12 @@
+{
+  "track": "shared",
+  "kind": "discussions",
+  "source_id": "vqcc-frontier-compilation-survey",
+  "title": "Frontier Compilation Architectures and Agentic Optimization in the Google Verifiable Quantum Circuit Compilation Competition",
+  "source_url": null,
+  "version": "user-provided text snapshot 2026-11-09",
+  "accessed_at": "2026-11-09",
+  "source_file": "survey.txt",
+  "source_sha256": "c986cc4ec2ae014af07820a5910d3dd5d7d684ec301b2f17dc85bec7e4c53e14",
+  "coverage": "Đọc bản tổng hợp người dùng cung cấp: luật điểm, diễn tiến DQI, invsqrt, DFTHCSOS, verifier, bốn hypothesis và roadmap. Snapshot giữ nguyên văn bản đã dán. Không có permalink hoặc phiên bản của chính survey. Các nguồn được nhắc, circuit và số đo bên ngoài chưa được xác minh trong bước đăng ký."
+}
