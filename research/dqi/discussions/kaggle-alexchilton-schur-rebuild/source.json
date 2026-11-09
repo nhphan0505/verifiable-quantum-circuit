@@ -1,0 +1,12 @@
+{
+  "track": "dqi",
+  "kind": "discussions",
+  "source_id": "kaggle-alexchilton-schur-rebuild",
+  "title": "24.94 LB: Verified Three-Task Portfolio",
+  "source_url": "https://www.kaggle.com/code/alexchilton/24-94-lb-verified-three-task-portfolio",
+  "version": "Kaggle notebook 140386665 v129, Schur rebuild dataset v5",
+  "accessed_at": "2026-11-10",
+  "source_file": "source.md",
+  "source_sha256": "44636918afb64ffc8c9d880dd874fb94058ae98a543840720f4a0cba0295dfeb",
+  "coverage": "Định danh notebook v129 và dataset v5, đọc mục 3, ghi công, manifest DQI và mô tả archive."
+}
