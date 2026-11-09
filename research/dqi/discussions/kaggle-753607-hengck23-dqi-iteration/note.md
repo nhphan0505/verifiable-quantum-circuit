@@ -3,22 +3,23 @@
 Status: draft
 Track: dqi
 Source: https://www.kaggle.com/competitions/google-verifiable-quantum-circuit-compilation/discussion/753607
-Version: Kaggle thread 753607, snapshot 2026-11-09
+Version: Kaggle thread 753607, snapshot văn bản API 2026-11-09
 
 - Từ khóa: circuit surgery, profiling theo khối, A/B test, iter014, generator.
-- Đọc trực tiếp bài của hengck23 và tám bình luận hiển thị ngày 2026-11-09. Phần đã lưu là [snapshot diễn giải](source.md). Dùng tác giả và chủ đề bình luận để định vị vì snapshot không lưu permalink từng bình luận. [Thread gốc](https://www.kaggle.com/competitions/google-verifiable-quantum-circuit-compilation/discussion/753607)
+- Đọc trực tiếp bài của hengck23 và tám bình luận hiển thị ngày 2026-11-09, sau đó đối chiếu văn bản bài và 10 bình luận do API Kaggle trả, gồm bảy bình luận cấp đầu và ba phản hồi lồng. Giữ [snapshot giao diện](source.md) và [snapshot đối chiếu có ID bình luận](source-2026-11-09-api.md). Ảnh đính kèm nằm ngoài phạm vi đối chiếu. [Thread gốc](https://www.kaggle.com/competitions/google-verifiable-quantum-circuit-compilation/discussion/753607)
 
 ## Câu hỏi và bối cảnh
 
-Hengck23 mô tả hai tầng tối ưu decoder. Tầng toán chọn cách giải mã. Tầng biên dịch thay cách biểu diễn và thao tác trên thanh ghi. Tiêu đề bài đăng nêu ratio 60,11134658530358. Notebook mà bài dẫn có tên chứa 59,56854. Lời bình luận của Wan Xiaolong nhắc đến iter014. Thread chưa nối cả ba tên/mốc này bằng hash đầy đủ và log chấm. [Bài gốc và phản hồi của Wan Xiaolong](https://www.kaggle.com/competitions/google-verifiable-quantum-circuit-compilation/discussion/753607)
+Hengck23 mô tả hai tầng tối ưu decoder. Tầng toán chọn cách giải mã. Tầng biên dịch thay cách biểu diễn và thao tác trên thanh ghi. Tiêu đề bài đăng nêu ratio 60,11134658530358. Notebook mà bài dẫn có tên chứa 59,56854. Lời bình luận của Wan Xiaolong nhắc đến iter014. Văn bản đã đọc chưa nối ba mốc này bằng hash và log chấm. [Bài gốc và phản hồi của Wan Xiaolong](https://www.kaggle.com/competitions/google-verifiable-quantum-circuit-compilation/discussion/753607)
 
 ## Các phương án và lập luận
 
 | Phát biểu | Căn cứ trong thread | Giới hạn |
 | --- | --- | --- |
-| **Hengck23, chọn mô hình decoder rồi biên dịch từng khối.** Tách pipeline thành các đoạn và đo Q/T để chọn đoạn cần sửa. | Bài gốc, mục *High-level modeling* và *Low-level compilation*, cùng bình luận bắt đầu bằng mô tả phân rã baseline thành các bước. | Bài không cung cấp bảng chi phí theo đoạn cho một hash cụ thể. So sánh BM khoảng 14,2× là nhận định của tác giả bài đăng. Thiếu cấu hình để đối chiếu. |
-| **Hengck23, ghép module và A/B test.** Dùng đoạn phù hợp từ các mạch công khai, ghép ở mức .kmb và chọn biến thể theo số đo. | Bình luận về circuit surgery. Tác giả nói còn phải dựng lại generator Python. | Cần xác minh biên giữa module, mapping dây, pha và cleanup. Thành công trên artifact chưa xác nhận có thể dựng lại từ generator hoặc áp dụng cùng kỹ thuật cho mạch khác. |
-| **Wan Xiaolong báo kiểm iter014 trên salt mặc định và ba salt khác.** Jack gợi ý mốc 65. | Hai bình luận được quy riêng cho người viết. | Không có raw log trong thread. Lời báo bốn salt là bằng chứng được người tham gia báo lại. Mốc 65 trong bình luận của Jack là gợi ý, chưa có phép đo kèm theo. |
+| **Hengck23, chọn mô hình decoder rồi biên dịch từng khối.** Tách pipeline thành các đoạn và đo Q/T để chọn đoạn cần sửa. | Bài gốc, mục *High-level modeling* và *Low-level compilation*, cùng comment 3546276 về phân rã baseline thành các bước. | Phần văn bản đã đọc không cung cấp bảng chi phí theo đoạn cho một hash cụ thể. So sánh BM khoảng 14,2× là nhận định của tác giả bài đăng. Thiếu cấu hình để đối chiếu. |
+| **Hengck23, ghép module và A/B test.** Dùng đoạn phù hợp từ các mạch công khai, ghép ở mức .kmb và chọn biến thể theo số đo. | Comment 3546421 về circuit surgery. Tác giả nói còn phải dựng lại generator Python. | Cần xác minh biên giữa module, mapping dây, pha và cleanup. Thành công trên artifact chưa xác nhận có thể dựng lại từ generator hoặc áp dụng cùng kỹ thuật cho mạch khác. |
+| **Wan Xiaolong báo kiểm iter014 trên salt mặc định và ba salt khác.** | Comment 3546847. | Đây là lời báo của người kiểm. Phần văn bản không kèm raw log hoặc hash. |
+| **Hengck23 kể về việc dùng mốc leaderboard bịa trong prompt. Jack gợi ý agent có thể đạt 65.** | Comment 3546299 và 3546422 của hengck23. Comment 3546436 của Jack là phản hồi lồng dưới 3546422. | Mốc 65 là gợi ý trong cuộc trao đổi về prompt. Ngữ cảnh này chưa xác định nguồn gốc hoặc độ chính xác của ratio cụ thể trong tiêu đề. |
 
 ## Kết luận hiện tại
 
