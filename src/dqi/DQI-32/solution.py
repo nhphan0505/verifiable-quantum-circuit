@@ -13,6 +13,7 @@ conventions are retained. All arithmetic is exact under the stated promises.
 
 import argparse
 from collections import Counter
+from contextlib import contextmanager
 import hashlib
 import importlib.util
 import json
@@ -382,11 +383,58 @@ def modular_product(builder, sigma, source, coefficients, state, previous, *,
         builder.free(square)
 
 
-def transform_evaluator(builder, sigma, omega, previous, *, inverse=False):
+def xor_borrowed_cofactors(builder, sigma, snapshot, previous):
+    """XOR normalized cofactors into snapshot and restore the borrowed locator."""
+    r0, r1 = sigma[::2], sigma[1::2]
+    a0, a1, b0, b1 = [previous._alloc_poly(builder, previous.AUX_WORDS) for _ in range(4)]
+    for word in sigma:
+        previous._square_inplace(builder, word, inverse=True)
+    builder.x(km.array([a0[0][0], b1[0][0]]))
+    rows = [(r0, r1), (a0, a1), (b0, b1)]
+    degrees = (builder.alloc_qubits(5), builder.alloc_qubits(5))
+    previous._degree_xor(builder, r0, degrees[0])
+    previous._degree_xor(builder, r1, degrees[1])
+    tape = [previous._aux_step_compact(builder, rows, degrees)
+            for _ in range(previous.AUX_STEPS)]
+    gcd = r0[0]
+    field = previous.FIELD
+    inverse, scaffold = builder.init_gf2_inverse_with_scaffold(gcd, field=field)
+    cofactors = a0 + b0
+    previous._scale_inplace(builder, cofactors, inverse, gcd)
+    builder.cx(previous._flat([cofactors]), previous._flat([snapshot["A"] + snapshot["B"]]))
+    previous._scale_inplace(builder, cofactors, gcd, inverse)
+    builder.del_gf2_inverse_with_scaffold(gcd, target=inverse, scaffold=scaffold, field=field)
+    builder.free(inverse + scaffold)
+    for record in reversed(tape):
+        previous._aux_step_compact_inverse(builder, rows, degrees, record)
+    previous._degree_xor(builder, r0, degrees[0])
+    previous._degree_xor(builder, r1, degrees[1])
+    builder.free(degrees[0] + degrees[1])
+    builder.x(km.array([a0[0][0], b1[0][0]]))
+    builder.free(previous._flat([a0, a1, b0, b1]))
+    for word in sigma:
+        previous._square_inplace(builder, word)
+
+
+@contextmanager
+def staged_cofactors(builder, sigma, previous):
+    """Keep only the normalized cofactor snapshot while using the locator."""
+    snapshot = {key: previous._alloc_poly(builder, previous.AUX_WORDS) for key in ("A", "B")}
+    with builder.mark("borrowed_locator_cofactors"):
+        xor_borrowed_cofactors(builder, sigma, snapshot, previous)
+    yield snapshot
+    with builder.mark("borrowed_locator_cofactors_cleanup"):
+        xor_borrowed_cofactors(builder, sigma, snapshot, previous)
+    builder.free(previous._flat([snapshot["A"], snapshot["B"]]))
+
+
+def transform_evaluator(builder, sigma, omega, previous, *, inverse=False, cofactors=None):
     """Replace omega by its modular image, then erase the old value by phase."""
-    bezout = previous._prepare_bezout(builder, sigma, compact=True)
+    owns_cofactors = cofactors is None
+    if owns_cofactors:
+        cofactors = previous._prepare_bezout(builder, sigma, compact=True)
     companion = companion_parameters(builder, sigma, len(omega), previous)
-    psi = [(i, bezout["A" if i % 2 else "B"][i // 2]) for i in range(len(sigma))]
+    psi = [(i, cofactors["A" if i % 2 else "B"][i // 2]) for i in range(len(sigma))]
     derivative = [(2 * i, word) for i, word in enumerate(sigma[1::2])]
     forward, reverse = (derivative, psi) if inverse else (psi, derivative)
     transformed = previous._alloc_poly(builder, len(omega))
@@ -400,19 +448,27 @@ def transform_evaluator(builder, sigma, omega, previous, *, inverse=False):
     builder.swap(previous._flat([omega]), previous._flat([transformed]))
     builder.free(previous._flat([transformed]))
     erase_companion_parameters(builder, sigma, companion, previous)
-    previous._erase_bezout(builder, sigma, bezout)
+    if owns_cofactors:
+        previous._erase_bezout(builder, sigma, cofactors)
 
 
-def modular_phase_block(builder, sigma, omega, masks, previous):
-    with builder.mark("modular_evaluator_forward"):
-        transform_evaluator(builder, sigma, omega, previous)
-    with builder.mark("phase_only_sweep"):
-        previous._scan_error_polynomial(builder, sigma, omega, masks)
-    with builder.mark("modular_evaluator_reverse"):
-        transform_evaluator(builder, sigma, omega, previous, inverse=True)
+def modular_phase_block(builder, sigma, omega, masks, previous, *, staged=False):
+    def phase(cofactors):
+        with builder.mark("modular_evaluator_forward"):
+            transform_evaluator(builder, sigma, omega, previous, cofactors=cofactors)
+        with builder.mark("phase_only_sweep"):
+            previous._scan_error_polynomial(builder, sigma, omega, masks)
+        with builder.mark("modular_evaluator_reverse"):
+            transform_evaluator(builder, sigma, omega, previous, inverse=True, cofactors=cofactors)
+
+    if staged:
+        with staged_cofactors(builder, sigma, previous) as cofactors:
+            phase(cofactors)
+    else:
+        phase(None)
 
 
-def validate_modular_reference(previous):
+def validate_modular_reference(previous, *, staged=False):
     """Compare both coherent transforms and the end-to-end phase block."""
     rng = random.Random(32026)
     field = previous.FIELD
@@ -439,7 +495,11 @@ def validate_modular_reference(previous):
         masks = []
         if mode == "phase":
             masks = [builder.create_classical_register(12, f"E{i}") for i in range(4095)]
-            modular_phase_block(builder, sigma, omega, masks, previous)
+            modular_phase_block(builder, sigma, omega, masks, previous, staged=staged)
+        elif staged:
+            with staged_cofactors(builder, sigma, previous) as cofactors:
+                transform_evaluator(builder, sigma, omega, previous,
+                                    inverse=(mode == "reverse"), cofactors=cofactors)
         else:
             transform_evaluator(builder, sigma, omega, previous, inverse=(mode == "reverse"))
         circuit = builder.finish_circuit()
@@ -482,7 +542,8 @@ def build_modular_reference(previous, config):
     class ModularDecoder(base.ProosAndZalkaDecoder):
         def _chien_search_and_forney_mbuc(self, builder, reg_b, masks, nb, nB):
             self._pre_align_reg_b(builder, reg_b, nb, nB, is_adjoint=False)
-            modular_phase_block(builder, reg_b[:36], list(reversed(reg_b[37:72])), masks, previous)
+            modular_phase_block(builder, reg_b[:36], list(reversed(reg_b[37:72])), masks, previous,
+                                staged=config["layout"] == "companion_borrowed_locator_staged")
             self._pre_align_reg_b(builder, reg_b, nb, nB, is_adjoint=True)
 
     builder = km.CircuitBuilder()
@@ -505,9 +566,10 @@ def main():
     if (config["m"], config["n"], config["degree"]) != (4095, 70, 12):
         parser.error("This probe requires the DQI benchmark dimensions")
     previous = load_dqi21()
-    if config.get("layout") == "companion_modular_reference":
+    if config.get("layout") in ("companion_modular_reference", "companion_borrowed_locator_staged"):
         if args.validate_phase_block:
-            print(json.dumps(validate_modular_reference(previous), indent=2))
+            staged = config["layout"] == "companion_borrowed_locator_staged"
+            print(json.dumps(validate_modular_reference(previous, staged=staged), indent=2))
             return
         directory = Path(__file__).resolve().parent
         output = directory.parents[2] / "artifacts" / directory.parent.name / directory.name / (path.stem + ".kmb")
