@@ -1,0 +1,12 @@
+{
+  "track": "shared",
+  "kind": "papers",
+  "source_id": "arxiv-2407.20167",
+  "title": "Measurement-based uncomputation of quantum circuits for modular arithmetic",
+  "source_url": "https://arxiv.org/pdf/2407.20167",
+  "version": "v1",
+  "accessed_at": "2026-11-09",
+  "source_file": "paper.pdf",
+  "source_sha256": "c5b152e5dbfdbc767e49edaec45f3550e623fdefa269fdabed0ab578d7a392f0",
+  "coverage": "Trang PDF 1–4 (trang đầu, abstract, mục 1.1 và Bảng 1) để định danh nguồn và chọn track."
+}
