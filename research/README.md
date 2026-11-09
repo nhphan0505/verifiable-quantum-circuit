@@ -26,7 +26,7 @@ Luôn đối chiếu với EXPERIMENTS, Issues và results
 | Câu hỏi / hướng thảo luận | Track | Từ khóa / thành phần | Nội dung | Issue / hướng liên quan |
 | --- | --- | --- | --- | --- |
 | Vòng lặp verifier và tình hình tối ưu ba bài thi | shared | Invsqrt, DQI, DFTHCSOS; chi phí, sai số và vòng lặp kiểm chứng | [note.md — ready](shared/discussions/kaggle-752897-verifier-in-the-loop/note.md) | — |
-| Bản tin RezOps 757068 về mốc công khai của ba bài | shared | Uncompute theo nhánh, cache DQI nhiều salt, refit hệ số hóa học | [source.md — source_only](shared/discussions/kaggle-757068-rezops-public-frontier/source.md) | — |
+| Bản tin RezOps 757068 về mốc công khai của ba bài | shared | Uncompute theo nhánh, cache DQI nhiều salt, refit hệ số hóa học | [note.md — draft](shared/discussions/kaggle-757068-rezops-public-frontier/note.md) | — |
 | Portfolio mạch VQCC của Syed Asad Ali (Kaggle v11) | shared | Invsqrt, DQI, DFTHCSOS; lookup, uncompute, lượng tử hóa | [note.md — ready](shared/discussions/kaggle-vqcc-own-circuit-portfolio/note.md) | — |
 | SomeJoint v36: hai bit pha, DQI của yoyobar và refit trọng số FeMoCo | shared | Invsqrt, DQI, DFTHCSOS | [note.md — ready](shared/discussions/kaggle-somejoint-chem-refit-v36/note.md) | — |
 | Özer v23 — refit DF-THC, tái dùng tích DQI và pha invsqrt | shared | Invsqrt, DQI, DFTHCSOS | [note.md — ready](shared/discussions/kaggle-ozer-df-thc-group-compression-v23/note.md) | — |
