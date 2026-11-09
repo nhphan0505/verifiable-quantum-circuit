@@ -8,5 +8,5 @@
   "accessed_at": "2026-11-09",
   "source_file": "source.md",
   "source_sha256": "01e3eba69b914d7822c4c31665c0b4370b063e87321e8bb6c4f32a4ffa15dfbf",
-  "coverage": "Bài và tám bình luận hiển thị. Snapshot diễn giải tập trung vào phân rã mạch, ghép module, giới hạn generator và lời báo kiểm iter014. Chưa đọc notebook, log hoặc artifact được nhắc."
+  "coverage": "Đọc bài gốc và tám bình luận hiển thị trên Kaggle ngày 2026-11-09, đối chiếu snapshot diễn giải. Phân biệt phát biểu hengck23, lời báo kiểm của Wan Xiaolong và gợi ý của Jack. Chưa đọc notebook, log hoặc artifact ngoài thread."
 }

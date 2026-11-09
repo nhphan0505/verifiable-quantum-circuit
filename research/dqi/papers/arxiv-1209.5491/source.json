@@ -8,5 +8,5 @@
   "accessed_at": "2026-11-09",
   "source_file": null,
   "source_sha256": null,
-  "coverage": "Trang arXiv v1 xác minh tiêu đề, tác giả Brittanney Amento, Martin Rötteler và Rainer Steinwandt, phiên bản, abstract và mục lục HTML. Lưu URL của đúng v1. Metadata arXiv ghi giấy phép phân phối không độc quyền dành cho arXiv, nên PDF không được đưa vào repo công khai. Bước đăng ký chưa có note phân tích paper."
+  "coverage": "Đọc trực tiếp HTML arXiv v1, §1, §2.2–2.4, §3.1, phần lập chi phí §4 và §5. Chưa rà toàn bộ chứng minh §3.2 hoặc tái lập mạch. Nguồn URL pin v1; không kèm PDF trong repo."
 }
