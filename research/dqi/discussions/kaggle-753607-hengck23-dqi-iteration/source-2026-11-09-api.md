@@ -1,8 +1,0 @@
-# Kaggle 753607 — đối chiếu văn bản qua API ngày 2026-11-09
-
-- [Thread gốc](https://www.kaggle.com/competitions/google-verifiable-quantum-circuit-compilation/discussion/753607), đăng ngày 2026-10-28 bởi hengck23. [API bài đăng](https://www.kaggle.com/api/v1/discussions/753607/get) · [API bình luận](https://www.kaggle.com/api/v1/discussions/753607/comments).
-- Đây là snapshot diễn giải bổ sung cho [bản chụp giao diện](source.md). Giao diện lúc đọc hiển thị tám bình luận. API báo 10 và trả bảy bình luận cấp đầu cùng ba phản hồi lồng, với nextPageToken rỗng. Đã đọc văn bản của bài và các bình luận do API trả. Chưa kiểm tra ảnh đính kèm, notebook, artifact, generator hoặc log chấm.
-- **Bài gốc:** Tiêu đề nêu ratio 60,11134658530358. Bài dẫn [notebook có tên chứa 59,56854](https://www.kaggle.com/code/hengck23/dqi-kmb-at-59-56854). Hengck23 tách chọn mô hình toán của decoder khỏi thao tác trên thanh ghi và nêu nhận định riêng về BM khoảng 14,2×.
-- **hengck23, comment 3546276 và 3546421:** Tách baseline thành từng bước để đo Q và T. Thử thay các module trong .kmb từ notebook công khai bằng A/B test. Tác giả nói vẫn cần dựng lại generator Python.
-- **hengck23, comment 3546299 và 3546422:** Tác giả kể từng đưa mốc leaderboard bịa vào prompt và đùa về việc agent tin một mốc 60× được đưa vào theo cách đó. Comment 3546436 của Jack nằm dưới 3546422 và gợi ý agent có thể đạt 65. Bối cảnh này cho thấy lời gợi ý không phải phép đo và không đủ để kết luận về con số cụ thể trong tiêu đề.
-- **Wan Xiaolong, comment 3546847:** Báo đã kiểm iter014 local trên salt mặc định và ba salt khác. Phần văn bản không kèm raw log hoặc hash để nối iter014 với ratio trong tiêu đề hay notebook được dẫn.
