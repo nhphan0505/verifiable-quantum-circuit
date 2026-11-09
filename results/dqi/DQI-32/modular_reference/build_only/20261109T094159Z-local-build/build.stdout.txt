@@ -1,0 +1,7 @@
+{
+  "status": "BUILT",
+  "artifact_path": "/Users/tranxuanhoa/Documents/research/GQA-DQI-32/artifacts/dqi/DQI-32/modular_reference.kmb",
+  "num_qubits": 4412,
+  "static_toffoli_like": 6257729,
+  "num_instructions": 85321754
+}

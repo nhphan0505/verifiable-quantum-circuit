@@ -1,0 +1,41 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-32",
+  "config_name": "modular_reference",
+  "verification_level": "dev_5min",
+  "source_commit": "e4280f5dad2c7c6b6233c44a87ef9084d2415177",
+  "build_run": "results/dqi/DQI-32/modular_reference/build_only/20261109T094159Z-local-build",
+  "artifact_matches_build": true,
+  "raw_stdout_matches_verifier_json": true,
+  "verifier_and_harness_hashes_match_checkout": true,
+  "status_observed": "PASS",
+  "verified_shots": 4096,
+  "value_errors": 0,
+  "phase_errors": 0,
+  "score": 363578922011319.56,
+  "num_qubits": 4412,
+  "mean_toffoli_like": 6257718.236328125,
+  "repetition_factor": 2.9847755992784792,
+  "same_environment_baseline_recheck": "results/dqi/DQI-21/streamed_compact/dev_5min/20261108T151523Z-local-dev_5min-9f886e/baseline_recheck_verifier.json",
+  "candidate_over_baseline_recheck": 5.937469292713184,
+  "baseline_recheck_over_candidate": 0.1684219236682638,
+  "q_squared_ratio": 5.432125307211014,
+  "toffoli_ratio": 1.0930287791467803,
+  "candidate_over_streamed_compact": 1.629236631536006,
+  "candidate_over_bezout_reference": 0.9565025840378968,
+  "formal_baseline_gain": null,
+  "raw_evidence_sha256": {
+    "config.json": "d9b25e6054e38f15ebb935b85cf143c2743ccce8db349c782e7b11e3013228a6",
+    "metadata.json": "dc5cc8447401fc607a45e269f55050a33d5cca25d6ab5ed80722dc03572a3d28",
+    "provenance.json": "11d5fd721c4a682562082e5b1b49cc3d6fe04402d94c194336fd0762980d4fc5",
+    "verifier.json": "c5bb415c870ef7e3463d0ecc75326780647497d1b11417622ba0de73eb87b075",
+    "verify.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "verify.stdout.txt": "c5bb415c870ef7e3463d0ecc75326780647497d1b11417622ba0de73eb87b075"
+  },
+  "limitations": [
+    "Dev profile only. No full run was requested.",
+    "Baseline recheck matches comparison environment and profile but lacks build provenance. Historical baseline has a different environment or harness.",
+    "Static component measurements do not establish per-stage mean execution cost."
+  ],
+  "decision": "Reject modular_reference on resources. Consider packed_degree_replay only after coherent component liveness and cost screening."
+}

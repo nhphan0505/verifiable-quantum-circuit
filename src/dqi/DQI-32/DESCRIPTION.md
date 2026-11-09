@@ -51,7 +51,7 @@ python src/dqi/DQI-32/solution.py --config src/dqi/DQI-32/configs/structured_pro
 
 | Mốc tốt nhất | Config | Commit nguồn | Run / provenance |
 | --- | --- | --- | --- |
-| Dev | Chưa có | Chưa có | Chưa chấm |
+| Dev | `modular_reference` | `e4280f5dad2c7c6b6233c44a87ef9084d2415177` | `results/dqi/DQI-32/modular_reference/dev_5min/20261109T120723Z-local-dev_5min-83916b/`, gồm `verifier.json`, `provenance.json` và `review.json` |
 | Full | Chưa có | Chưa có | Chưa chấm |
 
 ### Build reference theo yêu cầu chấm stage 4
@@ -63,3 +63,15 @@ Bản reference dùng EEA phụ compact của DQI-21 để lấy Psi. Từ degre
 Cộng các bản dịch z^j của evaluator nhân với từng hệ số Psi vào bank tạm 35 word để tạo R. Đảo toàn bộ dịch để trả lại evaluator cũ, đo X bank cũ rồi bù pha bằng parity của D*R modulo s. Khâu bù dùng tích pha từ các bản dịch của R, không cần materialize bank thứ ba. Sau khi swap R vào slot gốc, dọn EEA phụ, cờ degree và scratch trước sweep. Chiều sau sweep đổi vai D và Psi để trả omega. Giữ 222 vòng EEA và alignment gốc. Bản reference không dùng H 70 word và vẫn dùng tape/cofactor riêng cùng một bank evaluator tạm. Đây chưa phải lịch packed quotient dùng chung của mô hình.
 
 Trước build, kiểm riêng omega→R, R→omega và toàn khối pha trên fixture packed, locator square-free ngẫu nhiên ở các bậc khác nhau, nhiều outcome HMR và mask runtime. Chấm `dev_5min` trước để xác nhận trên syndrome thực, sau đó chấm full nếu cần dữ liệu cuối. Báo mean T, peak Q, R và lỗi tách riêng. Bản reference có thể cho kết quả âm về Q²T.
+
+Bản `modular_reference` BUILT từ source `e4280f5dad2c7c6b6233c44a87ef9084d2415177`, SHA-256 artifact `2959e8a00f52d29a6e3790d8860bd6a2a122dc78eaa2e4a833334db2c57d3635`. Mạch đầy đủ có 4.412 qubit và 6.257.729 Toffoli-like tĩnh, proxy Q²T cao gấp 5,937 lần baseline. Bản này vượt tiêu chí tài nguyên và được bàn giao để đo độ đúng cùng chi phí thực. Khối aligned có 975.514 T thuận, 45.045 T sweep và 949.054 T đảo. Ba kiểm tra riêng, mỗi kiểm tra 14 ca × 3 seed, đều khớp giá trị, pha và workspace. Build record, provenance và kiểm tra component nằm trong `results/dqi/DQI-32/modular_reference/build_only/20261109T094159Z-local-build/`. Chưa có điểm verifier.
+
+### Kết quả dev_5min và quyết định stage 04
+
+Run `20261109T120723Z-local-dev_5min-83916b` dùng profile v1, seed 20261106, 4.096 shots. PASS, 0 lỗi value và 0 lỗi phase. Score dev **363578922011319.56**, Q=4.412, mean T=6.257.718,2363, R=2,9847756. Hash artifact, source/config và helper khớp provenance; stdout khớp verifier JSON. Chỉ có số đo dev theo phạm vi được giao.
+
+So với baseline recheck cùng môi trường và profile trong run DQI-21, cost tăng **5,9375×**, phân rã thành Q² **5,4321×**, mean T **1,0930×**, R **1×**. Gain số học baseline/candidate là 0,1684×. Cột gain chính thức để trống vì recheck thiếu provenance build và baseline đăng ký khác môi trường/harness. Cùng profile và môi trường, cost cao hơn `streamed_compact` **62,92%**, thấp hơn `bezout_reference` **4,35%**. Các số này dùng dev, với seed và mean error weight khớp.
+
+Nút thắt là peak ở tiền xử lý, khi hai remainder và bốn cofactor của EEA phụ, compact transcript, bank evaluator tạm và scratch đồng thời sống. Trả chúng trước sweep không hạ được peak đã xảy ra. Sweep đạt 11 T tĩnh mỗi điểm nhưng chỉ chiếm **2,29%** của 1.969.613 T tĩnh trong khối aligned. Hai lượt modular transform chiếm **97,71%** còn lại, gồm hai lần compute/uncompute EEA phụ và các vòng companion shift thuận/ngược cho cả tính giá trị lẫn sửa pha. Với mean T hiện tại, điểm hòa vốn cần Q tối đa khoảng 1.810 qubit nếu giữ R, thấp hơn peak EEA gốc. Config bị bác bỏ về tài nguyên dù dev PASS. Không cần full để quyết định về config này.
+
+**Config đề xuất nếu tiếp tục: `packed_degree_replay`.** Giữ EEA chính và sweep 11 T. Thay auxiliary EEA riêng cùng hai lượt companion transform bằng phân rã Bézoutian đã qua kiểm tra đại số. Dùng locator làm bank E/O, lưu quotient vào word leading đã triệt tiêu và chỉ giữ thông tin degree cần cho replay. Áp lịch shear/scale trực tiếp lên evaluator. Chốt một primitive degree/pivot dùng chung cho nhiều bậc, đo cả thuận và đảo trên locator hằng, bậc nhỏ, 35 và ca tụt bậc sâu. Sàng lọc bằng Q toàn mạch khoảng 2.050 hoặc thấp hơn và T khối thay thế gồm alignment dưới 600.000, đồng thời kiểm proxy Q²T từ số đếm thật trước build. Đây là điều kiện hòa vốn gần đúng, mục tiêu gain 1,10× cần thêm dư địa. Không mở biến thể chỉ đổi số vòng hoặc đổi seed vì chưa có căn cứ giảm peak. Với ứng viên qua screening, dùng dev trước và kiểm độc lập/full nếu tiếp tục tới xác nhận cuối.

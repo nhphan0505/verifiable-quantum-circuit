@@ -1,0 +1,38 @@
+{
+  "verification_level": "coherent phase-block component checks",
+  "checks": [
+    {
+      "mode": "forward",
+      "cases_per_seed": 14,
+      "seeds": [
+        32,
+        320,
+        3200
+      ],
+      "num_qubits": 3461,
+      "static_toffoli_like": 975514
+    },
+    {
+      "mode": "reverse",
+      "cases_per_seed": 14,
+      "seeds": [
+        32,
+        320,
+        3200
+      ],
+      "num_qubits": 3461,
+      "static_toffoli_like": 949054
+    },
+    {
+      "mode": "phase",
+      "cases_per_seed": 14,
+      "seeds": [
+        32,
+        320,
+        3200
+      ],
+      "num_qubits": 3461,
+      "static_toffoli_like": 1969613
+    }
+  ]
+}

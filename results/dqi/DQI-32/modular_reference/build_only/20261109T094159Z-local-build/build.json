@@ -1,0 +1,14 @@
+{
+  "status": "BUILT",
+  "artifact_path": "artifacts/dqi/DQI-32/modular_reference.kmb",
+  "num_qubits": 4412,
+  "static_toffoli_like": 6257729,
+  "num_instructions": 85321754,
+  "artifact_sha256": "2959e8a00f52d29a6e3790d8860bd6a2a122dc78eaa2e4a833334db2c57d3635",
+  "artifact_size_bytes": 857823807,
+  "source_commit": "e4280f5dad2c7c6b6233c44a87ef9084d2415177",
+  "track": "dqi",
+  "experiment_id": "DQI-32",
+  "config_name": "modular_reference",
+  "static_q2t_ratio_vs_baseline": 5.93712332798499
+}
