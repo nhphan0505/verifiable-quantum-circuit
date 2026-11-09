@@ -1,0 +1,42 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-32",
+  "config_name": "borrowed_locator_staged",
+  "verification_level": "dev_5min",
+  "source_commit": "10173eea73cf850e4290989c15e31de384f51af0",
+  "build_run": "results/dqi/DQI-32/borrowed_locator_staged/build_only/20261109T121555Z-local-build",
+  "artifact_matches_build": true,
+  "raw_stdout_matches_verifier_json": true,
+  "verifier_and_harness_hashes_match_checkout": true,
+  "status_observed": "PASS",
+  "verified_shots": 4096,
+  "value_errors": 0,
+  "phase_errors": 0,
+  "score": 275560081449241.4,
+  "num_qubits": 3841,
+  "mean_toffoli_like": 6257718.236328125,
+  "repetition_factor": 2.9847755992784792,
+  "reference_run": "results/dqi/DQI-32/modular_reference/dev_5min/20261109T120723Z-local-dev_5min-83916b",
+  "reference_over_candidate": 1.3194179654003744,
+  "score_reduction_vs_reference": 0.2420900531723833,
+  "qubits_saved": 571,
+  "reaction_depth_ratio_vs_reference": 1.0165296433534043,
+  "same_environment_baseline_recheck": "results/dqi/DQI-21/streamed_compact/dev_5min/20261108T151523Z-local-dev_5min-9f886e/baseline_recheck_verifier.json",
+  "candidate_over_baseline_recheck": 4.500067035930855,
+  "baseline_recheck_over_candidate": 0.22221891185519782,
+  "formal_baseline_gain": null,
+  "candidate_over_streamed_compact": 1.2348146487770597,
+  "raw_evidence_sha256": {
+    "config.json": "e39623ea202e49b8d98326b32896ef9d323cd16c238bccb41fa3a899adae3b0d",
+    "metadata.json": "e55ead1777fe28380056b2f99e8e552a34bf42d4e3821a3defef0ede686528bf",
+    "provenance.json": "14bb383eacbd0c3cbe04d4381cff19584ddba3677b576ab8d03fb1419521708a",
+    "verifier.json": "3a3c5917cdb30976d7fc31cc107d737d3725174f37cb634c81aeb818106f2052",
+    "verify.stdout.txt": "3a3c5917cdb30976d7fc31cc107d737d3725174f37cb634c81aeb818106f2052",
+    "verify.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "limitations": [
+    "Dev only. Baseline recheck lacks build provenance.",
+    "Reaction depth is separate from the score."
+  ],
+  "decision": "Accept staging as a memory improvement. Reject both DQI-32 configs as baseline replacements. Stop this bounded cycle at dev."
+}

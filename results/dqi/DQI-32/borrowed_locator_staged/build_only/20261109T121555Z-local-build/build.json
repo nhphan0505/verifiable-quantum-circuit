@@ -1,0 +1,15 @@
+{
+  "status": "BUILT",
+  "artifact_path": "artifacts/dqi/DQI-32/borrowed_locator_staged.kmb",
+  "num_qubits": 3841,
+  "static_toffoli_like": 6257729,
+  "num_instructions": 85322190,
+  "artifact_sha256": "ee23084dae9c6afc420e7d56c54524126e79ec4fd4c29b6ff07bb5291f00ca21",
+  "artifact_size_bytes": 857827877,
+  "source_commit": "10173eea73cf850e4290989c15e31de384f51af0",
+  "track": "dqi",
+  "experiment_id": "DQI-32",
+  "config_name": "borrowed_locator_staged",
+  "static_q2t_ratio_vs_baseline": 4.499804825822107,
+  "static_q2t_ratio_vs_modular_reference": 0.7579099468276168
+}

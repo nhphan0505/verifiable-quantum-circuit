@@ -51,7 +51,7 @@ python src/dqi/DQI-32/solution.py --config src/dqi/DQI-32/configs/structured_pro
 
 | Mốc tốt nhất | Config | Commit nguồn | Run / provenance |
 | --- | --- | --- | --- |
-| Dev | `modular_reference` | `e4280f5dad2c7c6b6233c44a87ef9084d2415177` | `results/dqi/DQI-32/modular_reference/dev_5min/20261109T120723Z-local-dev_5min-83916b/`, gồm `verifier.json`, `provenance.json` và `review.json` |
+| Dev | `borrowed_locator_staged` | `10173eea73cf850e4290989c15e31de384f51af0` | `results/dqi/DQI-32/borrowed_locator_staged/dev_5min/20261109T121950Z-local-dev_5min-dce377/`, gồm `verifier.json`, `provenance.json` và `review.json` |
 | Full | Chưa có | Chưa có | Chưa chấm |
 
 ### Build reference theo yêu cầu chấm stage 4
@@ -83,3 +83,13 @@ Theo yêu cầu giảm qubit và bàn giao một config mới để chấm, th�
 Đảo Frobenius trên locator để mượn các word chẵn/lẻ làm hai remainder, thay vì cấp riêng 432 qubit. Sau EEA phụ, XOR hai cofactor chuẩn hóa vào một snapshot, đảo toàn bộ EEA phụ và Frobenius để phục hồi locator trước biến đổi evaluator. Chỉ snapshot cofactor sống qua hai lượt biến đổi và sweep. Tape, hai hàng cofactor còn lại và scaffold đều được dọn trước khi cấp bank evaluator tạm. Sau reverse, tái tạo cofactor bằng cùng oracle XOR để dọn snapshot. Như vậy có hai lượt oracle compute/uncompute như tổng số lượt EEA phụ của reference, với lịch cấp phát khác. Dự đoán giảm ít nhất 400 qubit và giữ số Toffoli tĩnh gần reference. Chưa có dự báo thắng baseline.
 
 Đây là một vòng đo trung gian theo yêu cầu mới, nên gate thắng baseline được giữ cho quyết định tiếp tục và không dùng để cản build này. Bác bỏ config nếu sai giá trị, pha, workspace hoặc không giảm peak và proxy Q²T so với `modular_reference`. Kiểm component riêng hai chiều và phase block có đủ 4.095 runtime masks, sau đó bàn giao một lượt dev_5min. Mốc 890 qubit của DQI-27 thuộc decoder Schur khác. Giữ EEA hiện tại thì riêng state sống ở biên khối pha đã là 1.803 qubit. Không dự kiến đạt 890 qubit bằng thay config của khối pha.
+
+`borrowed_locator_staged` BUILT từ source `10173eea73cf850e4290989c15e31de384f51af0`. Artifact SHA-256 `ee23084dae9c6afc420e7d56c54524126e79ec4fd4c29b6ff07bb5291f00ca21`. Toàn mạch giảm 4.412 → 3.841 qubit (−571, khoảng −12,94%) và giữ 6.257.729 Toffoli-like tĩnh. Proxy Q²T giảm 24,21% so với reference và vẫn cao khoảng 4,50× baseline. Kiểm tra component gồm 14 ca × 3 seed cho mỗi chiều và cho khối pha đầy đủ. Tất cả đều khớp dữ liệu, pha và workspace. Build record và provenance tại `results/dqi/DQI-32/borrowed_locator_staged/build_only/20261109T121555Z-local-build/`. Đây là số đo trước khi có điểm dev.
+
+### Phân tích dev_5min sau vòng 05
+
+Run `20261109T121950Z-local-dev_5min-dce377` của `borrowed_locator_staged` PASS, 4.096 shots, 0 lỗi value và 0 lỗi phase. Hash artifact, commit nguồn, config, các helper và hồ sơ build khớp provenance. Score dev **275560081449241.4**, Q=3.841, mean T=6.257.718,2363, R=2,9847756. Đây là mốc dev tốt nhất của DQI-32. Mốc cũ `modular_reference` vẫn tái lập theo source/run đã ghi ở trên.
+
+Cùng profile v1, seed 20261106 và môi trường, giảm **571 qubit** với mean T và R giữ nguyên. Score giảm **24,209%** (gain **1,3194×**) so `modular_reference`, đúng mức dự báo từ thay đổi Q². Reaction depth tăng 103.632 → 105.345, khoảng 1,65%, là số đo riêng. Không suy ra tốc độ chạy từ thời gian của hai lượt chấm.
+
+Config đạt mục tiêu trung gian nhưng cost vẫn **4,5001×** baseline recheck và **1,2348×** DQI-21 `streamed_compact`. Gain chính thức tiếp tục để trống vì baseline recheck thiếu build provenance. Cả hai config DQI-32 bị bác bỏ như phương án thay baseline. Chốt vòng thử ở dev theo phạm vi đã chọn. Mục tiêu còn lại nếu mở vòng mới là chứng minh lịch packed replay để bỏ transcript/cofactor riêng và giảm chi phí biến đổi cả hai chiều. Với mục tiêu xấp xỉ 890 qubit, cần một hypothesis riêng về decoder và lịch sống của khối pha vì EEA hiện tại đã vượt mốc đó trước khi cấp workspace.

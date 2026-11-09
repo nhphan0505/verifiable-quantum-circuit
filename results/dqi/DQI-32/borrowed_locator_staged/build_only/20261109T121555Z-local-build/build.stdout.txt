@@ -1,0 +1,7 @@
+{
+  "status": "BUILT",
+  "artifact_path": "/Users/tranxuanhoa/Documents/research/GQA-DQI-32/artifacts/dqi/DQI-32/borrowed_locator_staged.kmb",
+  "num_qubits": 3841,
+  "static_toffoli_like": 6257729,
+  "num_instructions": 85322190
+}
