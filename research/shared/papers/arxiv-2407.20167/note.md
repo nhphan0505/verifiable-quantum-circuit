@@ -1,6 +1,6 @@
 # Measurement-based uncomputation of quantum circuits for modular arithmetic
 
-Status: draft
+Status: ready
 Track: shared
 Source: arXiv:2407.20167
 Version: v1 (truy cập 2026-11-09)
