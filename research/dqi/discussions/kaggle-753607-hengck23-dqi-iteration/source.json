@@ -1,0 +1,12 @@
+{
+  "track": "dqi",
+  "kind": "discussions",
+  "source_id": "kaggle-753607-hengck23-dqi-iteration",
+  "title": "DQI: The baselines RATIO: 60.11134658530358",
+  "source_url": "https://www.kaggle.com/competitions/google-verifiable-quantum-circuit-compilation/discussion/753607",
+  "version": "Kaggle thread 753607, snapshot văn bản API 2026-11-09",
+  "accessed_at": "2026-11-09",
+  "source_file": "source-2026-11-09-api.md",
+  "source_sha256": "c968c56544982d511999bb504d5218348fbc2e58293f7dec5873631bdfdda235",
+  "coverage": "Đọc bài và tám bình luận hiển thị trên Kaggle, rồi đối chiếu văn bản bài và 10 bình luận do API trả ngày 2026-11-09 (bảy cấp đầu, ba lồng). Giữ bản snapshot giao diện trước đó. Chưa kiểm tra ảnh đính kèm, notebook, artifact, generator hoặc log chấm."
+}

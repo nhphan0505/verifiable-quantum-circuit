@@ -1,0 +1,12 @@
+{
+  "track": "dqi",
+  "kind": "papers",
+  "source_id": "arxiv-1209.5491",
+  "title": "Quantum binary field inversion: improved circuit depth via choice of basis representation",
+  "source_url": "https://arxiv.org/abs/1209.5491v1",
+  "version": "arXiv:1209.5491v1 (2012-09-25)",
+  "accessed_at": "2026-11-09",
+  "source_file": null,
+  "source_sha256": null,
+  "coverage": "Đọc trực tiếp HTML arXiv v1, §1, §2.2–2.4, §3.1, phần lập chi phí §4 và §5. Chưa rà toàn bộ chứng minh §3.2 hoặc tái lập mạch. Nguồn URL pin v1; không kèm PDF trong repo."
+}
