@@ -1,6 +1,6 @@
 # Đo chi phí từng khối và ghép module trong decoder DQI của hengck23
 
-Status: draft
+Status: ready
 Track: dqi
 Source: https://www.kaggle.com/competitions/google-verifiable-quantum-circuit-compilation/discussion/753607
 Version: Kaggle thread 753607, snapshot văn bản API 2026-11-09

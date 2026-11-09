@@ -1,6 +1,6 @@
 # Nghịch đảo trường nhị phân bằng Itoh–Tsujii trong normal basis và ghost-bit basis
 
-Status: draft
+Status: ready
 Track: dqi
 Source: https://arxiv.org/abs/1209.5491v1
 Version: arXiv:1209.5491v1 (2012-09-25)
