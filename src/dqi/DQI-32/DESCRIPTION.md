@@ -53,3 +53,13 @@ python src/dqi/DQI-32/solution.py --config src/dqi/DQI-32/configs/structured_pro
 | --- | --- | --- | --- |
 | Dev | Chưa có | Chưa có | Chưa chấm |
 | Full | Chưa có | Chưa có | Chưa chấm |
+
+### Build reference theo yêu cầu chấm stage 4
+
+Sau khi có kết quả screening, người dùng yêu cầu dựng artifact. Bản `modular_reference` là đối chứng coherent để đo độ đúng và chi phí của phép ghi đè evaluator. Thay đổi điều kiện dừng cho phép dựng bản reference dù proxy tài nguyên không thắng baseline. Các tiêu chí chấp nhận về lỗi, peak và score của hypothesis ban đầu vẫn áp dụng khi phân tích kết quả. Config `structured_probe` tiếp tục dùng riêng cho screening.
+
+Bản reference dùng EEA phụ compact của DQI-21 để lấy Psi. Từ degree+1 của s, tạo các cờ `i<deg(s)` để xoay prefix evaluator. Một bước nhân z modulo s đưa word cao nhất vào slot 0, cộng tích của word đó với các hệ số s_i/s_lead vào các slot còn hoạt động rồi scale slot 0 theo s_0/s_lead. Chiều đảo đảo scale, shear và phép xoay theo thứ tự. Với locator hằng, các cờ đều bằng zero, scale bằng một và evaluator hợp lệ bằng zero. Nhánh này giữ pha và dữ liệu. Miền đầu vào là evaluator EEA có bậc nhỏ hơn locator và các word đệm bằng zero.
+
+Cộng các bản dịch z^j của evaluator nhân với từng hệ số Psi vào bank tạm 35 word để tạo R. Đảo toàn bộ dịch để trả lại evaluator cũ, đo X bank cũ rồi bù pha bằng parity của D*R modulo s. Khâu bù dùng tích pha từ các bản dịch của R, không cần materialize bank thứ ba. Sau khi swap R vào slot gốc, dọn EEA phụ, cờ degree và scratch trước sweep. Chiều sau sweep đổi vai D và Psi để trả omega. Giữ 222 vòng EEA và alignment gốc. Bản reference không dùng H 70 word và vẫn dùng tape/cofactor riêng cùng một bank evaluator tạm. Đây chưa phải lịch packed quotient dùng chung của mô hình.
+
+Trước build, kiểm riêng omega→R, R→omega và toàn khối pha trên fixture packed, locator square-free ngẫu nhiên ở các bậc khác nhau, nhiều outcome HMR và mask runtime. Chấm `dev_5min` trước để xác nhận trên syndrome thực, sau đó chấm full nếu cần dữ liệu cuối. Báo mean T, peak Q, R và lỗi tách riêng. Bản reference có thể cho kết quả âm về Q²T.
