@@ -15,12 +15,12 @@ Bài báo phân tích mạch cộng, trừ và so sánh thuận nghịch, rồi 
 
 ## Thuật toán và công thức cần dùng
 
-**Xóa một bit (Lemma 4.1, Hình 24, tr. 34–35).** Cho `g(x) ∈ {0,1}`. Trước phép đo, trạng thái có dạng `Σ_x α_x |x⟩|g(x)⟩`. Oracle sửa pha phải có tác dụng `U_g|x⟩|b⟩ = |x⟩|b XOR g(x)⟩` cho cả hai giá trị `b`, với mọi scratch trả sạch và pha đúng. Áp dụng H lên cờ rồi đo Z, tương đương đo X, được bit cổ điển `h`. Biên độ chưa chuẩn hóa của dữ liệu là `α_x (-1)^(h g(x))/√2`. Vì các `|x⟩` trực giao, mỗi kết quả có xác suất 1/2.
+**Xóa một bit (Lemma 4.1, Hình 24, tr. 34–35).** Cho `g(x) ∈ {0,1}`. Trước phép đo, trạng thái có dạng `Σ_x α_x |x⟩|g(x)⟩`. Oracle sửa pha phải có tác dụng `U_g|x⟩|b⟩ = |x⟩|b XOR g(x)⟩` cho cả hai giá trị `b`, với mọi scratch trả sạch và pha đúng. Áp dụng H lên cờ rồi đo Z, tương đương đo X, được bit cổ điển `h`. Biên độ chưa chuẩn hóa của dữ liệu là `α_x (-1)^(h·g(x))/√2`. Vì các `|x⟩` trực giao, mỗi kết quả có xác suất 1/2.
 
 - `h=0` — dữ liệu giữ nguyên pha và cờ đã ở `|0⟩`.
-- `h=1` — cờ đang ở `|1⟩`. Áp dụng H để tạo `|−⟩`, gọi `U_g` để nhân thêm `(-1)^g(x)`, rồi H và X để trả cờ về `|0⟩`. Hai thừa số pha triệt tiêu trên từng thành phần `x`.
+- `h=1` — cờ đang ở `|1⟩`. Áp dụng H để tạo `|−⟩`, gọi `U_g` để nhân thêm `(-1)^(g(x))`, rồi H và X để trả cờ về `|0⟩`. Hai thừa số pha triệt tiêu trên từng thành phần `x`.
 
-Nếu đã có oracle pha `D_g|x⟩ = (-1)^g(x)|x⟩`, có thể suy ra cách dùng đo X kèm reset và áp dụng `D_g` chỉ khi `h=1`. Ví dụ, với `g(x)=u·v` và hai toán hạng còn sống, `D_g` là CZ. Với predicate phức tạp, cần tính chi phí mạch pha riêng.
+Nếu đã có oracle pha `D_g|x⟩ = (-1)^(g(x))|x⟩`, có thể suy ra cách dùng đo X kèm reset và áp dụng `D_g` chỉ khi `h=1`. Ví dụ, với `g(x)=u·v` và hai toán hạng còn sống, `D_g` là CZ. Với predicate phức tạp, cần tính chi phí mạch pha riêng.
 
 **Cộng modulo kiểu VBE (Prop. 3.2, tr. 24–25, Thm. 4.2 và Hình 25, tr. 35–36).** Với `x,y` là số không dấu `n` bit, modulus cổ điển `0<p<2^n` và `0≤x,y<p`, tạo tổng `s=x+y` trên `n+1` bit. Tạo cờ `d=1[s≥p]`, rồi trừ `d·p` để được `z=s-d·p`. Khi `d=0`, `z≥x`. Khi `d=1`, `z=x+y-p<x` vì `y<p`. Vậy `d=1[z<x]`, và comparator trên **đầu ra hiện tại** `(x,z)` thực hiện được `U_g` dùng để xóa cờ. Tổng bằng đúng `p` phải đi vào nhánh trừ.
 
@@ -30,7 +30,7 @@ Nếu đã có oracle pha `D_g|x⟩ = (-1)^g(x)|x⟩`, có thể suy ra cách d�
 
 ## Điều kiện đúng, sai số và tài nguyên
 
-Với cờ cần xóa tại thời điểm mà thanh ghi dữ liệu đã thay đổi, phải chứng minh cờ bằng đúng `g` của dữ liệu **tại điểm đo** trên toàn miền reachable. Oracle có relative phase chưa sửa hoặc còn scratch phụ không thỏa ánh xạ của Lemma 4.1. Suy ra từ công thức biên độ, một kiểm tra chỉ so bit đầu ra sẽ bỏ sót lỗi pha giữa các trạng thái có `g` khác nhau. Lemma dùng phép đo và cổng lý tưởng, không đưa mô hình nhiễu hoặc sai số tổng hợp phép quay. Nhiều bit garbage cần phân tích riêng từng phép đo và quan hệ phụ thuộc.
+Với cờ cần xóa tại thời điểm mà thanh ghi dữ liệu đã thay đổi, phải chứng minh cờ bằng đúng `g` của dữ liệu **tại điểm đo** trên toàn miền reachable. Oracle có relative phase chưa sửa hoặc còn scratch phụ không thỏa ánh xạ của Lemma 4.1. Suy ra từ công thức biên độ, một kiểm tra chỉ so bit đầu ra sẽ bỏ sót lỗi pha giữa các trạng thái có `g` khác nhau. Lemma dùng phép đo và cổng lý tưởng, không đưa mô hình nhiễu hoặc sai số tổng hợp phép quay. Nhiều bit garbage cần phân tích riêng từng phép đo và quan hệ phụ thuộc. Nếu khối con đã dùng đo, không thể suy ra mạch đảo bằng cách đảo danh sách cổng. Remark 2.23 (tr. 19) mô tả cách đổi vai trò compute và uncompute của temporary AND để dựng phép trừ từ Gidney adder.
 
 Gọi `B` là Toffoli của phần luôn chạy và `C` là Toffoli của oracle xóa cuối. Nếu các chi phí cố định trong từng nhánh, Toffoli là `B` hoặc `B+C`, kỳ vọng `B+C/2`, cực đại `B+C`. Lemma còn dùng một H và một đo Z cho mọi nhánh, thêm hai H và một X ở nhánh `h=1`. Độ trễ đo, phản hồi và reset phải được xét riêng nếu nằm trong hàm chi phí. Với VBE ở Thm. 4.2, `B=r_ADD+r_COMP+r_C-SUB`, `C=r'_COMP` và scratch là hai dây phụ cộng với số scratch lớn nhất của bốn khối theo quy ước định lý.
 
@@ -42,7 +42,7 @@ Gọi `B` là Toffoli của phần luôn chạy và `C` là Toffoli của oracle
 | Gidney | `4n` | `3.5n` |
 | CDKPM + Gidney | `6n` | `5.5n` |
 
-Các số Toffoli trên lấy từ Bảng 1, tr. 4. CDKPM ở Thm. 4.3 tiết kiệm `n` Toffoli kỳ vọng (12,5%) so với chính biến thể xóa tất định. Khi đọc số qubit, Bảng 1 và các Thm. 4.3–4.5 có chênh một dây nếu cộng trực tiếp `2n` dây dữ liệu với ancilla nêu trong định lý. Chưa đối chiếu được quy ước hoặc lịch cấp phát cho dây chênh, nên cần đếm lại trước khi dùng số qubit để so sánh. Tương tự, số khối QFT ở Bảng 1 và Thm. 4.6 khác cách trình bày, và chưa quy đổi được sang Toffoli tương đương. Với kiểm tra khoảng, công thức ở Thm. 4.13 giảm từ `2r+r_c` xuống `1.5r+r_c` với `r` là chi phí comparator và `r_c` là chi phí comparator có control. Tỷ lệ giảm là `0.5r/(2r+r_c)`. Để đếm scratch từ sơ đồ, cần đủ cho cả comparator có control nếu khối đó dùng nhiều scratch hơn comparator thường.
+Các số Toffoli trên lấy từ Bảng 1, tr. 4. CDKPM ở Thm. 4.3 tiết kiệm `n` Toffoli kỳ vọng (12,5%) so với chính biến thể xóa tất định. Khi đọc số qubit, Bảng 1 và các Thm. 4.3–4.5 có chênh một dây nếu cộng trực tiếp `2n` dây dữ liệu với ancilla nêu trong định lý. Chưa đối chiếu được quy ước hoặc lịch cấp phát cho dây chênh, nên cần đếm lại trước khi dùng số qubit để so sánh. Tương tự, số khối QFT ở Bảng 1 và Thm. 4.6 khác cách trình bày, và chưa quy đổi được sang Toffoli tương đương. Với kiểm tra khoảng, công thức ở Thm. 4.13 giảm từ `2r+r_c` xuống `1.5r+r_c` với `r` là chi phí comparator và `r_c` là chi phí comparator có control. Tỷ lệ giảm là `0.5r/(2r+r_c)`. Với `r_c=r>0`, tỷ lệ là 1/6. Mức 25% là cận trên của tỷ lệ theo công thức này. Để đếm scratch từ sơ đồ, cần đủ cho cả comparator có control nếu khối đó dùng nhiều scratch hơn comparator thường.
 
 ## Khả năng áp dụng vào project
 
@@ -60,7 +60,7 @@ Trước khi xem điểm, kiểm tra cờ ở biên bằng nhau, các nhánh con
 
 ## Bằng chứng trong project và câu hỏi còn mở
 
-[Issue DQI-27](https://github.com/nhphan0505/verifiable-quantum-circuit/issues/27) và [mô tả DQI-27](../../../../src/dqi/DQI-27/DESCRIPTION.md) là tiền lệ của xóa masked AND và phân tích liveness. Chưa xác định được cờ comparator rộng có đủ dữ liệu tại điểm đo, và chưa có kết quả chấm cho biến thể đề xuất ở note này. Phạm vi nguồn đã rà nằm trong [coverage](source.json). Mục 2, các dẫn xuất còn lại của mục 3, mã bổ trợ và tài liệu dẫn chưa được rà đầy đủ. Phần số qubit/QFT chênh giữa bảng và định lý cần đối chiếu nếu dùng để dự toán.
+[Issue DQI-27](https://github.com/nhphan0505/verifiable-quantum-circuit/issues/27) và [mô tả DQI-27](../../../../src/dqi/DQI-27/DESCRIPTION.md) là tiền lệ của xóa masked AND và phân tích liveness. Chưa xác định được cờ comparator rộng có đủ dữ liệu tại điểm đo, và chưa có kết quả chấm cho biến thể đề xuất ở note này. Đã rà phần kết quả và Bảng 1 (tr. 1–4), Remark 2.23 và Def. 2.37 (tr. 19, 24), các đoạn xây dựng VBE và Takahashi liên quan ở mục 3 (tr. 24–34) và các kết quả MBU ở mục 4–4.5 (tr. 34–41). Phần còn lại của mục 2, các dẫn xuất khác của mục 3, mã bổ trợ và tài liệu dẫn chưa được rà đầy đủ. Xem [coverage](source.json). Phần số qubit/QFT chênh giữa bảng và định lý cần đối chiếu nếu dùng để dự toán.
 
 ## Tài liệu liên quan
 
