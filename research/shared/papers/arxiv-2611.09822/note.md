@@ -1,6 +1,6 @@
 # Discovering formally verified quantum programs with AI
 
-Status: draft
+Status: ready
 Track: shared
 Source: https://arxiv.org/pdf/2611.09822v1
 Version: arXiv:2611.09822v1, truy cập ngày 2026-11-10
