@@ -45,9 +45,9 @@ Paper xấp xỉ `1/√(r²)` bằng đa thức Bernstein bậc ba theo tọa đ
 
 ### Tra bit góc one-hot của P450 (§2.5 và App. I.2–I.4, tr. 8, 38–41)
 
-Ở mỗi lần SELECT, baseline nạp góc Givens 13 bit theo nhóm 19 góc và điều khiển cộng chúng vào thanh ghi phase-gradient. Mạch mới tạo 145 dây one-hot, mỗi dây đại diện một cặp vector. Bit `s` chọn vector thứ nhất ((`s = 0`)) hay thứ hai ((`s = 1`)). Với một bit góc, `M₀` và `M₁` là XOR các dây có bit đó bằng 1 ở vector tương ứng, còn `M₀₁` là XOR các dây mà cả hai vector đều có bit 1. Vì có tối đa một dây bật, `M₀₁ = M₀M₁`.
+Ở mỗi lần SELECT, baseline nạp góc Givens 13 bit theo nhóm 19 góc và điều khiển cộng chúng vào thanh ghi phase-gradient. Mạch mới tạo 145 dây one-hot, mỗi dây đại diện một cặp vector. Một lần SELECT bao phủ 261 vector hai hạt và 29 vector một hạt. Lần SELECT thứ hai xử lý 29 vector một hạt còn lại. Bit `s` chọn vector thứ nhất (`s = 0`) hay thứ hai (`s = 1`). Với một bit góc, `M₀` và `M₁` là XOR các dây có bit đó bằng 1 ở vector tương ứng, còn `M₀₁` là XOR các dây mà cả hai vector đều có bit 1. Vì có tối đa một dây bật, `M₀₁ = M₀M₁`.
 
-Phương trình (23) tạo addend bit có điều khiển từ các parity trên. Với `q_c` là bit điều khiển phép quay, đặt `β = q_c AND s` và `α = q_c XOR β`. Addend là `((α XOR M₁) AND (β XOR M₀)) XOR M₀₁`. Khai triển cho `α M₀ XOR β M₁` vì `αβ=0` và `M₀M₁=M₀₁`. Khi `q_c = 0` kết quả bằng 0. Khi `q_c = 1` kết quả là `M_s`. Phép đổi này cần một AND cho mỗi bit và thêm một AND mỗi phép quay để tạo (eta), đồng thời bỏ thanh ghi góc riêng. Tác giả báo 11.818 cổng `T` mỗi SELECT cho nhóm quay và góc, so với 18.844 cổng `T` của baseline.
+Phương trình (23) tạo addend bit có điều khiển từ các parity trên. Với `q_c` là bit điều khiển phép quay, đặt `β = q_c AND s` và `α = q_c XOR β`. Addend là `((α XOR M₁) AND (β XOR M₀)) XOR M₀₁`. Khai triển cho `α M₀ XOR β M₁` vì `αβ=0` và `M₀M₁=M₀₁`. Khi `q_c = 0` kết quả bằng 0. Khi `q_c = 1` kết quả là `M_s`. Phép đổi này cần một AND cho mỗi bit và thêm một AND mỗi phép quay để tạo `β`, đồng thời bỏ thanh ghi góc riêng. Tác giả báo 11.818 cổng `T` mỗi SELECT cho nhóm quay và góc, so với 18.844 cổng `T` của baseline.
 
 ## Điều kiện đúng, sai số và tài nguyên
 
@@ -59,7 +59,7 @@ Phương trình (23) tạo addend bit có điều khiển từ các parity trên
 
 Đối chiếu project tại commit `a19b0e08bb6af0f7b4cdf6fe10569d2ad43e870f`.
 
-- **invsqrt.** [INV-BASELINE](../../../../src/invsqrt/INV-BASELINE/DESCRIPTION.md) chuẩn hóa `x` theo cặp bit, dùng Horner bậc ba và một bước Newton rồi áp pha `1/√x`. [Verifier](../../../../verifiers/invsqrt/verify_submission_invsqrt.py) yêu cầu giữ `x`, dọn workspace, theo dõi pha modulo một vòng trên miền `1..3.133.452` với dung sai `2^-24 / sqrt`x``. Điểm tính `Q` nhân chi phí Toffoli-like trung bình cộng `T/4` cho phép quay. Kỹ thuật tra hệ số và dọn thanh ghi theo liveness có thể đối chiếu. Đa thức arcsin, dung sai tuyệt đối và gadget giao thoa cần mô hình khác. App. F.3 chú thích 2 dẫn mạch `1/√x` 260 qubit, 7.735 Toffoli để minh họa tác động của baseline mới.
+- **invsqrt.** [INV-BASELINE](../../../../src/invsqrt/INV-BASELINE/DESCRIPTION.md) chuẩn hóa `x` theo cặp bit, dùng Horner bậc ba và một bước Newton rồi áp pha `1/√x` tính theo vòng. [Verifier](../../../../verifiers/invsqrt/verify_submission_invsqrt.py) yêu cầu giữ `x`, dọn workspace, theo dõi pha modulo một vòng trên miền `1..3.133.452` với dung sai `2^-24 / sqrt`x``. Điểm tính `Q` nhân chi phí Toffoli-like trung bình cộng `T/4` cho phép quay. Kỹ thuật tra hệ số và dọn thanh ghi theo liveness có thể đối chiếu. Đa thức arcsin, dung sai tuyệt đối và gadget giao thoa cần mô hình khác. App. F.3 chú thích 2 dẫn mạch `1/√x` 260 qubit, 7.735 Toffoli để minh họa tác động của baseline mới.
 - **dfthcsos.** [DFT-BASELINE](../../../../src/dfthcsos/DFT-BASELINE/DESCRIPTION.md) nạp XOR delta của các batch góc 12 bit vào word riêng, với 75 góc và 3.976 địa chỉ. [Verifier](../../../../verifiers/dfthcsos/verify.py) chấm trên FeMoCo76o113e theo `λ_eff × T_total × Q_total`. Submission cung cấp họ ANGLE_k và factorization; verifier tự tính chi phí các phép quay Givens và chuẩn bị trạng thái. Vì vậy phần bỏ thanh ghi góc và ghép addend vào phase-gradient của P450 nằm ngoài giao diện submission. Ý tưởng có thể chuyển là giải mã cục bộ một nhóm nhỏ địa chỉ rồi XOR parity của các dây vào word delta, dưới giới hạn 128 qubit mỗi ANGLE_k.
 - **dqi.** Liên hệ ở việc đóng băng verifier, tách bằng chứng và số đo. Phạm vi đã đọc chưa cung cấp kernel giải mã Reed–Solomon thay thế.
 
@@ -70,7 +70,7 @@ Phương trình (23) tạo addend bit có điều khiển từ các parity trên
 
 ## Bằng chứng trong project và câu hỏi còn mở
 
-- [Điểm invsqrt](../../../../src/invsqrt/SCORES.md) ghi INV-3 dev cải thiện 1,15 lần với dọn sớm/pebbling, còn INV-6 ghi 1,14 lần với cắt cụt và bù sai lệch. Hai mốc này là kết quả project của các thiết kế đã có. Chưa đối chiếu thiết kế gợi ý từ paper bằng một lượt chấm ghép cặp.
+- [Điểm invsqrt](../../../../src/invsqrt/SCORES.md) ghi INV-3 dev cải thiện 1,15 lần với dọn sớm/pebbling, còn INV-6 ghi 1,14 lần với cắt cụt và bù sai lệch. Hai mốc này là kết quả dev của các thiết kế đã có. Chưa đối chiếu thiết kế gợi ý từ paper bằng một lượt chấm ghép cặp.
 - [Điểm dfthcsos](../../../../src/dfthcsos/SCORES.md) có mốc DFT-BASELINE dev. Chưa đo phương án parity one-hot cục bộ trên cùng bảng XOR delta. Chi phí thêm của decode lặp lại và phân bổ workspace còn bỏ ngỏ.
 
 ## Tài liệu liên quan và phạm vi đọc
