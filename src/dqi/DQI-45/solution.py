@@ -32,6 +32,7 @@ No .kmb is emitted by screening and no official grader is invoked.
 from __future__ import annotations
 import argparse
 from collections import Counter
+import datetime
 import hashlib
 import importlib.util
 import json
@@ -39,6 +40,7 @@ from pathlib import Path
 import random
 import re
 import sys
+import subprocess
 import time
 
 import kickmix as km
@@ -120,14 +122,67 @@ class RankNarrow(SCHUR.SchurDecoder):
         if any(words[i]&words[j] for i in range(3) for j in range(i)):raise ValueError('Aliased field words')
         if control is not True:
             if any(control in word for word in words):raise ValueError('Aliased control')
-            RANK.rank42_ixor(self.b,lhs,rhs,target=target,field=self.gf,control=control,strategy='control_input');return
-        scratch=self.b.alloc_qubits(3);a,b,term=scratch;last_l=last_r=0
+            masked=self.b.alloc_qubits(12);self.b.init_and(control,lhs,masked)
+            self.rank42_unitary(masked,rhs,target)
+            self.b.del_and(control,lhs,masked);self.b.free(masked)
+        else:self.rank42_unitary(lhs,rhs,target)
+
+    def rank42_unitary(self,lhs,rhs,target):
+        """42 CCX, no scratch: conjugate a target pivot by binary basis maps.
+
+        Input parity is computed in a selected input bit and restored. For a
+        nonzero output mask p, target fanout L satisfies L(e_pivot)=p. Thus
+        L CCX L implements target ^= p*(left_parity AND right_parity) for an
+        arbitrary target. The circuit is a classical reversible permutation,
+        with no measurements or relative phase. Masked-input HMR follows only
+        after all input basis maps are undone; its original factors survive.
+        """
         for left,right,output in RANK.rank42_tensor():
-            RANK._xor_mask(self.b,lhs,left^last_l,a);RANK._xor_mask(self.b,rhs,right^last_r,b)
-            self.b.init_and(a,b,term)
-            self.b.cx(term,km.array([target[i] for i in range(12) if output>>i&1]))
-            self.b.del_and(a,b,term);last_l,last_r=left,right
-        RANK._xor_mask(self.b,lhs,last_l,a);RANK._xor_mask(self.b,rhs,last_r,b);self.b.free(scratch)
+            i=(left&-left).bit_length()-1;j=(right&-right).bit_length()-1;k=(output&-output).bit_length()-1
+            ls=km.array([lhs[a] for a in range(12) if a!=i and left>>a&1])
+            rs=km.array([rhs[a] for a in range(12) if a!=j and right>>a&1])
+            ts=km.array([target[a] for a in range(12) if a!=k and output>>a&1])
+            if len(ls):self.b.cx(ls,lhs[i])
+            if len(rs):self.b.cx(rs,rhs[j])
+            if len(ts):self.b.cx(target[k],ts)
+            self.b.ccx(lhs[i],rhs[j],target[k])
+            if len(ts):self.b.cx(target[k],ts)
+            if len(rs):self.b.cx(rs,rhs[j])
+            if len(ls):self.b.cx(ls,lhs[i])
+
+def validate_kernel(config):
+    reports=[]
+    for controlled in (False,True):
+        b=km.CircuitBuilder();regs=[b.create_quantum_register(12,k) for k in ('x','y','t')]
+        control=b.create_quantum_register(1,'c')[0] if controlled else True
+        RankNarrow(b,FIELD,[],masked_cleanup='hmr').multiply_add(*regs,control)
+        circuit=b.finish_circuit();assert circuit.operation_statistics().num_toffoli_like==(54 if controlled else 42)
+        cases=0
+        for seed in config['measurement_seeds']:
+            rng=np.random.default_rng(seed);count=65536
+            x=rng.integers(0,4096,count,dtype=np.uint32);y=rng.integers(0,4096,count,dtype=np.uint32)
+            x[:4096]=np.arange(4096);y[:4096]=0;x[4096:8192]=0;y[4096:8192]=np.arange(4096)
+            x[8192:12288]=np.arange(4096);y[8192:12288]=np.arange(4096)
+            t=rng.integers(0,4096,count,dtype=np.uint32)
+            a=x.copy();product=np.zeros_like(a)
+            for i in range(12):
+                product^=np.where(y>>i&1,a,0).astype(a.dtype);a<<=1
+                a^=np.where(a&4096,FIELD.modulus,0).astype(a.dtype)
+            for value in ((False,True) if controlled else (True,)):
+                sim=km.Simulator(count,seed=seed,debug_print=False);sim.use_same_registers_as(circuit)
+                for reg,data in zip(regs,(x,y,t)):sim.write_across_shots(reg,bits(data))
+                if controlled:sim.write_across_shots(control,np.full(count,value,dtype=bool))
+                sim.do(circuit)
+                for reg,data in zip(regs,(x,y,t^product if value else t)):
+                    assert np.array_equal(sim.read_across_shots(reg),bits(data))
+                if controlled:assert np.all(sim.read_across_shots(control)==value)
+                anc=km.array([km.q(i) for i in range(37 if controlled else 36,circuit.num_qubits)])
+                if len(anc):assert not sim.read_across_shots(anc).any()
+                assert not sim.read_phase_flipped_across_shots().any();cases+=count
+        reports.append({'controlled':controlled,'cases':cases,'qubits':circuit.num_qubits,
+                        'static_toffoli_like':circuit.operation_statistics().num_toffoli_like,
+                        'value_errors':0,'phase_errors':0,'workspace_errors':0})
+    return reports
 
 def bits(values):return np.array([(values>>i)&1 for i in range(12)],dtype=bool)
 def read_words(sim,words):
@@ -278,12 +333,12 @@ def main():
     expected={'m':4095,'n':70,'degree':12,'mode':'screening_only','seed':20261110,'cases_per_weight':2,'measurement_seeds':[4501,4502,4503],'target_qubits':892,'target_total_t':600000}
     if config!=expected:raise ValueError('Only the predeclared screening config is supported')
     if not args.screen:raise RuntimeError('No submission compiler: coherent in-place preprocessing and resource gates are not demonstrated; run --screen')
-    started=time.monotonic();cases=fixtures(config);models=model(cases)
+    started=time.monotonic();kernels=validate_kernel(config);cases=fixtures(config);models=model(cases)
     print('Structured model complete',file=sys.stderr,flush=True)
     bound=boundary(cases,config);phase=phase_component(cases,config)
     optimistic=bound['inherited_core_static_toffoli_like']+phase['static_toffoli_like']
     report={'status':'SCREENED_NOT_BUILT','verification_level':'model and quantum component screening; no submission grading',
-            'model':models,'boundary':bound,'phase_component':phase,'optimistic_total_static_t_excluding_preprocessing':optimistic,
+            'kernel':kernels,'model':models,'boundary':bound,'phase_component':phase,'optimistic_total_static_t_excluding_preprocessing':optimistic,
             'gates':{'existing_clean_bank_demonstrated':bool(bound['minimum_zero_coefficient_words_observed']>=35),
                      'coherent_variable_degree_preprocessing_implemented':False,'inherited_core_meets_t_budget':optimistic<=config['target_total_t'],
                      'inherited_core_meets_q_budget':bound['inherited_core_qubits']<=config['target_qubits']},
@@ -292,7 +347,16 @@ def main():
                           'A nonzero-bank witness rejects borrowing existing zeros, not every possible overwrite algorithm.',
                           'The inherited Schur core is kept fixed in the cost bound; a new decoder could change that bound.',
                           'No .kmb or verifier score is produced.']}
-    out=ROOT/'artifacts/dqi'/HERE.name/(path.stem+'.screening.json');out.parent.mkdir(parents=True,exist_ok=True)
+    source=Path(__file__).resolve();sha=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
+    for item in (source,path):
+        relative=item.relative_to(ROOT).as_posix()
+        assert item.read_bytes()==subprocess.check_output(['git','show',sha+':'+relative],cwd=ROOT),'Uncommitted screening source/config'
+    report['provenance']={'source_commit':sha,'source_sha256':hashlib.sha256(source.read_bytes()).hexdigest(),
+                          'build_config_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),
+                          'command':subprocess.list2cmdline([sys.executable,*sys.argv]),
+                          'dependency_sha256':{name:value[1] for name,value in DEPENDENCIES.items()}}
+    stamp=datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
+    out=ROOT/'artifacts/dqi'/HERE.name/(path.stem+'.'+stamp+'.screening.json');out.parent.mkdir(parents=True,exist_ok=True)
     out.write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8');print(json.dumps(report,indent=2))
 
 if __name__=='__main__':main()
