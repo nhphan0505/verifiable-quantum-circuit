@@ -1,0 +1,68 @@
+{
+  "verification_level": "evidence review of member dev_5min run; no grading invoked",
+  "run": "results/dqi/DQI-43/schur_rank42/dev_5min/20261110T064752Z-local-dev_5min-adc82c",
+  "source_commit": "a6a19f519f66bbc825ce79c9d6f72b857ac20f48",
+  "artifact_sha256": "af4962b7f4a94e9da1698d5d7498bd52f014c86c1a7e497e984a5fbb48637864",
+  "checks": {
+    "raw_stdout_matches_verifier_json": true,
+    "exit_code_mode_profile_seed_shots": true,
+    "artifact_matches_build_and_metadata": true,
+    "source_config_dependency_snapshots": true,
+    "verifier_and_harness_hashes_match_local_files": true,
+    "score_formula_matches": true
+  },
+  "baseline": {
+    "compatibility": {
+      "python_patch": true,
+      "packages": true,
+      "verifier_hashes": true,
+      "dev_harness_hash": true,
+      "profile_version": true,
+      "seed": true,
+      "shots": true,
+      "spec": true
+    },
+    "formal_gain_eligible": true,
+    "reference_score": 61234661450380.1,
+    "reference_over_candidate": 2.5691327406630573,
+    "candidate_score_reduction_fraction": 0.6107635918641113,
+    "mean_t_saved": -4133455.826171875
+  },
+  "schur_hmr": {
+    "compatibility": {
+      "python_patch": false,
+      "packages": true,
+      "verifier_hashes": true,
+      "dev_harness_hash": false,
+      "profile_version": true,
+      "seed": true,
+      "shots": true,
+      "spec": true
+    },
+    "formal_gain_eligible": false,
+    "reference_score": 28092418499024.06,
+    "reference_over_candidate": 1.178632336993238,
+    "candidate_score_reduction_fraction": 0.15155899883838242,
+    "mean_t_saved": 1761060.0
+  },
+  "raw_file_sha256": {
+    "results\\dqi\\DQI-43\\schur_rank42\\dev_5min\\20261110T064752Z-local-dev_5min-adc82c\\config.json": "be4926eb9681ad7b0c9f2d3b4928426acec1c253028240731b7b946e282199de",
+    "results\\dqi\\DQI-43\\schur_rank42\\dev_5min\\20261110T064752Z-local-dev_5min-adc82c\\metadata.json": "d4d339086b92d2910ca7567c0b230cf17e7ab71ad4bdaf4cefc0ece901ece0f8",
+    "results\\dqi\\DQI-43\\schur_rank42\\dev_5min\\20261110T064752Z-local-dev_5min-adc82c\\provenance.json": "78353d432900f9963f31d52f73456f5a19fadcebd0f7e3da0fb5a851f554f949",
+    "results\\dqi\\DQI-43\\schur_rank42\\dev_5min\\20261110T064752Z-local-dev_5min-adc82c\\verifier.json": "1c9b13b8a59772e8762975200ac491b7001199b39e1182d59bd40ebec8c734fc",
+    "results\\dqi\\DQI-43\\schur_rank42\\dev_5min\\20261110T064752Z-local-dev_5min-adc82c\\verify.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "results\\dqi\\DQI-43\\schur_rank42\\dev_5min\\20261110T064752Z-local-dev_5min-adc82c\\verify.stdout.txt": "1c9b13b8a59772e8762975200ac491b7001199b39e1182d59bd40ebec8c734fc"
+  },
+  "limitations": [
+    "Only dev_5min, no full or independent holdout grading.",
+    "Schur historical Python patch/platform and dev harness differ; its ratio is descriptive, not formal gain.",
+    "Observed 256.6156-second simulator run is not a repeated runtime benchmark."
+  ],
+  "repository_checks": {
+    "scope_checker_exit_code": 0,
+    "repo_tests_exit_code": 0,
+    "repo_tests_count": 21,
+    "whitespace_check_exit_code": 0,
+    "raw_inputs_unchanged_after_analysis": true
+  }
+}

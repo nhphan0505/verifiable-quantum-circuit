@@ -1,0 +1,24 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-43",
+  "config_name": "schur_rank42",
+  "mode": "dev_5min",
+  "command": [
+    "d:\\GQA\\.venv\\Scripts\\python.exe",
+    "D:\\GQA\\src\\common\\dev_verify.py",
+    "--track",
+    "dqi",
+    "--submission",
+    "D:\\GQA\\artifacts\\dqi\\DQI-43\\schur_rank42.kmb",
+    "--seed",
+    "20261106",
+    "--invsqrt-samples",
+    "4096",
+    "--invsqrt-repeats",
+    "2",
+    "--dqi-shots",
+    "4096",
+    "--dfthc-repeats",
+    "4"
+  ]
+}
