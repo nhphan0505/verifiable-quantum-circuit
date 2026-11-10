@@ -68,7 +68,7 @@ Giới hạn cần giữ rõ:
 - **Chưa có full.** Chưa chạy verifier với đủ 64 shot mỗi x, nên chưa khẳng định đã xác nhận đầy đủ các nhánh đo.
 - **Hệ số cải thiện để trống.** Tỷ số số học với baseline dev là 5,14 lần, nhưng run này dùng Python 3.13.9 còn baseline dùng 3.13.14, và hash dev harness khác nhau (`33402313…` so với `cafdade4…`), nên chưa đủ điều kiện ghi hệ số. Muốn có hệ số thì phải chấm lại baseline trong cùng môi trường.
 
-**Đề xuất.** Dừng chỉnh độ rộng trong hướng này: config `base` đã là kết quả tìm kiếm tọa độ trên mạch dựng thật, và sai số xấu nhất 0,9308 sát ngưỡng 0,95, nên không còn chỗ giảm bit đáng kể. Trước khi mở PR, chạy mode full cho `base`. Dư địa lớn hơn nằm ở số qubit: rút ngắn vòng đời các thanh ghi `c0`, `c2` và scratch quanh phép nhân, tách thành một hypothesis riêng kế thừa hướng này.
+**Đề xuất.** Dừng chỉnh độ rộng trong hướng này: config `base` đã là kết quả tìm kiếm tọa độ trên mạch dựng thật, và sai số xấu nhất 0,9308 sát ngưỡng 0,95, nên không còn chỗ giảm bit đáng kể. PR của hướng này được mở để review khi chưa chạy full; nên chạy mode full cho `base` trước khi dùng mạch này trong bài nộp Kaggle, và ghi run đó ở một lần cập nhật riêng. Dư địa lớn hơn nằm ở số qubit: rút ngắn vòng đời các thanh ghi `c0`, `c2` và scratch quanh phép nhân, tách thành một hypothesis riêng kế thừa hướng này.
 
 | Mốc tốt nhất | Config | Commit nguồn | Run / provenance |
 | --- | --- | --- | --- |
