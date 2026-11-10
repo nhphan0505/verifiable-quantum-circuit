@@ -12,6 +12,7 @@ Mỗi tiêu đề bên dưới trùng H1 của mô tả và title GitHub Issue. 
 | DQI-25 | [[DQI-25] Tái sử dụng các tích lặp và tương đương Boolean/affine bằng product caching và xóa đo X, giữ decoder DQI-19](DQI-25/DESCRIPTION.md) | https://github.com/nhphan0505/verifiable-quantum-circuit/issues/25 |
 | DQI-27 | [[DQI-27] Thu gọn decoder Schur bằng Narrow Return cursor và giải mã lịch sử, giữ cờ converter ở 890 qubit](DQI-27/DESCRIPTION.md) | https://github.com/nhphan0505/verifiable-quantum-circuit/issues/27 |
 | DQI-39 | [[DQI-39] Viết lại khối tổng hợp locator của Kirill V5 bằng Python và giảm tích lặp ở hai chiều](DQI-39/DESCRIPTION.md) | https://github.com/nhphan0505/verifiable-quantum-circuit/issues/39 |
+| DQI-43 | [[DQI-43] Thay multiply-add trong reciprocal và converter Schur bằng bilinear Rank-42, giữ nghịch đảo norm và quét pha](DQI-43/DESCRIPTION.md) | https://github.com/nhphan0505/verifiable-quantum-circuit/issues/43 |
 
 Tiêu đề phải nêu phần xử lý, cách làm/thay đổi và phạm vi phân biệt với các hướng khác. Không dùng tên chung như “tối ưu baseline” hay chỉ ghi tên file. Quy tắc và ví dụ: [CONTRIBUTING.md](../../CONTRIBUTING.md).
 
