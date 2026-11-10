@@ -1,0 +1,35 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-43",
+  "config_name": "schur_rank42",
+  "source_commit": "a6a19f519f66bbc825ce79c9d6f72b857ac20f48",
+  "source_path": "src/dqi/DQI-43/solution.py",
+  "source_sha256": "ad6b6a2f1e68bb03dcd41b131eefd8fa200fb7915a13b17ba8d697c26c42d78f",
+  "build_config_path": "src/dqi/DQI-43/configs/schur_rank42.json",
+  "build_config_sha256": "47a0175767fd961eee8795c85156cf252d6ba0bc037abe5acdb25a6e57e61e0a",
+  "artifact_path": "artifacts/dqi/DQI-43/schur_rank42.kmb",
+  "artifact_sha256": "af4962b7f4a94e9da1698d5d7498bd52f014c86c1a7e497e984a5fbb48637864",
+  "build_command": "D:\\GQA\\.venv\\Scripts\\python.exe -X utf8 src/dqi/DQI-43/solution.py --config src/dqi/DQI-43/configs/schur_rank42.json",
+  "environment": {
+    "python": "3.13.14",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    },
+    "dependencies": [
+      {
+        "path": "src/dqi/DQI-23/solution.py",
+        "source_commit": "c5b70b1a7618057000cc9af35794c8e733e5eb1c",
+        "sha256": "18f7e197dc832236b95cef3b87013cce15373d7327554efb1fdb2bd2f618f492"
+      },
+      {
+        "path": "src/dqi/DQI-19/solution.py",
+        "source_commit": "c0cf9dfb45b62ba7eeb8588c87b0066409880046",
+        "sha256": "3798b608825c8ca741aaf4cf1d7913d87b650f2be55242a35dc769b8cd47c298"
+      }
+    ]
+  },
+  "build_run": "results/dqi/DQI-43/schur_rank42/build_only/20261110T063636Z-local-build"
+}

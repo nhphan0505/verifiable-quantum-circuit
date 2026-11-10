@@ -77,9 +77,25 @@ Raw stdout khớp verifier JSON, exit_code=0; metadata/config/provenance khớp 
 
 Correctness được ủng hộ trên kernel/component và dev đã kiểm; Q không tăng, static và mean T giảm đúng hướng dự đoán. H4 đạt dev PASS và cải thiện 2.5691× so baseline tương thích. Kết quả chưa đạt mục tiêu tham khảo 7-8 triệu T hoặc 3-3.5× trong ảnh. Không tự mở config hoặc đổi inverse norm để đuổi mục tiêu đó. H4 cũng chưa là ứng viên tốt nhất repo: DQI-39 có dev score thấp hơn, thuộc kiến trúc khác.
 
-Đề nghị giữ nguyên `schur_rank42`, thành viên chấm **MODE=full**, mặc định 102400 shots, để kiểm tra ứng viên cuối trước quyết định kết thúc/review. Chưa có full hoặc seed giữ lại độc lập; một bộ dev cố định không chứng minh đúng mọi syndrome/measurement outcome. Không tự chấm, triển khai vòng 05 hoặc chuyển PR sang ready trong bước 04 này.
+Sau dev, đã đề nghị giữ nguyên `schur_rank42` để thành viên chấm full 102400 shots trước quyết định kết thúc/review. Tại mốc dev chưa có full hoặc seed giữ lại độc lập; phần full và quyết định sau cùng được ghi bên dưới. Không mở vòng 05 hoặc tự chấm.
 
 | Mốc tốt nhất | Config | Commit nguồn | Run / provenance |
 | --- | --- | --- | --- |
 | Dev | [schur_rank42](https://github.com/nhphan0505/verifiable-quantum-circuit/blob/a6a19f519f66bbc825ce79c9d6f72b857ac20f48/src/dqi/DQI-43/configs/schur_rank42.json) | `a6a19f519f66bbc825ce79c9d6f72b857ac20f48` | [verifier](../../../results/dqi/DQI-43/schur_rank42/dev_5min/20261110T064752Z-local-dev_5min-adc82c/verifier.json) · [provenance](../../../results/dqi/DQI-43/schur_rank42/dev_5min/20261110T064752Z-local-dev_5min-adc82c/provenance.json) |
-| Full | Chưa chấm | Chưa có | Chưa có |
+| Full | [schur_rank42](https://github.com/nhphan0505/verifiable-quantum-circuit/blob/a6a19f519f66bbc825ce79c9d6f72b857ac20f48/src/dqi/DQI-43/configs/schur_rank42.json) | `a6a19f519f66bbc825ce79c9d6f72b857ac20f48` | [verifier](../../../results/dqi/DQI-43/schur_rank42/full/20261110T070438Z-local-full-2f5a6e/verifier.json) · [provenance](../../../results/dqi/DQI-43/schur_rank42/full/20261110T070438Z-local-full-2f5a6e/provenance.json) |
+
+## Kết quả full và kết luận cuối
+
+Thành viên đã chạy verifier chính thức, defaults đầy đủ và chỉ thêm `--max-workers 1`. Run `20261110T070438Z-local-full-2f5a6e` PASS **102400 shots**, value_errors=0, phase_errors=0; m/n/degree/r=4095/70/12/2016 và log2_delta=-128. Score full **9512735649563.273**, Q=900, mean T=9858564.464101562, R=1.1912604648115832. Source/config và artifact giữ đúng bản đã chấm dev; không sửa implementation hoặc thêm config.
+
+Raw stdout bằng verifier JSON, metadata exit_code=0, mode/command đúng full, hash artifact trong file local/metadata/verifier/provenance khớp build. Source/config/dependency snapshots và verifier hashes đã đối chiếu. [Review full](../../../results/dqi/DQI-43/schur_rank42/full/20261110T070438Z-local-full-2f5a6e/review.json) lưu kiểm tra và hash raw files; giữ nguyên raw records/provenance notebook và mọi run cũ. Full là kiểm chứng thống kê bổ sung ngoài dev, không chứng minh mọi syndrome hoặc mọi nhánh phép đo.
+
+Baseline full lịch sử `20261107T094931Z-local-full-5ed1c6` có score 24439463583672.93; khớp Python 3.13.14, packages, verifier hashes, full spec và 102400 shots. **Baseline/candidate=2.569130950758096×**, giảm score khoảng **61.0763%**. Cột full gain đủ điều kiện điền 2.5691×. Verifier dùng default seed suy từ hash từng mạch, nên hai bên full có mẫu khác nhau; không gọi paired common-seed experiment.
+
+So schur_hmr full lịch sử, score giảm số học 15.1559% (tỷ số 1.1786323825663332×), Q giữ 900 và mean T giảm khoảng 1761058.859. Python patch/platform khác nên giữ giới hạn so sánh như dev. Dev/full có score khác nhau chủ yếu do R phụ thuộc số shots; không so trực tiếp score hai mode để suy cải thiện thuật toán.
+
+**Chốt hướng sau một config:** kết hợp Rank-42 với Schur đạt dev/full PASS trên các lượt đã lưu, giảm T cả thuận/đảo và giữ peak 900 qubit. Kết quả ủng hộ phạm vi tối ưu multiply-add đã chọn; chưa đạt mục tiêu tham khảo 7-8 triệu T hoặc 3-3.5× trong ảnh. Artifact và instruction overhead tăng, không có benchmark timing lặp độc lập. DQI-39 vẫn có score tốt hơn; H4 lưu một phép ghép có kiểm chứng và bằng chứng tài nguyên, không tuyên bố là ứng viên tốt nhất repo.
+
+Không mở thêm config hoặc thay inverse/routing trong hướng này. Hoàn tất phân tích bước 04 và chuẩn bị PR ở bước 06, giữ các SHA nguồn và dependency. Reviewer độc lập cần kiểm điều kiện disjointness của các call site, phase correction của input masking, mapping source/build/run, điểm/gain hai mode và phạm vi diff. Merge/đóng Issue chỉ sau approval teammate khác tài khoản tác giả trên đúng HEAD và các check thực tế đạt; tác giả không tự approve.
+
+Tái lập: checkout source/config tại `a6a19f519f66bbc825ce79c9d6f72b857ac20f48`, giữ hai helper đúng hash/commit trong provenance, dùng Python 3.13 và packages pin, chạy `python src/dqi/DQI-43/solution.py --config src/dqi/DQI-43/configs/schur_rank42.json`. Build record gắn source SHA gốc; không thay provenance theo HEAD tài liệu sau cùng.

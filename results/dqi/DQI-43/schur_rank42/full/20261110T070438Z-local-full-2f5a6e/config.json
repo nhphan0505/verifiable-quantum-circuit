@@ -1,0 +1,13 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-43",
+  "config_name": "schur_rank42",
+  "mode": "full",
+  "command": [
+    "d:\\GQA\\.venv\\Scripts\\python.exe",
+    "D:\\GQA\\verifiers\\dqi\\verify_submission_dqi.py",
+    "D:\\GQA\\artifacts\\dqi\\DQI-43\\schur_rank42.kmb",
+    "--max-workers",
+    "1"
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "verification_level": "evidence review of member official full run; no grading invoked",
+  "run": "results/dqi/DQI-43/schur_rank42/full/20261110T070438Z-local-full-2f5a6e",
+  "source_commit": "a6a19f519f66bbc825ce79c9d6f72b857ac20f48",
+  "artifact_sha256": "af4962b7f4a94e9da1698d5d7498bd52f014c86c1a7e497e984a5fbb48637864",
+  "checks": {
+    "raw_stdout_matches_verifier_json": true,
+    "exit_code_full_mode_spec_shots": true,
+    "official_command_defaults_except_max_workers": true,
+    "artifact_build_metadata_provenance_match": true,
+    "source_config_helper_snapshots_match": true,
+    "verifier_hashes_match_local_files": true,
+    "score_formula_matches": true
+  },
+  "baseline": {
+    "compatibility": {
+      "python_patch": true,
+      "packages": true,
+      "verifier_hashes": true,
+      "full_spec_and_shots": true
+    },
+    "formal_gain_eligible": true,
+    "reference_over_candidate": 2.569130950758096,
+    "score_reduction_fraction": 0.6107633206844045,
+    "mean_t_saved": -4133456.0819921875,
+    "seed_policy": "Official defaults derive seed from each artifact hash; full samples differ between circuits."
+  },
+  "schur_hmr": {
+    "compatibility": {
+      "python_patch": false,
+      "packages": true,
+      "verifier_hashes": true,
+      "full_spec_and_shots": true
+    },
+    "formal_gain_eligible": false,
+    "reference_over_candidate": 1.1786323825663332,
+    "score_reduction_fraction": 0.15155903164427087,
+    "mean_t_saved": 1761058.8589062504,
+    "seed_policy": "Official defaults derive seed from each artifact hash; full samples differ between circuits."
+  },
+  "raw_file_sha256": {
+    "results/dqi/DQI-43/schur_rank42/full/20261110T070438Z-local-full-2f5a6e/config.json": "ab3c8cea1ca65fca96bc3ad5d63a35e6c5c3576a0f1cd2b70ebef12b15938b3b",
+    "results/dqi/DQI-43/schur_rank42/full/20261110T070438Z-local-full-2f5a6e/metadata.json": "2e6111cdda05b69f9c985e6e82de532a2e8521be1e8eddb96e56ed3ba167854a",
+    "results/dqi/DQI-43/schur_rank42/full/20261110T070438Z-local-full-2f5a6e/provenance.json": "78353d432900f9963f31d52f73456f5a19fadcebd0f7e3da0fb5a851f554f949",
+    "results/dqi/DQI-43/schur_rank42/full/20261110T070438Z-local-full-2f5a6e/verifier.json": "0b904eaf19df05b98897e8089e59cf499d1cc5a81e3ff11cf0f3a6b819673906",
+    "results/dqi/DQI-43/schur_rank42/full/20261110T070438Z-local-full-2f5a6e/verify.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "results/dqi/DQI-43/schur_rank42/full/20261110T070438Z-local-full-2f5a6e/verify.stdout.txt": "0b904eaf19df05b98897e8089e59cf499d1cc5a81e3ff11cf0f3a6b819673906"
+  },
+  "limitations": [
+    "Full is statistical verification, not proof on all syndrome inputs or HMR outcomes.",
+    "Default seeds depend on circuit hash; not a paired common-seed experiment.",
+    "Historical Schur comparison has a different Python patch/platform."
+  ],
+  "repository_checks": {
+    "scope_checker_exit_code": 0,
+    "repo_tests_exit_code": 0,
+    "repo_tests_count": 21,
+    "whitespace_check_exit_code": 0,
+    "main_is_ancestor": true,
+    "raw_inputs_unchanged_after_analysis": true
+  }
+}
