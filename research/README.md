@@ -21,6 +21,7 @@ Luôn đối chiếu với EXPERIMENTS, Issues và results
 | Measurement-based uncomputation of quantum circuits for modular arithmetic | shared | Đo cơ sở X, sửa pha, xóa cờ so sánh; arXiv:2407.20167v1 | [note.md — ready](shared/papers/arxiv-2407.20167/note.md) | [PDF v1](shared/papers/arxiv-2407.20167/paper.pdf) |
 | Discovering formally verified quantum programs with AI | shared | Lean, số học fixed-point, one-hot Givens; arXiv:2611.09822v1 | source_only | [PDF v1](shared/papers/arxiv-2611.09822/paper.pdf) |
 
+
 ## Discussions
 
 | Câu hỏi / hướng thảo luận | Track | Từ khóa / thành phần | Nội dung | Issue / hướng liên quan |
