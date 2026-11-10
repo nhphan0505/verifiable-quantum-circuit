@@ -22,20 +22,20 @@ Loại: Ý tưởng mới.
 
 **Cân sai số từng đoạn.** Sau khi làm tròn hệ số, chạy `fixed_point_model` trên mọi x của từng đoạn, lấy trung điểm của sai số tương đối nhỏ nhất và lớn nhất, rồi dịch `c0` của đoạn đó một số nguyên để đưa trung điểm về 0. Vì `c0` là hằng trong bảng nên việc này không tốn Toffoli và bù được phần lệch do cắt cụt.
 
-Config đầu tiên được chọn ở bước 03, bằng mô hình toàn miền và mạch dựng thật: chỉ giữ bộ độ rộng có sai số xấu nhất dưới 0,95 lần dung sai rồi chọn bộ có Q × C nhỏ nhất.
+**Config đầu tiên.** [base.json](configs/base.json): a = 6, wy = 29, wc1 = 28, wc2 = 25, d0 = 15, d1 = 13, phase_drop_bits = 1. Cách chọn: xuất phát từ bộ độ rộng nhỏ nhất mà mô hình toàn miền cho sai số dưới 0,95 lần dung sai, rồi tìm kiếm tọa độ, mỗi lần đổi một tham số ±1 và dựng mạch thật để đo Q, Toffoli và biên sai số. Chỉ nhận bộ có sai số xấu nhất dưới 0,95 lần dung sai, và chọn bộ có Q × C dự kiến nhỏ nhất. Ngưỡng 0,95 là biên an toàn đặt trước; phần biên còn lại cũng là phần verifier dùng để định giá phép quay, nên biên quá sát 0 sẽ làm điểm xấu đi. Một config là đủ để kiểm hypothesis vì đã có run đối chứng baseline cùng profile; không thêm config đối chứng.
 
 ## Điều kiện đúng và sai số
 
 - **Miền.** Mọi x từ 1 đến 3.133.452. x = 0 nằm ngoài hợp đồng. x_norm luôn có bit 21 bằng 1.
 - **Sai số xấp xỉ.** Đa thức bậc hai trên 128 đoạn có sai số tương đối khoảng 0,612 lần 2⁻²⁴, phần còn lại dành cho làm tròn hệ số, cắt cụt từng hàng và bỏ bit pha.
-- **Mô hình khớp từng bit.** `fixed_point_model` tái hiện đúng phép cắt cụt theo hàng và báo lỗi nếu `r1` âm hoặc `y` vượt độ rộng. `validate_model.py` kiểm tra toàn miền với ngưỡng 0,95 lần dung sai, rồi so pha của mạch thật với mô hình trên các đầu vào biên và ngẫu nhiên.
+- **Mô hình khớp từng bit.** `fixed_point_model` tái hiện đúng phép cắt cụt theo hàng và báo lỗi nếu `r1` âm hoặc `y` vượt độ rộng. [validate_model.py](validate_model.py) kiểm tra toàn miền với ngưỡng 0,95 lần dung sai, rồi so pha của mạch thật với mô hình trên các đầu vào biên và ngẫu nhiên.
 - **Phục hồi và làm sạch.** Mọi bước được đảo đúng thứ tự. Cờ S_k được tính lại trên x đã dịch ngược. Các tích AND trong từng hàng xóa bằng `del_and`, bảng xóa bằng `del_lookup`, nên có phép đo; do đó phải thử nhiều seed đo.
 - **Giả định `_denormalize`.** Việc giới hạn số bit sống dựa trên S ≤ 21 với x ≥ 1. Giả định này được kiểm bằng so khớp pha trên mạch.
 - **Biên sai số và phép quay.** Verifier định giá phép quay từ biên tuyệt đối nhỏ nhất min_x(tol(x) − |error(x)|). Biên càng hẹp thì mỗi phép quay càng đắt.
 
 ## Tài nguyên dự kiến
 
-Số đo từ mô hình toàn miền và một mạch dựng thử trên máy trước khi tạo Issue, với a = 6, wy = 29, wc1 = 28, wc2 = 25, d0 = 15, d1 = 13, phase_drop_bits = 1. Đây chưa phải điểm chấm; bước 03 dựng lại và ghi provenance dưới ID này.
+Số đo của config `base` từ mô hình toàn miền và một mạch dựng thử trên máy trước khi tạo Issue. Đây chưa phải điểm chấm; bước 03 dựng lại và ghi provenance dưới ID này.
 
 | Đại lượng | Baseline | Hướng này (dự kiến) |
 | --- | ---: | ---: |
