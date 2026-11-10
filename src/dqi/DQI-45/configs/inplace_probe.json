@@ -1,0 +1,11 @@
+{
+  "m": 4095,
+  "n": 70,
+  "degree": 12,
+  "mode": "screening_only",
+  "seed": 20261110,
+  "cases_per_weight": 2,
+  "measurement_seeds": [4501, 4502, 4503],
+  "target_qubits": 892,
+  "target_total_t": 600000
+}
