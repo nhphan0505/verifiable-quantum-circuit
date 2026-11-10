@@ -31,11 +31,22 @@ Thay đúng hai đoạn `synthesis` và `unsynthesis` bằng bộ sinh Python c�
 
 Cả dev_5min và full đều PASS, 0 lỗi value và phase trên lần lượt 4.096 và 102.400 shots. Hai run khớp build qua hash artifact và source/config snapshot. Dev profile v1, seed `20261106` và cùng số shots cho đúng tài nguyên và điểm của V5 đã chấm trước đó. Full dùng verifier chính thức với seed mặc định suy từ hash mạch, nên cùng binary cũng dùng cùng seed mặc định. V5 được tái lập ở cấp binary. Giả thuyết giảm Toffoli của synthesis vẫn chưa có ứng viên được kiểm chứng.
 
-Mạch dùng 892 qubit, 395.593 Toffoli-like tĩnh, trung bình khoảng 395.307 ở dev và 395.308 ở full. Chênh lệch score giữa hai mode chủ yếu đến từ repetition factor (2,9848 và 1,1913), vì số shots khác nhau ảnh hưởng cận trên xác suất lỗi. Với DQI-BASELINE lịch sử, tỷ số số học khoảng 65,23× ở cả hai mode. Cột cải thiện giữ trống vì Python patch khác (3.13.7 và 3.13.14) và hash dev harness khác. Đây là tỷ số tham khảo cho V5 đã được tái lập, không phải mức tăng do bộ sinh Python.
+Mạch dùng 892 qubit, 395.593 Toffoli-like tĩnh, trung bình khoảng 395.307 ở dev và 395.308 ở full. Chênh lệch score giữa hai mode chủ yếu đến từ repetition factor (2,9848 và 1,1913), vì số shots khác nhau ảnh hưởng cận trên xác suất lỗi.
+
+### Đối chứng DQI-BASELINE chạy lại cục bộ
+
+| Mode | Run baseline cục bộ | Score baseline | Score DQI-39 | Baseline / DQI-39 |
+| --- | --- | ---: | ---: | ---: |
+| dev_5min | `20261110T033155Z-local-dev_5min-4cf478` | 61.234.661.450.380,1 | 938.805.873.038,7448 | 65,2261× |
+| full | `20261110T033335Z-local-full-fc3712` | 24.439.467.666.108,316 | 374.690.051.360,2488 | 65,2258× |
+
+Cả hai mạch đều PASS với 0 lỗi value/phase trong mỗi mode. Metadata hai phía khớp Python 3.13.7, phiên bản package và toàn bộ bảng hash verifier. Hai run dev còn khớp hash harness, profile v1, seed `20261106` và 4.096 shots. Hai run full dùng cùng thiết lập 102.400 shots và seed mặc định suy từ hash của từng mạch, nên mẫu full khác nhau. Baseline dùng 1.893 qubit và khoảng 5,725 triệu Toffoli-like trung bình. Ở dev, tỷ số khoảng 65,23× đến từ hệ số 4,50× của `Q²` và 14,48× của `T`, với cùng repetition factor.
+
+Artifact baseline chạy lại có SHA-256 `5dfb9991335e41f709a2b2cd0c1e8b28f5ad50e9672b11539d77480b39e9f98f`, khác artifact lịch sử, và các run mới chưa có provenance build. Các tỷ số trên dùng làm tham khảo cục bộ cho V5 đã tái lập. Hàng DQI-BASELINE trong SCORES.md vẫn dẫn các run lịch sử, nên cột cải thiện chính thức của DQI-39 để trống.
 
 ### Quyết định sau bước 04
 
-Dừng quét config trong DQI-39 và giữ `rank42_reference` làm đối chứng. Việc đổi cách sinh cùng tensor hoặc hủy thêm CNOT không tạo lợi ích (Q^2T). Các phase fold local đã đo giảm khoảng 3,47 Toffoli trung bình, tương đương 0,00088% ở cùng Q và repetition factor.
+Dừng ở `rank42_reference` theo điều kiện dừng đã đặt trước và chuyển sang chuẩn bị review. Phạm vi bàn giao là tái lập V5 và bộ sinh nhân-cộng. Giả thuyết giảm chi phí synthesis chưa có ứng viên để chấm. Việc đổi cách sinh cùng tensor hoặc hủy thêm CNOT không tạo lợi ích (Q^2T). Các phase fold local đã đo giảm khoảng 3,47 Toffoli trung bình, tương đương 0,00088% ở cùng Q và repetition factor.
 
 Ưu tiên một hypothesis riêng về ghép giao diện synthesis/conversion và chiều đảo. Audit xem biểu diễn trung gian nào chỉ dùng ở giao diện và có thể được truyền trực tiếp vào converter, bỏ các phép nhân hoặc tái dựng rồi xóa biểu diễn đó. Đo tổng chi phí của cả hai chiều, giữ mask runtime và scan, kiểm đúng locator, dữ liệu converter, khôi phục syndrome và pha ở weight 0/1/29/33/35 và tụt bậc. Dùng [note Kirill đã review và merge](https://github.com/nhphan0505/verifiable-quantum-circuit/blob/c4d8b66974ee7bc958d9adf7a1505eac3e7b249e/research/dqi/discussions/kaggle-kirilltym-conditional-uncompute-audit/note.md) cho mốc phân rã: cặp synthesis khoảng 72.000 Toffoli tĩnh, cả bốn stage synthesis/conversion khoảng 195.000 trên bản local chỉ ghép phase fold. Các số tĩnh này dùng để định vị chi phí.
 
