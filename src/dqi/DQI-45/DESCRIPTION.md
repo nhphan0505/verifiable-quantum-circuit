@@ -38,4 +38,53 @@ Mục tiêu Q<=892, T toàn mạch khoảng 500000-600000 và gain40-45× chỉ 
 
 ## Kết luận và phiên bản tái lập
 
-Chưa triển khai hoặc đo H6 sửa lại. Chưa có artifact, source build SHA hay score; mốc dev/full để trống đến khi có bằng chứng thật. Bước03 phải hoàn thiện schedule và resource gate trước khi bàn giao chấm.
+Đã triển khai và chạy screening bằng source/config commit `842c243db8b953c5abafed976f31b7bf4e51a537`. Trước đó commit `51da796cf712214c0922b552730d4526b14ca5c5` đã chạy lượt đầu với kernel dùng 3 parity/product scratch; giữ nguyên báo cáo lượt đầu, không ghi đè. **Trạng thái SCREENED_NOT_BUILT:** mô hình và các component đã được kiểm; chưa có coherent preprocessing hoặc submission H6. Chưa có dev/full score, không thêm dòng SCORES và không tạo provenance giả cho artifact không tồn tại.
+
+## Cấu hình, implementation và kết quả screening bước 03
+
+Config duy nhất [inplace_probe.json](https://github.com/nhphan0505/verifiable-quantum-circuit/blob/842c243db8b953c5abafed976f31b7bf4e51a537/src/dqi/DQI-45/configs/inplace_probe.json): m4095/n70/degree12, mode=screening_only, seed20261110, hai random fixture cho mỗi weight0..35, measurement seeds4501/4502/4503, Q target892 và total T target600000. Không có setting submission. [solution.py](https://github.com/nhphan0505/verifiable-quantum-circuit/blob/842c243db8b953c5abafed976f31b7bf4e51a537/src/dqi/DQI-45/solution.py) từ chối compile nếu không có `--screen`, vì chưa có circuit tiền xử lý coherent để đưa cho grader.
+
+Model structured Bézoutian kế thừa phép factorization từ DQI-32 nhưng không dùng coefficient của fixture như hằng số trong circuit có locator quantum. Mô hình tính R và inverse trên **109 ca**, bao phủ mọi weight0..35, lỗi đơn0/4094 và 35 ca cưỡng bức jump1..35. R khớp phép nghịch đảo đa thức độc lập, inverse khôi phục w, và **1892** root values khớp biên độ lỗi gốc. Đây là model số học, chưa là schedule quantum xử lý degree/pivot và uncompute.
+
+Kernel Rank-42 mới conjugate từng CCX bằng map parity trên chính hai input word và map fanout trên target. Với output mask p và pivot k trong p, map tuyến tính L thỏa L(e_k)=p, nên L*CCX*L cộng đúng p*(parity(lhs)&parity(rhs)) vào target bất kỳ. Hoàn nguyên toàn bộ basis mỗi hạng. Không có scratch cho 42 tích và không đo target; nhánh có control vẫn dùng 12 masked-input AND, del_and chỉ sau khi các input basis đã trả về ban đầu. Đây là phép sửa triển khai sau kết quả Q893 của lượt đầu, giữ nguyên hypothesis/config và chi phí 42/54 T.
+
+| Component | Kết quả đo | Giới hạn |
+| --- | --- | --- |
+| Rank-42 không control | 196608 ca, 42 T, 36 tổng qubit | arbitrary target, zero/equal/random operands, 3 seed |
+| Rank-42 có control | 393216 ca, 54 T, 49 tổng qubit | control0/1, phase và masked-input cleanup đúng |
+| Schur boundary đầy đủ | 109 ca/seed ×3, Q peak890 | GF(2^12), đủ70 word, model locator/evaluator khớp, forward/reverse khôi phục syndrome và ancilla |
+| Sweep với R cho sẵn | 45045 T, 875 qubit, đủ4095 vị trí | 5 ca weights0/1/7/17/35 ×3 seed, runtime masks; không tính R coherent |
+
+Tất cả component trên có 0 lỗi value/phase/workspace trong các ca kiểm. Không gọi đây là decoder dev/full PASS. Convention Schur đã được kiểm: locator f(z)=1+sum den_i*z^(i+1), omega(z)=sum num_i*z^i, beta=alpha^-j. Native sweep có cùng factor beta ở numerator và z*f', nên với R=omega/f' mod f, kernel mới dùng **R(beta)** trực tiếp; không nhân thêm beta^-1 của convention EEA DQI-21.
+
+### Phản ví dụ bank sạch
+
+Lượt seed4501 có fixture weight35 mà **toàn bộ70 coefficient word ở boundary đều khác zero**. Không có slot luôn zero trong tập109 fixtures. Witness tạo lại từ config seed20261110, positions bắt đầu `2733,3496,673,452,2620`, values bắt đầu `554,1195,3964,1896,946`; báo cáo JSON chứa đủ35 positions,35 values và70 packed words. Điều này bác bỏ cách mượn một bank35 word zero đã tồn tại tại boundary hiện tại; không bác bỏ mọi phép biến đổi ghi đè tại chỗ.
+
+Còn có cận thông tin cho yêu cầu giữ sạch35 word cùng lúc: riêng lỗi weight35 có `C(4095,35)*4095^35` input khác nhau và syndrome70 phân biệt chúng vì Vandermonde trên hiệu support<=70 khả nghịch. Log2 số input khoảng706.8407, cần ít nhất707 qubit để giữ thông tin trong một encoding reversible. Với tổng892 qubit mà420 qubit sạch, chỉ còn472 qubit mang thông tin, không đủ. Cận này giả thiết không offload dữ liệu input vào classical output hoặc workspace ngoài ngân sách. Nó không cấm H6 dùng phép overwrite thay biểu diễn; nó loại suy luận rằng có thể giữ nguyên toàn bộ thông tin và đồng thời dành sẵn35 word sạch trong ngân sách này.
+
+### Cận chi phí khi giữ lõi Schur hiện tại
+
+| Stage giữ lại | Toffoli-like tĩnh |
+| --- | ---: |
+| Forward extraction | 2986703 |
+| Forward conversion | 1063622 |
+| Reverse conversion | 1063622 |
+| Reverse extraction | 2986703 |
+| Tổng lõi | **8100650** |
+| Sweep11/điểm | 45045 |
+| Tổng lạc quan, chưa tính Bézout | **8145695** |
+
+Q của lõi sau đổi basis kernel là890 (lượt đầu893). Gate Q đạt cho **lõi**, chưa phải Q của một H6 đầy đủ; gate T600000 thất bại hơn13 lần ngay khi cho preprocessing chi phí0. Đây là cận của phép ghép giữ nguyên extraction/conversion trên repo, không phải định lý về mọi decoder Schur. Đạt target500-600k cần thay lịch extraction/conversion hoặc tái dựng một kiến trúc khác; giảm riêng khối phase không đủ.
+
+## Bằng chứng, tái lập và quyết định dừng
+
+Chạy từ worktree của DQI-45 bằng Python3.13.14/kickmix1.0.0/numpy2.5.4/scipy1.18.1:
+
+```powershell
+D:/GQA/.venv/Scripts/python.exe src/dqi/DQI-45/solution.py --config src/dqi/DQI-45/configs/inplace_probe.json --screen
+```
+
+Code xuất diagnostic JSON dưới `artifacts/dqi/DQI-45/` với timestamp mới, không ghi đè report cũ. Báo cáo cuối `inplace_probe.20261110T095058556025Z.screening.json` có SHA-256 `b173eff9d12092a2f2d2666a7decca7f4eac488b426d23e12331241468714bb0`; elapsed151.1477 giây là thời gian screening, không là runtime grader. Report chứa source/config hashes, command và helper hashes. Các report diagnostic ở artifacts ignored; kết luận kỹ thuật, counterexample tái lập và code được lưu trong Git. Không lưu chúng như build_only/provenance của một KMB giả.
+
+**Dừng trước build submission theo gate đã đặt ở bước02:** giả thiết bank sạch không đúng cho layout giữ nguyên, T lõi vượt budget, và coherent variable-degree evaluator overwrite/cleanup vẫn chưa có. Giữ draft PR để lưu code/probe và kết quả âm; chưa nghiệm thu bước03 ở mức artifact BUILT, chưa bàn giao chấm local và chưa mở vòng config khác. Muốn tiếp tục cần một schedule cụ thể cho overwrite Bézout và thay phần lõi gây chi phí8.1triệu T; không tự đổi mục tiêu thành một reference nhiều qubit hoặc coi model số học là circuit.
