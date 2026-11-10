@@ -49,4 +49,14 @@ Kiểm component trước submission build: tensor khớp đủ 144 cặp basis;
 
 ## Kết luận và phiên bản tái lập
 
-Chưa có artifact hoặc kết quả chấm cho hướng ghép. H1/H3 PASS không tự chứng minh H4 PASS. Bước 03 sẽ ghi config, commit nguồn, dependency hashes và build provenance thật; chưa có mốc dev/full tốt nhất cho H4.
+Config `schur_rank42` đã BUILT từ source/config commit `a6a19f519f66bbc825ce79c9d6f72b857ac20f48` trên Python 3.13.14, kickmix 1.0.0, numpy 2.5.4, scipy 1.18.1. Source/config và hai helper được đối chiếu bytes với snapshot Git trước và sau build. Artifact local `artifacts/dqi/DQI-43/schur_rank42.kmb` có SHA-256 `af4962b7f4a94e9da1698d5d7498bd52f014c86c1a7e497e984a5fbb48637864`, dung lượng 1379816527 bytes.
+
+[Build metrics](https://github.com/nhphan0505/verifiable-quantum-circuit/blob/exp/DQI-43-schur-rank42/results/dqi/DQI-43/schur_rank42/build_only/20261110T063636Z-local-build/build.json), [provenance](https://github.com/nhphan0505/verifiable-quantum-circuit/blob/exp/DQI-43-schur-rank42/results/dqi/DQI-43/schur_rank42/build_only/20261110T063636Z-local-build/provenance.json) và [component checks](https://github.com/nhphan0505/verifiable-quantum-circuit/blob/exp/DQI-43-schur-rank42/results/dqi/DQI-43/schur_rank42/build_only/20261110T063636Z-local-build/component_validation.json) giữ bằng chứng thật. Q=900, T tĩnh=9859000, 148357628 instructions. Cả forward và reverse là 4036790 T, mỗi chiều 41930 lời gọi multiply-add; phase giữ 1785420 T và không gọi kernel mới. Peak đo được giữ 900, không phải dự đoán 903.
+
+So với đối chứng tĩnh 11620060 T ở cùng Q, tiết kiệm 1761060 T và proxy Q²T giảm 15.1553%. Dự đoán trước build chỉ tính 78820 controlled call từ cleanup delta; bộ đếm build mới có tổng 83860 call, gồm thêm các call ngoài số suy từ cleanup có điều khiển. Chênh 5040 call giải thích phần tiết kiệm vượt dự đoán; không sửa dự đoán ban đầu thành số đã đo. Artifact tăng khoảng 24.369% so với 1109451887 bytes của schur_hmr; instructions/Clifford và kích thước là đánh đổi thực tế, chưa có timing simulator ứng viên.
+
+Chưa có dev/full score và chưa có mốc tốt nhất của H4. Static Q²T không thay verifier score; H1/H3 PASS không tự chứng minh H4 PASS. Formal gain còn cần đối chứng cùng Python patch/harness; lịch sử DQI-23 dùng 3.13.7, local 3.13.14. Bộ 21 test repository đã đạt, không thay kiểm chứng thuật toán hoặc grading.
+
+## Bàn giao chấm local
+
+Trong notebook `notebooks/GQA_Grade_Submission.ipynb`, kernel `.venv`, chọn TRACK=dqi, MODE=dev_5min, EXPERIMENT_ID=DQI-43, OWNER=nhphan0505, CONFIG_NAME=schur_rank42. Giữ profile v1, seed 20261106, 4096 shots để đối chiếu; results tự lưu `results/dqi/DQI-43/schur_rank42/dev_5min/<run-id>/`. Chỉ một artifact cần chấm. Sau dev, ứng viên cuối cần full 102400 shots hoặc bộ seed giữ lại; weight35 và valuation jumps dài vẫn chưa được kiểm trong component decoder thu nhỏ. Agent dừng chờ thành viên chấm; không tự chạy verifier, approve hoặc merge.

@@ -1,0 +1,15 @@
+Historical runs exempt from new provenance schema: 8
+Historical runs exempt from new provenance schema: 8
+Historical runs exempt from new provenance schema: 8
+Historical runs exempt from new provenance schema: 8
+Historical runs exempt from new provenance schema: 8
+Historical runs exempt from new provenance schema: 8
+Historical runs exempt from new provenance schema: 8
+Running: ['D:\\GQA\\.venv\\Scripts\\python.exe', 'D:\\GQA\\artifacts\\tmp4dpx48f9\\verifiers\\invsqrt\\verify_submission_invsqrt.py', 'D:\\GQA\\artifacts\\tmp4dpx48f9\\artifacts\\invsqrt\\INV-123\\test.kmb', '--max-workers', '1', '--max-x', '4096', '--shots-per-x', '1']
+{
+  "status": "PASS",
+  "score": 1
+}
+PASS Saved: D:\GQA\artifacts\tmp4dpx48f9\results\invsqrt\INV-123\test\smoke\20261110T063554Z-local-smoke-7aafb0
+Running: ['D:\\GQA\\.venv\\Scripts\\python.exe', 'D:\\GQA\\artifacts\\tmppcr341dy\\src\\common\\dev_verify.py', '--track', 'invsqrt', '--submission', 'D:\\GQA\\artifacts\\tmppcr341dy\\artifacts\\invsqrt\\INV-123\\test.kmb', '--seed', '20261106', '--invsqrt-samples', '4096', '--invsqrt-repeats', '2', '--dqi-shots', '4096', '--dfthc-repeats', '4']
+TIMEOUT Saved: D:\GQA\artifacts\tmppcr341dy\results\invsqrt\INV-123\test\dev_5min\20261110T063554Z-local-dev_5min-72dbe0

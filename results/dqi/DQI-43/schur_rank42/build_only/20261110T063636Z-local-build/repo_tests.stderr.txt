@@ -1,0 +1,26 @@
+test_bad_title_and_config_fail (test_check_repo.RepositoryChecks.test_bad_title_and_config_fail) ... ok
+test_comparison_environment_and_hashes (test_check_repo.RepositoryChecks.test_comparison_environment_and_hashes) ... ok
+test_current_records_pass (test_check_repo.RepositoryChecks.test_current_records_pass) ... ok
+test_full_settings_for_all_tracks (test_check_repo.RepositoryChecks.test_full_settings_for_all_tracks) ... ok
+test_git_snapshots_and_scope (test_check_repo.RepositoryChecks.test_git_snapshots_and_scope) ... ok
+test_new_run_cannot_use_legacy_exemption (test_check_repo.RepositoryChecks.test_new_run_cannot_use_legacy_exemption) ... ok
+test_notebook_dependency_drift_fails (test_check_repo.RepositoryChecks.test_notebook_dependency_drift_fails) ... ok
+test_personal_research_scope_allows_multiple_sources_not_code (test_check_repo.RepositoryChecks.test_personal_research_scope_allows_multiple_sources_not_code) ... ok
+test_pre_git_build_requires_matching_historical_evidence (test_check_repo.RepositoryChecks.test_pre_git_build_requires_matching_historical_evidence) ... ok
+test_research_note_identity_and_hash (test_check_repo.RepositoryChecks.test_research_note_identity_and_hash) ... ok
+test_stdout_catches_matching_forged_table (test_check_repo.RepositoryChecks.test_stdout_catches_matching_forged_table) ... ok
+test_verifier_change_fails (test_check_repo.RepositoryChecks.test_verifier_change_fails) ... ok
+test_wrong_score_and_ratio_fail (test_check_repo.RepositoryChecks.test_wrong_score_and_ratio_fail) ... ok
+test_missing_config_never_creates_run (test_local_grade.LocalGrading.test_missing_config_never_creates_run) ... ok
+test_output_layout_and_missing_provenance (test_local_grade.LocalGrading.test_output_layout_and_missing_provenance) ... ok
+test_timeout_does_not_save_score (test_local_grade.LocalGrading.test_timeout_does_not_save_score) ... ok
+test_wrong_track_id_rejected (test_local_grade.LocalGrading.test_wrong_track_id_rejected) ... ok
+test_empty_or_wrong_filename_rejected (test_research_notes.ResearchNotes.test_empty_or_wrong_filename_rejected) ... ok
+test_loose_resources_rejected_but_placeholders_allowed (test_research_notes.ResearchNotes.test_loose_resources_rejected_but_placeholders_allowed) ... ok
+test_notes_for_all_tracks_pass (test_research_notes.ResearchNotes.test_notes_for_all_tracks_pass) ... ok
+test_pdf_only_and_link_only_rejected (test_research_notes.ResearchNotes.test_pdf_only_and_link_only_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 74.167s
+
+OK

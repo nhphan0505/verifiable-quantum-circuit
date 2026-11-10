@@ -1,0 +1,37 @@
+{
+  "status": "BUILT",
+  "qubits": 900,
+  "static_toffoli_like": 9859000,
+  "instructions": 148357628,
+  "artifact_bytes": 1379816527,
+  "elapsed_seconds": 147.18914519999998,
+  "stages": {
+    "forward_schur": {
+      "static_toffoli_like": 4036790,
+      "instructions": 52221423,
+      "multiply_add_calls": 41930,
+      "qubits_allocated_so_far": 900
+    },
+    "chien_forney": {
+      "static_toffoli_like": 1785420,
+      "instructions": 43914782,
+      "multiply_add_calls": 0,
+      "qubits_allocated_so_far": 900
+    },
+    "reverse_schur": {
+      "static_toffoli_like": 4036790,
+      "instructions": 52221423,
+      "multiply_add_calls": 41930,
+      "qubits_allocated_so_far": 900
+    }
+  },
+  "verification_level": "build_only, not dev/full PASS",
+  "source_commit": "a6a19f519f66bbc825ce79c9d6f72b857ac20f48",
+  "artifact_sha256": "af4962b7f4a94e9da1698d5d7498bd52f014c86c1a7e497e984a5fbb48637864",
+  "snapshot_bytes_verified_before_and_after": true,
+  "static_q2t_ratio_to_schur_hmr": 0.8484465656803838,
+  "limitations": [
+    "No official grading invoked.",
+    "Historical DQI-23 grading used Python 3.13.7; current Python 3.13.14 needs a matched baseline before formal gain."
+  ]
+}

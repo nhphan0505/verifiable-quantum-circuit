@@ -1,0 +1,70 @@
+{
+  "verification_level": "component checks, not official decoder grading",
+  "tensor_basis_pairs": 144,
+  "measurement_seeds": [
+    4301,
+    4302,
+    4303
+  ],
+  "kernels": [
+    {
+      "controlled": false,
+      "cases": 196608,
+      "qubits": 39,
+      "static_toffoli_like": 42
+    },
+    {
+      "controlled": true,
+      "cases": 393216,
+      "qubits": 52,
+      "static_toffoli_like": 54
+    }
+  ],
+  "decoders": [
+    {
+      "degree": 12,
+      "m": 15,
+      "n": 2,
+      "cases": 384,
+      "forced_valuation_jumps": [
+        1
+      ],
+      "qubits": 69,
+      "static_toffoli_like": 10284
+    },
+    {
+      "degree": 12,
+      "m": 15,
+      "n": 4,
+      "cases": 384,
+      "forced_valuation_jumps": [
+        1,
+        2
+      ],
+      "qubits": 95,
+      "static_toffoli_like": 16498
+    },
+    {
+      "degree": 12,
+      "m": 15,
+      "n": 8,
+      "cases": 384,
+      "forced_valuation_jumps": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "qubits": 145,
+      "static_toffoli_like": 39518
+    }
+  ],
+  "value_errors": 0,
+  "phase_errors": 0,
+  "workspace_errors": 0,
+  "limitations": [
+    "Seeded measurement checks do not enumerate all outcomes.",
+    "Reduced decoders cover weights through 4; full-size weight 35 and long jumps remain for member grading.",
+    "No official dev/full verifier invoked."
+  ]
+}
