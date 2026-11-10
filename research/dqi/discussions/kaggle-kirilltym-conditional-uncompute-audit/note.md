@@ -1,6 +1,6 @@
 # Kiểm chứng readout và phase fold trong DQI 892 qubit của Kirill
 
-Status: draft
+Status: ready
 Track: dqi
 Source: https://www.kaggle.com/code/kirilltym/quantum-circuits-conditional-uncompute-audit
 Version: Kaggle notebook 140275987 v6, V5 output scriptVersionId 367172760
