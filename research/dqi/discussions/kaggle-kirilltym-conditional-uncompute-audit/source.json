@@ -1,0 +1,12 @@
+{
+  "track": "dqi",
+  "kind": "discussions",
+  "source_id": "kaggle-kirilltym-conditional-uncompute-audit",
+  "title": "Quantum Circuits | Conditional Uncompute Audit",
+  "source_url": "https://www.kaggle.com/code/kirilltym/quantum-circuits-conditional-uncompute-audit",
+  "version": "Kaggle notebook 140275987 v6, V5 output scriptVersionId 367172760",
+  "accessed_at": "2026-11-10",
+  "source_file": "source.md",
+  "source_sha256": "ca8b8d8b35930167d4fcfb2477e85a2a55ffb3edd2444388f00802140b260d02",
+  "coverage": "Đọc mục readout, full verification, receipts và attribution DQI; đối chiếu hash V5/V6 và các phép đo local. Chưa tái dựng generator hoặc chấm full ghép cặp."
+}
