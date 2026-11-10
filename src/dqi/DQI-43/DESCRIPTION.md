@@ -41,6 +41,12 @@ Với control quantum, tạo masked_x[i]=c AND x[i] bằng 12 init_and. Dùng ha
 - Điều kiện dừng: đúng một config ghép, không đổi inverse norm, routing, phase hoặc thêm caching. Dừng bàn giao nếu component lỗi, peak Q>910, static proxy không giảm hoặc build thất bại chưa sửa được trong phạm vi. Mục tiêu mới ngoài multiply-add cần hypothesis riêng. Giới hạn Q=910 là gate sàng lọc trước thử, không phải tuyên bố Q thực tế.
 - Kiểm tra ứng viên cuối: thành viên chạy dev_5min profile v1/seed20261106/4096 shots; sau đó full 102400 shots hoặc seed giữ lại có đối chứng. Kiểm thêm weight 0/1/35, syndrome đầu zero và degree jumps ở full-size. Agent chỉ chạy component checks/build, dừng chờ chấm local.
 
+## Cấu hình và kiểm tra bước 03
+
+Config đầu tiên là [schur_rank42.json](https://github.com/nhphan0505/verifiable-quantum-circuit/blob/exp/DQI-43-schur-rank42/src/dqi/DQI-43/configs/schur_rank42.json): m=4095, n=70, degree=12, multiplication_strategy=control_input, masked_cleanup=hmr. Không có config thứ hai. [solution.py](https://github.com/nhphan0505/verifiable-quantum-circuit/blob/exp/DQI-43-schur-rank42/src/dqi/DQI-43/solution.py) chỉ override multiply-add và dùng vòng build tương đương để ghi counts forward/phase/reverse. Hash helper DQI-23 là `18f7e197dc832236b95cef3b87013cce15373d7327554efb1fdb2bd2f618f492`; helper DQI-19 là `3798b608825c8ca741aaf4cf1d7913d87b650f2be55242a35dc769b8cd47c298`.
+
+Kiểm component trước submission build: tensor khớp đủ 144 cặp basis; kernel không control 196608 ca (42 T, 39 tổng qubit), kernel có control 393216 ca (54 T, 52 tổng qubit). Ba seed phép đo 4301/4302/4303, target ngẫu nhiên và các trường hợp operands zero/equal. Ba decoder GF(2^12), m=15, n=2/4/8, mỗi decoder 384 ca, gồm valuation jumps 1..n/2 cưỡng bức. Không lỗi value, phase hoặc workspace trên các ca đã kiểm. Các decoder thu nhỏ thực sự dùng tensor 12 bit; không fallback sang arithmetic field nhỏ. Chưa kiểm full-size weight 35 bằng verifier, chưa enumerate mọi measurement outcome. Chứng minh thay kernel dựa trên identity bilinear và cleanup với factor còn nguyên; không suy mọi input của decoder đúng từ sampling.
+
 ## Kết luận và phiên bản tái lập
 
 Chưa có artifact hoặc kết quả chấm cho hướng ghép. H1/H3 PASS không tự chứng minh H4 PASS. Bước 03 sẽ ghi config, commit nguồn, dependency hashes và build provenance thật; chưa có mốc dev/full tốt nhất cho H4.
