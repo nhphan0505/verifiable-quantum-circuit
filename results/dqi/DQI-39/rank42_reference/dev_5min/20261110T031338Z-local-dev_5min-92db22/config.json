@@ -1,0 +1,24 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-39",
+  "config_name": "rank42_reference",
+  "mode": "dev_5min",
+  "command": [
+    "/Users/tranxuanhoa/Documents/research/GQA-DQI-39/.venv/bin/python",
+    "/Users/tranxuanhoa/Documents/research/GQA-DQI-39/src/common/dev_verify.py",
+    "--track",
+    "dqi",
+    "--submission",
+    "/Users/tranxuanhoa/Documents/research/GQA-DQI-39/artifacts/dqi/DQI-39/rank42_reference.kmb",
+    "--seed",
+    "20261106",
+    "--invsqrt-samples",
+    "4096",
+    "--invsqrt-repeats",
+    "2",
+    "--dqi-shots",
+    "4096",
+    "--dfthc-repeats",
+    "4"
+  ]
+}

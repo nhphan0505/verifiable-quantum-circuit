@@ -1,0 +1,35 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-39",
+  "config_name": "rank42_reference",
+  "source_commit": "cde21590a4027faf0950ea087e21d3516d405f21",
+  "source_path": "src/dqi/DQI-39/solution.py",
+  "source_sha256": "05760873a6d72e5fefc84d79f890c0c79e7d56f7ef68458571923f37e27790a5",
+  "build_config_path": "src/dqi/DQI-39/configs/rank42_reference.json",
+  "build_config_sha256": "0d0165968b7757ef553ee3e8e64d89f31794d9a91f464ed909302f6ad238a2eb",
+  "artifact_path": "artifacts/dqi/DQI-39/rank42_reference.kmb",
+  "artifact_sha256": "4e9b50b1ee34b3eaf2b7f394873c2dd3dad4cddbdd1f12a348b4323b5eb41771",
+  "build_command": "/Users/tranxuanhoa/Documents/research/GQA/.venv/bin/python src/dqi/DQI-39/solution.py --config src/dqi/DQI-39/configs/rank42_reference.json --reference ../GQA-local-dqi-v5/kirill_v5.kmb",
+  "environment": {
+    "python": "3.13.7",
+    "python_executable": "/Users/tranxuanhoa/Documents/research/GQA/.venv/bin/python",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    },
+    "reference_kmb_sha256": "4e9b50b1ee34b3eaf2b7f394873c2dd3dad4cddbdd1f12a348b4323b5eb41771"
+  },
+  "build_run": null,
+  "build_validation": {
+    "status": "BUILT",
+    "rank42_calls": {
+      "synthesis": 734,
+      "unsynthesis": 801
+    },
+    "tensor_basis_pairs": 144,
+    "qubits": 892,
+    "static_toffoli_like": 395593
+  }
+}
