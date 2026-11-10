@@ -19,7 +19,7 @@ Luôn đối chiếu với EXPERIMENTS, Issues và results
 | Fast Quantum Simulation of Electronic Structure by Spectral Amplification | dfthcsos | Spectral amplification, Hamiltonian sum-of-squares, DF/THC block encoding, FeMoco/P450; doi:10.1103/pb2g-j9cw | [note.md — ready](dfthcsos/papers/doi-10.1103--pb2g-j9cw/note.md) | [PDF PRX 2025](dfthcsos/papers/doi-10.1103--pb2g-j9cw/paper.pdf) |
 | Discovering state-of-the-art quantum circuits with large language models | dqi | LLM-guided circuit discovery, independent evaluator, reversible arithmetic; arXiv:2610.22367v1 | [note.md — ready](dqi/papers/arxiv-2610.22367/note.md) | [PDF v1](dqi/papers/arxiv-2610.22367/paper.pdf) |
 | Measurement-based uncomputation of quantum circuits for modular arithmetic | shared | Đo cơ sở X, sửa pha, xóa cờ so sánh; arXiv:2407.20167v1 | [note.md — ready](shared/papers/arxiv-2407.20167/note.md) | [PDF v1](shared/papers/arxiv-2407.20167/paper.pdf) |
-
+| Discovering formally verified quantum programs with AI | shared | Lean, số học fixed-point, one-hot Givens; arXiv:2611.09822v1 | source_only | [PDF v1](shared/papers/arxiv-2611.09822/paper.pdf) |
 
 ## Discussions
 
