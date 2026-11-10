@@ -8,5 +8,5 @@
   "accessed_at": "2026-11-10",
   "source_file": "paper.pdf",
   "source_sha256": "5164d64cbbfbcd6bddb16a6f8d31376be345f3b684db2534a6365ac3e0419df1",
-  "coverage": "Title, abstract and arXiv version (PDF p. 1); application overview (Fig. 1, p. 2)."
+  "coverage": "PDF pp. 1–5; §§2.2–2.5 (pp. 6–8); App. A resource counting and App. B (pp. 19–20); App. F–G (pp. 29–35); App. H.3–H.4 (pp. 36–37); App. I (pp. 37–41). Lean solution code and other appendix sections were not audited."
 }
