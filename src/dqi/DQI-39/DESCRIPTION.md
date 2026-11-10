@@ -37,3 +37,11 @@ Chưa đủ bằng chứng về giảm chi phí synthesis. Bản dựng byte-exa
 | Full | Chưa tạo | Chưa có | Chưa chấm |
 
 Điểm và các run xem trong [SCORES.md](https://github.com/nhphan0505/verifiable-quantum-circuit/blob/a19b0e08bb6af0f7b4cdf6fe10569d2ad43e870f/src/dqi/SCORES.md).
+
+## Cấu hình bước 03
+
+[rank42_reference](configs/rank42_reference.json) dùng [bộ sinh Python](solution.py) để nhận dạng các khối nhân-cộng 42 Toffoli trong cả hai chiều. Mỗi khối được mô tả bằng ba word 12-bit rời nhau và 42 hạng song tuyến tính. Mỗi hạng dùng CNOT để đưa parity hai toán hạng vào hai dây trụ và đổi cơ sở đầu ra, sau đó dùng một CCX rồi hoàn nguyên CNOT. Toàn khối thực hiện `out ^= left * right` với hai toán hạng giữ nguyên. Vì ánh xạ là song tuyến tính, kiểm trên cả 144 cặp bit cơ sở đủ để xác nhận tensor so với phép nhân GF(2^12) của Kickmix.
+
+Kiểm trên gate stream cục bộ nhận diện và sinh lại 734 khối thuận và 801 khối đảo. Đối chiếu từng lệnh sau sinh trên cả 1.535 khối. Mọi phần điều tuyến, history, phép đo và sửa pha bên ngoài khối nhân tiếp tục dùng dữ liệu cổng V5. Phạm vi tái dựng ở cấp phép nhân chưa thay cho việc khôi phục toàn bộ thuật toán locator. Các kiểm tra cục bộ về hai tích lặp qua CNOT và điều kiện điều khiển affine chưa tìm được lịch giảm Toffoli có chứng chỉ trong phạm vi đã kiểm tra.
+
+Cấu hình này là mốc tham chiếu để kiểm chứng phần Python. Build yêu cầu file V5 đúng SHA-256 trên và tự kiểm hash đầu ra. Nếu khớp byte, số qubit, Toffoli và điểm của cùng profile/harness sẽ khớp đối chứng. Không dùng config này làm bằng chứng giảm điểm hoặc làm ứng viên đã chấm chính thức. Chỉ mở lịch tối ưu nếu tìm được cách giảm chi phí của cặp synthesis và giữ đúng giao diện.
