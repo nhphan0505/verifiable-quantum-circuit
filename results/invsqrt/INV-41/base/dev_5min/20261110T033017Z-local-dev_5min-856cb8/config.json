@@ -1,0 +1,24 @@
+{
+  "track": "invsqrt",
+  "experiment_id": "INV-41",
+  "config_name": "base",
+  "mode": "dev_5min",
+  "command": [
+    "c:\\Users\\ADMIN\\Desktop\\verifiable-quantum-circuit\\.venv\\Scripts\\python.exe",
+    "C:\\Users\\ADMIN\\Desktop\\verifiable-quantum-circuit\\src\\common\\dev_verify.py",
+    "--track",
+    "invsqrt",
+    "--submission",
+    "C:\\Users\\ADMIN\\Desktop\\verifiable-quantum-circuit\\artifacts\\invsqrt\\INV-41\\base.kmb",
+    "--seed",
+    "20261106",
+    "--invsqrt-samples",
+    "4096",
+    "--invsqrt-repeats",
+    "2",
+    "--dqi-shots",
+    "4096",
+    "--dfthc-repeats",
+    "4"
+  ]
+}

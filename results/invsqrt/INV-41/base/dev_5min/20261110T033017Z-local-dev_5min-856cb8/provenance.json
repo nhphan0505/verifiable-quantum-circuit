@@ -1,0 +1,40 @@
+{
+  "track": "invsqrt",
+  "experiment_id": "INV-41",
+  "config_name": "base",
+  "source_commit": "78674187c2daa4dbc34b6052f91b733d6760a0f7",
+  "source_path": "src/invsqrt/INV-41/solution.py",
+  "source_sha256": "8ad0d08922e13f3d3744940f938202dbb9523cd8435352a51cbf8e6cc1846041",
+  "build_config_path": "src/invsqrt/INV-41/configs/base.json",
+  "build_config_sha256": "fa3a80ceecab1850c26bacfd4647b68febaa7e502e7fd7373066bc36f3b9eb76",
+  "artifact_path": "artifacts/invsqrt/INV-41/base.kmb",
+  "artifact_sha256": "2dc5469dec7db5f4609c220b4e4212c7549bd2731fd0f46ab696e321f3ff8e4c",
+  "build_command": [
+    ".\\.venv\\Scripts\\python.exe",
+    "src/invsqrt/INV-41/solution.py",
+    "--config",
+    "src/invsqrt/INV-41/configs/base.json",
+    "--overwrite"
+  ],
+  "environment": {
+    "python": "3.13.9 (tags/v3.13.9:8183fa5, Oct 14 2025, 14:09:13) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    },
+    "validation_script_path": "src/invsqrt/INV-41/validate_model.py",
+    "validation_script_sha256": "bee8a5ed36b767050878973958a83e5949117092f3ec71d71ef0474fa362c5ee",
+    "validation_command": [
+      ".\\.venv\\Scripts\\python.exe",
+      "-I",
+      "src/invsqrt/INV-41/validate_model.py",
+      "--config",
+      "src/invsqrt/INV-41/configs/base.json",
+      "--output",
+      "artifacts/invsqrt/INV-41/base_model_validation.json"
+    ]
+  },
+  "build_run": "results/invsqrt/INV-41/base/build_only/20261110T031817Z-local-build"
+}

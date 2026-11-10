@@ -58,12 +58,22 @@ Tác động lên điểm dự kiến: score khoảng 405.000, tức khoảng 5,
 
 ## Kết luận và phiên bản tái lập
 
-Chưa có results. Điền sau khi chấm local ở bước 04.
+**Hypothesis được ủng hộ trong phạm vi dev_5min.** Config `base` đạt PASS trên 4096 đầu vào × 2 lần đo (8.192 shot), cùng tập đầu vào và cùng hash verifier với run baseline (`input_sha256` trùng). Mạch thấp hơn mốc tốt nhất của nhóm (INV-3 `pebble_square`) khoảng 4,48 lần, nên đạt tiêu chí đã đặt trước khi thử. Cột hệ số cải thiện trong SCORES để trống vì lý do ở phần giới hạn.
+
+Tài nguyên đo được đúng bằng dự đoán: Q = 164, Toffoli = 2.220, 35 phép quay bậc cao, 1 T; Toffoli tĩnh bằng Toffoli trung bình mỗi shot. Như vậy cả hai thừa số của điểm đều giảm: Q giảm 1,59 lần và Toffoli tương đương giảm khoảng 3,2 lần so với baseline. Phần còn đắt nhất là hai phép nhân (khoảng 1.560 Toffoli trên cả hai chiều), và đỉnh qubit do nhiều thanh ghi sống cùng lúc trong phép nhân `t·r1`. [Kiểm tra local](../../../results/invsqrt/INV-41/base/build_only/20261110T031817Z-local-build/model_validation.json): mô hình toàn miền có sai số xấu nhất 0,9308 lần dung sai tại x = 526.275; nếu bỏ bước cân `c0` thì là 1,0154, tức không đạt. Mạch khớp pha mô hình trên 3.104 đầu vào biên và ngẫu nhiên với 3 seed đo, x được phục hồi và scratch sạch.
+
+Giới hạn cần giữ rõ:
+
+- **Score dev lạc quan hơn score toàn miền.** Dev chỉ gặp sai số xấu nhất 0,784 tại x = 2.103.276, nên biên sai số rộng hơn và phép quay rẻ hơn (`rotation_eps` 7,96 × 10⁻¹³). Trên toàn miền, sai số xấu nhất là 0,9308. Trước khi tạo Issue, một lần chạy tay verifier gốc với 1 shot mỗi x trên toàn miền, trên đúng mạch này (cùng hash), cho PASS với score cao hơn dev khoảng 0,31% (`rotation_eps` 2,70 × 10⁻¹³). Lần chạy đó không được lưu thành run nên chỉ dùng để tham khảo.
+- **Chưa có full.** Chưa chạy verifier với đủ 64 shot mỗi x, nên chưa khẳng định đã xác nhận đầy đủ các nhánh đo.
+- **Hệ số cải thiện để trống.** Tỷ số số học với baseline dev là 5,14 lần, nhưng run này dùng Python 3.13.9 còn baseline dùng 3.13.14, và hash dev harness khác nhau (`33402313…` so với `cafdade4…`), nên chưa đủ điều kiện ghi hệ số. Muốn có hệ số thì phải chấm lại baseline trong cùng môi trường.
+
+**Đề xuất.** Dừng chỉnh độ rộng trong hướng này: config `base` đã là kết quả tìm kiếm tọa độ trên mạch dựng thật, và sai số xấu nhất 0,9308 sát ngưỡng 0,95, nên không còn chỗ giảm bit đáng kể. Trước khi mở PR, chạy mode full cho `base`. Dư địa lớn hơn nằm ở số qubit: rút ngắn vòng đời các thanh ghi `c0`, `c2` và scratch quanh phép nhân, tách thành một hypothesis riêng kế thừa hướng này.
 
 | Mốc tốt nhất | Config | Commit nguồn | Run / provenance |
 | --- | --- | --- | --- |
-| Dev | Chưa có | Chưa có | Chưa chấm |
-| Full | Chưa có | Chưa có | Chưa chấm |
+| Dev | [base.json](configs/base.json) | `78674187c2daa4dbc34b6052f91b733d6760a0f7` | [verifier.json](../../../results/invsqrt/INV-41/base/dev_5min/20261110T033017Z-local-dev_5min-856cb8/verifier.json) / [provenance.json](../../../results/invsqrt/INV-41/base/dev_5min/20261110T033017Z-local-dev_5min-856cb8/provenance.json) |
+| Full | [base.json](configs/base.json) | `78674187c2daa4dbc34b6052f91b733d6760a0f7` | Chưa chấm |
 
 Mã triển khai: [solution.py](solution.py). Cấu hình: [configs](configs/).
 Điểm và các run: [SCORES.md](../SCORES.md).
