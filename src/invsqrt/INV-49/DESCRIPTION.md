@@ -52,6 +52,8 @@ Bỏ `P` hoặc scratch đều không lợi vì bộ cộng của kickmix rẻ n
 
 Mạch nháp với config đề xuất đã qua `validate_model.py`: pha khớp mô hình trên 3.104 đầu vào biên và ngẫu nhiên với 3 seed đo, x được phục hồi, scratch sạch. Một lần chạy thử dev harness trên artifact nháp cho PASS, 123 qubit, 2.424 Toffoli trung bình mỗi shot bằng đúng số tĩnh. Các số này chưa phải run của ID này; bước 03 dựng lại và ghi provenance.
 
+**Config đầu tiên.** [base.json](configs/base.json): giữ nguyên độ rộng của INV-41 (a = 6, wy = 29, wc1 = 28, wc2 = 25, d0 = 15, d1 = 13, phase_drop_bits = 1) và thêm `max_qubits` = 123. Lý do: 123 là sàn của cấu trúc mới (thấp hơn thì không dựng được), và khi quét giới hạn từ 123 tới 143 trên mạch dựng thật, Q × C nhỏ nhất ở đúng 123. Tìm kiếm tọa độ trên các độ rộng, với mỗi điểm tự chọn giới hạn tốt nhất, không tìm được bộ nào tốt hơn bộ của INV-41. Chỉ cần một config vì đã có run đối chứng INV-41 cùng môi trường; việc tách riêng tác dụng của giới hạn qubit đã có ở bảng trên.
+
 **Giả định cần giữ.** Hành vi của `set_max_qubits` và chi phí bộ cộng thuộc kickmix 1.0.0 đã pin trong `requirements.txt`. Nếu giới hạn thấp hơn sàn thì việc dựng mạch báo lỗi, không sinh mạch sai.
 
 ## Kế hoạch kiểm chứng hypothesis
