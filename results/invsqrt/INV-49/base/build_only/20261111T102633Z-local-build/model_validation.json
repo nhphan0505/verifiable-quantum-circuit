@@ -1,0 +1,39 @@
+{
+  "kind": "local_model_and_simulation_checks",
+  "not_verifier_result": true,
+  "config_name": "base",
+  "exhaustive_domain": [
+    1,
+    3133452
+  ],
+  "model": {
+    "base": {
+      "min_signed_ratio": -0.9264473047501994,
+      "max_signed_ratio": 0.930813807943649,
+      "worst_ratio": 0.930813807943649,
+      "worst_x": 526275,
+      "overflow": false
+    },
+    "no_c0_centring": {
+      "min_signed_ratio": -1.0153943344672596,
+      "max_signed_ratio": 0.9428743599813135,
+      "worst_ratio": 1.0153943344672596,
+      "worst_x": 2123747,
+      "overflow": false
+    }
+  },
+  "simulation": {
+    "inputs": 3104,
+    "rng_seed": 20261109,
+    "measurement_seeds": [
+      17,
+      982451653,
+      20261108
+    ],
+    "phase_matches_model": true,
+    "x_restored": true,
+    "scratch_zero": true,
+    "num_qubits": 123,
+    "static_toffoli": 2424
+  }
+}
