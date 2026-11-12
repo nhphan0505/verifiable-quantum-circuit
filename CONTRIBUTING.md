@@ -8,6 +8,10 @@ Instructions cho coding agent: [instructions/README.md](instructions/README.md).
 
 ## Hai luồng cộng tác
 
+- **Tái dựng submission (decompiler):** [instructions](instructions/decompiler/README.md).
+  Lối vào luồng thử nghiệm từ KMB/ZIP, dùng KMX để phân tích, kiểm tra exact bằng
+  bytes/SHA-256 rồi viết Python/DESCRIPTION. Không cần hypothesis ban đầu; dùng
+  số bước riêng và giữ các điều kiện Issue, provenance, chấm local, review.
 - **Nghiên cứu thử nghiệm:** [agent](docs/EXPERIMENT_WORKFLOW.md),
   [instructions](instructions/experiments/README.md); thực hiện 12 bước bên dưới.
 - **Đọc tài liệu:** [agent](research/AGENTS.md), [paper](instructions/papers/README.md) và [discussion](instructions/discussions/README.md).

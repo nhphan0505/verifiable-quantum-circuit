@@ -5,6 +5,10 @@
 
 ## Chọn luồng
 
+- **Decompiler:** đọc [instructions](instructions/decompiler/README.md) để tái dựng
+  submission KMB (bài 1/2) hoặc ZIP (bài 3) thành Python và DESCRIPTION trong src.
+  Không cần hypothesis gốc; kiểm tra KMB/KMX khứ hồi, hash và provenance trước
+  nghiệm thu. Dùng quy tắc owner/Issue/review của thử nghiệm; số bước riêng.
 - **Nghiên cứu thử nghiệm:** đọc [hướng dẫn](docs/EXPERIMENT_WORKFLOW.md) và
   [instructions](instructions/experiments/README.md). Trong research chỉ đọc
   `note.md` có `Status: ready` đã merge vào nhánh chính; không mở nguồn gốc.
@@ -15,7 +19,7 @@
   viết và review note trên branch `research/<username>` cá nhân, có thể thêm nhiều
   nguồn trong một đợt. Sau review độc lập bước 04 đạt và checks đạt, tác giả được merge
   vào main theo research/AGENTS.md; không sửa thí nghiệm.
-- Hai luồng dùng chat/agent riêng. Khi chạy đồng thời, dùng workspace/worktree
+- Luồng tài liệu và thử nghiệm/decompiler dùng chat/agent riêng. Khi chạy đồng thời, dùng workspace/worktree
   riêng; không chuyển branch trong workspace có công việc của chat khác.
 
 ## Giao việc bằng số bước
