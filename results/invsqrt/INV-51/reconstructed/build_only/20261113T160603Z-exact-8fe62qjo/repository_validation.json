@@ -1,0 +1,11 @@
+{
+  "checker_errors": 0,
+  "scope_base": "origin/main",
+  "scope_branch": "exp/INV-51-reconstruct-fusion46",
+  "tests_run": 21,
+  "tests_status": "OK",
+  "tests_seconds": 82.193,
+  "grading_tests_note": "Fixture PASS/TIMEOUT output is not INV-51 grading",
+  "metadata_command_validation": "root-relative POSIX; no drive letters; build_only build_run null",
+  "bytes_comparison": "RECONSTRUCTED_EXACT"
+}

@@ -22,10 +22,12 @@
     "obtain": "Download invsqrt_source_zip from the referenced Kaggle dataset, rename to invsqrt_source.zip without recompression, verify archive SHA-256 and extract into artifacts/invsqrt/INV-51/dependencies/. See DEPENDENCIES.md.",
     "host_files": "Repository DATA.md; original kickmix.so used for source pin verification only, pip Windows Kickmix executes.",
     "dataset_url": "https://www.kaggle.com/datasets/syed3000/vqcc-own-circuit-portfolio",
-    "dataset_version": null,
+    "dataset_version": 12,
     "archive_name": "invsqrt_source_zip",
     "archive_sha256": "7d9801ae20e942dba2211a656bba6014a0a16d57da534c0b60328d1c5d9d8254",
-    "archive_bytes": 2563106
+    "archive_bytes": 2563106,
+    "archive_download_url": "https://www.kaggle.com/api/v1/datasets/download/syed3000/vqcc-own-circuit-portfolio/invsqrt_source_zip?datasetVersionNumber=12",
+    "public_access_evidence": "evidence/public_source.json"
   },
   "reconstruction_level": "AUTHOR_SOURCE_REBUILD_EXACT",
   "limitations": [
@@ -34,6 +36,6 @@
     "External author source bundle must be supplied; not distributed in Git.",
     "Historical score is not remeasured."
   ],
-  "build_source_commit": "bfe070108c6dd02649c6ba4ab3400b2f0ed50249",
-  "reconstruction_check": "results/invsqrt/INV-51/reconstructed/build_only/20261113T083955Z-exact-wopk8bm7/reconstruction_check.json"
+  "build_source_commit": "48729436b421e7320d86e48cc0e451be0d84260e",
+  "reconstruction_check": "results/invsqrt/INV-51/reconstructed/build_only/20261113T160603Z-exact-8fe62qjo/reconstruction_check.json"
 }
