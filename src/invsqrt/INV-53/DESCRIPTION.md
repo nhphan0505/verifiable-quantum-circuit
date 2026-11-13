@@ -29,7 +29,7 @@ Giữ input x 22 bit little-endian trong 1..3133452, 46 qubit peak, pha mục ti
 
 ## Kết luận và phiên bản tái lập
 
-Chưa triển khai/build hướng mới. Source commit và records sẽ được ghi sau; chưa nhận PASS hoặc điểm mới. Giữ hướng INV-51 và toàn bộ kết quả lịch sử nguyên vẹn.
+Đã build từ checkout sạch tại commit f0f0540; output trùng bytes/hash bản INV-51. Không tạo run chấm hoặc điểm mới; giữ hướng INV-51 và toàn bộ kết quả lịch sử nguyên vẹn.
 
 
 ## Implementation và dependency nội bộ
@@ -41,3 +41,14 @@ Sau một build đã audit, dependency còn 72 module Python, 39 JSON bảng/cer
 Luồng sinh mạch giữ từ INV-51: normalization.forward → root.forward (root12 + residual10) → emit_body (hai lượt hệ số, seed/product, divider/phase và HMR correction) → root.inverse → normalization.inverse → restore_input_layout. Các pass giữ tích, thay affine product và gộp Z_POW thực hiện trên mạch mới sinh trước compile cuối. Không lấy gate stream có sẵn làm input. Chi tiết lịch đo và cơ chế correction kế thừa [INV-51 DESCRIPTION](../INV-51/DESCRIPTION.md); các module thực thi nay nằm trong engine của hướng này.
 
 Các kiểm tra hash/receipt lịch sử upstream được thay bằng manifest source tích hợp, không giả lập checksum hay dữ liệu artifact gốc. Các assertion về số học, owner, phase, debt và precision được giữ; source port không chạy kiểm chứng upstream hoặc verifier chính thức. Hash exact vẫn là điều kiện nghiệm thu riêng.
+
+
+## Kết quả tái lập trực tiếp
+
+Build từ commit `f0f05405b7a1623f191ce6cafdf2d93ce0f8da22` trong checkout sạch không có bundle, Linux .so hoặc artifact cũ tạo KMB 291626 bytes, SHA-256 `321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177`. Đối chiếu độc lập từng block bytes với input gốc đạt RECONSTRUCTED_EXACT. Audit file reads của mọi stage chỉ nằm trong source của hướng, thư mục build mới, .venv và Python chuẩn; không đọc source ngoài Git hoặc submission đối chứng khi compile.
+
+| Mốc | Config | Commit nguồn | Bằng chứng |
+| --- | --- | --- | --- |
+| Compile trực tiếp | [reconstructed](configs/reconstructed.json) | `f0f05405b7a1623f191ce6cafdf2d93ce0f8da22` | [provenance](../../../results/invsqrt/INV-53/reconstructed/build_only/20261113T192913Z-exact-u5d6osbs/provenance.json), [bytes/hash](../../../results/invsqrt/INV-53/reconstructed/build_only/20261113T192913Z-exact-u5d6osbs/reconstruction_check.json), [dependency audit](../../../results/invsqrt/INV-53/reconstructed/build_only/20261113T192913Z-exact-u5d6osbs/dependency_audit.json) |
+
+Đối chứng INV-51 full PASS đã merge sử dụng đúng hash artifact này; đây là bằng chứng tương đương artifact, không ghi nhận run full hoặc điểm mới cho INV-53. Việc bỏ source-manifest checks upstream được thay bằng engine_manifest có hash của toàn bộ mã/dữ liệu mới; thay code phải cập nhật manifest và commit rồi build lại. Cần review độc lập source adaptation và clean build trước merge.

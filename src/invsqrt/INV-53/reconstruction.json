@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "track": "invsqrt",
+  "input_sha256": "321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177",
+  "input_bytes": 291626,
+  "reconstruction_level": "INTEGRATED_GENERATOR_EXACT",
+  "build_source_commit": "f0f05405b7a1623f191ce6cafdf2d93ce0f8da22",
+  "engine_manifest": "engine_manifest.json",
+  "upstream_changes": "upstream_changes.json",
+  "source_attribution": "Syed Asad Ali, Apache-2.0; see LICENSE.txt/NOTICE.txt",
+  "references": [
+    "https://github.com/nhphan0505/verifiable-quantum-circuit/issues/53",
+    "https://www.kaggle.com/datasets/syed3000/vqcc-own-circuit-portfolio"
+  ],
+  "dependencies": {
+    "runtime": "Python 3.13 Windows .venv, pinned repository requirements",
+    "source": "All generator source/data committed under engine/; no runtime external bundle or host binary"
+  },
+  "limitations": [
+    "Historical source/receipt SHA checks replaced by committed integrated manifest; inspect upstream_changes.json.",
+    "No new official grading run for INV-53; exact artifact equals INV-51 full-PASS artifact.",
+    "Windows Unix memory limits are not enforced; stage timeout 600 seconds."
+  ],
+  "reconstruction_check": "results/invsqrt/INV-53/reconstructed/build_only/20261113T192913Z-exact-u5d6osbs/reconstruction_check.json"
+}

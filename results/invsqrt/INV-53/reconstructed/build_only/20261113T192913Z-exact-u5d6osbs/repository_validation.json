@@ -1,0 +1,13 @@
+{
+  "checker_errors": 0,
+  "scope_base": "origin/main",
+  "scope_branch": "exp/INV-53-integrated-fusion-generator",
+  "unittest_count": 21,
+  "unittest_status": "OK",
+  "unittest_seconds": 150.352,
+  "fixture_git_longpaths_enabled": true,
+  "fixture_grading_output": "Fake PASS/TIMEOUT fixtures are not grading runs for INV-53.",
+  "standalone_compile": "PASS; clean checkout without external bundle or original artifact",
+  "dependency_audit": "PASS; no unexpected read path",
+  "byte_comparison": "RECONSTRUCTED_EXACT"
+}

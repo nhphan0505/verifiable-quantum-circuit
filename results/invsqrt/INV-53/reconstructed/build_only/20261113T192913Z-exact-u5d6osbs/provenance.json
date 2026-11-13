@@ -1,0 +1,477 @@
+{
+  "track": "invsqrt",
+  "experiment_id": "INV-53",
+  "config_name": "reconstructed",
+  "source_commit": "f0f05405b7a1623f191ce6cafdf2d93ce0f8da22",
+  "source_path": "src/invsqrt/INV-53/solution.py",
+  "source_sha256": "4c55b9bc3ed39c2223a9ec418d516571f0661ff0b952955e68bcaee4e56f369b",
+  "build_config_path": "src/invsqrt/INV-53/configs/reconstructed.json",
+  "build_config_sha256": "8dbc0a22ffd91be1216f185a545d1ade354135febae22019e92141c04965d9df",
+  "artifact_path": "artifacts/invsqrt/INV-53/reconstructed.kmb",
+  "artifact_sha256": "321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177",
+  "build_command": "../../../.venv/Scripts/python.exe src/invsqrt/INV-53/solution.py --config src/invsqrt/INV-53/configs/reconstructed.json",
+  "build_command_base": ".",
+  "environment": {
+    "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    },
+    "executable": "../../../.venv/Scripts/python.exe",
+    "unix_rlimits_enforced": false
+  },
+  "build_run": null,
+  "dependency_hashes": [
+    {
+      "path": "src/invsqrt/INV-53/engine/patches/patch_coef2_q46.py",
+      "sha256": "f19b26ac84cd8edd56f9163d4ab3a3a71aee8a166cf9d76dcbea983c434ee98f"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/patches/patch_coefdisp.py",
+      "sha256": "cbfd243cda93a40dd5ca1cac2f977d3e859bf54da292d44bc437d8ff66ebf5f1"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/patches/patch_donor_first60.py",
+      "sha256": "6a89e65144ac80c09c5f354e3ff5456dfc3e4eda5a0346605b2ace8277bcdff7"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/patches/patch_endpoint_v9e2.py",
+      "sha256": "826f96a337ec8d778e967f3faef7fdb62edc62ab1b9ff9411cfd9847e0fb9738"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/patches/patch_fwd_narrow.py",
+      "sha256": "c2bb01c6ac9e72c04680176e110225ec6ad5d5e6f4ddab302ba128d9c27307f8"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/patches/patch_h2ret.py",
+      "sha256": "3f8953052ec4dc166d4444f0c4973b3308dfdbc75877004cc6faaee7e7251633"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/patches/patch_hret_sat_s15k7a.py",
+      "sha256": "990f88bfcd8c9b9927dd3d08077ecb0dcd9a408729b33a5eb5d3c5cd84896c29"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/patches/patch_ld_first20_56b8.py",
+      "sha256": "fed89434f88b6198872c40c0173d079973922745b2613539c3b8a043030f7e6f"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/patches/PATCH_ORDER.txt",
+      "sha256": "672daa2df9234c93c4379e93dd699285cca64bd0dfe2aecf630057aeb0fbfb14"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/patches/patch_proddisp.py",
+      "sha256": "07ddde1e2968dc920ff3ea953df326a8d1ee6cfb46a119adbddb73beb86ca554"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/patches/patch_q47_decoder_resynth2.py",
+      "sha256": "4c32f1b429e27d05c2e2793f4df937d6b3ce018d0fdd2849e36f5b44bcaed74a"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/patches/patch_second46_c19_70nb1.py",
+      "sha256": "c2cd2fed5f2149456e52b48640979d649a1e9f6db97d9eafebbc8b84e4b08a04"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/patches/patch_seedinv.py",
+      "sha256": "67c2e5c8ec1f60efedc178f106eedb8abcc71a42ecb3e3f4ffddb88edf288c78"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/patches/patch_w47_body.py",
+      "sha256": "057561600274039c54e088efbb0a6c0def5b11d16a40cb44df47043db8db802c"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/patches/q46_loaders.py",
+      "sha256": "7f79dd3348ebe6fe16b8bd117f40ea72d69bb8d6bb0c3f71ad633876f556c1f9"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/tools/audit_affine.py",
+      "sha256": "bd42bf0f5cdecfee3c243beca798641d2f144117cba66354479674a8a060dcff"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/tools/audit_pairs.py",
+      "sha256": "2a49349fd23eb5527c647e5b4ff452a433d74cd6a70b1bd8528ad9d68435f08c"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/tools/build_variant.py",
+      "sha256": "a23d502d88e95f34628f729afc9ba8109c00864aa83a3ffc9ac6fa52e879b6fd"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/tools/hold_pass.py",
+      "sha256": "241ae21a276a9142687b2dd53c76f0e13d2ad96fac7cb5733a1b5cf003ad93a3"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/tools/kmsim.py",
+      "sha256": "d9762f38aa4702365e089d5f33998b42d8c66f863e4c19522f70ddc56ad71609"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/tools/kmx_to_kmb.py",
+      "sha256": "a76134bcdd14a8f0e7e2d94ccb8249bb3ed0b5156be6f8e97eaaf545e7bbd579"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/tools/merge_zpow.py",
+      "sha256": "c141d4c1b7b6079a167c088087f402da429ef30a078c4febc6e3ea8b4ecdd570"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/tools/postpass.py",
+      "sha256": "d124ecb1b2bf6ad340d76559a42b2b615bbebc8f5bf9d266dc9913106afe762a"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/pro2_q47_loader/work/loaders/q47_loader_native_v1/paid_R_cleanup_certificate.json",
+      "sha256": "9c4b4aea56ad334f7082608d3a24193d900390c76e578e48aa67a88456664ff7"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/pro1_013/narrow/arithmetic_round3/native/candidate11r2/candidate11r2.build.json",
+      "sha256": "16883b72c01fac188c3583574c2eda391ffba9a30cd6c14e8b5a3ea383138099"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/PAPER_GATE_RECEIPT_011_VARIANT.json",
+      "sha256": "27a5fae99ae9ce4fed8602b52160618a25b56c56b30ea34b8101b64b161e53be"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/PAPER_GATE_RECEIPT_012_VARIANT.json",
+      "sha256": "f11816ec390d58f379a7dc63704fab80a385bb581c73ec729c8e199697ad5131"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/PAPER_GATE_RECEIPT_014_VARIANT.json",
+      "sha256": "d3ece51a8a4443080d4899f1076cbc1ef85d263057e364de79e1a4cc43ad8a18"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/PAPER_GATE_RECEIPT_016_VARIANT.json",
+      "sha256": "141d51af466cea914cc9c318e09c34558b7c23c6247fbf5e87c9ea9f1efa7cbe"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/PAPER_GATE_RECEIPT_018_VARIANT.json",
+      "sha256": "99ef9a891d4e99b262b1a452ea48b18c536e91e7017f018b77bc37f1793ccffd"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/PAPER_GATE_RECEIPT_022_VARIANT.json",
+      "sha256": "f8cfe4331b37a5184a4aab17ee85b4ac892c08c2cfb863fc4b1c1b3c9978262e"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/research/combined_q48_ring26/COMPLETE_GATE.json",
+      "sha256": "49ce6e7007b19abcd533b82a9f291b617cbc1c864a3d66287c0e63a87ebb82c4"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/research/joint_loader/Q48_COMPLETE_PAPER_GATE.json",
+      "sha256": "912da9164095aa996317909903d50162a76eded7ff9a90cbb9299c85c013de2c"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/research/lifecycle_schedule/post008_gate_v4.json",
+      "sha256": "0e49c0e309c3a816d9e0512d5d815de44a1fc5a1de3b5eff866330c6017954b3"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/research/lifecycle_schedule/seed_phase_cleanup_conditional.json",
+      "sha256": "71f0fcb5645fd32cf128c310c5e5cba406d1ad33c02b4f37e51869ee845ed466"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/research/lifecycle_schedule/slope_h3_h4_retirement_v3.json",
+      "sha256": "1e5afe12bc0a9005bb3705afdc564f30c0861d99970d31f71d9b7c2556e17721"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/research/postgate_angle_refit/quantize50.json",
+      "sha256": "8670515091475959ab0edeae03cb736cdb1cb66cd7768366e69fafb7eff8bf72"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/research/postgate_angle_refit/quantize50_bound.json",
+      "sha256": "fdbd64481c3e876ac88a6a0ad80c44a8b019807cc5d3b5cdee5bd12a59630ac1"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/research/quantized_producer/framed_retained5_best21_snapshot.json",
+      "sha256": "3b6fa7059bee77bb9abe6c7395cd8ff2f2899843523188c60d513e6c5d381def"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/research/quantized_producer/pair_normalization.py",
+      "sha256": "f0e663d517e636cce79a04d553970cb2775efede0b4d3ad7fe662712b9d39296"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/research/ring26_phase/basis.json",
+      "sha256": "a3bacdd5ef8e16acb8560a40e60e2c998f8171973b1dcc062a47503c5218d744"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/research/ring26_phase/COMPLETE_GATE_RING26_ZERO33.json",
+      "sha256": "b579924175ee8e73c61c2f945b2d85e8ba2e536a8dbd8288a8332628142cd569"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/research/stream_phase/drive_paper_ledger.py",
+      "sha256": "078bc99e8e64922a052dfa5f1bf0ab0b461a87eb75c8f3c3f46907a25e4fb8c4"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/research/ring26_phase/frozen/global_zero33.json",
+      "sha256": "c0eab1edd234e32d5baa1a51a0fec46abf82165d3973ffda825d2149f67f11e5"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/research/recompute_root/initializer_u12/local_algebra.json",
+      "sha256": "978c2adafd8d3355558a5e672982623372d459dec610273e1e43847681cc4c14"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/research/recompute_root/initializer_u12_triangular/complete_gate.json",
+      "sha256": "fc9626c050ad286dadcbb02ce5e901f7c651748dd804bd41c1ba564450ca7e7f"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/research/recompute_root/models/phasefit_z1_K7_G4_m37_virtual_quadS2_36_12c0.json",
+      "sha256": "24fff823faa911afe93d02afc3ded0bbd156a210a85f1265c989a087f8fd1219"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/native/candidate01/common.py",
+      "sha256": "29f08dcbf4111771ce6a67045db44d39171b7f131f05d0765a7161050f1f840d"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/native/candidate01/divider.py",
+      "sha256": "195dd0c9a9eb907d216c9212e3a1512d31d522aaa9e2c0879eabe59fc896b54c"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/native/candidate01/generate.py",
+      "sha256": "74ea8eb0efe02c4b8fe4e17a677f48c2acde14622e6afdb5c59e0bb9a8f30f66"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/native/candidate01/layout.py",
+      "sha256": "adb9d649162f3b1b7e598d991fcad2f6d4b6d56dbebd5ab0f5987d5b3416aa32"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/native/candidate01/lifecycle.py",
+      "sha256": "ec598fe5ce925213a3d70c4bf1526775df7e92c0d8d082e9d614800362961993"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/native/candidate01/normalization.py",
+      "sha256": "e5b2a0065954bbfa3858b903afcfd80908353856c885140cd3290f4c9c9da51e"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/native/candidate01/root_decode.py",
+      "sha256": "e0c34cb141bfe30801e1bdbf07b6f707c717aa795d3d37e63ce99378f7166cd0"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/native/candidate01/tables.py",
+      "sha256": "604c76455c2e0fe9f8702a007ab0a18cc5f2dbf13cea7eeb0edb4f86596cff62"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/native/candidate02/INPUTS.json",
+      "sha256": "8521586ac83d0fd9bca51947525c9df09c8e68304d2ea92626b258574d5affbe"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/native/candidate02/variant.py",
+      "sha256": "34457c716a6c40ec89842aa842fa55150e2348cbf082ebd6c2f909bc3e3e7fa1"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/native/candidate03/variant.py",
+      "sha256": "e32006ac926c9546f2eff1e536410ed352597c9f6ccce8fafe75c19d916f1dd1"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/native/candidate04/INPUTS.json",
+      "sha256": "a4245198d8174e6c179880d62b2f7068e5ce46a4d08f7e85895fbd065670425e"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/native/candidate04/variant.py",
+      "sha256": "5075ed8d06a39026fdb566cf4512db78b9f8e70f069deb54b2446da32ea74c6b"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/native/candidate04/whole_native_text_all.json",
+      "sha256": "04102ab61b58c85fe956b2072877bab042341847a5a1f8323b77638e0174e652"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/native/candidate05/INPUTS.json",
+      "sha256": "d6d9a82e8042b8219461d9db8e78379b441aa983171a877ccf84fad42aeb2eec"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/native/candidate05/variant.py",
+      "sha256": "49ddd8d4c52b24a4f6d0fb4f0d0eb5ce4d5accc40fb99b149709268fadd2557e"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/native/candidate06/decoder06.py",
+      "sha256": "a7613c72e3d50f106e3cc14869f9b0f3c4dc1644e0fc6314c88b118dfc6e823b"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/native/candidate06/divider_cleanup06.py",
+      "sha256": "e67f527f0eaedf948018b48fa8e8fe7fe1fbf03c069f4af60b6e3df9f486dadd"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/native/candidate06/lifecycle06.py",
+      "sha256": "0040baa6be0435547fffdbaf716381b3c4f89cbc7a78586aeca3b8a1fe5014c3"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/native/candidate06/phase06.py",
+      "sha256": "7aad7f4b016b4b41e0fcda4cadaeff1470db05feda372d0c7f81163be7f3abb2"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/native/candidate06/tables06.py",
+      "sha256": "b3cbd5723181ffff0f6c74bae5da27790e61f043283ba86838117900b94f21b6"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/native/candidate06/variant.py",
+      "sha256": "9bb99f916545b56005714ca3ef7968b118c62f7f01a6c37bec305da7fc979614"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/native/candidate07/phase07.py",
+      "sha256": "85920ed58bce4e7fa114096ab55560d426a8ce8196f6badecbedc0b1b07992a8"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/native/candidate07/tables07.py",
+      "sha256": "e8a5ec750374ec78449c8417f1c572b4bad0fc1e595c5628e9fa1a1d6ac34b57"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/native/candidate07/variant.py",
+      "sha256": "c77e385a0b320ef2ac9d9a16267d6e94058d98d793dcfe8132255ad358359305"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/checkpoint002/cleanroom/odd_sqrt/consuming_odd_sqrt.py",
+      "sha256": "5354918c81be67d45d21decac9931797a6ef4dbafadd930f270349faef6af179"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/checkpoint002/cleanroom/baseline_stage97/engine/branch_prover.py",
+      "sha256": "1269cf4e3395f08c80354505bbf9664c4d4f95b8dd137a70eeb2ee02f5ac115d"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/checkpoint002/cleanroom/baseline_stage97/engine/codebook.py",
+      "sha256": "463f5464ccbcf85eb9eea17e64c3e7e3d721f1cd8d30d3513854e1085b250dd3"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/checkpoint002/cleanroom/baseline_stage97/engine/cyclic_phase.py",
+      "sha256": "ec0122850f61f8b76b6db22639da4a95ef20c85610c74c7bd005032cc3623737"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/checkpoint002/cleanroom/baseline_stage97/engine/dirty_terminal.py",
+      "sha256": "7b0d9d4e9ca64da1cea6f0185dc8708691f9cf5118c6b40a1d266bc0f527b724"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/checkpoint002/cleanroom/baseline_stage97/engine/paired_arithmetic.py",
+      "sha256": "2d90f4176cd46c103c01956f0943ded767cdf9a28b7df02078ff688ccf4f8c2e"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/checkpoint002/cleanroom/baseline_stage97/engine/quadratic_terms.py",
+      "sha256": "327eb4139a9b1eedde46891ee3e558a04e0a0df19dda79e7597e71642eb565b4"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/checkpoint002/cleanroom/baseline_stage97/engine/stage94_bit_routing_math.py",
+      "sha256": "5ffc64642f10111a8da408698e84cbb6161121ae73aefaa134270a84c83e59c2"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/checkpoint002/cleanroom/baseline_stage97/engine/thermometer_cleanup.py",
+      "sha256": "f838469e1898d33899391dc8d9b68e0b3fc13af753a583377f35164f42f5c208"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/checkpoint002/cleanroom/baseline_stage97/tests/fourier_resource_expectation.py",
+      "sha256": "0f739dceec476c713c9816c2a7b88471f8b2627b0f7efcad9d46b8ba84f69f97"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/checkpoint002/cleanroom/baseline_stage97/engine/fusion/arithmetic.py",
+      "sha256": "c22f820e5d9155947a3b418d52459637906a56fcd1b9203b039c714db0024ca2"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/checkpoint002/cleanroom/baseline_stage97/engine/fusion/compiler.py",
+      "sha256": "6811f10cc29d8298f6dba401f20cf4903e2344ad050318f06c5f79746ce9ee67"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/checkpoint002/cleanroom/baseline_stage97/engine/fusion/lookup.py",
+      "sha256": "a8ba4d4906520218a5fd1d70579f2e9f600b096c1f690bfbe4de27771abe7775"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/checkpoint002/cleanroom/baseline_stage97/engine/fusion/__init__.py",
+      "sha256": "81be31b9bafe00c1b6040120e04fc219ea1c25379355a96f38f922fb7d755e00"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/arithmetic_round2/receipts/DIVIDER_HISTORY12_PAPER_ACCEPTED.json",
+      "sha256": "d188e0b75ffa397879884f4d77c64fa409b4cada180e5253244f415d84e1d8e7"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/arithmetic_round2/receipts/NORMALIZATION9475_PAPER_ACCEPTED.json",
+      "sha256": "c6e795219c98415c078c010023004def1a76b2785779955c95d1f4f3c62f40bd"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/arithmetic_round2/research/divider/history12_kernel.py",
+      "sha256": "88958ae8caa232c27b9069ee436e9a1c936dd044fe70edd4db702a55920a518e"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/arithmetic_round2/research/divider/top12_kernel.py",
+      "sha256": "7a356a56b1ed9eed271406fb83ea56531bf2b5976488aa6db1a4730bfa4d91e0"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/arithmetic_round2/research/product_coefficient/native_transfer.py",
+      "sha256": "0e3b5b4da5cca12e13fcefcfd52632f98d50cecdb6c4fb4429d8d7f1a9052490"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/arithmetic_round2/research/root_normalization/native_rn2df/normalization9475.py",
+      "sha256": "12f3e0c4204f80f0baada3a3257e9a9548c4739e6a87e716704de175338c13e1"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/arithmetic_round2/research/root_normalization/native_rn3/root192.py",
+      "sha256": "dd382ecc283297253a1e7062dfd92f84ec37b541a40311ce399a943034a12b69"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/arithmetic_round2/research/product_coefficient/native_v3/adapter.py",
+      "sha256": "c760c45627c37feda882a835c863e70fb56f1e1b02b7b0d3102fe5e412f60adb"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/arithmetic_round2/research/divider/native_ar004/adapter.py",
+      "sha256": "d3912a6dfd591e385ce8c2f2d42359638366e51ea07418093c332bbf3394cd2f"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/arithmetic_round2/research/divider/native_ar004/INPUTS.json",
+      "sha256": "89ca5d0a650e132b92f56c26e4d0c4e14d1d4aecca9224471577bc6906350aed"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/arithmetic_round2/native/candidate10/arithmetic_variant.py",
+      "sha256": "189b0dca77aa8fff70ac10d1fe64018e12737d053312001f48a30c04f0032265"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/arithmetic_round2/native/candidate10/COMPLETE_GATE.json",
+      "sha256": "eb427769c7166ea94422a4d910cd47a2284c38f46f4eb311885ed6b86e6eb714"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/arithmetic_round2/native/candidate10/INPUTS.json",
+      "sha256": "45e416686f28385837970e9c89a6b5fca3cb791fbf0cb45dde430ad778b1aa98"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/arithmetic_round2/native/candidate10/lifecycle10.py",
+      "sha256": "c8e160d087206d978861755d32781e4bf4cbb21b41e7a7f5890ea8b92a9c8eff"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/work/c10/narrow/arithmetic_round2/native/candidate10/PARENT_ACCEPTED.json",
+      "sha256": "284a8f73c7cfda88e57d87f7123d0f8d3e0c1154d595b1a05c7868258b0c57dc"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/agents/normroot/q47_t2_rewrite.json",
+      "sha256": "861e6cf7c0e91e8ea9b5c361e64968f3219a7b5da50e7a17c1a0a2a88c691d85"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/agents/width/plans/T1_late_metadata.json",
+      "sha256": "7a70493e77e6cff16874ec47b426a1dc40f5e7449f8a81318d29febd4ece80bd"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/agents/width/plans/T2_decoder_capture.json",
+      "sha256": "9a4cd975a106250546e684d766610c2e08b5fef26bf5383cdffc77b332533dc8"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/agents/width/src/block_replay.py",
+      "sha256": "93789f8b5031ef38f5daa8614293c24235d02633894aac187c0c06bfe10cc729"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/agents/width/src/paid_R_cleanup_q48.py",
+      "sha256": "0b48575e3139012d0ccc6ce7077be4dce324222f6af95962931c47087445eac9"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/agents/micro47/scripts/relocate_cs2.py",
+      "sha256": "8bd1a4ad99dfca1fdbadb03cd1285f848a8f867f2f8c7b80b9f112640ef3e970"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/agents/loader2/certs/first_cap20_56b8.json",
+      "sha256": "f09657772c5fdba988c5dae5e599c003e635cc000d4aa53093362d0846332ec9"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/agents/loader2/certs/second_cap19_70nb1.json",
+      "sha256": "3b4621d63f719928b38a3f2838de2c8d718aa6bbcdbc5a70eec706b2365e5c51"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/agents/composer/p/hret_s15k7a_s15.json",
+      "sha256": "a742f55004f9fec20d1b5de31f87255a99fd7830f35bc9eb645fa94b0fee588e"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/agents/composer/p/v9_form_e2.json",
+      "sha256": "221ee58f0074ac4bcd30a8dc27428b70ef712f68b16878cd3d1247c576fa5ede"
+    },
+    {
+      "path": "src/invsqrt/INV-53/engine/agents/composer/p/w2core_e2.py",
+      "sha256": "39af9d947e9b60a2d54f806952ae5dc41c92e3ae226938ec5d8ef1544391570e"
+    }
+  ],
+  "adapter_work_directory": "artifacts/invsqrt/INV-53/build-u5d6osbs"
+}
