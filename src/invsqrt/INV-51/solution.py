@@ -1,26 +1,21 @@
-"""Rebuild the supplied Fusion invsqrt 46-qubit circuit from author source.
+"""Compile Fusion invsqrt directly from the integrated Python generator and data.
 
-Issue #51, owner nhphan0505; upstream Syed Asad Ali, Apache-2.0 (data/NOTICE).
-This is source-backed exact reconstruction, not a new optimization. The frozen
-generator normalizes 22-bit x, consumes its root/residual, computes coefficient,
-seed/product/divider phase and uncomputes back to the original physical x wires.
-Thirteen patches reduce width and implement measurement/rebuild schedules. The
-finishing passes retain AND products, replace affine products and merge rotations.
-All HMR phase corrections, exact angles and allocation order remain upstream.
+Issue #51; owner nhphan0505. Upstream Syed Asad Ali, Apache-2.0; see NOTICE.txt,
+LICENSE.txt and upstream_changes.json. Source/data in engine/ are readable and
+editable, with integrity checked against engine_manifest.json before build.
+No external source bundle, Linux engine, input submission or precompiled circuit
+is used. The pipeline computes normalization/root/residual, coefficient/seed/product,
+divider/phase endpoint, inverse cleanup and deterministic gate finishing passes.
+The target is 46-qubit phase exp(2*pi*i/sqrt(x)), x=1..3133452, restoring x/scratch.
+Exact bytes and HMR corrections must match INV-51. No optimization or new score is
+claimed. Historical source/proof-receipt hash checks were replaced by the committed
+integrated-source manifest; arithmetic/ownership/phase assertions remain.
 
-The domain is x=1..3133452; the intended phase is exp(2*pi*i/sqrt(x)), with all
-scratch returned to zero. Exact byte reproduction is checked independently from
-the mathematical error tolerance and official verification; neither score nor
-PASS is claimed here. Static gates are not the expected executed count.
-
-Use the repo Windows .venv: python src/invsqrt/INV-51/solution.py --config
-src/invsqrt/INV-51/configs/reconstructed.json. Supply the hash-pinned author bundle
-and competition host files per DEPENDENCIES.md. No input submission or scratch KMX
-is read. Generated KMX is intermediate output, never stored as source. A Windows
-runner preloads pip Kickmix and logs unsupported Unix memory-limit requests.
-Each subprocess has a 600-second limit; Windows memory limits are not enforced.
-No official verifier or author's final full-domain proof is invoked by this build.
-See DESCRIPTION.md for acceptance, provenance, dependencies and grading handoff.
+Use Windows repo .venv with Python 3.13 and pinned requirements:
+python src/invsqrt/INV-51/solution.py --config src/invsqrt/INV-51/configs/reconstructed.json
+Outputs artifacts/invsqrt/INV-51/reconstructed.kmb and build_only provenance.
+Each stage times out at 600 seconds; Windows memory limits are not enforced.
+This command does not run official grading. See DESCRIPTION.md for validation.
 """
 from pathlib import Path
 import argparse
@@ -72,7 +67,7 @@ def load_config(value):
     if path.parent != (HERE / 'configs').resolve() or path.suffix != '.json':
         raise ValueError('Config must resolve directly inside this experiment configs/')
     config = json.loads(path.read_text(encoding='utf-8'))
-    if set(config) != {'source_bundle', 'expected_sha256', 'stage_timeout_seconds'}:
+    if set(config) != {'expected_sha256', 'stage_timeout_seconds'}:
         raise ValueError('Unexpected configuration keys')
     if config['stage_timeout_seconds'] != 600:
         raise ValueError('First reconstruction has a fixed 600-second stage limit')
@@ -86,67 +81,22 @@ def check_committed(config_path):
     for relative in filter(None, tracked):
         if (ROOT / relative).read_bytes() != git('show', f'{head}:{relative}'):
             raise RuntimeError(f'Uncommitted source/dependency metadata: {relative}')
-    for path in [HERE/'solution.py', HERE/'windows_runner.py', config_path, HERE/'data/SHA256SUMS']:
+    for path in [HERE/'solution.py', HERE/'worker.py', config_path, HERE/'engine_manifest.json']:
         if path.relative_to(ROOT).as_posix() not in tracked:
             raise RuntimeError(f'Untracked implementation file: {path}')
     return head
 
 
-def prepare_bundle(config, work):
-    bundle = (ROOT / config['source_bundle']).resolve()
-    if not bundle.is_relative_to(ROOT / 'artifacts'):
-        raise ValueError('Author bundle must be a declared dependency under artifacts/')
-    manifest = HERE / 'data/SHA256SUMS'
-    if (bundle/'SHA256SUMS').read_bytes() != manifest.read_bytes():
-        raise RuntimeError('Source bundle manifest differs from committed manifest')
-    records = []
-    for line in manifest.read_text(encoding='utf-8').splitlines():
-        expected, relative = line.split(maxsplit=1)
-        relative = relative.removeprefix('*')
-        path = (bundle/relative).resolve()
-        if not path.is_relative_to(bundle) or sha(path) != expected:
-            raise RuntimeError(f'Invalid author dependency: {relative}')
-        records.append({'path': relative, 'sha256': expected})
-    tree = work/'tree'
-    # Copy only manifest-declared source entries; unknown files cannot be executed.
-    for item in records:
-        rel = Path(item['path'])
-        if rel.parts[0] != 'src':
-            continue
-        target = tree/Path(*rel.parts[1:])
-        target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(bundle/rel, target)
-    official = tree/'work/c10/narrow/base/official'
-    host = [('kickmix/kickmix.so', 'kickmix/kickmix.so', 'c66b3216c4029e0cdfd09054306aa0feadf53ab2f50c1164e37f752874e5005e'),
-            ('verifiers/invsqrt/verify_submission_invsqrt.py', 'verifier_invsqrt/verify_submission_invsqrt.py', 'ddef520dec6b68d1cf0a6f328ddd36d79eb84570b9192cf3f7acaf073f06733a')]
-    for relative, dest, expected in host:
-        if sha(ROOT/relative) != expected:
-            raise RuntimeError(f'Host dependency hash mismatch: {relative}')
-        target = official/dest
-        target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(ROOT/relative, target)
-    for name in ['__init__.py', 'nr_reference_circuit.py']:
-        source = ROOT/'verifiers/invsqrt'/name
-        if source.exists():
-            shutil.copyfile(source, official/'verifier_invsqrt'/name)
-            records.append({'path': source.relative_to(ROOT).as_posix(), 'sha256': sha(source)})
-    for path in tree.rglob('*'):
-        if not path.is_file() or path.is_relative_to(tree/'work/c10'):
-            continue
-        raw = path.read_bytes()
-        if b'@FG_ROOT@' in raw:
-            if path.suffix not in ('.py', '.sh'):
-                raise RuntimeError(f'Relocation token outside source: {path}')
-            path.write_bytes(raw.replace(b'@FG_ROOT@', tree.as_posix().encode()))
-    # Upstream compares a Windows Path string to a slash-separated literal.
-    # Compare resolved paths instead; certificate bytes/hash checks stay intact.
-    patch = tree/'patches/patch_second46_c19_70nb1.py'
-    raw = patch.read_bytes()
-    old = b'assert str(module.OWN_SECOND) == CERT'
-    if raw.count(old) != 1:
-        raise RuntimeError('Unexpected upstream certificate path assertion')
-    patch.write_bytes(raw.replace(old, b'assert Path(module.OWN_SECOND).resolve() == Path(CERT).resolve()'))
-    return tree, records + [{'path': rel, 'sha256': h} for rel, _, h in host]
+def prepare_engine(config, work):
+    tree = HERE/'engine'
+    manifest = json.loads((HERE/'engine_manifest.json').read_text(encoding='utf-8'))
+    records=[]
+    for relative, expected in manifest['files'].items():
+        path=(HERE/relative).resolve()
+        if not path.is_relative_to(HERE) or sha(path)!=expected:
+            raise RuntimeError(f'Integrated source integrity mismatch: {relative}')
+        records.append({'path':path.relative_to(ROOT).as_posix(),'sha256':expected})
+    return tree, records
 
 
 def main():
@@ -166,8 +116,8 @@ def main():
     if artifact.exists():
         raise FileExistsError(f'Output already exists: {artifact}; preserve it and use a new config')
     work = Path(tempfile.mkdtemp(prefix='build-', dir=artifact_dir))
-    tree, dependencies = prepare_bundle(config, work)
-    env = {**os.environ, 'PYTHONUTF8':'1', 'PYTHONIOENCODING':'utf-8', 'OPENBLAS_NUM_THREADS':'1',
+    tree, dependencies = prepare_engine(config, work)
+    env = {**os.environ, 'PYTHONUTF8':'1', 'PYTHONIOENCODING':'utf-8', 'PYTHONDONTWRITEBYTECODE':'1', 'OPENBLAS_NUM_THREADS':'1',
            'OMP_NUM_THREADS':'1', 'MKL_NUM_THREADS':'1'}
     for key in ['DIVIDER_FORCE_CAP','DIVIDER_PLACEHOLDER','DIVIDER_RETIRE','LD_FIRST_JSON','LEAD_SECOND_JSON',
                 'TK46_SECOND_JSON','W2_E_HOLD','W2_F_HOLD','W2_R2','W2_V10_G1','W2_V9_FORM','W2_V9_PLACEHOLDER','FG','NARROW']:
@@ -175,7 +125,7 @@ def main():
     stages=[]
 
     def run(label, script, *arguments):
-        command=[sys.executable, '-X', 'utf8', str(HERE/'windows_runner.py'), str(script), *map(str,arguments)]
+        command=[sys.executable, '-X', 'utf8', str(HERE/'worker.py'), '--trace', str(work/(label+'.reads.json')), str(script), *map(str,arguments)]
         print(f'{label}: {script.name}', flush=True)
         with (work/(label+'.log')).open('xb') as log:
             result=subprocess.run(command, cwd=tree, env=env, stdout=log, stderr=subprocess.STDOUT,

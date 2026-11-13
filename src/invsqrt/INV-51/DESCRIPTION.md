@@ -82,11 +82,11 @@ Quan sát trực tiếp từ KMB: 46 qubit, 1297 HMR, 895 cặp PUSH_CONDITION/P
 
 ## Cách chạy và cấu hình
 
-Dùng Python 3.13 trong `.venv` Windows, Kickmix 1.0.0, NumPy 2.5.4 và SciPy 1.18.1. Không dùng WSL. Config có ba trường: đường dẫn bundle nguồn tương đối root, hash mục tiêu và timeout 600 giây mỗi stage. Config phải nằm trong thư mục configs của hướng này; output lấy tên theo stem config. Output có sẵn sẽ không bị ghi đè. Provenance của các build mới ghi executable và lệnh chạy tương đối repo root bằng dấu `/`; build_only đặt build_run=null. Provenance lịch sử được giữ nguyên bytes.
+Dùng Python 3.13 trong `.venv` Windows, Kickmix 1.0.0, NumPy 2.5.4 và SciPy 1.18.1. Không dùng WSL. Config hiện có hai trường: hash mục tiêu và timeout 600 giây mỗi stage; không còn source_bundle. Config phải nằm trong thư mục configs của hướng này; output lấy tên theo stem config. Output có sẵn sẽ không bị ghi đè. Provenance của các build mới ghi executable và lệnh chạy tương đối repo root bằng dấu `/`; build_only đặt build_run=null. Provenance lịch sử được giữ nguyên bytes.
 
-[windows_runner.py](windows_runner.py) preload Kickmix Windows từ `.venv`. File Linux `.so` chỉ dùng để kiểm tra source pin, không thực thi. Adapter ghi rõ các yêu cầu Unix setrlimit không được enforce trên Windows; timeout subprocess vẫn có hiệu lực. Một assertion so sánh đường dẫn certificate được đổi sang so Path.resolve để xử lý dấu phân cách Windows; hash certificate không đổi. Các file generator nền đã pin giữ nguyên bytes.
+[worker.py](worker.py) preload Kickmix Windows từ `.venv`; không dùng file Linux `.so`. windows_runner.py chỉ thuộc implementation lịch sử đã chấm. Source tích hợp đã bỏ các import/setrlimit Unix; không enforce giới hạn RAM Unix, timeout subprocess vẫn có hiệu lực. Một assertion so sánh đường dẫn certificate được đổi sang so Path.resolve để xử lý dấu phân cách Windows; hash certificate không đổi. Mã đã port được kiểm tra bằng manifest tích hợp và có lineage hash trước/sau trong upstream_changes.json.
 
-Chạy lệnh trong [DEPENDENCIES.md](DEPENDENCIES.md). Build dùng bản nguồn đã commit, kiểm tra hash dependency rồi ghi provenance. Toàn bộ source tác giả là dependency ngoài Git, không phải source độc lập chỉ cần một file solution; người tái lập phải cấp đúng bundle. Source/config và metadata của adapter được version hóa trong hướng này.
+Chạy lệnh trong [DEPENDENCIES.md](DEPENDENCIES.md). Build dùng bản nguồn đã commit, kiểm tra hash dependency rồi ghi provenance. Generator và dữ liệu runtime nay được tích hợp trong engine/ và version hóa trong INV-51. Không cần bundle, file Linux .so hoặc verifier để compile. engine_manifest.json kiểm tra mã/dữ liệu tích hợp; upstream_changes.json ghi các kiểm tra receipts nguồn lịch sử đã được thay thế. Giữ toàn bộ invariant số học/owner/debt/phase.
 
 ## Kế hoạch kiểm chứng hypothesis
 
@@ -129,3 +129,10 @@ Thành viên chạy verifier chính thức với các tham số mặc định, c
 Hash khớp hai bản build exact. Notebook không tự gắn provenance vì có hai build cùng hash; sidecar mới nối đến build 4872943 đã tạo artifact ở root ngay trước lần chấm này, giữ nguyên review.json và mọi log gốc. Không lấy HEAD làm source commit. Baseline full hiện có chạy Colab với Python/package khác, nên không ghi hệ số cải thiện full; hệ số dev vẫn dựa trên baseline local tương thích. Score full nằm trong SCORES, không thay bằng số lịch sử trong ảnh.
 
 Đã đáp ứng khuyến nghị full của review. Dừng ở mốc tái lập này và bàn giao reviewer kiểm tra lại HEAD mới trước merge; không tự kết luận đã được approve.
+
+
+## Hoàn thiện compile trực tiếp trong INV-51
+
+Theo yêu cầu người dùng, phần bỏ bundle ngoài là hoàn thiện INV-51 hiện có, không mở hướng thí nghiệm mới. [solution.py](solution.py) gọi 72 module Python và 39 JSON nội bộ cùng PATCH_ORDER.txt trong engine/. Không tải/giải nén bundle hay đọc submission cũ khi compile; mã có thể đọc/sửa trong Git. [INTEGRATION.md](INTEGRATION.md) mô tả cách chạy và các thay đổi port; [engine_manifest.json](engine_manifest.json) kiểm tra source/data; [upstream_changes.json](upstream_changes.json) giữ attribution và hash nguồn.
+
+Các build/dev/full trước đây vẫn nối đúng source commit lịch sử trong bảng; không thay provenance hoặc điểm của chúng bằng source mới. Bản compile trực tiếp cần source commit và build_only mới để xác nhận lại bytes/hash. Không tạo run chấm mới từ kết quả cũ. Windows .venv và pinned requirements là dependency runtime duy nhất.
