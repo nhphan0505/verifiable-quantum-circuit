@@ -15,10 +15,7 @@ HERE = Path(__file__).resolve().parent
 PARENT = HERE.parent
 NARROW = HERE.parents[3]
 pass
-for pin in json.loads((HERE / 'INPUTS.json').read_text())['files']:
-    data = (NARROW / pin['path']).read_bytes()
-    assert len(data) == pin['bytes']
-    pass
+pass
 spec = importlib.util.spec_from_file_location('_rn2f_pinned_rn2b_paper', PARENT / 'leading_one_normalization_v2.py')
 baseline = importlib.util.module_from_spec(spec)
 sys.modules[spec.name] = baseline

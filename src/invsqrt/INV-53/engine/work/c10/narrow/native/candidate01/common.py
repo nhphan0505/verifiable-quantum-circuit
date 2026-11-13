@@ -67,6 +67,5 @@ def current_gate():
 
 def verify_gate_sources():
     gate = current_gate()
-    for path, digest in gate['source_pins'].items():
-        pass
+    pass
     return gate

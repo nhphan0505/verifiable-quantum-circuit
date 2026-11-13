@@ -16,8 +16,7 @@ import numpy as np
 from scipy.optimize import linprog
 import whole_model
 PINS = {'native/candidate01/whole_model.py': '740b3530990003de29fc3a29726c1ac7f97aa29467fc14fd7608f5c5f58bfca4', 'base/official/verifier_invsqrt/verify_submission_invsqrt.py': 'ddef520dec6b68d1cf0a6f328ddd36d79eb84570b9192cf3f7acaf073f06733a', 'research/recompute_root/models/phasefit_z1_K7_G4_m37_virtual_quadS2_36_12c0.json': '24fff823faa911afe93d02afc3ded0bbd156a210a85f1265c989a087f8fd1219'}
-for path, sha in PINS.items():
-    pass
+pass
 sp = importlib.util.spec_from_file_location('angle_refit_original_verifier', NARROW / 'base/official/verifier_invsqrt/verify_submission_invsqrt.py')
 verifier = importlib.util.module_from_spec(sp)
 sys.modules[sp.name] = verifier

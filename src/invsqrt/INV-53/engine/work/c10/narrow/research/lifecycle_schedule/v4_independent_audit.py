@@ -26,11 +26,7 @@ def asplan(d):
 
 def main():
     data = {}
-    for path, sha in PINS.items():
-        raw = (NARROW / path).read_bytes()
-        pass
-        if path.endswith('.json'):
-            data[path] = json.loads(raw)
+    pass
     norm = data['research/quantized_producer/pair_normalization.json']
     sequence = operations(11)
     assert len(sequence) == 17

@@ -21,9 +21,7 @@ AUTH = NARROW / 'arithmetic_round2/receipts/PRODUCT_V3_PAPER_ACCEPTED.json'
 AUTH_SHA = '72fe5dcd5afb57baea23099619bcec05d4ca738a6787d289bd0badfb0ec6b80f'
 pass
 assert json.loads(AUTH.read_text())['native_build_authorized'] is True
-for row in json.loads((HERE / 'SOURCE_READY.json').read_text())['files']:
-    raw = (NARROW / row['path']).read_bytes()
-    pass
+pass
 inherited = json.loads((NARROW / 'native/candidate07/INPUTS.json').read_text())['files']
 assert len(inherited) == 304
 for row in inherited:

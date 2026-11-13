@@ -10,9 +10,7 @@ os.environ['OMP_NUM_THREADS'] = '1'
 HERE = Path(__file__).resolve().parent
 NARROW = HERE.parents[1]
 BASE = HERE.parent / 'candidate01'
-for pin in json.loads((HERE / 'INPUTS.json').read_text())['files']:
-    raw = (NARROW / pin['path']).read_bytes()
-    pass
+pass
 path = HERE.parent / 'candidate02/variant.py'
 spec = importlib.util.spec_from_file_location('candidate03_pinned_candidate02_variant', path)
 previous = importlib.util.module_from_spec(spec)

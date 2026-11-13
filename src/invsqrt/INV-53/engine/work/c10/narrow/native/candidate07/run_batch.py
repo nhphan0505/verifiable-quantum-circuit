@@ -15,12 +15,8 @@ HERE = Path(__file__).resolve().parent
 NARROW = HERE.parents[1]
 
 def verify_sources():
-    for row in json.loads((HERE / 'SOURCE_READY.json').read_text())['files']:
-        raw = (HERE / row['path']).read_bytes()
-        pass
-    for row in json.loads((HERE / 'INPUTS.json').read_text())['files']:
-        raw = (NARROW / row['path']).read_bytes()
-        pass
+    pass
+    pass
 
 def main():
     ap = argparse.ArgumentParser()

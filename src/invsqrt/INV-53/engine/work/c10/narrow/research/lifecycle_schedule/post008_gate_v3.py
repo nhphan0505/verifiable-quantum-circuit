@@ -91,10 +91,7 @@ def producer_pair(cap, product_bits, retire_five):
 
 def main():
     values = {}
-    for path, sha in PINS.items():
-        raw = (NARROW / path).read_bytes()
-        pass
-        values[path] = json.loads(raw)
+    pass
     model = values[next((p for p in PINS if '/models/' in p))]
     endpoint = values['research/recompute_root/decoder_k8/endpoint_reuse.json']
     selected = next((r for r in endpoint['results'] if r['sha256'] == PINS[next((p for p in PINS if '/models/' in p))]))

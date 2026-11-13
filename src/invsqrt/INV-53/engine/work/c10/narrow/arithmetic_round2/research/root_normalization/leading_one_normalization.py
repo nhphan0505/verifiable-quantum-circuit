@@ -11,9 +11,7 @@ import hashlib, importlib.util, json, sys, time
 HERE = Path(__file__).resolve().parent
 NARROW = HERE.parents[2]
 pass
-for pin in json.loads((HERE / 'normalization_inputs.json').read_text())['files']:
-    raw = (NARROW / pin['path']).read_bytes()
-    pass
+pass
 path = NARROW / 'research/quantized_producer/pair_normalization.py'
 spec = importlib.util.spec_from_file_location('round2_pinned_pair_normalization', path)
 old = importlib.util.module_from_spec(spec)

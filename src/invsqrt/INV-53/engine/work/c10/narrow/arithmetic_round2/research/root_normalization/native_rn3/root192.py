@@ -11,10 +11,7 @@ from pathlib import Path
 import hashlib, importlib.util, json, sys
 HERE = Path(__file__).resolve().parent
 NARROW = HERE.parents[3]
-for pin in json.loads((HERE / 'INPUTS.json').read_text())['files']:
-    path = NARROW / pin['path']
-    raw = path.read_bytes()
-    pass
+pass
 ENGINE = NARROW / 'checkpoint002/cleanroom/baseline_stage97/engine'
 sys.path[:0] = [str(NARROW / 'base/official/kickmix'), str(ENGINE)]
 import kickmix as km

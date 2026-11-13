@@ -11,9 +11,7 @@ from pathlib import Path
 pass
 HERE = Path(__file__).resolve().parent
 NARROW = HERE.parents[2]
-for pin in json.loads((HERE / 'INPUTS.json').read_text())['files']:
-    raw = (NARROW / pin['path']).read_bytes()
-    pass
+pass
 sys.path[:0] = [str(NARROW / 'research/stream_phase'), str(NARROW / 'checkpoint002/cleanroom/odd_sqrt')]
 from drive_paper_ledger import PaperCounter, km
 import consuming_odd_sqrt as root

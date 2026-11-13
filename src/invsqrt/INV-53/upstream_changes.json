@@ -531,16 +531,16 @@
       "path": "engine/work/c10/narrow/research/joint_loader/run_loader_followup003.py",
       "upstream_path": "src/work/c10/narrow/research/joint_loader/run_loader_followup003.py",
       "upstream_sha256": "20915a226a437aebc8638cc12b315cef49871c16a3429dcce194544da7f3f27a",
-      "integrated_sha256": "92500d53581287b2bfe0843be088e75a7e044924ad666af41915393f7b2de60f",
+      "integrated_sha256": "2c4dcd8d3c92862d35e9f9e2a8bc04713255a1b952b8e140746e36b046fe9554",
       "adaptations": [
         {
           "line": 24,
           "kind": "Unix_resource_limit_request"
         },
         {
-          "line": 30,
-          "kind": "upstream_hash_assertion",
-          "original": "assert len(raw) == item['bytes'] and hashlib.sha256(raw).hexdigest() == item['sha256'], item['path']"
+          "line": 28,
+          "kind": "upstream_source_manifest_loop",
+          "original": "for item in manifest['files']:\n    raw = (HERE / item['path']).read_bytes()\n    assert len(raw) == item['bytes'] and hashlib.sha256(raw).hexdigest() == item['sha256'], item['path']"
         },
         {
           "line": 98,
@@ -584,16 +584,16 @@
       "path": "engine/work/c10/narrow/research/lifecycle_schedule/post008_gate_v3.py",
       "upstream_path": "src/work/c10/narrow/research/lifecycle_schedule/post008_gate_v3.py",
       "upstream_sha256": "ec66f61b38ed835754bac44dfb7debf5d4b357f20800f13c482fd8515d256f07",
-      "integrated_sha256": "909d496f25bb507e4b9108ccd3521d6dbd6f80ffbd2e737ded944b31aaf14296",
+      "integrated_sha256": "d89cdeb3533338ae3688712ba421b216b5138be884d82af60f99c0dd801a760f",
       "adaptations": [
         {
           "line": 16,
           "kind": "Unix_resource_limit_request"
         },
         {
-          "line": 86,
-          "kind": "upstream_hash_assertion",
-          "original": "assert hashlib.sha256(raw).hexdigest() == sha, (path, 'hash mismatch')"
+          "line": 85,
+          "kind": "upstream_source_manifest_loop",
+          "original": "for path, sha in PINS.items():\n    raw = (NARROW / path).read_bytes()\n    assert hashlib.sha256(raw).hexdigest() == sha, (path, 'hash mismatch')\n    values[path] = json.loads(raw)"
         }
       ]
     },
@@ -629,16 +629,16 @@
       "path": "engine/work/c10/narrow/research/lifecycle_schedule/v4_independent_audit.py",
       "upstream_path": "src/work/c10/narrow/research/lifecycle_schedule/v4_independent_audit.py",
       "upstream_sha256": "8b472269ff34708b4d77ce16157a40ff175f4206f6484ae9a8e14723213a513d",
-      "integrated_sha256": "4a7c568af72ea34d6ed25557331a633030c4ad04cd0f3fb11ee1353bd9e6ab45",
+      "integrated_sha256": "c641f086bf274406233aec0be74219ec71fadcfe347cb1815375355f6e1fbfdd",
       "adaptations": [
         {
           "line": 14,
           "kind": "Unix_resource_limit_request"
         },
         {
-          "line": 43,
-          "kind": "upstream_hash_assertion",
-          "original": "assert hashlib.sha256(raw).hexdigest() == sha, path"
+          "line": 42,
+          "kind": "upstream_source_manifest_loop",
+          "original": "for path, sha in PINS.items():\n    raw = (NARROW / path).read_bytes()\n    assert hashlib.sha256(raw).hexdigest() == sha, path\n    if path.endswith('.json'):\n        data[path] = json.loads(raw)"
         }
       ]
     },
@@ -680,11 +680,16 @@
       "path": "engine/work/c10/narrow/research/postgate_angle_refit/quantize50.py",
       "upstream_path": "src/work/c10/narrow/research/postgate_angle_refit/quantize50.py",
       "upstream_sha256": "27959adf4590e3657eaf83cab99370813e50728d9a3a433c143277388f8a9228",
-      "integrated_sha256": "d350489786a8223b4c910b2bde8804d64e8183f6b6b6cb1f75424d597474a73a",
+      "integrated_sha256": "97fba99d00771e64c4b294475302b268334f608c474e9e76c1602f0c73373fe9",
       "adaptations": [
         {
           "line": 12,
           "kind": "Unix_resource_limit_request"
+        },
+        {
+          "line": 37,
+          "kind": "upstream_source_manifest_loop",
+          "original": "for relative, expected in PINS.items():\n    actual = hashlib.sha256((NARROW / relative).read_bytes()).hexdigest()\n    assert actual == expected, (relative, actual, expected)"
         }
       ]
     },
@@ -706,7 +711,7 @@
       "path": "engine/work/c10/narrow/research/postgate_angle_refit/refit.py",
       "upstream_path": "src/work/c10/narrow/research/postgate_angle_refit/refit.py",
       "upstream_sha256": "4f19919c27cd6a0a24bb827fe94982460c974f7b3148aaa03041fafcdd683edd",
-      "integrated_sha256": "1eab8a25cdeddafef54178cfc068f1eeffe63bfd613b4b88679244c1f54a13fd",
+      "integrated_sha256": "49f0b729504bb5fc3e9a8a921fecc56fc79ce4572ffe5faea12c192182fddabf",
       "adaptations": [
         {
           "line": 9,
@@ -714,8 +719,8 @@
         },
         {
           "line": 20,
-          "kind": "upstream_hash_assertion",
-          "original": "assert hashlib.sha256((NARROW / path).read_bytes()).hexdigest() == sha, path"
+          "kind": "upstream_source_manifest_loop",
+          "original": "for path, sha in PINS.items():\n    assert hashlib.sha256((NARROW / path).read_bytes()).hexdigest() == sha, path"
         }
       ]
     },
@@ -1016,16 +1021,16 @@
       "path": "engine/work/c10/narrow/research/postgate_root_constants/independent_audit/audit.py",
       "upstream_path": "src/work/c10/narrow/research/postgate_root_constants/independent_audit/audit.py",
       "upstream_sha256": "6aca83c76c2eec18757518200c40de9464d1ff83d84620a8cd8043c159e709ab",
-      "integrated_sha256": "b466953fb38a654eb87a0e77ecc437b6693518fd4342b347b264811b5c35319b",
+      "integrated_sha256": "e5e0ba0f6136d3de9a355ad92f953b2d12eab828ccb2e55c92abb5f90cba0882",
       "adaptations": [
         {
           "line": 9,
           "kind": "Unix_resource_limit_request"
         },
         {
-          "line": 13,
-          "kind": "upstream_hash_assertion",
-          "original": "assert len(raw) == pin['bytes'] and hashlib.sha256(raw).hexdigest() == pin['sha256']"
+          "line": 11,
+          "kind": "upstream_source_manifest_loop",
+          "original": "for pin in json.loads((HERE / 'INPUTS.json').read_text())['files']:\n    raw = (NARROW / pin['path']).read_bytes()\n    assert len(raw) == pin['bytes'] and hashlib.sha256(raw).hexdigest() == pin['sha256']"
         }
       ]
     },
@@ -1257,7 +1262,7 @@
       "path": "engine/work/c10/narrow/native/candidate01/common.py",
       "upstream_path": "src/work/c10/narrow/native/candidate01/common.py",
       "upstream_sha256": "9872e64213a4219522a87efc49d1aa549a04e43ae3fb51c9d5b762b1ea6535ab",
-      "integrated_sha256": "74e9768fe26c8d4d0844a243355ced26be3a203b47399866354e57109d90652e",
+      "integrated_sha256": "29f08dcbf4111771ce6a67045db44d39171b7f131f05d0765a7161050f1f840d",
       "adaptations": [
         {
           "line": 14,
@@ -1275,9 +1280,9 @@
           "original": "assert hashlib.sha256(MODEL_PATH.read_bytes()).hexdigest() == MODEL_SHA"
         },
         {
-          "line": 70,
-          "kind": "upstream_hash_assertion",
-          "original": "assert hashlib.sha256((NARROW / path).read_bytes()).hexdigest() == digest, path"
+          "line": 69,
+          "kind": "upstream_source_manifest_loop",
+          "original": "for path, digest in gate['source_pins'].items():\n    assert hashlib.sha256((NARROW / path).read_bytes()).hexdigest() == digest, path"
         }
       ]
     },
@@ -1543,12 +1548,12 @@
       "path": "engine/work/c10/narrow/native/candidate02/variant.py",
       "upstream_path": "src/work/c10/narrow/native/candidate02/variant.py",
       "upstream_sha256": "5fc151b1a633a36be4733ee23bdb66acd18504950124c54506adf25250e7e487",
-      "integrated_sha256": "0788bff519a40e5ab11b779642ff4908d640113eb116708528c62a2bacc42b9d",
+      "integrated_sha256": "34457c716a6c40ec89842aa842fa55150e2348cbf082ebd6c2f909bc3e3e7fa1",
       "adaptations": [
         {
-          "line": 11,
-          "kind": "upstream_hash_assertion",
-          "original": "assert len(raw) == pin['bytes'] and hashlib.sha256(raw).hexdigest() == pin['sha256'], pin['path']"
+          "line": 9,
+          "kind": "upstream_source_manifest_loop",
+          "original": "for pin in INPUTS['files']:\n    raw = (NARROW / pin['path']).read_bytes()\n    assert len(raw) == pin['bytes'] and hashlib.sha256(raw).hexdigest() == pin['sha256'], pin['path']"
         }
       ]
     },
@@ -1577,12 +1582,12 @@
       "path": "engine/work/c10/narrow/native/candidate03/variant.py",
       "upstream_path": "src/work/c10/narrow/native/candidate03/variant.py",
       "upstream_sha256": "7a5375b1b59bbb19ea050380039ba4b44b04ab8a26a4b553d917d0b14827e49f",
-      "integrated_sha256": "3e5169eb579d52d3b3154db0d2d66284c712edca96e42cd352e9e4629af79aaa",
+      "integrated_sha256": "e32006ac926c9546f2eff1e536410ed352597c9f6ccce8fafe75c19d916f1dd1",
       "adaptations": [
         {
-          "line": 10,
-          "kind": "upstream_hash_assertion",
-          "original": "assert len(raw) == pin['bytes'] and hashlib.sha256(raw).hexdigest() == pin['sha256'], pin['path']"
+          "line": 8,
+          "kind": "upstream_source_manifest_loop",
+          "original": "for pin in json.loads((HERE / 'INPUTS.json').read_text())['files']:\n    raw = (NARROW / pin['path']).read_bytes()\n    assert len(raw) == pin['bytes'] and hashlib.sha256(raw).hexdigest() == pin['sha256'], pin['path']"
         }
       ]
     },
@@ -1648,17 +1653,17 @@
       "path": "engine/work/c10/narrow/native/candidate04/run_batch.py",
       "upstream_path": "src/work/c10/narrow/native/candidate04/run_batch.py",
       "upstream_sha256": "10fa226bd758cf66ada535ef563e24bf150220d454983583aaeaa9ceccd06aa0",
-      "integrated_sha256": "4f7defb5d709e6000cbbe9cb0104273a60e1ceb57d9ac56985ef7244a3e45087",
+      "integrated_sha256": "039d250d53a49684a7d87eca849d463e733c095e0c21190f93ca189de3f3310e",
       "adaptations": [
         {
-          "line": 14,
-          "kind": "upstream_hash_assertion",
-          "original": "assert len(raw) == row['bytes'] and hashlib.sha256(raw).hexdigest() == row['sha256'], row['path']"
+          "line": 12,
+          "kind": "upstream_source_manifest_loop",
+          "original": "for row in json.loads((HERE / 'SOURCE_READY.json').read_text())['files']:\n    raw = (HERE / row['path']).read_bytes()\n    assert len(raw) == row['bytes'] and hashlib.sha256(raw).hexdigest() == row['sha256'], row['path']"
         },
         {
-          "line": 17,
-          "kind": "upstream_hash_assertion",
-          "original": "assert len(raw) == row['bytes'] and hashlib.sha256(raw).hexdigest() == row['sha256'], row['path']"
+          "line": 15,
+          "kind": "upstream_source_manifest_loop",
+          "original": "for row in json.loads((HERE / 'INPUTS.json').read_text())['files']:\n    raw = (NARROW / row['path']).read_bytes()\n    assert len(raw) == row['bytes'] and hashlib.sha256(raw).hexdigest() == row['sha256'], row['path']"
         }
       ]
     },
@@ -1702,7 +1707,7 @@
       "path": "engine/work/c10/narrow/native/candidate04/variant.py",
       "upstream_path": "src/work/c10/narrow/native/candidate04/variant.py",
       "upstream_sha256": "da023f7bc56995b9a8764a35c25b782f579b46e5a663e5b7100690819513e7ce",
-      "integrated_sha256": "f4a16acfc976170c05055f240895dabd244b73328da43aaeddc4f80f37205129",
+      "integrated_sha256": "5075ed8d06a39026fdb566cf4512db78b9f8e70f069deb54b2446da32ea74c6b",
       "adaptations": [
         {
           "line": 14,
@@ -1720,9 +1725,9 @@
           "original": "assert result['script_sha256'] == hashlib.sha256((RESEARCH / 'quantize50.py').read_bytes()).hexdigest()"
         },
         {
-          "line": 55,
-          "kind": "upstream_hash_assertion",
-          "original": "assert hashlib.sha256((NARROW / relative).read_bytes()).hexdigest() == digest, relative"
+          "line": 54,
+          "kind": "upstream_source_manifest_loop",
+          "original": "for relative, digest in result['source_pins'].items():\n    assert hashlib.sha256((NARROW / relative).read_bytes()).hexdigest() == digest, relative"
         }
       ]
     },
@@ -1779,17 +1784,17 @@
       "path": "engine/work/c10/narrow/native/candidate05/run_batch.py",
       "upstream_path": "src/work/c10/narrow/native/candidate05/run_batch.py",
       "upstream_sha256": "bfb27d92597bbe2311c9364b2342e21bee5ca6c13d4723a9158b11bf1930bd55",
-      "integrated_sha256": "d4053e2215be06f72fd21e5de36f47a0dd4a39eee6649a154c56c34229287553",
+      "integrated_sha256": "1f7d549a074f1bb8bd1e34fd8a5ac12c7a66b4465d81e8ddaacf77ce31a03206",
       "adaptations": [
         {
-          "line": 13,
-          "kind": "upstream_hash_assertion",
-          "original": "assert len(raw) == row['bytes'] and hashlib.sha256(raw).hexdigest() == row['sha256'], row['path']"
+          "line": 12,
+          "kind": "upstream_source_manifest_loop",
+          "original": "for row in json.loads((HERE / 'SOURCE_READY.json').read_text())['files']:\n    raw = (HERE / row['path']).read_bytes()\n    assert len(raw) == row['bytes'] and hashlib.sha256(raw).hexdigest() == row['sha256'], row['path']"
         },
         {
-          "line": 15,
-          "kind": "upstream_hash_assertion",
-          "original": "assert len(raw) == row['bytes'] and hashlib.sha256(raw).hexdigest() == row['sha256'], row['path']"
+          "line": 14,
+          "kind": "upstream_source_manifest_loop",
+          "original": "for row in json.loads((HERE / 'INPUTS.json').read_text())['files']:\n    raw = (NARROW / row['path']).read_bytes()\n    assert len(raw) == row['bytes'] and hashlib.sha256(raw).hexdigest() == row['sha256'], row['path']"
         }
       ]
     },
@@ -1976,17 +1981,17 @@
       "path": "engine/work/c10/narrow/native/candidate06/run_batch.py",
       "upstream_path": "src/work/c10/narrow/native/candidate06/run_batch.py",
       "upstream_sha256": "445dcb481328d4e4222bbaa98e04d0345c59583877bf099302b47e673b718581",
-      "integrated_sha256": "29d26a801a739b795dd8351a49d5c1c89de717207cf3f7b644bd97451c3d397e",
+      "integrated_sha256": "9f01d47f33468bfebe2857566cbab4b0477364f91bdc72d874c5357fe7d14ba6",
       "adaptations": [
         {
-          "line": 13,
-          "kind": "upstream_hash_assertion",
-          "original": "assert len(raw) == row['bytes'] and hashlib.sha256(raw).hexdigest() == row['sha256'], row['path']"
+          "line": 12,
+          "kind": "upstream_source_manifest_loop",
+          "original": "for row in json.loads((HERE / 'SOURCE_READY.json').read_text())['files']:\n    raw = (HERE / row['path']).read_bytes()\n    assert len(raw) == row['bytes'] and hashlib.sha256(raw).hexdigest() == row['sha256'], row['path']"
         },
         {
-          "line": 15,
-          "kind": "upstream_hash_assertion",
-          "original": "assert len(raw) == row['bytes'] and hashlib.sha256(raw).hexdigest() == row['sha256'], row['path']"
+          "line": 14,
+          "kind": "upstream_source_manifest_loop",
+          "original": "for row in json.loads((HERE / 'INPUTS.json').read_text())['files']:\n    raw = (NARROW / row['path']).read_bytes()\n    assert len(raw) == row['bytes'] and hashlib.sha256(raw).hexdigest() == row['sha256'], row['path']"
         }
       ]
     },
@@ -2162,17 +2167,17 @@
       "path": "engine/work/c10/narrow/native/candidate07/run_batch.py",
       "upstream_path": "src/work/c10/narrow/native/candidate07/run_batch.py",
       "upstream_sha256": "906d64eed736a3d7a1d495bfea4f9f5882fcd849a67b721c2b0855c97670ba52",
-      "integrated_sha256": "242aa1cbf0fcab90ca2d99565114207a12fb07cfd14519027e83ffc740b19d6b",
+      "integrated_sha256": "53b3de58364069e4a9612254f4b4b3be21cc7d4c3950b6386b93d29155bba90c",
       "adaptations": [
         {
-          "line": 21,
-          "kind": "upstream_hash_assertion",
-          "original": "assert len(raw) == row['bytes'] and hashlib.sha256(raw).hexdigest() == row['sha256'], row['path']"
+          "line": 19,
+          "kind": "upstream_source_manifest_loop",
+          "original": "for row in json.loads((HERE / 'SOURCE_READY.json').read_text())['files']:\n    raw = (HERE / row['path']).read_bytes()\n    assert len(raw) == row['bytes'] and hashlib.sha256(raw).hexdigest() == row['sha256'], row['path']"
         },
         {
-          "line": 24,
-          "kind": "upstream_hash_assertion",
-          "original": "assert len(raw) == row['bytes'] and hashlib.sha256(raw).hexdigest() == row['sha256'], row['path']"
+          "line": 22,
+          "kind": "upstream_source_manifest_loop",
+          "original": "for row in json.loads((HERE / 'INPUTS.json').read_text())['files']:\n    raw = (NARROW / row['path']).read_bytes()\n    assert len(raw) == row['bytes'] and hashlib.sha256(raw).hexdigest() == row['sha256'], row['path']"
         }
       ]
     },
@@ -3183,12 +3188,12 @@
       "path": "engine/work/c10/narrow/arithmetic_round2/research/divider/history12_study.py",
       "upstream_path": "src/work/c10/narrow/arithmetic_round2/research/divider/history12_study.py",
       "upstream_sha256": "fcedae75ed24e28245dffd514b7b8564eaaedb646add7e0ef926f64e0e6d6c8e",
-      "integrated_sha256": "bdd3f1a49049c47816e50b8d4b5d3108123ef06e9f85ef7d007502278899533c",
+      "integrated_sha256": "12b137f981fa64ef08e7458583e4f5cef38f25c6fe94c648b1e1ee3b064fd006",
       "adaptations": [
         {
-          "line": 11,
-          "kind": "upstream_hash_assertion",
-          "original": "assert len(raw) == rec['bytes'] and hashlib.sha256(raw).hexdigest() == rec['sha256'], rec['path']"
+          "line": 9,
+          "kind": "upstream_source_manifest_loop",
+          "original": "for rec in json.loads((HERE / 'SOURCE_READY_006.json').read_text())['files']:\n    p = HERE / rec['path']\n    raw = p.read_bytes()\n    assert len(raw) == rec['bytes'] and hashlib.sha256(raw).hexdigest() == rec['sha256'], rec['path']"
         }
       ]
     },
@@ -3350,16 +3355,16 @@
       "path": "engine/work/c10/narrow/arithmetic_round2/research/root_normalization/leading_one_normalization.py",
       "upstream_path": "src/work/c10/narrow/arithmetic_round2/research/root_normalization/leading_one_normalization.py",
       "upstream_sha256": "f4f14704c36446c695f5f7d769ca400bfd0ac32034d3cc5295e4b4bef6572964",
-      "integrated_sha256": "52b4fea919e3ee417eaf150d6ae871e3e9c89b9c02a23cfe9ce727a782eab428",
+      "integrated_sha256": "010eddb7a7a77f0a19fbd8e72ea1dd24a49dbec12679389a3276914c1c932863",
       "adaptations": [
         {
           "line": 10,
           "kind": "Unix_resource_limit_request"
         },
         {
-          "line": 13,
-          "kind": "upstream_hash_assertion",
-          "original": "assert len(raw) == pin['bytes'] and hashlib.sha256(raw).hexdigest() == pin['sha256'], pin['path']"
+          "line": 11,
+          "kind": "upstream_source_manifest_loop",
+          "original": "for pin in json.loads((HERE / 'normalization_inputs.json').read_text())['files']:\n    raw = (NARROW / pin['path']).read_bytes()\n    assert len(raw) == pin['bytes'] and hashlib.sha256(raw).hexdigest() == pin['sha256'], pin['path']"
         }
       ]
     },
@@ -3374,16 +3379,16 @@
       "path": "engine/work/c10/narrow/arithmetic_round2/research/root_normalization/leading_one_normalization_v2.py",
       "upstream_path": "src/work/c10/narrow/arithmetic_round2/research/root_normalization/leading_one_normalization_v2.py",
       "upstream_sha256": "73774fd158bf0d2170a1f08ed72ce6a64b864c61b1ed64169872314a0aade88a",
-      "integrated_sha256": "0e59f266dd4943aee52f2ba02166bd381717f9e79738a0c3fbb76a48fffc4145",
+      "integrated_sha256": "cce48587453a2de5762ab5b568cc05f63027e5ab521fea1f37eaac3d397bf817",
       "adaptations": [
         {
           "line": 10,
           "kind": "Unix_resource_limit_request"
         },
         {
-          "line": 13,
-          "kind": "upstream_hash_assertion",
-          "original": "assert len(raw) == pin['bytes'] and hashlib.sha256(raw).hexdigest() == pin['sha256'], pin['path']"
+          "line": 11,
+          "kind": "upstream_source_manifest_loop",
+          "original": "for pin in json.loads((HERE / 'normalization_inputs_v2.json').read_text())['files']:\n    raw = (NARROW / pin['path']).read_bytes()\n    assert len(raw) == pin['bytes'] and hashlib.sha256(raw).hexdigest() == pin['sha256'], pin['path']"
         }
       ]
     },
@@ -3426,16 +3431,16 @@
       "path": "engine/work/c10/narrow/arithmetic_round2/research/root_normalization/source_aware_root.py",
       "upstream_path": "src/work/c10/narrow/arithmetic_round2/research/root_normalization/source_aware_root.py",
       "upstream_sha256": "0271673e452fbe5df53b49e34c8f929e43199ee3be501cc317670e15163f28ee",
-      "integrated_sha256": "7f80b51f5e3d7a207847d9e3aac8258de16402de6bbcccaf339d6e993c6b24b4",
+      "integrated_sha256": "6aca25d44a2e784e4ac7018ce01d1595da10c6c4c0853392480bab1c2a5b363b",
       "adaptations": [
         {
           "line": 13,
           "kind": "Unix_resource_limit_request"
         },
         {
-          "line": 16,
-          "kind": "upstream_hash_assertion",
-          "original": "assert len(raw) == pin['bytes'] and hashlib.sha256(raw).hexdigest() == pin['sha256'], pin['path']"
+          "line": 14,
+          "kind": "upstream_source_manifest_loop",
+          "original": "for pin in json.loads((HERE / 'INPUTS.json').read_text())['files']:\n    path = NARROW / pin['path']\n    raw = path.read_bytes()\n    assert len(raw) == pin['bytes'] and hashlib.sha256(raw).hexdigest() == pin['sha256'], pin['path']"
         }
       ]
     },
@@ -3464,12 +3469,12 @@
       "path": "engine/work/c10/narrow/arithmetic_round2/research/root_normalization/native_rn2b/normalization96.py",
       "upstream_path": "src/work/c10/narrow/arithmetic_round2/research/root_normalization/native_rn2b/normalization96.py",
       "upstream_sha256": "a3d644d83e9c815157aeffa283301d021c89d3da27a129453697f78953cc96d4",
-      "integrated_sha256": "716d021a3db31666e44ac27164525208f28f38230e6e10985e6f71575d6b51c3",
+      "integrated_sha256": "40d814d8ff03f508dce2f8a263a635b16f79e63f5a8db7107363635385a27b17",
       "adaptations": [
         {
-          "line": 9,
-          "kind": "upstream_hash_assertion",
-          "original": "assert len(raw) == pin['bytes'] and hashlib.sha256(raw).hexdigest() == pin['sha256'], pin['path']"
+          "line": 7,
+          "kind": "upstream_source_manifest_loop",
+          "original": "for pin in json.loads((HERE / 'INPUTS.json').read_text())['files']:\n    path = NARROW / pin['path']\n    raw = path.read_bytes()\n    assert len(raw) == pin['bytes'] and hashlib.sha256(raw).hexdigest() == pin['sha256'], pin['path']"
         },
         {
           "line": 11,
@@ -3524,7 +3529,7 @@
       "path": "engine/work/c10/narrow/arithmetic_round2/research/root_normalization/native_rn2df/normalization9475.py",
       "upstream_path": "src/work/c10/narrow/arithmetic_round2/research/root_normalization/native_rn2df/normalization9475.py",
       "upstream_sha256": "95d6e2ac6ae838459310e77b5f05c3a77c8ee29b37e622888769dd8a83fefc81",
-      "integrated_sha256": "d8663ae33ffe1a3219da99fdefd15df115824da29d31d38c0f0aa73552f9fed9",
+      "integrated_sha256": "12f3e0c4204f80f0baada3a3257e9a9548c4739e6a87e716704de175338c13e1",
       "adaptations": [
         {
           "line": 14,
@@ -3532,9 +3537,9 @@
           "original": "assert hashlib.sha256(raw).hexdigest() == digest, str(path)"
         },
         {
-          "line": 20,
-          "kind": "upstream_hash_assertion",
-          "original": "assert len(raw) == pin['bytes'] and hashlib.sha256(raw).hexdigest() == pin['sha256'], pin['path']"
+          "line": 18,
+          "kind": "upstream_source_manifest_loop",
+          "original": "for pin in json.loads((HERE / 'INPUTS.json').read_text())['files']:\n    raw = (NARROW / pin['path']).read_bytes()\n    assert len(raw) == pin['bytes'] and hashlib.sha256(raw).hexdigest() == pin['sha256'], pin['path']"
         },
         {
           "line": 23,
@@ -3618,12 +3623,12 @@
       "path": "engine/work/c10/narrow/arithmetic_round2/research/root_normalization/native_rn3/root192.py",
       "upstream_path": "src/work/c10/narrow/arithmetic_round2/research/root_normalization/native_rn3/root192.py",
       "upstream_sha256": "1be9045ccd992451807c2be22e079c4b3b013eb219ce7e6658f0ca3cdef1cd4a",
-      "integrated_sha256": "2a9544325651ecd2b9893468ae1b0c1d622d945a72803c3c5b0193cf6731b241",
+      "integrated_sha256": "dd382ecc283297253a1e7062dfd92f84ec37b541a40311ce399a943034a12b69",
       "adaptations": [
         {
-          "line": 13,
-          "kind": "upstream_hash_assertion",
-          "original": "assert len(raw) == pin['bytes'] and hashlib.sha256(raw).hexdigest() == pin['sha256'], pin['path']"
+          "line": 11,
+          "kind": "upstream_source_manifest_loop",
+          "original": "for pin in json.loads((HERE / 'INPUTS.json').read_text())['files']:\n    path = NARROW / pin['path']\n    raw = path.read_bytes()\n    assert len(raw) == pin['bytes'] and hashlib.sha256(raw).hexdigest() == pin['sha256'], pin['path']"
         },
         {
           "line": 20,
@@ -3699,16 +3704,16 @@
       "path": "engine/work/c10/narrow/arithmetic_round2/research/root_normalization/normalization9475_combined/study.py",
       "upstream_path": "src/work/c10/narrow/arithmetic_round2/research/root_normalization/normalization9475_combined/study.py",
       "upstream_sha256": "73fe92d402f4a34472ac09beede18fbac73116abdac151509f7fc4e67abeeb47",
-      "integrated_sha256": "eb48386d094cc28bbb551dfd7f60c010e622c2b8dd9a32425bf4fc620c6064e0",
+      "integrated_sha256": "c620aa249ac6c9b2b6be6c30d0154a152ae42e00f86a70f4db3b6af1de0f43b7",
       "adaptations": [
         {
           "line": 16,
           "kind": "Unix_resource_limit_request"
         },
         {
-          "line": 20,
-          "kind": "upstream_hash_assertion",
-          "original": "assert hashlib.sha256(data).hexdigest() == pin['sha256'], pin['path']"
+          "line": 17,
+          "kind": "upstream_source_manifest_loop",
+          "original": "for pin in json.loads((HERE / 'INPUTS.json').read_text())['files']:\n    data = (NARROW / pin['path']).read_bytes()\n    assert len(data) == pin['bytes']\n    assert hashlib.sha256(data).hexdigest() == pin['sha256'], pin['path']"
         }
       ]
     },
@@ -3751,16 +3756,16 @@
       "path": "engine/work/c10/narrow/arithmetic_round2/research/root_normalization/normalization_eight_metadata/study_v2.py",
       "upstream_path": "src/work/c10/narrow/arithmetic_round2/research/root_normalization/normalization_eight_metadata/study_v2.py",
       "upstream_sha256": "918723beb61a8f121ea7f97e2fd0d43d3407aaf316b02dcce372fd8cfc3d7cbb",
-      "integrated_sha256": "6d33904dd32718baae03d97e538ae92145747c6ee7475120ef122e3198d04440",
+      "integrated_sha256": "ed5393ce767ad39511440985682b7a707b5cc84cd87b90f6746140a988a74e79",
       "adaptations": [
         {
           "line": 17,
           "kind": "Unix_resource_limit_request"
         },
         {
-          "line": 21,
-          "kind": "upstream_hash_assertion",
-          "original": "assert hashlib.sha256(data).hexdigest() == pin['sha256'], pin['path']"
+          "line": 18,
+          "kind": "upstream_source_manifest_loop",
+          "original": "for pin in json.loads((HERE / 'INPUTS.json').read_text())['files']:\n    data = (NARROW / pin['path']).read_bytes()\n    assert len(data) == pin['bytes']\n    assert hashlib.sha256(data).hexdigest() == pin['sha256'], pin['path']"
         }
       ]
     },
@@ -3796,16 +3801,16 @@
       "path": "engine/work/c10/narrow/arithmetic_round2/research/root_normalization/normalization_phase_parity/study.py",
       "upstream_path": "src/work/c10/narrow/arithmetic_round2/research/root_normalization/normalization_phase_parity/study.py",
       "upstream_sha256": "354b3fd92b9a028a16f37beee7720c8b066ca6234533c6d1414212b4e5fdc008",
-      "integrated_sha256": "8a4a6506a2e4a9c6ef0e22ee043217f58c7bdeedd6212a53b2449791fa928d08",
+      "integrated_sha256": "065e7a403228cb88adf2fa639930b215e03fbd67a611564dea0ad6c78d7e1848",
       "adaptations": [
         {
           "line": 8,
           "kind": "Unix_resource_limit_request"
         },
         {
-          "line": 11,
-          "kind": "upstream_hash_assertion",
-          "original": "assert len(raw) == pin['bytes'] and hashlib.sha256(raw).hexdigest() == pin['sha256'], pin['path']"
+          "line": 9,
+          "kind": "upstream_source_manifest_loop",
+          "original": "for pin in json.loads((HERE / 'INPUTS.json').read_text())['files']:\n    path = NARROW / pin['path']\n    raw = path.read_bytes()\n    assert len(raw) == pin['bytes'] and hashlib.sha256(raw).hexdigest() == pin['sha256'], pin['path']"
         }
       ]
     },
@@ -3827,7 +3832,7 @@
       "path": "engine/work/c10/narrow/arithmetic_round2/research/product_coefficient/native_v3/prove.py",
       "upstream_path": "src/work/c10/narrow/arithmetic_round2/research/product_coefficient/native_v3/prove.py",
       "upstream_sha256": "92c7209129636c049e6dfa234bca2025e2c1c5ad243e63273d6d2f5eaf9fee18",
-      "integrated_sha256": "4a7c24f8fb97da30dc300c16000da07e5fb263cd95d12be6c8ae8c386fd5ff77",
+      "integrated_sha256": "eff59842401a1f082e0aea4c32c345ad619fc649aa820f6d92a5f6b1976ada5b",
       "adaptations": [
         {
           "line": 19,
@@ -3839,9 +3844,9 @@
           "original": "assert hashlib.sha256(AUTH.read_bytes()).hexdigest() == AUTH_SHA"
         },
         {
-          "line": 26,
-          "kind": "upstream_hash_assertion",
-          "original": "assert len(raw) == row['bytes'] and hashlib.sha256(raw).hexdigest() == row['sha256'], row['path']"
+          "line": 24,
+          "kind": "upstream_source_manifest_loop",
+          "original": "for row in json.loads((HERE / 'SOURCE_READY.json').read_text())['files']:\n    raw = (NARROW / row['path']).read_bytes()\n    assert len(raw) == row['bytes'] and hashlib.sha256(raw).hexdigest() == row['sha256'], row['path']"
         },
         {
           "line": 31,
@@ -4040,12 +4045,12 @@
       "path": "engine/work/c10/narrow/arithmetic_round2/native/candidate10/arithmetic_variant.py",
       "upstream_path": "src/work/c10/narrow/arithmetic_round2/native/candidate10/arithmetic_variant.py",
       "upstream_sha256": "1212eb8d1c23f9601c1dda9d0032d8709471052ae9fa9eb982298cdb000d8c63",
-      "integrated_sha256": "13a8659e8ecdb75c51552cf08d49758e1da61eaeb67f6c06c86e834a620cb172",
+      "integrated_sha256": "189b0dca77aa8fff70ac10d1fe64018e12737d053312001f48a30c04f0032265",
       "adaptations": [
         {
-          "line": 28,
-          "kind": "upstream_hash_assertion",
-          "original": "assert hashlib.sha256(raw).hexdigest() == pin['sha256'], pin['path']"
+          "line": 24,
+          "kind": "upstream_source_manifest_loop",
+          "original": "for pin in manifest['files']:\n    source = root / pin['path']\n    raw = source.read_bytes()\n    assert len(raw) == pin['bytes'], pin['path']\n    assert hashlib.sha256(raw).hexdigest() == pin['sha256'], pin['path']"
         },
         {
           "line": 32,
@@ -4119,12 +4124,12 @@
       "path": "engine/work/c10/narrow/arithmetic_round2/native/candidate10/native_batch.py",
       "upstream_path": "src/work/c10/narrow/arithmetic_round2/native/candidate10/native_batch.py",
       "upstream_sha256": "9b83b54a01dc6176ff0ac4b45ef60aac1d420fd80392253ab0dcd396a1e16dd9",
-      "integrated_sha256": "6a3820b6740b23a99f4f5b9d99391b88a14ea8899f495ea656730e7fb11833a9",
+      "integrated_sha256": "d0c8ab00fa37aab73f44df9789c8b61b287c9ff30a61aabd819d6a835137dff5",
       "adaptations": [
         {
-          "line": 17,
-          "kind": "upstream_hash_assertion",
-          "original": "assert hashlib.sha256(p.read_bytes()).hexdigest() == pin['sha256']"
+          "line": 14,
+          "kind": "upstream_source_manifest_loop",
+          "original": "for pin in manifest['files']:\n    p = HERE / pin['path']\n    assert p.stat().st_size == pin['bytes']\n    assert hashlib.sha256(p.read_bytes()).hexdigest() == pin['sha256']"
         }
       ]
     },

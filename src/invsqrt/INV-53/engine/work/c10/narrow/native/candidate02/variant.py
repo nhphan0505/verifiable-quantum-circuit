@@ -11,9 +11,7 @@ HERE = Path(__file__).resolve().parent
 BASE = HERE.parent / 'candidate01'
 NARROW = HERE.parents[1]
 INPUTS = json.loads((HERE / 'INPUTS.json').read_text())
-for pin in INPUTS['files']:
-    raw = (NARROW / pin['path']).read_bytes()
-    pass
+pass
 sys.path.insert(0, str(BASE))
 import common
 import divider as baseline_divider

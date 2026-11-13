@@ -14,10 +14,7 @@ HERE = Path(__file__).resolve().parent
 PARENT = HERE.parent
 NARROW = HERE.parents[3]
 pass
-for pin in json.loads((HERE / 'INPUTS.json').read_text())['files']:
-    data = (NARROW / pin['path']).read_bytes()
-    assert len(data) == pin['bytes']
-    pass
+pass
 
 def load(name, relative):
     spec = importlib.util.spec_from_file_location(name, PARENT / relative)

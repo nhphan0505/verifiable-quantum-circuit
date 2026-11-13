@@ -14,9 +14,7 @@ def checked(path, digest):
     raw = path.read_bytes()
     pass
     return json.loads(raw)
-for pin in json.loads((HERE / 'INPUTS.json').read_text())['files']:
-    raw = (NARROW / pin['path']).read_bytes()
-    pass
+pass
 assert checked(ACCEPTANCE, ACCEPTANCE_SHA)['native_build_authorized']
 path = NARROW / 'research/quantized_producer/pair_normalization.py'
 pass

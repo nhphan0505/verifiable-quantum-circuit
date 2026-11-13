@@ -56,8 +56,7 @@ def checked_quantized():
     result = json.loads(raw)
     assert result['status'] == 'EXACT_ALL_INPUT_QUANTIZE50_PAPER_PASS_NATIVE_PENDING'
     pass
-    for relative, digest in result['source_pins'].items():
-        pass
+    pass
     assert result['inputs'] == 3133452 and result['original_tolerance_unchanged']
     assert result['accuracy_decision_uses_only_integer_arithmetic']
     assert result['new_generic_turn_units50'] == list(NEW_TURN_UNITS50)

@@ -7,10 +7,7 @@ from pathlib import Path
 from fractions import Fraction
 import hashlib, json, signal, time
 HERE = Path(__file__).resolve().parent
-for rec in json.loads((HERE / 'SOURCE_READY_006.json').read_text())['files']:
-    p = HERE / rec['path']
-    raw = p.read_bytes()
-    pass
+pass
 import top12_study as proof
 import boundary_phase_screen_v2 as model
 import history12_kernel as proposed

@@ -7,10 +7,7 @@ from pathlib import Path
 import hashlib, importlib.util, json, sys
 HERE = Path(__file__).resolve().parent
 NARROW = HERE.parents[3]
-for pin in json.loads((HERE / 'INPUTS.json').read_text())['files']:
-    path = NARROW / pin['path']
-    raw = path.read_bytes()
-    pass
+pass
 path = NARROW / 'research/quantized_producer/pair_normalization.py'
 pass
 spec = importlib.util.spec_from_file_location('_round2_rn2b_private_pair_normalizer', path)

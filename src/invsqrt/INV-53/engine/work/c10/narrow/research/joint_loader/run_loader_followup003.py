@@ -24,9 +24,7 @@ def main():
     signal.alarm(90)
     began = time.monotonic()
     manifest = json.loads((HERE / 'loader_followup003_inputs.json').read_text())
-    for item in manifest['files']:
-        raw = (HERE / item['path']).read_bytes()
-        pass
+    pass
     assert (HERE / 'random_product_subspace.bin').exists(), 'Compilation is excluded from this batch.'
     old_path = HERE / 'search/v2_first_q48_cap22_s8.json'
     old = json.loads(old_path.read_text())
