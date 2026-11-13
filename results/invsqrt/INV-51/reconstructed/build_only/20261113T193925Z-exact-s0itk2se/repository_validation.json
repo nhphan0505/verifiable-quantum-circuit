@@ -1,0 +1,11 @@
+{
+  "checker_errors": 0,
+  "scope_branch": "exp/INV-51-integrated-generator",
+  "scope_base": "origin/main",
+  "unittest_count": 21,
+  "unittest_status": "OK",
+  "unittest_seconds": 155.184,
+  "grading_fixture_note": "Fixture PASS/TIMEOUT output is not a new grading result for INV-51.",
+  "exact_compile": "PASS",
+  "old_results_unchanged": true
+}

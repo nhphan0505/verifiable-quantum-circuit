@@ -1,0 +1,20 @@
+{
+  "status": "RECONSTRUCTED_EXACT",
+  "source_commit": "4a8c32b544079ce94c9b3b3aec2befff4022eb4e",
+  "input_sha256": "321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177",
+  "output_sha256": "321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177",
+  "input_bytes": 291626,
+  "output_bytes": 291626,
+  "bytes_equal": true,
+  "comparison": "Independent streaming byte comparison with original, blocks of 65536 bytes",
+  "clean_worktree": true,
+  "source_bundle_present": false,
+  "linux_engine_present": false,
+  "official_verifier_run": false,
+  "audit_open_events": 314,
+  "unexpected_source_reads": [],
+  "notes": [
+    "Audit includes attempted cache paths.",
+    "Run uses integrated source in INV-51; historical grading records are unchanged."
+  ]
+}

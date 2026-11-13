@@ -5,7 +5,7 @@
   "input_bytes": 291626,
   "source_attribution": "Syed Asad Ali; user-supplied invsqrt_source, Apache-2.0",
   "source_manifest_sha256": "9164edf966ca34759f2b5f57e02ccd1a89a34f04efa6721300c040423de2c519",
-  "components_manifest": "data/SHA256SUMS",
+  "components_manifest": "engine_manifest.json",
   "environment": {
     "python": "3.13",
     "platform": "Windows",
@@ -18,9 +18,8 @@
     "https://www.kaggle.com/datasets/syed3000/vqcc-own-circuit-portfolio"
   ],
   "dependencies": {
-    "source_bundle": "artifacts/invsqrt/INV-51/dependencies/invsqrt_source",
-    "obtain": "Download invsqrt_source_zip from the referenced Kaggle dataset, rename to invsqrt_source.zip without recompression, verify archive SHA-256 and extract into artifacts/invsqrt/INV-51/dependencies/. See DEPENDENCIES.md.",
-    "host_files": "Repository DATA.md; original kickmix.so used for source pin verification only, pip Windows Kickmix executes.",
+    "obtain": "All runtime generator source/data committed in engine/. Only Windows .venv and pinned requirements required; upstream archive fields record lineage only.",
+    "host_files": "None required by integrated compiler; official verifier remains needed only for grading.",
     "dataset_url": "https://www.kaggle.com/datasets/syed3000/vqcc-own-circuit-portfolio",
     "dataset_version": 12,
     "archive_name": "invsqrt_source_zip",
@@ -29,13 +28,13 @@
     "archive_download_url": "https://www.kaggle.com/api/v1/datasets/download/syed3000/vqcc-own-circuit-portfolio/invsqrt_source_zip?datasetVersionNumber=12",
     "public_access_evidence": "evidence/public_source.json"
   },
-  "reconstruction_level": "AUTHOR_SOURCE_REBUILD_EXACT",
+  "reconstruction_level": "INTEGRATED_GENERATOR_EXACT",
   "limitations": [
-    "No official verifier or upstream full-domain final proof is run.",
-    "Windows resource API requests logged but memory limits not enforced.",
-    "External author source bundle must be supplied; not distributed in Git.",
-    "Historical score is not remeasured."
+    "Historical archive integrity checks replaced by integrated engine manifest; adaptations recorded in upstream_changes.json.",
+    "No new grading run; bytes/hash identical to historical INV-51 full-PASS artifact.",
+    "Windows Unix memory limits are not enforced; stage timeouts are enforced."
   ],
-  "build_source_commit": "48729436b421e7320d86e48cc0e451be0d84260e",
-  "reconstruction_check": "results/invsqrt/INV-51/reconstructed/build_only/20261113T160603Z-exact-8fe62qjo/reconstruction_check.json"
+  "build_source_commit": "4a8c32b544079ce94c9b3b3aec2befff4022eb4e",
+  "reconstruction_check": "results/invsqrt/INV-51/reconstructed/build_only/20261113T193925Z-exact-s0itk2se/reconstruction_check.json",
+  "upstream_components_manifest": "data/SHA256SUMS"
 }
