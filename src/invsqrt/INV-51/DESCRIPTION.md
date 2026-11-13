@@ -4,7 +4,7 @@ Loại: Tái dựng từ submission có source tác giả.
 
 ## File gốc
 
-Kế thừa generator Fusion của Syed Asad Ali, Apache-2.0, trong gói `invsqrt_source` người dùng cung cấp. Giữ attribution tại [NOTICE](data/NOTICE.txt), [LICENSE](data/LICENSE.txt) và manifest `data/SHA256SUMS`. Gói chứa generator nền `src/work/c10`, 13 patch và các certificate/bảng dùng khi dựng. Chưa có URL phát hành công khai đã xác minh; cách cấp dependency nằm trong [DEPENDENCIES.md](DEPENDENCIES.md).
+Kế thừa generator Fusion của Syed Asad Ali, Apache-2.0, trong gói `invsqrt_source` người dùng cung cấp. Giữ attribution tại [NOTICE](data/NOTICE.txt), [LICENSE](data/LICENSE.txt) và manifest `data/SHA256SUMS`. Gói chứa generator nền `src/work/c10`, 13 patch và các certificate/bảng dùng khi dựng. Nguồn discussion do người dùng xác nhận đã lấy source: [Kaggle discussion #758815](https://www.kaggle.com/competitions/google-verifiable-quantum-circuit-compilation/discussion/758815). Link này ghi nhận xuất xứ do người dùng cung cấp; phiên bản source thực tế được xác định bằng manifest/hash ở trên. Cách cấp dependency nằm trong [DEPENDENCIES.md](DEPENDENCIES.md).
 
 Submission đối chứng là `invsqrt.kmb`, 291626 byte, SHA-256 `321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177`. Source tác giả khai báo đúng hash này. Đây là phiên bản tốt nhất theo chi phí báo cáo trong các ảnh người dùng cung cấp; đã có phép chấm dev local trong hướng này, còn điểm full lịch sử chưa được xác nhận lại.
 
