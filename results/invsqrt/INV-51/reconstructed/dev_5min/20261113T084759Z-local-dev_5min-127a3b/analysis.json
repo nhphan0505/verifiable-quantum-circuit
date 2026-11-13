@@ -1,0 +1,24 @@
+{
+  "status": "PASS_REVIEWED_DEV_ONLY",
+  "run_id": "20261113T084759Z-local-dev_5min-127a3b",
+  "source_commit": "bfe070108c6dd02649c6ba4ab3400b2f0ed50249",
+  "artifact_sha256": "321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177",
+  "build_run": "results/invsqrt/INV-51/reconstructed/build_only/20261113T083955Z-exact-wopk8bm7",
+  "verification_level": "dev_5min",
+  "input_count": 4096,
+  "verified_shots": 8192,
+  "profile_version": 1,
+  "seed": 20261106,
+  "raw_stdout_matches_verifier": true,
+  "baseline_run": "results/invsqrt/INV-BASELINE/baseline/dev_5min/20261107T180810Z-local-dev_5min-eb9c85",
+  "baseline_comparable": true,
+  "comparison_checks": [
+    "Python, packages, verifier hashes, dev harness hash, profile version, seed, sample/repeat counts, input sample hash match"
+  ],
+  "improvement_over_baseline": 25.967229223811845,
+  "limitations": [
+    "4096 inputs and 8192 shots only; no full-domain PASS",
+    "Fixed dev sample was not an independent holdout",
+    "No independent GitHub reviewer approval obtained"
+  ]
+}

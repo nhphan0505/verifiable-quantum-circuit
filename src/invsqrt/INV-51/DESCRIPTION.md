@@ -6,7 +6,7 @@ Loại: Tái dựng từ submission có source tác giả.
 
 Kế thừa generator Fusion của Syed Asad Ali, Apache-2.0, trong gói `invsqrt_source` người dùng cung cấp. Giữ attribution tại [NOTICE](data/NOTICE.txt), [LICENSE](data/LICENSE.txt) và manifest `data/SHA256SUMS`. Gói chứa generator nền `src/work/c10`, 13 patch và các certificate/bảng dùng khi dựng. Chưa có URL phát hành công khai đã xác minh; cách cấp dependency nằm trong [DEPENDENCIES.md](DEPENDENCIES.md).
 
-Submission đối chứng là `invsqrt.kmb`, 291626 byte, SHA-256 `321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177`. Source tác giả khai báo đúng hash này. Đây là phiên bản tốt nhất theo chi phí báo cáo trong các ảnh người dùng cung cấp; chưa có phép chấm độc lập trong hướng này.
+Submission đối chứng là `invsqrt.kmb`, 291626 byte, SHA-256 `321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177`. Source tác giả khai báo đúng hash này. Đây là phiên bản tốt nhất theo chi phí báo cáo trong các ảnh người dùng cung cấp; đã có phép chấm dev local trong hướng này, còn điểm full lịch sử chưa được xác nhận lại.
 
 ## Mục tiêu và phạm vi
 
@@ -73,12 +73,23 @@ Chạy lệnh trong [DEPENDENCIES.md](DEPENDENCIES.md). Build dùng bản nguồ
 
 ## Kết luận và phiên bản tái lập
 
-Tiếp nhận và KMB/KMX roundtrip đã đạt, xem [roundtrip_check.json](evidence/roundtrip_check.json). Chưa có run dev/full. Build độc lập bằng .venv Windows đã đạt RECONSTRUCTED_EXACT: 291626 bytes trùng hoàn toàn với submission. Đã so từng block bytes và SHA-256 độc lập với builder. Exact chứng minh tái lập, không thay cho kết quả chấm hoặc full proof.
+Tiếp nhận và KMB/KMX roundtrip đã đạt, xem [roundtrip_check.json](evidence/roundtrip_check.json). Đã có dev_5min PASS trên 4096 input / 8192 shots; chưa có full. Build độc lập bằng .venv Windows đã đạt RECONSTRUCTED_EXACT: 291626 bytes trùng hoàn toàn với submission. Đã so từng block bytes và SHA-256 độc lập với builder. Exact chứng minh tái lập, không thay cho kết quả chấm hoặc full proof.
 
 | Mốc | Config | Commit nguồn | Run / provenance |
 | --- | --- | --- | --- |
 | Build exact | [reconstructed](configs/reconstructed.json) | `bfe070108c6dd02649c6ba4ab3400b2f0ed50249` | [provenance](../../../results/invsqrt/INV-51/reconstructed/build_only/20261113T083955Z-exact-wopk8bm7/provenance.json), [đối chiếu](../../../results/invsqrt/INV-51/reconstructed/build_only/20261113T083955Z-exact-wopk8bm7/reconstruction_check.json) |
-| Dev | Chưa chấm | Chưa có | Chưa có |
+| Dev | [reconstructed](configs/reconstructed.json) | `bfe070108c6dd02649c6ba4ab3400b2f0ed50249` | [run](../../../results/invsqrt/INV-51/reconstructed/dev_5min/20261113T084759Z-local-dev_5min-127a3b/verifier.json), [provenance](../../../results/invsqrt/INV-51/reconstructed/dev_5min/20261113T084759Z-local-dev_5min-127a3b/provenance.json) |
 | Full | Chưa chấm | Chưa có | Chưa có |
 
 Mã triển khai: [solution.py](solution.py). Cấu hình: [configs](configs/). Manifest: [reconstruction.json](reconstruction.json). Điểm và các run: [SCORES.md](../SCORES.md).
+
+
+## Phân tích kết quả dev và quyết định
+
+Run dev_5min ngày 13/11/2026 đạt PASS trên 4096 input, mỗi input 2 shots (8192 shots), seed 20261106, profile v1. Hash artifact khớp bản dựng exact và provenance nối đúng source commit, không lấy HEAD hiện tại làm nguồn dựng.
+
+Mạch dùng 46 qubit, trung bình 1511.5113525390625 Toffoli-like, 1 T và 33 generic rotations trên các shots được chấm. Tỷ số sai số/dung sai lớn nhất là 0.7422629274647067 tại x=248, dưới ngưỡng 1. Sai số ở các input chưa lấy mẫu và các nhánh đo khác chưa được run này chứng minh.
+
+So sánh với baseline local dev cùng Python, package, verifier/hash harness, profile, seed và hash tập input là hợp lệ; hệ số cải thiện được ghi trong SCORES. Score dev khác con số lịch sử trong ảnh vì profile lấy mẫu và ngân sách tổng hợp rotation phụ thuộc sai số quan sát được; không coi dev score là xác nhận điểm full của tác giả.
+
+Hypothesis tái lập đúng bytes đã được ủng hộ bởi build exact. Run dev bổ sung bằng chứng chức năng trên mẫu đã chấm; chưa chứng minh toàn miền hay mọi transcript HMR. Dừng thay đổi implementation ở mốc exact này. Bước tiếp theo là thành viên chấm full hoặc profile bổ sung độc lập, rồi reviewer khác tài khoản kiểm tra trước merge. Không tối ưu thêm trong hướng tái lập hiện tại.
