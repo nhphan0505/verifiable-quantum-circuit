@@ -8,7 +8,7 @@ Loại: Tái dựng từ submission.
 
 Kế thừa generator Fusion của Syed Asad Ali, Apache-2.0, trong gói `invsqrt_source` người dùng cung cấp. Giữ attribution tại [NOTICE](data/NOTICE.txt), [LICENSE](data/LICENSE.txt) và manifest `data/SHA256SUMS`. Gói chứa generator nền `src/work/c10`, 13 patch và các certificate/bảng dùng khi dựng. Nguồn discussion do người dùng xác nhận đã lấy source: [Kaggle discussion #758815](https://www.kaggle.com/competitions/google-verifiable-quantum-circuit-compilation/discussion/758815). Archive nguồn tải từ [dataset VQCC Own-Circuit Portfolio](https://www.kaggle.com/datasets/syed3000/vqcc-own-circuit-portfolio), file `invsqrt_source_zip`; đổi tên thành `.zip` để giải nén. SHA-256 archive là `7d9801ae20e942dba2211a656bba6014a0a16d57da534c0b60328d1c5d9d8254` (2563106 bytes), đã kiểm tra manifest và toàn bộ 560 file bên trong. Đã tải lại [archive version 12 qua API công khai](https://www.kaggle.com/api/v1/datasets/download/syed3000/vqcc-own-circuit-portfolio/invsqrt_source_zip?datasetVersionNumber=12) không đăng nhập, HTTP 200 và hash trùng; dataset listing trả isPrivate=false, giấy phép Apache 2.0. Xem [bằng chứng nguồn](evidence/public_source.json). Cách cấp dependency nằm trong [DEPENDENCIES.md](DEPENDENCIES.md).
 
-Submission đối chứng là `invsqrt.kmb`, 291626 byte, SHA-256 `321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177`. Source tác giả khai báo đúng hash này. Đây là phiên bản tốt nhất theo chi phí báo cáo trong các ảnh người dùng cung cấp; đã có phép chấm dev local trong hướng này, còn điểm full lịch sử chưa được xác nhận lại.
+Submission đối chứng là `invsqrt.kmb`, 291626 byte, SHA-256 `321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177`. Source tác giả khai báo đúng hash này. Đây là phiên bản tốt nhất theo chi phí báo cáo trong các ảnh người dùng cung cấp; đã có phép chấm dev local trong hướng này, đã xác nhận full local trên đúng hash artifact (một default salt).
 
 ## Mục tiêu và phạm vi
 
@@ -98,14 +98,14 @@ Chạy lệnh trong [DEPENDENCIES.md](DEPENDENCIES.md). Build dùng bản nguồ
 
 ## Kết luận và phiên bản tái lập
 
-Tiếp nhận và KMB/KMX roundtrip đã đạt, xem [roundtrip_check.json](evidence/roundtrip_check.json). Đã có dev_5min PASS trên 4096 input / 8192 shots; chưa có full. Build độc lập bằng .venv Windows đã đạt RECONSTRUCTED_EXACT: 291626 bytes trùng hoàn toàn với submission. Đã so từng block bytes và SHA-256 độc lập với builder. Exact chứng minh tái lập, không thay cho kết quả chấm hoặc full proof.
+Tiếp nhận và KMB/KMX roundtrip đã đạt, xem [roundtrip_check.json](evidence/roundtrip_check.json). Đã có dev_5min PASS trên 4096 input / 8192 shots và full PASS trên 200540928 shots. Build độc lập bằng .venv Windows đã đạt RECONSTRUCTED_EXACT: 291626 bytes trùng hoàn toàn với submission. Đã so từng block bytes và SHA-256 độc lập với builder. Exact chứng minh tái lập, không thay cho kết quả chấm hoặc full proof.
 
 | Mốc | Config | Commit nguồn | Run / provenance |
 | --- | --- | --- | --- |
 | Build exact | [reconstructed](configs/reconstructed.json) | `bfe070108c6dd02649c6ba4ab3400b2f0ed50249` | [provenance](../../../results/invsqrt/INV-51/reconstructed/build_only/20261113T083955Z-exact-wopk8bm7/provenance.json), [đối chiếu](../../../results/invsqrt/INV-51/reconstructed/build_only/20261113T083955Z-exact-wopk8bm7/reconstruction_check.json) |
 | Build sau review | [reconstructed](configs/reconstructed.json) | `48729436b421e7320d86e48cc0e451be0d84260e` | [provenance](../../../results/invsqrt/INV-51/reconstructed/build_only/20261113T160603Z-exact-8fe62qjo/provenance.json), [đối chiếu](../../../results/invsqrt/INV-51/reconstructed/build_only/20261113T160603Z-exact-8fe62qjo/reconstruction_check.json) |
 | Dev | [reconstructed](configs/reconstructed.json) | `bfe070108c6dd02649c6ba4ab3400b2f0ed50249` | [run](../../../results/invsqrt/INV-51/reconstructed/dev_5min/20261113T084759Z-local-dev_5min-127a3b/verifier.json), [provenance](../../../results/invsqrt/INV-51/reconstructed/dev_5min/20261113T084759Z-local-dev_5min-127a3b/provenance.json) |
-| Full | Chưa chấm | Chưa có | Chưa có |
+| Full | [reconstructed](configs/reconstructed.json) | `48729436b421e7320d86e48cc0e451be0d84260e` | [run](../../../results/invsqrt/INV-51/reconstructed/full/20261113T161038Z-local-full-c530d9/verifier.json), [provenance](../../../results/invsqrt/INV-51/reconstructed/full/20261113T161038Z-local-full-c530d9/provenance.json) |
 
 Mã triển khai: [solution.py](solution.py). Cấu hình: [configs](configs/). Manifest: [reconstruction.json](reconstruction.json). Điểm và các run: [SCORES.md](../SCORES.md).
 
@@ -118,6 +118,14 @@ Mạch dùng 46 qubit, trung bình 1511.5113525390625 Toffoli-like, 1 T và 33 g
 
 So sánh với baseline local dev cùng Python, package, verifier/hash harness, profile, seed và hash tập input là hợp lệ; hệ số cải thiện được ghi trong SCORES. Score dev khác con số lịch sử trong ảnh vì profile lấy mẫu và ngân sách tổng hợp rotation phụ thuộc sai số quan sát được; không coi dev score là xác nhận điểm full của tác giả.
 
-Hypothesis tái lập đúng bytes đã được ủng hộ bởi build exact. Run dev bổ sung bằng chứng chức năng trên mẫu đã chấm; chưa chứng minh toàn miền hay mọi transcript HMR. Dừng thay đổi implementation ở mốc exact này. Bước tiếp theo là thành viên chấm full hoặc profile bổ sung độc lập, rồi reviewer khác tài khoản kiểm tra trước merge. Không tối ưu thêm trong hướng tái lập hiện tại.
+Hypothesis tái lập đúng bytes đã được ủng hộ bởi build exact. Run dev bổ sung bằng chứng chức năng trên mẫu đã chấm; chưa chứng minh toàn miền hay mọi transcript HMR. Dừng thay đổi implementation ở mốc exact này. Full local đã được thực hiện ở mục kết quả full bên dưới; bước tiếp theo là reviewer khác tài khoản kiểm tra trước merge. Không tối ưu thêm trong hướng tái lập hiện tại.
 
-Bản build sau sửa review giữ nguyên hash/bytes của bản gốc; thay đổi ở code chỉ chuẩn hóa metadata provenance. Run dev trong bảng vẫn thuộc commit nguồn lịch sử bfe0701, không gán lại sang commit mới. Chưa chạy full; reviewer cần đánh giá lại HEAD mới trước merge.
+Bản build sau sửa review giữ nguyên hash/bytes của bản gốc; thay đổi ở code chỉ chuẩn hóa metadata provenance. Run dev trong bảng vẫn thuộc commit nguồn lịch sử bfe0701, không gán lại sang commit mới. Đã có full PASS; reviewer cần đánh giá lại HEAD mới trước merge.
+
+## Kết quả full local
+
+Thành viên chạy verifier chính thức với các tham số mặc định, chỉ đặt max-workers=1, không timeout. Run full đạt PASS trên 3133452 input × 64 shots = 200540928 shots. Trung bình 1511.5700305625394 Toffoli-like, 1 T, 33 rotations, 46 qubit. Tỷ số sai số/dung sai lớn nhất 0.973575996935943 tại x=54566, nhỏ hơn 1. Đây là kiểm tra toàn miền với số shot chính thức ở default salt, không phải liệt kê mọi transcript HMR.
+
+Hash khớp hai bản build exact. Notebook không tự gắn provenance vì có hai build cùng hash; sidecar mới nối đến build 4872943 đã tạo artifact ở root ngay trước lần chấm này, giữ nguyên review.json và mọi log gốc. Không lấy HEAD làm source commit. Baseline full hiện có chạy Colab với Python/package khác, nên không ghi hệ số cải thiện full; hệ số dev vẫn dựa trên baseline local tương thích. Score full nằm trong SCORES, không thay bằng số lịch sử trong ảnh.
+
+Đã đáp ứng khuyến nghị full của review. Dừng ở mốc tái lập này và bàn giao reviewer kiểm tra lại HEAD mới trước merge; không tự kết luận đã được approve.

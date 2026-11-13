@@ -1,0 +1,13 @@
+{
+  "track": "invsqrt",
+  "experiment_id": "INV-51",
+  "config_name": "reconstructed",
+  "mode": "full",
+  "command": [
+    "d:\\GQA\\.venv\\Scripts\\python.exe",
+    "D:\\GQA\\verifiers\\invsqrt\\verify_submission_invsqrt.py",
+    "D:\\GQA\\artifacts\\invsqrt\\INV-51\\reconstructed.kmb",
+    "--max-workers",
+    "1"
+  ]
+}

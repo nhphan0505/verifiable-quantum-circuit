@@ -1,0 +1,36 @@
+{
+  "status": "PASS_REVIEWED_FULL",
+  "source_commit": "48729436b421e7320d86e48cc0e451be0d84260e",
+  "build_run": "results/invsqrt/INV-51/reconstructed/build_only/20261113T160603Z-exact-8fe62qjo",
+  "artifact_sha256": "321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177",
+  "verified_shots": 200540928,
+  "max_x": 3133452,
+  "shots_per_x": 64,
+  "precision_bits": 24,
+  "beta": 1,
+  "configuration": "Official verifier defaults, only max-workers=1 override; no timeout",
+  "raw_stdout_matches": true,
+  "baseline_full_comparable": false,
+  "baseline_difference": {
+    "python": [
+      "3.13.18 (main, Oct 26 2026, 15:28:15) [GCC 13.3.0]",
+      "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]"
+    ],
+    "packages": [
+      {
+        "kickmix": "1.0.0",
+        "numpy": "2.4.6",
+        "scipy": "1.16.3"
+      },
+      {
+        "kickmix": "1.0.0",
+        "numpy": "2.5.4",
+        "scipy": "1.18.1"
+      }
+    ]
+  },
+  "limitations": [
+    "One default-salt official full run; not exhaustive enumeration of every possible HMR transcript.",
+    "Original review.json kept intact; provenance resolution is in the new provenance.json."
+  ]
+}
