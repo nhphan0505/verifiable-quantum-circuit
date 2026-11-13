@@ -1,6 +1,8 @@
 # [INV-51] Tái lập mạch invsqrt 46 qubit bằng source tác giả và đối chiếu KMX/KMB exact
 
-Loại: Tái dựng từ submission có source tác giả.
+Loại: Tái dựng từ submission.
+
+Áp dụng phân loại riêng tại [instructions decompiler bước 04](../../../instructions/decompiler/04_claim.md); source tác giả đã được cung cấp cho bản này.
 
 ## File gốc
 
@@ -35,6 +37,29 @@ Các patch trong `PATCH_ORDER.txt` thay callback của generator đã nạp, the
 
 Khi dùng temporary AND `t=a·b`, việc xóa bằng HMR có correction CZ(a,b) theo kết quả đo. Mọi scratch được đo/xóa phải có correction phù hợp với biểu thức thật của nó. Các trường hợp tái dựng phức tạp dùng bảng/certificate của source; hướng này giữ nguyên biểu thức, không tự suy ra một công thức thay thế có ít cổng hơn.
 
+### Luồng dữ liệu và lịch đo/tái dựng trong thân mạch
+
+Các tên dưới đây là vai trò logic trong source, không cố định vào một số qubit sau mọi bước. `v[0:12]` là root, `h[0:10]` là residual, `flags[0:4]` giữ lớp chuẩn hóa. Khi một vai trò bị đo và free, lần tái dựng có thể dùng qubit vật lý khác. Sau mỗi giai đoạn phải truyền danh sách owner hiện tại cho phần inverse.
+
+`src/patches/patch_w47_body.py::emit_body` trong bundle đã pin mô tả lịch chính; bản cuối đặt `PACK=False`, `A6_EARLY=True`, `TAIL='donor'`:
+
+| Giai đoạn | Dữ liệu và chuyển tiếp | Khoản đo/sửa pha phải xử lý |
+| --- | --- | --- |
+| Bảng đầu | Địa chỉ `v[5:]` nạp `D` và `Hlow`; dựng H3/H4, đổi root sang R-frame, chạy coefficient_forward | Đo sớm a6=`v[11]` sau H3; giữ outcome đến khi tái dựng. Xóa H qua table_debts; giữ snapshot hệ số |
+| Seed và product | seed_forward dùng root và D; product_forward dùng D, seed và residual; từ word 16 bit giữ signed product P 15 bit | Tái dựng a6 từ D hiện tại; trả pha bằng Z(a6) khi outcome=1. Đo các bit D và giữ transcript `first_D` |
+| Divider/phase | `compute_phase_cleanup(v,P,flags)` tạo trạng thái divider, thực hiện phase endpoint và đảo divider; trả lại P | Chỉ kết thúc ở 31 owner dữ liệu: root12+P15+flags4. Mọi carry/history debt phải trả trong cleanup |
+| Bảng thứ hai | Chuyển root sang R-frame; nạp D/H từ lượt second. Bốn địa chỉ a0,a1,a2,a4 đã bị tiêu thụ; đo thêm a6 sau H3 | coefficient_forward tái tạo D để trả toàn bộ `first_D` bằng các Z có điều kiện; merge transcript hai lượt |
+| Đảo product/seed | Tạo lại bit cao của word từ P14; product_inverse trả seed và residual, rồi seed_cleanup | Truyền owner root hiện tại và các dirty wire được phép dùng; giữ snapshot cho coefficient_inverse |
+| Tail và hoàn nguyên | Replay T1 tái dựng a6/H3/H4; coefficient_inverse; replay T2 dựng lại bốn address bit và capture pha R; cleanup_joint18 | Xóa outcome a6, trả khoản pha R và table_debts; kiểm tra mọi row debt consumed, không còn measurement chờ, trả v12+h10+flags4 |
+
+Ví dụ tái dựng a6 trong source: `a6 = D10 XOR D11 XOR D12 XOR ((D10 XOR a5) AND (D11 XOR a5))`, với a5=`v[10]`. Hai CX vào D10/D11 được đảo lại sau CCX. Z có điều kiện trên a6 mới trả đúng pha của lần HMR trước đó; khôi phục giá trị mà thiếu Z này chưa đủ đúng.
+
+Divider lưu 24 row-debt và history của các hàng 12..24. `patch_hret_sat_s15k7a.py` đo bỏ sign12 và các history13/14/15 (15 có certificate SAT đã pin), giữ outcomes; khi đảo hàng thì tái dựng history cần dùng và trả pha trước khi tiêu thụ debt. Cuối cleanup phải quay về 31 owner, mọi debt được đánh dấu consumed. Các biểu thức history là dependency certificate, không suy ra từ tên hàng.
+
+Endpoint trong `patch_endpoint_v9e2.py` gắn `agents/composer/p/w2core_e2.py`: route/walk trên ring26, các feature Boolean của lớp chuẩn hóa điều khiển phép quay chính xác modulo 2^50. Các tích E/F và đường route được giữ lại khi còn chỗ. Hai root bit v9/v10 bị retire qua endpoint; v9 được tái dựng theo `v9_form_e2.json`, v10 tái dùng gate g1 của chương trình đó khi hash form khớp. Giới hạn QMAX được đặt 46. Đây là mô tả từ source, không phải bằng chứng tự kiểm chứng toàn bộ correction.
+
+Sau body_return, `root.inverse` và `normalization.inverse` chỉ chạy khi đã có đủ owner; `restore_input_layout` đưa register x về đúng thứ tự vật lý. Các assertion trong source kiểm tra số owner, debt và snapshot còn chờ; dev PASS hiện tại chưa chứng minh chúng cho mọi transcript đo.
+
 ## Các lượt hoàn thiện mạch
 
 Sau generator, solution thực hiện đúng thứ tự build của tác giả:
@@ -57,7 +82,7 @@ Quan sát trực tiếp từ KMB: 46 qubit, 1297 HMR, 895 cặp PUSH_CONDITION/P
 
 ## Cách chạy và cấu hình
 
-Dùng Python 3.13 trong `.venv` Windows, Kickmix 1.0.0, NumPy 2.5.4 và SciPy 1.18.1. Không dùng WSL. Config có ba trường: đường dẫn bundle nguồn tương đối root, hash mục tiêu và timeout 600 giây mỗi stage. Config phải nằm trong thư mục configs của hướng này; output lấy tên theo stem config. Output có sẵn sẽ không bị ghi đè.
+Dùng Python 3.13 trong `.venv` Windows, Kickmix 1.0.0, NumPy 2.5.4 và SciPy 1.18.1. Không dùng WSL. Config có ba trường: đường dẫn bundle nguồn tương đối root, hash mục tiêu và timeout 600 giây mỗi stage. Config phải nằm trong thư mục configs của hướng này; output lấy tên theo stem config. Output có sẵn sẽ không bị ghi đè. Provenance của các build mới ghi executable và lệnh chạy tương đối repo root bằng dấu `/`; build_only đặt build_run=null. Provenance lịch sử được giữ nguyên bytes.
 
 [windows_runner.py](windows_runner.py) preload Kickmix Windows từ `.venv`. File Linux `.so` chỉ dùng để kiểm tra source pin, không thực thi. Adapter ghi rõ các yêu cầu Unix setrlimit không được enforce trên Windows; timeout subprocess vẫn có hiệu lực. Một assertion so sánh đường dẫn certificate được đổi sang so Path.resolve để xử lý dấu phân cách Windows; hash certificate không đổi. Các file generator nền đã pin giữ nguyên bytes.
 

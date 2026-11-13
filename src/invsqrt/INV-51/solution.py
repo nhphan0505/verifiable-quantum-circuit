@@ -55,6 +55,18 @@ def git(*args):
     return subprocess.check_output(['git', '-C', str(ROOT), *args])
 
 
+def relative_path(path):
+    """Describe a runtime path relative to the checkout, using POSIX separators."""
+    return Path(os.path.relpath(Path(path).resolve(), ROOT)).as_posix()
+
+
+def build_command(config_path):
+    """Equivalent invocation from repo root; preserves the actual Python runtime."""
+    return subprocess.list2cmdline([relative_path(sys.executable),
+        (HERE/'solution.py').relative_to(ROOT).as_posix(), '--config',
+        config_path.relative_to(ROOT).as_posix()])
+
+
 def load_config(value):
     path = Path(value).resolve()
     if path.parent != (HERE / 'configs').resolve() or path.suffix != '.json':
@@ -168,7 +180,9 @@ def main():
         with (work/(label+'.log')).open('xb') as log:
             result=subprocess.run(command, cwd=tree, env=env, stdout=log, stderr=subprocess.STDOUT,
                                   timeout=config['stage_timeout_seconds'])
-        stages.append({'stage':label,'command':command,'returncode':result.returncode})
+        stages.append({'stage':label,'command':[relative_path(v) if Path(str(v)).is_absolute() else str(v) for v in command],
+                       'command_base':'.','cwd':tree.relative_to(ROOT).as_posix(),
+                       'returncode':result.returncode})
         if result.returncode:
             raise RuntimeError(f'{label} failed ({result.returncode}); see {work/(label+".log")}')
 
@@ -212,13 +226,14 @@ def main():
     record=ROOT/'results'/TRACK/EXPERIMENT/config_path.stem/'build_only'/run_id
     record.mkdir(parents=True,exist_ok=False)
     environment={'python':sys.version,'platform':platform.platform(),'packages':packages,
-                 'executable':sys.executable,'unix_rlimits_enforced':False}
+                 'executable':relative_path(sys.executable),'unix_rlimits_enforced':False}
     provenance={'track':TRACK,'experiment_id':EXPERIMENT,'config_name':config_path.stem,'source_commit':head,
         'source_path':(HERE/'solution.py').relative_to(ROOT).as_posix(),'source_sha256':sha(HERE/'solution.py'),
         'build_config_path':config_path.relative_to(ROOT).as_posix(),'build_config_sha256':sha(config_path),
         'artifact_path':artifact.relative_to(ROOT).as_posix(),'artifact_sha256':sha(artifact),
-        'build_command':subprocess.list2cmdline([sys.executable,str(HERE/'solution.py'),'--config',str(config_path)]),
-        'environment':environment,'build_run':record.relative_to(ROOT).as_posix(),'dependency_hashes':dependencies,
+        'build_command':build_command(config_path),
+        'build_command_base':'.',
+        'environment':environment,'build_run':None,'dependency_hashes':dependencies,
         'adapter_work_directory':work.relative_to(ROOT).as_posix()}
     write_json(record/'provenance.json',provenance)
     write_json(record/'build.json',{'status':'BUILT','artifact_sha256':got,'bytes':artifact.stat().st_size,
