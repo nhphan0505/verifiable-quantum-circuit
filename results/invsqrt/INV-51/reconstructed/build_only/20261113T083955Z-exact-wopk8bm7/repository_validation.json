@@ -1,0 +1,17 @@
+{
+  "checker": {
+    "command": "python scripts/check_repo.py --base origin/main --branch exp/INV-51-reconstruct-fusion46",
+    "errors": 0
+  },
+  "tests": {
+    "command": "python -m unittest discover -s scripts/tests",
+    "tests_run": 21,
+    "status": "OK",
+    "seconds": 73.695
+  },
+  "diff_check": "PASS",
+  "notes": [
+    "Tests use isolated fake grading fixtures; their PASS/TIMEOUT output is not a grading result for INV-51.",
+    "A previous test failed on fixture-excluded extensionless documentation links; text license copies and references fixed without checker changes."
+  ]
+}

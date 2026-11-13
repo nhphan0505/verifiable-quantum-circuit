@@ -1,0 +1,13 @@
+{
+  "track": "invsqrt",
+  "experiment_id": "INV-51",
+  "owner": "nhphan0505",
+  "config_name": "reconstructed",
+  "recommended_mode": "dev_5min",
+  "notebook": "notebooks/GQA_Grade_Submission.ipynb",
+  "artifact_path": "artifacts/invsqrt/INV-51/reconstructed.kmb",
+  "artifact_sha256": "321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177",
+  "expected_results_directory": "results/invsqrt/INV-51/reconstructed/dev_5min/",
+  "status": "WAITING_FOR_MEMBER_LOCAL_GRADING",
+  "review": "Separate GitHub reviewer account required after grading; no approval obtained."
+}

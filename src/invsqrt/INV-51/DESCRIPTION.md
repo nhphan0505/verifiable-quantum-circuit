@@ -2,86 +2,83 @@
 
 Loại: Tái dựng từ submission có source tác giả.
 
+## File gốc
 
-## Nguồn và bằng chứng
+Kế thừa generator Fusion của Syed Asad Ali, Apache-2.0, trong gói `invsqrt_source` người dùng cung cấp. Giữ attribution tại [NOTICE](data/NOTICE.txt), [LICENSE](data/LICENSE.txt) và manifest `data/SHA256SUMS`. Gói chứa generator nền `src/work/c10`, 13 patch và các certificate/bảng dùng khi dựng. Chưa có URL phát hành công khai đã xác minh; cách cấp dependency nằm trong [DEPENDENCIES.md](DEPENDENCIES.md).
 
-Input 291626 bytes, SHA-256 321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177.
-Hai đường KMB→KMB và KMB→KMX→KMB đều trùng bytes/hash với Kickmix 1.0.0,
-Python 3.13.14, NumPy 2.5.4. 560 entries của SHA256SUMS nguồn đều khớp.
-Attribution theo gói: Syed Asad Ali, Apache-2.0. Chưa có URL phát hành độc lập.
-Đây là bản tốt nhất theo chi phí được báo cáo trong các ảnh người dùng cung cấp;
-chưa xác minh score bằng verifier trong phiên này.
+Submission đối chứng là `invsqrt.kmb`, 291626 byte, SHA-256 `321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177`. Source tác giả khai báo đúng hash này. Đây là phiên bản tốt nhất theo chi phí báo cáo trong các ảnh người dùng cung cấp; chưa có phép chấm độc lập trong hướng này.
 
-## Bản đồ mạch quan sát trực tiếp
+## Mục tiêu và phạm vi
 
-KMX có 34812 dòng. Dòng 1–22 gắn q0..q21 vào r0, dòng 23 đặt tên register x.
-Tổng 46 qubit: input 22 bit little-endian, workspace tối đa 24 qubit khác.
-Verifier yêu cầu x=1..3133452, pha exp(2πi/sqrt(x)), khôi phục x và scratch=0.
-Có 1297 lệnh HMR và 895 PUSH_CONDITION/POP_CONDITION; số tĩnh:
-1461 CCX, 9 CCZ, 129 CSWAP, 38 Z_POW. Các số tĩnh không bằng kỳ vọng mỗi shot.
-Không gán ranh giới khối thuật toán vào final KMX khi chưa có cut-map sau rewrite.
+Viết [solution.py](solution.py) đọc [configs/reconstructed.json](configs/reconstructed.json), dựng mạch bằng Python trong `.venv` Windows và xuất `artifacts/invsqrt/INV-51/reconstructed.kmb`. Giữ nguyên thuật toán, các bảng, góc quay, thứ tự patch và cấp phát qubit của bản nguồn. Tiêu chí là trùng toàn bộ bytes/hash với submission, không chỉ tương đương chức năng. Không đọc submission hay KMX đối chứng khi build.
 
-## Bản đồ từ source
+Đây không phải một đề xuất tối ưu mới hoặc bản chỉnh sửa trực tiếp [INV-BASELINE](../INV-BASELINE/DESCRIPTION.md). Baseline repo dùng Horner bậc ba rồi Newton–Raphson; generator được cung cấp có luồng root/residual, bảng hệ số, seed, product, divider và phase endpoint riêng. Không gán lịch sử thuật toán của các ảnh bản cũ cho bản cuối nếu source không xác nhận.
 
-tools/build_variant.py: normalization.forward → root.forward → emit_body →
-root.inverse → normalization.inverse → restore_input_layout → register x.
-emit_body được patch bởi patch_w47_body.py, tổ chức bảng hệ số, metadata,
-seed inverse, product, divider/phase và cleanup; giữ các callback từ module đã pin.
-PATCH_ORDER.txt áp 13 patch, Q=46, rồi relocate_cs2.py.
-pipeline.sh: audit_affine → audit_pairs → hold_pass → tối đa 4 vòng
-audit_affine/postpass → merge_zpow → compile. Sau postpass cuối compile lại.
-Phép đo HMR có sửa pha theo kết quả đo; không được bỏ điều kiện/metadata/góc.
-Bản nền repo INV-BASELINE dùng Horner bậc ba và Newton; không coi bản nguồn này
-là chỉnh sửa baseline đó. Không tuyên bố hệ số cải thiện khi chưa có run tương thích.
+## Thuật toán và biểu diễn
 
-## Phương án triển khai
+Bài toán là thực hiện `|x>|0> → exp(2πi/√x)|x>|0>` với x trong [1,3133452]. Register duy nhất tên `x` có 22 qubit little-endian. Mạch cuối dùng 46 qubit; 24 qubit còn lại là workspace được tái sử dụng theo giai đoạn.
 
-Tái lập từ source tác giả thay vì giải ngược chuỗi lệnh: giữ nguyên source dependency
-và license/hash; Python adapter chỉ chuẩn bị đường dẫn, chạy generator và finishing
-passes theo đúng thứ tự, rồi đối chiếu SHA-256. Không đọc KMB đầu vào hoặc KMX scratch
-trong build. Lưu gói nguồn riêng ngoài Git cùng manifest từng file và hướng dẫn cấp lại.
-Không đưa toàn KMB/KMX vào source dưới dạng bảng dữ liệu. Chỉ đọc các component KMX
-nếu thực sự là dependency của source tác giả và khai báo rõ.
-Môi trường repo Windows đã pin đủ; source tác giả yêu cầu Linux/Python 3.13 và
-resource module. WSL Ubuntu hiện chỉ có Python 3.10.12. Theo yêu cầu người dùng, dùng adapter trên .venv Windows; không bỏ kiểm tra hash của nguồn và verifier để chạy được.
-Giới hạn mỗi tiến trình build 10 phút, tối đa 3 lần sửa lỗi tích hợp trước đánh giá lại.
-Không chạy official verifier/chấm tự động trong nhiệm vụ decompiler; bàn giao notebook.
+Generator thực hiện các bước sau:
 
-## Nghiệm thu và giới hạn
+1. Cấp phát 22 qubit input và 4 cờ chuẩn hóa; chạy `normalization.forward`.
+2. `root.forward` chuyển giá trị chuẩn hóa sang root 12 bit và residual 10 bit. Root/residual chiếm lại vùng dữ liệu, không giữ thêm bản sao nguyên input.
+3. `emit_body` nạp bảng đầu từ các bit cao của root, tạo hệ số, xử lý metadata, dựng seed nghịch đảo và tích trung gian. Các giá trị không cần trong một đoạn được đo X rồi tái dựng ở thời điểm dùng lại, cùng khoản sửa pha tương ứng.
+4. Luồng tiếp theo nạp bảng thứ hai, thực hiện divider và phase endpoint. Góc pha giữ dạng chính xác do generator/serializer cung cấp; không chuyển qua float để sinh lại góc.
+5. Cleanup đảo các phép tính, trả lại root/residual và cờ. `root.inverse`, `normalization.inverse` và `restore_input_layout` khôi phục input về đúng qubit vật lý ban đầu. Sau đó gắn register `x` vào mạch.
 
-Hypothesis: source + dependency pin dựng đúng bytes input. Chỉ nghiệm thu khi
-build từ commit thật, so bytes/hash và provenance đúng schema. Hash khác là MISMATCH.
-Exact không đồng nghĩa hiểu toàn bộ thiết kế hay PASS verifier. Chưa đo lại score.
-GitHub đã xác minh owner nhphan0505, base main; đã đọc toàn bộ 50 Issue/PR và hai PR mở.
-Không thấy hướng tái lập cùng input hash; INV-49 là tối ưu INV-41 của Reece1512,
-khác phạm vi. Workspace DQI giữ nguyên; tạo worktree riêng từ origin/main.
+Các patch trong `PATCH_ORDER.txt` thay callback của generator đã nạp, theo thứ tự cố định. Những thay đổi chính của bản 46 qubit gồm:
+
+- Nạp hệ số bằng các chương trình Boolean có certificate, với giới hạn workspace riêng cho hai lượt. Địa chỉ và bit output giữ đúng giao diện của generator.
+- Đo bỏ một số root bit ở đoạn endpoint, rồi tái dựng bằng chương trình AND đã khai báo. Root bit thứ hai dùng lại tích có sẵn từ lần tái dựng thứ nhất.
+- Đo bỏ và tái dựng các history bit của divider để giảm đỉnh workspace. Sửa pha HMR được gắn với giá trị Boolean đã tái dựng, không chỉ khôi phục giá trị cổ điển.
+- Tái dùng tích trung gian và thay cách phân bố pha ở postpass cuối.
+
+Khi dùng temporary AND `t=a·b`, việc xóa bằng HMR có correction CZ(a,b) theo kết quả đo. Mọi scratch được đo/xóa phải có correction phù hợp với biểu thức thật của nó. Các trường hợp tái dựng phức tạp dùng bảng/certificate của source; hướng này giữ nguyên biểu thức, không tự suy ra một công thức thay thế có ít cổng hơn.
+
+## Các lượt hoàn thiện mạch
+
+Sau generator, solution thực hiện đúng thứ tự build của tác giả:
+
+1. Quét mạch để tìm quan hệ affine và các tích được tính lặp.
+2. Giữ tích AND trên qubit rảnh khi lịch sống cho phép, dùng CX tại lần cần lại và HMR/correction khi kết thúc.
+3. Tối đa bốn lượt tìm và thay Toffoli có tích nằm trong span affine của các dây đang sống; dừng sớm khi không còn findings.
+4. Gộp các Z_POW tác động lên cùng hàm Boolean, giữ số học góc chính xác.
+5. Compile, chạy postpass `relocate_cs2.py`, rồi compile KMB cuối.
+
+Các audit này là một phần thuật toán dựng. Chúng không được ghi nhận thành official verifier PASS. Nếu serializer hoặc platform sinh bytes khác, build dừng và giữ output để điều tra.
+
+## Điều kiện đúng, sai số và tài nguyên
+
+Input phải được khôi phục, scratch phải về zero, không thêm register ngoài `x`. Verifier gốc cho tolerance `2^-24/√x` turns; phép tổng hợp rotation còn phải nằm trong phần ngân sách sai số dư. Hướng tái lập không thay precision, miền x hoặc dung sai.
+
+Quan sát trực tiếp từ KMB: 46 qubit, 1297 HMR, 895 cặp PUSH_CONDITION/POP_CONDITION; số lệnh tĩnh là 1461 CCX, 9 CCZ, 129 CSWAP và 38 Z_POW. Các số tĩnh không bằng số cổng kỳ vọng thực thi mỗi shot. Báo cáo compiler từ bản dựng tính kỳ vọng 1511.5703125 Toffoli-like, 1 T và 33 generic rotations theo Boolean guards. Đây là kết quả đếm từ mạch với giả định HMR độc lập/công bằng, chưa phải điểm chấm. Vì vậy không tính score bằng tổng lệnh đơn giản. Inventory ở [evidence/circuit_inventory.json](evidence/circuit_inventory.json).
+
+Đánh đổi của thiết kế là giảm số qubit bằng đo và tái dựng, có thể tăng một phần cổng/correction. Trong công thức score `Q × (Toffoli + T/4)`, chi phí tổng hợp rotation cũng góp vào T. Chưa có run tương thích thì không tính hệ số cải thiện so với baseline.
+
+## Cách chạy và cấu hình
+
+Dùng Python 3.13 trong `.venv` Windows, Kickmix 1.0.0, NumPy 2.5.4 và SciPy 1.18.1. Không dùng WSL. Config có ba trường: đường dẫn bundle nguồn tương đối root, hash mục tiêu và timeout 600 giây mỗi stage. Config phải nằm trong thư mục configs của hướng này; output lấy tên theo stem config. Output có sẵn sẽ không bị ghi đè.
+
+[windows_runner.py](windows_runner.py) preload Kickmix Windows từ `.venv`. File Linux `.so` chỉ dùng để kiểm tra source pin, không thực thi. Adapter ghi rõ các yêu cầu Unix setrlimit không được enforce trên Windows; timeout subprocess vẫn có hiệu lực. Một assertion so sánh đường dẫn certificate được đổi sang so Path.resolve để xử lý dấu phân cách Windows; hash certificate không đổi. Các file generator nền đã pin giữ nguyên bytes.
+
+Chạy lệnh trong [DEPENDENCIES.md](DEPENDENCIES.md). Build dùng bản nguồn đã commit, kiểm tra hash dependency rồi ghi provenance. Toàn bộ source tác giả là dependency ngoài Git, không phải source độc lập chỉ cần một file solution; người tái lập phải cấp đúng bundle. Source/config và metadata của adapter được version hóa trong hướng này.
 
 ## Kế hoạch kiểm chứng hypothesis
 
-- Mốc đối chứng: submission SHA-256 `321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177`; source supplied by user, Apache-2.0. Đây là đối chứng bytes, không lấy score ảnh làm run.
-- Dự đoán: generator và các pass giữ nguyên sẽ tái tạo đúng artifact; adapter chỉ chuyển đường dẫn và điều phối, không thay số học.
-- Ủng hộ: so sánh trực tiếp bytes và hash đều trùng, có source commit/config/dependency hashes thực tế. Bác bỏ: bất kỳ byte khác hoặc dependency không truy vết được.
-- Điều kiện dừng: đạt exact hoặc sau ba vòng sửa tích hợp; không đổi tiêu chí để nhận một mạch tương đương. Không thay verifier, số bit hay góc quay.
-- Kiểm tra độc lập: thành viên chạy notebook local dev_5min/full sau bàn giao; reviewer khác tài khoản kiểm tra provenance và phạm vi. Chưa có run chấm mới.
-
-## Điều kiện đúng và sai số
-
-Input x little-endian 22 bit, x trong [1,3133452]. Pha mục tiêu exp(2πi/sqrt(x)); tolerance theo verifier là 2^-24/sqrt(x) turns. Input phải trở về đúng các qubit ban đầu; mọi scratch phải sạch. HMR cần phase correction đúng từng nhánh. Không suy ra correctness toàn miền từ gate counts hoặc hash nguồn. Exact bytes với input chỉ chứng minh tái lập submission đó.
+- Mốc đối chứng: hash submission ở trên, manifest 560 file của source và verifier gốc đúng data_manifest của repo. Hash xác định phiên bản, không dùng tên file hoặc ảnh làm bằng chứng PASS.
+- Dự đoán: generator và các pass cố định chạy trên Windows tạo đúng bytes của bản tác giả.
+- Ủng hộ: build từ source commit thật, hash trùng và công cụ độc lập so bytes toàn file đạt. Bác bỏ: bất kỳ sai khác byte nào hoặc thiếu dependency truy vết được.
+- Điều kiện dừng: đạt exact hoặc sau ba lần sửa lỗi tích hợp phải đánh giá lại. Không vá KMB bằng input gốc; không hạ tiêu chí xuống tương đương chức năng.
+- Kiểm tra độc lập ứng viên cuối: thành viên chạy notebook local dev_5min, sau đó full hoặc profile bổ sung phù hợp; reviewer khác tài khoản đánh giá source/provenance. Agent không tự chạy official verifier trong lượt decompiler này.
 
 ## Kết luận và phiên bản tái lập
 
-Bước tiếp nhận và khứ hồi đã đạt trong scratch; chưa build độc lập từ source commit và chưa chấm. Config đầu tiên dự kiến tên reconstructed; triển khai adapter sau mốc mô tả này. Bằng chứng bước 1–3 sẽ được đưa vào thư mục của hướng cùng manifest.
+Tiếp nhận và KMB/KMX roundtrip đã đạt, xem [roundtrip_check.json](evidence/roundtrip_check.json). Chưa có run dev/full. Build độc lập bằng .venv Windows đã đạt RECONSTRUCTED_EXACT: 291626 bytes trùng hoàn toàn với submission. Đã so từng block bytes và SHA-256 độc lập với builder. Exact chứng minh tái lập, không thay cho kết quả chấm hoặc full proof.
 
 | Mốc | Config | Commit nguồn | Run / provenance |
 | --- | --- | --- | --- |
-| Build exact | Dự kiến reconstructed | Chưa có commit implementation | Chưa build |
+| Build exact | [reconstructed](configs/reconstructed.json) | `bfe070108c6dd02649c6ba4ab3400b2f0ed50249` | [provenance](../../../results/invsqrt/INV-51/reconstructed/build_only/20261113T083955Z-exact-wopk8bm7/provenance.json), [đối chiếu](../../../results/invsqrt/INV-51/reconstructed/build_only/20261113T083955Z-exact-wopk8bm7/reconstruction_check.json) |
 | Dev | Chưa chấm | Chưa có | Chưa có |
 | Full | Chưa chấm | Chưa có | Chưa có |
 
-## Triển khai Windows đã chọn
-
-[solution.py](solution.py) chạy bằng `.venv` Windows với package pin của repo; không dùng WSL. [windows_runner.py](windows_runner.py) preload pip Kickmix Windows và cung cấp resource.setrlimit compatibility với log công khai rằng Unix memory limits không được enforce. Timeout từng subprocess là 600 giây. Các assertion hash, phép toán và generator upstream giữ nguyên. Việc copy file Linux .so chỉ để kiểm tra pin, không load nó trên Windows.
-
-[Config reconstructed](configs/reconstructed.json) khai báo source bundle riêng dưới artifacts, target hash và timeout. [Manifest](reconstruction.json), [hướng dẫn dependency](DEPENDENCIES.md) và [SHA256SUMS](data/SHA256SUMS) cho phép kiểm tra lại nguồn. [Báo cáo roundtrip](evidence/roundtrip_check.json) và [inventory](evidence/circuit_inventory.json) lưu bằng chứng tiếp nhận. Source gốc đã có nên mức khôi phục là tái lập generator tác giả, không nhận là suy ra toàn bộ thuật toán từ KMB.
-
-Adapter không gọi official verifier hoặc proof cuối của tác giả. Các audit toàn miền trong finishing pipeline chỉ dùng để sinh đúng rewrite đã khai báo. Nghiệm thu ở bước này là exact bytes/hash; chấm notebook và review độc lập vẫn còn riêng.
+Mã triển khai: [solution.py](solution.py). Cấu hình: [configs](configs/). Manifest: [reconstruction.json](reconstruction.json). Điểm và các run: [SCORES.md](../SCORES.md).

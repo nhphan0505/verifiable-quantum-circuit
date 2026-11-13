@@ -21,11 +21,13 @@
     "obtain": "Copy user-supplied invsqrt_source directory; validate against data/SHA256SUMS. No public release URL supplied.",
     "host_files": "Repository DATA.md; original kickmix.so used for source pin verification only, pip Windows Kickmix executes."
   },
-  "reconstruction_level": "AUTHOR_SOURCE_REBUILD_PENDING",
+  "reconstruction_level": "AUTHOR_SOURCE_REBUILD_EXACT",
   "limitations": [
     "No official verifier or upstream full-domain final proof is run.",
     "Windows resource API requests logged but memory limits not enforced.",
     "External author source bundle must be supplied; not distributed in Git.",
     "Historical score is not remeasured."
-  ]
+  ],
+  "build_source_commit": "bfe070108c6dd02649c6ba4ab3400b2f0ed50249",
+  "reconstruction_check": "results/invsqrt/INV-51/reconstructed/build_only/20261113T083955Z-exact-wopk8bm7/reconstruction_check.json"
 }
