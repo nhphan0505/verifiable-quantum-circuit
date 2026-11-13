@@ -1,0 +1,8 @@
+{
+  "missing_provenance": true,
+  "matching_builds": [
+    "results/invsqrt/INV-51/reconstructed/build_only/20261113T083955Z-exact-wopk8bm7",
+    "results/invsqrt/INV-51/reconstructed/build_only/20261113T160603Z-exact-8fe62qjo"
+  ],
+  "note": "Agent must identify build evidence; do not infer source commit from current HEAD."
+}

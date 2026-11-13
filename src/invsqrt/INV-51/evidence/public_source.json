@@ -1,0 +1,17 @@
+{
+  "url": "https://www.kaggle.com/api/v1/datasets/download/syed3000/vqcc-own-circuit-portfolio/invsqrt_source_zip?datasetVersionNumber=12",
+  "dataset_version": 12,
+  "authentication_used": false,
+  "http_status": 200,
+  "bytes": 2563106,
+  "sha256": "7d9801ae20e942dba2211a656bba6014a0a16d57da534c0b60328d1c5d9d8254",
+  "checked_at_utc": "2026-11-13T16:05:55.710469+00:00",
+  "dataset_listing": {
+    "url": "https://www.kaggle.com/api/v1/datasets/list?search=vqcc-own-circuit-portfolio",
+    "id": 13072949,
+    "ref": "syed3000/vqcc-own-circuit-portfolio",
+    "isPrivate": false,
+    "currentVersionNumber": 12,
+    "licenseName": "Apache 2.0"
+  }
+}

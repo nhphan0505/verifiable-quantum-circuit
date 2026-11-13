@@ -1,0 +1,32 @@
+{
+  "status": "RECONSTRUCTED_EXACT",
+  "input_sha256": "321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177",
+  "output_sha256": "321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177",
+  "input_bytes": 291626,
+  "output_bytes": 291626,
+  "bytes_equal": true,
+  "comparison": "Independent streaming byte comparison in 65536-byte blocks; SHA-256 via hashlib.file_digest",
+  "source_commit": "bfe070108c6dd02649c6ba4ab3400b2f0ed50249",
+  "manifest": "src/invsqrt/INV-51/reconstruction.json",
+  "environment": {
+    "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    },
+    "executable": "D:\\GQA\\.venv\\Scripts\\python.exe",
+    "unix_rlimits_enforced": false
+  },
+  "checked_at": "2026-11-13T08:41:11.214184+00:00",
+  "runtime_module": {
+    "path": "D:\\GQA\\.venv\\Lib\\site-packages\\kickmix.cp313-win_amd64.pyd",
+    "sha256": "cf84657d91fb53d7558872ac64969dd5ad88d0bf7fdd8ae5f7e00b8c95fdf4cc"
+  },
+  "official_verifier_run": false,
+  "limitations": [
+    "No grading result or upstream final proof from this build.",
+    "Author bundle remains required external source dependency."
+  ]
+}

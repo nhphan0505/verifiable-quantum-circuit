@@ -1,0 +1,9 @@
+{
+  "python_syntax": "PASS",
+  "config_in_experiment": "ACCEPTED",
+  "config_outside_experiment": "REJECTED",
+  "different_build_cwd": "D:/GQA instead of worktree root; successful",
+  "input_submission_used_by_builder": false,
+  "byte_comparison": "PASS; see reconstruction_check.json",
+  "upstream_path_adaptation": "One certificate path string comparison replaced by Path.resolve equality; certificate hash check unchanged."
+}

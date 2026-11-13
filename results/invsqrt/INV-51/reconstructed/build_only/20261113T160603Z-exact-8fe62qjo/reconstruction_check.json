@@ -1,0 +1,25 @@
+{
+  "status": "RECONSTRUCTED_EXACT",
+  "source_commit": "48729436b421e7320d86e48cc0e451be0d84260e",
+  "input_sha256": "321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177",
+  "output_sha256": "321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177",
+  "input_bytes": 291626,
+  "output_bytes": 291626,
+  "bytes_equal": true,
+  "comparison": "Streaming independent comparison against original input, 65536-byte blocks",
+  "environment": {
+    "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    },
+    "executable": ".venv/Scripts/python.exe",
+    "unix_rlimits_enforced": false
+  },
+  "provenance_root_relative": true,
+  "build_only_build_run_is_null": true,
+  "checked_at_utc": "2026-11-13T16:07:13.106572+00:00",
+  "official_verifier_run": false
+}

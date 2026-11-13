@@ -1,0 +1,23 @@
+{
+  "track": "invsqrt",
+  "input_path": "C:\\Users\\Admin\\Downloads\\archive\\invsqrt.kmb",
+  "sha256": "321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177",
+  "bytes": 291626,
+  "inspected_at": "2026-11-13T08:26:30.384263+00:00",
+  "source_directory": "C:\\Users\\Admin\\Downloads\\archive\\invsqrt_source",
+  "attribution": "Syed Asad Ali, as declared in supplied README/LICENSE/NOTICE",
+  "license": "Apache-2.0",
+  "origin": "Files supplied by user; publication URL and author identity not independently verified",
+  "reported_score": 80162.76,
+  "reported_score_verified": false,
+  "environment": {
+    "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    }
+  },
+  "source_manifest_sha256": "9164edf966ca34759f2b5f57e02ccd1a89a34f04efa6721300c040423de2c519"
+}
