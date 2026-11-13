@@ -14,12 +14,18 @@
     "scipy": "1.18.1"
   },
   "references": [
-    "https://github.com/nhphan0505/verifiable-quantum-circuit/issues/51"
+    "https://github.com/nhphan0505/verifiable-quantum-circuit/issues/51",
+    "https://www.kaggle.com/datasets/syed3000/vqcc-own-circuit-portfolio"
   ],
   "dependencies": {
     "source_bundle": "artifacts/invsqrt/INV-51/dependencies/invsqrt_source",
-    "obtain": "Copy user-supplied invsqrt_source directory; validate against data/SHA256SUMS. No public release URL supplied.",
-    "host_files": "Repository DATA.md; original kickmix.so used for source pin verification only, pip Windows Kickmix executes."
+    "obtain": "Download invsqrt_source_zip from the referenced Kaggle dataset, rename to invsqrt_source.zip without recompression, verify archive SHA-256 and extract into artifacts/invsqrt/INV-51/dependencies/. See DEPENDENCIES.md.",
+    "host_files": "Repository DATA.md; original kickmix.so used for source pin verification only, pip Windows Kickmix executes.",
+    "dataset_url": "https://www.kaggle.com/datasets/syed3000/vqcc-own-circuit-portfolio",
+    "dataset_version": null,
+    "archive_name": "invsqrt_source_zip",
+    "archive_sha256": "7d9801ae20e942dba2211a656bba6014a0a16d57da534c0b60328d1c5d9d8254",
+    "archive_bytes": 2563106
   },
   "reconstruction_level": "AUTHOR_SOURCE_REBUILD_EXACT",
   "limitations": [
