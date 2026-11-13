@@ -1,0 +1,33 @@
+{
+  "status": "ROUNDTRIP_EXACT",
+  "command": [
+    "D:\\GQA\\.venv\\Scripts\\python.exe",
+    "D:\\GQA\\artifacts\\decompiler\\321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177\\inspection-20261113\\inspect_input.py"
+  ],
+  "environment": {
+    "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    }
+  },
+  "input_sha256": "321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177",
+  "checks": [
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177\\inspection-20261113\\direct.kmb",
+      "bytes": 291626,
+      "sha256": "321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177",
+      "bytes_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177\\inspection-20261113\\roundtrip.kmb",
+      "bytes": 291626,
+      "sha256": "321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177",
+      "bytes_equal": true,
+      "first_difference": null
+    }
+  ]
+}

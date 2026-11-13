@@ -43,8 +43,7 @@ trong build. Lưu gói nguồn riêng ngoài Git cùng manifest từng file và 
 Không đưa toàn KMB/KMX vào source dưới dạng bảng dữ liệu. Chỉ đọc các component KMX
 nếu thực sự là dependency của source tác giả và khai báo rõ.
 Môi trường repo Windows đã pin đủ; source tác giả yêu cầu Linux/Python 3.13 và
-resource module. WSL Ubuntu hiện chỉ có Python 3.10.12. Cần runtime tương thích hoặc
-adapter có kiểm chứng; không bỏ kiểm tra hash của nguồn và verifier để chạy được.
+resource module. WSL Ubuntu hiện chỉ có Python 3.10.12. Theo yêu cầu người dùng, dùng adapter trên .venv Windows; không bỏ kiểm tra hash của nguồn và verifier để chạy được.
 Giới hạn mỗi tiến trình build 10 phút, tối đa 3 lần sửa lỗi tích hợp trước đánh giá lại.
 Không chạy official verifier/chấm tự động trong nhiệm vụ decompiler; bàn giao notebook.
 
@@ -78,3 +77,11 @@ Bước tiếp nhận và khứ hồi đã đạt trong scratch; chưa build đ�
 | Build exact | Dự kiến reconstructed | Chưa có commit implementation | Chưa build |
 | Dev | Chưa chấm | Chưa có | Chưa có |
 | Full | Chưa chấm | Chưa có | Chưa có |
+
+## Triển khai Windows đã chọn
+
+[solution.py](solution.py) chạy bằng `.venv` Windows với package pin của repo; không dùng WSL. [windows_runner.py](windows_runner.py) preload pip Kickmix Windows và cung cấp resource.setrlimit compatibility với log công khai rằng Unix memory limits không được enforce. Timeout từng subprocess là 600 giây. Các assertion hash, phép toán và generator upstream giữ nguyên. Việc copy file Linux .so chỉ để kiểm tra pin, không load nó trên Windows.
+
+[Config reconstructed](configs/reconstructed.json) khai báo source bundle riêng dưới artifacts, target hash và timeout. [Manifest](reconstruction.json), [hướng dẫn dependency](DEPENDENCIES.md) và [SHA256SUMS](data/SHA256SUMS) cho phép kiểm tra lại nguồn. [Báo cáo roundtrip](evidence/roundtrip_check.json) và [inventory](evidence/circuit_inventory.json) lưu bằng chứng tiếp nhận. Source gốc đã có nên mức khôi phục là tái lập generator tác giả, không nhận là suy ra toàn bộ thuật toán từ KMB.
+
+Adapter không gọi official verifier hoặc proof cuối của tác giả. Các audit toàn miền trong finishing pipeline chỉ dùng để sinh đúng rewrite đã khai báo. Nghiệm thu ở bước này là exact bytes/hash; chấm notebook và review độc lập vẫn còn riêng.

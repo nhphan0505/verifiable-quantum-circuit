@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "track": "invsqrt",
+  "input_sha256": "321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177",
+  "input_bytes": 291626,
+  "source_attribution": "Syed Asad Ali; user-supplied invsqrt_source, Apache-2.0",
+  "source_manifest_sha256": "9164edf966ca34759f2b5f57e02ccd1a89a34f04efa6721300c040423de2c519",
+  "components_manifest": "data/SHA256SUMS",
+  "environment": {
+    "python": "3.13",
+    "platform": "Windows",
+    "kickmix": "1.0.0",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1"
+  },
+  "references": [
+    "https://github.com/nhphan0505/verifiable-quantum-circuit/issues/51"
+  ],
+  "dependencies": {
+    "source_bundle": "artifacts/invsqrt/INV-51/dependencies/invsqrt_source",
+    "obtain": "Copy user-supplied invsqrt_source directory; validate against data/SHA256SUMS. No public release URL supplied.",
+    "host_files": "Repository DATA.md; original kickmix.so used for source pin verification only, pip Windows Kickmix executes."
+  },
+  "reconstruction_level": "AUTHOR_SOURCE_REBUILD_PENDING",
+  "limitations": [
+    "No official verifier or upstream full-domain final proof is run.",
+    "Windows resource API requests logged but memory limits not enforced.",
+    "External author source bundle must be supplied; not distributed in Git.",
+    "Historical score is not remeasured."
+  ]
+}
