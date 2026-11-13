@@ -126,6 +126,14 @@ def prepare_bundle(config, work):
             if path.suffix not in ('.py', '.sh'):
                 raise RuntimeError(f'Relocation token outside source: {path}')
             path.write_bytes(raw.replace(b'@FG_ROOT@', tree.as_posix().encode()))
+    # Upstream compares a Windows Path string to a slash-separated literal.
+    # Compare resolved paths instead; certificate bytes/hash checks stay intact.
+    patch = tree/'patches/patch_second46_c19_70nb1.py'
+    raw = patch.read_bytes()
+    old = b'assert str(module.OWN_SECOND) == CERT'
+    if raw.count(old) != 1:
+        raise RuntimeError('Unexpected upstream certificate path assertion')
+    patch.write_bytes(raw.replace(old, b'assert Path(module.OWN_SECOND).resolve() == Path(CERT).resolve()'))
     return tree, records + [{'path': rel, 'sha256': h} for rel, _, h in host]
 
 
