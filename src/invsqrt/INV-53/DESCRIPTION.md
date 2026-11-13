@@ -30,3 +30,14 @@ Giữ input x 22 bit little-endian trong 1..3133452, 46 qubit peak, pha mục ti
 ## Kết luận và phiên bản tái lập
 
 Chưa triển khai/build hướng mới. Source commit và records sẽ được ghi sau; chưa nhận PASS hoặc điểm mới. Giữ hướng INV-51 và toàn bộ kết quả lịch sử nguyên vẹn.
+
+
+## Implementation và dependency nội bộ
+
+[solution.py](solution.py) đọc [config reconstructed](configs/reconstructed.json), kiểm tra [engine_manifest.json](engine_manifest.json) rồi chạy các stage Python local. Config không có đường dẫn bundle. [INTEGRATION.md](INTEGRATION.md) mô tả source port, cách chạy và giới hạn; [upstream_changes.json](upstream_changes.json) ghi hash trước/sau và các loại thay đổi từng file. Giấy phép tại [LICENSE](LICENSE.txt), attribution tại [NOTICE](NOTICE.txt).
+
+Sau một build đã audit, dependency còn 72 module Python, 39 JSON bảng/certificate/cấu hình và PATCH_ORDER.txt. Không track KMB, KMX hoặc archive. Tất cả dữ liệu này nằm trong source của hướng, không cần dataset Kaggle hoặc Downloads khi compile. Một số tên directory giữ lineage upstream để giữ import/component identity; source là Python đọc/sửa trực tiếp, không được nhúng hoặc giải nén khi chạy.
+
+Luồng sinh mạch giữ từ INV-51: normalization.forward → root.forward (root12 + residual10) → emit_body (hai lượt hệ số, seed/product, divider/phase và HMR correction) → root.inverse → normalization.inverse → restore_input_layout. Các pass giữ tích, thay affine product và gộp Z_POW thực hiện trên mạch mới sinh trước compile cuối. Không lấy gate stream có sẵn làm input. Chi tiết lịch đo và cơ chế correction kế thừa [INV-51 DESCRIPTION](../INV-51/DESCRIPTION.md); các module thực thi nay nằm trong engine của hướng này.
+
+Các kiểm tra hash/receipt lịch sử upstream được thay bằng manifest source tích hợp, không giả lập checksum hay dữ liệu artifact gốc. Các assertion về số học, owner, phase, debt và precision được giữ; source port không chạy kiểm chứng upstream hoặc verifier chính thức. Hash exact vẫn là điều kiện nghiệm thu riêng.
