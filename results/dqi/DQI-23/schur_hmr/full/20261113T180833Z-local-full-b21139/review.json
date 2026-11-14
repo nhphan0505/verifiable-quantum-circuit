@@ -1,0 +1,8 @@
+{
+  "missing_provenance": true,
+  "matching_builds": [
+    "results/dqi/DQI-23/schur_hmr/build_only/20261108T165644Z-local-build",
+    "results/dqi/DQI-23/schur_hmr/build_only/20261113T180725Z-engine-rebuild"
+  ],
+  "note": "Agent must identify build evidence; do not infer source commit from current HEAD."
+}

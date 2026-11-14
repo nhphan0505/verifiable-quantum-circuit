@@ -1,11 +1,11 @@
 """Grade one local artifact and preserve evidence in the experiment's results tree.
 
-The notebook supplies track, mode, experiment ID, owner and config name. This
-module validates their paths, hashes the actual KMB/ZIP and runs the unchanged
-official verifier (or fixed dev profile) in a child process using the kernel's
-Python. One worker limits Windows memory use. Task 3 ZIPs are checked and
+The notebook supplies track, experiment ID, owner and config name. This
+module validates paths and hashes the actual KMB/ZIP, then runs kickmix-engine
+with full official settings or a reduced smoke check. Windows delegates to
+WSL; Linux/macOS use the kernel Python. At most four threads bound simulator resource use. Task 3 ZIPs are checked and
 extracted into temporary storage under ignored artifacts, cleaned after grading.
-Timeout/interruption keep logs and metadata without inventing a score. A matching
+Interruption keeps logs and metadata without inventing a score. A matching
 build record is copied as provenance only when identity and artifact hash match;
 otherwise review.json records the missing evidence for the coding agent to fix.
 No score tables or historical runs are modified. Use via the local notebook.
@@ -24,6 +24,9 @@ import tempfile
 import uuid
 import zipfile
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from engine_runtime import runtime, preflight
+
 PREFIXES = {'invsqrt': 'INV', 'dqi': 'DQI', 'dfthcsos': 'DFT'}
 
 
@@ -39,10 +42,12 @@ def write_json(path, data):
     path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
 
 
-def grade(root, track, mode, experiment_id, owner, config_name):
+def grade(root, track, experiment_id, owner, config_name, mode="full"):
     root = Path(root).resolve()
-    if track not in PREFIXES or mode not in {'smoke', 'dev_5min', 'full'}:
-        raise ValueError('Invalid TRACK/MODE')
+    if mode not in {'smoke', 'full'}:
+        raise ValueError('MODE must be smoke or full')
+    if track not in PREFIXES:
+        raise ValueError('Invalid TRACK')
     if not re.fullmatch(PREFIXES[track] + r'-(BASELINE|[1-9][0-9]*)', experiment_id):
         raise ValueError('EXPERIMENT_ID does not match TRACK')
     if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]*', config_name) or not owner.strip():
@@ -58,6 +63,35 @@ def grade(root, track, mode, experiment_id, owner, config_name):
         for name in ['FeMoCo76o113e.fcidump', 'FeMoCo76o113e.fixed_shifts.npz']:
             if not (root / 'verifiers/dfthcsos' / name).is_file():
                 raise FileNotFoundError(f'Restore reference data: {name}; see DATA.md')
+    prefix, runtime_root = runtime(root)
+    engine_info = preflight(prefix)
+    if sys.platform == 'win32':
+        # Share only bridge control files; result records remain in the usual tree.
+        bridge_base = root / 'artifacts'
+        bridge_base.mkdir(exist_ok=True)
+        with tempfile.TemporaryDirectory(prefix='.engine-bridge-', dir=bridge_base) as control:
+            control = Path(control)
+            linux_control = runtime_root + '/' + control.relative_to(root).as_posix()
+            args = [track, experiment_id, owner, config_name, mode]
+            code = ("import sys,os,json;from pathlib import Path;"
+                    "sys.path.insert(0,sys.argv[1]+'/src/common');"
+                    "from local_grade import grade;"
+                    "Path(sys.argv[2]+'/pid').write_text(str(os.getpid()));"
+                    "out=grade(sys.argv[1],*sys.argv[3:]);"
+                    "Path(sys.argv[2]+'/result').write_text(str(out.relative_to(sys.argv[1])))")
+            bridge = subprocess.Popen(prefix + ['-c', code, runtime_root, linux_control, *args])
+            try:
+                if bridge.wait() != 0:
+                    raise RuntimeError('WSL grading failed; inspect output and saved results.')
+            except KeyboardInterrupt:
+                pidfile = control / 'pid'
+                if pidfile.is_file():
+                    pid = pidfile.read_text().strip()
+                    if pid.isdecimal():
+                        subprocess.run(['wsl.exe', '--exec', '/bin/kill', '-INT', pid], check=False)
+                bridge.wait(timeout=30)
+                raise
+            return root / (control / 'result').read_text().strip()
     artifact_hash = sha(artifact)
     # Preflight ZIP before creating a run or extracting files.
     if track == 'dfthcsos':
@@ -77,8 +111,9 @@ def grade(root, track, mode, experiment_id, owner, config_name):
                 upload_artifact={'name': artifact.name, 'sha256': artifact_hash, 'size_bytes': artifact.stat().st_size},
                 artifact_path=artifact.relative_to(root).as_posix(),
                 verifier_sha256={p.relative_to(root).as_posix(): sha(p) for p in (root / 'verifiers').rglob('*.py')},
-                dev_harness_sha256=sha(root / 'src/common/dev_verify.py') if mode == 'dev_5min' else None,
-                timeout_seconds=300 if mode == 'dev_5min' else None)
+                timeout_seconds=None)
+    if engine_info:
+        meta.update(python=engine_info['python'], packages=engine_info['packages'], engine=dict(name='kickmix-engine', version='0.6.0', platform=engine_info['platform'], kernel=engine_info['kernel']))
     # Preserve all matching build candidates; do not guess when hashes have multiple origins.
     matches = []
     for record in (out.parents[1] / 'build_only').glob('*/provenance.json'):
@@ -106,45 +141,40 @@ def grade(root, track, mode, experiment_id, owner, config_name):
             with zipfile.ZipFile(artifact) as archive:
                 archive.extractall(submission)
         verifier = root / 'verifiers' / track / ('verify.py' if track == 'dfthcsos' else f'verify_submission_{track}.py')
-        cmd = [sys.executable, str(verifier), str(submission)]
-        if track != 'dfthcsos':
-            cmd += ['--max-workers', '1']
+        cmd = [sys.executable, '-m', 'kickmix_engine', 'verify', track, str(submission),
+               '--verifier', str(verifier.parent if track == 'dfthcsos' else verifier), '--threads', str(min(4, os.cpu_count() or 1))]
         if mode == 'smoke':
             cmd += {'invsqrt': ['--max-x', '4096', '--shots-per-x', '1'],
-                    'dqi': ['--num-shots', '1024'], 'dfthcsos': ['--shots-per-address', '1']}[track]
-        if mode == 'dev_5min':
-            cmd = [sys.executable, str(root / 'src/common/dev_verify.py'), '--track', track,
-                   '--submission', str(submission), '--seed', '20261106', '--invsqrt-samples', '4096',
-                   '--invsqrt-repeats', '2', '--dqi-shots', '4096', '--dfthc-repeats', '4']
+                    'dqi': ['--num-shots', '4096'],
+                    'dfthcsos': ['--shots-per-address', '1']}[track]
         meta['verify_command'] = cmd
         meta['submission_sha256'] = {p.name: sha(p) for p in ([submission] if submission.is_file() else submission.iterdir()) if p.is_file()}
         write_json(out / 'config.json', dict(track=track, experiment_id=experiment_id, config_name=config_name, mode=mode, command=cmd))
         write_json(out / 'metadata.json', meta)
-        env = dict(os.environ, PYTHONPATH=str(root / 'verifiers'), OPENBLAS_NUM_THREADS='1', OMP_NUM_THREADS='1', PYTHONIOENCODING='utf-8')
+        env = dict(os.environ, KICKMIX_ENGINE_VERIFIERS=str(root / 'verifiers'), PYTHONPATH=str(root / 'verifiers'), OPENBLAS_NUM_THREADS='1', OMP_NUM_THREADS='1', PYTHONIOENCODING='utf-8')
         print('Running:', cmd, flush=True)
         with (out / 'verify.stdout.txt').open('w', encoding='utf-8') as stdout, (out / 'verify.stderr.txt').open('w', encoding='utf-8') as stderr:
-            process = subprocess.Popen(cmd, cwd=root, env=env, stdout=stdout, stderr=stderr)
+            process = subprocess.Popen(cmd, cwd=root, env=env, stdout=stdout, stderr=stderr, start_new_session=os.name != 'nt')
             try:
                 process.wait(timeout=meta['timeout_seconds'])
-            except subprocess.TimeoutExpired:
-                process.kill()
-                process.wait()
-                meta['status'] = 'TIMEOUT'
             except BaseException:
-                process.kill()
+                if os.name != 'nt':
+                    import signal
+                    os.killpg(process.pid, signal.SIGKILL)
+                else:
+                    process.kill()
                 process.wait()
                 raise
         meta['exit_code'] = process.returncode
         raw = (out / 'verify.stdout.txt').read_text(encoding='utf-8')
-        if meta['status'] != 'TIMEOUT':
-            try:
-                result = json.loads(raw)
-                (out / 'verifier.json').write_text(raw, encoding='utf-8')
-                meta['status'] = 'PASS' if process.returncode == 0 and result.get('status') == 'PASS' else 'FAIL'
-                print(json.dumps(result, indent=2))
-            except (ValueError, AttributeError):
-                meta['status'] = 'ERROR'
-                print((out / 'verify.stderr.txt').read_text(encoding='utf-8')[-6000:])
+        try:
+            result = json.loads(raw)
+            (out / 'verifier.json').write_text(raw, encoding='utf-8')
+            meta['status'] = 'PASS' if process.returncode == 0 and result.get('status') == 'PASS' else 'FAIL'
+            print(json.dumps(result, indent=2))
+        except (ValueError, AttributeError):
+            meta['status'] = 'ERROR'
+            print((out / 'verify.stderr.txt').read_text(encoding='utf-8')[-6000:])
     except KeyboardInterrupt:
         meta['status'] = 'INTERRUPTED'
         print('Stopped; no valid score.')

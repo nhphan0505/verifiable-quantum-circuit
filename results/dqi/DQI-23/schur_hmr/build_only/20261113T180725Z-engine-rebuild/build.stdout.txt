@@ -1,0 +1,2 @@
+Compiled Q=900, emitted T=11,620,060
+Wrote D:\GQA\artifacts\worktrees\kickmix-engine-grading\artifacts\dqi\DQI-23\schur_hmr.kmb

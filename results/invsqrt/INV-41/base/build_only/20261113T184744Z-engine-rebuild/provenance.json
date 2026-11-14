@@ -1,0 +1,28 @@
+{
+  "track": "invsqrt",
+  "experiment_id": "INV-41",
+  "config_name": "base",
+  "source_commit": "ece496eb416068bfdb9ee0f1239e2aa9b9f9e96c",
+  "source_path": "src/invsqrt/INV-41/solution.py",
+  "source_sha256": "8ad0d08922e13f3d3744940f938202dbb9523cd8435352a51cbf8e6cc1846041",
+  "build_config_path": "src/invsqrt/INV-41/configs/base.json",
+  "build_config_sha256": "fa3a80ceecab1850c26bacfd4647b68febaa7e502e7fd7373066bc36f3b9eb76",
+  "artifact_path": "artifacts/invsqrt/INV-41/base.kmb",
+  "artifact_sha256": "2dc5469dec7db5f4609c220b4e4212c7549bd2731fd0f46ab696e321f3ff8e4c",
+  "build_command": [
+    "D:\\GQA\\.venv\\Scripts\\python.exe",
+    "D:\\GQA\\artifacts\\worktrees\\kickmix-engine-grading\\src\\invsqrt\\INV-41\\solution.py",
+    "--config",
+    "D:\\GQA\\artifacts\\worktrees\\kickmix-engine-grading\\src\\invsqrt\\INV-41\\configs\\base.json"
+  ],
+  "build_run": null,
+  "environment": {
+    "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    },
+    "limitations": "Source helpers at source_commit; engine grading implementation is uncommitted on codex/kickmix-engine-grading."
+  }
+}

@@ -1,0 +1,2 @@
+Model: max relative error 2^-25.07 at x=2588411
+Wrote D:\GQA\artifacts\worktrees\kickmix-engine-grading\artifacts\invsqrt\INV-BASELINE\baseline.kmb: 7,735 Toffolis, 260 qubits.

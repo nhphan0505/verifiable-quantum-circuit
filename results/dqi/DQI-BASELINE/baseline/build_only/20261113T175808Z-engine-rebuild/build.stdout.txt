@@ -1,0 +1,1 @@
+Wrote D:\GQA\artifacts\worktrees\kickmix-engine-grading\artifacts\dqi\DQI-BASELINE\baseline.kmb: 5,725,461 Toffolis, 1893 qubits.

@@ -1,0 +1,2 @@
+Model: max error/tolerance 0.930814 at x=526275
+Wrote D:\GQA\artifacts\worktrees\kickmix-engine-grading\artifacts\invsqrt\INV-41\base.kmb: 2,220 Toffolis, 164 qubits.

@@ -1,0 +1,1 @@
+Wrote D:\GQA\artifacts\worktrees\kickmix-engine-grading\artifacts\dfthcsos\DFT-BASELINE\baseline.zip: submission.npz and 10 ANGLE circuits.
