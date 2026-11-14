@@ -1,0 +1,18 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-39",
+  "config_name": "q26_homogeneous_group4",
+  "mode": "full",
+  "command": [
+    "/mnt/d/GQA/artifacts/worktrees/kickmix-engine-grading/.venv-engine/bin/python",
+    "-m",
+    "kickmix_engine",
+    "verify",
+    "dqi",
+    "/mnt/d/GQA/artifacts/worktrees/DQI-39-verify-portable/artifacts/dqi/DQI-39/q26_homogeneous_group4.kmb",
+    "--verifier",
+    "/mnt/d/GQA/artifacts/worktrees/DQI-39-verify-portable/verifiers/dqi/verify_submission_dqi.py",
+    "--threads",
+    "4"
+  ]
+}

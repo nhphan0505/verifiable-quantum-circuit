@@ -1,0 +1,28 @@
+{
+  "track": "dfthcsos",
+  "experiment_id": "DFT-BASELINE",
+  "config_name": "baseline",
+  "source_commit": "ece496eb416068bfdb9ee0f1239e2aa9b9f9e96c",
+  "source_path": "src/dfthcsos/DFT-BASELINE/solution.py",
+  "source_sha256": "5c4599510c1bf0a1a26873e08edb05127534b91fb079e0ac7eae904d9ad7327b",
+  "build_config_path": "src/dfthcsos/DFT-BASELINE/configs/baseline.json",
+  "build_config_sha256": "cdcf727361faa5053b894f5567c4b00ebbd0f097d6b78cc919845851c4efdbfb",
+  "artifact_path": "artifacts/dfthcsos/DFT-BASELINE/baseline.zip",
+  "artifact_sha256": "af12bd4b01067665f97aae8caa0022e22b39cfcd153591b302123b4dfe8b9cb6",
+  "build_command": [
+    "D:\\GQA\\.venv\\Scripts\\python.exe",
+    "D:\\GQA\\artifacts\\worktrees\\kickmix-engine-grading\\src\\dfthcsos\\DFT-BASELINE\\solution.py",
+    "--config",
+    "D:\\GQA\\artifacts\\worktrees\\kickmix-engine-grading\\src\\dfthcsos\\DFT-BASELINE\\configs\\baseline.json"
+  ],
+  "build_run": null,
+  "environment": {
+    "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    },
+    "limitations": "Source helpers at source_commit; engine grading implementation is uncommitted on codex/kickmix-engine-grading."
+  }
+}

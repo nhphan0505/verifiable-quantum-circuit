@@ -1,0 +1,7 @@
+{
+  "status": "BUILT",
+  "artifact_path": "D:\\GQA\\artifacts\\worktrees\\kickmix-engine-grading\\artifacts\\dqi\\DQI-21\\streamed_compact.kmb",
+  "num_qubits": 3876,
+  "static_toffoli_like": 4976652,
+  "num_instructions": 80902255
+}

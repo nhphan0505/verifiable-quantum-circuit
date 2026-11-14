@@ -67,7 +67,20 @@ class Audit:
             return
         command = meta.get('verify_command', meta.get('command', []))
         filename = 'verify.py' if track == 'dfthcsos' else f'verify_submission_{track}.py'
-        self.require(isinstance(command, list) and any(str(x).replace(chr(92), '/').endswith(f'/verifiers/{track}/{filename}') for x in command), f'{run}: full requires official verifier command')
+        engine = meta.get('engine')
+        if engine:
+            valid = (isinstance(engine, dict) and engine.get('name') == 'kickmix-engine'
+                     and engine.get('version') == '0.6.0' and isinstance(command, list)
+                     and len(command) >= 6 and command[1:5] == ['-m', 'kickmix_engine', 'verify', track]
+                     and '--verifier' in command)
+            self.require(valid, f'{run}: invalid engine command/identity')
+            if valid:
+                i = command.index('--verifier')
+                path = str(command[i+1]).replace(chr(92), '/') if i+1 < len(command) else ''
+                suffix = f'/verifiers/{track}' if track == 'dfthcsos' else f'/verifiers/{track}/{filename}'
+                self.require(path.endswith(suffix), f'{run}: engine must use repository verifier')
+        else:
+            self.require(isinstance(command, list) and any(str(x).replace(chr(92), '/').endswith(f'/verifiers/{track}/{filename}') for x in command), f'{run}: full requires official verifier command')
         expected = {
             'invsqrt': {'--n-p': 10, '--width': 22, '--max-x': 3133452, '--beta': 1,
                         '--precision-bits': 24, '--shots-per-x': 64, '--eta': 218, '--system-qubits': 6540},
@@ -78,6 +91,8 @@ class Audit:
         # Only exact option names are accepted; argparse abbreviations are ambiguous here.
         other = {'--format', '--seed', '--salt'}
         other |= {'--tree-edges'} if track == 'dfthcsos' else {'--batch-size', '--max-workers'}
+        if engine:
+            other |= {'--verifier', '--threads'}
         seen = set()
         for i, token in enumerate(command if isinstance(command, list) else []):
             if not isinstance(token, str) or not token.startswith('--'):

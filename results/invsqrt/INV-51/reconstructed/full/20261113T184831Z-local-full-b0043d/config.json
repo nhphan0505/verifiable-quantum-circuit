@@ -1,0 +1,18 @@
+{
+  "track": "invsqrt",
+  "experiment_id": "INV-51",
+  "config_name": "reconstructed",
+  "mode": "full",
+  "command": [
+    "/mnt/d/GQA/artifacts/worktrees/kickmix-engine-grading/.venv-engine/bin/python",
+    "-m",
+    "kickmix_engine",
+    "verify",
+    "invsqrt",
+    "/mnt/d/GQA/artifacts/worktrees/kickmix-engine-grading/artifacts/invsqrt/INV-51/reconstructed.kmb",
+    "--verifier",
+    "/mnt/d/GQA/artifacts/worktrees/kickmix-engine-grading/verifiers/invsqrt/verify_submission_invsqrt.py",
+    "--threads",
+    "4"
+  ]
+}

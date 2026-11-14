@@ -1,0 +1,28 @@
+{
+  "track": "invsqrt",
+  "experiment_id": "INV-BASELINE",
+  "config_name": "baseline",
+  "source_commit": "ece496eb416068bfdb9ee0f1239e2aa9b9f9e96c",
+  "source_path": "src/invsqrt/INV-BASELINE/solution.py",
+  "source_sha256": "fddc7ecc89a67a4a897a5bf509c902805383b31c94964221f8ae70c2f695cfad",
+  "build_config_path": "src/invsqrt/INV-BASELINE/configs/baseline.json",
+  "build_config_sha256": "8c76e1d32d9b6b0c898d347e883c9ea65b1e26b3151bd57c99d9e98487a1c8a8",
+  "artifact_path": "artifacts/invsqrt/INV-BASELINE/baseline.kmb",
+  "artifact_sha256": "e2bf8eb64350a4460a271fc7f1d591ef125b1e276377e9a0f64b96ab3ca321e1",
+  "build_command": [
+    "D:\\GQA\\.venv\\Scripts\\python.exe",
+    "D:\\GQA\\artifacts\\worktrees\\kickmix-engine-grading\\src\\invsqrt\\INV-BASELINE\\solution.py",
+    "--config",
+    "D:\\GQA\\artifacts\\worktrees\\kickmix-engine-grading\\src\\invsqrt\\INV-BASELINE\\configs\\baseline.json"
+  ],
+  "build_run": "results/invsqrt/INV-BASELINE/baseline/build_only/20261113T183444Z-engine-rebuild",
+  "environment": {
+    "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    },
+    "limitations": "Source helpers at source_commit; engine grading implementation is uncommitted on codex/kickmix-engine-grading."
+  }
+}

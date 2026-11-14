@@ -1,0 +1,28 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-19",
+  "config_name": "rank42",
+  "source_commit": "ece496eb416068bfdb9ee0f1239e2aa9b9f9e96c",
+  "source_path": "src/dqi/DQI-19/solution.py",
+  "source_sha256": "3798b608825c8ca741aaf4cf1d7913d87b650f2be55242a35dc769b8cd47c298",
+  "build_config_path": "src/dqi/DQI-19/configs/rank42.json",
+  "build_config_sha256": "74055cda362a06faece1aa628efa072d1b6ecce8898934143c2b0fb40985466d",
+  "artifact_path": "artifacts/dqi/DQI-19/rank42.kmb",
+  "artifact_sha256": "239695030405080ef92cb5b384eedb367587a9e9d8788edaef7c3aefd3d94a85",
+  "build_command": [
+    "D:\\GQA\\.venv\\Scripts\\python.exe",
+    "D:\\GQA\\artifacts\\worktrees\\kickmix-engine-grading\\src\\dqi\\DQI-19\\solution.py",
+    "--config",
+    "D:\\GQA\\artifacts\\worktrees\\kickmix-engine-grading\\src\\dqi\\DQI-19\\configs\\rank42.json"
+  ],
+  "build_run": null,
+  "environment": {
+    "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    },
+    "limitations": "Source helpers at source_commit; engine grading implementation is uncommitted on codex/kickmix-engine-grading."
+  }
+}

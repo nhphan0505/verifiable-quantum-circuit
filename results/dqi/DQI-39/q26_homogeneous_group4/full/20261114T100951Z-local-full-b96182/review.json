@@ -1,0 +1,8 @@
+{
+  "missing_provenance": true,
+  "matching_builds": [
+    "results/dqi/DQI-39/q26_homogeneous_group4/build_only/20261114T084125Z-local-build",
+    "results/dqi/DQI-39/q26_homogeneous_group4/build_only/20261114T100942Z-independent-windows"
+  ],
+  "note": "Agent must identify build evidence; do not infer source commit from current HEAD."
+}
