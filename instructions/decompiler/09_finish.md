@@ -20,6 +20,14 @@ Reviewer kiểm tra thêm: nguồn và attribution, code thực sự dựng mạ
 so với từng thành phần, SHA nguồn đúng build, hypothesis không bị nhận thành sự
 thật và results không bị sửa. Head thay đổi thì review lại theo quy tắc repo.
 
+Review code bắt buộc đối chiếu thuật toán với implementation theo
+[experiments 07](../experiments/07_review_pr.md): lập ánh xạ các bước mô tả sang
+hàm/stage/helper thực tế, kiểm công thức, bảng/hệ số, precision, register, thứ tự
+cổng/điều kiện, compute/uncompute và sửa pha. Không lấy hash exact hoặc verifier
+PASS làm bằng chứng rằng mô tả thuật toán đúng. Nếu chỉ khôi phục chuỗi lệnh thì
+ghi đúng mức đó; không tự suy thành thuật toán cấp cao. Sai khác code–mô tả phải
+được sửa hoặc giải thích bằng bằng chứng trước nghiệm thu.
+
 Reviewer phải kiểm tra bằng chứng build từ checkout GitHub sạch theo bước 6 và
 tự chạy lại entry point/config trong môi trường sạch. Không dùng bundle/file local
 của tác giả hoặc chỉ chạy các stage riêng để thay cho build end-to-end. Kiểm tra
@@ -27,6 +35,10 @@ audit bao phủ subprocess, không có đầu vào ngoài checkout/runtime đã 
 Thiếu dependency đã push, entry point lỗi hoặc thiếu bằng chứng build sạch là
 finding chặn nghiệm thu reproducible; yêu cầu sửa rồi build/review lại, không
 chấp nhận chỉ vì máy tác giả build được hoặc hash output lịch sử trùng.
+Reviewer làm theo chính hướng dẫn setup/build trong repo như người dùng mới;
+kiểm tra lệnh, dependency pin, config và vị trí output đủ rõ để người khác dùng
+được mà không cần tác giả cấp thêm file hoặc chỉ dẫn riêng. Ghi lệnh đã chạy,
+environment, hash output và mọi bước còn thiếu trong kết luận review.
 
 Reviewer kiểm tra tính tối giản của tập file: không bê nguyên bundle, không có
 helper/data không dùng, bản trùng, phiên bản cũ hoặc script thử/cache trong source

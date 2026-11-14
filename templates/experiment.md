@@ -58,7 +58,7 @@ xóa workspace, sửa pha và giới hạn sai số.>
 
 ## Kế hoạch kiểm chứng hypothesis
 
-- Mốc đối chứng: <link source/config và commit/hash; link run cùng mode/profile/seed/môi trường nếu có, hoặc ghi chưa chấm>.
+- Mốc đối chứng: <link source/config và commit/hash; link run có điểm nếu có, ghi mode/profile/seed/môi trường thực tế; không bắt buộc khớp phiên bản/bối cảnh, hoặc ghi chưa chấm>.
 - Dự đoán: <đại lượng dự kiến thay đổi, cơ chế và đánh đổi; phân biệt dự đoán với kết quả đã đo>.
 - Ủng hộ / bác bỏ: <kết quả quan sát và tiêu chí cụ thể để quyết định; trường hợp chưa đủ bằng chứng>.
 - Điều kiện dừng: <mức đạt mục tiêu, dấu hiệu bác bỏ, giới hạn số vòng hoặc tài nguyên; khi nào thử tiếp/tách hướng>.

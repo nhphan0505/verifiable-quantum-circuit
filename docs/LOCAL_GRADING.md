@@ -34,6 +34,7 @@ review.json nêu phần agent cần đối chiếu; không suy đoán commit t�
 không cập nhật SCORES hay tự commit; báo agent thư mục Saved để phân tích ở bước 04.
 Không sửa log/JSON gốc. Kết quả lịch sử vẫn giữ nguyên.
 
-Dev PASS không thay full PASS. So cải thiện với baseline cùng môi trường local,
-mode/profile/seed và phiên bản verifier/harness; thiếu baseline tương thích thì
-để hệ số cải thiện trống. Không dùng baseline Colab khác dependency để so trực tiếp.
+Dev PASS không thay full PASS. Có điểm PASS hợp lệ của cùng bài là được so sánh,
+kể cả local/Colab khác Python/package, verifier/harness, profile, seed hoặc số mẫu.
+Giữ hai cột full/dev riêng và ghi bối cảnh các run; khác biệt phiên bản không phải
+lý do bắt buộc để trống hệ số hoặc chấm lại baseline.
