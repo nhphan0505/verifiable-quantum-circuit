@@ -1,0 +1,12 @@
+{
+  "track": "shared",
+  "kind": "discussions",
+  "source_id": "kaggle-759220-rezops-generator-frontier",
+  "title": "RezOps Briefing: frontier 27.28 — 46 qubits for the inverse square root, a cutoff-18 DQI, 4,038-Toffoli loaders — 2026-11-14",
+  "source_url": "https://www.kaggle.com/competitions/google-verifiable-quantum-circuit-compilation/discussion/759220",
+  "version": "snapshot 2026-11-14; message 3554987 and comment 3554988",
+  "accessed_at": "2026-11-14",
+  "source_file": "source.md",
+  "source_sha256": "63eda3e7d8326695ff070f5f52b5b7c0b28e0f12df8fd0dbe66b711c43a6a9b7",
+  "coverage": "Đọc toàn bộ rawMarkdown bài chính 3554987 (mục 1–6, gồm 4b/4c) và một comment 3554988 qua API public Kaggle, không có replies trong kết quả nhận được. source.md là snapshot diễn giải tiếng Việt có các mục nguồn, không phải bản sao nguyên văn; hash định danh bản diễn giải. Chưa mở ảnh, viewer, notebooks/datasets/artifacts, proof/logs hoặc thread được dẫn; không chạy chấm. Chỉ đối chiếu verifier DQI và kết quả INV-51 đã có ở main fe0169da6404eac00149482b096b5ad9a692022d. Chưa review độc lập bước 4."
+}
