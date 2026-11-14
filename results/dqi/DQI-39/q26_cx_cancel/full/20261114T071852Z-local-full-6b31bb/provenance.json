@@ -1,0 +1,26 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-39",
+  "config_name": "q26_cx_cancel",
+  "source_commit": "2320183a7b9c1982a7eb8c5bd56113fa9f87ed97",
+  "source_path": "src/dqi/DQI-39/solution.py",
+  "source_sha256": "b372950ddda00d44c61185d20e5b1df5de1ad9f8f2d4783e8761ea7575081bb7",
+  "build_config_path": "src/dqi/DQI-39/configs/q26_cx_cancel.json",
+  "build_config_sha256": "1c941049f7680529e0329706269be207fe1970283867a1ee8db55f20dcbd3fa1",
+  "artifact_path": "artifacts/dqi/DQI-39/q26_cx_cancel.kmb",
+  "artifact_sha256": "7f71a310ac1f61f86f908c3c61375c879da4caca7db9b140e966195e8e4d01d1",
+  "build_command": "/Users/tranxuanhoa/Documents/research/GQA/.venv/bin/python src/dqi/DQI-39/solution.py --source-bundle /tmp/dqi-atakan-sources.zip --config src/dqi/DQI-39/configs/q26_cx_cancel.json --output artifacts/dqi/DQI-39/q26_cx_cancel.kmb",
+  "environment": {
+    "python": "3.13.7",
+    "python_executable": "/Users/tranxuanhoa/Documents/research/GQA/.venv/bin/python",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "packages": {
+      "kickmix": "1.0.0"
+    },
+    "source_bundle": {
+      "url": "https://www.kaggle.com/datasets/atakanaldemir/qcc-c44-five-helper-release-sources/versions/1",
+      "release_source_xz_sha256": "a0f705ea88b888cfaa89b84ddc7c988fa4aa5702c1ffc81cb9b2f917e149b95c"
+    }
+  },
+  "build_run": "results/dqi/DQI-39/q26_cx_cancel/build_only/20261114T070946Z-local-build"
+}
