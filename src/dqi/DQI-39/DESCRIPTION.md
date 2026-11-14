@@ -26,7 +26,7 @@ python src/dqi/DQI-39/solution.py \
 
 Mã Python và kế hoạch JSON nằm trong `decoder/` và `tools/`. Các file
 attribution và điều khoản của gói nguồn nằm trong `upstream/`.
-[CREDITS](upstream/CREDITS.md) · [LICENSE](upstream/packet/LICENSE) · [Phạm vi giấy phép](upstream/provenance/upstream_scope_notice.md).
+[CREDITS](upstream/CREDITS.md) · [LICENSE](upstream/packet/LICENSE.txt) · [Phạm vi giấy phép](upstream/provenance/upstream_scope_notice.md).
 
 Bản thử cục bộ trước khi đóng gói CLI đạt 892 qubit và 457.906 Toffoli-like tĩnh ở cả hai phiên bản. Bước giản lược bỏ 7.910.160 CX, giảm tổng số lệnh từ 63.887.951 xuống 55.977.791 (12,38%). Đối chiếu 16 trajectory ghép cặp khớp quantum bits, classical bits và pha. SHA-256 của bản đã giản lược là `7f71a310ac1f61f86f908c3c61375c879da4caca7db9b140e966195e8e4d01d1`.
 
