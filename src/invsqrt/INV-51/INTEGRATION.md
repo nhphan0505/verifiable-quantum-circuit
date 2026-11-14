@@ -1,28 +1,22 @@
-# Source tích hợp Fusion
+# Compiler gọn INV-51
 
-## Mục tiêu
+Ba file runtime là solution.py, circuit.py và tables.json; configs/reconstructed.json chọn bản Q46 cố định. Không cần thư mục engine hoặc source bundle. Dùng .venv Windows với requirements của repo.
 
-`solution.py` compile mạch bằng source Python và JSON trong `engine/`. Không tải hoặc giải nén archive ở runtime, không phụ thuộc `artifacts/.../dependencies`, không dùng Linux .so, verifier hoặc file submission/KMX đã có.
+## Thay đổi
 
-Các module giữ tên/path component upstream để duy trì quan hệ import và owner token; đây là các file Python/JSON có thể đọc/sửa trong Git, không phải archive/payload. Credits Syed Asad Ali, Apache-2.0, giữ LICENSE.txt/NOTICE.txt. Bundle nguồn gốc Kaggle version 12 có hash 7d9801ae20e942dba2211a656bba6014a0a16d57da534c0b60328d1c5d9d8254, đã xác minh công khai ở INV-51.
+- Các định nghĩa Python được gom theo namespace, đổi tên scope-aware thành tên toán học rõ ràng. Đây là hàm/class Python thực, không phải chuỗi code, ZIP hoặc payload mạch. Bộ liên kết nội bộ gọi trực tiếp các hàm khởi tạo đã định nghĩa; exec_module là tên phương thức compatibility, không gọi exec/eval.
+- Giữ bốn ngữ cảnh arithmetic riêng vì các binding carry/cleanup bị thay đổi độc lập. Gom chung globals của chúng sẽ có thể đổi gate stream.
+- Bỏ 89 định nghĩa không được gọi/tham chiếu, biến khởi tạo không dùng và preflight chỉ kiểm tra hồ sơ giá/ủy quyền của các phiên bản cũ. Không thay toán học, phép quay hoặc correction.
+- Trường JSON được chọn theo truy cập thực tế, giữ cả subtree khi so sánh/copy/serialize cần nó; giữ độ dài/thứ tự mảng và giá trị scalar. Sau pruning phải kiểm tra lại build sạch và so bytes, không chỉ tin trace.
+- Adapter path Q46 và V10_FROM_G1 được cố định theo cấu hình e2 đã được nghiệm thu. Các environment variant upstream không phải API hỗ trợ.
+- engine_manifest.json kiểm tra circuit.py/tables.json trước build; check_committed kiểm tra snapshot Git của source/config. Thay source/data phải cập nhật manifest rồi commit và build lại.
 
-## Điều chỉnh so với upstream
+upstream_changes.json ghi commit cơ sở, nguồn Apache-2.0, danh sách định nghĩa/biến đã bỏ và cách lấy lineage trước refactor. Các source/result cũ còn nguyên trong Git. Bản file legacy còn được lưu ngoài Git dưới artifacts/inv51-compact/legacy-source-preserved để hoàn tác, nhưng compiler không đọc chúng.
 
-- Chuẩn hóa cú pháp Python bằng AST unparse, bổ sung docstring/attribution khi thiếu. Công thức, gate emission, thứ tự patch, exact angles và assertion số học/owner/debt được giữ.
-- Những assertion SHA-256 và vòng kiểm tra INPUTS/SOURCE_READY kiểm tra archive lịch sử được tách khỏi thuật toán; không giả lập nội dung/hash các artifact bị bỏ. Trước build, engine_manifest.json kiểm tra hash từng file source/data tích hợp đã commit.
-- Dữ liệu certificate và bảng được copy nguyên bytes; hash được giữ trong manifest và lineage. Một số receipt JSON cũng chứa cấu hình/angles và vẫn cần cho module; chúng chỉ là input dựng, không phải kết quả chấm mới.
-- @FG_ROOT@ trở thành path của engine tính từ __file__; không sửa file nguồn/copy bundle trong quá trình build.
-- Bỏ import resource và các setrlimit chỉ dùng cho giới hạn hệ thống Unix. Chạy pip Kickmix Windows và giới hạn 600s mỗi stage; không tuyên bố enforce giới hạn RAM Unix.
-- So sánh đường dẫn certificate bằng Path.resolve để phù hợp Windows.
-
-upstream_changes.json ghi path nguồn gốc, SHA trước/sau và từng loại thay đổi. Không sử dụng mạch được chấm sẵn làm dữ liệu của generator. Các KMB/KMX component và receipt chỉ dùng cho kiểm tra source upstream được bỏ khỏi dependency runtime.
-
-## Giao diện
-
-Cài requirements của repo vào .venv Windows, rồi từ root checkout:
+## Cách chạy
 
 ```powershell
 .venv/Scripts/python.exe src/invsqrt/INV-51/solution.py --config src/invsqrt/INV-51/configs/reconstructed.json
 ```
 
-Config gồm hash target và timeout stage; không có source_bundle. Worker chạy từng module local và ghi audit các file đọc vào artifacts để chứng minh dependency closure. Chỉ phép kiểm tra đối chiếu bên ngoài build mới đọc submission đối chứng. Build_only provenance gắn source/config/engine hashes và commit thật; không tự chấm official verifier.
+Stage sinh mạch thô → audit affine/pairs → giữ tích → tối đa bốn lượt rewrite affine → merge Z_POW → relocate → compile KMB. Audit file-open được lưu ở thư mục build mới. Không tự chạy official verifier hoặc symbolic proof upstream; kết quả exact và PASS là các loại bằng chứng khác nhau.

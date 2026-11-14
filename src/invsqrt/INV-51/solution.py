@@ -1,21 +1,23 @@
-"""Compile Fusion invsqrt directly from the integrated Python generator and data.
+"""Compile the compact, exact 46-qubit Fusion circuit for INV-51.
 
-Issue #51; owner nhphan0505. Upstream Syed Asad Ali, Apache-2.0; see NOTICE.txt,
-LICENSE.txt and upstream_changes.json. Source/data in engine/ are readable and
-editable, with integrity checked against engine_manifest.json before build.
-No external source bundle, Linux engine, input submission or precompiled circuit
-is used. The pipeline computes normalization/root/residual, coefficient/seed/product,
-divider/phase endpoint, inverse cleanup and deterministic gate finishing passes.
-The target is 46-qubit phase exp(2*pi*i/sqrt(x)), x=1..3133452, restoring x/scratch.
-Exact bytes and HMR corrections must match INV-51. No optimization or new score is
-claimed. Historical source/proof-receipt hash checks were replaced by the committed
-integrated-source manifest; arithmetic/ownership/phase assertions remain.
+Owner nhphan0505; upstream Syed Asad Ali, Apache-2.0 (LICENSE.txt/NOTICE.txt).
+Runtime source is this entry point, readable circuit.py and tables.json. Internal
+component namespaces preserve mutable arithmetic bindings and independent carry
+contexts; no external bundle, source archive or precompiled gate payload is used.
+The generator normalizes 22-bit x, consumes root/residual, computes coefficient,
+seed/product/divider phase and reverses with HMR phase repayment and clean scratch.
+It implements phase exp(2*pi*i/sqrt(x)), x=1..3133452, with original exact angles.
 
-Use Windows repo .venv with Python 3.13 and pinned requirements:
+The fixed reconstructed config must reproduce SHA-256 321aff83...40935177. Build
+checks committed source/data hashes, runs deterministic finishing passes and saves
+new build_only provenance. Source, tables and initialization state were pruned;
+metadata preflights were replaced by a manifest, not mathematical/owner assertions.
+No new verifier PASS or score is claimed; see DESCRIPTION.md for historical runs.
+
+Run with repository Windows Python 3.13 .venv and pinned requirements:
 python src/invsqrt/INV-51/solution.py --config src/invsqrt/INV-51/configs/reconstructed.json
-Outputs artifacts/invsqrt/INV-51/reconstructed.kmb and build_only provenance.
-Each stage times out at 600 seconds; Windows memory limits are not enforced.
-This command does not run official grading. See DESCRIPTION.md for validation.
+Output artifacts/invsqrt/INV-51/reconstructed.kmb is never silently overwritten.
+Each stage times out at 600 seconds; Unix RAM limits are not enforced on Windows.
 """
 from pathlib import Path
 import argparse
@@ -128,7 +130,7 @@ def main():
         command=[sys.executable, '-X', 'utf8', str(HERE/'circuit.py'), script.relative_to(tree).as_posix(), *map(str,arguments)]
         print(f'{label}: {script.name}', flush=True)
         with (work/(label+'.log')).open('xb') as log:
-            result=subprocess.run(command, cwd=HERE, env=env, stdout=log, stderr=subprocess.STDOUT,
+            result=subprocess.run(command, cwd=HERE, env={**env, 'INV51_AUDIT_FILE':str(work/(label+'.reads.json'))}, stdout=log, stderr=subprocess.STDOUT,
                                   timeout=config['stage_timeout_seconds'])
         stages.append({'stage':label,'command':[relative_path(v) if Path(str(v)).is_absolute() else str(v) for v in command],
                        'command_base':'.','cwd':HERE.relative_to(ROOT).as_posix(),

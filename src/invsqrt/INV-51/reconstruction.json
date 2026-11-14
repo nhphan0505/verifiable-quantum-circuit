@@ -18,23 +18,23 @@
     "https://www.kaggle.com/datasets/syed3000/vqcc-own-circuit-portfolio"
   ],
   "dependencies": {
-    "obtain": "All runtime generator source/data committed in engine/. Only Windows .venv and pinned requirements required; upstream archive fields record lineage only.",
-    "host_files": "None required by integrated compiler; official verifier remains needed only for grading.",
-    "dataset_url": "https://www.kaggle.com/datasets/syed3000/vqcc-own-circuit-portfolio",
-    "dataset_version": 12,
-    "archive_name": "invsqrt_source_zip",
-    "archive_sha256": "7d9801ae20e942dba2211a656bba6014a0a16d57da534c0b60328d1c5d9d8254",
-    "archive_bytes": 2563106,
-    "archive_download_url": "https://www.kaggle.com/api/v1/datasets/download/syed3000/vqcc-own-circuit-portfolio/invsqrt_source_zip?datasetVersionNumber=12",
-    "public_access_evidence": "evidence/public_source.json"
+    "runtime": "Repository pinned Windows Python 3.13 .venv",
+    "local_files": [
+      "solution.py",
+      "circuit.py",
+      "tables.json",
+      "configs/reconstructed.json"
+    ],
+    "external_bundle_required": false,
+    "linux_engine_required": false
   },
-  "reconstruction_level": "INTEGRATED_GENERATOR_EXACT",
+  "reconstruction_level": "COMPACT_GENERATOR_PENDING",
   "limitations": [
-    "Historical archive integrity checks replaced by integrated engine manifest; adaptations recorded in upstream_changes.json.",
-    "No new grading run; bytes/hash identical to historical INV-51 full-PASS artifact.",
-    "Windows Unix memory limits are not enforced; stage timeouts are enforced."
+    "Fixed reconstructed Q46 configuration only; old environment experiment variants unsupported.",
+    "A new clean build and byte comparison is required after this refactor.",
+    "Historical grading remains bound to its historical source commits."
   ],
   "build_source_commit": "4a8c32b544079ce94c9b3b3aec2befff4022eb4e",
   "reconstruction_check": "results/invsqrt/INV-51/reconstructed/build_only/20261113T193925Z-exact-s0itk2se/reconstruction_check.json",
-  "upstream_components_manifest": "data/SHA256SUMS"
+  "source_basis_commit": "1cd2ba724e603c7ed985b2a6d4717b1badd8febc"
 }
