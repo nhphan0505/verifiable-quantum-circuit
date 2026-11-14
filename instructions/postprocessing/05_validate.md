@@ -9,15 +9,19 @@ không phải bước bàn giao chấm và lưu results của luồng experiment
 1. Xác minh phiên bản code PP khớp commit; nguồn/hash mạch gốc và bằng chứng
    chưa qua PP khác. Nếu không xác minh được thì chọn đầu vào khác hoặc báo
    thiếu dữ kiện, không dùng mạch đó như đối chứng không PP.
-2. Kiểm tra cách gọi verifier trước khi chạy. Dùng chế độ không lưu hoặc
+2. Đọc [LOCAL_GRADING](../../docs/LOCAL_GRADING.md) và kiểm tra cách gọi engine
+   hiện hành trước khi chạy: kickmix-engine 0.6.0, smoke/full; Windows dùng WSL
+   với môi trường engine Linux. Không fallback sang engine cũ hoặc chạy mode
+   dev_5min mới. Dùng chế độ không lưu hoặc
    chuyển mọi output sang thư mục tạm riêng. Không dùng đường chạy notebook/
    wrapper tự ghi results, SCORES hoặc metadata experiment. Không sửa verifier
    để đáp ứng điều này; nếu chưa có cách chạy phù hợp thì báo blocker.
 3. Chạy đối chứng và ứng viên trên cùng bytes đầu vào, cùng profile, seed và
    số mẫu khi có. Ứng viên chỉ chạy PP đang thử; không xếp chuỗi với PP khác.
    Kết quả cũ chỉ dùng tham khảo nếu điều kiện chấm không tương thích.
-4. Kiểm tra artifact hợp lệ, chạy verifier gốc, đo tài nguyên trước/sau theo
-   công thức của bài. Phân biệt smoke/dev/full, FAIL/TIMEOUT và PASS thật;
+4. Kiểm tra artifact hợp lệ, chấm bằng engine hiện hành theo điều kiện bài và
+   giữ nguyên verifier gốc, đo tài nguyên trước/sau theo công thức của bài.
+   Phân biệt smoke/full, FAIL/TIMEOUT và PASS thật;
    giảm qubit/Toffoli không đủ nghiệm thu tính đúng.
 5. So với tiêu chí dự đoán; thử trong giới hạn đã ghi. Dùng mẫu/mạch chưa dùng
    tinh chỉnh cho kiểm tra bổ sung nếu đã có trong kế hoạch; không tuyên bố

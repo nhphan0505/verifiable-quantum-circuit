@@ -67,7 +67,10 @@ mở lại experiment.
   pipeline tạo mạch; hash giống nhau không tự chứng minh chưa có PP.
 - Đối chứng và ứng viên dùng cùng bytes mạch gốc, cùng điều kiện chấm. Không
   đổi tham số dựng mạch nguồn để làm PP có lợi hơn.
-- Vẫn chạy verifier gốc, không chỉ đếm qubit/Toffoli. Kiểm tra tính đúng trên
+- Chấm theo [LOCAL_GRADING](../../docs/LOCAL_GRADING.md): hiện dùng
+  kickmix-engine 0.6.0, chỉ `smoke`/`full`; Windows dùng WSL và môi trường engine
+  Linux. Không fallback sang engine cũ khi thiếu môi trường. Giữ nguyên verifier
+  và điều kiện bài, không chỉ đếm qubit/Toffoli. Kiểm tra tính đúng trên
   mạch nhỏ và đánh giá đúng đại lượng chi phí của bài.
 - Khác luồng experiments, bước 5 cho phép agent chạy chấm local phục vụ kiểm
   chứng PP. Không tạo run, provenance JSON, bảng điểm hoặc log lưu lâu dài.
@@ -76,7 +79,8 @@ mở lại experiment.
   khi dọn, xác minh đường dẫn tuyệt đối và chỉ xóa dữ liệu tạm do mình tạo.
 - DESCRIPTION lưu cách kiểm chứng, nguồn/hash đầu vào, phiên bản, tham số,
   kết luận và giới hạn; không chép bảng điểm hoặc log chấm. Báo số đo thực tế
-  trong chat, phân biệt smoke/dev/full và chưa kiểm tra.
+  trong chat, phân biệt smoke/full và chưa kiểm tra. `dev_5min` chỉ là dữ liệu
+  lịch sử, không dùng làm mode cho lần chấm mới.
 - Chỉ bật nhiều PP trong một công việc kết hợp riêng được giao, sau kiểm chứng
   độc lập; không lấy kết quả phối hợp làm bằng chứng cho một PP đơn lẻ.
 
