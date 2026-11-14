@@ -40,3 +40,17 @@ Hai run dùng config `q26_cx_cancel`, commit nguồn `2320183a7b9c1982a7eb8c5bd5
 | full | PASS | 383517939271.7216 | 102400 | 0 | 1 | [20261114T071852Z-local-full-6b31bb](../../../results/dqi/DQI-39/q26_cx_cancel/full/20261114T071852Z-local-full-6b31bb/verifier.json) |
 
 Cả hai run dùng 892 qubit và trung bình khoảng 402.773 Toffoli-like. Full đạt PASS theo verifier và ghi nhận một lỗi phase, nên tiêu chí không lỗi chưa đạt trên full. Cần đối chiếu với q26 gốc trên cùng mẫu trước khi quy lỗi cho phép giản lược CX. Các run DQI-BASELINE trong bảng điểm khác môi trường hoặc harness, nên cột hệ số cải thiện để trống.
+
+### Điều tra lỗi phase
+
+Tái chạy với seed mặc định của artifact full và batch 256 tái lập lỗi ở shot chỉ số 14975 (đếm từ 0), trọng số 31. q26 gốc và bản giản lược cùng sai đúng shot đó khi dùng cùng syndrome, mask và seed simulator. Thử giữ các pole flag thật thay cho phép truyền flag của q26 vẫn sai ở shot này, đồng thời tăng lên 901 qubit. Phép thử này không được chọn làm config chấm.
+
+Đặt riêng từng bit mask tại 31 vị trí có lỗi cho thấy 30 vị trí trả về 0, còn vị trí 50 trả về 2477 thay cho 2850. Mạch vẫn khôi phục syndrome và dọn workspace. Đọc hệ số B ngay sau synthesis cho thấy đa thức monic dùng trong biểu diễn Forney không có nghiệm tại các điểm trường của ca này. Kết quả khoanh lỗi vào quá trình dựng locator, gồm extraction và synthesis. Chưa xác định được phép cập nhật đầu tiên làm sai locator. Giữ ca trọng số 31 này làm test hồi quy trước khi thử thay đổi converter hoặc reverse extraction.
+
+V5 và q26 cùng dùng 892 qubit, với mean Toffoli-like dev lần lượt khoảng 395.307 và 402.774. Bản đếm theo marker cho thấy cả hai cùng dùng 44.275 Toffoli-like tĩnh cho scan. Hai phần đáng đối chiếu là reverse extraction (q26 121.867, V5 96.881) và reverse conversion (q26 77.403, V5 62.534) theo [ghi chú audit V5/V6](../../../research/dqi/discussions/kaggle-kirilltym-conditional-uncompute-audit/note.md). Các chênh lệch theo khối là mốc để kiểm tra tương đương dữ liệu và pha ở biên. Chưa có bằng chứng rằng ghép riêng một khối sẽ đạt mức tiết kiệm của toàn mạch V5.
+
+### Đối chiếu phương án sửa lỗi
+
+Bản dựng thử từ gói upstream, gồm hoàn thiện hụt ba bậc và giữ pole flag ở nhóm 12 và 16, dùng 892 qubit và 458.305 Toffoli-like tĩnh. Phát lại cùng batch 256 vẫn sai pha đúng shot 14975; probe các bit mask vẫn trả về cùng mẫu lỗi sai. Loại bản dựng này khỏi các config chấm.
+
+DQI-27 `narrow_return` dựng lại từ mã nguồn, dùng 890 qubit và 11.647.130 Toffoli-like tĩnh. Trên cùng batch 256 không có lỗi pha hay lỗi hoàn nguyên. Probe riêng từng bit tại 31 vị trí lỗi cũng khớp toàn bộ giá trị. Đây là mốc đúng cho ca hồi quy và có chi phí cao hơn q26. Bản q26 hiện vẫn cần sửa khối dựng locator.
