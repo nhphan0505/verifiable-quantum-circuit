@@ -53,10 +53,21 @@ V5 và q26 cùng dùng 892 qubit, với mean Toffoli-like dev lần lượt kho�
 
 Bản dựng thử từ gói upstream, gồm hoàn thiện hụt ba bậc và giữ pole flag ở nhóm 12 và 16, dùng 892 qubit và 458.305 Toffoli-like tĩnh. Phát lại cùng batch 256 vẫn sai pha đúng shot 14975; probe các bit mask vẫn trả về cùng mẫu lỗi sai. Loại bản dựng này khỏi các config chấm.
 
-DQI-27 `narrow_return` dựng lại từ mã nguồn, dùng 890 qubit và 11.647.130 Toffoli-like tĩnh. Trên cùng batch 256 không có lỗi pha hay lỗi hoàn nguyên. Probe riêng từng bit tại 31 vị trí lỗi cũng khớp toàn bộ giá trị. Đây là mốc đúng cho ca hồi quy và có chi phí cao hơn q26. Bản q26 hiện vẫn cần sửa khối dựng locator.
+DQI-27 `narrow_return` dựng lại từ mã nguồn, dùng 890 qubit và 11.647.130 Toffoli-like tĩnh. Trên cùng batch 256 không có lỗi pha hay lỗi hoàn nguyên. Probe riêng từng bit tại 31 vị trí lỗi cũng khớp toàn bộ giá trị. Đây là mốc đúng cho ca hồi quy và có chi phí cao hơn q26. Bản vá bên dưới xử lý lỗi tại bước extraction của q26.
 
 ### Bản vá extraction của q26
 
 Đối chiếu với phép chia đa thức GF(2¹²) cho thấy tám hệ số đầu của continued fraction khớp, còn hệ số thứ chín sai. Ở node nhóm 4, mẫu số trung gian bằng 0 sau bốn bước. Phép nghịch đảo zero-safe của đường thông thường làm mất tọa độ projective tại pole. Config `q26_homogeneous_group4` dùng đường homogeneous của q26 cho nhóm 4 để giữ riêng tử số và mẫu số qua pole. Flag của nhóm 4 được giữ để hoàn nguyên độc lập với chuỗi flag của nhóm 5–16. Đối chiếu với batch lỗi đã lưu, probe các giá trị lỗi và đo Toffoli-like trước khi chấm lại.
 
-Bản dựng `q26_homogeneous_group4` ở commit `333aaff` có 892 qubit và 458.100 Toffoli-like tĩnh, tăng 194 cổng so với `q26_cx_cancel`. Bản trước và sau CNOT cancellation đều vượt qua batch hồi quy 256 shot và khớp 31 giá trị lỗi khi probe từng bit. Bản cuối cũng vượt qua 256 phép dịch vòng của ca lỗi. Các phép thử kiểm tra pha, khôi phục syndrome và workspace. Điểm full cho bản vá cần chấm riêng. [Provenance bản vá](../../../results/dqi/DQI-39/q26_homogeneous_group4/build_only/20261114T084125Z-local-build/provenance.json).
+Bản dựng `q26_homogeneous_group4` ở commit `333aaff` có 892 qubit và 458.100 Toffoli-like tĩnh, tăng 194 cổng so với `q26_cx_cancel`. Bản trước và sau CNOT cancellation đều vượt qua batch hồi quy 256 shot và khớp 31 giá trị lỗi khi probe từng bit. Bản cuối cũng vượt qua 256 phép dịch vòng của ca lỗi. Các phép thử kiểm tra pha, khôi phục syndrome và workspace. [Provenance bản vá](../../../results/dqi/DQI-39/q26_homogeneous_group4/build_only/20261114T084125Z-local-build/provenance.json).
+
+### Kết quả bản vá
+
+Cả hai run `q26_homogeneous_group4` đạt PASS với 0 lỗi value và 0 lỗi phase, khớp SHA-256 bản dựng `9ccc5add224f76e127ccf8129570ad344b5d3e5183c9a08fcd85133a6b9c45a8` từ commit `333aaffb48277d81dec33a2b7d4e7f44f75e4b18`.
+
+| Mode | Score | Shots | Mean Toffoli-like | Run |
+| --- | ---: | ---: | ---: | --- |
+| dev_5min | 959137617154.2389 | 4096 | 403868.080 | [20261114T084337Z-local-dev_5min-916c76](../../../results/dqi/DQI-39/q26_homogeneous_group4/dev_5min/20261114T084337Z-local-dev_5min-916c76/verifier.json) |
+| full | 382804854185.055 | 102400 | 403869.446 | [20261114T084401Z-local-full-70b703](../../../results/dqi/DQI-39/q26_homogeneous_group4/full/20261114T084401Z-local-full-70b703/verifier.json) |
+
+Bảng điểm chọn bản vá cho cả hai mode vì bản này vượt qua ca hồi quy và đạt tiêu chí full không lỗi. Dev dùng cùng seed 20261106 và tăng khoảng 0,27% điểm so với bản trước. Hai run full dùng seed mặc định suy từ hash riêng của mỗi artifact. Hệ số cạnh link run là đối chiếu số học với DQI-BASELINE lịch sử khác điều kiện chấm.
