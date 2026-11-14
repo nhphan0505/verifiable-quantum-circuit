@@ -1,5 +1,9 @@
 # Quy trình cộng tác từ ý tưởng đến hoàn thành
 
+**Luồng chấm hiện tại:** dùng kickmix-engine 0.6.0, chỉ có `smoke` và `full`.
+Notebook tự nhận diện OS; Windows dùng WSL. Các mục/run `dev_5min` bên dưới
+là hồ sơ của luồng cũ, không còn là lựa chọn cho lượt chấm mới. Xem docs/LOCAL_GRADING.md từ root repo.
+
 Một hướng nghiên cứu tương ứng một GitHub Issue, một branch và một thư mục source. Một hướng có thể thử nhiều config và nhiều lần chấm. Quy trình khép kín:
 
 **Chuẩn bị → kiểm tra hướng cũ → nhận Issue → tạo branch → mô tả/code/config → commit nguồn → dựng/chấm → lưu và phân tích → commit kết quả → thử tiếp hoặc PR → review/merge → đóng Issue.**
@@ -64,6 +68,25 @@ Dùng trực tiếp Python trong `.venv` như trên, không cần activate. Nế
 lệnh `py`, dùng `python --version` xác nhận đúng 3.13 rồi chạy `python -m venv .venv`.
 Notebook local dùng cùng bộ dependency trong requirements.txt và các package giao diện trong requirements-notebook.txt.
 
+**2b. Cài engine chấm (bắt buộc để chạy notebook):**
+
+Giữ `kickmix==1.0.0` trong `.venv` để compile; chấm dùng `kickmix-engine==0.6.0`.
+Notebook tự nhận diện OS và chỉ có hai mode `smoke`/`full`.
+
+- **Windows:** giữ kernel `.venv` Windows. Nếu chưa có WSL Ubuntu, mở PowerShell
+  Administrator và chạy `wsl --install -d Ubuntu`, mở Ubuntu để hoàn tất tạo tài khoản,
+  rồi chọn `wsl --set-default Ubuntu`. Trong terminal Ubuntu, vào cùng project
+  (ví dụ `cd /mnt/d/GQA`), tạo `.venv-engine` bằng Python 3.13 Linux và cài requirements
+  cùng wheel Linux của engine. Không dùng `.venv` Windows từ WSL.
+- **Linux/macOS:** tạo `.venv` bằng `python3.13 -m venv .venv`, cài
+  `requirements-notebook.txt` và wheel engine phù hợp vào chính `.venv`; notebook dùng
+  kernel này. Wheel phát hành hỗ trợ Linux x86_64 và macOS Apple Silicon; macOS Intel
+  cần build và kiểm thử riêng. Từng generator có thể có giới hạn OS, xem hướng dẫn của ID.
+
+Lệnh cài Python trong WSL, wheel cố định phiên bản, kiểm hash và `doctor` nằm trong
+[hướng dẫn chấm local](docs/LOCAL_GRADING.md#engine-chấm-mặc-định).
+Notebook báo lỗi nếu thiếu WSL/engine, không quay về trình chấm cũ.
+
 **3. Bổ sung dữ liệu ban tổ chức:**
 
 Lấy bộ dữ liệu gốc của cuộc thi hoặc từ người phụ trách nhóm, đặt theo [DATA.md](DATA.md).
@@ -84,7 +107,7 @@ không cần binary Linux `kickmix.so` để compile.
 ```
 
 Mở `notebooks/GQA_Grade_Submission.ipynb` trong VS Code/Jupyter, chọn kernel
-`.venv`. Chọn TRACK, MODE, EXPERIMENT_ID, CONFIG_NAME trong dropdown, điền OWNER rồi chạy cell chấm; artifact được đọc
+`.venv`. Chọn TRACK, MODE (`smoke` hoặc `full`), EXPERIMENT_ID, CONFIG_NAME trong dropdown, điền OWNER rồi chạy cell chấm; artifact được đọc
 từ project và results lưu đúng chỗ. Xem [chấm local](docs/LOCAL_GRADING.md).
 
 **5. Chuẩn bị coding agent để bắt đầu nghiên cứu:**

@@ -1,0 +1,2 @@
+Model: max relative error 2^-24.10 at x=284671
+Wrote D:\GQA\artifacts\worktrees\kickmix-engine-grading\artifacts\invsqrt\INV-6\delta12.kmb: 6,989 Toffolis, 251 qubits.

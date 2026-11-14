@@ -1,0 +1,23 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-39",
+  "config_name": "q26_homogeneous_group4",
+  "source_commit": "230a09ba84a92e13e98f2f61c39b7b37600f30e0",
+  "source_path": "src/dqi/DQI-39/solution.py",
+  "source_sha256": "d384f34974a2e405eed65b9fb246516df14f659b4e5ba140f9e6f20992f5859f",
+  "build_config_path": "src/dqi/DQI-39/configs/q26_homogeneous_group4.json",
+  "build_config_sha256": "4572bd1a5cbd0d76c436e21d05f12db017f1b0a90499ff3dc82a9b37f50c6f50",
+  "artifact_path": "artifacts/dqi/DQI-39/q26_homogeneous_group4.kmb",
+  "artifact_sha256": "9ccc5add224f76e127ccf8129570ad344b5d3e5183c9a08fcd85133a6b9c45a8",
+  "build_run": null,
+  "build_command": "D:/GQA/.venv/Scripts/python.exe -X utf8 src/dqi/DQI-39/solution.py --config src/dqi/DQI-39/configs/q26_homogeneous_group4.json --output artifacts/dqi/DQI-39/q26_homogeneous_group4.kmb",
+  "environment": {
+    "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    },
+    "decoder_source_commit": "230a09ba84a92e13e98f2f61c39b7b37600f30e0"
+  }
+}

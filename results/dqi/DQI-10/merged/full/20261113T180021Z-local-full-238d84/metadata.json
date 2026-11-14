@@ -1,0 +1,124 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-10",
+  "config_name": "merged",
+  "run_id": "20261113T180021Z-local-full-238d84",
+  "owner": "nhphan0505",
+  "verification_level": "full",
+  "status": "PASS",
+  "python": "3.13.18 (main, Nov 11 2026, 00:17:48) [Clang 23.1.3 ]",
+  "packages": {
+    "kickmix": "1.0.0",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "kickmix-engine": "0.6.0"
+  },
+  "upload_artifact": {
+    "name": "merged.kmb",
+    "sha256": "a8256b3af3695f112656af1a7af5eb81e953577a802b463f8383a6d278cd2924",
+    "size_bytes": 885495508
+  },
+  "artifact_path": "artifacts/dqi/DQI-10/merged.kmb",
+  "verifier_sha256": {
+    "verifiers/dfthcsos/verify.py": "0775be7a528922367caebe9e4d051d6199811f1aefeaa4b793eaaa4621b8ec9d",
+    "verifiers/dfthcsos/__init__.py": "81915e324cc0cade67f52a54b7a51991fd96abaea94d1f8a4d423dae20e57348",
+    "verifiers/dqi/dqi_reference_circuit.py": "2b8e1b80a806157c333a7e308eaf2499ee09de499efbc05875202c327959959e",
+    "verifiers/dqi/verify_submission_dqi.py": "f14274bc0943fb9769ddb01131be6063191a15009fe1caf1d4bdd9fd25194e65",
+    "verifiers/dqi/__init__.py": "01c870aa9763f4e4357fc6654bff1d3296cec995bd0943f87b4a48946ada5b40",
+    "verifiers/invsqrt/nr_reference_circuit.py": "bb90330dcf774f7b502de471293facba67f27952cc8808fe4a9970a9b1322e23",
+    "verifiers/invsqrt/verify_submission_invsqrt.py": "ddef520dec6b68d1cf0a6f328ddd36d79eb84570b9192cf3f7acaf073f06733a",
+    "verifiers/invsqrt/__init__.py": "e9a6ecf253c343528578be5fa92eb820ccade63333aebb784552fb4ae75dbc0b",
+    "verifiers/dfthcsos/example_submission/angle_k_reference_circuit.py": "8daccdca69f2d718b0176cd9281803df84a988ea5ac6c167fbb02e461ac2b371",
+    "verifiers/dfthcsos/scoreinfra/circuits.py": "fc027b52fdcebe14404f403a089122485d097ed65d03e6d989623d620b1ab68c",
+    "verifiers/dfthcsos/scoreinfra/costs_prepare.py": "7f1e190c42fc5325f3e6689fbbef51f95b0cb12f1c828cda92b6c088e72206da",
+    "verifiers/dfthcsos/scoreinfra/dfthc_math.py": "ae82898d47a7a86b96378fb906e0f8a9f46003065cf19c7c09952a123b5b5af8",
+    "verifiers/dfthcsos/scoreinfra/reference.py": "a2d5a63191d655729e29f0fde1e85fe4630bf896a91a63bb894d8d7daf71ed39",
+    "verifiers/dfthcsos/scoreinfra/__init__.py": "be90e0d503d5c20dcac0102af638b9a4ccad0341daa5baa5d49216a259e4516f"
+  },
+  "timeout_seconds": null,
+  "engine": {
+    "name": "kickmix-engine",
+    "version": "0.6.0",
+    "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "kernel": {
+      "arch": "x86_64",
+      "os": "linux",
+      "compiled": [
+        "baseline",
+        "avx2",
+        "avx512"
+      ],
+      "available": [
+        "baseline",
+        "avx2"
+      ],
+      "features": {
+        "sse4.2": true,
+        "popcnt": true,
+        "avx": true,
+        "avx2": true,
+        "bmi1": true,
+        "bmi2": true,
+        "fma": true,
+        "lzcnt": true,
+        "movbe": true,
+        "avx512f": false,
+        "avx512bw": false,
+        "avx512vl": false,
+        "avx512dq": false
+      },
+      "kernel_features": {
+        "baseline": [],
+        "avx2": [
+          "avx2",
+          "bmi1",
+          "bmi2",
+          "fma",
+          "lzcnt",
+          "movbe"
+        ],
+        "avx512": [
+          "avx2",
+          "bmi1",
+          "bmi2",
+          "fma",
+          "lzcnt",
+          "movbe",
+          "avx512f",
+          "avx512bw",
+          "avx512vl",
+          "avx512dq"
+        ]
+      },
+      "env_var": "KICKMIX_ENGINE_KERNEL",
+      "env_request": null,
+      "kernel": "avx2",
+      "selected_by": "auto",
+      "kernel_requires": [
+        "avx2",
+        "bmi1",
+        "bmi2",
+        "fma",
+        "lzcnt",
+        "movbe"
+      ]
+    }
+  },
+  "verify_command": [
+    "/mnt/d/GQA/artifacts/worktrees/kickmix-engine-grading/.venv-engine/bin/python",
+    "-m",
+    "kickmix_engine",
+    "verify",
+    "dqi",
+    "/mnt/d/GQA/artifacts/worktrees/kickmix-engine-grading/artifacts/dqi/DQI-10/merged.kmb",
+    "--verifier",
+    "/mnt/d/GQA/artifacts/worktrees/kickmix-engine-grading/verifiers/dqi/verify_submission_dqi.py",
+    "--threads",
+    "1"
+  ],
+  "submission_sha256": {
+    "merged.kmb": "a8256b3af3695f112656af1a7af5eb81e953577a802b463f8383a6d278cd2924"
+  },
+  "exit_code": 0,
+  "finished_at_utc": "2026-11-13T18:01:57.130833+00:00"
+}

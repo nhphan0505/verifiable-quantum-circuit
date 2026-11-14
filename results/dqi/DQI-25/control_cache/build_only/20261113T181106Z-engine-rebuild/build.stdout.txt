@@ -1,0 +1,9 @@
+{
+  "status": "BUILT",
+  "artifact_path": "artifacts\\dqi\\DQI-25\\control_cache.kmb",
+  "num_qubits": 1893,
+  "static_toffoli_like": 5043561,
+  "num_instructions": 90582806,
+  "reference_t": 5044893,
+  "saved_t": 1332
+}

@@ -1,0 +1,1 @@
+Wrote D:\GQA\artifacts\worktrees\kickmix-engine-grading\artifacts\dqi\DQI-10\merged.kmb: 5,788,553 Toffolis, 1889 qubits.

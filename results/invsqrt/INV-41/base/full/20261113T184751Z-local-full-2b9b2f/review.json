@@ -1,0 +1,8 @@
+{
+  "missing_provenance": true,
+  "matching_builds": [
+    "results/invsqrt/INV-41/base/build_only/20261110T031817Z-local-build",
+    "results/invsqrt/INV-41/base/build_only/20261113T184744Z-engine-rebuild"
+  ],
+  "note": "Agent must identify build evidence; do not infer source commit from current HEAD."
+}

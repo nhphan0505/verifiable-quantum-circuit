@@ -1,0 +1,18 @@
+{
+  "track": "dfthcsos",
+  "experiment_id": "DFT-BASELINE",
+  "config_name": "baseline",
+  "mode": "full",
+  "command": [
+    "/mnt/d/GQA/artifacts/worktrees/kickmix-engine-grading/.venv-engine/bin/python",
+    "-m",
+    "kickmix_engine",
+    "verify",
+    "dfthcsos",
+    "/mnt/d/GQA/artifacts/worktrees/kickmix-engine-grading/artifacts/dfthcsos/DFT-BASELINE/.verify-cusurcmp",
+    "--verifier",
+    "/mnt/d/GQA/artifacts/worktrees/kickmix-engine-grading/verifiers/dfthcsos",
+    "--threads",
+    "4"
+  ]
+}

@@ -1,5 +1,9 @@
 # Hướng dẫn agent nghiên cứu thử nghiệm
 
+**Luồng chấm hiện tại:** dùng kickmix-engine 0.6.0, chỉ có `smoke` và `full`.
+Notebook tự nhận diện OS; Windows dùng WSL. Các mục/run `dev_5min` bên dưới
+là hồ sơ của luồng cũ, không còn là lựa chọn cho lượt chấm mới. Xem docs/LOCAL_GRADING.md từ root repo.
+
 Áp dụng cho toàn bộ repository. Đọc [CONTRIBUTING.md](../CONTRIBUTING.md) trước khi làm việc; đó là quy trình đầy đủ. Làm trong phạm vi thành viên giao, không tự đổi hypothesis hoặc mở rộng sang hạ tầng chung. Nếu yêu cầu mới của người dùng thay đổi phạm vi, điều chỉnh công việc theo yêu cầu đó.
 
 ## 1. Xác định giai đoạn và quyền sở hữu

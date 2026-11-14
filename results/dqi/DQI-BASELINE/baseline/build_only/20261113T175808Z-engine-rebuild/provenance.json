@@ -1,0 +1,28 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-BASELINE",
+  "config_name": "baseline",
+  "source_commit": "ece496eb416068bfdb9ee0f1239e2aa9b9f9e96c",
+  "source_path": "src/dqi/DQI-BASELINE/solution.py",
+  "source_sha256": "3bba2c941021749393d322c1b779e02dd7ec987c61c7b253a54fd2173968cdb4",
+  "build_config_path": "src/dqi/DQI-BASELINE/configs/baseline.json",
+  "build_config_sha256": "74055cda362a06faece1aa628efa072d1b6ecce8898934143c2b0fb40985466d",
+  "artifact_path": "artifacts/dqi/DQI-BASELINE/baseline.kmb",
+  "artifact_sha256": "959471d05a26373b4f14ca0cae2d8639ea25f18170d9f6532139aa51ccc04995",
+  "build_command": [
+    "D:\\GQA\\.venv\\Scripts\\python.exe",
+    "D:\\GQA\\artifacts\\worktrees\\kickmix-engine-grading\\src\\dqi\\DQI-BASELINE\\solution.py",
+    "--config",
+    "D:\\GQA\\artifacts\\worktrees\\kickmix-engine-grading\\src\\dqi\\DQI-BASELINE\\configs\\baseline.json"
+  ],
+  "build_run": null,
+  "environment": {
+    "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    },
+    "limitations": "Source helpers at source_commit; engine grading implementation is uncommitted on codex/kickmix-engine-grading."
+  }
+}

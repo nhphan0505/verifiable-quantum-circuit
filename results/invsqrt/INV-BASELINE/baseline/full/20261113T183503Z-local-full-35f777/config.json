@@ -1,0 +1,18 @@
+{
+  "track": "invsqrt",
+  "experiment_id": "INV-BASELINE",
+  "config_name": "baseline",
+  "mode": "full",
+  "command": [
+    "/mnt/d/GQA/artifacts/worktrees/kickmix-engine-grading/.venv-engine/bin/python",
+    "-m",
+    "kickmix_engine",
+    "verify",
+    "invsqrt",
+    "/mnt/d/GQA/artifacts/worktrees/kickmix-engine-grading/artifacts/invsqrt/INV-BASELINE/baseline.kmb",
+    "--verifier",
+    "/mnt/d/GQA/artifacts/worktrees/kickmix-engine-grading/verifiers/invsqrt/verify_submission_invsqrt.py",
+    "--threads",
+    "1"
+  ]
+}
