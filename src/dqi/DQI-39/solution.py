@@ -1,4 +1,4 @@
-"""Generate the q26 DQI circuit from the pinned upstream Python source release.
+"""Generate the q26 DQI circuit from the Python sources included with DQI-39.
 
 The q26 carry implementation is from Atakan Aldemir's QCC C44 Five Helper
 Release Sources v1. See DESCRIPTION.md for attribution and build instructions.
@@ -7,23 +7,15 @@ The build starts from the decoder's Python functions and compiler plans.
 import argparse
 import hashlib
 from importlib.metadata import version
-import io
 import json
-import lzma
-from pathlib import Path, PurePosixPath
+from pathlib import Path
 import sys
 import tempfile
-from zipfile import ZipFile
 
 import kickmix as km
 
 
 CONFIGS = Path(__file__).resolve().parent / "configs"
-SOURCE_PREFIX = (
-    "datasets/qcc-dqi-nonempty-projective-lean-source-v3/parent/parent/parent/parent/"
-    "packet/blocks/dqi/carry-q26-892/source/"
-)
-RETENTION_TOOL = "tools/q26_transfer_build.py"
 WORD_BITS = 12
 SYNDROME_WORDS = 70
 POSITIONS = 4095
@@ -195,34 +187,9 @@ def optimize(original, output):
             "cnot_removed": removed}
 
 
-def extract_sources(bundle, decoder, expected_sha256, repair=False):
-    with ZipFile(bundle) as release:
-        compressed = release.read("release_source.xz")
-    if hashlib.sha256(compressed).hexdigest() != expected_sha256:
-        raise ValueError("The q26 source release does not match the config SHA-256")
-    with ZipFile(io.BytesIO(lzma.decompress(compressed))) as archive:
-        if repair:
-            release_root = SOURCE_PREFIX.split("packet/", 1)[0]
-            target = decoder.parent / RETENTION_TOOL
-            target.parent.mkdir(parents=True, exist_ok=True)
-            target.write_bytes(archive.read(release_root + RETENTION_TOOL))
-        for name in archive.namelist():
-            if not name.startswith(SOURCE_PREFIX):
-                continue
-            relative = PurePosixPath(name.removeprefix(SOURCE_PREFIX))
-            if relative.suffix not in {".py", ".json"}:
-                continue
-            if relative.is_absolute() or ".." in relative.parts:
-                raise ValueError(f"Invalid source archive path: {name}")
-            target = decoder / relative
-            target.parent.mkdir(parents=True, exist_ok=True)
-            target.write_bytes(archive.read(name))
-
-
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--source-bundle", type=Path, required=True)
-    parser.add_argument("--config", type=Path, default=CONFIGS / "q26_cx_cancel.json")
+    parser.add_argument("--config", type=Path, default=CONFIGS / "q26_homogeneous_group4.json")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     config = json.loads(args.config.read_text())
@@ -234,9 +201,8 @@ def main():
     output.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(dir=output.parent) as directory:
         workspace = Path(directory)
-        decoder = workspace / "decoder"
+        decoder = Path(__file__).resolve().parent / "decoder"
         repair = config.get("homogeneous_group4", False)
-        extract_sources(args.source_bundle, decoder, config["source_bundle_sha256"], repair)
         generated = workspace / "generated.kmb"
         print("Generating q26 from Python", flush=True)
         build_circuit(decoder, repair).to_file(str(generated), format="kmb")

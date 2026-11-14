@@ -16,15 +16,17 @@ Trong một đoạn chỉ gồm CX không điều kiện, CX(a,b) và CX(c,d) gi
 
 ## Dựng và kiểm chứng
 
-Tải bản ZIP của dataset v1 ở trên, chứa `release_source.xz`. Chạy từ thư mục gốc repo bằng Python 3.13 và Kickmix 1.0.0.
+Chạy từ thư mục gốc repo bằng Python 3.13 và Kickmix 1.0.0.
 
 ```sh
 python src/dqi/DQI-39/solution.py \
-  --source-bundle /path/to/qcc-c44-five-helper-release-sources.zip \
-  --output artifacts/dqi/DQI-39/q26_cx_cancel.kmb
+  --config src/dqi/DQI-39/configs/q26_homogeneous_group4.json \
+  --output artifacts/dqi/DQI-39/q26_homogeneous_group4.kmb
 ```
 
-Config mặc định `configs/q26_cx_cancel.json` ghim SHA-256 của `release_source.xz`. Bộ sinh chỉ trích xuất tệp Python và JSON của khối q26 vào thư mục tạm. Gói mã nguồn upstream là đầu vào bắt buộc. Không cần mạch `.kmb` upstream và PR không phân phối lại gói mã nguồn.
+Mã Python và kế hoạch JSON nằm trong `decoder/` và `tools/`. Các file
+attribution và điều khoản của gói nguồn nằm trong `upstream/`.
+[CREDITS](upstream/CREDITS.md) · [LICENSE](upstream/packet/LICENSE) · [Phạm vi giấy phép](upstream/provenance/upstream_scope_notice.md).
 
 Bản thử cục bộ trước khi đóng gói CLI đạt 892 qubit và 457.906 Toffoli-like tĩnh ở cả hai phiên bản. Bước giản lược bỏ 7.910.160 CX, giảm tổng số lệnh từ 63.887.951 xuống 55.977.791 (12,38%). Đối chiếu 16 trajectory ghép cặp khớp quantum bits, classical bits và pha. SHA-256 của bản đã giản lược là `7f71a310ac1f61f86f908c3c61375c879da4caca7db9b140e966195e8e4d01d1`.
 
