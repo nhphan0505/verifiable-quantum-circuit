@@ -183,7 +183,33 @@ class Audit:
                 for key in ['source_commit', 'source_sha256', 'build_config_sha256', 'artifact_sha256']:
                     self.require(p.get(key) == original.get(key), f'{run}: {key} differs from build_run')
 
+    def postprocessing(self):
+        """Validate PP methods separately from experiment IDs/configs."""
+        seen = set()
+        for scope in ['common', *TRACKS]:
+            folder = self.root / 'src' / scope / 'postprocessing'
+            if not folder.is_dir():
+                continue
+            for method in folder.iterdir():
+                if not method.is_dir() or method.name in {'tests', '__pycache__'}:
+                    continue
+                pp_id = method.name
+                valid = bool(re.fullmatch(r'PP-[0-9]{3,}', pp_id)) and int(pp_id[3:] or '0') > 0
+                self.require(valid, f'{method}: invalid PP ID')
+                self.require(pp_id not in seen, f'{method}: duplicate PP ID')
+                seen.add(pp_id)
+                desc = method / 'DESCRIPTION.md'
+                if self.require(desc.is_file(), f'{method}: missing DESCRIPTION.md'):
+                    self.require(self.read(desc).startswith(f'# [{pp_id}] '), f'{desc}: title differs from PP ID')
+                self.require((method / 'solution.py').is_file(), f'{method}: missing solution.py')
+                self.require(any((method / 'tests').glob('test_*.py')), f'{method}: missing PP tests')
+                self.require(not (method / 'configs').exists(), f'{method}: PP validation must not add configs')
+        if seen:
+            self.require((self.root / 'src/common/postprocessing/METHODS.md').is_file(),
+                         'Postprocessing methods require METHODS.md')
+
     def run(self):
+        self.postprocessing()
         self.research()
         legacy = set(self.load(self.root / 'scripts/legacy_runs.json').get('runs', []))
         manifest = self.load(self.root / 'data_manifest.json').get('files', {})
@@ -207,7 +233,7 @@ class Audit:
                 if not exp.endswith('-BASELINE'):
                     self.require(bool(re.search(r'https://github\.com/[^/\s]+/[^/\s]+/issues/' + exp.split('-')[1] + r'(?:\)|$)', issue)), f'{index}: missing/mismatched Issue URL for {exp}')
             for experiment in folder.iterdir():
-                if not experiment.is_dir() or experiment.name == '__pycache__':
+                if not experiment.is_dir() or experiment.name in {'__pycache__', 'postprocessing'}:
                     continue
                 exp = experiment.name
                 self.require(bool(re.fullmatch(prefix + r'-(?:BASELINE|[1-9][0-9]*)', exp)), f'{experiment}: invalid ID')
