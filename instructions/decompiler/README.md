@@ -59,11 +59,37 @@ results/<TRACK>/<ID>/<config>/build_only/<run-id>/
 ```
 
 Không sửa verifier, notebook, checker, template chung hoặc run cũ. Không commit
-binary lớn, KMX khổng lồ hoặc bản sao toàn submission. Dữ liệu phụ lớn ở vị trí
-ngoài Git có hướng dẫn lấy lại/hash; dữ liệu nhỏ dạng text có thể nằm trong data.
+binary lớn, KMX khổng lồ hoặc bản sao toàn submission. Dữ liệu phụ nằm ngoài
+Git không phải đầu vào build hợp lệ; dữ liệu cần để dựng phải được đưa lên GitHub
+cùng source (trong giới hạn repository), có attribution và hash. Nếu chưa thể đưa
+dependency cần thiết lên GitHub thì báo blocker, chưa nghiệm thu reproducible.
 Nếu checker không hỗ trợ đầu ra dự kiến, báo xung đột và xử lý trong phạm vi cho
 phép; không sửa checker hoặc thêm miễn trừ. Tối ưu hóa làm đổi mạch không thuộc
 mục tiêu tái dựng chính xác; thống nhất phạm vi/Issue trước khi chuyển hướng.
+
+## Điều kiện tái lập bắt buộc
+
+Solution phải tự dựng được từ checkout sạch của commit đã push lên GitHub và
+môi trường Python/package pin của repo. Toàn bộ source, helper, bảng và dữ liệu
+đầu vào build phải có trong checkout đó; không gọi file local ngoài repo, thư mục
+Downloads/Temp/scratch, bundle tác giả, cache hoặc artifact đã tạo ở máy cũ.
+Đường dẫn build resolve theo checkout/config, không phụ thuộc cwd hay đường dẫn
+tuyệt đối của máy tác giả. File tạm/output mới tạo trong lần build được phép đọc
+lại; thư viện/runtime đã khai báo được phép cài theo requirements.
+
+File submission gốc chỉ dùng ở bước phân tích/đối chiếu riêng, không được truyền
+vào solution hoặc dùng để vá output. Link tải và hash của bundle ngoài GitHub
+không thay thế dependency đã track. Phải có bằng chứng build sạch ở bước 6 và
+review lại ở bước 9; exact hash trên máy có sẵn dependency chưa đủ chứng minh
+reproducible. Quy tắc này áp dụng nghiệm thu mới, không sửa bằng chứng lịch sử.
+
+Source bàn giao phải tối giản: chỉ đưa vào GitHub các file thực sự cần để build,
+kiểm chứng/provenance, mô tả và đáp ứng giấy phép/attribution. Không chép nguyên
+bundle tác giả; loại bỏ module/data không được dùng, bản trùng, phiên bản cũ,
+script thử/tìm kiếm/profiling, cache và file tạm. Giữ ít file, ít dependency nhất
+có thể mà vẫn rõ ràng và tái lập được; không ép gộp bằng cách nhúng archive, mã
+nguồn dạng chuỗi hoặc toàn submission. Giải thích vai trò của từng file/helper/data
+còn lại; dữ liệu lịch sử đã commit vẫn giữ nguyên theo quy tắc provenance.
 
 ## Các mức bằng chứng
 

@@ -6,9 +6,24 @@ build lại khi cần; lưu records mới. Không tự chạy verifier/chấm đ
 - Theo [experiments 03](../experiments/03_implement_compile.md) và
   [REPOSITORY_CHECKS](../../docs/REPOSITORY_CHECKS.md): kiểm tra bytes source/config
   local khớp snapshot commit trước build, dùng Python/package pin của repo.
-- Chạy solution với dependency đã khai báo, không đọc input gốc hoặc scratch khi
-  build. Kiểm tra đường dẫn/dependency trong code; chạy với cwd khác khi cần để
-  phát hiện phụ thuộc ngầm. Chỉ công cụ đối chiếu mới đọc file gốc.
+- Bắt buộc build từ clone/checkout sạch của đúng commit đã push lên GitHub, dùng
+  venv mới và package pin theo repo; không chép source/data, bundle, cache hoặc
+  artifact từ workspace cũ sang. Chạy entry point solution.py với config đã track,
+  không chỉ chạy riêng các stage thay cho entry point. Chạy từ cwd khác để kiểm
+  tra resolve đường dẫn. Output/build directory phải mới, không dùng output có sẵn.
+- Kiểm tra dependency closure bằng code và audit file-open của solution cùng mọi
+  subprocess/stage: đầu vào chỉ thuộc checkout và runtime/package đã khai báo;
+  file trung gian phải được chính lần build này tạo. Không đọc input gốc, bundle
+  ngoài repo hoặc scratch/cache máy cũ, kể cả qua environment, symlink hay fallback.
+  Build không tự tải source/data ngoài checkout. Chỉ công cụ đối chiếu chạy riêng
+  sau build mới đọc submission gốc; audit tách riêng để không nhầm hai luồng.
+- Lưu bằng chứng mới cạnh provenance: URL repo, commit checkout, trạng thái sạch
+  trước build, lệnh setup/build và cwd, phiên bản/hash dependency, log build và
+  audit đường dẫn đọc của các stage. Không ghi token hay thông tin bí mật.
+- Đối chiếu audit với danh sách file bàn giao: mọi helper/data runtime giữ lại
+  phải có vai trò cụ thể; loại file dư và dependency không dùng, rồi commit và
+  build sạch lại nếu source/data thay đổi. Audit một config không tự chứng minh
+  file vô dụng: xét mọi config/nhánh được hỗ trợ và các file tài liệu/giấy phép.
 - Ghi provenance build_only đúng schema: commit, source/config hash, artifact hash,
   command, environment; thêm dependency hashes. Lưu reconstruction_check.json mới
   bên cạnh: input/output hash/bytes, từng file con, cách so, kết quả, environment,
@@ -22,5 +37,7 @@ build lại khi cần; lưu records mới. Không tự chạy verifier/chấm đ
   trước khi nghiệm thu ở mức thấp hơn. Giữ trace tiêu chí gốc và tiêu chí mới.
 
 Nghiệm thu mặc định: RECONSTRUCTED_EXACT cho toàn artifact, build/provenance có
-bằng chứng thật. COMPONENTS_EXACT_CONTAINER_DIFFERS chưa đạt mục tiêu hash ZIP.
+bằng chứng thật và entry point build sạch từ GitHub thành công, không phụ thuộc
+file local ngoài checkout/runtime. Thiếu bằng chứng này thì chưa đạt reproducible,
+kể cả output có hash exact. COMPONENTS_EXACT_CONTAINER_DIFFERS chưa đạt mục tiêu hash ZIP.
 Báo BUILT độc lập với exact; cả hai không đồng nghĩa PASS.
