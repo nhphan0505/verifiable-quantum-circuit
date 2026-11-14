@@ -16,7 +16,7 @@ Giữ nguyên 128 đoạn tra bảng, thuật toán `y = c0 - T(t (c1 - T(t c2))
 
 Đặt `phase_drop_bits=2` trong JSON; `_phase()` chỉ phát `Z_POW` cho `j>=2`, bỏ phép quay ở `j=1` cùng với bit 0 đã bỏ từ trước. Mô hình trong `_evaluate()` phải dùng đúng `y1_masked = (y1 >> 2) << 2`. Mỗi phép nhân `T` giữ quy tắc bỏ các partial-product row dưới LSB của thanh ghi đích; không thay đổi làm tròn/cắt cụt. Vì offset có thể dịch `r1` và `y`, phải kiểm tra không âm và không tràn theo mọi `x=1..3,133,452`; kiểm tra cả đầu/cuối mỗi đoạn bảng, các giá trị gần biên và miền `x=1`. Tiêu chí pha là `abs(y1_masked / 2^(wy+n_p) - 1/sqrt(x)) < 2^-24 / sqrt(x)`.
 
-Quét mô hình fixed-point của INV-41 trên toàn miền với ứng viên này cho sai số tương đối lớn nhất khoảng 0.898786 lần dung sai, biên tuyệt đối nhỏ nhất khoảng 4.110e-12 vòng, và các độ rộng word không tăng. Theo công thức điểm verifier với 34 thay vì 35 phép quay, Q=164 và 2220 Toffoli giữ nguyên, score ước tính 403718.36. Đây là kết quả mô hình, chưa phải mạch đã build hay verifier PASS. Cấu hình JSON đầu tiên ở giai đoạn code sẽ dùng offset và số bit trên để kiểm định giả thuyết, chưa khẳng định tối ưu. Offset có thể làm thay đổi pha ở điểm biên và đường HMR cần kiểm bằng mạch thật.
+Quét mô hình fixed-point của INV-41 trên toàn miền với ứng viên này cho sai số tương đối lớn nhất khoảng 0.898786 lần dung sai, biên tuyệt đối nhỏ nhất khoảng 4.110e-12 vòng, và các độ rộng word không tăng. Theo công thức điểm verifier với 34 thay vì 35 phép quay, Q=164 và 2220 Toffoli giữ nguyên, score ước tính 403718.36. Đây là kết quả mô hình, chưa phải mạch đã build hay verifier PASS. Config đầu tiên là [phase2_row0.json](configs/phase2_row0.json) với đúng offset và số bit trên để kiểm định giả thuyết, chưa khẳng định tối ưu. Offset có thể làm thay đổi pha ở điểm biên và đường HMR cần kiểm bằng mạch thật.
 
 ## Kế hoạch kiểm chứng hypothesis
 
@@ -35,4 +35,4 @@ Chưa build hoặc chấm. Sẽ ghi config, SHA nguồn, provenance và run sau 
 | Dev | Chưa có | Chưa có | Chưa chấm |
 | Full | Chưa có | Chưa có | Chưa chấm |
 
-Mã triển khai dự kiến: `solution.py`. Cấu hình dự kiến: `configs/`.
+Mã triển khai: [solution.py](solution.py). Cấu hình: [phase2_row0.json](configs/phase2_row0.json).
