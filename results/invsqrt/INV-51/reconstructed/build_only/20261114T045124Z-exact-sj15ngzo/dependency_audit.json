@@ -1,0 +1,16 @@
+{
+  "status": "PASS_COMPACT_DEPENDENCY_CLOSURE",
+  "source_commit": "d89769f0fd76190159d33298ff43948a846faad3",
+  "audited_open_paths": 125,
+  "unexpected_reads": [],
+  "allowed_scopes": [
+    "checkout/src/invsqrt/INV-51",
+    "fresh build directory",
+    "Windows .venv",
+    "CPython base prefix"
+  ],
+  "notes": [
+    "Audit includes attempted cache reads, not only existing files.",
+    "No original submission or legacy source was read by compiler stages. Original input was opened only by the independent comparison afterward."
+  ]
+}

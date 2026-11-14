@@ -1,0 +1,230 @@
+{
+  "source_commit": "925692745f4508cf47a82e8b631e96d30379e613",
+  "stages": [
+    {
+      "stage": "01_generator",
+      "command": [
+        "../../../.venv/Scripts/python.exe",
+        "-X",
+        "utf8",
+        "src/invsqrt/INV-51/circuit.py",
+        "tools/build_variant.py",
+        "--out",
+        "artifacts/invsqrt/INV-51/build-s_z9uw_j/raw",
+        "--name",
+        "raw",
+        "--Q",
+        "46",
+        "--patch",
+        "src/invsqrt/INV-51/_components/patches/patch_fwd_narrow.py",
+        "--patch",
+        "src/invsqrt/INV-51/_components/patches/patch_w47_body.py",
+        "--patch",
+        "src/invsqrt/INV-51/_components/patches/patch_endpoint_v9e2.py",
+        "--patch",
+        "src/invsqrt/INV-51/_components/patches/patch_hret_sat_s15k7a.py",
+        "--patch",
+        "src/invsqrt/INV-51/_components/patches/patch_seedinv.py",
+        "--patch",
+        "src/invsqrt/INV-51/_components/patches/patch_coefdisp.py",
+        "--patch",
+        "src/invsqrt/INV-51/_components/patches/patch_coef2_q46.py",
+        "--patch",
+        "src/invsqrt/INV-51/_components/patches/patch_h2ret.py",
+        "--patch",
+        "src/invsqrt/INV-51/_components/patches/patch_proddisp.py",
+        "--patch",
+        "src/invsqrt/INV-51/_components/patches/patch_donor_first60.py",
+        "--patch",
+        "src/invsqrt/INV-51/_components/patches/patch_ld_first20_56b8.py",
+        "--patch",
+        "src/invsqrt/INV-51/_components/patches/patch_second46_c19_70nb1.py",
+        "--patch",
+        "src/invsqrt/INV-51/_components/patches/patch_q47_decoder_resynth2.py"
+      ],
+      "command_base": ".",
+      "cwd": "src/invsqrt/INV-51",
+      "returncode": 0
+    },
+    {
+      "stage": "02_affine",
+      "command": [
+        "../../../.venv/Scripts/python.exe",
+        "-X",
+        "utf8",
+        "src/invsqrt/INV-51/circuit.py",
+        "tools/audit_affine.py",
+        "artifacts/invsqrt/INV-51/build-s_z9uw_j/raw/raw.kmx",
+        "--out",
+        "artifacts/invsqrt/INV-51/build-s_z9uw_j/final/s1.audit.json"
+      ],
+      "command_base": ".",
+      "cwd": "src/invsqrt/INV-51",
+      "returncode": 0
+    },
+    {
+      "stage": "03_pairs",
+      "command": [
+        "../../../.venv/Scripts/python.exe",
+        "-X",
+        "utf8",
+        "src/invsqrt/INV-51/circuit.py",
+        "tools/audit_pairs.py",
+        "artifacts/invsqrt/INV-51/build-s_z9uw_j/raw/raw.kmx",
+        "--live",
+        "artifacts/invsqrt/INV-51/build-s_z9uw_j/final/s1.audit.live.npy",
+        "--out",
+        "artifacts/invsqrt/INV-51/build-s_z9uw_j/final/s1.pairs.json"
+      ],
+      "command_base": ".",
+      "cwd": "src/invsqrt/INV-51",
+      "returncode": 0
+    },
+    {
+      "stage": "04_hold",
+      "command": [
+        "../../../.venv/Scripts/python.exe",
+        "-X",
+        "utf8",
+        "src/invsqrt/INV-51/circuit.py",
+        "tools/hold_pass.py",
+        "artifacts/invsqrt/INV-51/build-s_z9uw_j/raw/raw.kmx",
+        "artifacts/invsqrt/INV-51/build-s_z9uw_j/final/s1.pairs.json",
+        "--out",
+        "artifacts/invsqrt/INV-51/build-s_z9uw_j/final/s2.kmx",
+        "--Q",
+        "46"
+      ],
+      "command_base": ".",
+      "cwd": "src/invsqrt/INV-51",
+      "returncode": 0
+    },
+    {
+      "stage": "05_affine_1",
+      "command": [
+        "../../../.venv/Scripts/python.exe",
+        "-X",
+        "utf8",
+        "src/invsqrt/INV-51/circuit.py",
+        "tools/audit_affine.py",
+        "artifacts/invsqrt/INV-51/build-s_z9uw_j/final/s2.kmx",
+        "--out",
+        "artifacts/invsqrt/INV-51/build-s_z9uw_j/final/r1.audit.json"
+      ],
+      "command_base": ".",
+      "cwd": "src/invsqrt/INV-51",
+      "returncode": 0
+    },
+    {
+      "stage": "06_rewrite_1",
+      "command": [
+        "../../../.venv/Scripts/python.exe",
+        "-X",
+        "utf8",
+        "src/invsqrt/INV-51/circuit.py",
+        "tools/postpass.py",
+        "artifacts/invsqrt/INV-51/build-s_z9uw_j/final/s2.kmx",
+        "artifacts/invsqrt/INV-51/build-s_z9uw_j/final/r1.audit.json",
+        "--out",
+        "artifacts/invsqrt/INV-51/build-s_z9uw_j/final/r1.kmx"
+      ],
+      "command_base": ".",
+      "cwd": "src/invsqrt/INV-51",
+      "returncode": 0
+    },
+    {
+      "stage": "05_affine_2",
+      "command": [
+        "../../../.venv/Scripts/python.exe",
+        "-X",
+        "utf8",
+        "src/invsqrt/INV-51/circuit.py",
+        "tools/audit_affine.py",
+        "artifacts/invsqrt/INV-51/build-s_z9uw_j/final/r1.kmx",
+        "--out",
+        "artifacts/invsqrt/INV-51/build-s_z9uw_j/final/r2.audit.json"
+      ],
+      "command_base": ".",
+      "cwd": "src/invsqrt/INV-51",
+      "returncode": 0
+    },
+    {
+      "stage": "07_merge_zpow",
+      "command": [
+        "../../../.venv/Scripts/python.exe",
+        "-X",
+        "utf8",
+        "src/invsqrt/INV-51/circuit.py",
+        "tools/merge_zpow.py",
+        "artifacts/invsqrt/INV-51/build-s_z9uw_j/final/r1.kmx",
+        "--out",
+        "artifacts/invsqrt/INV-51/build-s_z9uw_j/final/zpow.kmx"
+      ],
+      "command_base": ".",
+      "cwd": "src/invsqrt/INV-51",
+      "returncode": 0
+    },
+    {
+      "stage": "08_compile_prepost",
+      "command": [
+        "../../../.venv/Scripts/python.exe",
+        "-X",
+        "utf8",
+        "src/invsqrt/INV-51/circuit.py",
+        "tools/kmx_to_kmb.py",
+        "artifacts/invsqrt/INV-51/build-s_z9uw_j/final/zpow.kmx",
+        "--out",
+        "artifacts/invsqrt/INV-51/build-s_z9uw_j/final/prepost.kmb"
+      ],
+      "command_base": ".",
+      "cwd": "src/invsqrt/INV-51",
+      "returncode": 0
+    },
+    {
+      "stage": "09_relocate",
+      "command": [
+        "../../../.venv/Scripts/python.exe",
+        "-X",
+        "utf8",
+        "src/invsqrt/INV-51/circuit.py",
+        "agents/micro47/scripts/relocate_cs2.py",
+        "artifacts/invsqrt/INV-51/build-s_z9uw_j/final/zpow.kmx",
+        "artifacts/invsqrt/INV-51/build-s_z9uw_j/final/final_text.kmx"
+      ],
+      "command_base": ".",
+      "cwd": "src/invsqrt/INV-51",
+      "returncode": 0
+    },
+    {
+      "stage": "10_compile",
+      "command": [
+        "../../../.venv/Scripts/python.exe",
+        "-X",
+        "utf8",
+        "src/invsqrt/INV-51/circuit.py",
+        "tools/kmx_to_kmb.py",
+        "artifacts/invsqrt/INV-51/build-s_z9uw_j/final/final_text.kmx",
+        "--out",
+        "artifacts/invsqrt/INV-51/build-s_z9uw_j/final/reconstructed.kmb"
+      ],
+      "command_base": ".",
+      "cwd": "src/invsqrt/INV-51",
+      "returncode": 0
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "src/invsqrt/INV-51/circuit.py",
+      "sha256": "0612aa51c5c3a9ee9cb0801dfbb89cc63a9c108663b167aeea5ca65fa2a28e0f"
+    },
+    {
+      "path": "src/invsqrt/INV-51/tables.json",
+      "sha256": "095e56453d505eb8f573f31b545bc22fd1f9856aec6265894951f1dd5d812dd0"
+    }
+  ],
+  "sha256": "321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177",
+  "expected_sha256": "321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177",
+  "official_verifier": false,
+  "author_final_proof_run": false,
+  "unix_rlimits_enforced": false
+}

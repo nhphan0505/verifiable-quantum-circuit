@@ -1,26 +1,23 @@
-"""Rebuild the supplied Fusion invsqrt 46-qubit circuit from author source.
+"""Compile the compact, exact 46-qubit Fusion circuit for INV-51.
 
-Issue #51, owner nhphan0505; upstream Syed Asad Ali, Apache-2.0 (data/NOTICE).
-This is source-backed exact reconstruction, not a new optimization. The frozen
-generator normalizes 22-bit x, consumes its root/residual, computes coefficient,
-seed/product/divider phase and uncomputes back to the original physical x wires.
-Thirteen patches reduce width and implement measurement/rebuild schedules. The
-finishing passes retain AND products, replace affine products and merge rotations.
-All HMR phase corrections, exact angles and allocation order remain upstream.
+Owner nhphan0505; upstream Syed Asad Ali, Apache-2.0 (LICENSE.txt/NOTICE.txt).
+Runtime source is this entry point, readable circuit.py and tables.json. Internal
+component namespaces preserve mutable arithmetic bindings and independent carry
+contexts; no external bundle, source archive or precompiled gate payload is used.
+The generator normalizes 22-bit x, consumes root/residual, computes coefficient,
+seed/product/divider phase and reverses with HMR phase repayment and clean scratch.
+It implements phase exp(2*pi*i/sqrt(x)), x=1..3133452, with original exact angles.
 
-The domain is x=1..3133452; the intended phase is exp(2*pi*i/sqrt(x)), with all
-scratch returned to zero. Exact byte reproduction is checked independently from
-the mathematical error tolerance and official verification; neither score nor
-PASS is claimed here. Static gates are not the expected executed count.
+The fixed reconstructed config must reproduce SHA-256 321aff83...40935177. Build
+checks committed source/data hashes, runs deterministic finishing passes and saves
+new build_only provenance. Source, tables and initialization state were pruned;
+metadata preflights were replaced by a manifest, not mathematical/owner assertions.
+No new verifier PASS or score is claimed; see DESCRIPTION.md for historical runs.
 
-Use the repo Windows .venv: python src/invsqrt/INV-51/solution.py --config
-src/invsqrt/INV-51/configs/reconstructed.json. Supply the hash-pinned author bundle
-and competition host files per DEPENDENCIES.md. No input submission or scratch KMX
-is read. Generated KMX is intermediate output, never stored as source. A Windows
-runner preloads pip Kickmix and logs unsupported Unix memory-limit requests.
-Each subprocess has a 600-second limit; Windows memory limits are not enforced.
-No official verifier or author's final full-domain proof is invoked by this build.
-See DESCRIPTION.md for acceptance, provenance, dependencies and grading handoff.
+Run with repository Windows Python 3.13 .venv and pinned requirements:
+python src/invsqrt/INV-51/solution.py --config src/invsqrt/INV-51/configs/reconstructed.json
+Output artifacts/invsqrt/INV-51/reconstructed.kmb is never silently overwritten.
+Each stage times out at 600 seconds; Unix RAM limits are not enforced on Windows.
 """
 from pathlib import Path
 import argparse
@@ -72,7 +69,7 @@ def load_config(value):
     if path.parent != (HERE / 'configs').resolve() or path.suffix != '.json':
         raise ValueError('Config must resolve directly inside this experiment configs/')
     config = json.loads(path.read_text(encoding='utf-8'))
-    if set(config) != {'source_bundle', 'expected_sha256', 'stage_timeout_seconds'}:
+    if set(config) != {'expected_sha256', 'stage_timeout_seconds'}:
         raise ValueError('Unexpected configuration keys')
     if config['stage_timeout_seconds'] != 600:
         raise ValueError('First reconstruction has a fixed 600-second stage limit')
@@ -86,67 +83,22 @@ def check_committed(config_path):
     for relative in filter(None, tracked):
         if (ROOT / relative).read_bytes() != git('show', f'{head}:{relative}'):
             raise RuntimeError(f'Uncommitted source/dependency metadata: {relative}')
-    for path in [HERE/'solution.py', HERE/'windows_runner.py', config_path, HERE/'data/SHA256SUMS']:
+    for path in [HERE/'solution.py', HERE/'circuit.py', config_path, HERE/'engine_manifest.json']:
         if path.relative_to(ROOT).as_posix() not in tracked:
             raise RuntimeError(f'Untracked implementation file: {path}')
     return head
 
 
-def prepare_bundle(config, work):
-    bundle = (ROOT / config['source_bundle']).resolve()
-    if not bundle.is_relative_to(ROOT / 'artifacts'):
-        raise ValueError('Author bundle must be a declared dependency under artifacts/')
-    manifest = HERE / 'data/SHA256SUMS'
-    if (bundle/'SHA256SUMS').read_bytes() != manifest.read_bytes():
-        raise RuntimeError('Source bundle manifest differs from committed manifest')
-    records = []
-    for line in manifest.read_text(encoding='utf-8').splitlines():
-        expected, relative = line.split(maxsplit=1)
-        relative = relative.removeprefix('*')
-        path = (bundle/relative).resolve()
-        if not path.is_relative_to(bundle) or sha(path) != expected:
-            raise RuntimeError(f'Invalid author dependency: {relative}')
-        records.append({'path': relative, 'sha256': expected})
-    tree = work/'tree'
-    # Copy only manifest-declared source entries; unknown files cannot be executed.
-    for item in records:
-        rel = Path(item['path'])
-        if rel.parts[0] != 'src':
-            continue
-        target = tree/Path(*rel.parts[1:])
-        target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(bundle/rel, target)
-    official = tree/'work/c10/narrow/base/official'
-    host = [('kickmix/kickmix.so', 'kickmix/kickmix.so', 'c66b3216c4029e0cdfd09054306aa0feadf53ab2f50c1164e37f752874e5005e'),
-            ('verifiers/invsqrt/verify_submission_invsqrt.py', 'verifier_invsqrt/verify_submission_invsqrt.py', 'ddef520dec6b68d1cf0a6f328ddd36d79eb84570b9192cf3f7acaf073f06733a')]
-    for relative, dest, expected in host:
-        if sha(ROOT/relative) != expected:
-            raise RuntimeError(f'Host dependency hash mismatch: {relative}')
-        target = official/dest
-        target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(ROOT/relative, target)
-    for name in ['__init__.py', 'nr_reference_circuit.py']:
-        source = ROOT/'verifiers/invsqrt'/name
-        if source.exists():
-            shutil.copyfile(source, official/'verifier_invsqrt'/name)
-            records.append({'path': source.relative_to(ROOT).as_posix(), 'sha256': sha(source)})
-    for path in tree.rglob('*'):
-        if not path.is_file() or path.is_relative_to(tree/'work/c10'):
-            continue
-        raw = path.read_bytes()
-        if b'@FG_ROOT@' in raw:
-            if path.suffix not in ('.py', '.sh'):
-                raise RuntimeError(f'Relocation token outside source: {path}')
-            path.write_bytes(raw.replace(b'@FG_ROOT@', tree.as_posix().encode()))
-    # Upstream compares a Windows Path string to a slash-separated literal.
-    # Compare resolved paths instead; certificate bytes/hash checks stay intact.
-    patch = tree/'patches/patch_second46_c19_70nb1.py'
-    raw = patch.read_bytes()
-    old = b'assert str(module.OWN_SECOND) == CERT'
-    if raw.count(old) != 1:
-        raise RuntimeError('Unexpected upstream certificate path assertion')
-    patch.write_bytes(raw.replace(old, b'assert Path(module.OWN_SECOND).resolve() == Path(CERT).resolve()'))
-    return tree, records + [{'path': rel, 'sha256': h} for rel, _, h in host]
+def prepare_engine(config, work):
+    tree = HERE/'_components'
+    manifest = json.loads((HERE/'engine_manifest.json').read_text(encoding='utf-8'))
+    records=[]
+    for relative, expected in manifest['files'].items():
+        path=(HERE/relative).resolve()
+        if not path.is_relative_to(HERE) or sha(path)!=expected:
+            raise RuntimeError(f'Integrated source integrity mismatch: {relative}')
+        records.append({'path':path.relative_to(ROOT).as_posix(),'sha256':expected})
+    return tree, records
 
 
 def main():
@@ -166,8 +118,8 @@ def main():
     if artifact.exists():
         raise FileExistsError(f'Output already exists: {artifact}; preserve it and use a new config')
     work = Path(tempfile.mkdtemp(prefix='build-', dir=artifact_dir))
-    tree, dependencies = prepare_bundle(config, work)
-    env = {**os.environ, 'PYTHONUTF8':'1', 'PYTHONIOENCODING':'utf-8', 'OPENBLAS_NUM_THREADS':'1',
+    tree, dependencies = prepare_engine(config, work)
+    env = {**os.environ, 'PYTHONUTF8':'1', 'PYTHONIOENCODING':'utf-8', 'PYTHONDONTWRITEBYTECODE':'1', 'OPENBLAS_NUM_THREADS':'1',
            'OMP_NUM_THREADS':'1', 'MKL_NUM_THREADS':'1'}
     for key in ['DIVIDER_FORCE_CAP','DIVIDER_PLACEHOLDER','DIVIDER_RETIRE','LD_FIRST_JSON','LEAD_SECOND_JSON',
                 'TK46_SECOND_JSON','W2_E_HOLD','W2_F_HOLD','W2_R2','W2_V10_G1','W2_V9_FORM','W2_V9_PLACEHOLDER','FG','NARROW']:
@@ -175,19 +127,19 @@ def main():
     stages=[]
 
     def run(label, script, *arguments):
-        command=[sys.executable, '-X', 'utf8', str(HERE/'windows_runner.py'), str(script), *map(str,arguments)]
+        command=[sys.executable, '-X', 'utf8', str(HERE/'circuit.py'), script.relative_to(tree).as_posix(), *map(str,arguments)]
         print(f'{label}: {script.name}', flush=True)
         with (work/(label+'.log')).open('xb') as log:
-            result=subprocess.run(command, cwd=tree, env=env, stdout=log, stderr=subprocess.STDOUT,
+            result=subprocess.run(command, cwd=HERE, env={**env, 'INV51_AUDIT_FILE':str(work/(label+'.reads.json'))}, stdout=log, stderr=subprocess.STDOUT,
                                   timeout=config['stage_timeout_seconds'])
         stages.append({'stage':label,'command':[relative_path(v) if Path(str(v)).is_absolute() else str(v) for v in command],
-                       'command_base':'.','cwd':tree.relative_to(ROOT).as_posix(),
+                       'command_base':'.','cwd':HERE.relative_to(ROOT).as_posix(),
                        'returncode':result.returncode})
         if result.returncode:
             raise RuntimeError(f'{label} failed ({result.returncode}); see {work/(label+".log")}')
 
     patch_args=[]; posts=[]; width=None
-    for line in (tree/'patches/PATCH_ORDER.txt').read_text().splitlines():
+    for line in 'patch patch_fwd_narrow.py\npatch patch_w47_body.py\npatch patch_endpoint_v9e2.py\npatch patch_hret_sat_s15k7a.py\npatch patch_seedinv.py\npatch patch_coefdisp.py\npatch patch_coef2_q46.py\npatch patch_h2ret.py\npatch patch_proddisp.py\npatch patch_donor_first60.py\npatch patch_ld_first20_56b8.py\npatch patch_second46_c19_70nb1.py\npatch patch_q47_decoder_resynth2.py\nwith patch_endpoint_walk8.py\nwith q46_loaders.py\nQ 46\npost agents/micro47/scripts/relocate_cs2.py\n'.splitlines():
         kind, name=line.split(maxsplit=1)
         if kind=='patch': patch_args.extend(['--patch',tree/'patches'/name])
         elif kind=='post': posts.append(tree/name)

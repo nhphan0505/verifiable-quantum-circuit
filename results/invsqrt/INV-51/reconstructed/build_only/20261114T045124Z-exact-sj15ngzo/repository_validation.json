@@ -1,0 +1,19 @@
+{
+  "checker_errors": 0,
+  "scope_base": "origin/main",
+  "scope_branch": "exp/INV-51-integrated-generator",
+  "tests_run": 21,
+  "tests_status": "OK",
+  "tests_seconds": 86.682,
+  "fixture_note": "Fixture grading PASS/TIMEOUT logs are not new INV-51 grading results.",
+  "retained_data_values_match_basis": true,
+  "retained_scalar_count": 13464,
+  "array_lengths_order_preserved": true,
+  "compact_runtime_files": [
+    "solution.py",
+    "circuit.py",
+    "tables.json"
+  ],
+  "source_code_policy": "Readable Python definitions; no direct exec/eval/compile call or gate-payload decoding.",
+  "old_files_preserved": "Version control plus artifacts/inv51-compact/legacy-source-preserved"
+}
