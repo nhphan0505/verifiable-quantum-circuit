@@ -33,8 +33,17 @@ Windows chưa có WSL: mở PowerShell Administrator, chạy `wsl --install -d U
 khởi động lại nếu được yêu cầu, rồi mở Ubuntu để tạo tài khoản. Chọn Ubuntu làm
 distro mặc định bằng `wsl --set-default Ubuntu`. Xem [hướng dẫn Microsoft](https://learn.microsoft.com/windows/wsl/install).
 
-Trong Linux/macOS hoặc terminal Ubuntu (Windows), chuẩn bị Python 3.13 và tạo
-môi trường riêng. Trên WSL, cd tới project bằng đường dẫn `/mnt/d/...`:
+Trong terminal Ubuntu, vào đúng project (ví dụ `cd /mnt/d/GQA`). Nếu WSL chưa có
+Python 3.13, có thể cài [uv theo tài liệu chính thức](https://docs.astral.sh/uv/getting-started/installation/)
+và để uv chuẩn bị Python/môi trường:
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+~/.local/bin/uv venv --seed --python 3.13 .venv-engine
+.venv-engine/bin/python -m pip install -r requirements.txt
+```
+
+Nếu đã có Python 3.13 trong WSL, thay bước uv bằng:
 
 ```bash
 python3.13 -m venv .venv-engine
@@ -47,10 +56,24 @@ Cài wheel **0.6.0** phù hợp OS/CPU từ
 
 ```bash
 .venv-engine/bin/python -m pip install /path/to/kickmix_engine-0.6.0-PLATFORM.whl
-.venv-engine/bin/python -m kickmix_engine doctor --json
+KICKMIX_ENGINE_VERIFIERS="$PWD/verifiers" .venv-engine/bin/python -m kickmix_engine doctor --json
+.venv-engine/bin/python -m pip check
 ```
 
-Linux/macOS chạy notebook bằng `.venv` như trước: cài cùng wheel vào `.venv`.
+Linux/macOS dùng một môi trường cho notebook và engine:
+
+```bash
+python3.13 -m venv .venv
+.venv/bin/python -m pip install -r requirements-notebook.txt
+.venv/bin/python -m pip install /path/to/kickmix_engine-0.6.0-PLATFORM.whl
+KICKMIX_ENGINE_VERIFIERS="$PWD/verifiers" .venv/bin/python -m kickmix_engine doctor --json
+.venv/bin/python -m pip check
+```
+
+Chọn wheel `kickmix_engine-0.6.0-cp312-abi3-manylinux_2_28_x86_64.whl` cho
+Linux x86_64 (gồm WSL), hoặc `kickmix_engine-0.6.0-cp312-abi3-macosx_11_0_arm64.whl`
+cho macOS Apple Silicon. Tag cp312-abi3 dùng được với Python 3.13.
+`/path/to/...` là đường dẫn wheel đã tải và kiểm hash từ release phía trên.
 Windows giữ notebook trong `.venv` Windows; chỉ engine chấm dùng `.venv-engine`
 Linux. Không dùng `.venv` Windows trong WSL. Wheel phải hỗ trợ kiến trúc hiện tại;
 macOS Intel chưa có wheel được xác nhận, cần build upstream và kiểm thử riêng.
