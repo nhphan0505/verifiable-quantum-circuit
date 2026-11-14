@@ -58,3 +58,5 @@ DQI-27 `narrow_return` dựng lại từ mã nguồn, dùng 890 qubit và 11.647
 ### Bản vá extraction của q26
 
 Đối chiếu với phép chia đa thức GF(2¹²) cho thấy tám hệ số đầu của continued fraction khớp, còn hệ số thứ chín sai. Ở node nhóm 4, mẫu số trung gian bằng 0 sau bốn bước. Phép nghịch đảo zero-safe của đường thông thường làm mất tọa độ projective tại pole. Config `q26_homogeneous_group4` dùng đường homogeneous của q26 cho nhóm 4 để giữ riêng tử số và mẫu số qua pole. Flag của nhóm 4 được giữ để hoàn nguyên độc lập với chuỗi flag của nhóm 5–16. Đối chiếu với batch lỗi đã lưu, probe các giá trị lỗi và đo Toffoli-like trước khi chấm lại.
+
+Bản dựng `q26_homogeneous_group4` ở commit `333aaff` có 892 qubit và 458.100 Toffoli-like tĩnh, tăng 194 cổng so với `q26_cx_cancel`. Bản trước và sau CNOT cancellation đều vượt qua batch hồi quy 256 shot và khớp 31 giá trị lỗi khi probe từng bit. Bản cuối cũng vượt qua 256 phép dịch vòng của ca lỗi. Các phép thử kiểm tra pha, khôi phục syndrome và workspace. Điểm full cho bản vá cần chấm riêng. [Provenance bản vá](../../../results/dqi/DQI-39/q26_homogeneous_group4/build_only/20261114T084125Z-local-build/provenance.json).
