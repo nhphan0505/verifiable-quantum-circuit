@@ -81,14 +81,14 @@ def check_committed(config_path):
     for relative in filter(None, tracked):
         if (ROOT / relative).read_bytes() != git('show', f'{head}:{relative}'):
             raise RuntimeError(f'Uncommitted source/dependency metadata: {relative}')
-    for path in [HERE/'solution.py', HERE/'worker.py', config_path, HERE/'engine_manifest.json']:
+    for path in [HERE/'solution.py', HERE/'circuit.py', config_path, HERE/'engine_manifest.json']:
         if path.relative_to(ROOT).as_posix() not in tracked:
             raise RuntimeError(f'Untracked implementation file: {path}')
     return head
 
 
 def prepare_engine(config, work):
-    tree = HERE/'engine'
+    tree = HERE/'_components'
     manifest = json.loads((HERE/'engine_manifest.json').read_text(encoding='utf-8'))
     records=[]
     for relative, expected in manifest['files'].items():
@@ -125,19 +125,19 @@ def main():
     stages=[]
 
     def run(label, script, *arguments):
-        command=[sys.executable, '-X', 'utf8', str(HERE/'worker.py'), '--trace', str(work/(label+'.reads.json')), str(script), *map(str,arguments)]
+        command=[sys.executable, '-X', 'utf8', str(HERE/'circuit.py'), script.relative_to(tree).as_posix(), *map(str,arguments)]
         print(f'{label}: {script.name}', flush=True)
         with (work/(label+'.log')).open('xb') as log:
-            result=subprocess.run(command, cwd=tree, env=env, stdout=log, stderr=subprocess.STDOUT,
+            result=subprocess.run(command, cwd=HERE, env=env, stdout=log, stderr=subprocess.STDOUT,
                                   timeout=config['stage_timeout_seconds'])
         stages.append({'stage':label,'command':[relative_path(v) if Path(str(v)).is_absolute() else str(v) for v in command],
-                       'command_base':'.','cwd':tree.relative_to(ROOT).as_posix(),
+                       'command_base':'.','cwd':HERE.relative_to(ROOT).as_posix(),
                        'returncode':result.returncode})
         if result.returncode:
             raise RuntimeError(f'{label} failed ({result.returncode}); see {work/(label+".log")}')
 
     patch_args=[]; posts=[]; width=None
-    for line in (tree/'patches/PATCH_ORDER.txt').read_text().splitlines():
+    for line in 'patch patch_fwd_narrow.py\npatch patch_w47_body.py\npatch patch_endpoint_v9e2.py\npatch patch_hret_sat_s15k7a.py\npatch patch_seedinv.py\npatch patch_coefdisp.py\npatch patch_coef2_q46.py\npatch patch_h2ret.py\npatch patch_proddisp.py\npatch patch_donor_first60.py\npatch patch_ld_first20_56b8.py\npatch patch_second46_c19_70nb1.py\npatch patch_q47_decoder_resynth2.py\nwith patch_endpoint_walk8.py\nwith q46_loaders.py\nQ 46\npost agents/micro47/scripts/relocate_cs2.py\n'.splitlines():
         kind, name=line.split(maxsplit=1)
         if kind=='patch': patch_args.extend(['--patch',tree/'patches'/name])
         elif kind=='post': posts.append(tree/name)
