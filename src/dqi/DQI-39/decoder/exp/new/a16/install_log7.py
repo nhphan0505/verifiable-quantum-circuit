@@ -35,7 +35,7 @@ def install(entry):
     for fn in walk.functions(entry):
         code=fn.__code__
         for (suffix,name),(replacement,arity) in replacements.items():
-            if fn.__name__!=name or not code.co_filename.endswith(suffix):continue
+            if fn.__name__!=name or not code.co_filename.replace('\\', '/').endswith(suffix):continue
             assert code.co_argcount==arity and not code.co_freevars and fn.__closure__ is None
             # These scopes already own their norm generation, source
             # erasure, field representation and GF8 log permutations.

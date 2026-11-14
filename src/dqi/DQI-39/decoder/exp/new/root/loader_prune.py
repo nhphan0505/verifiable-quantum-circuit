@@ -12,7 +12,7 @@ from pathlib import Path
 import sys
 from types import CodeType, FunctionType, ModuleType
 
-ROOT = str(Path(__file__).resolve().parents[3]) + '/'
+ROOT = Path(__file__).resolve().parents[3].as_posix() + '/'
 
 
 @lru_cache(None)
@@ -44,7 +44,7 @@ def prune():
     protected = set()
     for value in objects:
         if (isinstance(value, FunctionType)
-                and value.__code__.co_filename.startswith(ROOT)
+                and value.__code__.co_filename.replace('\\', '/').startswith(ROOT)
                 and id(value.__globals__) not in module_scopes):
             scopes.setdefault(id(value.__globals__), [value.__globals__, set(), False])
     for value in objects:
@@ -53,7 +53,7 @@ def prune():
         scope = value.__globals__
         # Dynamic generated code may share an owned scope while its filename
         # is '<string>'. Every such function must contribute its names too.
-        if id(scope) not in scopes and not value.__code__.co_filename.startswith(ROOT):
+        if id(scope) not in scopes and not value.__code__.co_filename.replace('\\', '/').startswith(ROOT):
             continue
         names, strings = code_names(value.__code__)
         if '__globals__' in names:
@@ -99,7 +99,7 @@ def prune():
     try:
         import ctypes
         ctypes.CDLL(None).malloc_trim(0)
-    except (AttributeError, OSError):
+    except (AttributeError, OSError, TypeError):
         pass
     return dict(private_scopes=count, changed_scopes=changed,
                 skipped_dynamic_scopes=skipped, removed_names=removed,

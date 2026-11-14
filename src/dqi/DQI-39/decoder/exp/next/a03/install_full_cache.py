@@ -14,7 +14,7 @@ def install(entry,levels=(8,)):
     levels=frozenset(levels)
     edits=[];seen=set();count={'first':0,'second':0}
     for fn in walk_bound.functions(entry):
-        if not fn.__code__.co_filename.endswith('/research/agents/a12/forward_norm_cache.py'):continue
+        if not fn.__code__.co_filename.replace('\\', '/').endswith('/research/agents/a12/forward_norm_cache.py'):continue
         cells=dict(zip(fn.__code__.co_freevars,fn.__closure__ or ()))
         if fn.__name__=='inverse_zero' and {'original_inverse','frames','levels'}<=set(cells):
             cell=cells['original_inverse']

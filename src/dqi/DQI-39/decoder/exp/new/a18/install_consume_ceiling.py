@@ -11,13 +11,13 @@ def install(entry,ceiling=900):
     for fn in walk.functions(entry):
         code=fn.__code__
         if (fn.__name__!='consume' or code.co_argcount!=2 or
-            not code.co_filename.endswith('/exp/frontier/a12/decode_companion_preserve.py')):
+            not code.co_filename.replace('\\', '/').endswith('/exp/frontier/a12/decode_companion_preserve.py')):
             continue
         cells=dict(zip(code.co_freevars,fn.__closure__ or ()))
         assert {'inverse','ceiling'}<=set(cells)
         inv=cells['inverse'].cell_contents
         assert inv.__name__=='inverse12_keep_norm'
-        assert inv.__code__.co_filename.endswith('/exp/frontier/a12/decode_trailing_normcache.py')
+        assert inv.__code__.co_filename.replace('\\', '/').endswith('/exp/frontier/a12/decode_trailing_normcache.py')
         cell=cells['ceiling']
         if id(cell) in seen:continue
         seen.add(id(cell))

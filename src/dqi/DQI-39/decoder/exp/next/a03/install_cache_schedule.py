@@ -18,7 +18,7 @@ def install(entry,forward_levels=(11,8,5),reverse_kinds=None):
     assert all(v in ('t6','w3') for v in reverse_kinds.values())
     edits=[];seen=set()
     for fn in walk_bound.functions(entry):
-        file=fn.__code__.co_filename
+        file=fn.__code__.co_filename.replace('\\', '/')
         cells=dict(zip(fn.__code__.co_freevars,fn.__closure__ or ()))
         if file.endswith('/research/agents/a12/forward_norm_cache.py'):
             if 'levels' in cells and id(cells['levels']) not in seen:

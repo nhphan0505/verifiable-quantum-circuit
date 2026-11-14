@@ -8,7 +8,7 @@ def install(cv, scalar, levels=(8, 5)):
         if not isinstance(fn, FunctionType) or id(fn) in seen: return
         seen.add(id(fn))
         cells = dict(zip(fn.__code__.co_freevars, fn.__closure__ or ()))
-        if fn.__code__.co_filename.endswith('/a12/forward_norm_cache.py') and 'levels' in cells:
+        if fn.__code__.co_filename.replace('\\', '/').endswith('/a12/forward_norm_cache.py') and 'levels' in cells:
             cells['levels'].cell_contents = frozenset(levels)
             changed.append(fn.__name__)
         for cell in fn.__closure__ or ():
