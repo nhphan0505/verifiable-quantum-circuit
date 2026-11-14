@@ -1,5 +1,9 @@
 # Kiểm tra trước PR
 
+Lượt chấm mới dùng kickmix-engine 0.6.0 với mode smoke/full. Checker nhận diện
+CLI engine khi metadata có engine/version và chỉ định đúng verifier repository;
+records chấm trực tiếp hoặc dev_5min cũ vẫn được kiểm tra để giữ bằng chứng lịch sử.
+
 Từ root project, dùng Python 3.13:
 
 ```powershell

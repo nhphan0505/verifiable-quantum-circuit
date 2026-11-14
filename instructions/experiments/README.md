@@ -1,5 +1,9 @@
 # Instructions nghiên cứu thử nghiệm
 
+**Luồng chấm hiện tại:** dùng kickmix-engine 0.6.0, chỉ có `smoke` và `full`.
+Notebook tự nhận diện OS; Windows dùng WSL. Các mục/run `dev_5min` bên dưới
+là hồ sơ của luồng cũ, không còn là lựa chọn cho lượt chấm mới. Xem docs/LOCAL_GRADING.md từ root repo.
+
 Áp dụng [quy tắc chung](../README.md) và [workflow](../../docs/EXPERIMENT_WORKFLOW.md).
 Trong chat luồng này chỉ cần giao “thực hiện các bước 1 2 3”; agent dùng ngữ cảnh,
 tra repo/GitHub và chỉ hỏi thông tin chưa xác định được. Ví dụ thiếu track hoặc

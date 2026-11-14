@@ -1,5 +1,9 @@
 # Quy trình cộng tác từ ý tưởng đến hoàn thành
 
+**Luồng chấm hiện tại:** dùng kickmix-engine 0.6.0, chỉ có `smoke` và `full`.
+Notebook tự nhận diện OS; Windows dùng WSL. Các mục/run `dev_5min` bên dưới
+là hồ sơ của luồng cũ, không còn là lựa chọn cho lượt chấm mới. Xem docs/LOCAL_GRADING.md từ root repo.
+
 Một hướng nghiên cứu tương ứng một GitHub Issue, một branch và một thư mục source. Một hướng có thể thử nhiều config và nhiều lần chấm. Quy trình khép kín:
 
 **Chuẩn bị → kiểm tra hướng cũ → nhận Issue → tạo branch → mô tả/code/config → commit nguồn → dựng/chấm → lưu và phân tích → commit kết quả → thử tiếp hoặc PR → review/merge → đóng Issue.**
