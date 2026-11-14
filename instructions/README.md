@@ -8,6 +8,7 @@ không phải tham số bắt buộc người dùng phải truyền trong mỗi 
 | Luồng | Instructions | Branch được sửa | Issue |
 | --- | --- | --- | --- |
 | Thử nghiệm | [experiments](experiments/README.md) | `exp/<ID>-<slug>` của owner | Bắt buộc có Issue thật trước triển khai |
+| Postprocessing | [postprocessing](postprocessing/README.md) | `pp/<PP-ID>-<slug>` của owner | Issue quản lý phát triển PP; mã PP độc lập số Issue |
 | Tái dựng submission | [decompiler](decompiler/README.md) | Scratch riêng bước 1–3; `exp/<ID>-<slug>` của owner từ bước 4 | Bắt buộc có Issue thật trước viết solution |
 | Đọc paper | [papers](papers/README.md) | `research/<username>` của owner | Tùy chọn |
 | Đọc discussion | [discussions](discussions/README.md) | `research/<username>` của owner | Tùy chọn |
@@ -22,7 +23,7 @@ và `templates/run/` vẫn là mẫu đầu ra, không phải mẫu tin nhắn.
 ## Nhận lệnh ngắn và dùng ngữ cảnh
 
 1. Với lệnh như **“thực hiện các bước 1 2 3”**, dùng luồng đang làm trong chat.
-   Nếu chưa rõ luồng, hỏi chọn experiments, decompiler, papers hay discussions trước thao tác phụ thuộc.
+   Nếu chưa rõ luồng, hỏi chọn experiments, postprocessing, decompiler, papers hay discussions trước thao tác phụ thuộc.
    Số bước trong instructions là số để giao agent; 12 mục trong CONTRIBUTING.md là
    phần giải thích quy trình, không phải bảng số bước cho lệnh ngắn.
 2. Lấy dữ kiện đã xác định từ chat trước; đối chiếu Git, file và GitHub thật trước
