@@ -163,7 +163,7 @@ Với hướng kế thừa, tập trung vào phần thay đổi thay vì chép l
 Thêm một dòng vào EXPERIMENTS.md gồm ID, title làm link trực tiếp tới DESCRIPTION.md và link Issue. File mô tả trong repo là bản chuẩn; đồng bộ title và nội dung Issue khi thiết kế thay đổi. Khi dán description lên Issue, đổi link tương đối thành URL GitHub tương ứng để người đọc mở được file. Không cần lặp H1 trong body Issue.
 
 Trước khi thử, điền phần kế hoạch kiểm chứng trong DESCRIPTION: mốc đối chứng
-source/config/commit và run tương thích nếu đã có; dự đoán; tiêu chí ủng hộ/bác bỏ
+source/config/commit và run có điểm nếu đã có; dự đoán; tiêu chí ủng hộ/bác bỏ
 hypothesis; điều kiện dừng hoặc giới hạn số vòng/tài nguyên. Hoàn thiện tham số ở
 giai đoạn triển khai trước compile/chấm. Nếu đổi tiêu chí sau khi thấy kết quả,
 ghi lý do để phân biệt với dự đoán ban đầu.
@@ -224,12 +224,12 @@ Ghi full PASS hoặc dev_5min PASS vào SCORES.md: mỗi hướng một dòng, h
 
 Cải thiện (lần) = `baseline_score / candidate_score`. Baseline là `1.00×`; lớn hơn 1 là tốt hơn (ví dụ `2.00×` nghĩa là chi phí còn một nửa baseline), nhỏ hơn 1 là kém hơn. Chi phí/score gốc càng thấp càng tốt; hệ số cải thiện càng cao càng tốt.
 
-So với baseline cùng chế độ, profile, seed và số mẫu; chưa có baseline phù hợp thì để `—`. Chỉ tính hệ số khi có kết quả PASS và chi phí hữu hạn, lớn hơn 0. Không lấy baseline full để tính cải thiện của một run dev. Bảng điểm giữ score gốc và ghi hai hệ số full/dev riêng; không sửa JSON verifier gốc.
+Có điểm PASS hợp lệ của cùng bài là được so sánh và tính hệ số, không yêu cầu trùng phiên bản Python/package, verifier/harness, môi trường, profile, seed hoặc số mẫu. Chỉ tính với chi phí hữu hạn, lớn hơn 0; chưa có điểm baseline/candidate thì để `—`. Bảng điểm giữ score gốc và hai hệ số full/dev riêng theo baseline tương ứng; khi so khác mode trong phân tích phải ghi rõ mode. Giữ metadata/provenance và nêu khác biệt bối cảnh, không sửa JSON verifier gốc hoặc bắt chấm lại chỉ để khớp phiên bản.
 
 Ứng viên cuối cần kiểm tra bổ sung độc lập (mẫu/seed chưa dùng để chọn config,
 kiểm tra biên phù hợp) hoặc full trước khi khẳng định chất lượng. Bộ dev cố định
 có thể bị chọn quá phù hợp sau nhiều vòng thử. Nếu so điểm trên profile bổ sung,
-chấm đối chứng cùng profile; thành viên vẫn tự chạy notebook local. Chưa có kiểm tra bổ sung
+ghi rõ profile của các run; không bắt chấm lại đối chứng chỉ để được so điểm. Thành viên vẫn tự chạy notebook local. Chưa có kiểm tra bổ sung
 thì có thể tổng kết/merge với giới hạn rõ ràng, không tuyên bố đã xác nhận đầy đủ.
 
 Trong DESCRIPTION, ghi config/run tốt nhất của từng mode kèm SHA nguồn thực tế,
@@ -245,7 +245,7 @@ Bổ sung kết luận kỹ thuật vào DESCRIPTION.md: giả thuyết nào đ�
 
 Sau mỗi vòng, chọn một trong các nhánh:
 
-- **Thử setting khác cùng ý tưởng:** quay lại bước 5, thêm/sửa JSON; commit nguồn/config ở bước 6 rồi dựng và chấm lại. Giữ cùng profile chấm để so sánh.
+- **Thử setting khác cùng ý tưởng:** quay lại bước 5, thêm/sửa JSON; commit nguồn/config ở bước 6 rồi dựng và chấm lại. Ghi profile chấm để người đọc hiểu bối cảnh so điểm.
 - **Cần sửa implementation trong cùng hướng:** cập nhật mô tả và code ở bước 5; tạo commit mới trước khi dựng/chấm.
 - **Đổi sang ý tưởng đáng kể hoặc nằm ngoài phạm vi đã nhận:** quay lại bước 2–3, tạo/nhận Issue mới và link hướng gốc.
 - **Đã thử đủ:** sang bước 11, kể cả khi không cải thiện điểm.

@@ -17,7 +17,9 @@ không suy đoán phiên bản từ HEAD hoặc tên file. Nếu thiếu provena
 
 Giữ nguyên JSON/log gốc. Thêm provenance/review riêng nếu cần. Cập nhật
 SCORES.md từ kết quả hợp lệ: một hướng một dòng, hai cột full/dev, link đúng
-run/config tốt nhất; cải thiện = baseline/candidate (lần), cùng profile.
+run/config tốt nhất; cải thiện = baseline/candidate (lần). Có điểm PASS hợp lệ
+của cùng bài là được so, không cần trùng phiên bản/môi trường/profile/seed/số mẫu;
+giữ thông tin bối cảnh, hai cột full/dev riêng và không sửa metadata lịch sử.
 Smoke/FAIL/TIMEOUT không có điểm trong bảng. Đừng đổi dev thành full.
 
 Phân tích giả thuyết, tài nguyên, sai số và xu hướng giữa các config. Ghi kết

@@ -63,7 +63,7 @@ Local baseline đã chạy Python 3.13.14: `requirements.txt` cố định kickm
 NumPy 2.5.4, SciPy 1.18.1. Notebook local kiểm tra đúng kernel `.venv` và bộ
 package này. Cài thêm requirements-notebook.txt để có giao diện notebook/dropdown.
 Metadata của các run Colab lịch sử vẫn giữ nguyên Python/package thực tế; khi
-so điểm với run local cần dùng baseline tương thích hoặc để hệ số trống.
+so điểm với run local được phép dù khác phiên bản/môi trường; giữ rõ bối cảnh mỗi run.
 CI kiểm tra records bằng Python 3.13; review/check bắt buộc do cấu hình GitHub quyết định.
 
 ## Bằng chứng chấm và tính bất biến
@@ -78,10 +78,11 @@ CI kiểm tra records bằng Python 3.13; review/check bắt buộc do cấu hì
 - Khi có `verify.stdout.txt` và `verifier.json`, hai JSON phải bằng nhau về nội dung
   (khác whitespace không ảnh hưởng). Stdout không phải JSON thì báo lỗi để review,
   không tự trích một đoạn rồi coi là kết quả gốc.
-- Hệ số cải thiện yêu cầu cùng phiên bản Python patch, kickmix/numpy/scipy,
-  toàn bộ bảng hash verifier và hash dev harness khi dùng dev. Thiếu bằng chứng
-  so sánh thì để hệ số `—` và chấm đối chứng tương thích; không bổ sung hash suy đoán.
-  Hệ số baseline tự so chính nó vẫn là 1.00×; không dùng ngoại lệ này cho ứng viên.
+- Có điểm PASS hợp lệ của cùng bài là được so sánh và tính baseline/candidate;
+  không yêu cầu trùng Python/package, verifier/harness, profile, seed hay số mẫu.
+  Checker vẫn kiểm điểm hữu hạn dương, bằng chứng PASS, đúng cột full/dev và
+  phép tính hệ số. Metadata/provenance giữ nguyên để giải thích khác biệt giữa run;
+  không suy đoán hash hoặc sửa records lịch sử để làm chúng giống nhau.
 - Với `--base`, mọi file đã có trong thư mục run của nhánh gốc phải giữ nguyên bytes,
   kể cả raw results, provenance và review đã lưu. Áp dụng cả branch hạ tầng.
   Cho phép thêm sidecar mới như `review_v2.json`/provenance còn thiếu hoặc run mới;
