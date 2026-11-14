@@ -1,0 +1,26 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-39",
+  "config_name": "q26_homogeneous_group4",
+  "source_commit": "333aaffb48277d81dec33a2b7d4e7f44f75e4b18",
+  "source_path": "src/dqi/DQI-39/solution.py",
+  "source_sha256": "af4416972c98885b65b96cb87e2ad49381b25ff068e38c7006c97c5c3db701b1",
+  "build_config_path": "src/dqi/DQI-39/configs/q26_homogeneous_group4.json",
+  "build_config_sha256": "4572bd1a5cbd0d76c436e21d05f12db017f1b0a90499ff3dc82a9b37f50c6f50",
+  "artifact_path": "artifacts/dqi/DQI-39/q26_homogeneous_group4.kmb",
+  "artifact_sha256": "9ccc5add224f76e127ccf8129570ad344b5d3e5183c9a08fcd85133a6b9c45a8",
+  "build_command": "/Users/tranxuanhoa/Documents/research/GQA/.venv/bin/python src/dqi/DQI-39/solution.py --source-bundle /tmp/dqi-atakan-sources.zip --config src/dqi/DQI-39/configs/q26_homogeneous_group4.json --output artifacts/dqi/DQI-39/q26_homogeneous_group4.kmb",
+  "environment": {
+    "python": "3.13.7",
+    "python_executable": "/Users/tranxuanhoa/Documents/research/GQA/.venv/bin/python",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "packages": {
+      "kickmix": "1.0.0"
+    },
+    "source_bundle": {
+      "url": "https://www.kaggle.com/datasets/atakanaldemir/qcc-c44-five-helper-release-sources/versions/1",
+      "release_source_xz_sha256": "a0f705ea88b888cfaa89b84ddc7c988fa4aa5702c1ffc81cb9b2f917e149b95c"
+    }
+  },
+  "build_run": null
+}

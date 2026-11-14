@@ -1,68 +1,75 @@
-# [DQI-39] Viết lại khối tổng hợp locator của Kirill V5 bằng Python và giảm tích lặp ở hai chiều
+# [DQI-39] Tái lập decoder q26 từ mã nguồn và giản lược CNOT giao hoán
 
-**Loại** — Tinh chỉnh một phương án.
+**Loại** — Tái lập decoder và tinh chỉnh số lệnh Clifford.
 
-## File gốc
+## Nguồn và đối chứng
 
-Đối chứng là mạch Kirill V5 có SHA-256 `4e9b50b1ee34b3eaf2b7f394873c2dd3dad4cddbdd1f12a348b4323b5eb41771`. Bộ sinh cổng cục bộ nằm ở `GQA-local-dqi-v5/recovered_generator/`. `rebuild.py` có SHA-256 `049c49acdda2faa049cd3e7cfedd1b24da54347a32b4a86be03bab2428635d19`, `scan_kernel.py` có SHA-256 `fb7b22182f05baf35e3ec5782d41559bf681f8a7e147a8e90a772136827d7c53`, và `stages.zip` có SHA-256 `9c3d3f1ffdbd1ce47435b99d9e68f33b55ce794fe86edb2f7b40dc9ace3c46e3`. Bản dựng lại khớp từng byte với mạch đối chứng. Python sinh kernel kiểm nghiệm và áp pha tại 4.025 vị trí quét. Synthesis, conversion và các khối còn lại vẫn dựa vào dữ liệu cổng đã tách theo nhãn. Bộ sinh và archive này hiện là đầu vào cục bộ, chưa có permalink hoặc provenance build trong repo.
+- Mã Python và các kế hoạch compiler của q26 lấy từ gói [QCC C44 Five Helper Release Sources v1 của Atakan Aldemir](https://www.kaggle.com/datasets/atakanaldemir/qcc-c44-five-helper-release-sources/versions/1), đường dẫn kết thúc bằng `packet/blocks/dqi/carry-q26-892/source/`. Xem thêm [notebook QCC Terminal Readout and Phase Folds của Atakan](https://www.kaggle.com/code/atakanaldemir/qcc-terminal-readout-and-phase-folds) để tham khảo hướng compiler.
+- [Notebook Quantum Circuits Conditional Uncompute Audit của Kirill](https://www.kaggle.com/code/kirilltym/quantum-circuits-conditional-uncompute-audit?scriptVersionId=367172760) là nguồn đối chiếu V5. [PR #40](https://github.com/nhphan0505/verifiable-quantum-circuit/pull/40) lưu phiên bản V5 trước đây của thử nghiệm. q26 dùng mã Python từ gói Atakan.
+- Đối chứng trực tiếp cho bước giản lược CNOT là q26 gốc, SHA-256 `b7ca9bce749dcd049f94326446e90cad474b51e6e0abf81561fc37f261abf69b`.
 
-Giữ attribution của mạch V5. Nếu bước 03 còn cần dữ liệu cổng của V5 để build, mô tả cách lấy đúng artifact bằng hash và kiểm tra điều khoản phân phối trước khi đưa dữ liệu bên thứ ba vào repo. Giữ nguyên [verifier DQI](https://github.com/nhphan0505/verifiable-quantum-circuit/blob/a19b0e08bb6af0f7b4cdf6fe10569d2ad43e870f/verifiers/dqi/verify_submission_dqi.py). [DQI-27](https://github.com/nhphan0505/verifiable-quantum-circuit/blob/a19b0e08bb6af0f7b4cdf6fe10569d2ad43e870f/src/dqi/DQI-27/DESCRIPTION.md) là hướng trước về quản lý bộ nhớ trên decoder Schur của nhóm. Phạm vi lần này là cặp khối synthesis của V5.
+## Phương pháp
 
-## Phần tinh chỉnh và lý do
+Bộ sinh khai báo 70 word syndrome và 4.095 word mask runtime trên GF(2¹²). Nó chiếu mask, đổi biểu diễn syndrome tuyến tính, trích xuất dữ liệu giải mã, tổng hợp locator/evaluator, chuyển biểu diễn rồi quét để áp pha. Các bước ngược hoàn nguyên syndrome và mask; phần unsynthesis tiêu thụ thông tin lịch sử và định tuyến lại thanh ghi. `solution.py` gọi các hàm decoder upstream theo từng bước, sau đó tối ưu luồng cổng của mạch vừa sinh.
 
-Thay đúng hai đoạn `synthesis` và `unsynthesis` bằng bộ sinh Python có cấu trúc theo phép cập nhật locator. Giữ `mask_projection`, `initial`, `extract`, `convert`, `scan`, `unconvert`, `unextract`, `uninitial` và `restore_masks` của đối chứng trong lần so sánh đầu. Giữ GF(2^12), 70 word syndrome, 4.095 vị trí, trọng số hỗ trợ đến 35 và mask runtime. Tách việc kiểm chứng bản viết lại khỏi thay đổi lịch cổng để đo phần tiết kiệm do synthesis.
+Trong một đoạn chỉ gồm CX không điều kiện, CX(a,b) và CX(c,d) giao hoán khi a ≠ d và b ≠ c. Hai CX giống nhau triệt tiêu nếu có thể di chuyển chúng lại gần nhau theo quy tắc đó. Cổng khác, điều kiện và giới hạn bộ đệm chặn việc gộp. Bộ sinh kiểm tra lại khai báo thanh ghi, số qubit/bit, số Toffoli-like tĩnh và chênh lệch số lệnh sau biến đổi.
 
-## Cách thực hiện và đánh đổi
+## Dựng và kiểm chứng
 
-1. Dùng marker và hai stage gốc để lập bảng dây đọc/ghi ở biên `extract → synthesis → convert` và `unconvert → unsynthesis → unextract`. Ghi biểu diễn từng word, thứ tự bit, vị trí locator và hệ số sống, độ bậc và lịch sử điều khiển, thanh ghi cổ điển dùng lại, cùng dây sạch và dây mượn. Kiểm basis, modulus, chuẩn hóa và mapping đầu ra bằng fixture trước khi thay cổng.
-2. Từ chuỗi cập nhật lặp trong gate stream, khôi phục quy tắc rẽ nhánh, thứ tự hệ số và biểu diễn field. Dùng phép nhân cộng `target ^= left * right` trên GF(2^12) để mô hình hóa các cập nhật song tuyến tính đã xác nhận. Sinh forward và inverse từ cùng quy tắc với thứ tự và dữ liệu điều khiển tương ứng. Kiểm locator độc lập bằng nghiệm tại vị trí lỗi và kiểm riêng layout, hệ số chuẩn hóa và lịch sử với V5 vì cùng locator toán học có thể có biểu diễn khác. Nhánh hụt bậc, locator hằng và hệ số đầu bằng 0 cần đi đúng tuyến V5.
-3. Đối chiếu trên cùng input ở cả hai biên. Cặp mới phải để `convert` đọc được cùng trạng thái, giữ các dây sống và phục hồi dữ liệu đầu vào cũng như workspace sau `unsynthesis`. Xét pha phụ thuộc đầu vào trên các nhánh đo. Với xóa đo X một tích bit `a*b`, outcome `h` sinh pha `(-1)^(h*a*b)`. Chỉ dùng CZ điều kiện `h` khi hai factor đúng còn sống hoặc có thể dựng lại. Nếu predicate khác tích hai bit thì xác định phép sửa pha tương ứng trước khi bỏ lịch cũ.
-4. Sau khi bản tương đương qua kiểm tra, thống kê Toffoli-like riêng ở cả hai chiều và xác định một cặp cập nhật lặp có thể dùng chung tích hoặc scratch đã sạch. Chỉ tái dùng tích khi cả hai toán hạng và điều kiện điều khiển còn tương đương trên mọi nhánh sử dụng. Ghi chi phí giữ qubit sống, dựng lại và xóa pha. Với repetition factor cố định, điều kiện hòa vốn là `T_new/T_v5 < (892/Q_new)^2`. Nếu lỗi thay đổi, so điểm trực tiếp. Tên config, layout và lựa chọn lịch cổng cụ thể thuộc bước 03.
+Chạy từ thư mục gốc repo bằng Python 3.13 và Kickmix 1.0.0.
 
-## Kế hoạch kiểm chứng hypothesis
+```sh
+python src/dqi/DQI-39/solution.py \
+  --config src/dqi/DQI-39/configs/q26_homogeneous_group4.json \
+  --output artifacts/dqi/DQI-39/q26_homogeneous_group4.kmb
+```
 
-- **Đối chứng.** V5 và bản dựng lại có cùng hash ở trên. Lượt dev cục bộ do owner cung cấp dùng profile v1, seed `20261106`, 4.096 shots và có 0 lỗi value/phase. Lượt chấm theo schema và đối chiếu môi trường được ghi ở phần kết luận.
-- **Dự đoán.** Tái sử dụng tích lặp có thể giảm tổng Toffoli-like của cặp synthesis mà không tăng đỉnh qubit nếu tìm được dây sạch xuyên suốt khoảng sống. Bản Python tương đương dùng làm mốc kiểm tra trước khi đo lợi ích.
-- **Ủng hộ hoặc bác bỏ.** Kiểm tra weight 0, 1, 35, tụt bậc và syndrome đầu bằng zero, vị trí biên và mask runtime khác nhau. Lỗi value, phase hoặc workspace bác bỏ lịch cổng. Sau kiểm tra thành phần, ứng viên phải dev PASS với điểm thấp hơn V5 trên cùng harness, seed, profile và số shots. Chỉ số operation count hoặc runtime thấp hơn không đủ để ủng hộ giả thuyết về điểm.
-- **Điều kiện dừng.** Giới hạn ở một bản tham chiếu Python và một lịch tối ưu của cặp synthesis. Nếu chưa khớp được giao diện hoặc không tìm được tiết kiệm có chứng chỉ đủ bù chi phí, ghi lại kết quả và dừng ở khối này. Thay converter hoặc ghép decoder khác cần mở rộng phạm vi riêng.
-- **Kiểm tra ứng viên cuối.** Sau dev, owner chạy full 102.400 shots hoặc dùng bộ seed giữ lại có đối chứng chạy cùng điều kiện. Dùng thêm ca biên và kiểm phase/cleanup của thành phần. Dev không thay thế kiểm tra bổ sung.
+Mã Python và kế hoạch JSON nằm trong `decoder/` và `tools/`. Các file
+attribution và điều khoản của gói nguồn nằm trong `upstream/`.
+[CREDITS](upstream/CREDITS.md) · [LICENSE](upstream/packet/LICENSE.txt) · [Phạm vi giấy phép](upstream/provenance/upstream_scope_notice.md).
 
-## Kết luận và phiên bản tái lập
+Bản thử cục bộ trước khi đóng gói CLI đạt 892 qubit và 457.906 Toffoli-like tĩnh ở cả hai phiên bản. Bước giản lược bỏ 7.910.160 CX, giảm tổng số lệnh từ 63.887.951 xuống 55.977.791 (12,38%). Đối chiếu 16 trajectory ghép cặp khớp quantum bits, classical bits và pha. SHA-256 của bản đã giản lược là `7f71a310ac1f61f86f908c3c61375c879da4caca7db9b140e966195e8e4d01d1`.
 
-Cả dev_5min và full đều PASS, 0 lỗi value và phase trên lần lượt 4.096 và 102.400 shots. Hai run khớp build qua hash artifact và source/config snapshot. Dev profile v1, seed `20261106` và cùng số shots cho đúng tài nguyên và điểm của V5 đã chấm trước đó. Full dùng verifier chính thức với seed mặc định suy từ hash mạch, nên cùng binary cũng dùng cùng seed mặc định. V5 được tái lập ở cấp binary. Giả thuyết giảm Toffoli của synthesis vẫn chưa có ứng viên được kiểm chứng.
+Phép giản lược giữ `Q²T`. Mục tiêu đo tiếp là thời gian verifier và số lệnh trên cùng harness, seed và profile. Chấm dev_5min với seed `20261106` và 4.096 shots. Kiểm tra value và phase trước khi so sánh trên cùng harness và profile. Dừng nếu có lỗi hoặc nếu kiểm tra tĩnh phát hiện thay đổi ngoài dự kiến. Chạy full cho ứng viên cuối. Các run `rank42_reference` giữ nguyên làm hồ sơ Kirill V5 trước đây. Chúng không cung cấp điểm cho q26.
 
-Mạch dùng 892 qubit, 395.593 Toffoli-like tĩnh, trung bình khoảng 395.307 ở dev và 395.308 ở full. Chênh lệch score giữa hai mode chủ yếu đến từ repetition factor (2,9848 và 1,1913), vì số shots khác nhau ảnh hưởng cận trên xác suất lỗi.
+## Kết quả q26
 
-### Đối chứng DQI-BASELINE chạy lại cục bộ
+Hai run dùng config `q26_cx_cancel`, commit nguồn `2320183a7b9c1982a7eb8c5bd56113fa9f87ed97` và cùng SHA-256 artifact nêu trên. [Provenance bản dựng](../../../results/dqi/DQI-39/q26_cx_cancel/build_only/20261114T070946Z-local-build/provenance.json).
 
-| Mode | Run baseline cục bộ | Score baseline | Score DQI-39 | Baseline / DQI-39 |
-| --- | --- | ---: | ---: | ---: |
-| dev_5min | `20261110T033155Z-local-dev_5min-4cf478` | 61.234.661.450.380,1 | 938.805.873.038,7448 | 65,2261× |
-| full | `20261110T033335Z-local-full-fc3712` | 24.439.467.666.108,316 | 374.690.051.360,2488 | 65,2258× |
+| Mode | Trạng thái | Score | Shots | Lỗi value | Lỗi phase | Run |
+| --- | --- | ---: | ---: | ---: | ---: | --- |
+| dev_5min | PASS | 956538238429.3275 | 4096 | 0 | 0 | [20261114T071739Z-local-dev_5min-9333d8](../../../results/dqi/DQI-39/q26_cx_cancel/dev_5min/20261114T071739Z-local-dev_5min-9333d8/verifier.json) |
+| full | PASS | 383517939271.7216 | 102400 | 0 | 1 | [20261114T071852Z-local-full-6b31bb](../../../results/dqi/DQI-39/q26_cx_cancel/full/20261114T071852Z-local-full-6b31bb/verifier.json) |
 
-Cả hai mạch đều PASS với 0 lỗi value/phase trong mỗi mode. Metadata hai phía khớp Python 3.13.7, phiên bản package và toàn bộ bảng hash verifier. Hai run dev còn khớp hash harness, profile v1, seed `20261106` và 4.096 shots. Hai run full dùng cùng thiết lập 102.400 shots và seed mặc định suy từ hash của từng mạch, nên mẫu full khác nhau. Baseline dùng 1.893 qubit và khoảng 5,725 triệu Toffoli-like trung bình. Ở dev, tỷ số khoảng 65,23× đến từ hệ số 4,50× của `Q²` và 14,48× của `T`, với cùng repetition factor.
+Cả hai run dùng 892 qubit và trung bình khoảng 402.773 Toffoli-like. Full đạt PASS theo verifier và ghi nhận một lỗi phase, nên tiêu chí không lỗi chưa đạt trên full. Cần đối chiếu với q26 gốc trên cùng mẫu trước khi quy lỗi cho phép giản lược CX. Các run DQI-BASELINE trong bảng điểm khác môi trường hoặc harness, nên cột hệ số cải thiện để trống.
 
-Artifact baseline chạy lại có SHA-256 `5dfb9991335e41f709a2b2cd0c1e8b28f5ad50e9672b11539d77480b39e9f98f`, khác artifact lịch sử, và các run mới chưa có provenance build. Các tỷ số trên dùng làm tham khảo cục bộ cho V5 đã tái lập. Hàng DQI-BASELINE trong SCORES.md vẫn dẫn các run lịch sử, nên cột cải thiện chính thức của DQI-39 để trống.
+### Điều tra lỗi phase
 
-### Quyết định sau bước 04
+Tái chạy với seed mặc định của artifact full và batch 256 tái lập lỗi ở shot chỉ số 14975 (đếm từ 0), trọng số 31. q26 gốc và bản giản lược cùng sai đúng shot đó khi dùng cùng syndrome, mask và seed simulator. Thử giữ các pole flag thật thay cho phép truyền flag của q26 vẫn sai ở shot này, đồng thời tăng lên 901 qubit. Phép thử này không được chọn làm config chấm.
 
-Dừng ở `rank42_reference` theo điều kiện dừng đã đặt trước và chuyển sang chuẩn bị review. Phạm vi bàn giao là tái lập V5 và bộ sinh nhân-cộng. Giả thuyết giảm chi phí synthesis chưa có ứng viên để chấm. Việc đổi cách sinh cùng tensor hoặc hủy thêm CNOT không tạo lợi ích (Q^2T). Các phase fold local đã đo giảm khoảng 3,47 Toffoli trung bình, tương đương 0,00088% ở cùng Q và repetition factor.
+Đặt riêng từng bit mask tại 31 vị trí có lỗi cho thấy 30 vị trí trả về 0, còn vị trí 50 trả về 2477 thay cho 2850. Mạch vẫn khôi phục syndrome và dọn workspace. Đọc hệ số B ngay sau synthesis cho thấy đa thức monic dùng trong biểu diễn Forney không có nghiệm tại các điểm trường của ca này. Kết quả khoanh lỗi vào quá trình dựng locator, gồm extraction và synthesis. Chưa xác định được phép cập nhật đầu tiên làm sai locator. Giữ ca trọng số 31 này làm test hồi quy trước khi thử thay đổi converter hoặc reverse extraction.
 
-Ưu tiên một hypothesis riêng về ghép giao diện synthesis/conversion và chiều đảo. Audit xem biểu diễn trung gian nào chỉ dùng ở giao diện và có thể được truyền trực tiếp vào converter, bỏ các phép nhân hoặc tái dựng rồi xóa biểu diễn đó. Đo tổng chi phí của cả hai chiều, giữ mask runtime và scan, kiểm đúng locator, dữ liệu converter, khôi phục syndrome và pha ở weight 0/1/29/33/35 và tụt bậc. Dùng [note Kirill đã review và merge](https://github.com/nhphan0505/verifiable-quantum-circuit/blob/c4d8b66974ee7bc958d9adf7a1505eac3e7b249e/research/dqi/discussions/kaggle-kirilltym-conditional-uncompute-audit/note.md) cho mốc phân rã: cặp synthesis khoảng 72.000 Toffoli tĩnh, cả bốn stage synthesis/conversion khoảng 195.000 trên bản local chỉ ghép phase fold. Các số tĩnh này dùng để định vị chi phí.
+V5 và q26 cùng dùng 892 qubit, với mean Toffoli-like dev lần lượt khoảng 395.307 và 402.774. Bản đếm theo marker cho thấy cả hai cùng dùng 44.275 Toffoli-like tĩnh cho scan. Hai phần đáng đối chiếu là reverse extraction (q26 121.867, V5 96.881) và reverse conversion (q26 77.403, V5 62.534) theo [ghi chú audit V5/V6](../../../research/dqi/discussions/kaggle-kirilltym-conditional-uncompute-audit/note.md). Các chênh lệch theo khối là mốc để kiểm tra tương đương dữ liệu và pha ở biên. Chưa có bằng chứng rằng ghép riêng một khối sẽ đạt mức tiết kiệm của toàn mạch V5.
 
-Mốc sàng lọc đề xuất trước khi compile biến thể mới là khoảng 20.000 Toffoli trung bình tiết kiệm được (~5,1% proxy ở 892 qubit, nếu lỗi và repetition factor giữ nguyên). Mốc tham khảo 80× cần khoảng 322.300 Toffoli trung bình ở cùng Q và repetition factor, tức giảm khoảng 73.000 so với V5, xấp xỉ toàn bộ cặp synthesis hiện tại. Sau kiểm tra thành phần, so dev trên cùng profile/seed và đánh giá full riêng, do hash mạch mới đổi seed mặc định. Chưa có ước lượng chi phí đã đo cho phép ghép.
+### Đối chiếu phương án sửa lỗi
 
-| Mốc tốt nhất | Config | Commit nguồn | Run / provenance |
-| --- | --- | --- | --- |
-| Dev | [rank42_reference](configs/rank42_reference.json) | `cde21590a4027faf0950ea087e21d3516d405f21` | [20261110T031338Z-local-dev_5min-92db22](../../../results/dqi/DQI-39/rank42_reference/dev_5min/20261110T031338Z-local-dev_5min-92db22/verifier.json) · [provenance](../../../results/dqi/DQI-39/rank42_reference/dev_5min/20261110T031338Z-local-dev_5min-92db22/provenance.json) |
-| Full | [rank42_reference](configs/rank42_reference.json) | `cde21590a4027faf0950ea087e21d3516d405f21` | [20261110T031736Z-local-full-f7e2d6](../../../results/dqi/DQI-39/rank42_reference/full/20261110T031736Z-local-full-f7e2d6/verifier.json) · [provenance](../../../results/dqi/DQI-39/rank42_reference/full/20261110T031736Z-local-full-f7e2d6/provenance.json) |
+Bản dựng thử từ gói upstream, gồm hoàn thiện hụt ba bậc và giữ pole flag ở nhóm 12 và 16, dùng 892 qubit và 458.305 Toffoli-like tĩnh. Phát lại cùng batch 256 vẫn sai pha đúng shot 14975; probe các bit mask vẫn trả về cùng mẫu lỗi sai. Loại bản dựng này khỏi các config chấm.
 
-Điểm và các run xem trong [SCORES.md](../SCORES.md).
+DQI-27 `narrow_return` dựng lại từ mã nguồn, dùng 890 qubit và 11.647.130 Toffoli-like tĩnh. Trên cùng batch 256 không có lỗi pha hay lỗi hoàn nguyên. Probe riêng từng bit tại 31 vị trí lỗi cũng khớp toàn bộ giá trị. Đây là mốc đúng cho ca hồi quy và có chi phí cao hơn q26. Bản vá bên dưới xử lý lỗi tại bước extraction của q26.
 
-## Cấu hình bước 03
+### Bản vá extraction của q26
 
-[rank42_reference](configs/rank42_reference.json) dùng [bộ sinh Python](solution.py) để nhận dạng các khối nhân-cộng 42 Toffoli trong cả hai chiều. Mỗi khối được mô tả bằng ba word 12-bit rời nhau và 42 hạng song tuyến tính. Mỗi hạng dùng CNOT để đưa parity hai toán hạng vào hai dây trụ và đổi cơ sở đầu ra, sau đó dùng một CCX rồi hoàn nguyên CNOT. Toàn khối thực hiện `out ^= left * right` với hai toán hạng giữ nguyên. Vì ánh xạ là song tuyến tính, kiểm trên cả 144 cặp bit cơ sở đủ để xác nhận tensor so với phép nhân GF(2^12) của Kickmix.
+Đối chiếu với phép chia đa thức GF(2¹²) cho thấy tám hệ số đầu của continued fraction khớp, còn hệ số thứ chín sai. Ở node nhóm 4, mẫu số trung gian bằng 0 sau bốn bước. Phép nghịch đảo zero-safe của đường thông thường làm mất tọa độ projective tại pole. Config `q26_homogeneous_group4` dùng đường homogeneous của q26 cho nhóm 4 để giữ riêng tử số và mẫu số qua pole. Flag của nhóm 4 được giữ để hoàn nguyên độc lập với chuỗi flag của nhóm 5–16. Đối chiếu với batch lỗi đã lưu, probe các giá trị lỗi và đo Toffoli-like trước khi chấm lại.
 
-Kiểm trên gate stream cục bộ nhận diện và sinh lại 734 khối thuận và 801 khối đảo. Đối chiếu từng lệnh sau sinh trên cả 1.535 khối. Mọi phần điều tuyến, history, phép đo và sửa pha bên ngoài khối nhân tiếp tục dùng dữ liệu cổng V5. Phạm vi tái dựng ở cấp phép nhân chưa thay cho việc khôi phục toàn bộ thuật toán locator. Các kiểm tra cục bộ về hai tích lặp qua CNOT và điều kiện điều khiển affine chưa tìm được lịch giảm Toffoli có chứng chỉ trong phạm vi đã kiểm tra.
+Bản dựng `q26_homogeneous_group4` ở commit `333aaff` có 892 qubit và 458.100 Toffoli-like tĩnh, tăng 194 cổng so với `q26_cx_cancel`. Bản trước và sau CNOT cancellation đều vượt qua batch hồi quy 256 shot và khớp 31 giá trị lỗi khi probe từng bit. Bản cuối cũng vượt qua 256 phép dịch vòng của ca lỗi. Các phép thử kiểm tra pha, khôi phục syndrome và workspace. [Provenance bản vá](../../../results/dqi/DQI-39/q26_homogeneous_group4/build_only/20261114T084125Z-local-build/provenance.json).
 
-Cấu hình này là mốc tham chiếu để kiểm chứng phần Python. Build yêu cầu file V5 đúng SHA-256 trên và tự kiểm hash đầu ra. Nếu khớp byte, số qubit, Toffoli và điểm của cùng profile/harness sẽ khớp đối chứng. Không dùng config này làm bằng chứng giảm điểm hoặc làm ứng viên đã chấm chính thức. Chỉ mở lịch tối ưu nếu tìm được cách giảm chi phí của cặp synthesis và giữ đúng giao diện.
+### Kết quả bản vá
+
+Cả hai run `q26_homogeneous_group4` đạt PASS với 0 lỗi value và 0 lỗi phase, khớp SHA-256 bản dựng `9ccc5add224f76e127ccf8129570ad344b5d3e5183c9a08fcd85133a6b9c45a8` từ commit `333aaffb48277d81dec33a2b7d4e7f44f75e4b18`.
+
+| Mode | Score | Shots | Mean Toffoli-like | Run |
+| --- | ---: | ---: | ---: | --- |
+| dev_5min | 959137617154.2389 | 4096 | 403868.080 | [20261114T084337Z-local-dev_5min-916c76](../../../results/dqi/DQI-39/q26_homogeneous_group4/dev_5min/20261114T084337Z-local-dev_5min-916c76/verifier.json) |
+| full | 382804854185.055 | 102400 | 403869.446 | [20261114T084401Z-local-full-70b703](../../../results/dqi/DQI-39/q26_homogeneous_group4/full/20261114T084401Z-local-full-70b703/verifier.json) |
+
+Bảng điểm chọn bản vá cho cả hai mode vì bản này vượt qua ca hồi quy và đạt tiêu chí full không lỗi. Dev dùng cùng seed 20261106 và tăng khoảng 0,27% điểm so với bản trước. Hai run full dùng seed mặc định suy từ hash riêng của mỗi artifact. Hệ số cạnh link run là đối chiếu số học với DQI-BASELINE lịch sử khác điều kiện chấm.

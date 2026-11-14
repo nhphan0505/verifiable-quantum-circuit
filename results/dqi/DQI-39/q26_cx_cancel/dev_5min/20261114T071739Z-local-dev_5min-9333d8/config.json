@@ -1,0 +1,24 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-39",
+  "config_name": "q26_cx_cancel",
+  "mode": "dev_5min",
+  "command": [
+    "/Users/tranxuanhoa/Documents/research/GQA/.venv/bin/python",
+    "/private/tmp/GQA-DQI-39-q26/src/common/dev_verify.py",
+    "--track",
+    "dqi",
+    "--submission",
+    "/private/tmp/GQA-DQI-39-q26/artifacts/dqi/DQI-39/q26_cx_cancel.kmb",
+    "--seed",
+    "20261106",
+    "--invsqrt-samples",
+    "4096",
+    "--invsqrt-repeats",
+    "2",
+    "--dqi-shots",
+    "4096",
+    "--dfthc-repeats",
+    "4"
+  ]
+}
