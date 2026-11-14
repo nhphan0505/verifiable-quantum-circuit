@@ -34,6 +34,7 @@ class LocalGrading(unittest.TestCase):
     def run_fake(self, interrupted=False, mode="full"):
         class Process:
             returncode = 0
+            pid = 12345
             def __init__(self, cmd, **kwargs):
                 kwargs['stdout'].write(json.dumps({'status': 'PASS', 'score': 1}))
                 self.first = True
@@ -43,7 +44,7 @@ class LocalGrading(unittest.TestCase):
                     raise KeyboardInterrupt()
             def kill(self):
                 self.returncode = -1
-        with patch.object(grader.importlib.metadata, 'version', return_value='test'), patch.object(grader.subprocess, 'Popen', Process), patch.object(grader.sys, 'platform', 'linux'), patch.object(grader, 'runtime', return_value=(['python'], str(self.root))), patch.object(grader, 'preflight', return_value={'python': '3.13.14', 'packages': {'kickmix-engine': '0.6.0'}, 'platform': 'Linux', 'kernel': {'selected': 'baseline'}}):
+        with patch.object(grader.os, 'killpg', create=True), patch.object(grader.importlib.metadata, 'version', return_value='test'), patch.object(grader.subprocess, 'Popen', Process), patch.object(grader.sys, 'platform', 'linux'), patch.object(grader, 'runtime', return_value=(['python'], str(self.root))), patch.object(grader, 'preflight', return_value={'python': '3.13.14', 'packages': {'kickmix-engine': '0.6.0'}, 'platform': 'Linux', 'kernel': {'selected': 'baseline'}}):
             return grader.grade(self.root, 'invsqrt', 'INV-123', 'owner', 'test', mode=mode)
 
     def test_full_engine_records_runtime_and_default_options(self):

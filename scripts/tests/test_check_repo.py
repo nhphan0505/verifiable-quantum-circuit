@@ -125,7 +125,8 @@ class RepositoryChecks(unittest.TestCase):
         self.assertTrue(any('provenance.json' in e for e in self.audit.errors))
 
     def test_pre_git_build_requires_matching_historical_evidence(self):
-        build = next((self.root / 'results/dqi/DQI-BASELINE/baseline/build_only').iterdir())
+        legacy = json.loads((self.root / 'scripts/legacy_runs.json').read_text())['runs']
+        build = self.root / next(name for name in legacy if name.startswith('results/dqi/DQI-BASELINE/baseline/build_only/'))
         original = json.loads((build / 'metadata.json').read_text())
         run = self.root / 'results/dqi/DQI-BASELINE/baseline/dev_5min/test-regrade'
         run.mkdir(parents=True)
