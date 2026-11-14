@@ -16,7 +16,7 @@ Giữ nguyên 128 đoạn tra bảng, thuật toán `y = c0 - T(t (c1 - T(t c2))
 
 Đặt `phase_drop_bits=2` trong JSON; `_phase()` chỉ phát `Z_POW` cho `j>=2`, bỏ phép quay ở `j=1` cùng với bit 0 đã bỏ từ trước. Mô hình trong `_evaluate()` phải dùng đúng `y1_masked = (y1 >> 2) << 2`. Mỗi phép nhân `T` giữ quy tắc bỏ các partial-product row dưới LSB của thanh ghi đích; không thay đổi làm tròn/cắt cụt. Vì offset có thể dịch `r1` và `y`, phải kiểm tra không âm và không tràn theo mọi `x=1..3,133,452`; kiểm tra cả đầu/cuối mỗi đoạn bảng, các giá trị gần biên và miền `x=1`. Tiêu chí pha là `abs(y1_masked / 2^(wy+n_p) - 1/sqrt(x)) < 2^-24 / sqrt(x)`.
 
-Quét mô hình fixed-point của INV-41 trên toàn miền với ứng viên này cho sai số tương đối lớn nhất khoảng 0.898786 lần dung sai, biên tuyệt đối nhỏ nhất khoảng 4.110e-12 vòng, và các độ rộng word không tăng. Theo công thức điểm verifier với 34 thay vì 35 phép quay, Q=164 và 2220 Toffoli giữ nguyên, score ước tính 403718.36. Đây là kết quả mô hình, chưa phải mạch đã build hay verifier PASS. Config đầu tiên là [phase2_row0.json](configs/phase2_row0.json) với đúng offset và số bit trên để kiểm định giả thuyết, chưa khẳng định tối ưu. Offset có thể làm thay đổi pha ở điểm biên và đường HMR cần kiểm bằng mạch thật.
+Trước khi build/chấm, quét mô hình fixed-point của INV-41 trên toàn miền với ứng viên này cho sai số tương đối lớn nhất khoảng 0.898786 lần dung sai, biên tuyệt đối nhỏ nhất khoảng 4.110e-12 vòng, và các độ rộng word không tăng. Theo công thức điểm verifier với 34 thay vì 35 phép quay, Q=164 và 2220 Toffoli giữ nguyên, score ước tính 403718.36. Đây là dự đoán mô hình, không phải số đo tại thời điểm đặt hypothesis. Config đầu tiên là [phase2_row0.json](configs/phase2_row0.json) với đúng offset và số bit trên để kiểm định giả thuyết. Offset có thể làm thay đổi pha ở điểm biên và đường HMR cần kiểm bằng mạch thật.
 
 ## Kế hoạch kiểm chứng hypothesis
 
@@ -28,11 +28,15 @@ Quét mô hình fixed-point của INV-41 trên toàn miền với ứng viên n�
 
 ## Kết luận và phiên bản tái lập
 
-Chưa build hoặc chấm. Sẽ ghi config, SHA nguồn, provenance và run sau khi có kết quả.
+Run [full INV-64](../../../results/invsqrt/INV-64/phase2_row0/full/20261114T144833Z-local-full-5929af/verifier.json) PASS với 200.540.928 shots, score `403718.3593824384`, 164 qubit, 2.220 Toffoli và 34 phép quay generic. Sai số lớn nhất bằng `0.8987860953092711` lần dung sai tại `x=2154475`; `rotation_eps=3.797698733857673e-13`. Hash mạch `aa89f2ff3a32b9ad6bbac476852e76c16227af2854f942e0ca0d90ee5a6339ed` khớp metadata, [provenance của run](../../../results/invsqrt/INV-64/phase2_row0/full/20261114T144833Z-local-full-5929af/provenance.json) và [build_only](../../../results/invsqrt/INV-64/phase2_row0/build_only/20261114T141430Z-local-build/provenance.json). Source/config của build là commit `22c4472510f6337a197c8a4019cbb0f31a82574e`; không suy ra từ HEAD hiện tại.
+
+So với [full INV-41](../../../results/invsqrt/INV-41/base/full/20261113T184751Z-local-full-2b9b2f/verifier.json), score giảm `1560.0117564984` (`0.3849235%`), đúng chiều dự đoán và gần score mô hình. Q và Toffoli không đổi; rotations giảm 35 xuống 34, `rotation_eps` tăng từ `2.7002820506109133e-13` lên `3.797698733857673e-13`. Sai số tương đối xấu nhất giảm từ `0.9308138085034672` xuống `0.8987860953092711`. Kết quả ủng hộ hypothesis cải thiện score của INV-41; mức cải thiện nhỏ và vẫn cao hơn score full `80162.73214111096` của INV-51, nên dừng quét config của hướng này sau ứng viên đầu tiên.
+
+Hai run full cùng dùng kickmix-engine 0.6.0, verifier invsqrt cùng SHA-256 `ddef520dec6b68d1cf0a6f328ddd36d79eb84570b9192cf3f7acaf073f06733a`, Python 3.13.18 và 200.540.928 shots, nhưng đối chứng chạy WSL2 Linux/AVX2 còn INV-64 chạy macOS/NEON. Không có run smoke/dev cho INV-64; full PASS đã kiểm miền chính thức, nhưng chưa làm kiểm tra độc lập nhiều seed HMR hoặc đối chiếu riêng các điểm biên bảng. Đây là giới hạn trước review cuối, không làm thay đổi điểm full đã ghi.
 
 | Mốc tốt nhất | Config | Commit nguồn | Run / provenance |
 | --- | --- | --- | --- |
 | Dev | Chưa có | Chưa có | Chưa chấm |
-| Full | Chưa có | Chưa có | Chưa chấm |
+| Full | [phase2_row0.json](configs/phase2_row0.json) | `22c4472510f6337a197c8a4019cbb0f31a82574e` | [verifier](../../../results/invsqrt/INV-64/phase2_row0/full/20261114T144833Z-local-full-5929af/verifier.json), [provenance](../../../results/invsqrt/INV-64/phase2_row0/full/20261114T144833Z-local-full-5929af/provenance.json) |
 
 Mã triển khai: [solution.py](solution.py). Cấu hình: [phase2_row0.json](configs/phase2_row0.json).
