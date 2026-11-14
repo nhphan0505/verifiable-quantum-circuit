@@ -1,0 +1,12 @@
+{
+  "n_p": 10,
+  "address_bits": 6,
+  "wy": 29,
+  "wc1": 28,
+  "wc2": 25,
+  "d0": 15,
+  "d1": 13,
+  "phase_drop_bits": 2,
+  "table_offset_index": 0,
+  "table_offset": [-3, 2, 1]
+}
