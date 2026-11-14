@@ -54,3 +54,7 @@ V5 và q26 cùng dùng 892 qubit, với mean Toffoli-like dev lần lượt kho�
 Bản dựng thử từ gói upstream, gồm hoàn thiện hụt ba bậc và giữ pole flag ở nhóm 12 và 16, dùng 892 qubit và 458.305 Toffoli-like tĩnh. Phát lại cùng batch 256 vẫn sai pha đúng shot 14975; probe các bit mask vẫn trả về cùng mẫu lỗi sai. Loại bản dựng này khỏi các config chấm.
 
 DQI-27 `narrow_return` dựng lại từ mã nguồn, dùng 890 qubit và 11.647.130 Toffoli-like tĩnh. Trên cùng batch 256 không có lỗi pha hay lỗi hoàn nguyên. Probe riêng từng bit tại 31 vị trí lỗi cũng khớp toàn bộ giá trị. Đây là mốc đúng cho ca hồi quy và có chi phí cao hơn q26. Bản q26 hiện vẫn cần sửa khối dựng locator.
+
+### Bản vá extraction của q26
+
+Đối chiếu với phép chia đa thức GF(2¹²) cho thấy tám hệ số đầu của continued fraction khớp, còn hệ số thứ chín sai. Ở node nhóm 4, mẫu số trung gian bằng 0 sau bốn bước. Phép nghịch đảo zero-safe của đường thông thường làm mất tọa độ projective tại pole. Config `q26_homogeneous_group4` dùng đường homogeneous của q26 cho nhóm 4 để giữ riêng tử số và mẫu số qua pole. Flag của nhóm 4 được giữ để hoàn nguyên độc lập với chuỗi flag của nhóm 5–16. Đối chiếu với batch lỗi đã lưu, probe các giá trị lỗi và đo Toffoli-like trước khi chấm lại.

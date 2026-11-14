@@ -23,17 +23,51 @@ SOURCE_PREFIX = (
     "datasets/qcc-dqi-nonempty-projective-lean-source-v3/parent/parent/parent/parent/"
     "packet/blocks/dqi/carry-q26-892/source/"
 )
+RETENTION_TOOL = "tools/q26_transfer_build.py"
 WORD_BITS = 12
 SYNDROME_WORDS = 70
 POSITIONS = 4095
 
 
-def emit_decoder(builder, syndromes, masks, decoder):
+def emit_decoder(builder, syndromes, masks, decoder, repair):
     """Project masks, extract and synthesize, apply phase, then restore inputs."""
     # Upstream modules use `circ` as the name of the Kickmix builder API.
     sys.modules["circ"] = km
     sys.path.insert(0, str(decoder))
     import decode_carry_round7  # Installs the upstream flag-carry transformations.
+    if repair:
+        sys.path.insert(0, str(decoder.parent / "tools"))
+        from q26_transfer_build import install_retention
+
+        # Group 4 can encounter an intermediate pole. Retain its own flag
+        # and keep its return independent of the existing groups 5–16.
+        entry = decode_carry_round7.decode
+        from walk_bound import functions
+
+        selected = set(range(4, 17))
+        # The deferred normalization wrapper has its own routing table.
+        # Extend both directions so group 4 has the matching gauge token.
+        from direct_deferred_companion import forward_deferred
+
+        scopes = {id(fn.__globals__): fn.__globals__ for fn in functions(entry)}
+        for scope in scopes.values():
+            if "_a18_deferred_select" not in scope:
+                continue
+            scope["_a18_deferred_select"] |= {4}
+            original = scope["forward_original"]
+            reference = scope["ref"]
+
+            def forward(b, words, gi, reverse=False, token=None, normalizer=None,
+                        *, original=original, reference=reference):
+                if gi == 4 and not reverse:
+                    return forward_deferred(b, words, gi, reference)
+                return original(b, words, gi, reverse, token, normalizer)
+
+            scope["forward_original"] = forward
+        install_retention(entry, decoder, {4, 16}, selected, False, {})
+        entry(builder, syndromes, masks)
+        return
+
     from decode_norm_deferred_flag_unsynthesis import g, consume_synthesis, route_words
 
     project_masks = g["baseline"].project
@@ -70,11 +104,11 @@ def emit_decoder(builder, syndromes, masks, decoder):
         restore_masks(builder, masks, saved_masks)
 
 
-def build_circuit(decoder):
+def build_circuit(decoder, repair=False):
     builder = km.CircuitBuilder()
     syndromes = [builder.alloc_qubits(WORD_BITS) for _ in range(SYNDROME_WORDS)]
     masks = [builder.alloc_bits(WORD_BITS) for _ in range(POSITIONS)]
-    emit_decoder(builder, syndromes, masks, decoder)
+    emit_decoder(builder, syndromes, masks, decoder, repair)
 
     # Match q26's published register serialization.
     declarations = []
@@ -161,12 +195,17 @@ def optimize(original, output):
             "cnot_removed": removed}
 
 
-def extract_sources(bundle, decoder, expected_sha256):
+def extract_sources(bundle, decoder, expected_sha256, repair=False):
     with ZipFile(bundle) as release:
         compressed = release.read("release_source.xz")
     if hashlib.sha256(compressed).hexdigest() != expected_sha256:
         raise ValueError("The q26 source release does not match the config SHA-256")
     with ZipFile(io.BytesIO(lzma.decompress(compressed))) as archive:
+        if repair:
+            release_root = SOURCE_PREFIX.split("packet/", 1)[0]
+            target = decoder.parent / RETENTION_TOOL
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(archive.read(release_root + RETENTION_TOOL))
         for name in archive.namelist():
             if not name.startswith(SOURCE_PREFIX):
                 continue
@@ -196,10 +235,11 @@ def main():
     with tempfile.TemporaryDirectory(dir=output.parent) as directory:
         workspace = Path(directory)
         decoder = workspace / "decoder"
-        extract_sources(args.source_bundle, decoder, config["source_bundle_sha256"])
+        repair = config.get("homogeneous_group4", False)
+        extract_sources(args.source_bundle, decoder, config["source_bundle_sha256"], repair)
         generated = workspace / "generated.kmb"
         print("Generating q26 from Python", flush=True)
-        build_circuit(decoder).to_file(str(generated), format="kmb")
+        build_circuit(decoder, repair).to_file(str(generated), format="kmb")
         print("Canceling commuting CNOT pairs", flush=True)
         candidate = workspace / "optimized.kmb"
         report = optimize(generated, candidate)
