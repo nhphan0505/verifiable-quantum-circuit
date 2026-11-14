@@ -58,4 +58,15 @@ Các run dưới đây giữ đúng source commit lịch sử, không gán cho s
 | Dev | [reconstructed](configs/reconstructed.json) | `bfe070108c6dd02649c6ba4ab3400b2f0ed50249` | [run](../../../results/invsqrt/INV-51/reconstructed/dev_5min/20261113T084759Z-local-dev_5min-127a3b/verifier.json), [provenance](../../../results/invsqrt/INV-51/reconstructed/dev_5min/20261113T084759Z-local-dev_5min-127a3b/provenance.json) |
 | Full | [reconstructed](configs/reconstructed.json) | `48729436b421e7320d86e48cc0e451be0d84260e` | [run](../../../results/invsqrt/INV-51/reconstructed/full/20261113T161038Z-local-full-c530d9/verifier.json), [provenance](../../../results/invsqrt/INV-51/reconstructed/full/20261113T161038Z-local-full-c530d9/provenance.json) |
 
-Source rút gọn cần build_only mới và đối chiếu exact riêng. Không tạo run verifier hoặc điểm mới từ run lịch sử; full một salt không phải liệt kê mọi transcript HMR. Reviewer phải đánh giá lại HEAD sau refactor trước merge.
+Source rút gọn đã được build từ checkout sạch và đối chiếu exact riêng. Không tạo run verifier hoặc điểm mới từ run lịch sử; full một salt không phải liệt kê mọi transcript HMR. Reviewer phải đánh giá lại HEAD sau refactor trước merge.
+
+
+## Nghiệm thu bản gọn
+
+Commit source `d89769f0fd76190159d33298ff43948a846faad3` đã build trong checkout không có engine/worker cũ, bundle hay artifact đầu vào. KMB 291626 bytes, SHA-256 `321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177`, so độc lập từng block với input gốc đạt RECONSTRUCTED_EXACT. Audit stage reads không có đường dẫn ngoài source mới, build directory, .venv và Python chuẩn. 13464 giá trị scalar trong dữ liệu còn lại khớp bản trước, giữ chiều/thứ tự mảng; checker/scope và 21 tests đạt.
+
+| Mốc | Config | Commit nguồn | Bằng chứng |
+| --- | --- | --- | --- |
+| Compiler gọn | [reconstructed](configs/reconstructed.json) | `d89769f0fd76190159d33298ff43948a846faad3` | [provenance](../../../results/invsqrt/INV-51/reconstructed/build_only/20261114T045124Z-exact-sj15ngzo/provenance.json), [bytes/hash](../../../results/invsqrt/INV-51/reconstructed/build_only/20261114T045124Z-exact-sj15ngzo/reconstruction_check.json), [dependency audit](../../../results/invsqrt/INV-51/reconstructed/build_only/20261114T045124Z-exact-sj15ngzo/dependency_audit.json) |
+
+Lõi engine cũ 2717606 bytes/112 file được thay bằng circuit.py + tables.json tổng 683415 bytes, giảm khoảng 75%; entry point solution.py là file runtime thứ ba. Source cũ vẫn có ở Git commit cơ sở và backup ngoài Git, không bị mất lịch sử. Không tự ghi nhận điểm/full run mới; artifact hiện tại trùng bytes bản full PASS trong bảng lịch sử.

@@ -1,0 +1,12 @@
+{
+  "status": "BUILT",
+  "artifact_sha256": "321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177",
+  "bytes": 291626,
+  "expected_hash_matches": true,
+  "official_verifier": false,
+  "author_final_proof_run": false,
+  "limitations": [
+    "Independent byte comparison with original is recorded separately.",
+    "No grading run."
+  ]
+}

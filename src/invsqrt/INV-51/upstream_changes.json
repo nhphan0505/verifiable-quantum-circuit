@@ -525,8 +525,6 @@
     "circuit.py",
     "tables.json"
   ],
-  "line_count": 9848,
-  "bytes": 568216,
   "schema_version": 2,
   "upstream_archive_sha256": "7d9801ae20e942dba2211a656bba6014a0a16d57da534c0b60328d1c5d9d8254",
   "upstream_lineage_at_basis": "https://github.com/nhphan0505/verifiable-quantum-circuit/blob/1cd2ba724e603c7ed985b2a6d4717b1badd8febc/src/invsqrt/INV-51/upstream_changes.json",
@@ -545,5 +543,10 @@
     "array_lengths_and_order_preserved": true
   },
   "before_engine_bytes": 2717606,
-  "compact_core_bytes": 683416
+  "compact_core_bytes": 683415,
+  "pruning_definition_lines": 9848,
+  "runtime_circuit_lines": 9866,
+  "runtime_circuit_bytes": 568746,
+  "core_storage_reduction_fraction": 0.7485231486830688,
+  "pruning_code_bytes": 568216
 }

@@ -4,7 +4,6 @@
   "input_sha256": "321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177",
   "input_bytes": 291626,
   "source_attribution": "Syed Asad Ali; user-supplied invsqrt_source, Apache-2.0",
-  "source_manifest_sha256": "9164edf966ca34759f2b5f57e02ccd1a89a34f04efa6721300c040423de2c519",
   "components_manifest": "engine_manifest.json",
   "environment": {
     "python": "3.13",
@@ -28,13 +27,15 @@
     "external_bundle_required": false,
     "linux_engine_required": false
   },
-  "reconstruction_level": "COMPACT_GENERATOR_PENDING",
+  "reconstruction_level": "COMPACT_GENERATOR_EXACT",
   "limitations": [
-    "Fixed reconstructed Q46 configuration only; old environment experiment variants unsupported.",
-    "A new clean build and byte comparison is required after this refactor.",
-    "Historical grading remains bound to its historical source commits."
+    "Only the fixed reconstructed Q46 configuration is supported; old environment variants are removed.",
+    "No new official grading run; output bytes equal the historical full-PASS artifact.",
+    "Source consolidation retains independent mutable arithmetic namespaces; review refactoring before merge."
   ],
-  "build_source_commit": "4a8c32b544079ce94c9b3b3aec2befff4022eb4e",
-  "reconstruction_check": "results/invsqrt/INV-51/reconstructed/build_only/20261113T193925Z-exact-s0itk2se/reconstruction_check.json",
-  "source_basis_commit": "1cd2ba724e603c7ed985b2a6d4717b1badd8febc"
+  "build_source_commit": "d89769f0fd76190159d33298ff43948a846faad3",
+  "reconstruction_check": "results/invsqrt/INV-51/reconstructed/build_only/20261114T045124Z-exact-sj15ngzo/reconstruction_check.json",
+  "source_basis_commit": "1cd2ba724e603c7ed985b2a6d4717b1badd8febc",
+  "upstream_manifest_sha256": "9164edf966ca34759f2b5f57e02ccd1a89a34f04efa6721300c040423de2c519",
+  "source_manifest_sha256": "c2ab92b74f5facfa171cfc2eac5e2c041ea4e538513140c8a10a049121950594"
 }
