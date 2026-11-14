@@ -97,6 +97,23 @@ class RepositoryChecks(unittest.TestCase):
         self.audit.scope('base', branch)
         self.assertTrue(any('changed index outside resource rows' in e for e in self.audit.errors))
 
+    def test_postprocessing_structure(self):
+        folder = self.root / 'src/invsqrt/postprocessing/PP-987'
+        (folder / 'tests').mkdir(parents=True)
+        (folder / 'DESCRIPTION.md').write_text('# [PP-987] Test method\n', encoding='utf-8')
+        (folder / 'solution.py').write_text('"""Test method."""\n', encoding='utf-8')
+        (folder / 'tests/test_method.py').write_text('"""Test fixture."""\n', encoding='utf-8')
+        catalog = self.root / 'src/common/postprocessing/METHODS.md'
+        catalog.parent.mkdir(parents=True, exist_ok=True)
+        catalog.touch(exist_ok=True)
+        self.audit.postprocessing()
+        self.assertFalse(self.audit.errors)
+        (folder / 'configs').mkdir()
+        (folder / 'solution.py').unlink()
+        self.audit.postprocessing()
+        self.assertTrue(any('must not add configs' in e for e in self.audit.errors))
+        self.assertTrue(any('missing solution.py' in e for e in self.audit.errors))
+
     def test_current_records_pass(self):
         self.audit.run()
         self.assertEqual([], self.audit.errors)

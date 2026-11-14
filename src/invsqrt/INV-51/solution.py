@@ -1,7 +1,8 @@
 """Compile the compact, exact 46-qubit Fusion circuit for INV-51.
 
 Owner nhphan0505; upstream Syed Asad Ali, Apache-2.0 (LICENSE.txt/NOTICE.txt).
-Runtime source is this entry point, readable circuit.py and tables.json. Internal
+Runtime source includes this entry point, circuit.py, tables.json and the extracted
+PP-001 through PP-004 under src/invsqrt/postprocessing. Internal
 component namespaces preserve mutable arithmetic bindings and independent carry
 contexts; no external bundle, source archive or precompiled gate payload is used.
 The generator normalizes 22-bit x, consumes root/residual, computes coefficient,
@@ -86,6 +87,10 @@ def check_committed(config_path):
     for path in [HERE/'solution.py', HERE/'circuit.py', config_path, HERE/'engine_manifest.json']:
         if path.relative_to(ROOT).as_posix() not in tracked:
             raise RuntimeError(f'Untracked implementation file: {path}')
+    manifest = json.loads((HERE/'engine_manifest.json').read_text(encoding='utf-8'))
+    for relative in manifest.get('postprocessing', {}):
+        if (ROOT/relative).read_bytes() != git('show', f'{head}:{relative}'):
+            raise RuntimeError(f'Uncommitted postprocessing dependency: {relative}')
     return head
 
 
@@ -97,6 +102,12 @@ def prepare_engine(config, work):
         path=(HERE/relative).resolve()
         if not path.is_relative_to(HERE) or sha(path)!=expected:
             raise RuntimeError(f'Integrated source integrity mismatch: {relative}')
+        records.append({'path':path.relative_to(ROOT).as_posix(),'sha256':expected})
+    pp_root = (HERE.parent/'postprocessing').resolve()
+    for relative, expected in manifest.get('postprocessing', {}).items():
+        path = (ROOT/relative).resolve()
+        if not path.is_relative_to(pp_root) or sha(path) != expected:
+            raise RuntimeError(f'Postprocessing integrity mismatch: {relative}')
         records.append({'path':path.relative_to(ROOT).as_posix(),'sha256':expected})
     return tree, records
 

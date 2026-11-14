@@ -70,3 +70,17 @@ Commit source `d89769f0fd76190159d33298ff43948a846faad3` đã build trong checko
 | Compiler gọn | [reconstructed](configs/reconstructed.json) | `d89769f0fd76190159d33298ff43948a846faad3` | [provenance](../../../results/invsqrt/INV-51/reconstructed/build_only/20261114T045124Z-exact-sj15ngzo/provenance.json), [bytes/hash](../../../results/invsqrt/INV-51/reconstructed/build_only/20261114T045124Z-exact-sj15ngzo/reconstruction_check.json), [dependency audit](../../../results/invsqrt/INV-51/reconstructed/build_only/20261114T045124Z-exact-sj15ngzo/dependency_audit.json) |
 
 Lõi engine cũ 2717606 bytes/112 file được thay bằng circuit.py + tables.json tổng 683415 bytes, giảm khoảng 75%; entry point solution.py là file runtime thứ ba. Source cũ vẫn có ở Git commit cơ sở và backup ngoài Git, không bị mất lịch sử. Không tự ghi nhận điểm/full run mới; artifact hiện tại trùng bytes bản full PASS trong bảng lịch sử.
+
+## Tách postprocessing (Issue #62)
+
+Các implementation hậu xử lý đã được chuyển nguyên thuật toán sang
+[PP-001](../postprocessing/PP-001/DESCRIPTION.md) (giữ tích),
+[PP-002](../postprocessing/PP-002/DESCRIPTION.md) (rewrite affine),
+[PP-003](../postprocessing/PP-003/DESCRIPTION.md) (gộp Z_POW) và
+[PP-004](../postprocessing/PP-004/DESCRIPTION.md) (relocate CS).
+Các đoạn nói ba file runtime phía trên mô tả bản trước khi tách: hiện cần thêm
+bốn solution.py của PP. circuit.py giữ simulator/backend và adapter nạp PP;
+engine_manifest.json khóa cả source PP, check_committed kiểm tra snapshot Git
+của dependency mới. Không dùng bản sao implementation cũ làm fallback.
+Thứ tự pipeline, tham số và target hash không thay đổi. Records lịch sử vẫn
+tham chiếu đúng source cũ; không suy ra verifier PASS mới từ việc di chuyển.

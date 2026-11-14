@@ -20,3 +20,17 @@ upstream_changes.json ghi commit cơ sở, nguồn Apache-2.0, danh sách địn
 ```
 
 Stage sinh mạch thô → audit affine/pairs → giữ tích → tối đa bốn lượt rewrite affine → merge Z_POW → relocate → compile KMB. Audit file-open được lưu ở thư mục build mới. Không tự chạy official verifier hoặc symbolic proof upstream; kết quả exact và PASS là các loại bằng chứng khác nhau.
+
+## Tách postprocessing (Issue #62)
+
+Các implementation hậu xử lý đã được chuyển nguyên thuật toán sang
+[PP-001](../postprocessing/PP-001/DESCRIPTION.md) (giữ tích),
+[PP-002](../postprocessing/PP-002/DESCRIPTION.md) (rewrite affine),
+[PP-003](../postprocessing/PP-003/DESCRIPTION.md) (gộp Z_POW) và
+[PP-004](../postprocessing/PP-004/DESCRIPTION.md) (relocate CS).
+Các đoạn nói ba file runtime phía trên mô tả bản trước khi tách: hiện cần thêm
+bốn solution.py của PP. circuit.py giữ simulator/backend và adapter nạp PP;
+engine_manifest.json khóa cả source PP, check_committed kiểm tra snapshot Git
+của dependency mới. Không dùng bản sao implementation cũ làm fallback.
+Thứ tự pipeline, tham số và target hash không thay đổi. Records lịch sử vẫn
+tham chiếu đúng source cũ; không suy ra verifier PASS mới từ việc di chuyển.
