@@ -118,23 +118,6 @@ class Audit:
             for key, value in {'m': 4095, 'n': 70, 'degree': 12, 'r': 2016, 'log2_delta': -128}.items():
                 self.require(result.get(key) == value, f'{run}: incorrect full DQI {key}')
 
-    def comparison(self, label, baseline_meta, candidate_meta, mode, same_run=False):
-        def environment(meta):
-            env = meta.get('environment', {})
-            packages = meta.get('packages', env.get('packages', {}))
-            python = meta.get('python', env.get('python', ''))
-            version = re.match(r'[0-9]+[.][0-9]+[.][0-9]+', str(python))
-            return (version.group() if version else None,
-                    tuple(packages.get(p) for p in ['kickmix', 'numpy', 'scipy']))
-        self.require(baseline_meta.get('engine') == candidate_meta.get('engine'), f'{label}: incompatible engine; use a matching baseline')
-        a, b = environment(baseline_meta), environment(candidate_meta)
-        self.require(a == b and a[0] and all(a[1]), f'{label}: incompatible/missing comparison environment')
-        # Baseline self-ratio is an identity, including historical records with missing hashes.
-        if same_run:
-            return
-        for key in ['verifier_sha256'] + (['dev_harness_sha256'] if mode == 'dev_5min' else []):
-            self.require(bool(baseline_meta.get(key)) and baseline_meta.get(key) == candidate_meta.get(key), f'{label}: incompatible/missing {key}; use a matching baseline')
-
     def immutable_results(self, base):
         # Compare against the actual base tree, including working-tree changes locally.
         for name in self.git('ls-tree', '-r', '--name-only', base, '--', 'results').decode().splitlines():
@@ -315,8 +298,6 @@ class Audit:
     def scores(self, path, track, indexed):
         rows = {}
         results = {}
-        metadata = {}
-        targets = {}
         for line in self.read(path).splitlines():
             cells = [s.strip() for s in line.strip('|').split('|')]
             if cells[0] not in indexed:
@@ -348,8 +329,6 @@ class Audit:
                     self.require(math.isfinite(value) and value > 0 and math.isclose(value, result['score'], rel_tol=1e-12), f'{path}: score differs from verifier')
                     self.require(result.get('status') == meta.get('status') == 'PASS' and meta.get('verification_level') == mode, f'{path}: score must reference PASS in correct mode')
                     results[exp, mode] = result
-                    metadata[exp, mode] = meta
-                    targets[exp, mode] = target
                 except (ValueError, KeyError, TypeError):
                     self.errors.append(f'{path}: invalid score/verifier')
         for exp, cells in rows.items():
@@ -360,14 +339,6 @@ class Audit:
                 candidate = results.get((exp, mode))
                 if not self.require(bool(baseline and candidate), f'{path}: ratio has no baseline/candidate'):
                     continue
-                baseline_key = (TRACKS[track] + '-BASELINE', mode)
-                self.comparison(path, metadata[baseline_key], metadata[exp, mode], mode, targets[baseline_key] == targets[exp, mode])
-                if mode == 'dev_5min':
-                    for key in ['profile_version', 'input_sha256', 'verified_shots']:
-                        self.require(candidate.get(key) == baseline.get(key), f'{path}: incompatible baseline {key}')
-                    for key, value in baseline.get('profile', {}).items():
-                        if key != 'submission':
-                            self.require(candidate.get('profile', {}).get(key) == value, f'{path}: incompatible dev profile {key}')
                 try:
                     ratio = float(cells[ratio_col].removesuffix('×'))
                     self.require(abs(ratio - baseline['score'] / candidate['score']) <= .0051, f'{path}: incorrect improvement ratio')

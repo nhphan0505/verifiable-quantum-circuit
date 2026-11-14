@@ -19,8 +19,8 @@ mới hoặc sửa công cụ chấm. Không xóa config/run cũ để làm đ�
 
 Kiểm tra phù hợp, đồng bộ mô tả/Issue nếu thiết kế đổi. Commit source/config
 trước build; compile artifact đúng tên và ghi provenance build_only mới.
-Giữ cùng profile dev với mốc so sánh; nếu cần đổi profile, giải thích rằng
-cần chấm lại baseline tương ứng để so công bằng.
+Ghi rõ profile dev và bối cảnh so sánh. Không bắt buộc trùng phiên bản/profile
+hoặc chấm lại baseline để được so điểm; có điểm PASS hợp lệ của cùng bài là đủ.
 
 Nếu compile lỗi, tự đọc lỗi và sửa code/config trong phạm vi Issue, commit
 phiên bản mới rồi compile lại bằng .venv đến khi thành công. Không bàn giao

@@ -1,0 +1,13 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-39",
+  "config_name": "q26_homogeneous_group4",
+  "mode": "full",
+  "command": [
+    "/Users/tranxuanhoa/Documents/research/GQA/.venv/bin/python",
+    "/private/tmp/GQA-DQI-39-q26/verifiers/dqi/verify_submission_dqi.py",
+    "/private/tmp/GQA-DQI-39-q26/artifacts/dqi/DQI-39/q26_homogeneous_group4.kmb",
+    "--max-workers",
+    "1"
+  ]
+}

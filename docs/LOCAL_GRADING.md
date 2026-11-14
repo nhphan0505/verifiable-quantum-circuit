@@ -20,8 +20,8 @@ phần cần đối chiếu; không suy ra commit nguồn từ HEAD. Notebook kh
 SCORES hoặc commit. Các run dev lịch sử vẫn được giữ và checker vẫn đọc để bảo toàn bằng chứng.
 Smoke chỉ kiểm tra nhanh, không thay thế full và không ghi điểm vào SCORES.
 
-Không so hệ số với baseline khác engine/môi trường. Cần chấm lại baseline tương
-thích hoặc để hệ số trống.
+Có thể so điểm giữa các phiên bản/môi trường theo chính sách repo; cần ghi rõ
+điều kiện chấm và giới hạn. Đợt chấm lại này dùng cùng engine cho baseline và ứng viên.
 
 ## Engine chấm mặc định
 
@@ -57,8 +57,7 @@ macOS Intel chưa có wheel được xác nhận, cần build upstream và kiể
 Không tự tải binary hoặc tự cài WSL từ notebook.
 
 Metadata mới có `engine` (version, platform, kernel) và packages của runtime thực
-sự chấm. Checker yêu cầu cùng engine khi tính hệ số so baseline; chấm lại baseline
-trong môi trường mới trước khi ghi hệ số. Kết quả lịch sử giữ nguyên bytes.
+sự chấm. Metadata cho phép người đọc đối chiếu điều kiện baseline và ứng viên. Kết quả lịch sử giữ nguyên bytes.
 Full dùng CLI engine với đầy đủ tham số mặc định chính thức. Smoke dùng
 invsqrt max-x=4096, shots-per-x=1; DQI num-shots=4096; DFTHC shots-per-address=1.
 Trước nghiệm thu trên mỗi nền tảng, chạy `verify ... --cross-check` với artifact

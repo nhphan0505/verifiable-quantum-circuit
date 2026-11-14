@@ -24,11 +24,21 @@ và đồng bộ Issue/draft PR; không sửa hạ tầng, verifier, SCORES ho�
    Đây là manifest bổ sung, không thay schema provenance; không ghi hash artifact
    tương lai hoặc tự tạo SHA commit nguồn trong manifest trước commit.
 6. Config đầu tiên tên reconstructed; chỉ tham số có nghĩa và đủ tái lập. Bản
-   dựng không phụ thuộc file gốc/scratch hoặc đường dẫn máy tác giả. Dữ liệu ngoài
-   Git phải có hash và cách lấy thật; thiếu dữ liệu thì chưa gọi tái lập được.
+   dựng chỉ dùng source/helper/data đã track và push lên GitHub tại commit dựng,
+   cùng runtime/package pin đã khai báo. Không đọc file gốc, bundle ngoài repo,
+   scratch, cache máy cũ hoặc đường dẫn tuyệt đối máy tác giả; không tự tải chúng
+   trong build. Link/hash/cách tải không thay thế file build cần có trong checkout.
+   Nếu thiếu dependency trên GitHub thì báo blocker, chưa nghiệm thu tái lập.
 7. Chạy kiểm tra source/config phù hợp, hoàn thiện mô tả rồi commit nguồn/config
    và dependency trước build bước 6. Không chạy solution đầy đủ trước commit để
    né mốc provenance; sau sửa source phải tạo mốc mới cho lần build mới.
+8. Trước commit, rút gọn tập file bàn giao theo dependency thực tế của entry point.
+   Chỉ giữ code/data được dùng và file bắt buộc cho config, tài liệu, kiểm chứng,
+   provenance, giấy phép/attribution. Không copy nguyên bundle hoặc giữ module
+   không dùng, bản sao/phiên bản cũ, script thử nghiệm, profiling hay cache.
+   Gom helper/bảng khi giúp giảm file và dependency mà vẫn đọc/sửa được; không
+   minify, nhúng archive/code string hoặc giấu toàn mạch trong data để giảm số file.
+   Manifest/mô tả giải thích vai trò từng file và lý do cần dependency còn lại.
 
 Nghiệm thu: source có thể đọc/sửa, config và manifest đầy đủ, dependency rõ, commit
 thật đã xác minh. Chưa tuyên bố exact hoặc verifier PASS.

@@ -1,0 +1,37 @@
+{
+  "track": "invsqrt",
+  "experiment_id": "INV-51",
+  "config_name": "reconstructed",
+  "source_commit": "925692745f4508cf47a82e8b631e96d30379e613",
+  "source_path": "src/invsqrt/INV-51/solution.py",
+  "source_sha256": "da2688b6dd3620ca45a9d7895e743d5528cdbaa759205c52416bc4d1f39e997b",
+  "build_config_path": "src/invsqrt/INV-51/configs/reconstructed.json",
+  "build_config_sha256": "8dbc0a22ffd91be1216f185a545d1ade354135febae22019e92141c04965d9df",
+  "artifact_path": "artifacts/invsqrt/INV-51/reconstructed.kmb",
+  "artifact_sha256": "321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177",
+  "build_command": "../../../.venv/Scripts/python.exe src/invsqrt/INV-51/solution.py --config src/invsqrt/INV-51/configs/reconstructed.json",
+  "build_command_base": ".",
+  "environment": {
+    "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    },
+    "executable": "../../../.venv/Scripts/python.exe",
+    "unix_rlimits_enforced": false
+  },
+  "build_run": null,
+  "dependency_hashes": [
+    {
+      "path": "src/invsqrt/INV-51/circuit.py",
+      "sha256": "0612aa51c5c3a9ee9cb0801dfbb89cc63a9c108663b167aeea5ca65fa2a28e0f"
+    },
+    {
+      "path": "src/invsqrt/INV-51/tables.json",
+      "sha256": "095e56453d505eb8f573f31b545bc22fd1f9856aec6265894951f1dd5d812dd0"
+    }
+  ],
+  "adapter_work_directory": "artifacts/invsqrt/INV-51/build-s_z9uw_j"
+}

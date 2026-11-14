@@ -4,8 +4,7 @@
   "input_sha256": "321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177",
   "input_bytes": 291626,
   "source_attribution": "Syed Asad Ali; user-supplied invsqrt_source, Apache-2.0",
-  "source_manifest_sha256": "9164edf966ca34759f2b5f57e02ccd1a89a34f04efa6721300c040423de2c519",
-  "components_manifest": "data/SHA256SUMS",
+  "components_manifest": "engine_manifest.json",
   "environment": {
     "python": "3.13",
     "platform": "Windows",
@@ -18,24 +17,25 @@
     "https://www.kaggle.com/datasets/syed3000/vqcc-own-circuit-portfolio"
   ],
   "dependencies": {
-    "source_bundle": "artifacts/invsqrt/INV-51/dependencies/invsqrt_source",
-    "obtain": "Download invsqrt_source_zip from the referenced Kaggle dataset, rename to invsqrt_source.zip without recompression, verify archive SHA-256 and extract into artifacts/invsqrt/INV-51/dependencies/. See DEPENDENCIES.md.",
-    "host_files": "Repository DATA.md; original kickmix.so used for source pin verification only, pip Windows Kickmix executes.",
-    "dataset_url": "https://www.kaggle.com/datasets/syed3000/vqcc-own-circuit-portfolio",
-    "dataset_version": 12,
-    "archive_name": "invsqrt_source_zip",
-    "archive_sha256": "7d9801ae20e942dba2211a656bba6014a0a16d57da534c0b60328d1c5d9d8254",
-    "archive_bytes": 2563106,
-    "archive_download_url": "https://www.kaggle.com/api/v1/datasets/download/syed3000/vqcc-own-circuit-portfolio/invsqrt_source_zip?datasetVersionNumber=12",
-    "public_access_evidence": "evidence/public_source.json"
+    "runtime": "Repository pinned Windows Python 3.13 .venv",
+    "local_files": [
+      "solution.py",
+      "circuit.py",
+      "tables.json",
+      "configs/reconstructed.json"
+    ],
+    "external_bundle_required": false,
+    "linux_engine_required": false
   },
-  "reconstruction_level": "AUTHOR_SOURCE_REBUILD_EXACT",
+  "reconstruction_level": "COMPACT_GENERATOR_EXACT",
   "limitations": [
-    "No official verifier or upstream full-domain final proof is run.",
-    "Windows resource API requests logged but memory limits not enforced.",
-    "External author source bundle must be supplied; not distributed in Git.",
-    "Historical score is not remeasured."
+    "Only the fixed reconstructed Q46 configuration is supported; old environment variants are removed.",
+    "No new official grading run; output bytes equal the historical full-PASS artifact.",
+    "Source consolidation retains independent mutable arithmetic namespaces; review refactoring before merge."
   ],
-  "build_source_commit": "48729436b421e7320d86e48cc0e451be0d84260e",
-  "reconstruction_check": "results/invsqrt/INV-51/reconstructed/build_only/20261113T160603Z-exact-8fe62qjo/reconstruction_check.json"
+  "build_source_commit": "d89769f0fd76190159d33298ff43948a846faad3",
+  "reconstruction_check": "results/invsqrt/INV-51/reconstructed/build_only/20261114T045124Z-exact-sj15ngzo/reconstruction_check.json",
+  "source_basis_commit": "1cd2ba724e603c7ed985b2a6d4717b1badd8febc",
+  "upstream_manifest_sha256": "9164edf966ca34759f2b5f57e02ccd1a89a34f04efa6721300c040423de2c519",
+  "source_manifest_sha256": "c2ab92b74f5facfa171cfc2eac5e2c041ea4e538513140c8a10a049121950594"
 }

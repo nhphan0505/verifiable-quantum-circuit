@@ -1,0 +1,62 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-39",
+  "config_name": "q26_homogeneous_group4",
+  "run_id": "20261114T084337Z-local-dev_5min-916c76",
+  "owner": "trng-hminh",
+  "verification_level": "dev_5min",
+  "status": "PASS",
+  "python": "3.13.7 (v3.13.7:bcee1c32211, Aug 14 2025, 19:10:51) [Clang 16.0.0 (clang-1600.0.26.6)]",
+  "packages": {
+    "kickmix": "1.0.0",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1"
+  },
+  "upload_artifact": {
+    "name": "q26_homogeneous_group4.kmb",
+    "sha256": "9ccc5add224f76e127ccf8129570ad344b5d3e5183c9a08fcd85133a6b9c45a8",
+    "size_bytes": 507949064
+  },
+  "artifact_path": "artifacts/dqi/DQI-39/q26_homogeneous_group4.kmb",
+  "verifier_sha256": {
+    "verifiers/dfthcsos/__init__.py": "81915e324cc0cade67f52a54b7a51991fd96abaea94d1f8a4d423dae20e57348",
+    "verifiers/dfthcsos/verify.py": "0775be7a528922367caebe9e4d051d6199811f1aefeaa4b793eaaa4621b8ec9d",
+    "verifiers/invsqrt/verify_submission_invsqrt.py": "ddef520dec6b68d1cf0a6f328ddd36d79eb84570b9192cf3f7acaf073f06733a",
+    "verifiers/invsqrt/__init__.py": "e9a6ecf253c343528578be5fa92eb820ccade63333aebb784552fb4ae75dbc0b",
+    "verifiers/invsqrt/nr_reference_circuit.py": "bb90330dcf774f7b502de471293facba67f27952cc8808fe4a9970a9b1322e23",
+    "verifiers/dqi/dqi_reference_circuit.py": "2b8e1b80a806157c333a7e308eaf2499ee09de499efbc05875202c327959959e",
+    "verifiers/dqi/__init__.py": "01c870aa9763f4e4357fc6654bff1d3296cec995bd0943f87b4a48946ada5b40",
+    "verifiers/dqi/verify_submission_dqi.py": "f14274bc0943fb9769ddb01131be6063191a15009fe1caf1d4bdd9fd25194e65",
+    "verifiers/dfthcsos/example_submission/angle_k_reference_circuit.py": "8daccdca69f2d718b0176cd9281803df84a988ea5ac6c167fbb02e461ac2b371",
+    "verifiers/dfthcsos/scoreinfra/circuits.py": "fc027b52fdcebe14404f403a089122485d097ed65d03e6d989623d620b1ab68c",
+    "verifiers/dfthcsos/scoreinfra/dfthc_math.py": "ae82898d47a7a86b96378fb906e0f8a9f46003065cf19c7c09952a123b5b5af8",
+    "verifiers/dfthcsos/scoreinfra/__init__.py": "be90e0d503d5c20dcac0102af638b9a4ccad0341daa5baa5d49216a259e4516f",
+    "verifiers/dfthcsos/scoreinfra/costs_prepare.py": "7f1e190c42fc5325f3e6689fbbef51f95b0cb12f1c828cda92b6c088e72206da",
+    "verifiers/dfthcsos/scoreinfra/reference.py": "a2d5a63191d655729e29f0fde1e85fe4630bf896a91a63bb894d8d7daf71ed39"
+  },
+  "dev_harness_sha256": "33402313455f76532bf856a6814702e89e5a9b30982cf49ff56321b1086d6d1c",
+  "timeout_seconds": 300,
+  "verify_command": [
+    "/Users/tranxuanhoa/Documents/research/GQA/.venv/bin/python",
+    "/private/tmp/GQA-DQI-39-q26/src/common/dev_verify.py",
+    "--track",
+    "dqi",
+    "--submission",
+    "/private/tmp/GQA-DQI-39-q26/artifacts/dqi/DQI-39/q26_homogeneous_group4.kmb",
+    "--seed",
+    "20261106",
+    "--invsqrt-samples",
+    "4096",
+    "--invsqrt-repeats",
+    "2",
+    "--dqi-shots",
+    "4096",
+    "--dfthc-repeats",
+    "4"
+  ],
+  "submission_sha256": {
+    "q26_homogeneous_group4.kmb": "9ccc5add224f76e127ccf8129570ad344b5d3e5183c9a08fcd85133a6b9c45a8"
+  },
+  "exit_code": 0,
+  "finished_at_utc": "2026-11-14T08:43:56.074910+00:00"
+}

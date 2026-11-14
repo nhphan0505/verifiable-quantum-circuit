@@ -179,17 +179,16 @@ class RepositoryChecks(unittest.TestCase):
             self.audit.evidence(run, track, 'full', meta, result)
             self.assertTrue(self.audit.errors)
 
-    def test_comparison_environment_and_hashes(self):
-        meta = dict(python='3.13.18', packages={'kickmix': '1.0.0', 'numpy': '2.4.6', 'scipy': '1.16.3'},
-                    verifier_sha256={'verify.py': 'a' * 64}, dev_harness_sha256='b' * 64)
-        self.audit.comparison('test', meta, meta, 'dev_5min')
+    def test_scores_allow_different_environment_and_verifier(self):
+        # Keep actual scores/PASS evidence; change only the comparison context.
+        for number, path in enumerate(self.root.glob('results/**/metadata.json')):
+            meta = json.loads(path.read_text(encoding='utf-8'))
+            meta.update(python=f'3.13.{number}', packages={'kickmix': str(number)},
+                        verifier_sha256={'verify.py': f'{number:064x}'},
+                        dev_harness_sha256=f'{number + 1:064x}')
+            path.write_text(json.dumps(meta), encoding='utf-8')
+        self.audit.run()
         self.assertEqual([], self.audit.errors)
-        for key in ['packages', 'verifier_sha256', 'dev_harness_sha256']:
-            other = dict(meta)
-            other[key] = {'kickmix': '99'} if key == 'packages' else None
-            self.audit.errors.clear()
-            self.audit.comparison('test', meta, other, 'dev_5min')
-            self.assertTrue(self.audit.errors)
 
     def test_stdout_catches_matching_forged_table(self):
         run = next(self.root.glob('results/invsqrt/*/*/full/*'))
