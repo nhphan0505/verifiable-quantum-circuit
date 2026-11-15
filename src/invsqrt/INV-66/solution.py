@@ -21,7 +21,6 @@ import importlib.metadata
 import io
 import json
 import os
-import platform
 import subprocess
 import sys
 import uuid
@@ -133,7 +132,7 @@ def main():
         'build_config_sha256': hashes[config_relative],
         'artifact_path': output.relative_to(root).as_posix(), 'artifact_sha256': digest(data),
         'build_command': [sys.executable, *sys.argv], 'build_run': None,
-        'environment': {'python': sys.version, 'packages': packages, 'platform': platform.platform(), 'dependencies': input_records},
+        'environment': {'python': sys.version, 'packages': packages, 'platform': sys.platform, 'dependencies': input_records},
         'reconstruction_level': 'GATE_LEVEL_PYTHON', 'dependency_audit': 'dependency_audit.json',
     }
     write_json('provenance.json', provenance)
