@@ -13,7 +13,7 @@
       "url": null
     }
   ],
-  "reconstruction_level": "Source-derived gate emitters; exact build pending",
+  "reconstruction_level": "RECONSTRUCTED_EXACT: independent source-derived emitters, clean GitHub checkout, pinned new venv",
   "environment": {
     "python": "3.13",
     "packages": {
@@ -832,14 +832,23 @@
     }
   ],
   "limitations": [
-    "No historical verifier results are transferred",
-    "Build exactness and dependency closure pending",
-    "Original release URL not supplied"
+    "No verifier run or score measured for this restoration",
+    "Original release URL not supplied",
+    "Only the fixed reconstructed configuration is supported",
+    "Python file-open audit plus code inspection; native Kickmix artifact write explicitly recorded"
   ],
   "supported_variants": "Only reconstructed.json; legacy frame entrypoints deliberately fail closed after fixed production bindings",
   "excluded_unused_modules": [
     "gauge_park_window",
     "raw_lower_window",
     "transpose_handoff_window"
-  ]
+  ],
+  "verified_build": {
+    "source_commit": "9d899c2fe708135ee86f43473084f8288b5865ab",
+    "run": "results/dqi/DQI-72/reconstructed/build_only/20261115T083137Z-clean-build",
+    "artifact_sha256": "7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9",
+    "bytes_equal": true,
+    "emitted_module_count": 100,
+    "external_bundle_required": false
+  }
 }

@@ -40,7 +40,7 @@ compute/uncompute và sửa pha measurement. Bỏ bootstrap và hồ sơ audit l
 khỏi đường build, thay bằng loader cố định dùng source đã track trong checkout.
 Tối giản theo import/file-open audit: chỉ giữ helper và bảng thực sự cần, cùng
 giấy phép và mapping hash upstream; không chép nguyên bundle hoặc nhúng tape.
-Manifest sẽ chỉ rõ vai trò và nguồn từng file. 100 module emitter/helper đã được tách vào `decoder/`, tổng khoảng 625 KB;
+100 module emitter/helper đã được tách vào `decoder/`, tổng 617.237 byte;
 không giữ bootstrap, lịch sử gate hoặc bản mạch/KMX. Audit lượt dựng đầy đủ
 loại thêm ba window module của các frame cũ không được gọi; các entrypoint
 frame cũ báo lỗi rõ ràng, production cố định dùng transpose14_core.frame. Mapping path/hash và vai trò
@@ -75,13 +75,38 @@ là số đo input, chưa phải bản dựng phục hồi.
 
 ## Kết luận và phiên bản tái lập
 
-Input đạt ROUNDTRIP_EXACT. Chưa build source phục hồi, chưa có source commit
-được dựng hoặc provenance; chưa nghiệm thu RECONSTRUCTED_EXACT.
+Input đạt ROUNDTRIP_EXACT; bản dựng phục hồi đạt **RECONSTRUCTED_EXACT**.
+Commit nguồn thực sự dựng: `9d899c2fe708135ee86f43473084f8288b5865ab`. Entry point được chạy từ cwd ngoài
+checkout sạch lấy từ GitHub, venv mới với requirements pin. Toàn bộ 100 module
+decoder có trong manifest đều được đọc; không có module decoder dư hoặc dependency
+source/bundle bên ngoài checkout. Không có subprocess trong build.
+
+Artifact 455.590.024 byte trùng từng byte và SHA-256 với input. Số đo bản dựng:
+889 qubit, 53.911 classical bits, 52.930.855 lệnh, 384.003 Toffoli-like tĩnh.
+Đối chiếu chạy riêng sau build, không cấp input gốc cho solution.
+Xem [báo cáo exact](../../../results/dqi/DQI-72/reconstructed/build_only/20261115T083137Z-clean-build/reconstruction_check.json),
+[audit dependency](../../../results/dqi/DQI-72/reconstructed/build_only/20261115T083137Z-clean-build/dependency_audit.json),
+[checkout sạch](../../../results/dqi/DQI-72/reconstructed/build_only/20261115T083137Z-clean-build/clean_checkout.json) và
+[provenance](../../../results/dqi/DQI-72/reconstructed/build_only/20261115T083137Z-clean-build/provenance.json).
+
+Lượt dựng trước khi hoàn thiện audit đã cho hash exact nhưng phần ghi metadata
+Windows gọi shell và bị chặn; đã thay bằng metadata không subprocess. Audit lượt
+tiếp theo cho phép loại ba module fallback không dùng. Bản cuối nêu trên đã dựng
+lại sau thay đổi source, không lấy hash của phiên bản cũ để nghiệm thu phiên bản mới.
+Các module tiền nhiệm còn lại cung cấp helper/binding cho production; không phải
+config thử nghiệm bổ sung. Các hồ sơ kiểm chứng lịch sử upstream không được chuyển
+thành PASS hay điểm của hướng này.
+
+Đây là phục hồi mạch, không có hypothesis tối ưu thuật toán mới hoặc thay đổi
+miền đúng/sai số. Chưa chạy smoke/full. Thành viên chấm notebook tại worktree này
+với TRACK=dqi, EXPERIMENT_ID=DQI-72, CONFIG_NAME=reconstructed, OWNER=nhphan0505.
+Exact hash không thay thế kiểm tra value/phase hoặc full verifier.
 
 | Mốc | Config | Commit nguồn | Run / provenance |
 | --- | --- | --- | --- |
-| Build phục hồi | Chưa tạo | Chưa có | Chưa build |
-| Smoke | Chưa có | Chưa có | Chưa chấm |
-| Full | Chưa có | Chưa có | Chưa chấm |
+| Build exact | [reconstructed](configs/reconstructed.json) | `9d899c2fe708135ee86f43473084f8288b5865ab` | [provenance](../../../results/dqi/DQI-72/reconstructed/build_only/20261115T083137Z-clean-build/provenance.json) |
+| Smoke | reconstructed | Chưa chấm | Chưa có |
+| Full | reconstructed | Chưa chấm | Chưa có |
 
+Mã triển khai: [solution.py](solution.py). Cấu hình: [configs](configs/).
 Điểm và các run: [SCORES.md](../SCORES.md).

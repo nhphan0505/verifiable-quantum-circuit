@@ -1,0 +1,24 @@
+{
+  "source_commit": "9d899c2fe708135ee86f43473084f8288b5865ab",
+  "checks": [
+    {
+      "command": "D:/GQA/.venv/Scripts/python.exe scripts/check_repo.py --base origin/main --branch exp/DQI-72-v7-source-reconstruction",
+      "exit_code": 0,
+      "errors": 0
+    },
+    {
+      "command": "D:/GQA/.venv/Scripts/python.exe -m unittest discover -s scripts/tests -q",
+      "exit_code": 0,
+      "tests": 34,
+      "seconds": 141.669
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "limitations": [
+    "Repository tests include mocked grading harness checks and are not DQI verifier results",
+    "Smoke/full grading and independent review remain pending"
+  ]
+}
