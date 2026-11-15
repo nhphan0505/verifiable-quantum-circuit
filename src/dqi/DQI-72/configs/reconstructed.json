@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "j_min": 15,
+  "scan_positions": 4095,
+  "max_qubits": 889,
+  "expected_static_toffoli": 384003,
+  "expected_instructions": 52930855,
+  "expected_classical_bits": 53911
+}

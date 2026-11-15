@@ -40,8 +40,10 @@ compute/uncompute và sửa pha measurement. Bỏ bootstrap và hồ sơ audit l
 khỏi đường build, thay bằng loader cố định dùng source đã track trong checkout.
 Tối giản theo import/file-open audit: chỉ giữ helper và bảng thực sự cần, cùng
 giấy phép và mapping hash upstream; không chép nguyên bundle hoặc nhúng tape.
-Manifest sẽ chỉ rõ vai trò và nguồn từng file. Config dự kiến `reconstructed`,
-j_min=15, scan_positions=4095, max_qubits=889; hoàn thiện trước commit nguồn.
+Manifest sẽ chỉ rõ vai trò và nguồn từng file. 103 module emitter/helper đã được tách vào `decoder/`, tổng khoảng 650 KB;
+không giữ bootstrap, lịch sử gate hoặc bản mạch/KMX. Mapping path/hash và vai trò
+từng module ở [reconstruction.json](reconstruction.json). Config [reconstructed](configs/reconstructed.json),
+j_min=15, scan_positions=4095, max_qubits=889; cố định theo input. Chạy `python src/dqi/DQI-72/solution.py --config src/dqi/DQI-72/configs/reconstructed.json`.
 
 Build không được đọc Downloads, submission/KMX gốc, cache hay thư mục source
 ngoài checkout. Thư viện dùng pin requirements của repo. Cần build entry point

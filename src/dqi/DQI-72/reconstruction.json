@@ -1,0 +1,863 @@
+{
+  "schema_version": 1,
+  "track": "dqi",
+  "input": {
+    "sha256": "7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9",
+    "bytes": 455590024
+  },
+  "source_archive_sha256": "49e2b331d4008afb724985caf1038765b7a910f08838b590bf6e8fb692772763",
+  "sources": [
+    {
+      "author": "Syed Asad Ali (as declared in supplied archive)",
+      "license": "Apache-2.0",
+      "url": null
+    }
+  ],
+  "reconstruction_level": "Source-derived gate emitters; exact build pending",
+  "environment": {
+    "python": "3.13",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    }
+  },
+  "references": [
+    "DESCRIPTION.md",
+    "LICENSE",
+    "NOTICE",
+    "solution.py",
+    "configs/reconstructed.json"
+  ],
+  "dependencies": [
+    {
+      "path": "decoder/adaptive_gauge64.py",
+      "upstream_path": "src/controller_work/after_v3/k24/adaptive_gauge/adaptive_gauge64.py",
+      "upstream_sha256": "3299627d63c20cf1223dc782cc6d48728f328a237d420f76f2d9260811bc7e5d",
+      "sha256": "3299627d63c20cf1223dc782cc6d48728f328a237d420f76f2d9260811bc7e5d",
+      "role": "Separate capped64 classical gauge candidate; native qualification pending.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/additive_fft_phase_scan.py",
+      "upstream_path": "src/controller_work/night_c27/synthesis/additive_fft_phase_scan.py",
+      "upstream_sha256": "cfbbfd64870a09e0cdd9ec15cccc5f07b0b0267d16fd404451282a8df6c1376a",
+      "sha256": "cfbbfd64870a09e0cdd9ec15cccc5f07b0b0267d16fd404451282a8df6c1376a",
+      "role": "Fixed additive-FFT implementation of the existing D/K root phase scan.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/coherent_border.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/coherent_border.py",
+      "upstream_sha256": "05e11f5133a18edb74b5cc2dfa6b9adebb0b1cb96b82553252af03bd40e8c631",
+      "sha256": "05e11f5133a18edb74b5cc2dfa6b9adebb0b1cb96b82553252af03bd40e8c631",
+      "role": "Paired coherent normal/simple-zero dual border, with an explicit live flag.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/compact_dual_scale.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/compact_dual_scale.py",
+      "upstream_sha256": "a5356c1fd7e1831bde05b2f0cf249048030ba4f2fd1dfefcfdf9ac8c0cf51aa9",
+      "sha256": "a5356c1fd7e1831bde05b2f0cf249048030ba4f2fd1dfefcfdf9ac8c0cf51aa9",
+      "role": "228-T nonzero dual scaling using24 scratch, including inverse cleanup.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/compact_inverse.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/compact_inverse.py",
+      "upstream_sha256": "3a0cb9ca02e51a6c55ccc8000448f45fb2f59d55c8f0d35c99344a731fb89b11",
+      "sha256": "d78ac34822324f79606235e1cced4d5286737ae7afcc760484ed3f81cab7eaa7",
+      "role": "A 228-T, 36-scratch-qubit extension inverse; optional zero flag costs 2 T.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/compact_inverse22.py",
+      "upstream_path": "src/controller_work/night_schedule/compact_inverse22.py",
+      "upstream_sha256": "53713d9b3e1ef8c34195ba3613e68411cf650e6bc3a1007a2f732a995802b326",
+      "sha256": "53713d9b3e1ef8c34195ba3613e68411cf650e6bc3a1007a2f732a995802b326",
+      "role": "Source-preserving65-T GF4096 reciprocal with22 extra qubits.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/compact_six130.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/compact_six130.py",
+      "upstream_sha256": "ee71c254c38e8c68c7fc0c60c2db22fcd2ad51ab5df6988954b9a1328d3cec5a",
+      "sha256": "ee71c254c38e8c68c7fc0c60c2db22fcd2ad51ab5df6988954b9a1328d3cec5a",
+      "role": "20-T clean GF64 inverse using its output and only four internal bits.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/confluent_reference.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/confluent_reference.py",
+      "upstream_sha256": "b30d1215306fc85a14e565fe602b2b21cf83e8fb670fe16ff186ad4db9b82458",
+      "sha256": "7d190f80a1e68c18db668ad70eeddcc97d0c0fcd2dcc432562674f69165c770d",
+      "role": "New classical confluent key transform, including interpolation-node errors.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/cubic_inverse130.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/cubic_inverse130.py",
+      "upstream_sha256": "b71110b9699fb4beb229fa725fd8a7126ac676e58f328344caffabbc4c96b27a",
+      "sha256": "b71110b9699fb4beb229fa725fd8a7126ac676e58f328344caffabbc4c96b27a",
+      "role": "20-T GF64 and 65-T GF4096 inverses from a derived cubic GF4 norm.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/cubic_trace_quotient20.py",
+      "upstream_path": "src/controller_work/after_v3/blocks/v5_cubic_phase20/cubic_trace_quotient20.py",
+      "upstream_sha256": "5c4e5c8e8241aca141db76d2ce3bc9580a9647e72e895ac6ee9729c1351c6205",
+      "sha256": "5c4e5c8e8241aca141db76d2ce3bc9580a9647e72e895ac6ee9729c1351c6205",
+      "role": "20-T, ten-helper phase Tr(numerator * inv0(denominator)) over GF64.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/deferred_fold.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/deferred_fold.py",
+      "upstream_sha256": "ed666db7eca6ab1fcacd49f32fe9101fac0a1c9a010d35b2b05cb0bf84c153e3",
+      "sha256": "ed666db7eca6ab1fcacd49f32fe9101fac0a1c9a010d35b2b05cb0bf84c153e3",
+      "role": "Forward polynomial fold with phase repayment after its paired inverse.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/direct_carry_arithmetic.py",
+      "upstream_path": "src/controller_work/after_c5/extractor_width/direct_carry_arithmetic.py",
+      "upstream_sha256": "3be5e0ec74b40e5aa681f3bbf4624f6d10c766b0f65469b6a211a7359fdc8096",
+      "sha256": "555fd0361f6bd6bd1ec7e6def49bdb7b9403d420c9bae18abda37649b0464bb0",
+      "role": "Deferred unit division and one shared-norm direct-carry return.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/direct_carry_extractor.py",
+      "upstream_path": "src/controller_work/after_c5/extractor_width/direct_carry_extractor.py",
+      "upstream_sha256": "d28760ae3ebe77449da545f5dfb7c027c6f9cb82036da7ed76eb686bc9ce063c",
+      "sha256": "d3fae7bd85e876f0d309c55575563ac5f73c40a7c5eace2164d8e90a3bfc3cf3",
+      "role": "Fixed raw-query extractor retaining the selected unit u as its carry.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/direct_carry_first2.py",
+      "upstream_path": "src/controller_work/after_c5/release_v3/normalized/direct_carry_first2.py",
+      "upstream_sha256": "fdb519bd501df5df70bd3571742964496e622951290d92f5479b4380c832772e",
+      "sha256": "0be03d5a608ad31078720f425899813d37e45fcedeb3e89b87e3a8f7d81aeb8a",
+      "role": "Direct carry with exact one-word charts at only the first two pivots.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/dual64_tensor.py",
+      "upstream_path": "src/controller_work/after_v3/blocks/dual64_tensor.py",
+      "upstream_sha256": "ee0e7c3fc4d0c16b56f808a999f59ddd4614c9729de9ed8c8efe4c755bc6439e",
+      "sha256": "523d25f4128113a66392c41911af26beb0d1223cc9d199e39aa6fc4bf7955c83",
+      "role": "Public rank-42 tensor for the dual-number algebra over the supplied GF64.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/dual_scale.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/dual_scale.py",
+      "upstream_sha256": "4251f6f8eed639505cdcdedc5b3ad18729fe067e4a4fdae29a799503e48009e3",
+      "sha256": "d857fd28bd4ad2a4f0afde66dd8620e21f2ec555bcd4b9777f3bed7e5b852443",
+      "role": "In-place multiplication by a nonzero dual number, with retained norm.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/even_forney_classical.py",
+      "upstream_path": "src/controller_work/research_audit/even_forney_classical.py",
+      "upstream_sha256": "fd1125a24b87a7947ffc36249ab6a3edc19b91a09d26668b9c87a83719e57ac3",
+      "sha256": "e89ed789a8e2058f2dc8651a1f0308d7148ecb3b068932797fc7e106518ce7b7",
+      "role": "Classical algebra certificate for the even-degree raw Forney outer map.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/extension24_tensor.py",
+      "upstream_path": "src/controller_work/night_root/extension24_tensor.py",
+      "upstream_sha256": "330cdeba5965e03fa397b07f7200539925112a815793704791173d144e74c09d",
+      "sha256": "58707f8c2d09e4245ab84c5f8975deaa635d4e4f3f1e90ee63ba5086398c8de9",
+      "role": "Fresh rank-99 tensor for F4096[t]/(t^2+t+delta).",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/field_tensor.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/field_tensor.py",
+      "upstream_sha256": "5ff27ee0ee83d5a171430506c2f2abe0956f205ce25e31256cc6f2e04657575f",
+      "sha256": "5ff27ee0ee83d5a171430506c2f2abe0956f205ce25e31256cc6f2e04657575f",
+      "role": "Derive a rank-42 multiplication tensor for the specified degree-12 field.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/finish_outer_seam.py",
+      "upstream_path": "src/controller_work/after_c5/arithmetic_t/finish_outer_seam.py",
+      "upstream_sha256": "67b7ea6170806f691f254ccee95a51abb7f3c80625342475f1c22bc5ec6d8846",
+      "sha256": "67b7ea6170806f691f254ccee95a51abb7f3c80625342475f1c22bc5ec6d8846",
+      "role": "Separate C5 candidate: share one reciprocal across the finish/outer seam.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/first3_retained_norm_adapter.py",
+      "upstream_path": "src/controller_work/after_v3/blocks/v6/first3_retained_norm_adapter.py",
+      "upstream_sha256": "6d66d5b5a308e56c50fe628cf0cfecda944db7e9189891d32ab628808d1e4cc8",
+      "sha256": "6d66d5b5a308e56c50fe628cf0cfecda944db7e9189891d32ab628808d1e4cc8",
+      "role": "Production-only three-pivot chart with a paid zero-residue correction.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/fixed_modular_finish.py",
+      "upstream_path": "src/controller_work/night_schedule/fixed_modular_finish.py",
+      "upstream_sha256": "f851998fd6562eedf2f7225e869b5413cef03de1cd42d2fa6bd2c4e305540ab4",
+      "sha256": "ad1243bd20c6c7c45fc440ed0488e496dbd00e92a35dd98c193b11d29bc26286",
+      "role": "One fixed35-word modular finish, seventeen quadratic factors plus x+1.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/fused_crt_synthesis.py",
+      "upstream_path": "src/controller_work/night_c27/synthesis/fused_crt_synthesis.py",
+      "upstream_sha256": "706d3555240ba60c088bbf50ae2ff9ce0f957b474f9175e917fde99a28cae240",
+      "sha256": "706d3555240ba60c088bbf50ae2ff9ce0f957b474f9175e917fde99a28cae240",
+      "role": "Fixed physical polynomial update with a fused r+2-point prefix.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/gauge_park_core.py",
+      "upstream_path": "src/controller_work/after_c5/converter_width/gauge_park_core.py",
+      "upstream_sha256": "4ab65080ff3495262059ca4c462b780947dffaf50adb37253da2b16c585b163d",
+      "sha256": "4ab65080ff3495262059ca4c462b780947dffaf50adb37253da2b16c585b163d",
+      "role": "Explicit-unit-leading top frame for the raw Forney interface.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/gauge_park_lender.py",
+      "upstream_path": "src/controller_work/after_c5/converter_width/gauge_park_lender.py",
+      "upstream_sha256": "cb23c7dd647f2d4661226762009cf67fdaf04035b1c5d4bd3b2b5df9060162e8",
+      "sha256": "55cc5444cd33997772a7b0a41f50885bee649f486ff068c7cd57148f8a81a0ae",
+      "role": "One-wire loan and sparse gauge-chart sentinel for a fixed top frame.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/gauge_park_outer.py",
+      "upstream_path": "src/controller_work/after_c5/converter_width/gauge_park_outer.py",
+      "upstream_sha256": "f5a7debb123b775027afef07224d95be21b1edad6bc09d4c95250a3cdca435bf",
+      "sha256": "07d21ce2e4daef77603487eb58bb4082762b19eea0a1c209a9c0c53f17bfe09c",
+      "role": "Public-shape odd/even raw Forney preimage and fused history finish.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/gauge_park_paired.py",
+      "upstream_path": "src/controller_work/after_c5/converter_width/gauge_park_paired.py",
+      "upstream_sha256": "7ffa6507d69fbd3de4c2f2e7a1eac09fd70eb49b7fa60d3d50468fae4f042320",
+      "sha256": "7ffa6507d69fbd3de4c2f2e7a1eac09fd70eb49b7fa60d3d50468fae4f042320",
+      "role": "Paired unit division with source-only reciprocal phase debt.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/gauge_park_virtual.py",
+      "upstream_path": "src/controller_work/after_c5/converter_width/gauge_park_virtual.py",
+      "upstream_sha256": "8f4179fe13c009c60367cb61edcac86c34c0dca862fef101b46eaebfed70e002",
+      "sha256": "8f4179fe13c009c60367cb61edcac86c34c0dca862fef101b46eaebfed70e002",
+      "role": "Virtual divisor borders and a reciprocal-lifetime-aware source map.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/gauge_park_window.py",
+      "upstream_path": "src/controller_work/after_c5/converter_width/gauge_park_window.py",
+      "upstream_sha256": "b2ae18b043dd08190e34ea4e8f9fbf395adad6b9ff3318a15c1ef45a231a587d",
+      "sha256": "b2ae18b043dd08190e34ea4e8f9fbf395adad6b9ff3318a15c1ef45a231a587d",
+      "role": "Paid three-frame lower-border fusion; transposed borders stay ordinary.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/gf24_arithmetic.py",
+      "upstream_path": "src/controller_work/night_c27/arithmetic/gf24_arithmetic.py",
+      "upstream_sha256": "0864e9455bf464c6e1501bbeb0bc1f9596fb81c9829c7df5ae5eab07bd4fb0f0",
+      "sha256": "bdb7d8472869b1a1083596976894b45312ec70c7b030d6144ebb6b227abfc999",
+      "role": "C2.7 narrow GF24 kernels with explicit HMR-mask ownership.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/gf24_nested_norm.py",
+      "upstream_path": "src/controller_work/after_c5/arithmetic_t/gf24_nested_norm.py",
+      "upstream_sha256": "e51535ecf80568d4a67b1406e3afeae718364587bec787f9aa7c6638d48d614a",
+      "sha256": "b96e9a84af80118fb9ef207dafad6c1d264987129ba3330a63da2f85ff0efeac",
+      "role": "Isolated post-C5 GF24 arithmetic using the66-T nested norm inverse.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/inplace_scan.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/inplace_scan.py",
+      "upstream_sha256": "8f8294bf0252b392cf1395371dd0164db65d35b760f9a759567e27386f3deba0",
+      "sha256": "de1c4263821da2fd8a325b3d86498b8c7d1fe4fe74d8ce3093f3ff8d24229b8d",
+      "role": "Root-mask scan using the two existing constant-coefficient words.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/integrated_pipeline.py",
+      "upstream_path": "src/controller_work/after_c5/integration_v3/integrated_pipeline.py",
+      "upstream_sha256": "0ddd3ececf5738594636a486dfbc211388dfed872fc8dba97fd573c45b64d5c9",
+      "sha256": "0f1962859040fe4447be075dd6f6c39a5722650ec341a082bf5400acfb08eec9",
+      "role": "Separate v3 deferred-flag pipeline; C5, v1 and v2 sources stay intact.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/inverse_phase27.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/inverse_phase27.py",
+      "upstream_sha256": "b0c5695638f727381c5f6888fdaac7b12b24df8a3695d307addc930ecc9bc93f",
+      "sha256": "b0c5695638f727381c5f6888fdaac7b12b24df8a3695d307addc930ecc9bc93f",
+      "role": "27-T classical-mask GF4096 inverse phase, with 13 clean scratch.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/inverse_retained_norm_deferred.py",
+      "upstream_path": "src/controller_work/after_v3/blocks/v5/inverse_retained_norm_deferred.py",
+      "upstream_sha256": "8cb8eaee9312acc81a3048072ec3ddf721399ba8ccdd7eac94002f9d4ec2da46",
+      "sha256": "8cb8eaee9312acc81a3048072ec3ddf721399ba8ccdd7eac94002f9d4ec2da46",
+      "role": "Matched inverse pair with one deferred six-bit child-norm phase.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/last_return_retained_norm.py",
+      "upstream_path": "src/controller_work/after_v3/k24/last_return_retained_norm.py",
+      "upstream_sha256": "35182c977774d579ef475ec3fdbd5959b7e616f79f03a837506c02c41f13db4a",
+      "sha256": "a27cefbb1380c79d678c1742a4c7defc6bbda97719e41b340e4ecca9a1da5228",
+      "role": "Only the final direct-carry return retains its reciprocal child norm.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/local_flag_core.py",
+      "upstream_path": "src/controller_work/after_c5/converter_width/local_flag_defer/local_flag_core.py",
+      "upstream_sha256": "7e1ec0eb318f23666642048123b726c5175e5a02bd8d9791642dfed7ec4aec8b",
+      "sha256": "7e1ec0eb318f23666642048123b726c5175e5a02bd8d9791642dfed7ec4aec8b",
+      "role": "Explicit-unit-leading top frame with same-half local-mask repayment.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/local_flag_window.py",
+      "upstream_path": "src/controller_work/after_c5/release_v3/normalized/local_flag_window.py",
+      "upstream_sha256": "bd58bbb619c4cf27ad28cec0443a3305b1e3db2af93638c31d09c86e8284dd41",
+      "sha256": "bd58bbb619c4cf27ad28cec0443a3305b1e3db2af93638c31d09c86e8284dd41",
+      "role": "Paid three-frame lower-border fusion; transposed borders stay ordinary.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/low_cached_arithmetic.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/low_cached_arithmetic.py",
+      "upstream_sha256": "c64cca88f70e41a4d9e1a2f08506112d4f585cbf3a15e796d93a5105e24b12aa",
+      "sha256": "c64cca88f70e41a4d9e1a2f08506112d4f585cbf3a15e796d93a5105e24b12aa",
+      "role": "Low-space scaling/folds using72T kernels, with the original mask contracts.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/low_pipeline.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/low_pipeline.py",
+      "upstream_sha256": "c1fc2a06ab83a6ec3213611f45b783f758c93a297d806940ca0f2fdad862a6e3",
+      "sha256": "8c187dd4bfbc8ce7b7ef9f632d87fe5a6c9964e98239965ba21ca8decc700d75",
+      "role": "Normal pipeline with12 arithmetic scratch and an untouched history input.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/low_space_inverse.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/low_space_inverse.py",
+      "upstream_sha256": "3d3b6861f9cc23fd1568131dae5ed82cea380fc1ba1ec0a99bedd5698d794133",
+      "sha256": "a9fc14b93db44e49abfd86ee9264e115374d79112fafae08b24b626ef8915c6c",
+      "role": "GF(2^24) inverse with a smaller, explicitly recycled norm scaffold.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/lowspace_field.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/lowspace_field.py",
+      "upstream_sha256": "63f7a406ba812963575a6c94f8409bb53539ca9e7d87e4d2f0bedb86550f9661",
+      "sha256": "8f327cfb37f122690bc111e58f6c45628dbf9ab6796e911c731bc3c594ba69c4",
+      "role": "In-place tower inverses and batched quotient phases with small workspace.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/lowspace_field130.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/lowspace_field130.py",
+      "upstream_sha256": "e5e24c094c54a58f255257c30ba00027e431bc6cecebc11b0196a60ae203b82c",
+      "sha256": "e5e24c094c54a58f255257c30ba00027e431bc6cecebc11b0196a60ae203b82c",
+      "role": "Measured-parent cleanup for24/117-T inverses at6/12 scratch qubits.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/mask_gauge135.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/mask_gauge135.py",
+      "upstream_sha256": "8ccf4ef6589f54f5abab89dc21b791aef1991a1451cec0183ac4bcf35439caa5",
+      "sha256": "8ccf4ef6589f54f5abab89dc21b791aef1991a1451cec0183ac4bcf35439caa5",
+      "role": "Reversible classical mask gauge for moments S_1,...,S_n.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/mask_gauge_blocked.py",
+      "upstream_path": "src/controller_work/night_c27/mask_gauge/mask_gauge_blocked.py",
+      "upstream_sha256": "0583bb931d91bb660108f815bb110d3885b713616b0b928bb3b385b22740a722",
+      "sha256": "0583bb931d91bb660108f815bb110d3885b713616b0b928bb3b385b22740a722",
+      "role": "The existing mask gauge with a streamed public binary-linear shear.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/masked_parked_scale_phase.py",
+      "upstream_path": "src/controller_work/after_v3/blocks/masked_parked_scale_phase.py",
+      "upstream_sha256": "202f391f8be4bbc88b40ed9fede962a6b1cf469dae37b9cf2fb5a733e0a2a0ec",
+      "sha256": "202f391f8be4bbc88b40ed9fede962a6b1cf469dae37b9cf2fb5a733e0a2a0ec",
+      "role": "Separate optional classical-mask guard for the23-T parked phase seam.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/modular_quadratic_direct.py",
+      "upstream_path": "src/controller_work/night_schedule/modular_quadratic_direct.py",
+      "upstream_sha256": "34749a359f131b63c3d18601f51cc6589b2d179c49ebb0212d4d513c23201abc",
+      "sha256": "34749a359f131b63c3d18601f51cc6589b2d179c49ebb0212d4d513c23201abc",
+      "role": "Narrow direct quadratic-field product with a consuming paired return.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/monic_forney.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/monic_forney.py",
+      "upstream_sha256": "98646104740f851ca9646b1cf830fb32bbb1e633ee8d9f94d14bc625588b3e5f",
+      "sha256": "98646104740f851ca9646b1cf830fb32bbb1e633ee8d9f94d14bc625588b3e5f",
+      "role": "Monic odd-degree Forney conversion on the normal half-Euclidean profile.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/narrow_field130.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/narrow_field130.py",
+      "upstream_sha256": "f021152bc598f334d854bfba13b9f228cd6a0b751010dde10c9341203bd49bf6",
+      "sha256": "f021152bc598f334d854bfba13b9f228cd6a0b751010dde10c9341203bd49bf6",
+      "role": "90-T inverse and88-T quotient phase with twelve scratch qubits.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/nested_norm_inverse.py",
+      "upstream_path": "src/controller_work/after_c5/arithmetic_t/nested_norm_inverse.py",
+      "upstream_sha256": "20e8c8cd699916e198cb79ce6ddd53ca933a76c5dbcbf2f329ab1001a26f06c9",
+      "sha256": "f5495e64ae9b2a78899ee4069bf7d854f09fb04cfa1395ffc4740702df4dbe19",
+      "role": "66-T deferred GF4096 inverse by paying its child's entry norm directly.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/night_outer.py",
+      "upstream_path": "src/controller_work/night_converter/night_outer.py",
+      "upstream_sha256": "8dd322592815fff0cfd07696ae44179901d2733502de21f5aa49afd90ba20200",
+      "sha256": "8dd322592815fff0cfd07696ae44179901d2733502de21f5aa49afd90ba20200",
+      "role": "Public-shape odd/even raw Forney preimage and fused history finish.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/night_reference.py",
+      "upstream_path": "src/controller_work/night_converter/night_reference.py",
+      "upstream_sha256": "c13598616973c1cc0ee310f2e204e5d4913e5b33aa98b3dbb9dae7c27e98d6b0",
+      "sha256": "1c2b36f6202d966086d7bacc46ab2c3b2849a235b94c81cadb61c0b86e85eb4d",
+      "role": "Manual classical references for the new outer converters; no kickmix.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/norm_cached_field.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/norm_cached_field.py",
+      "upstream_sha256": "8af6411be244568e48c2b4ae61f43b0ca491fa997a708139ce7e25eb13c7818b",
+      "sha256": "f58f5c8fb0297171114e9f4ea2934822f9837f2fda5e9cdf4416dfc680228a9c",
+      "role": "70-T field inverse and quotient phases using an invariant norm difference.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/norm_division.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/norm_division.py",
+      "upstream_sha256": "8acc4bf6a3608b56dbba540fb07355f4de267b318927b74b853efb811be4c2d3",
+      "sha256": "8acc4bf6a3608b56dbba540fb07355f4de267b318927b74b853efb811be4c2d3",
+      "role": "Stable-target division sessions with 18 scratch qubits and explicit phases.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/normal_fold.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/normal_fold.py",
+      "upstream_sha256": "0c8bcb75f4a4a4ebcf7cfbc7d3f9d0085daed6c24cc5f31c718b00cbdff60046",
+      "sha256": "8bcaaa6047d9eaf759294e64adcc81c681a9ccbfeaaacc7b14b7e1603f847cc6",
+      "role": "Normal one-array continuant fold using Taylor coordinates and dual scaling.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/normal_pipeline.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/normal_pipeline.py",
+      "upstream_sha256": "233c322ef97a41f93b32a2d9e472b97c9925d74659e6d9e452d6872b0be499a9",
+      "sha256": "e44d71b69df8c0875a8a97e7a5998342e2ac7b8a62520be13499f22aeb4965d7",
+      "role": "Normal syndrome->monic pair->syndrome pilot, without exceptions or scan.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/normalization.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/normalization.py",
+      "upstream_sha256": "bbf24f658e2afdd0fc0d55a35b87d2111669fc3a89a3e12c98562ae47a8d81b2",
+      "sha256": "2aaedcc08268bac63435d486a5c79cd49b193ce988a04555778f2a2afbc397ec",
+      "role": "Normalize a locator/numerator pair, retaining the nonzero leading scalar.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/paired_converter_scale.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/paired_converter_scale.py",
+      "upstream_sha256": "c8f6d09297668b5bcfd197f7328abef5ab7afc1029334b841c30883c46c1a2c5",
+      "sha256": "c8f6d09297668b5bcfd197f7328abef5ab7afc1029334b841c30883c46c1a2c5",
+      "role": "Paired unit division with source-only reciprocal phase debt.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/paired_phase62.py",
+      "upstream_path": "src/controller_work/after_v3/blocks/v5_cubic_phase20/paired_phase62.py",
+      "upstream_sha256": "b1e4b759b384a28b1ac557d6b5674319b5403cf53aa03cc0f196b03356d0d150",
+      "sha256": "b1e4b759b384a28b1ac557d6b5674319b5403cf53aa03cc0f196b03356d0d150",
+      "role": "Separate joint-norm quotient phase with the checked rare classical branch.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/parked_scale_phase.py",
+      "upstream_path": "src/controller_work/after_v3/blocks/parked_scale_phase.py",
+      "upstream_sha256": "07af5f682e7a04b1782f107d38785125c645e537f9ccd50c6efa7b5d4966cbb6",
+      "sha256": "07af5f682e7a04b1782f107d38785125c645e537f9ccd50c6efa7b5d4966cbb6",
+      "role": "Pay one scale mask directly on an existing sparse parked gauge anchor.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/phase_inverse12.py",
+      "upstream_path": "src/controller_work/night_c27/arithmetic/phase_inverse12.py",
+      "upstream_sha256": "5d803160a953d9156b7c2cfd6a9afc791dbb27d24d4b6745e294e31b6b68a3c2",
+      "sha256": "bec0b90a5d3167daaec666c3066e17fc34851d49d5baddcf43dfcccd6a35d28b",
+      "role": "The supplied 27-T inverse phase, with its last leaf AND made a CCZ.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/projective_carry.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/projective_carry.py",
+      "upstream_sha256": "6e4f714443c18133d82e06b5a33161caa46c9303f5a665b0ad815f306a3ada7a",
+      "sha256": "89f66f94bd12b5471a183258fb580ebf2e684cd20f8d424125b1f28a0190565f",
+      "role": "Normal confluent extraction with one reversible carried scale.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/projective_finish.py",
+      "upstream_path": "src/controller_work/night_c27/synthesis/projective_finish.py",
+      "upstream_sha256": "96ea7459a7b242f1112807ee9d7321f1f32de9d95a2a16e0484277d211d5713a",
+      "sha256": "96ea7459a7b242f1112807ee9d7321f1f32de9d95a2a16e0484277d211d5713a",
+      "role": "Fixed degree-34/infinity finish for 35-word full Bezout preimages.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/projective_finish_infinity3.py",
+      "upstream_path": "src/controller_work/after_c5/arithmetic_t/projective_finish_infinity3.py",
+      "upstream_sha256": "77594ca9ce843028de409474fe9ecac733c0c5f84da5b5573b96f6e02eaddbf8",
+      "sha256": "77594ca9ce843028de409474fe9ecac733c0c5f84da5b5573b96f6e02eaddbf8",
+      "role": "Isolated degree32 finite / length-three infinity projective finish.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/public_geometry.py",
+      "upstream_path": "src/controller_work/night_c27/synthesis/public_geometry.py",
+      "upstream_sha256": "a6e410dd457679005c364d91ad191471086daf9f82ade0c9763d4ca13c016cf7",
+      "sha256": "a6e410dd457679005c364d91ad191471086daf9f82ade0c9763d4ca13c016cf7",
+      "role": "Public syndrome/CRT geometry for the fixed quadratic-node representation.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/quadratic_phase_scan.py",
+      "upstream_path": "src/controller_work/night_c27/synthesis/quadratic_phase_scan.py",
+      "upstream_sha256": "05c6db0470cd7d1e5fbdfc928eaaee9a2c2b4f21f223f1d885db2b6ed3dcd9cf",
+      "sha256": "05c6db0470cd7d1e5fbdfc928eaaee9a2c2b4f21f223f1d885db2b6ed3dcd9cf",
+      "role": "Fixed physical scan of the padded D and projective finish polynomial K.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/quantum_reciprocal.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/quantum_reciprocal.py",
+      "upstream_sha256": "8e791a49445eb9acadd08cc5f8c8ac4fb6faf7917ffb55d0723b835621b8f301",
+      "sha256": "3b2ba08d7a56152c3aa9dbb85159a52c2be119056ee9828cafb1ff2165349078",
+      "role": "Small, clean-room quantum prototype of the one-array series reciprocal.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/quotient_phase62.py",
+      "upstream_path": "src/controller_work/after_v3/blocks/v5_cubic_phase20/quotient_phase62.py",
+      "upstream_sha256": "510b413697d3cd50b3d2c024252552bf294875ab5ff7ffe253f75b437b2fdc06",
+      "sha256": "510b413697d3cd50b3d2c024252552bf294875ab5ff7ffe253f75b437b2fdc06",
+      "role": "Zero-safe variable-numerator GF4096 trace phase with a 62-T source model.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/quotient_phase84.py",
+      "upstream_path": "src/controller_work/after_v3/audit/retained_child/quotient_phase84.py",
+      "upstream_sha256": "d139e47507a2e2c3d9e725902f0ff61cb5e9291e93c5b06242b73520800f1e8d",
+      "sha256": "8dace651bfe5be9467fc1ea20547d97635842c00b4546ea00f4f1286af2bcb94",
+      "role": "Preserved-source quotient phase with a retained three-bit child norm.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/quotient_phase84_mask_guard.py",
+      "upstream_path": "src/controller_work/after_v3/audit/retained_child/quotient_phase84_mask_guard.py",
+      "upstream_sha256": "a7cc4537044ed5f1e02c5cfbd5fd52346e56654a929bd92f1631d071d23100a8",
+      "sha256": "a7cc4537044ed5f1e02c5cfbd5fd52346e56654a929bd92f1631d071d23100a8",
+      "role": "Separate optional all-zero target-mask bypass for the phase84 sibling.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/quotient_phase85.py",
+      "upstream_path": "src/controller_work/after_v3/k24/quotient_phase85.py",
+      "upstream_sha256": "af38da39c7dcd64993b1fea433204960bc8846efb5b819227347553810740ab2",
+      "sha256": "2302af0cec0d9bc714097c14585cbcf3f963e91e991f05e8ab839f8f87f95d2f",
+      "role": "Preserved-source quotient phase with a deferred GF64 norm child.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/raw_gap2_bezout.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/raw_gap2_bezout.py",
+      "upstream_sha256": "f5b31feff640fd2bc88e476ba767a6f90f79d6f570a90dcf769706c72fc980a3",
+      "sha256": "f5b31feff640fd2bc88e476ba767a6f90f79d6f570a90dcf769706c72fc980a3",
+      "role": "Explicit-unit-leading top frame for the raw Forney interface.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/raw_lower_window.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/raw_lower_window.py",
+      "upstream_sha256": "f2ecc12f33089fc2ce9a3206d0e54f681c756e4d65cf355c0781a4942f4db9af",
+      "sha256": "f2ecc12f33089fc2ce9a3206d0e54f681c756e4d65cf355c0781a4942f4db9af",
+      "role": "Paid three-frame lower-border fusion; transposed borders stay ordinary.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/raw_query_extractor.py",
+      "upstream_path": "src/controller_work/night_c27/arithmetic/raw_query_extractor.py",
+      "upstream_sha256": "fe1610de1703f1bacf5664df32f0b259986efc7e892f3eda6906ed0cc146a60f",
+      "sha256": "6fdffebf05c304261abd9273219ed36c20206e024a627b0a5f31f246d22f5c3c",
+      "role": "One fixed raw-query extractor with a reciprocal carry and actual tail flags.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/raw_toeplitz.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/raw_toeplitz.py",
+      "upstream_sha256": "f3f6f76448a8965b0d40464b14b7db5459b379c670a18ec330ce6f74f3a98d60",
+      "sha256": "f3f6f76448a8965b0d40464b14b7db5459b379c670a18ec330ce6f74f3a98d60",
+      "role": "Triangular Toeplitz map with a preserved unit quantum diagonal.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/raw_window_tensor.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/raw_window_tensor.py",
+      "upstream_sha256": "6e801adee808e928778b9793e31611d639de6a34a1fa6974133a829f8eaaf91f",
+      "sha256": "6e801adee808e928778b9793e31611d639de6a34a1fa6974133a829f8eaaf91f",
+      "role": "Forward three-border tensor in the explicit raw source chart.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/raw_window_transpose.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/raw_window_transpose.py",
+      "upstream_sha256": "c6ad98c84c756e5cdf07f142c9d93cfc568d5a3ba7af14852e85cdf5d09553fa",
+      "sha256": "c6ad98c84c756e5cdf07f142c9d93cfc568d5a3ba7af14852e85cdf5d09553fa",
+      "role": "Field transpose of the raw three-border evaluation tensor.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/rolling_tail.py",
+      "upstream_path": "src/controller_work/night_c27/controller/rolling_tail.py",
+      "upstream_sha256": "fa5cc8a0e4f3124355825ea74ddd42c37be6a59b25e784a6a73951d1637b6463",
+      "sha256": "fa5cc8a0e4f3124355825ea74ddd42c37be6a59b25e784a6a73951d1637b6463",
+      "role": "Native rolling tail flags, phase repayment, and the inverse seed seam.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/rolling_tail_conditional.py",
+      "upstream_path": "src/controller_work/night_c27/controller/rolling_tail_conditional.py",
+      "upstream_sha256": "86eb5ca81c7c7fd3f6ecb52a261ec2ae254efd9a6c837c9b33998d60ed98a8c6",
+      "sha256": "86eb5ca81c7c7fd3f6ecb52a261ec2ae254efd9a6c837c9b33998d60ed98a8c6",
+      "role": "Optional fresh-mask skipping for the separately checked rolling controller.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/rolling_tail_deferred.py",
+      "upstream_path": "src/controller_work/after_c5/converter_width/tail_phase_defer/rolling_tail_deferred.py",
+      "upstream_sha256": "d305f4accc27986db5364d73ecf82b1bb35e36964e8536404e1bc7c561d5b419",
+      "sha256": "5ae298f8e1a14500cb8ca5763e3fd8626b4e2c7b84367dc6994d2229fe9bf137",
+      "role": "Defer each previous-tail-flag HMR phase to its existing return query.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/rolling_tail_early.py",
+      "upstream_path": "src/controller_work/after_c5/extractor_width/rolling_tail_early.py",
+      "upstream_sha256": "52d5eaed848f40095056d806cd69fd1f90681c857fadb14d6b3cbf9223f82d00",
+      "sha256": "270abf30788db64ae1e91d3a0b13637d03493800899933f6202644adbb56f4a8",
+      "role": "One live rolling flag across normalization, with the exact C5 domain.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/scalar_inverse_phase.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/scalar_inverse_phase.py",
+      "upstream_sha256": "d1549c918b98501276c692427d611da204e61c3f20501b53b7b0ab4fd873e06a",
+      "sha256": "c282f255da58547f7b2c773a1e0a2a45b5aedaf528cb2eb0d72007a2c1ec8bb3",
+      "role": "A certified scalar inverse-trace circuit, derived by this task's SAT search.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/scalar_seed.py",
+      "upstream_path": "src/controller_work/night_c27/controller/scalar_seed.py",
+      "upstream_sha256": "1200444cc7aa39a7ee72bf17578b4cba6a199e70a1f99bff87894c43f82cb4e0",
+      "sha256": "9a64c32c9965e4882b960d18bccfc8735196d81ab6463331b2ed24ec3d94c5a4",
+      "role": "The physical r=0 scalar seed: 84-T prefix, 176-T closing, 260-T pair.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/scalar_seed_padded.py",
+      "upstream_path": "src/controller_work/after_c5/extractor_width/scalar_seed_padded.py",
+      "upstream_sha256": "bcab5dc094bcd9707ac7d1a2ae40837767cf81d58d99ee842d8fcb152da6d0a0",
+      "sha256": "a38c716fc6b37c81b6892de2ee1b85cf087815cf904ee7a4a1be74b934c35a75",
+      "role": "177-T closing of the C5 scalar seed while its tail flag remains erased.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/scan10.py",
+      "upstream_path": "src/controller_work/night_schedule/scan10.py",
+      "upstream_sha256": "14a4e8e90dcc3b5f4b0dc3cc4ad5e306ebe55c87ca4185bc583f1ed9311f8b21",
+      "sha256": "14a4e8e90dcc3b5f4b0dc3cc4ad5e306ebe55c87ca4185bc583f1ed9311f8b21",
+      "role": "Root-mask phase using ten clean qubits and a restored classical parity view.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/sized_field130.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/sized_field130.py",
+      "upstream_sha256": "53bdc97b48a037be36a3fa3847b3208aab0209c5554ddba68e2e0809e1a484a7",
+      "sha256": "53bdc97b48a037be36a3fa3847b3208aab0209c5554ddba68e2e0809e1a484a7",
+      "role": "Cubic field substitutions with explicit16- and18-qubit scratch caps.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/third_pivot_chart.py",
+      "upstream_path": "src/controller_work/after_v3/blocks/v6/third_pivot_chart.py",
+      "upstream_sha256": "0a788b7b49b80f8d267d05ac1dc6c067fdb626aaa054d076ce3052948af32166",
+      "sha256": "ea8983c56196d61f476ac43988625dea4a0cb09b623ff49c45fe5abb3b3cd6be",
+      "role": "Zero-safe third public pivot with an explicitly matched predicate debt.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/tower_inverse.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/tower_inverse.py",
+      "upstream_sha256": "4b3956a1e02a0e61c2daf983c9a556a5997774d012267bd4ca17c94a8463027e",
+      "sha256": "71a25e24bbdae241f1c7f0917e523d3c48d71c6c05412c058584f8fbde780ffd",
+      "role": "Fresh quadratic-tower inverse kernels with measurement cleanup.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/transpose14_core.py",
+      "upstream_path": "src/controller_work/after_v3/k24/v5_transpose14/transpose14_core.py",
+      "upstream_sha256": "8b5eb93766ac6d9ef638594829ec8f6d27945e84b610c718b4cf9bea73ab039d",
+      "sha256": "8b5eb93766ac6d9ef638594829ec8f6d27945e84b610c718b4cf9bea73ab039d",
+      "role": "Explicit-unit-leading top frame with same-half local-mask repayment.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/transpose14_window.py",
+      "upstream_path": "src/controller_work/after_v3/k24/v5_transpose14/transpose14_window.py",
+      "upstream_sha256": "1c25f660a58f7907602e60cfc32fbfc51a2775023cc911e33d5d10c2860236b4",
+      "sha256": "1c25f660a58f7907602e60cfc32fbfc51a2775023cc911e33d5d10c2860236b4",
+      "role": "Fixed preimage window with explicit transpose-output flag ownership.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/transpose_handoff_core.py",
+      "upstream_path": "src/controller_work/after_v3/blocks/transpose_handoff_core.py",
+      "upstream_sha256": "c7453a0a4b75819b75bc8fc3c918e0ec33ae52a4ef55f37c10e07a41865fab17",
+      "sha256": "c7453a0a4b75819b75bc8fc3c918e0ec33ae52a4ef55f37c10e07a41865fab17",
+      "role": "Explicit-unit-leading top frame with same-half local-mask repayment.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/transpose_handoff_outer.py",
+      "upstream_path": "src/controller_work/after_v3/blocks/transpose_handoff_outer.py",
+      "upstream_sha256": "f2284acd4fd7c1f24fb4460a24ce7a449103412629bae59d06b2c1945788b699",
+      "sha256": "ad6ea448f621bcb506f2376e39330c24d3e5039b7868606a440d019d087fb827",
+      "role": "Public-shape odd/even raw Forney preimage and fused history finish.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/transpose_handoff_window.py",
+      "upstream_path": "src/controller_work/after_v3/blocks/transpose_handoff_window.py",
+      "upstream_sha256": "000864e4f2a87465bb882571f79e7c7fd35b04f25779fe4bb947c19183036281",
+      "sha256": "000864e4f2a87465bb882571f79e7c7fd35b04f25779fe4bb947c19183036281",
+      "role": "Fixed preimage window with explicit transpose-output flag ownership.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/unit_jet_tensor.py",
+      "upstream_path": "src/controller_work/after_c5/arithmetic_t/unit_jet_tensor.py",
+      "upstream_sha256": "370b0099892ba9cec432c956ea8e9a34576d0760dc0f6f196b5d0c940193ab17",
+      "sha256": "370b0099892ba9cec432c956ea8e9a34576d0760dc0f6f196b5d0c940193ab17",
+      "role": "Consuming length-two/three Taylor multiplication with 24 helper bits.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/unit_toeplitz.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/unit_toeplitz.py",
+      "upstream_sha256": "8938463326f67101577c6d651400db7e8e99d4ad225710fe6bcfda40421e193d",
+      "sha256": "8f3b8b9f600e02e5d3c421b9f81401c57fba2a2244846a8decdbfd8d43160f7c",
+      "role": "Zero-workspace in-place unit-series multiplication and its exact inverse.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/v7_pipeline.py",
+      "upstream_path": "src/controller_work/after_v3/integration_v7/v7_pipeline.py",
+      "upstream_sha256": "e144415f639d77c83ef0944b826a52b1f832eedd7112078070ac2ecdad42bcc3",
+      "sha256": "c1b0c03013fad172d34db38df1673f785515a10a0c4378d35b204a5082a6b53d",
+      "role": "Fixed T-only v7 candidate with mandatory completed component gates.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/virtual_divisor.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/virtual_divisor.py",
+      "upstream_sha256": "b18f90a0a020a7f9bef5fa23f5ac33085fdd6a3287a44ffb79f65b36ccbd7fe8",
+      "sha256": "b18f90a0a020a7f9bef5fa23f5ac33085fdd6a3287a44ffb79f65b36ccbd7fe8",
+      "role": "Virtual divisor borders and a reciprocal-lifetime-aware source map.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/window_forward_retained_flag.py",
+      "upstream_path": "src/controller_work/after_v3/blocks/window_forward_retained_flag.py",
+      "upstream_sha256": "8d84b64de0c7d221a418afbabf913dd9a5fd5d53993ab81525538b1f9b067200",
+      "sha256": "8d84b64de0c7d221a418afbabf913dd9a5fd5d53993ab81525538b1f9b067200",
+      "role": "Borrowed forward tensor with the caller's already-computed third flag.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/window_tensor_shared.py",
+      "upstream_path": "src/controller_work/after_c5/release_v3/normalized/window_tensor_shared.py",
+      "upstream_sha256": "683d02a8640cbcca0013ca685d00a8212b035c31915779fcbe16110514e24ae8",
+      "sha256": "683d02a8640cbcca0013ca685d00a8212b035c31915779fcbe16110514e24ae8",
+      "role": "Same raw three-border map, sharing its two RHS source/phase preparations.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/window_transpose_handoff.py",
+      "upstream_path": "src/controller_work/after_v3/blocks/window_transpose_handoff.py",
+      "upstream_sha256": "bb8423494ded91d4b42e83b147de4d45cf5bdb87695788ea66ef73cc3f817b21",
+      "sha256": "bb8423494ded91d4b42e83b147de4d45cf5bdb87695788ea66ef73cc3f817b21",
+      "role": "Retimed transpose returning its final restored third-source predicate.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/window_transpose_shared.py",
+      "upstream_path": "src/controller_work/after_c5/arithmetic_t/window_transpose_shared.py",
+      "upstream_sha256": "8d74cd453e5c3c38d10396e8d9b6ab8c2f89f464c2c90dfb62863ef32cf23b18",
+      "sha256": "8d74cd453e5c3c38d10396e8d9b6ab8c2f89f464c2c90dfb62863ef32cf23b18",
+      "role": "Same transposed three-border tensor with shared RHS source forms.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/zero_erasure.py",
+      "upstream_path": "src/controller_work/work/round2/milestone152/source/zero_erasure.py",
+      "upstream_sha256": "e0730bb7b4a15e4ab95ac0ebb8ea6c36f7b1d55587a981b58604c4f8ab962362",
+      "sha256": "e0730bb7b4a15e4ab95ac0ebb8ea6c36f7b1d55587a981b58604c4f8ab962362",
+      "role": "HMR-first erasure of a known zero predicate, with a fair-mask branch.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    },
+    {
+      "path": "decoder/zero_mask_scan.py",
+      "upstream_path": "src/controller_work/after_v3/scan/zero_mask_scan.py",
+      "upstream_sha256": "cacf6f97a639ff6b89d500e9cb9e2d427819ba461635cd6407a573d1668b53f1",
+      "sha256": "cacf6f97a639ff6b89d500e9cb9e2d427819ba461635cd6407a573d1668b53f1",
+      "role": "Exact classical-zero bypass for the accepted additive FFT phase scan.",
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+    }
+  ],
+  "limitations": [
+    "No historical verifier results are transferred",
+    "Build exactness and dependency closure pending",
+    "Original release URL not supplied"
+  ]
+}
