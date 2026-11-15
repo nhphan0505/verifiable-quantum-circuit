@@ -132,6 +132,11 @@ def main():
         if event != 'open' or isinstance(values[0], int):
             return
         path, mode, flags = values
+        if mode is None and flags & os.O_CREAT and flags & os.O_EXCL:
+            resolved = Path(path).resolve()
+            if resolved.is_relative_to(output.parent):
+                created.add(resolved)
+                return
         if mode is not None and mode[:1] in {'w', 'x'}:
             resolved = Path(path).resolve()
             if resolved.is_relative_to(output.parent):
