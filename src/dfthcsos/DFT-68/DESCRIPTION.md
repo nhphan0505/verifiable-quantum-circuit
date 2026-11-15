@@ -56,3 +56,11 @@ Config `reconstructed`, source commit `7df5dad8ca74a8610dd6597c53057f6cd7f30a4c`
 - [Build report](../../../results/dfthcsos/DFT-68/reconstructed/build_only/20261115T052652Z-build-u3fl7wvi/build.json): 15 loader, tổng 4074 Toffoli/pass theo compiler, serialization và packaging hai lần cho cùng ZIP SHA-256 `fc481755b7b97fa73ae9256e775907b82835b835d5520b3c529440d647bcab8a`.
 
 Mức đạt: COMPONENTS_EXACT và BUILT. ZIP mới chứa 16 file DFTHC ở gốc; notebook Kaggle người dùng cung cấp đóng ZIP chung 18 file với ba bài và prefix dfthcsos/. Hai container phục vụ hai giao diện khác nhau; không tuyên bố toàn ZIP gốc exact. Không chạy lại fitting, exhaustive symbolic proof hoặc official grading, không gọi đây là verifier PASS. Chưa có kết quả chấm mới của nhóm.
+
+
+Lặp lại build sạch sau cập nhật metadata nghiệm thu, source commit `5c97b93`:
+[provenance](../../../results/dfthcsos/DFT-68/reconstructed/build_only/20261115T053100Z-build-co4afj7g/provenance.json),
+[đối chiếu bytes](../../../results/dfthcsos/DFT-68/reconstructed/build_only/20261115T053100Z-build-co4afj7g/reconstruction_check.json).
+Entry point hoàn tất với cùng ZIP hash và 16 thành phần exact. Đây là build mới,
+không sửa record của mốc nguồn `7df5dad`. Repository checker/scope: 0 lỗi;
+bộ 34 tests repository đã đạt, các thay đổi audit sau đó được kiểm bằng build end-to-end.

@@ -1,0 +1,27 @@
+{
+  "repo_url": "https://github.com/nhphan0505/verifiable-quantum-circuit.git",
+  "source_commit": "5c97b93dbe74f05ded5c783ff3c644f06b11ab3b",
+  "checkout_path": "D:\\GQA\\artifacts\\dfthc68-clean-build",
+  "clean_before_build": true,
+  "build_cwd": "D:\\GQA\\artifacts",
+  "venv": "fresh clone-local .venv created with Python 3.13",
+  "setup_commands": [
+    "git clone --single-branch --branch exp/DFT-68-frozen-loader-rebuild https://github.com/nhphan0505/verifiable-quantum-circuit.git artifacts/dfthc68-clean-build",
+    "python -m venv artifacts/dfthc68-clean-build/.venv",
+    "<clone>/.venv/Scripts/python.exe -m pip install --timeout 120 --retries 2 kickmix==1.0.0 numpy==2.5.4 scipy==1.18.1"
+  ],
+  "notes": [
+    "Initial no-cache pip download timed out. Retried normal pinned pip installation successfully; no source/data copied into clone.",
+    "Compiler fixes committed and pushed, clone pulled fast-forward before each new attempt; unsuccessful build intermediates retained.",
+    "Final stdout saved as build.stdout.txt; comparison script reads originals separately, never during build."
+  ],
+  "environment": {
+    "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+    "os": "Windows-11-10.0.26200-SP0",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    }
+  }
+}

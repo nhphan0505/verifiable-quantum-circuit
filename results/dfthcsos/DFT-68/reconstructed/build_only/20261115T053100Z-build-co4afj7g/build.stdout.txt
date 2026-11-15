@@ -1,0 +1,21 @@
+Compiled ANGLE_0: 293 Toffoli
+Compiled ANGLE_1: 287 Toffoli
+Compiled ANGLE_2: 287 Toffoli
+Compiled ANGLE_3: 287 Toffoli
+Compiled ANGLE_4: 268 Toffoli
+Compiled ANGLE_5: 268 Toffoli
+Compiled ANGLE_6: 268 Toffoli
+Compiled ANGLE_7: 269 Toffoli
+Compiled ANGLE_8: 263 Toffoli
+Compiled ANGLE_9: 264 Toffoli
+Compiled ANGLE_10: 264 Toffoli
+Compiled ANGLE_11: 264 Toffoli
+Compiled ANGLE_12: 264 Toffoli
+Compiled ANGLE_13: 264 Toffoli
+Compiled ANGLE_14: 264 Toffoli
+{
+  "status": "BUILT",
+  "artifact": "artifacts/dfthcsos/DFT-68/reconstructed.zip",
+  "sha256": "fc481755b7b97fa73ae9256e775907b82835b835d5520b3c529440d647bcab8a",
+  "build_record": "results/dfthcsos/DFT-68/reconstructed/build_only/20261115T053100Z-build-co4afj7g"
+}
