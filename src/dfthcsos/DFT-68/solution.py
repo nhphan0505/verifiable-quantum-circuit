@@ -106,6 +106,8 @@ def main():
     for package, version in [('kickmix', '1.0.0'), ('numpy', '2.5.4')]:
         if importlib.metadata.version(package) != version:
             raise RuntimeError(f'Require {package}=={version}')
+    environment = {'python': sys.version, 'os': platform.platform(),
+                   'packages': {p: importlib.metadata.version(p) for p in ['kickmix', 'numpy', 'scipy']}}
     head = git('rev-parse', 'HEAD').decode().strip()
     dependencies = [HERE / name for name in ['solution.py', 'circuit.py', 'data.json', 'reconstruction.json']]
     dependencies += [config_path, ROOT / 'src/common/package_submission.py']
@@ -190,8 +192,7 @@ def main():
                   'artifact_sha256': packaged['artifact_sha256'], 'build_run': None,
                   'build_command': [sys.executable, str(HERE / 'solution.py'), '--config', str(config_path)],
                   'dependency_sha256': dependency_hashes,
-                  'environment': {'python': sys.version, 'os': platform.platform(),
-                                  'packages': {p: importlib.metadata.version(p) for p in ['kickmix', 'numpy', 'scipy']}}}
+                  'environment': environment}
     record(run / 'provenance.json', provenance)
     record(run / 'build.json', {'status': 'BUILT', 'components': got, 'compiler_reports': reports,
                               'deterministic_zip': True, 'work_path': relative(work),
