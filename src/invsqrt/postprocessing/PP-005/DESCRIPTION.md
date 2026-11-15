@@ -22,4 +22,18 @@ Benchmark: build raw INV-BASELINE từ source repository (không bật finishing
 
 ## Kết luận ban đầu
 
-Chưa triển khai hoặc chấm PP-005. Tích hợp INV-66 là công việc riêng được người dùng giao cùng yêu cầu; chỉ làm sau kiểm chứng PP. Giữ run/provenance lịch sử, build source mới từ checkout sạch và so exact target. PR experiment sẽ phụ thuộc branch PP để checker scope không cần sửa/bypass. Không merge hoặc đóng Issue trong lượt này.
+API và 13 tests semantic/guard đã đạt; hai lượt smoke riêng PP đã PASS. Tích hợp INV-66 là công việc riêng được người dùng giao cùng yêu cầu; chỉ làm sau kiểm chứng PP. Giữ run/provenance lịch sử, build source mới từ checkout sạch và so exact target. PR experiment sẽ phụ thuộc branch PP để checker scope không cần sửa/bypass. Không merge hoặc đóng Issue trong lượt này.
+
+## Kết luận kiểm chứng riêng PP
+
+Source PP được kiểm chứng tại commit `1298d954ef9e06a552edf9e8f38e040e3efe97f8`. Raw baseline được dựng trực tiếp bằng `build_nr_circuit(10)` từ INV-BASELINE, không gọi finishing pipeline; thêm identity harness bằng scratch mới q[num_qubits] và bit mới b[num_bits], controls q0/q1. Chọn operation_index bằng số operation raw baseline (bỏ qua metadata). Hàm rewrite chỉ được gọi một lần tại site harness, không gọi PP khác.
+
+Hash input raw+harness: `8603bd912c36fe00b4ff2d10d8a31f4ae4f9f1e324ceb479dd8459f8092c98de`; hash sau PP: `d92db9500de029768dcf0fc143f9ce80adec8d5ce7fb189db3f88a628c733909`. Môi trường chấm Python 3.13.18, kickmix 1.0.0, numpy 2.5.4, scipy 1.18.1, kickmix-engine 0.6.0 trên WSL Linux. Profile smoke max-x=4096, shots-per-x=1, seed=12345, threads=4, --no-cache; verifier repository giữ nguyên. Dùng CLI `python -m kickmix_engine verify invsqrt FILE --verifier VERIFIER --max-x 4096 --shots-per-x 1 --seed 12345 --threads 4 --no-cache` lần lượt cho control/candidate.
+
+Cả control và candidate đều smoke PASS, candidate giảm đúng một Toffoli mỗi shot, giữ nguyên Q và worst error. Kết quả ủng hộ hypothesis local rewrite trong phạm vi guard và smoke đã thử; không gọi là full PASS riêng PP hay lợi ích toàn cục trên mọi mạch. Mạch nhỏ được so full branch Kraus matrices nên bao phủ target coherent/entangled và controls đổi sau CCX, không chỉ input target zero.
+
+Artifacts/log chỉ tồn tại trong TemporaryDirectory /tmp/pp005-validation-* rồi tự dọn sau khi đọc output; không có config/run/results hay bảng điểm PP mới. Số đo đã báo trong chat, muốn xác nhận lại phải dựng baseline+harness và chạy lại. INV-66 fixed frontier không được dùng làm benchmark được gọi là chưa PP; việc tích hợp của nó được kiểm tra exact riêng trên branch experiment, không gộp vào kết luận smoke riêng PP.
+
+API từ chối index ngoài phạm vi cũng như index âm/bool/không nguyên. Chưa hỗ trợ rewrite trong hoặc xuyên qua condition stack, debug/metadata hoặc instruction chưa biết. Đây là giới hạn bảo thủ, không phải chứng minh các trường hợp đó sai.
+
+SHA-256 source baseline dùng kiểm chứng: `fddc7ecc89a67a4a897a5bf509c902805383b31c94964221f8ae70c2f695cfad`.
