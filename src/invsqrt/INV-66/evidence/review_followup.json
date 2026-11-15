@@ -1,0 +1,62 @@
+{
+  "review_id": 5909379196,
+  "reviewer": "nhphan0505",
+  "review_state": "CHANGES_REQUESTED",
+  "reviewed_commit": "6c94828436f3deba8b92069e064afafeebc884fb",
+  "requirement": "Recover the original high-level arithmetic algorithm and source, not a gate-list reconstruction",
+  "investigated_utc": "2026-11-15T07:59:54.075019+00:00",
+  "current_recovery_level": "GATE_LEVEL_PYTHON",
+  "algorithm_requirement_satisfied": false,
+  "public_sources": [
+    {
+      "ref": "ahoirg/qcc-submit-verify-and-package",
+      "version": 25,
+      "source_sha256": "26b147701a833a6f0db5117c9cfdbec4478b77d4a0fec981f2b440695d36174f",
+      "source_bytes": 6981,
+      "public_api": "https://www.kaggle.com/api/v1/kernels/pull/ahoirg/qcc-submit-verify-and-package"
+    },
+    {
+      "ref": "alexchilton/24-94-lb-verified-three-task-portfolio",
+      "version": 155,
+      "source_sha256": "83c8d01210eafe9a0c30527ca95bf179e0f1a72d4489cc765b4d6b9d96c477e1",
+      "source_bytes": 551591,
+      "public_api": "https://www.kaggle.com/api/v1/kernels/pull/alexchilton/24-94-lb-verified-three-task-portfolio"
+    },
+    {
+      "ref": "atakanaldemir/quantum-circuits-iso-gap-dqi-h5",
+      "version": 20,
+      "source_sha256": "9b2829c4d25dee37be56883f903ef5e8303a7b7ec52c50ac6a8684d29e493b42",
+      "source_bytes": 518093,
+      "public_api": "https://www.kaggle.com/api/v1/kernels/pull/atakanaldemir/quantum-circuits-iso-gap-dqi-h5"
+    },
+    {
+      "ref": "atakanaldemir/qcc-gap-3-residue-repair-and-c43-native-compiler",
+      "version": 15,
+      "source_sha256": "5723395a834e2b50d1e65daa81c9264888580242ec1652c8861496bedd5e8f43",
+      "source_bytes": 524432,
+      "public_api": "https://www.kaggle.com/api/v1/kernels/pull/atakanaldemir/qcc-gap-3-residue-repair-and-c43-native-compiler"
+    },
+    {
+      "ref": "sheroleg/quantum-circuits-from-zero-1-sqrt-x-explained",
+      "version": 10,
+      "source_sha256": "d23c9d139af8b5a788d2a3b2c5e35edb2c9c2bdc57bf23d1c60b4ea378c7f1c7",
+      "source_bytes": 67455,
+      "public_api": "https://www.kaggle.com/api/v1/kernels/pull/sheroleg/quantum-circuits-from-zero-1-sqrt-x-explained"
+    }
+  ],
+  "missing_generator": {
+    "ref": "ahoirg/qcc-invk6-k6c",
+    "api": "https://www.kaggle.com/api/v1/kernels/pull/ahoirg/qcc-invk6-k6c",
+    "observed_http_status": 403,
+    "upstream_notebook": "ahoirg/qcc-submit-verify-and-package",
+    "arithmetic_variant": "64-row coefficients, 6 address bits, 13 intercept bits, 7 slope bits; two re-synthesized loaders; slope S4 retirement/rebuild; interleaved-chain hold pass"
+  },
+  "existing_source": {
+    "path": "src/invsqrt/INV-51",
+    "target_sha256": "321aff83636214196daa9cbc9dcc9c5e12a155bcff8d9989e98b8cee40935177",
+    "coefficient_rows": 128,
+    "interchangeable_with_target": false
+  },
+  "target_sha256": "e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6",
+  "new_build_or_grading_executed": false
+}

@@ -1,5 +1,9 @@
 # [INV-66] Tái dựng mạch invsqrt e46d90c3 bằng Python cấp cổng từ KMX, giữ nguyên pha và sửa HMR/CZ
 
+## Điều kiện nghiệm thu sau review
+
+Review của nhphan0505 trên 6c94828 yêu cầu phục hồi thuật toán số học gốc. Bản hiện tại chỉ đạt GATE_LEVEL_PYTHON, chưa đáp ứng yêu cầu đó dù build exact và full PASS. Xem [kết quả truy nguồn và kế hoạch phục hồi](ALGORITHM_RECOVERY.md). Chưa xử lý xong review, chưa đủ điều kiện merge và không đổi nhãn mức phục hồi khi chưa có source/model thực tế.
+
 Loại: Tái dựng từ submission; phục hồi source Python cấp cổng, không nhận là thuật toán mới.
 
 ## Nguồn và mục tiêu
@@ -71,7 +75,7 @@ Chi phí full thấp hơn baseline INV-BASELINE khoảng 26.3819 lần (baseline
 
 Giá trị cost/error full khớp phần invsqrt trong receipt bên ngoài, nhưng kết luận local dựa trên log mới của thành viên. Cùng artifact/hash và không override salt/seed có nghĩa các lượt dùng policy seeded mặc định; không gọi đây là kiểm chứng bằng seed độc lập so với receipt. Full không liệt kê mọi transcript đo có thể xảy ra.
 
-Hypothesis tái lập exact được ủng hộ bởi build sạch và đối chiếu bytes; tính đúng theo bộ kiểm tra chính thức được xác nhận bằng full PASS trong điều kiện ghi lại. Mục tiêu hướng đã đạt ở mức phục hồi cấp cổng. Đề xuất dừng thay đổi source/config, chuyển sang review độc lập bước 9. Kiểm tra salt bổ sung chỉ là việc có thể giao riêng; không tự chạy hoặc mở hướng tối ưu mới.
+Hypothesis tái lập exact được ủng hộ bởi build sạch và đối chiếu bytes; tính đúng theo bộ kiểm tra chính thức được xác nhận bằng full PASS trong điều kiện ghi lại. Mục tiêu exact ban đầu đã đạt ở mức phục hồi cấp cổng. Review tiếp theo yêu cầu mức thuật toán cao hơn, hiện chưa đạt; cần làm lại generator trước khi gửi lại review. Kiểm tra salt bổ sung chỉ là việc có thể giao riêng; không tự chạy hoặc mở hướng tối ưu mới.
 
 ## Tách postprocessing PP-005
 
