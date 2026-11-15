@@ -6,6 +6,7 @@ phase repayment retained. No source archive or precompiled gate stream is read.
 Unsupported search plans are rejected. emit_k0 receives its frozen event schedule.
 """
 import itertools
+import hashlib
 import json
 from pathlib import Path
 import numpy as np
