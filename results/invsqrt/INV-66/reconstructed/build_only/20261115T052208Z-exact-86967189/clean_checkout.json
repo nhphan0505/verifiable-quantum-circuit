@@ -1,0 +1,42 @@
+{
+  "repository_url": "https://github.com/nhphan0505/verifiable-quantum-circuit.git",
+  "checkout": "C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-one-toffoli\\verifiable-quantum-circuit\\artifacts\\pp005-work\\clean-inv66",
+  "source_commit": "a9b0dd06833c364fbc53687799f4cf30a127f7f1",
+  "checkout_method": "fresh shallow HTTPS clone of pushed exp branch",
+  "clean_before_build": true,
+  "clean_evidence": "entry point checks git status --porcelain and each source/config/dependency against commit before construction",
+  "cwd": "C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-one-toffoli\\verifiable-quantum-circuit\\artifacts\\pp005-work",
+  "commands": [
+    "git -c core.longpaths=true -c core.autocrlf=false clone --depth 1 --single-branch --branch exp/INV-66-one-toffoli-reconstruction https://github.com/nhphan0505/verifiable-quantum-circuit.git artifacts/pp005-work/clean-inv66",
+    "py -3.13 -m venv artifacts/pp005-work/clean-inv66/.venv",
+    "./artifacts/pp005-work/clean-inv66/.venv/Scripts/python.exe -m pip install --no-cache-dir --report artifacts/pp005-work/install-report.json -r artifacts/pp005-work/clean-inv66/requirements.txt",
+    "cd artifacts/pp005-work",
+    "./clean-inv66/.venv/Scripts/python.exe ./clean-inv66/src/invsqrt/INV-66/solution.py --config ./clean-inv66/src/invsqrt/INV-66/configs/reconstructed.json"
+  ],
+  "pip_check": "No broken requirements found.",
+  "wheels": [
+    {
+      "name": "kickmix",
+      "version": "1.0.0",
+      "hashes": {
+        "sha256": "d5ac9b393f1227011c08307063962221f0fa6b4165f9ecf09d0d2d7c39db73b2"
+      }
+    },
+    {
+      "name": "numpy",
+      "version": "2.5.4",
+      "hashes": {
+        "sha256": "8b4d2fd2d34e5f8c9235ee787de5631a37a28402b15cb80814df973d2be54129"
+      }
+    },
+    {
+      "name": "scipy",
+      "version": "1.18.1",
+      "hashes": {
+        "sha256": "559ed65f60c1af5a03f3912605a1b5114f522c7c32fb23c3376ae8f03219fe28"
+      }
+    }
+  ],
+  "runtime": "fresh venv; no old source/data/artifacts copied into checkout",
+  "scope": "experiment integration exact-build evidence, not a PP grading run"
+}

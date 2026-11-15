@@ -1,0 +1,7 @@
+{
+  "status": "BUILT",
+  "artifact": "C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-one-toffoli\\verifiable-quantum-circuit\\artifacts\\pp005-work\\clean-inv66\\artifacts\\invsqrt\\INV-66\\reconstructed.kmb",
+  "sha256": "e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6",
+  "bytes": 198590,
+  "evidence": "C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-one-toffoli\\verifiable-quantum-circuit\\artifacts\\pp005-work\\clean-inv66\\results\\invsqrt\\INV-66\\reconstructed\\build_only\\20261115T052208Z-exact-86967189"
+}

@@ -1,0 +1,18 @@
+{
+  "status": "RECONSTRUCTED_EXACT",
+  "source_commit": "a9b0dd06833c364fbc53687799f4cf30a127f7f1",
+  "input_sha256": "e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6",
+  "output_sha256": "e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6",
+  "input_bytes": 198590,
+  "output_bytes": 198590,
+  "comparison": "independent streamed bytes and SHA-256 after build; comparison process alone reads reference artifact",
+  "postprocessing": {
+    "method": "PP-005",
+    "operation_index": 3292,
+    "rewrites": 1,
+    "precursor_sha256": "dcde70780434501912c5cc032c6dfad25ac694d50da4e8e45cdb65115baa81b2"
+  },
+  "new_verifier_run": false,
+  "historical_full_run": "results/invsqrt/INV-66/reconstructed/full/20261115T042258Z-local-full-7feec4",
+  "historical_full_source_commit": "50f9c29b9ce7647e5e0f96ac7ccffc34cf1860d1"
+}

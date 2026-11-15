@@ -1,0 +1,58 @@
+{
+  "track": "invsqrt",
+  "experiment_id": "INV-66",
+  "config_name": "reconstructed",
+  "source_commit": "a9b0dd06833c364fbc53687799f4cf30a127f7f1",
+  "source_path": "src/invsqrt/INV-66/solution.py",
+  "source_sha256": "c34f48fcce7aefff2bd8116a46c47f223c76834b37cb73d6b0e33314e75034f5",
+  "build_config_path": "src/invsqrt/INV-66/configs/reconstructed.json",
+  "build_config_sha256": "23e40c8119ed8bf501536363543c449ac1e5a5e89dea1411f061fb74a7a19d76",
+  "artifact_path": "artifacts/invsqrt/INV-66/reconstructed.kmb",
+  "artifact_sha256": "e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6",
+  "build_command": [
+    "C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-one-toffoli\\verifiable-quantum-circuit\\artifacts\\pp005-work\\clean-inv66\\.venv\\Scripts\\python.exe",
+    "./clean-inv66/src/invsqrt/INV-66/solution.py",
+    "--config",
+    "./clean-inv66/src/invsqrt/INV-66/configs/reconstructed.json"
+  ],
+  "build_run": null,
+  "environment": {
+    "python": "3.13.7 (tags/v3.13.7:bcee1c3, Aug 14 2025, 14:15:11) [MSC v.1944 64 bit (AMD64)]",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    },
+    "platform": "win32",
+    "dependencies": [
+      {
+        "path": "src/invsqrt/INV-66/solution.py",
+        "sha256": "c34f48fcce7aefff2bd8116a46c47f223c76834b37cb73d6b0e33314e75034f5"
+      },
+      {
+        "path": "src/invsqrt/INV-66/circuit.py",
+        "sha256": "ace1095ae7c83ebd4fbc36a3eaaec9bf7c22350ba818717e07246f09f43e1ba2"
+      },
+      {
+        "path": "src/invsqrt/INV-66/configs/reconstructed.json",
+        "sha256": "23e40c8119ed8bf501536363543c449ac1e5a5e89dea1411f061fb74a7a19d76"
+      },
+      {
+        "path": "requirements.txt",
+        "sha256": "f3cd725b18083117d8ad73afd9accf3a5a99a634fac00f221bf1d77d71ad09a8"
+      },
+      {
+        "path": "src/invsqrt/postprocessing/PP-005/solution.py",
+        "sha256": "28de23f261438791a871f0210e0ebe00bf2951eb635223dbc63104a61b4567ff"
+      }
+    ]
+  },
+  "reconstruction_level": "GATE_LEVEL_PYTHON",
+  "dependency_audit": "dependency_audit.json",
+  "postprocessing": {
+    "method": "PP-005",
+    "operation_index": 3292,
+    "rewrites": 1,
+    "precursor_sha256": "dcde70780434501912c5cc032c6dfad25ac694d50da4e8e45cdb65115baa81b2"
+  }
+}
