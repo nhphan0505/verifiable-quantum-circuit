@@ -6,3 +6,4 @@
 | PP-002 | [Thay cổng phi tuyến bằng quan hệ affine](../../invsqrt/postprocessing/PP-002/DESCRIPTION.md) | invsqrt | nhphan0505 | [#62](https://github.com/nhphan0505/verifiable-quantum-circuit/issues/62) |
 | PP-003 | [Gộp pha Z_POW trên cùng hàm Boolean](../../invsqrt/postprocessing/PP-003/DESCRIPTION.md) | invsqrt | nhphan0505 | [#62](https://github.com/nhphan0505/verifiable-quantum-circuit/issues/62) |
 | PP-004 | [Chuyển pha CS endpoint về normalization](../../invsqrt/postprocessing/PP-004/DESCRIPTION.md) | invsqrt | nhphan0505 | [#62](https://github.com/nhphan0505/verifiable-quantum-circuit/issues/62) |
+| PP-005 | [Đo sớm dead-write Toffoli và sửa pha CZ](../../invsqrt/postprocessing/PP-005/DESCRIPTION.md) | invsqrt | Cheemshoang | [#70](https://github.com/nhphan0505/verifiable-quantum-circuit/issues/70) |
