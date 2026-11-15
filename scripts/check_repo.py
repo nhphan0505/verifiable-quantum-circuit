@@ -5,7 +5,8 @@ Checks source syntax/docstrings, configs, experiment titles/IDs/links, scores,
 run identity and provenance. Git snapshots verify recorded source/config hashes
 without requiring ignored circuits or organizer datasets. Historical exceptions
 are explicit paths in legacy_runs.json, never all runs of a baseline ID.
-Experiment branches may modify only their own directories and tracking rows.
+Experiment branches may modify their own directories/tracking rows and the
+hash-pinned PP dependencies explicitly declared in the committed manifest.
 This checks consistency, not algorithm correctness, GitHub ownership or full
 verification. No circuit is compiled or simulated.
 """
@@ -424,6 +425,47 @@ class Audit:
                         except subprocess.CalledProcessError:
                             self.errors.append(f'{note}: project_snapshot Git blob unavailable: {commit}:{name}')
 
+    def experiment_postprocessing(self, track, exp):
+        """Resolve only hash-pinned PP dependencies from the committed manifest."""
+        manifest_path = f'src/{track}/{exp}/reconstruction.json'
+        try:
+            raw = self.git('show', 'HEAD:' + manifest_path)
+        except subprocess.CalledProcessError:
+            return {}
+        try:
+            manifest = json.loads(raw)
+        except (ValueError, UnicodeDecodeError):
+            self.errors.append(f'{manifest_path}: invalid committed reconstruction manifest')
+            return {}
+        if not self.require(isinstance(manifest, dict), f'{manifest_path}: expected an object'):
+            return {}
+        declarations = manifest.get('postprocessing')
+        if declarations is None:
+            return {}
+        declarations = declarations if isinstance(declarations, list) else [declarations]
+        dependencies = manifest.get('dependencies', [])
+        if not self.require(isinstance(dependencies, list), f'{manifest_path}: dependencies must be a list'):
+            return {}
+        pinned = {d.get('path'): d.get('sha256') for d in dependencies if isinstance(d, dict) and isinstance(d.get('path'), str)}
+        methods = {}
+        for declaration in declarations:
+            if not self.require(isinstance(declaration, dict), f'{manifest_path}: invalid PP declaration'):
+                continue
+            method, path, expected = (declaration.get(k) for k in ('method', 'path', 'sha256'))
+            valid_method = isinstance(method, str) and re.fullmatch(r'PP-[0-9]{3,}', method) and int(method[3:]) > 0
+            allowed_paths = {f'src/{scope}/postprocessing/{method}/solution.py' for scope in ('common', track)}
+            valid = valid_method and isinstance(path, str) and path in allowed_paths and isinstance(expected, str) and re.fullmatch(HASH, expected) and pinned.get(path) == expected
+            if not self.require(valid, f'{manifest_path}: PP must have a same-track/common path and matching dependency hash'):
+                continue
+            try:
+                actual = hashlib.sha256(self.git('show', 'HEAD:' + path)).hexdigest()
+            except subprocess.CalledProcessError:
+                self.errors.append(f'{manifest_path}: declared PP source missing from HEAD: {path}')
+                continue
+            if self.require(actual == expected, f'{manifest_path}: declared PP hash differs from HEAD: {path}'):
+                methods[method] = path.rsplit('/', 1)[0] + '/'
+        return methods
+
     def scope(self, base, branch):
         if not self.git_available:
             self.errors.append('--base requires Git repository')
@@ -454,9 +496,30 @@ class Audit:
         exp, prefix = match.groups()
         track = next(t for t, p in TRACKS.items() if p == prefix)
         shared = {f'src/{track}/{name}.md' for name in ['EXPERIMENTS', 'SCORES']}
+        methods = self.experiment_postprocessing(track, exp)
+        catalog = 'src/common/postprocessing/METHODS.md'
+        # One-time policy migration: only the checker, its focused regression
+        # tests and policy documentation may accompany this upgrade. Once the
+        # trusted base has PP scope support, infrastructure is rejected again.
+        migration_paths = {'scripts/check_repo.py', 'scripts/tests/test_postprocessing_scope.py', 'docs/REPOSITORY_CHECKS.md'}
+        migration = False
+        if methods and 'scripts/check_repo.py' in files:
+            base_tree = ast.parse(self.git('show', base + ':scripts/check_repo.py'))
+            base_supports_pp = any(isinstance(node, ast.FunctionDef) and node.name == 'experiment_postprocessing' for node in ast.walk(base_tree))
+            migration = not base_supports_pp
         for name in files:
-            allowed = name.startswith((f'src/{track}/{exp}/', f'results/{track}/{exp}/')) or name in shared
+            allowed = (name.startswith((f'src/{track}/{exp}/', f'results/{track}/{exp}/')) or name in shared
+                       or any(name.startswith(folder) for folder in methods.values())
+                       or (bool(methods) and name == catalog)
+                       or (migration and name in migration_paths))
             self.require(allowed, f'experiment branch modified outside its scope: {name}')
+            if name == catalog and methods:
+                diff = self.git('diff', '--unified=0', f'{base}...HEAD', '--', name).decode()
+                for line in diff.splitlines():
+                    if line.startswith(('+++', '---')) or not line.startswith(('+', '-')):
+                        continue
+                    row = re.match(r'\|\s*(PP-[0-9]{3,})\s*\|', line[1:])
+                    self.require(bool(row) and row.group(1) in methods, f'{catalog}: changed catalog content outside declared PP rows')
             if name in shared:
                 diff = self.git('diff', '--unified=0', f'{base}...HEAD', '--', name).decode()
                 for line in diff.splitlines():
