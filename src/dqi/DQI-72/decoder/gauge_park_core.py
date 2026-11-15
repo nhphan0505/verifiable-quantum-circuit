@@ -120,77 +120,8 @@ def scalar_slot(builder,A,B,rhss,monic,inverse,previous,context=None,closing=Fal
     finish_reciprocal(builder,beta,reciprocal,1,context,closing)
 
 def frame(builder,A,B,rhss,monic,inverse,previous=None,context=None,closing=False):
-    n=len(B);assert len(A)==n+1-int(monic) and all(len(r)==n for r in rhss)
-    import gauge_park_window as raw_lower_window
-    if not monic and context is not None and n in raw_lower_window.WINDOWS:
-        return raw_lower_window.emit(builder,A,B,rhss,inverse,previous,context,closing)
-    if n==1:return scalar_slot(builder,A,B,rhss,monic,inverse,previous,context,closing)
-    flag=builder.alloc_qubits(1);toggle_zero(builder,B[-1],flag[0])
-    if context is not None and closing:
-        incoming=context.flags.pop(n);builder.cz(incoming,flag);builder.free(incoming)
-    use_virtual=(not monic and n>4)
-    def route(right):
-        if use_virtual:builder.cswap(flag[0],B[-1],B[-2])
-        else:rotate(builder,B,flag[0],right)
-    def lower():
-        if use_virtual:virtual.lower(builder,B[:-1],rhss,flag[0])
-        else:lower_border(builder,B,rhss)
-    def upper():
-        if use_virtual:virtual.upper(builder,B[:-1],rhss,flag[0])
-        else:upper_border(builder,B,rhss)
-    route(True)
-    beta=B[-1];heads=[r[-1] for r in rhss]
-    reciprocal=compact_inverse_twelve(builder,beta)
-    accept_debt(builder,reciprocal,n,context,closing)
-    scale(builder,heads,beta,reciprocal,inverse)
-    if inverse:lower()
-    else:upper()
-    if use_virtual:
-        debt=virtual.source_forward(builder,A,B,reciprocal,flag[0],True)
-    else:
-        source_division(builder,A,B,reciprocal,monic)
-        if inverse and monic:scale(builder,heads,beta,reciprocal,False)
-        debt=erase_inverse_word(builder,beta,reciprocal,True)
-    # A local paired reciprocal needs 24 arithmetic bits. With a previous
-    # frame it also needs a second predicate. Return B to its raw chart
-    # early, erase this frame's flag, and reconstruct it from that raw top
-    # after the local action. The raw (nonmonic) local action does not read B.
-    early_route=bool(inverse and not monic and previous is not None and context is not None)
-    if early_route:
-        route(False)
-        local_flag_mask=builder.alloc_bits(1);builder.hmr(flag,local_flag_mask);builder.free(flag)
-        local(builder,A,B,rhss,previous,True,context,closing)
-        flag=builder.alloc_qubits(1);toggle_zero(builder,B[-1],flag[0])
-        builder.cz(local_flag_mask,flag);builder.free(local_flag_mask)
-    elif inverse and not monic:local(builder,A,B,rhss,previous,True,context,closing)
-    quotient=(heads,A[n-1],None if monic else A[n],monic)
-    low=A[:n-1]
-    if not early_route:route(False)
-    swap_low(builder,low,B[:-1],flag[0])
-    flag_debt=builder.alloc_bits(1);builder.hmr(flag,flag_debt);builder.free(flag)
-    frame(builder,B,low,[r[:-1] for r in rhss],False,inverse,quotient,context,closing)
-    flag=builder.alloc_qubits(1);toggle_zero(builder,B[-1],flag[0])
-    builder.cz(flag_debt,flag);builder.free(flag_debt)
-    swap_low(builder,low,B[:-1],flag[0])
-    route(True)
-    if not inverse and not monic:local(builder,A,B,rhss,previous,False,context,closing)
-    if use_virtual:
-        reciprocal=virtual.source_reverse(builder,A,B,flag[0])
-    else:
-        reciprocal=compact_inverse_twelve(builder,beta)
-        if not inverse and monic:scale(builder,heads,beta,reciprocal,True)
-        source_division(builder,A,B,reciprocal,monic,True)
-    repay_inverse_mask(builder,reciprocal,debt)
-    if inverse:upper()
-    else:lower()
-    scale(builder,heads,beta,reciprocal,inverse)
-    finish_reciprocal(builder,beta,reciprocal,n,context,closing)
-    route(False)
-    if context is not None and not closing:
-        assert n not in context.flags
-        mask=builder.alloc_bits(1);builder.hmr(flag,mask);context.flags[n]=mask
-    else:erase_zero(builder,B[-1],flag)
-    builder.free(flag)
+    """Legacy frame is excluded; production binds transpose14_core.frame."""
+    raise RuntimeError("Only the fixed v7 transpose14 frame is supported.")
 
 def emit(builder,A,B,rhss,inverse=True,context=None,closing=False):
     A,B=list(A),list(B);rhss=[list(r) for r in rhss]

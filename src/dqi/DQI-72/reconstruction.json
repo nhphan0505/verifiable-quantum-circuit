@@ -218,9 +218,9 @@
       "path": "decoder/gauge_park_core.py",
       "upstream_path": "src/controller_work/after_c5/converter_width/gauge_park_core.py",
       "upstream_sha256": "4ab65080ff3495262059ca4c462b780947dffaf50adb37253da2b16c585b163d",
-      "sha256": "4ab65080ff3495262059ca4c462b780947dffaf50adb37253da2b16c585b163d",
+      "sha256": "63755be5d5ad910030555721a3484b075446ccecc680b1433fa75ebe89dd5744",
       "role": "Explicit-unit-leading top frame for the raw Forney interface.",
-      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records; excluded unused legacy frame entrypoint (fail-closed) and its fallback window module after full fixed-config file-open audit"
     },
     {
       "path": "decoder/gauge_park_lender.py",
@@ -252,14 +252,6 @@
       "upstream_sha256": "8f4179fe13c009c60367cb61edcac86c34c0dca862fef101b46eaebfed70e002",
       "sha256": "8f4179fe13c009c60367cb61edcac86c34c0dca862fef101b46eaebfed70e002",
       "role": "Virtual divisor borders and a reciprocal-lifetime-aware source map.",
-      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
-    },
-    {
-      "path": "decoder/gauge_park_window.py",
-      "upstream_path": "src/controller_work/after_c5/converter_width/gauge_park_window.py",
-      "upstream_sha256": "b2ae18b043dd08190e34ea4e8f9fbf395adad6b9ff3318a15c1ef45a231a587d",
-      "sha256": "b2ae18b043dd08190e34ea4e8f9fbf395adad6b9ff3318a15c1ef45a231a587d",
-      "role": "Paid three-frame lower-border fusion; transposed borders stay ordinary.",
       "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
     },
     {
@@ -602,17 +594,9 @@
       "path": "decoder/raw_gap2_bezout.py",
       "upstream_path": "src/controller_work/work/round2/milestone152/source/raw_gap2_bezout.py",
       "upstream_sha256": "f5b31feff640fd2bc88e476ba767a6f90f79d6f570a90dcf769706c72fc980a3",
-      "sha256": "f5b31feff640fd2bc88e476ba767a6f90f79d6f570a90dcf769706c72fc980a3",
+      "sha256": "f63e78a80383a51cfcfa4a97e96863b9968e55e8a88a87da9652e2f0e446b80e",
       "role": "Explicit-unit-leading top frame for the raw Forney interface.",
-      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
-    },
-    {
-      "path": "decoder/raw_lower_window.py",
-      "upstream_path": "src/controller_work/work/round2/milestone152/source/raw_lower_window.py",
-      "upstream_sha256": "f2ecc12f33089fc2ce9a3206d0e54f681c756e4d65cf355c0781a4942f4db9af",
-      "sha256": "f2ecc12f33089fc2ce9a3206d0e54f681c756e4d65cf355c0781a4942f4db9af",
-      "role": "Paid three-frame lower-border fusion; transposed borders stay ordinary.",
-      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records; excluded unused legacy frame entrypoint (fail-closed) and its fallback window module after full fixed-config file-open audit"
     },
     {
       "path": "decoder/raw_query_extractor.py",
@@ -754,9 +738,9 @@
       "path": "decoder/transpose_handoff_core.py",
       "upstream_path": "src/controller_work/after_v3/blocks/transpose_handoff_core.py",
       "upstream_sha256": "c7453a0a4b75819b75bc8fc3c918e0ec33ae52a4ef55f37c10e07a41865fab17",
-      "sha256": "c7453a0a4b75819b75bc8fc3c918e0ec33ae52a4ef55f37c10e07a41865fab17",
+      "sha256": "fffc577ac9e1714834c861d293dc2e7da0b26be41e9638abf5d3ad42e697aba1",
       "role": "Explicit-unit-leading top frame with same-half local-mask repayment.",
-      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
+      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records; excluded unused legacy frame entrypoint (fail-closed) and its fallback window module after full fixed-config file-open audit"
     },
     {
       "path": "decoder/transpose_handoff_outer.py",
@@ -764,14 +748,6 @@
       "upstream_sha256": "f2284acd4fd7c1f24fb4460a24ce7a449103412629bae59d06b2c1945788b699",
       "sha256": "ad6ea448f621bcb506f2376e39330c24d3e5039b7868606a440d019d087fb827",
       "role": "Public-shape odd/even raw Forney preimage and fused history finish.",
-      "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
-    },
-    {
-      "path": "decoder/transpose_handoff_window.py",
-      "upstream_path": "src/controller_work/after_v3/blocks/transpose_handoff_window.py",
-      "upstream_sha256": "000864e4f2a87465bb882571f79e7c7fd35b04f25779fe4bb947c19183036281",
-      "sha256": "000864e4f2a87465bb882571f79e7c7fd35b04f25779fe4bb947c19183036281",
-      "role": "Fixed preimage window with explicit transpose-output flag ownership.",
       "modifications": "Removed standalone checks/main and obsolete path bootstrap; v7 pipeline uses direct fixed bindings and static ledger instead of historical audit/occupancy records"
     },
     {
@@ -859,5 +835,11 @@
     "No historical verifier results are transferred",
     "Build exactness and dependency closure pending",
     "Original release URL not supplied"
+  ],
+  "supported_variants": "Only reconstructed.json; legacy frame entrypoints deliberately fail closed after fixed production bindings",
+  "excluded_unused_modules": [
+    "gauge_park_window",
+    "raw_lower_window",
+    "transpose_handoff_window"
   ]
 }

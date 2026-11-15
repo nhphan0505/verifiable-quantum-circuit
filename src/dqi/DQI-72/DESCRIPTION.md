@@ -40,8 +40,10 @@ compute/uncompute và sửa pha measurement. Bỏ bootstrap và hồ sơ audit l
 khỏi đường build, thay bằng loader cố định dùng source đã track trong checkout.
 Tối giản theo import/file-open audit: chỉ giữ helper và bảng thực sự cần, cùng
 giấy phép và mapping hash upstream; không chép nguyên bundle hoặc nhúng tape.
-Manifest sẽ chỉ rõ vai trò và nguồn từng file. 103 module emitter/helper đã được tách vào `decoder/`, tổng khoảng 650 KB;
-không giữ bootstrap, lịch sử gate hoặc bản mạch/KMX. Mapping path/hash và vai trò
+Manifest sẽ chỉ rõ vai trò và nguồn từng file. 100 module emitter/helper đã được tách vào `decoder/`, tổng khoảng 625 KB;
+không giữ bootstrap, lịch sử gate hoặc bản mạch/KMX. Audit lượt dựng đầy đủ
+loại thêm ba window module của các frame cũ không được gọi; các entrypoint
+frame cũ báo lỗi rõ ràng, production cố định dùng transpose14_core.frame. Mapping path/hash và vai trò
 từng module ở [reconstruction.json](reconstruction.json). Config [reconstructed](configs/reconstructed.json),
 j_min=15, scan_positions=4095, max_qubits=889; cố định theo input. Chạy `python src/dqi/DQI-72/solution.py --config src/dqi/DQI-72/configs/reconstructed.json`.
 
