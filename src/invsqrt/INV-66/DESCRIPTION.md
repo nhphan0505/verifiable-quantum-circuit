@@ -38,7 +38,9 @@ ROUNDTRIP_EXACT và RECONSTRUCTED_EXACT có bằng chứng riêng; smoke và ful
 
 ## Source cấp cổng và cách chạy
 
-[solution.py](solution.py) là entry point; [circuit.py](circuit.py) chứa builder của precursor, bảy vùng quan sát và 136 vòng lặp sweep X, cùng adapter nạp PP-005. Không có artifact/KMX nhúng, tải binary, gate table, source string hay exec/eval. PP-005 chỉ parse KMX vừa serialize từ circuit trong bộ nhớ để áp rule; không đọc KMX gốc từ đĩa. Góc quay là scalar decimal string chính xác truyền cho API, không qua float. Hai file Python của INV-66, module [PP-005](../postprocessing/PP-005/solution.py) và [configs/reconstructed.json](configs/reconstructed.json) là dependency runtime của hướng; requirements.txt khai báo package pin. [reconstruction.json](reconstruction.json) ghi nguồn/hash, vai trò file và mức phục hồi; [NOTICE.txt](NOTICE.txt) giữ attribution và giới hạn giấy phép.
+[solution.py](solution.py) là entry point; [circuit.py](circuit.py) chứa builder của precursor, bảy vùng quan sát và 136 vòng lặp sweep X, cùng adapter nạp PP-005. Không có artifact/KMX nhúng, tải binary, gate table, source string hay exec/eval. PP-005 chỉ parse KMX vừa serialize từ circuit trong bộ nhớ để áp rule; không đọc KMX gốc từ đĩa. Góc quay là scalar decimal string chính xác truyền cho API, không qua float. Runtime của hướng dùng `solution.py`, `circuit.py`, [lookup_certificate.py](lookup_certificate.py),
+[hai certificate lookup](data/lookup64_certificates.json), module [PP-005](../postprocessing/PP-005/solution.py)
+và [configs/reconstructed.json](configs/reconstructed.json); requirements.txt khai báo package pin. [reconstruction.json](reconstruction.json) ghi nguồn/hash, vai trò file và mức phục hồi; [NOTICE.txt](NOTICE.txt) giữ attribution và giới hạn giấy phép.
 
 Mức phục hồi là GATE_LEVEL_PYTHON: source rõ từng cổng và có thể sửa, nhưng chưa phục hồi phép tính số học cấp cao hoặc cách tác giả tìm mạch. Đây là đường triển khai được bước 05 cho phép, không phải source gốc. Input KMB/KMX chỉ được dùng để phân tích trước khi viết source và đối chiếu độc lập sau build.
 
@@ -46,7 +48,7 @@ Mức phục hồi là GATE_LEVEL_PYTHON: source rõ từng cổng và có thể
 .venv/Scripts/python.exe src/invsqrt/INV-66/solution.py --config src/invsqrt/INV-66/configs/reconstructed.json
 ```
 
-Chạy Python 3.13 và package pin. Config phải nằm trực tiếp trong configs của hướng; chỉ hỗ trợ reconstructed với target cố định. Output mới mặc định artifacts/invsqrt/INV-66/reconstructed.kmb, không ghi đè. Entry point kiểm tra checkout sạch, source/config khớp Git snapshot, rồi dựng trong bộ nhớ và ghi artifact mới. Audit chặn read ngoài source/runtime/output và network/subprocess trong construction; Git snapshot preflight và khởi động interpreter xảy ra trước audit. Native library OS reads không được CPython audit bao phủ; precursor dùng builder và adapter chỉ nạp PP-005 đã khai báo; PP serialize circuit mới trong bộ nhớ, KMB dùng BytesIO và file write qua Python.
+Chạy Python 3.13 và package pin. Config phải nằm trực tiếp trong configs của hướng; chỉ hỗ trợ reconstructed với target cố định. Output mới mặc định artifacts/invsqrt/INV-66/reconstructed.kmb, không ghi đè. Entry point kiểm tra checkout sạch, source/config khớp Git snapshot, rồi dựng trong bộ nhớ và ghi artifact mới. Audit chặn read ngoài source/runtime/output và network/subprocess trong construction; Git snapshot preflight và khởi động interpreter xảy ra trước audit. Native library OS reads không được CPython audit bao phủ; precursor dùng builder, compiler/certificate lookup và adapter PP-005 đã khai báo; PP serialize circuit mới trong bộ nhớ, KMB dùng BytesIO và file write qua Python.
 
 Source commit `50f9c29b9ce7647e5e0f96ac7ccffc34cf1860d1` đã dựng từ clone GitHub mới, venv mới và cwd ngoài checkout; công cụ đối chiếu riêng xác nhận exact. Không chạy verifier. Working tree chính và thay đổi notebook của người dùng không bị sửa.
 
@@ -90,3 +92,26 @@ Build tích hợp PP-005 đã đạt RECONSTRUCTED_EXACT từ clone GitHub sạc
 Không có lượt verifier experiment mới sau refactor. Full PASS lịch sử vẫn gắn source 50f9c29, không được đổi sang a9b0dd0. Kết quả smoke riêng PP chỉ nằm trong phần mô tả phương pháp/chat; thư mục build_only mới này là bằng chứng build integration theo luồng decompiler, không phải run chấm PP. Có nhiều build cùng hash; nếu chấm lại cần đối chiếu source/build cụ thể khi notebook báo provenance mơ hồ, không tự chọn HEAD.
 
 Theo yêu cầu gộp PR của người dùng, PP-005 và tích hợp INV-66 được nộp chung trong PR #67 hướng về main; PR #71 được đóng vì toàn bộ commit đã nằm trong #67. Mã PP vẫn tách trong src/invsqrt/postprocessing/PP-005 và Issue #70 vẫn quản lý phương pháp. Theo nhiệm vụ sửa CI được giao sau khi gộp PR, checker xác minh PP dependency theo manifest đã commit và SHA-256 của module; chỉ folder PP đó và dòng catalog tương ứng được phép đi kèm. Tests chặn PP/track/experiment khác và declaration chưa commit. Phạm vi bootstrap checker/tests/docs được giới hạn cho base còn policy cũ; không tắt kiểm tra scope hoặc đổi tên branch. Chưa merge; cần review độc lập HEAD mới. Sau khi PP đổi hoặc resolve conflict cần build/review lại HEAD liên quan.
+
+
+## Phục hồi số học độc lập — tiến độ cách 2
+
+Đã phục hồi model normalize/root, bảng 64 hàng A13/S7, sáu hàng coefficient,
+seed và mười hàng signed product. `validate_recovery.py` đối chiếu thanh ghi trên
+toàn miền 3.133.452 x; kiểm tra riêng cả 4.096 v, cả 64 địa chỉ cho mỗi loader và
+4.096 nhánh đo ngẫu nhiên. Xem [bằng chứng và giới hạn](evidence/algorithm_recovery.json).
+Hai loader đã thay 2.977 lệnh tĩnh bằng compiler GF(2) và certificate toán học
+(27/29 coordinate bậc hai, các ma trận affine khả nghịch); certificate chỉ là
+lookup sáu đầu vào, không phải toàn mạch hay payload KMB/KMX.
+
+Source dcb4794910d04a3b86a8d1b3a68bf9adfbab15d6 đã được clone mới từ GitHub và
+build bằng venv mới, cwd ngoài checkout, package pin của repo. Run
+`results/invsqrt/INV-66/reconstructed/build_only/20261115T100613Z-exact-8259a1b7`
+ghi provenance/audit và đối chiếu bytes độc lập: 198590 bytes,
+SHA-256 e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6.
+PP-005 vẫn là module riêng và rewrite đúng một site. Không chấm lại; các run/receipt
+lịch sử giữ nguyên nguồn và provenance.
+
+Đây là phục hồi từng thành phần, chưa phải generator số học toàn mạch.
+Model quotient/pha divider, inverse product và cleanup cấp cao vẫn còn thiếu;
+`GATE_LEVEL_PYTHON` và trạng thái review chưa được xử lý xong vẫn giữ nguyên.

@@ -105,3 +105,13 @@ và không phải provenance của một source build mới.
 
 Không thiếu KMB hoặc receipt để tiếp tục cách 2. Source private sẽ hữu ích nếu
 được cung cấp hợp lệ, nhưng không còn được coi là điều kiện bắt buộc để làm phân tích.
+
+
+## Nghiệm thu build của bản phục hồi từng phần
+
+Source dcb4794910d04a3b86a8d1b3a68bf9adfbab15d6 đã build từ clone GitHub sạch,
+venv mới và cwd ngoài checkout. [Reconstruction check](../../../results/invsqrt/INV-66/reconstructed/build_only/20261115T100613Z-exact-8259a1b7/reconstruction_check.json)
+ghi so bytes độc lập sau build: 198590 bytes và SHA e46d90c3…005b6. Audit ghi
+Python/helper/certificate/PP đã khai báo, không có network/subprocess trong dựng.
+Đây là nghiệm thu exact của bản builder từng phần, không phải nghiệm thu model
+pha hoặc toàn bộ thuật toán cấp cao. Không có verifier run mới.
