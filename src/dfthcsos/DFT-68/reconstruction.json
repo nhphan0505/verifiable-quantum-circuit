@@ -21,7 +21,7 @@
     "angle_k_13.kmb": "1843d7993215656e4e0eee69169966ba269d544bc0b90e855e4ed5e6e113accc",
     "angle_k_14.kmb": "b763f0cd2fdeaaa31e7811084e51fde5d51575b036fa22854fb28172c1712a8e"
   },
-  "reconstruction_level": "IMPLEMENTED_NOT_BUILT",
+  "reconstruction_level": "COMPONENTS_EXACT",
   "dependencies": [
     "solution.py",
     "circuit.py",
@@ -38,5 +38,8 @@
     "python": "3.13",
     "kickmix": "1.0.0",
     "numpy": "2.5.4"
-  }
+  },
+  "build_source_commit": "7df5dad8ca74a8610dd6597c53057f6cd7f30a4c",
+  "build_record": "results/dfthcsos/DFT-68/reconstructed/build_only/20261115T052652Z-build-u3fl7wvi",
+  "artifact_sha256": "fc481755b7b97fa73ae9256e775907b82835b835d5520b3c529440d647bcab8a"
 }

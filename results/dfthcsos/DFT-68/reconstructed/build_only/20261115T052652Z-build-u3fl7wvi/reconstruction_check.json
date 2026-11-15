@@ -1,0 +1,175 @@
+{
+  "status": "COMPONENTS_EXACT",
+  "source_commit": "7df5dad8ca74a8610dd6597c53057f6cd7f30a4c",
+  "comparison": "independent streaming byte comparison in 65536-byte blocks after isolated build; NPZ NPY bytes and array dtype/shape/order checked, no allclose",
+  "components": [
+    {
+      "name": "submission.npz",
+      "bytes": 1847692,
+      "sha256": "6418ec8e10b1a8da967ee26278434f9ac950474741185f4d61363e17a03da77f",
+      "byte_equal": true
+    },
+    {
+      "name": "angle_k_0.kmb",
+      "bytes": 407750,
+      "sha256": "ce7ebaf342c5b49f7d539637359fb8a282718fb3057e7b25dd193f2a6a4b8974",
+      "byte_equal": true
+    },
+    {
+      "name": "angle_k_1.kmb",
+      "bytes": 420156,
+      "sha256": "3eac70665f021b0e304106fd62749277d4d69db775df008aacd6d950e4934193",
+      "byte_equal": true
+    },
+    {
+      "name": "angle_k_2.kmb",
+      "bytes": 421220,
+      "sha256": "c3e1454e29a05c3c28bcfd16c2aee02340b5d439d9466774424fedf0ed7601d1",
+      "byte_equal": true
+    },
+    {
+      "name": "angle_k_3.kmb",
+      "bytes": 415439,
+      "sha256": "d26b576ae789b0471ec6c11b7317c7c69eb3d7190472af8120ccf25cf217a8ea",
+      "byte_equal": true
+    },
+    {
+      "name": "angle_k_4.kmb",
+      "bytes": 366414,
+      "sha256": "2efacc9d944aa5a855acf780e6bbc3c07af16c0275eb9549bb24adc70acca344",
+      "byte_equal": true
+    },
+    {
+      "name": "angle_k_5.kmb",
+      "bytes": 364423,
+      "sha256": "7e4ed9a363c8f56d85410185c7b4449211788bc61e81b3dc7cbdd10ab7ce8a42",
+      "byte_equal": true
+    },
+    {
+      "name": "angle_k_6.kmb",
+      "bytes": 367137,
+      "sha256": "26ab1d5df8132bbc28e068a4eef0b247ea21a96fa4034f89a6d1bf306f07e284",
+      "byte_equal": true
+    },
+    {
+      "name": "angle_k_7.kmb",
+      "bytes": 372920,
+      "sha256": "1ae98642315e7aaedfde99773af4ae48198bf8b4f2e11e97883d6aa1bfe12bee",
+      "byte_equal": true
+    },
+    {
+      "name": "angle_k_8.kmb",
+      "bytes": 353772,
+      "sha256": "e69c554c360c709e52126a6f773afeaa3564da7be0927d6293665f342203771f",
+      "byte_equal": true
+    },
+    {
+      "name": "angle_k_9.kmb",
+      "bytes": 359601,
+      "sha256": "38848ce19bd553e4007a454d9b7d392d05ac105cf4b269f41521bd1003bf838e",
+      "byte_equal": true
+    },
+    {
+      "name": "angle_k_10.kmb",
+      "bytes": 360179,
+      "sha256": "fdb67807154e35d9f41471c22b38bbc3ed07e5c93efef30a57f0599fb8400ff7",
+      "byte_equal": true
+    },
+    {
+      "name": "angle_k_11.kmb",
+      "bytes": 360339,
+      "sha256": "d22baf8e2d294165618bcee40d958ef2806f0b35352c8b92e0d201aff3269c37",
+      "byte_equal": true
+    },
+    {
+      "name": "angle_k_12.kmb",
+      "bytes": 359705,
+      "sha256": "b1b6af502f4bf02e521ab888600f645aa5a5bed028290466b54a835423eb2517",
+      "byte_equal": true
+    },
+    {
+      "name": "angle_k_13.kmb",
+      "bytes": 359237,
+      "sha256": "1843d7993215656e4e0eee69169966ba269d544bc0b90e855e4ed5e6e113accc",
+      "byte_equal": true
+    },
+    {
+      "name": "angle_k_14.kmb",
+      "bytes": 361106,
+      "sha256": "b763f0cd2fdeaaa31e7811084e51fde5d51575b036fa22854fb28172c1712a8e",
+      "byte_equal": true
+    }
+  ],
+  "npz_members": [
+    {
+      "name": "U.npy",
+      "dtype": "<f8",
+      "shape": [
+        8,
+        143,
+        76
+      ],
+      "npy_bytes_equal": true,
+      "sha256": "0e18da2bdfe7347c81a47877d1dcde96afa96ef95aa2b09c626bda8a997ca660"
+    },
+    {
+      "name": "W.npy",
+      "dtype": "<f8",
+      "shape": [
+        8,
+        143,
+        44
+      ],
+      "npy_bytes_equal": true,
+      "sha256": "ea57bb807ff962b2e9935d40325770147aaa84c95c0e32e6983630ec9d1a9a20"
+    },
+    {
+      "name": "H2_I.npy",
+      "dtype": "<f8",
+      "shape": [
+        8,
+        44
+      ],
+      "npy_bytes_equal": true,
+      "sha256": "3bead4c55add3dbf9dbc2720a0617a1872ba31b588af133dd32e0c182d166c4e"
+    },
+    {
+      "name": "H1_I.npy",
+      "dtype": "<f4",
+      "shape": [],
+      "npy_bytes_equal": true,
+      "sha256": "7d330c793cc3f69fa3e8fde6fb92fb0beb228b988263c87a129b482d1b5cc6e5"
+    },
+    {
+      "name": "Hsym_lower.npy",
+      "dtype": "<f4",
+      "shape": [
+        2926
+      ],
+      "npy_bytes_equal": true,
+      "sha256": "36ccc4a1c76660ca82a2ba2c6dc6802e8f26b8bf5dbcbc610479e9ba8279f11b"
+    },
+    {
+      "name": "tree_edges.npy",
+      "dtype": "<i8",
+      "shape": [
+        75,
+        2
+      ],
+      "npy_bytes_equal": true,
+      "sha256": "de886ee33f8119c9f5a7fce98663ffe31840cbe29ae336a9cf81a9d82ef2aff6"
+    },
+    {
+      "name": "angle_words.npy",
+      "dtype": "<i8",
+      "shape": [
+        1220,
+        75
+      ],
+      "npy_bytes_equal": true,
+      "sha256": "12cae966a2e0b3bfa616b983e91c94ee7edb45bf51e6612f9258284f35b0a35d"
+    }
+  ],
+  "zip_sha256": "fc481755b7b97fa73ae9256e775907b82835b835d5520b3c529440d647bcab8a",
+  "original_zip": "Not supplied: user supplied component set. New deterministic DFTHC-only ZIP is not original combined 18-file Kaggle ZIP."
+}

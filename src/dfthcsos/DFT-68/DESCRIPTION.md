@@ -20,4 +20,39 @@ Hypothesis tái lập: Python phát 15 KMB và NPZ khớp bytes/hash công bố;
 Manifest tác giả ghi tổng 4074 Toffoli mỗi pass của ANGLE và điểm lịch sử 296635967.5935997; đây là công bố nguồn, chưa phải chấm của repo. Baseline DFT-BASELINE là QROM batch 8; không suy điểm cải thiện chỉ từ khác batch hoặc gate count. Chưa có grading mới và không sửa SCORES. Giữ data cuối nguyên bytes; fitting/refit thiếu đầu vào v18 không nằm trong build này. Không claim original ZIP exact; chỉ nghiệm thu component-exact cho tập đầu vào đã cung cấp, container mới deterministic.
 
 ## Kết quả và tái lập
-Chưa build solution hoặc chấm. Sau build sẽ bổ sung mapping source commit/config -> records. Chờ thành viên chấm theo instructions sau nghiệm thu build, rồi review độc lập; không tự merge.
+Build sạch đã thành công từ commit nguồn `7df5dad8ca74a8610dd6597c53057f6cd7f30a4c` trên clone GitHub và venv mới, chạy entry point từ cwd ngoài checkout. Không tạo postprocessing.py. Không chấm hoặc sửa SCORES. Chờ thành viên chấm, sau đó review độc lập; không tự merge.
+
+
+## File bàn giao và cách chạy
+
+- [solution.py](solution.py): resolve config, xác minh snapshot nguồn, dựng arrays/NPZ và loaders, audit input reads, gọi tiện ích chung và lưu build_only provenance.
+- [circuit.py](circuit.py): 18 hàm compiler thực sự dùng; gom từ các module compiler của tác giả, bỏ CLI/search/matching ngẫu nhiên và nhánh không có trong plan cố định. Không dùng exec/eval hoặc nhúng mã nguồn dạng chuỗi. Các nhánh không có explicit products bị từ chối.
+- [data.json](data.json): mảng số có dtype/shape, 15 plan product/cache và lịch ANGLE_0; không phải KMB/KMX hoặc NPZ đóng gói lại dưới dạng mã hóa. Không có dependency bundle hay bản binary tác giả. Dữ liệu float text được kiểm khôi phục đúng bit, bao gồm dtype float32/float64.
+- [configs/reconstructed.json](configs/reconstructed.json): batch 5, word 8 bit, plan cố định; [reconstruction.json](reconstruction.json): hash mục tiêu, nguồn/giới hạn và mapping build. Metadata nghiệm thu cập nhật sau build không được gán ngược vào SHA nguồn đã dùng.
+- [LICENSE.txt](LICENSE.txt), [NOTICE.txt](NOTICE.txt): giữ Apache-2.0 và attribution tác giả; evidence chỉ giữ manifest, inventory và kết quả roundtrip cần cho review.
+- [Tiện ích đóng gói chung](../../common/package_submission.py) ở commit `6ef65d8` là dependency có hash trong provenance. Không đổi helper chung trong hướng này.
+
+Tạo venv Python 3.13, cài `requirements.txt` của checkout. Từ root repo:
+
+```powershell
+.venv/Scripts/python.exe src/dfthcsos/DFT-68/solution.py --config src/dfthcsos/DFT-68/configs/reconstructed.json
+```
+
+Đầu ra `artifacts/dfthcsos/DFT-68/reconstructed.zip`; từ chối ghi đè. Chạy từ cwd khác bằng đường dẫn tuyệt đối tới Python/solution/config. Dùng `git checkout 7df5dad8ca74a8610dd6597c53057f6cd7f30a4c` trong checkout riêng để tái lập chính xác mốc nguồn build đã nghiệm thu. Tham khảo setup commands trong record bên dưới; không cần Downloads, WSL hoặc kickmix.so.
+
+## Đối chiếu code và thuật toán
+
+`solution.complete` giữ Mobius completion của upstream `rebuild.complete`, bảo toàn 1220 địa chỉ thật. `circuit.apply_padding_completion` xác minh prefix hash rồi thay đúng 12 địa chỉ ngoài miền khi plan có chỉ định. `cross_tensor` tách delta thành high/low Boolean tensor; `basis`, `outer`, `coordinate_basis`, `coordinates` kiểm biểu diễn product và correction trên GF(2). `separate_helpers` xác minh tách low/high helper. `emit_k0_emit` nhận lịch sự kiện k0; `emit_plan_emit` dùng full cache hoặc gọi `high_subspace_emitter_emit` cho ANGLE_8. `synthesize_low_cache` dựng low algebra từ helper đã sống. Mọi compute AND giữ cleanup HMR cùng CZ bù pha và thứ tự nguồn; không tối ưu cổng trong lần tái dựng này.
+
+`solution.write_npz` sinh NPY từ dữ liệu số rồi ghi ZIP_STORED, timestamp 1980, create_system=3, quyền 0600 và local ZIP64. Cần metadata cố định vì `np.savez` mặc định trên Windows cho cùng NPY nhưng khác header ZIP trung tâm so với nguồn Unix. Không vá binary từ submission gốc.
+
+## Nghiệm thu build và giới hạn
+
+Config `reconstructed`, source commit `7df5dad8ca74a8610dd6597c53057f6cd7f30a4c`:
+
+- [Provenance](../../../results/dfthcsos/DFT-68/reconstructed/build_only/20261115T052652Z-build-u3fl7wvi/provenance.json), [setup clone/venv sạch](../../../results/dfthcsos/DFT-68/reconstructed/build_only/20261115T052652Z-build-u3fl7wvi/clean_build_setup.json), [stdout](../../../results/dfthcsos/DFT-68/reconstructed/build_only/20261115T052652Z-build-u3fl7wvi/build.stdout.txt).
+- [Đối chiếu độc lập](../../../results/dfthcsos/DFT-68/reconstructed/build_only/20261115T052652Z-build-u3fl7wvi/reconstruction_check.json): 16 thành phần so từng byte theo luồng đều khớp; 7 member NPY có bytes/dtype/shape/order khớp, không allclose. NPZ SHA-256 `6418ec8e10b1a8da967ee26278434f9ac950474741185f4d61363e17a03da77f`.
+- [Audit](../../../results/dfthcsos/DFT-68/reconstructed/build_only/20261115T052652Z-build-u3fl7wvi/dependency_audit.json): 22 đường dẫn đọc sau setup/snapshot, không có input ngoài checkout/runtime và file mới tạo của build. Compiler và đóng gói chạy trong một Python process; Git chỉ dùng trước audit để xác minh snapshot/provenance. Không tuyên bố audit Python theo dõi syscall nội bộ thư viện native.
+- [Build report](../../../results/dfthcsos/DFT-68/reconstructed/build_only/20261115T052652Z-build-u3fl7wvi/build.json): 15 loader, tổng 4074 Toffoli/pass theo compiler, serialization và packaging hai lần cho cùng ZIP SHA-256 `fc481755b7b97fa73ae9256e775907b82835b835d5520b3c529440d647bcab8a`.
+
+Mức đạt: COMPONENTS_EXACT và BUILT. ZIP mới chứa 16 file DFTHC ở gốc; notebook Kaggle người dùng cung cấp đóng ZIP chung 18 file với ba bài và prefix dfthcsos/. Hai container phục vụ hai giao diện khác nhau; không tuyên bố toàn ZIP gốc exact. Không chạy lại fitting, exhaustive symbolic proof hoặc official grading, không gọi đây là verifier PASS. Chưa có kết quả chấm mới của nhóm.
