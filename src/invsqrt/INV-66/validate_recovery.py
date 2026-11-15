@@ -221,6 +221,6 @@ if __name__ == '__main__':
     parser.add_argument('--output',type=Path)
     args = parser.parse_args()
     report = json.dumps(validate(args.reference_kmx),indent=2)+'\n'
-    if args.output: args.output.write_text(report,encoding='utf-8')
+    if args.output: args.output.write_text(report,encoding='utf-8',newline='\n')
     print(report)
 

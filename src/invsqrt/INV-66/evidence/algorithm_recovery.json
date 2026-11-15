@@ -3,9 +3,9 @@
   "reference_kmx_sha256": "69872bf5557a94e4a7425c9470b7a0451958e18276f2be178b5b0ee27dddb1b1",
   "reference_operations": 23877,
   "model_sha256": "c9bed3b52492d0372e6d96920216ff513e344e28b52b6764fd1120e1b198f32d",
-  "validator_sha256": "fda1f16cd6f0b26f863ea489cac9fc0a01fe08f91621c854a5eddb60cd97e678",
+  "validator_sha256": "ae641d29612efe6bee35a1a1cca562247558cfa38c822b180f47f13910081d97",
   "lookup_emitter_sha256": "6c7f6205f36d5984dbc8b1435a8bb5b11fa1958a9f6c40fd59bf5f73fffc1c72",
-  "lookup_certificate_sha256": "46109bf5e8db9b4ddd84733cd52012078db8975ff9bf116c774dd371b7b0b8db",
+  "lookup_certificate_sha256": "3765c5ee45bd600d2908e726de250944f743ad8a35865899d7a067752e0ad3b2",
   "exact_synthesized_lookup_operations": 2977,
   "exhaustive_input_count": 3133452,
   "checked_boundaries": [
@@ -29,7 +29,7 @@
   "phase_branch_mismatches": 0,
   "input_restored": true,
   "scratch_zero": true,
-  "elapsed_seconds": 13.593,
+  "elapsed_seconds": 7.362,
   "limitations": [
     "Exhaustive arithmetic/register checks use zero HMR outcomes.",
     "Random measurement checks compare exact phase modulo two half-turns; they do not exhaust all outcomes.",

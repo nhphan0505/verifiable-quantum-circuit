@@ -61,7 +61,7 @@
     },
     {
       "path": "src/invsqrt/INV-66/data/lookup64_certificates.json",
-      "sha256": "46109bf5e8db9b4ddd84733cd52012078db8975ff9bf116c774dd371b7b0b8db",
+      "sha256": "3765c5ee45bd600d2908e726de250944f743ad8a35865899d7a067752e0ad3b2",
       "acquisition": "tracked checkout; independently recovered from coefficient lookup behavior",
       "role": "six-input coefficient lookup certificates; 27 and 29 quadratic coordinates"
     }
@@ -90,7 +90,7 @@
       },
       {
         "path": "validate_recovery.py",
-        "sha256": "fda1f16cd6f0b26f863ea489cac9fc0a01fe08f91621c854a5eddb60cd97e678"
+        "sha256": "ae641d29612efe6bee35a1a1cca562247558cfa38c822b180f47f13910081d97"
       }
     ],
     "evidence": "evidence/algorithm_recovery.json",
