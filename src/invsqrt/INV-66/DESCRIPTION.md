@@ -28,7 +28,7 @@ Base repository a6ec810060d35d1fb53cc86c1cc0e8f0db631241. INV-BASELINE dùng Hor
 
 ## Kết luận và phiên bản tái lập
 
-ROUNDTRIP_EXACT và RECONSTRUCTED_EXACT đã có bằng chứng riêng. Chưa chấm local. Receipt chỉ là bằng chứng bên ngoài, không chuyển thành run của repo. Mức phục hồi cấp cổng; chưa suy ra thuật toán số học gốc.
+ROUNDTRIP_EXACT và RECONSTRUCTED_EXACT có bằng chứng riêng; smoke và full local đã PASS với cùng artifact/hash và source commit dựng. Receipt vẫn là bằng chứng bên ngoài, không chuyển thành run của repo. Mức phục hồi cấp cổng; chưa suy ra thuật toán số học gốc.
 
 ## Source cấp cổng và cách chạy
 
@@ -48,13 +48,26 @@ Source commit `50f9c29b9ce7647e5e0f96ac7ccffc34cf1860d1` đã dựng từ clone 
 
 [Inventory](evidence/circuit_inventory.json) ghi register x=q0..q21, scratch q22..q45, classical bit capacity 387, điều kiện lồng tối đa hai mức. 23877 operation gồm 38 Z_POW (4 Clifford, 1 T, 33 generic); số cổng tĩnh không phải chi phí thực thi trung bình. Bản đồ vùng trong circuit.py chỉ mô tả vị trí quan sát, không gán tên thuật toán chưa chứng minh. [Round-trip](evidence/roundtrip.json) kiểm tra serializer trước khi viết source. [Receipt invsqrt](evidence/external_receipt_invsqrt.json) chỉ giữ phần liên quan từ receipt gốc có hash, không đại diện run local.
 
-Hypothesis tái lập được ủng hộ ở mức source Python cấp cổng: KMB mới 198590 bytes, cùng SHA-256 mục tiêu và streamed bytes bằng input. Entry point không đọc file circuit gốc hoặc KMX. Không khẳng định phục hồi root/normalization/divider gốc hay cải thiện baseline. INV-51 chỉ là nguồn so sánh khác target, không phải dependency runtime.
+Hypothesis tái lập được ủng hộ ở mức source Python cấp cổng: KMB mới 198590 bytes, cùng SHA-256 mục tiêu và streamed bytes bằng input. Entry point không đọc file circuit gốc hoặc KMX. Không khẳng định phục hồi root/normalization/divider gốc; so sánh chi phí baseline dựa trên run full thật bên dưới, không phải tuyên bố tối ưu mới của bước tái dựng. INV-51 chỉ là nguồn so sánh khác target, không phải dependency runtime.
 
 | Mốc | Config | Commit source thực sự dùng | Bằng chứng |
 | --- | --- | --- | --- |
 | Build sạch exact | [reconstructed](configs/reconstructed.json) | `50f9c29b9ce7647e5e0f96ac7ccffc34cf1860d1` | [provenance](../../../results/invsqrt/INV-66/reconstructed/build_only/20261115T033727Z-exact-fe8b97b7/provenance.json), [so bytes/hash](../../../results/invsqrt/INV-66/reconstructed/build_only/20261115T033727Z-exact-fe8b97b7/reconstruction_check.json), [checkout/setup](../../../results/invsqrt/INV-66/reconstructed/build_only/20261115T033727Z-exact-fe8b97b7/clean_checkout.json), [audit](../../../results/invsqrt/INV-66/reconstructed/build_only/20261115T033727Z-exact-fe8b97b7/dependency_audit.json) |
-| Smoke/full | Chưa chấm | Không có source/run chấm mới | Receipt bên ngoài không thay thế run repository |
+| Smoke PASS | [reconstructed](configs/reconstructed.json) | `50f9c29b9ce7647e5e0f96ac7ccffc34cf1860d1` | [run](../../../results/invsqrt/INV-66/reconstructed/smoke/20261115T042039Z-local-smoke-4371a2/verifier.json), [provenance](../../../results/invsqrt/INV-66/reconstructed/smoke/20261115T042039Z-local-smoke-4371a2/provenance.json) |
+| Full PASS | [reconstructed](configs/reconstructed.json) | `50f9c29b9ce7647e5e0f96ac7ccffc34cf1860d1` | [run](../../../results/invsqrt/INV-66/reconstructed/full/20261115T042258Z-local-full-7feec4/verifier.json), [provenance](../../../results/invsqrt/INV-66/reconstructed/full/20261115T042258Z-local-full-7feec4/provenance.json), [analysis](../../../results/invsqrt/INV-66/reconstructed/full/20261115T042258Z-local-full-7feec4/analysis.json) |
 
 Lần build đầu của source 92a1069 sinh target bytes nhưng không hoàn tất provenance vì platform.platform() gọi hostname bị audit chặn. Source 50f9c29 thay metadata platform bằng sys.platform rồi build sạch lại; không đổi circuit.py hoặc góc. Dữ liệu lần lỗi ở scratch riêng, không được gọi là build nghiệm thu. CPython audit không bao phủ mọi native OS read; generator chỉ có builder calls, serializer dùng BytesIO, file write qua Python. Source cache probe do importer thử mở không tồn tại sau build, không có cache cũ được chép vào checkout.
 
-Attribution được giữ theo notebook và NOTICE; giấy phép của mọi component trong lineage chưa được xác minh độc lập. Cần reviewer kiểm tra giới hạn này trước công bố/merge. Chưa chạy verifier hoặc smoke/full, chưa có bằng chứng thử seed bổ sung. Bước tiếp theo là thành viên chấm notebook local ở bước 8 rồi review độc lập; không tự merge.
+Attribution được giữ theo notebook và NOTICE; giấy phép của mọi component trong lineage chưa được xác minh độc lập. Cần reviewer kiểm tra giới hạn này trước công bố/merge. Smoke và full đã được thành viên chạy; chưa có lượt salt/seed bổ sung. Bước tiếp theo là review độc lập theo bước 9; không tự merge.
+
+## Phân tích chấm local (bước 8)
+
+Run smoke kiểm tra 4096 input với một shot/input; run full kiểm tra toàn bộ 3133452 input với 64 shot/input, tổng 200540928 shots. Cả hai PASS, exit code 0, stderr rỗng; JSON trong stdout khớp verifier.json. Hash artifact, hash verifier và provenance khớp record build sạch; source thực tế vẫn là 50f9c29, không suy ra từ HEAD của commit phân tích. Không sửa raw JSON/log hoặc metadata của run.
+
+Full xác nhận 46 qubit, mean Toffoli 1479.7500405453395, Toffoli-equivalent 1711.2941118988529, một T gate và 33 generic rotations. Worst error/tolerance 0.9986660009092673 tại x=159, còn khoảng 0.1334% dung sai trước khi chạm ngưỡng. Đây là biên hẹp; không có cơ sở giảm precision hoặc thay góc trong phạm vi tái dựng exact. Smoke chỉ dùng kiểm tra nhanh, không có điểm dev hoặc dòng điểm riêng.
+
+Chi phí full thấp hơn baseline INV-BASELINE khoảng 26.3819 lần (baseline/candidate), theo hai run full PASS được dẫn trong SCORES. Đây là lợi thế của mạch public đã tái dựng, không phải cải thiện mới do decompilation. Hai lượt dùng cùng Python 3.13.18, Kickmix 1.0.0, NumPy 2.5.4, SciPy 1.18.1 và engine 0.6.0; baseline dùng glibc2.35/1 thread, candidate glibc2.39/4 threads. So sánh được phép theo chính sách repo, giữ nguyên metadata bối cảnh. Build xảy ra trên Windows Python 3.13.7; chấm xảy ra trên WSL Linux Python 3.13.18. Hai môi trường được ghi riêng, không thay môi trường build trong provenance bằng môi trường chấm.
+
+Giá trị cost/error full khớp phần invsqrt trong receipt bên ngoài, nhưng kết luận local dựa trên log mới của thành viên. Cùng artifact/hash và không override salt/seed có nghĩa các lượt dùng policy seeded mặc định; không gọi đây là kiểm chứng bằng seed độc lập so với receipt. Full không liệt kê mọi transcript đo có thể xảy ra.
+
+Hypothesis tái lập exact được ủng hộ bởi build sạch và đối chiếu bytes; tính đúng theo bộ kiểm tra chính thức được xác nhận bằng full PASS trong điều kiện ghi lại. Mục tiêu hướng đã đạt ở mức phục hồi cấp cổng. Đề xuất dừng thay đổi source/config, chuyển sang review độc lập bước 9. Kiểm tra salt bổ sung chỉ là việc có thể giao riêng; không tự chạy hoặc mở hướng tối ưu mới.

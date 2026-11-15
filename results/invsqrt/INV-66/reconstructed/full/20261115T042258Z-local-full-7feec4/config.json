@@ -1,0 +1,18 @@
+{
+  "track": "invsqrt",
+  "experiment_id": "INV-66",
+  "config_name": "reconstructed",
+  "mode": "full",
+  "command": [
+    "/mnt/d/verifiable-quantum-circuit/.venv-engine/bin/python",
+    "-m",
+    "kickmix_engine",
+    "verify",
+    "invsqrt",
+    "/mnt/d/verifiable-quantum-circuit/artifacts/invsqrt/INV-66/reconstructed.kmb",
+    "--verifier",
+    "/mnt/d/verifiable-quantum-circuit/verifiers/invsqrt/verify_submission_invsqrt.py",
+    "--threads",
+    "4"
+  ]
+}
