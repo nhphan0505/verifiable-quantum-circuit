@@ -98,15 +98,31 @@ config thử nghiệm bổ sung. Các hồ sơ kiểm chứng lịch sử upstre
 thành PASS hay điểm của hướng này.
 
 Đây là phục hồi mạch, không có hypothesis tối ưu thuật toán mới hoặc thay đổi
-miền đúng/sai số. Chưa chạy smoke/full. Thành viên chấm notebook tại worktree này
-với TRACK=dqi, EXPERIMENT_ID=DQI-72, CONFIG_NAME=reconstructed, OWNER=nhphan0505.
-Exact hash không thay thế kiểm tra value/phase hoặc full verifier.
+miền đúng/sai số. Hypothesis tái lập được ủng hộ bằng build exact và lượt full
+102.400 shots không ghi nhận lỗi value hoặc phase. Full dùng kickmix-engine 0.6.0,
+Python 3.13.18 trên WSL2, kernel avx2, mặc định m=4095, n=70, degree=12, r=2016,
+log2_delta=-128; không đặt seed/salt riêng. Seed được engine suy ra theo mặc định
+từ artifact; metadata không lưu giá trị seed cụ thể nên không suy đoán.
+
+Hash artifact trong full, metadata và build provenance khớp. Verifier JSON khớp
+nguyên nội dung JSON stdout. Số qubit giữ 889; trung bình Toffoli-like/shot
+383.156,2908886719, max 384.003. Không lỗi trên lượt này không chứng minh đúng
+tuyệt đối trên toàn miền; không chuyển các tuyên bố điểm lịch sử từ archive sang
+kết quả mới. Chưa có smoke hoặc full bổ sung với salt độc lập.
+
+Run/config full hiện tại là mốc duy nhất của hướng, cùng commit nguồn
+`9d899c2fe708135ee86f43473084f8288b5865ab` đã dựng exact. Xem [full verifier](../../../results/dqi/DQI-72/reconstructed/full/20261115T094523Z-local-full-502791/verifier.json)
+và [provenance full](../../../results/dqi/DQI-72/reconstructed/full/20261115T094523Z-local-full-502791/provenance.json). Score và tỷ số baseline được
+ghi trong SCORES; so sánh dùng full baseline có trước trên engine 0.6.0,
+giữ nguyên metadata khác môi trường/mẫu. Mục tiêu phục hồi exact và chấm full
+đã đạt; dừng vòng phục hồi và chuyển review độc lập. Không chỉnh mạch để tối ưu
+trong phạm vi hướng này.
 
 | Mốc | Config | Commit nguồn | Run / provenance |
 | --- | --- | --- | --- |
 | Build exact | [reconstructed](configs/reconstructed.json) | `9d899c2fe708135ee86f43473084f8288b5865ab` | [provenance](../../../results/dqi/DQI-72/reconstructed/build_only/20261115T083137Z-clean-build/provenance.json) |
 | Smoke | reconstructed | Chưa chấm | Chưa có |
-| Full | reconstructed | Chưa chấm | Chưa có |
+| Full | [reconstructed](configs/reconstructed.json) | `9d899c2fe708135ee86f43473084f8288b5865ab` | [full provenance](../../../results/dqi/DQI-72/reconstructed/full/20261115T094523Z-local-full-502791/provenance.json) |
 
 Mã triển khai: [solution.py](solution.py). Cấu hình: [configs](configs/).
 Điểm và các run: [SCORES.md](../SCORES.md).
