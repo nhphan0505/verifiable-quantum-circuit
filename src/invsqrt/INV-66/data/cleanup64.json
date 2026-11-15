@@ -1,0 +1,390 @@
+{
+  "schema_version": 1,
+  "kind": "COEFFICIENT_CODE_DECODER_AND_ERASURE_SCHEDULE",
+  "address_bits": 6,
+  "decoder": {
+    "fixed": [
+      17
+    ],
+    "wire_count": 24,
+    "AND_count": 8,
+    "steps": [
+      {
+        "kind": "quadratic_coordinate",
+        "target": 18,
+        "new": true,
+        "variables": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        "constant": 0,
+        "linear": 437454,
+        "left": 67406,
+        "right": 494464,
+        "pivots": [
+          0,
+          6
+        ]
+      },
+      {
+        "kind": "quadratic_coordinate",
+        "target": 19,
+        "new": true,
+        "variables": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        "constant": 1,
+        "linear": 530432,
+        "left": 747346,
+        "right": 926100,
+        "pivots": [
+          0,
+          1
+        ]
+      },
+      {
+        "kind": "quadratic_coordinate",
+        "target": 20,
+        "new": true,
+        "variables": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "constant": 0,
+        "linear": 1522834,
+        "left": 243356,
+        "right": 179008,
+        "pivots": [
+          1,
+          5
+        ]
+      },
+      {
+        "kind": "quadratic_coordinate",
+        "target": 20,
+        "new": false,
+        "variables": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "constant": 0,
+        "linear": 0,
+        "left": 502424,
+        "right": 1729312,
+        "pivots": [
+          2,
+          4
+        ]
+      },
+      {
+        "kind": "quadratic_coordinate",
+        "target": 21,
+        "new": true,
+        "variables": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ],
+        "constant": 1,
+        "linear": 898226,
+        "left": 51218,
+        "right": 3273884,
+        "pivots": [
+          0,
+          1
+        ]
+      },
+      {
+        "kind": "quadratic_coordinate",
+        "target": 21,
+        "new": false,
+        "variables": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ],
+        "constant": 0,
+        "linear": 0,
+        "left": 1684688,
+        "right": 616960,
+        "pivots": [
+          3,
+          8
+        ]
+      },
+      {
+        "kind": "quadratic_coordinate",
+        "target": 22,
+        "new": true,
+        "variables": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21
+        ],
+        "constant": 1,
+        "linear": 7039696,
+        "left": 3845890,
+        "right": 8231004,
+        "pivots": [
+          0,
+          1
+        ]
+      },
+      {
+        "kind": "quadratic_coordinate",
+        "target": 23,
+        "new": true,
+        "variables": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22
+        ],
+        "constant": 0,
+        "linear": 15577050,
+        "left": 8427710,
+        "right": 9996224,
+        "pivots": [
+          0,
+          5
+        ]
+      }
+    ],
+    "outputs": [
+      20,
+      21,
+      23,
+      22,
+      19,
+      18
+    ]
+  },
+  "retirement_order": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    7,
+    8,
+    10,
+    11,
+    12,
+    15,
+    9,
+    13,
+    6,
+    16,
+    14
+  ],
+  "bank_factors": [
+    [
+      1,
+      2
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      9,
+      2
+    ],
+    [
+      3,
+      5
+    ],
+    [
+      8,
+      5
+    ]
+  ],
+  "banks_before_retirement": {
+    "12": [
+      0
+    ],
+    "13": [
+      1,
+      2
+    ],
+    "14": [
+      3,
+      4
+    ],
+    "15": [
+      5,
+      6
+    ],
+    "16": [
+      7
+    ]
+  },
+  "bank_erasure_order": [
+    7,
+    6,
+    5,
+    4,
+    3,
+    2,
+    1,
+    0
+  ],
+  "proof": "Every HMR correction is synthesized from its exact 64-row truth vector in the current quadratic codebook. No measured bit IDs or phase opcode list are stored."
+}

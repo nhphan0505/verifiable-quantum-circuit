@@ -1,8 +1,8 @@
-"""Build the fixed INV-66 invsqrt circuit from readable gate-level Python.
+"""Build the fixed INV-66 circuit from the recovered arithmetic generator.
 
-The source preserves explicit gate order, qubit/bit allocation, measurement
-conditions and exact decimal angles; it does not recover the original arithmetic
-algorithm. The circuit phases by the verifier's 1/sqrt(x) contract and restores x
+The source constructs the 64-row coefficient code, consumed-root arithmetic,
+balanced division/phase and inverse cleanup with typed owner/debt helpers.
+The private upstream source/search procedure is not claimed to be recovered. The circuit phases by the verifier's 1/sqrt(x) contract and restores x
 and scratch according to external evidence, not a new verifier run. The original precursor is generated first; shared PP-005 applies the HMR/CZ
 correction, preserving the fixed output bytes. There are no numerical tuning parameters.
 
@@ -54,8 +54,14 @@ def main():
         raise RuntimeError('Build requires a clean committed checkout')
     commit = git('rev-parse', 'HEAD').decode().strip()
     pp_path = root/'src/invsqrt/postprocessing/PP-005/solution.py'
-    inputs = [here/'solution.py', here/'circuit.py', here/'lookup_certificate.py',
-              here/'data/lookup64_certificates.json', config, root/'requirements.txt', pp_path]
+    shared_source = root/'src/invsqrt/INV-51/circuit.py'
+    finishing_paths = [root/f'src/invsqrt/postprocessing/PP-{index:03d}/solution.py' for index in range(1,5)]
+    inputs = [here/name for name in (
+        'solution.py','circuit.py','arithmetic_helpers.py','cleanup.py','finishing.py',
+        'lookup_certificate.py','recovery_model.py','data/lookup64_certificates.json',
+        'data/cleanup64.json','data/arithmetic_helpers.json','data/phase_parameters.json')]
+    inputs += [config, root/'requirements.txt', shared_source, *finishing_paths, pp_path]
+
     input_records = []
     for path in inputs:
         relative = path.relative_to(root).as_posix()
@@ -76,11 +82,17 @@ def main():
     run_id = datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ')+'-exact-'+uuid.uuid4().hex[:8]
     run_dir = root/f'results/{track}/{experiment_id}/{config.stem}/build_only/{run_id}'
     run_dir.mkdir(parents=True, exist_ok=False)
+    work_dir = root/f'artifacts/{track}/{experiment_id}/{run_id}-finishing'
+    if work_dir.exists(): raise FileExistsError(work_dir)
+    assert work_dir.resolve().is_relative_to((root/'artifacts').resolve())
     reads, writes, imports = set(), set(), set()
     runtime_roots = {Path(sys.prefix).resolve(), Path(sys.base_prefix).resolve()}
     source_root = here.resolve()
     def permitted_read(path):
-        return path.is_relative_to(source_root) or path.is_relative_to(pp_path.parent.resolve()) or any(path.is_relative_to(p) for p in runtime_roots) or path == output or path.is_relative_to(run_dir)
+        return (path.is_relative_to(source_root) or path.is_relative_to(shared_source.parent.resolve())
+                or any(path.is_relative_to(p.parent.resolve()) for p in [pp_path, *finishing_paths])
+                or any(path.is_relative_to(p) for p in runtime_roots) or path == output
+                or path.is_relative_to(run_dir) or path.is_relative_to(work_dir))
     def audit(event, arguments):
         if event.startswith('socket.') or event in ('subprocess.Popen', 'os.system'):
             raise RuntimeError('No network or subprocesses are permitted during circuit construction')
@@ -96,7 +108,7 @@ def main():
         flags = arguments[2] or 0
         writing = (isinstance(mode, str) and any(c in mode for c in 'wax+')) or bool(flags & (os.O_WRONLY | os.O_RDWR | os.O_CREAT | os.O_TRUNC))
         if writing:
-            if path != output and not path.is_relative_to(run_dir):
+            if path != output and not path.is_relative_to(run_dir) and not path.is_relative_to(work_dir):
                 raise RuntimeError('Write outside fresh artifact/evidence output: '+str(path))
             writes.add(str(path))
         else:
@@ -106,7 +118,7 @@ def main():
     sys.dont_write_bytecode = True
     sys.addaudithook(audit)
     from circuit import build_circuit, POSTPROCESSING_REPORT
-    circuit = build_circuit()
+    circuit = build_circuit(work_dir)
     buffer = io.BytesIO()
     circuit.to_file(buffer, format='kmb')
     data = buffer.getvalue()
@@ -121,7 +133,7 @@ def main():
         'source_inputs_checked_against_commit': input_records,
         'read_paths': sorted(reads), 'import_paths': sorted(imports),
         'write_paths': sorted(writes), 'network_or_subprocesses_during_construction': False,
-        'limitations': ['interpreter startup and Git snapshot preflight occur before audit installation', 'native package internal OS reads are outside CPython hooks; circuit.py builds the precursor with builder calls and the declared lookup compiler/certificates, then loads PP-005; PP serializes that new in-memory circuit'],
+        'limitations': ['interpreter startup and Git snapshot preflight occur before audit installation', 'native package internal OS reads are outside CPython hooks; the recovered arithmetic uses the declared shared source and mathematical data; PP-001..PP-004 read only intermediates produced in this fresh work directory, then PP-005 rewrites that new circuit'],
     }
     write_json('dependency_audit.json', dependency_audit)
     relative_source = (here/'solution.py').relative_to(root).as_posix()
@@ -135,8 +147,9 @@ def main():
         'artifact_path': output.relative_to(root).as_posix(), 'artifact_sha256': digest(data),
         'build_command': [sys.executable, *sys.argv], 'build_run': None,
         'environment': {'python': sys.version, 'packages': packages, 'platform': sys.platform, 'dependencies': input_records},
-        'reconstruction_level': 'GATE_LEVEL_PYTHON', 'dependency_audit': 'dependency_audit.json',
+        'reconstruction_level': 'ARITHMETIC_GENERATOR', 'dependency_audit': 'dependency_audit.json',
         'postprocessing': dict(POSTPROCESSING_REPORT),
+        'generated_work_directory': work_dir.relative_to(root).as_posix(),
     }
     write_json('provenance.json', provenance)
     print(json.dumps({'status': 'BUILT', 'artifact': str(output), 'sha256': digest(data), 'bytes': len(data), 'evidence': str(run_dir)}, indent=2))

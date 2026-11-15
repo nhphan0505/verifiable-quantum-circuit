@@ -1,5 +1,10 @@
 # INV-66: phục hồi thuật toán sau review
 
+> Đang nghiệm thu phiên bản generator số học hoàn chỉnh: divider m37, pha,
+> inverse product/coefficient và cleanup HMR đã được viết lại bằng helper số học
+> và certificate Boolean. Đang chờ build exact từ commit mới; các kết luận
+> GATE_LEVEL_PYTHON bên dưới mô tả phiên bản trước. Chưa coi review đã được xử lý.
+
 ## Trạng thái nghiệm thu
 
 Review [5909379196](https://github.com/nhphan0505/verifiable-quantum-circuit/pull/67#pullrequestreview-5909379196) của nhphan0505 trên commit 6c94828436f3deba8b92069e064afafeebc884fb yêu cầu phục hồi thuật toán số học gốc. Bản hiện tại chỉ đạt GATE_LEVEL_PYTHON. Build exact, full PASS và tests PP không đáp ứng thêm điều kiện mới này. Chưa xử lý xong yêu cầu review; không đề nghị approve/merge hoặc đổi nhãn recovery level.

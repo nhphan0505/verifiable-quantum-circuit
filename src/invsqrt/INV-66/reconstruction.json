@@ -27,19 +27,33 @@
     "numpy": "2.5.4",
     "scipy": "1.18.1"
   },
-  "reconstruction_level": "GATE_LEVEL_PYTHON",
+  "reconstruction_level": "ARITHMETIC_GENERATOR",
   "limitations": [
-    "original high-level arithmetic generator not recovered",
-    "two coefficient lookup builders recovered from mathematical certificates; remaining circuit regions retain gate-level reconstruction",
-    "external receipt is not a repository verifier run",
-    "upstream component license chain not independently established; see NOTICE"
+    "The arithmetic generator has been independently recovered; exact acceptance of this source revision is pending a new clean build.",
+    "Original private generator source and parameter-search history are not claimed; 64-row coefficients, Boolean certificates and 33 dyadic phase parameters are tracked mathematical inputs.",
+    "No new verifier run; external receipt and historical grading provenance remain separate.",
+    "Independent review on the new source is still required."
   ],
   "components": [
     {
       "path": "circuit.py",
-      "role": "gate-level precursor with independently recovered coefficient lookup synthesis and declared PP-005 adapter",
-      "sha256": "a56fbedcccbeab32c356777d23b553e4c4a5fe08b780648381983ad19ab0cdc7",
-      "x_sweep_loops": 136
+      "sha256": "a3db35437b114b1389f9a5ca42e80c2fc230502b65978e852cef4516d6a8b309",
+      "role": "complete arithmetic and inverse construction with owner/carry-debt tokens"
+    },
+    {
+      "path": "cleanup.py",
+      "sha256": "a6d1adaf389dca05d071cddbbaf0f1d999f0009590ecf58d3aea8890264a32b7",
+      "role": "six-bit decoder and symbolic HMR phase repayment in quadratic codebooks"
+    },
+    {
+      "path": "arithmetic_helpers.py",
+      "sha256": "f8c39e6856bc8752e712f79a5f0504e1db5a73e866681e020bba26e81a2acbbe",
+      "role": "selected shared INV-51 arithmetic library adapter; does not run its generator"
+    },
+    {
+      "path": "finishing.py",
+      "sha256": "5af3856023f0119f6038eaf2afd9db32fea0b5baae0a2502902090e70d637d30",
+      "role": "adapter for separate PP implementations with interleaved coordinate remapping"
     }
   ],
   "dependencies": [
@@ -49,21 +63,79 @@
       "acquisition": "tracked checkout and pinned package installation"
     },
     {
+      "path": "src/invsqrt/INV-51/circuit.py",
+      "sha256": "b867593d0306c6ca42ee0c5666f79ee5ca3d00120c77f27261435697518f8c17",
+      "acquisition": "tracked checkout; declared source or mathematical helper data"
+    },
+    {
+      "path": "src/invsqrt/postprocessing/PP-001/solution.py",
+      "sha256": "dea983724a71fbe8f5b0335e566b32ad1145e085ea0e9b1d5e23ea16fc4c4af5",
+      "acquisition": "tracked checkout; declared source or mathematical helper data"
+    },
+    {
+      "path": "src/invsqrt/postprocessing/PP-002/solution.py",
+      "sha256": "0728034b9ef1598000c635543a01c0d173049fb734c746e818760ad9d32c33e0",
+      "acquisition": "tracked checkout; declared source or mathematical helper data"
+    },
+    {
+      "path": "src/invsqrt/postprocessing/PP-003/solution.py",
+      "sha256": "c1bc58d1e1c432788ba3affb69fab2d62d3d9b7c6215105016d7782983f0415a",
+      "acquisition": "tracked checkout; declared source or mathematical helper data"
+    },
+    {
+      "path": "src/invsqrt/postprocessing/PP-004/solution.py",
+      "sha256": "ba5ae4093dac8cc80b6d3aa06c18ca38134635d542195ea2fb55808b6625751b",
+      "acquisition": "tracked checkout; declared source or mathematical helper data"
+    },
+    {
       "path": "src/invsqrt/postprocessing/PP-005/solution.py",
       "sha256": "28de23f261438791a871f0210e0ebe00bf2951eb635223dbc63104a61b4567ff",
-      "acquisition": "tracked checkout, separate PP-005 branch dependency"
+      "acquisition": "tracked checkout; declared source or mathematical helper data"
     },
     {
       "path": "src/invsqrt/INV-66/lookup_certificate.py",
       "sha256": "6c7f6205f36d5984dbc8b1435a8bb5b11fa1958a9f6c40fd59bf5f73fffc1c72",
-      "acquisition": "tracked checkout; independently recovered from coefficient lookup behavior",
-      "role": "GF(2) quadratic/affine coefficient lookup compiler"
+      "acquisition": "tracked checkout; declared source or mathematical helper data"
+    },
+    {
+      "path": "src/invsqrt/INV-66/recovery_model.py",
+      "sha256": "5e228a9c919727084222ddc183b0a41dda6be9878d38b167e0f10ade594b4318",
+      "acquisition": "tracked checkout; declared source or mathematical helper data"
+    },
+    {
+      "path": "src/invsqrt/INV-66/arithmetic_helpers.py",
+      "sha256": "f8c39e6856bc8752e712f79a5f0504e1db5a73e866681e020bba26e81a2acbbe",
+      "acquisition": "tracked checkout; declared source or mathematical helper data"
+    },
+    {
+      "path": "src/invsqrt/INV-66/cleanup.py",
+      "sha256": "a6d1adaf389dca05d071cddbbaf0f1d999f0009590ecf58d3aea8890264a32b7",
+      "acquisition": "tracked checkout; declared source or mathematical helper data"
+    },
+    {
+      "path": "src/invsqrt/INV-66/finishing.py",
+      "sha256": "5af3856023f0119f6038eaf2afd9db32fea0b5baae0a2502902090e70d637d30",
+      "acquisition": "tracked checkout; declared source or mathematical helper data"
     },
     {
       "path": "src/invsqrt/INV-66/data/lookup64_certificates.json",
       "sha256": "3765c5ee45bd600d2908e726de250944f743ad8a35865899d7a067752e0ad3b2",
-      "acquisition": "tracked checkout; independently recovered from coefficient lookup behavior",
-      "role": "six-input coefficient lookup certificates; 27 and 29 quadratic coordinates"
+      "acquisition": "tracked checkout; declared source or mathematical helper data"
+    },
+    {
+      "path": "src/invsqrt/INV-66/data/cleanup64.json",
+      "sha256": "eb9c19cef2cb11a2954ef66387a0ed5f2564e0a352e3fcbbb62f1c2830e559aa",
+      "acquisition": "tracked checkout; declared source or mathematical helper data"
+    },
+    {
+      "path": "src/invsqrt/INV-66/data/arithmetic_helpers.json",
+      "sha256": "55ef1cf214a99a45f52c9d58f269925d78d6dcdcc467882b6c21a1a51d425b3b",
+      "acquisition": "tracked checkout; declared source or mathematical helper data"
+    },
+    {
+      "path": "src/invsqrt/INV-66/data/phase_parameters.json",
+      "sha256": "1e3ea9102ae143b666aeec5234902eec624fa36773efd2a43e5ab41e605e4b69",
+      "acquisition": "tracked checkout; declared source or mathematical helper data"
     }
   ],
   "references": [
@@ -81,24 +153,45 @@
     "input_hash_prefix_from_reference": "dcde7078"
   },
   "algorithm_recovery_analysis": {
-    "status": "PARTIAL_CLASSICAL_MODEL_AND_LOOKUP_BUILDERS_RECOVERED",
-    "runtime_build_dependency": false,
+    "status": "ARITHMETIC_MODEL_AND_CONSTRUCTION_READY_FOR_CLEAN_EXACT_BUILD",
+    "runtime_build_dependency": true,
     "files": [
       {
         "path": "recovery_model.py",
-        "sha256": "c9bed3b52492d0372e6d96920216ff513e344e28b52b6764fd1120e1b198f32d"
+        "sha256": "5e228a9c919727084222ddc183b0a41dda6be9878d38b167e0f10ade594b4318"
       },
       {
         "path": "validate_recovery.py",
-        "sha256": "ae641d29612efe6bee35a1a1cca562247558cfa38c822b180f47f13910081d97"
+        "sha256": "68bfad12fde9e48c895de288a982464dcf79616582c4107ea8c5250eb0b203b8"
       }
     ],
     "evidence": "evidence/algorithm_recovery.json",
     "divider_correspondence": "evidence/divider_correspondence.json",
     "remaining": [
-      "quantum debt proof and inverse arithmetic lifecycle",
-      "balanced-divider quotient and phase model",
-      "complete high-level builder and clean exact acceptance"
+      "clean exact acceptance of the new source revision",
+      "independent review"
     ]
-  }
+  },
+  "finishing_pipeline": [
+    {
+      "method": "PP-001",
+      "path": "src/invsqrt/postprocessing/PP-001/solution.py",
+      "sha256": "dea983724a71fbe8f5b0335e566b32ad1145e085ea0e9b1d5e23ea16fc4c4af5"
+    },
+    {
+      "method": "PP-002",
+      "path": "src/invsqrt/postprocessing/PP-002/solution.py",
+      "sha256": "0728034b9ef1598000c635543a01c0d173049fb734c746e818760ad9d32c33e0"
+    },
+    {
+      "method": "PP-003",
+      "path": "src/invsqrt/postprocessing/PP-003/solution.py",
+      "sha256": "c1bc58d1e1c432788ba3affb69fab2d62d3d9b7c6215105016d7782983f0415a"
+    },
+    {
+      "method": "PP-004",
+      "path": "src/invsqrt/postprocessing/PP-004/solution.py",
+      "sha256": "ba5ae4093dac8cc80b6d3aa06c18ca38134635d542195ea2fb55808b6625751b"
+    }
+  ]
 }

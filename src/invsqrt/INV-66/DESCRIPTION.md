@@ -1,5 +1,10 @@
 # [INV-66] Tái dựng mạch invsqrt e46d90c3 bằng Python cấp cổng từ KMX, giữ nguyên pha và sửa HMR/CZ
 
+> Đang nghiệm thu phiên bản generator số học hoàn chỉnh: divider m37, pha,
+> inverse product/coefficient và cleanup HMR đã được viết lại bằng helper số học
+> và certificate Boolean. Đang chờ build exact từ commit mới; các kết luận
+> GATE_LEVEL_PYTHON bên dưới mô tả phiên bản trước. Chưa coi review đã được xử lý.
+
 ## Điều kiện nghiệm thu sau review
 
 Review của nhphan0505 trên 6c94828 yêu cầu phục hồi thuật toán số học gốc. Bản hiện tại chỉ đạt GATE_LEVEL_PYTHON, chưa đáp ứng yêu cầu đó dù build exact và full PASS. Xem [kết quả truy nguồn và kế hoạch phục hồi](ALGORITHM_RECOVERY.md). Chưa xử lý xong review, chưa đủ điều kiện merge và không đổi nhãn mức phục hồi khi chưa có source/model thực tế.
