@@ -2,11 +2,17 @@
 
 Derived from the submitted instruction graph, not recovered upstream arithmetic
 source. See NOTICE.txt and reconstruction.json for attribution and limitations.
-Every gate is an ordinary CircuitBuilder call. Consecutive X sweeps use loops;
+The precursor uses ordinary CircuitBuilder calls; PP-005 is loaded separately.
+Consecutive X sweeps use loops;
 there is no KMB/KMX, encoded instruction table, source string, loader, or runtime
 input artifact. Decimal angle literals are passed as exact strings to Kickmix.
 Names below mark observed regions, not proven high-level arithmetic routines.
 """
+from pathlib import Path
+import importlib.util
+import hashlib
+import io
+
 import kickmix as km
 
 q = km.q
@@ -3309,10 +3315,9 @@ def pre_rewrite(cb):
     cb.cx(q(18), q(21))
     cb.cx(q(18), q(16))
 
-def dead_write_correction(cb):
-    """Observed operation interval [3292, 3294); preserves measurement order."""
-    cb.hmr(q(21), b(61))
-    cb.ccz(q(16), q(20), b(61))
+def dead_write_candidate(cb):
+    """Unprocessed CCX; its HMR remains at the original later position."""
+    cb.ccx(q(16), q(20), q(21))
 
 def pre_phase(cb):
     """Observed operation interval [3294, 7681); preserves measurement order."""
@@ -3424,6 +3429,7 @@ def pre_phase(cb):
     cb.cx(q(12), q(13))
     cb.cx(q(12), q(11))
     cb.cx(q(12), q(10))
+    cb.hmr(q(21), b(61))
     cb.x(q(9))
     cb.cx(q(0), q(45))
     cb.cx(q(0), q(42))
@@ -22945,15 +22951,37 @@ def return_and_layout(cb):
     cb.swap(q(40), q(19))
     cb.swap(q(42), q(20))
 
-def build_circuit():
+def build_base_circuit():
     """Generate the fixed circuit without filesystem or network inputs."""
     cb = km.CircuitBuilder()
     cb.create_quantum_register(22, "x")
     prefix(cb)
     early_phase(cb)
     pre_rewrite(cb)
-    dead_write_correction(cb)
+    dead_write_candidate(cb)
     pre_phase(cb)
     phase_window(cb)
     return_and_layout(cb)
     return cb.finish_circuit()
+
+POSTPROCESSING_REPORT = {}
+
+
+def build_circuit():
+    """Build the precursor, then run only the shared PP-005 local rewrite."""
+    precursor = build_base_circuit()
+    data = io.BytesIO()
+    precursor.to_file(data, format='kmb')
+    before_hash = hashlib.sha256(data.getvalue()).hexdigest()
+    if not before_hash.startswith('dcde7078'):
+        raise RuntimeError('Generated precursor differs from notebook lineage: ' + before_hash)
+    path = Path(__file__).resolve().parents[1]/'postprocessing/PP-005/solution.py'
+    spec = importlib.util.spec_from_file_location('inv66_pp005', path)
+    pp = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(pp)
+    result, count = pp.rewrite(precursor, operation_index=3292)
+    if count != 1:
+        raise RuntimeError('Expected exactly the documented dead-write rewrite')
+    POSTPROCESSING_REPORT.update(method='PP-005', operation_index=3292,
+                                 rewrites=count, precursor_sha256=before_hash)
+    return result

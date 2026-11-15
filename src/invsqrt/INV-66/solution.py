@@ -3,8 +3,8 @@
 The source preserves explicit gate order, qubit/bit allocation, measurement
 conditions and exact decimal angles; it does not recover the original arithmetic
 algorithm. The circuit phases by the verifier's 1/sqrt(x) contract and restores x
-and scratch according to external evidence, not a new verifier run. HMR/Z/CZ
-corrections are retained exactly. There are no numerical tuning parameters.
+and scratch according to external evidence, not a new verifier run. The original precursor is generated first; shared PP-005 applies the HMR/CZ
+correction, preserving the fixed output bytes. There are no numerical tuning parameters.
 
 Run: python src/invsqrt/INV-66/solution.py --config
 src/invsqrt/INV-66/configs/reconstructed.json
@@ -53,7 +53,8 @@ def main():
     if git('status', '--porcelain').strip():
         raise RuntimeError('Build requires a clean committed checkout')
     commit = git('rev-parse', 'HEAD').decode().strip()
-    inputs = [here/'solution.py', here/'circuit.py', config, root/'requirements.txt']
+    pp_path = root/'src/invsqrt/postprocessing/PP-005/solution.py'
+    inputs = [here/'solution.py', here/'circuit.py', config, root/'requirements.txt', pp_path]
     input_records = []
     for path in inputs:
         relative = path.relative_to(root).as_posix()
@@ -78,7 +79,7 @@ def main():
     runtime_roots = {Path(sys.prefix).resolve(), Path(sys.base_prefix).resolve()}
     source_root = here.resolve()
     def permitted_read(path):
-        return path.is_relative_to(source_root) or any(path.is_relative_to(p) for p in runtime_roots) or path == output or path.is_relative_to(run_dir)
+        return path.is_relative_to(source_root) or path.is_relative_to(pp_path.parent.resolve()) or any(path.is_relative_to(p) for p in runtime_roots) or path == output or path.is_relative_to(run_dir)
     def audit(event, arguments):
         if event.startswith('socket.') or event in ('subprocess.Popen', 'os.system'):
             raise RuntimeError('No network or subprocesses are permitted during circuit construction')
@@ -103,7 +104,7 @@ def main():
             reads.add(str(path))
     sys.dont_write_bytecode = True
     sys.addaudithook(audit)
-    from circuit import build_circuit
+    from circuit import build_circuit, POSTPROCESSING_REPORT
     circuit = build_circuit()
     buffer = io.BytesIO()
     circuit.to_file(buffer, format='kmb')
@@ -119,7 +120,7 @@ def main():
         'source_inputs_checked_against_commit': input_records,
         'read_paths': sorted(reads), 'import_paths': sorted(imports),
         'write_paths': sorted(writes), 'network_or_subprocesses_during_construction': False,
-        'limitations': ['interpreter startup and Git snapshot preflight occur before audit installation', 'native package internal OS reads are outside CPython hooks; circuit.py contains only builder calls and no file or subprocess API'],
+        'limitations': ['interpreter startup and Git snapshot preflight occur before audit installation', 'native package internal OS reads are outside CPython hooks; circuit.py builds the precursor with builder calls and loads only the declared PP-005 source; PP serializes that new in-memory circuit'],
     }
     write_json('dependency_audit.json', dependency_audit)
     relative_source = (here/'solution.py').relative_to(root).as_posix()
@@ -134,6 +135,7 @@ def main():
         'build_command': [sys.executable, *sys.argv], 'build_run': None,
         'environment': {'python': sys.version, 'packages': packages, 'platform': sys.platform, 'dependencies': input_records},
         'reconstruction_level': 'GATE_LEVEL_PYTHON', 'dependency_audit': 'dependency_audit.json',
+        'postprocessing': dict(POSTPROCESSING_REPORT),
     }
     write_json('provenance.json', provenance)
     print(json.dumps({'status': 'BUILT', 'artifact': str(output), 'sha256': digest(data), 'bytes': len(data), 'evidence': str(run_dir)}, indent=2))

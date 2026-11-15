@@ -37,8 +37,8 @@
   "components": [
     {
       "path": "circuit.py",
-      "role": "ordinary Python gate construction; no circuit parser or embedded gate data",
-      "sha256": "5ebd4c23434cca80ad04d844ba6fda271fb4cac008cf6219a0ce3d8b9bf4b726",
+      "role": "gate-level precursor construction and declared PP-005 adapter",
+      "sha256": "ace1095ae7c83ebd4fbc36a3eaaec9bf7c22350ba818717e07246f09f43e1ba2",
       "x_sweep_loops": 136
     }
   ],
@@ -47,6 +47,11 @@
       "path": "requirements.txt",
       "sha256": "f3cd725b18083117d8ad73afd9accf3a5a99a634fac00f221bf1d77d71ad09a8",
       "acquisition": "tracked checkout and pinned package installation"
+    },
+    {
+      "path": "src/invsqrt/postprocessing/PP-005/solution.py",
+      "sha256": "28de23f261438791a871f0210e0ebe00bf2951eb635223dbc63104a61b4567ff",
+      "acquisition": "tracked checkout, separate PP-005 branch dependency"
     }
   ],
   "references": [
@@ -54,5 +59,13 @@
     "https://www.kaggle.com/code/atakanaldemir/qcc-gap-3-residue-repair-and-c43-native-compiler",
     "src/invsqrt/INV-51/DESCRIPTION.md"
   ],
-  "runtime_input_artifacts": []
+  "runtime_input_artifacts": [],
+  "postprocessing": {
+    "method": "PP-005",
+    "source_commit": "1298d954ef9e06a552edf9e8f38e040e3efe97f8",
+    "path": "src/invsqrt/postprocessing/PP-005/solution.py",
+    "sha256": "28de23f261438791a871f0210e0ebe00bf2951eb635223dbc63104a61b4567ff",
+    "operation_index": 3292,
+    "input_hash_prefix_from_reference": "dcde7078"
+  }
 }

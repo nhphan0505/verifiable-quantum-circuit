@@ -71,3 +71,9 @@ Chi phí full thấp hơn baseline INV-BASELINE khoảng 26.3819 lần (baseline
 Giá trị cost/error full khớp phần invsqrt trong receipt bên ngoài, nhưng kết luận local dựa trên log mới của thành viên. Cùng artifact/hash và không override salt/seed có nghĩa các lượt dùng policy seeded mặc định; không gọi đây là kiểm chứng bằng seed độc lập so với receipt. Full không liệt kê mọi transcript đo có thể xảy ra.
 
 Hypothesis tái lập exact được ủng hộ bởi build sạch và đối chiếu bytes; tính đúng theo bộ kiểm tra chính thức được xác nhận bằng full PASS trong điều kiện ghi lại. Mục tiêu hướng đã đạt ở mức phục hồi cấp cổng. Đề xuất dừng thay đổi source/config, chuyển sang review độc lập bước 9. Kiểm tra salt bổ sung chỉ là việc có thể giao riêng; không tự chạy hoặc mở hướng tối ưu mới.
+
+## Tách postprocessing PP-005
+
+Bản refactor mới sinh precursor dcde7078 bằng builder, giữ CCX gốc tại operation 3292 và HMR ở vị trí muộn ban đầu. Sau đó adapter nạp [PP-005](../postprocessing/PP-005/DESCRIPTION.md) bằng đường dẫn và gọi rewrite tại đúng site 3292. Không còn hard-code hai cổng đã sửa trong generator. PP nằm trên branch riêng, có Issue riêng #70; PR INV-66 phụ thuộc branch PP, không sửa checker để bỏ giới hạn scope.
+
+PP-005 đã được kiểm chứng riêng trên raw INV-BASELINE + identity harness với hai lượt smoke cùng seed, không dùng frontier đã hậu xử lý như đối chứng chưa PP. Kết luận PP và số đo riêng không gộp thành run/results experiment. API dùng generated in-memory circuit, không đọc artifact gốc. Source/config hash, dependency PP và audit phải được khóa lại ở build sạch mới. Các run smoke/full lịch sử tiếp tục gắn source 50f9c29; không thay provenance hoặc diễn giải như run chấm mới của refactor.
