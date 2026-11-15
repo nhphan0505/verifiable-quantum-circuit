@@ -26,7 +26,6 @@ import hashlib
 import importlib.metadata
 import json
 import os
-import platform
 import sys
 import time
 
@@ -131,7 +130,9 @@ def main():
     report = dict(status='BUILT', track=TRACK, experiment_id=EXPERIMENT,
                   config_name=config.stem, artifact_sha256=digest(output),
                   artifact_bytes=output.stat().st_size, **summary,
-                  environment=dict(python=sys.version, platform=platform.platform(), packages=packages),
+                  environment=dict(python=sys.version, platform=sys.platform, os_name=os.name,
+                                   windows_version=list(sys.getwindowsversion()) if hasattr(sys, 'getwindowsversion') else None,
+                                   packages=packages),
                   build_command=[sys.executable, str(Path(__file__).resolve()), *sys.argv[1:]],
                   cwd=str(Path.cwd()), elapsed_seconds=time.monotonic()-started,
                   contract=contract, stages=stages,
