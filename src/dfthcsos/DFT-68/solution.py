@@ -125,19 +125,25 @@ def main():
     components.mkdir()
     sources.mkdir()
     reads = set()
+    created = set()
     allowed = [HERE, ROOT / 'src/common', Path(sys.prefix).resolve(), Path(sys.base_prefix).resolve(), work]
 
     def audit(event, values):
         if event != 'open' or isinstance(values[0], int):
             return
         path, mode, flags = values
+        if mode is not None and mode[:1] in {'w', 'x'}:
+            resolved = Path(path).resolve()
+            if resolved.is_relative_to(output.parent):
+                created.add(resolved)
+            return
         if mode is not None and not ('r' in mode or '+' in mode):
             return
         if mode is None and flags & os.O_WRONLY and not flags & os.O_RDWR:
             return
         resolved = Path(path).resolve()
         reads.add(str(resolved))
-        if resolved != output and not any(resolved.is_relative_to(base) for base in allowed):
+        if resolved not in created and resolved != output and not any(resolved.is_relative_to(base) for base in allowed):
             raise RuntimeError(f'Unexpected build input: {resolved}')
 
     sys.addaudithook(audit)
