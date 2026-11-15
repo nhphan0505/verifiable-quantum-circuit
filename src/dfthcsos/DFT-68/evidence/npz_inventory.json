@@ -1,0 +1,126 @@
+{
+  "U.npy": {
+    "dtype": "<f8",
+    "shape": [
+      8,
+      143,
+      76
+    ],
+    "fortran": false,
+    "npy_sha256": "0e18da2bdfe7347c81a47877d1dcde96afa96ef95aa2b09c626bda8a997ca660",
+    "compress_type": 0,
+    "date_time": [
+      1980,
+      1,
+      1,
+      0,
+      0,
+      0
+    ]
+  },
+  "W.npy": {
+    "dtype": "<f8",
+    "shape": [
+      8,
+      143,
+      44
+    ],
+    "fortran": false,
+    "npy_sha256": "ea57bb807ff962b2e9935d40325770147aaa84c95c0e32e6983630ec9d1a9a20",
+    "compress_type": 0,
+    "date_time": [
+      1980,
+      1,
+      1,
+      0,
+      0,
+      0
+    ]
+  },
+  "H2_I.npy": {
+    "dtype": "<f8",
+    "shape": [
+      8,
+      44
+    ],
+    "fortran": false,
+    "npy_sha256": "3bead4c55add3dbf9dbc2720a0617a1872ba31b588af133dd32e0c182d166c4e",
+    "compress_type": 0,
+    "date_time": [
+      1980,
+      1,
+      1,
+      0,
+      0,
+      0
+    ]
+  },
+  "H1_I.npy": {
+    "dtype": "<f4",
+    "shape": [],
+    "fortran": false,
+    "npy_sha256": "7d330c793cc3f69fa3e8fde6fb92fb0beb228b988263c87a129b482d1b5cc6e5",
+    "compress_type": 0,
+    "date_time": [
+      1980,
+      1,
+      1,
+      0,
+      0,
+      0
+    ]
+  },
+  "Hsym_lower.npy": {
+    "dtype": "<f4",
+    "shape": [
+      2926
+    ],
+    "fortran": false,
+    "npy_sha256": "36ccc4a1c76660ca82a2ba2c6dc6802e8f26b8bf5dbcbc610479e9ba8279f11b",
+    "compress_type": 0,
+    "date_time": [
+      1980,
+      1,
+      1,
+      0,
+      0,
+      0
+    ]
+  },
+  "tree_edges.npy": {
+    "dtype": "<i8",
+    "shape": [
+      75,
+      2
+    ],
+    "fortran": false,
+    "npy_sha256": "de886ee33f8119c9f5a7fce98663ffe31840cbe29ae336a9cf81a9d82ef2aff6",
+    "compress_type": 0,
+    "date_time": [
+      1980,
+      1,
+      1,
+      0,
+      0,
+      0
+    ]
+  },
+  "angle_words.npy": {
+    "dtype": "<i8",
+    "shape": [
+      1220,
+      75
+    ],
+    "fortran": false,
+    "npy_sha256": "12cae966a2e0b3bfa616b983e91c94ee7edb45bf51e6612f9258284f35b0a35d",
+    "compress_type": 0,
+    "date_time": [
+      1980,
+      1,
+      1,
+      0,
+      0,
+      0
+    ]
+  }
+}
