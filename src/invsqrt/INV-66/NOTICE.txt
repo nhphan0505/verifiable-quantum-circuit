@@ -1,0 +1,13 @@
+This is a gate-level Python reconstruction of user-supplied invsqrt.kmb,
+SHA-256 e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6.
+
+Reference walkthrough: mizeroluckygall, Quantum Circuits | One Toffoli Less
+in invsqrt. It credits asteriospanoras for the dead-write HMR/CZ correction
+and notebook code (stated Apache-2.0), Alex Chilton and Atakan Aldemir for
+shipping the precursor, and the 46-qubit lineage to Syed Asad Ali and
+Ali Haydar Ozdag. Google Quantum AI / Qualtran provide Kickmix and verifier.
+
+The original high-level arithmetic source was not recovered here.
+This notice preserves the supplied attribution; it does not independently
+establish or relicense every upstream circuit component. Upstream terms
+continue to apply. No license is inferred from a file name or hash.

@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "track": "invsqrt",
+  "input_sha256": "e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6",
+  "input_bytes": 198590,
+  "source_url": "https://www.kaggle.com/code/mizeroluckygall/quantum-circuits-one-toffoli-less-in-invsqrt",
+  "input_files": [
+    {
+      "name": "submission_inv.zip",
+      "sha256": "35123b205c7b9db340cac87339849e16c70813945ea301b1292822568e551d78",
+      "bytes": 49293419
+    },
+    {
+      "name": "receipt.json",
+      "sha256": "7080631a78bb16ee28a9f6822eaee5346fe6a5d17ddf3b5c2d589d02f6b63c95",
+      "bytes": 4897
+    },
+    {
+      "name": "quantum-circuits-one-toffoli-less-in-invsqrt.ipynb",
+      "sha256": "1d3df3e244d4f87b93389e358a5bf94b5fa877e9e8ee707de82d12a95842e9ff",
+      "bytes": 22869
+    }
+  ],
+  "environment": {
+    "python": "3.13",
+    "kickmix": "1.0.0",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1"
+  },
+  "reconstruction_level": "GATE_LEVEL_PYTHON",
+  "limitations": [
+    "original high-level arithmetic generator not recovered",
+    "static gate-to-API reconstruction; function names describe observed regions only",
+    "external receipt is not a repository verifier run",
+    "upstream component license chain not independently established; see NOTICE"
+  ],
+  "components": [
+    {
+      "path": "circuit.py",
+      "role": "ordinary Python gate construction; no circuit parser or embedded gate data",
+      "sha256": "5ebd4c23434cca80ad04d844ba6fda271fb4cac008cf6219a0ce3d8b9bf4b726",
+      "x_sweep_loops": 136
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "requirements.txt",
+      "sha256": "f3cd725b18083117d8ad73afd9accf3a5a99a634fac00f221bf1d77d71ad09a8",
+      "acquisition": "tracked checkout and pinned package installation"
+    }
+  ],
+  "references": [
+    "https://www.kaggle.com/code/asteriospanoras/lb-25-367-qcc-toolkit-simulator-cost-anatomy",
+    "https://www.kaggle.com/code/atakanaldemir/qcc-gap-3-residue-repair-and-c43-native-compiler",
+    "src/invsqrt/INV-51/DESCRIPTION.md"
+  ],
+  "runtime_input_artifacts": []
+}

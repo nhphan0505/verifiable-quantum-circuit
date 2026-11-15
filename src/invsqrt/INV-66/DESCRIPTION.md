@@ -29,3 +29,17 @@ Base repository a6ec810060d35d1fb53cc86c1cc0e8f0db631241. INV-BASELINE dùng Hor
 ## Kết luận và phiên bản tái lập
 
 Đã có ROUNDTRIP_EXACT ngoài Git; chưa có source build, chưa có provenance build hoặc run chấm local. Receipt là bằng chứng bên ngoài, không chuyển thành run của repo. Config dự kiến reconstructed. Bước 5-6 sẽ ghi mapping commit/config/build thật; bước 7 hoàn thiện giới hạn phục hồi cấp cổng.
+
+## Source cấp cổng và cách chạy
+
+[solution.py](solution.py) là entry point; [circuit.py](circuit.py) chứa lời gọi CircuitBuilder trực tiếp, bảy hàm chia theo vùng quan sát và 136 vòng lặp sweep X. Không có parser KMX, tải binary, gate table, source string hay exec/eval trong generator. Góc quay là scalar decimal string chính xác truyền cho API, không qua float. Hai file Python và [configs/reconstructed.json](configs/reconstructed.json) là dependency runtime của hướng; requirements.txt khai báo package pin. [reconstruction.json](reconstruction.json) ghi nguồn/hash, vai trò file và mức phục hồi; [NOTICE.txt](NOTICE.txt) giữ attribution và giới hạn giấy phép.
+
+Mức phục hồi là GATE_LEVEL_PYTHON: source rõ từng cổng và có thể sửa, nhưng chưa phục hồi phép tính số học cấp cao hoặc cách tác giả tìm mạch. Đây là đường triển khai được bước 05 cho phép, không phải source gốc. Input KMB/KMX chỉ được dùng để phân tích trước khi viết source và đối chiếu độc lập sau build.
+
+```powershell
+.venv/Scripts/python.exe src/invsqrt/INV-66/solution.py --config src/invsqrt/INV-66/configs/reconstructed.json
+```
+
+Chạy Python 3.13 và package pin. Config phải nằm trực tiếp trong configs của hướng; chỉ hỗ trợ reconstructed với target cố định. Output mới mặc định artifacts/invsqrt/INV-66/reconstructed.kmb, không ghi đè. Entry point kiểm tra checkout sạch, source/config khớp Git snapshot, rồi dựng trong bộ nhớ và ghi artifact mới. Audit chặn read ngoài source/runtime/output và network/subprocess trong construction; Git snapshot preflight và khởi động interpreter xảy ra trước audit. Native library OS reads không được CPython audit bao phủ; source generator chỉ gọi builder, serialization dùng BytesIO và file write qua Python.
+
+Mốc source hiện tại chưa build; không có provenance hoặc run local mới. Bước 6 phải chạy entry point từ cwd khác trong checkout sạch của commit đã push và môi trường mới, sau đó so bytes/hash bằng công cụ riêng. Không dùng working tree có thay đổi của chat khác.
