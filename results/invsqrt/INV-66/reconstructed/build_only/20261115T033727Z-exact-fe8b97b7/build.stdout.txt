@@ -1,0 +1,7 @@
+{
+  "status": "BUILT",
+  "artifact": "D:\\verifiable-quantum-circuit\\artifacts\\decompiler\\e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6\\20261115T031515Z\\clean-final\\artifacts\\invsqrt\\INV-66\\reconstructed.kmb",
+  "sha256": "e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6",
+  "bytes": 198590,
+  "evidence": "D:\\verifiable-quantum-circuit\\artifacts\\decompiler\\e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6\\20261115T031515Z\\clean-final\\results\\invsqrt\\INV-66\\reconstructed\\build_only\\20261115T033727Z-exact-fe8b97b7"
+}

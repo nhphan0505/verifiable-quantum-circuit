@@ -1,0 +1,12 @@
+{
+  "status": "RECONSTRUCTED_EXACT",
+  "reconstruction_level": "GATE_LEVEL_PYTHON",
+  "source_commit": "50f9c29b9ce7647e5e0f96ac7ccffc34cf1860d1",
+  "input_sha256": "e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6",
+  "output_sha256": "e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6",
+  "input_bytes": 198590,
+  "output_bytes": 198590,
+  "comparison": "independent streamed byte comparison, 1 MiB blocks, then full SHA-256; original read only by comparison process after build",
+  "input_manifest": "source manifest tracked in src/invsqrt/INV-66/reconstruction.json",
+  "local_verifier_executed": false
+}

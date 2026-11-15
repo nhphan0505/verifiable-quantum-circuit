@@ -28,7 +28,7 @@ Base repository a6ec810060d35d1fb53cc86c1cc0e8f0db631241. INV-BASELINE dùng Hor
 
 ## Kết luận và phiên bản tái lập
 
-Đã có ROUNDTRIP_EXACT ngoài Git; chưa có source build, chưa có provenance build hoặc run chấm local. Receipt là bằng chứng bên ngoài, không chuyển thành run của repo. Config dự kiến reconstructed. Bước 5-6 sẽ ghi mapping commit/config/build thật; bước 7 hoàn thiện giới hạn phục hồi cấp cổng.
+ROUNDTRIP_EXACT và RECONSTRUCTED_EXACT đã có bằng chứng riêng. Chưa chấm local. Receipt chỉ là bằng chứng bên ngoài, không chuyển thành run của repo. Mức phục hồi cấp cổng; chưa suy ra thuật toán số học gốc.
 
 ## Source cấp cổng và cách chạy
 
@@ -42,4 +42,19 @@ Mức phục hồi là GATE_LEVEL_PYTHON: source rõ từng cổng và có thể
 
 Chạy Python 3.13 và package pin. Config phải nằm trực tiếp trong configs của hướng; chỉ hỗ trợ reconstructed với target cố định. Output mới mặc định artifacts/invsqrt/INV-66/reconstructed.kmb, không ghi đè. Entry point kiểm tra checkout sạch, source/config khớp Git snapshot, rồi dựng trong bộ nhớ và ghi artifact mới. Audit chặn read ngoài source/runtime/output và network/subprocess trong construction; Git snapshot preflight và khởi động interpreter xảy ra trước audit. Native library OS reads không được CPython audit bao phủ; source generator chỉ gọi builder, serialization dùng BytesIO và file write qua Python.
 
-Mốc source hiện tại chưa build; không có provenance hoặc run local mới. Bước 6 phải chạy entry point từ cwd khác trong checkout sạch của commit đã push và môi trường mới, sau đó so bytes/hash bằng công cụ riêng. Không dùng working tree có thay đổi của chat khác.
+Source commit `50f9c29b9ce7647e5e0f96ac7ccffc34cf1860d1` đã dựng từ clone GitHub mới, venv mới và cwd ngoài checkout; công cụ đối chiếu riêng xác nhận exact. Không chạy verifier. Working tree chính và thay đổi notebook của người dùng không bị sửa.
+
+## Bằng chứng exact và giới hạn phục hồi
+
+[Inventory](evidence/circuit_inventory.json) ghi register x=q0..q21, scratch q22..q45, classical bit capacity 387, điều kiện lồng tối đa hai mức. 23877 operation gồm 38 Z_POW (4 Clifford, 1 T, 33 generic); số cổng tĩnh không phải chi phí thực thi trung bình. Bản đồ vùng trong circuit.py chỉ mô tả vị trí quan sát, không gán tên thuật toán chưa chứng minh. [Round-trip](evidence/roundtrip.json) kiểm tra serializer trước khi viết source. [Receipt invsqrt](evidence/external_receipt_invsqrt.json) chỉ giữ phần liên quan từ receipt gốc có hash, không đại diện run local.
+
+Hypothesis tái lập được ủng hộ ở mức source Python cấp cổng: KMB mới 198590 bytes, cùng SHA-256 mục tiêu và streamed bytes bằng input. Entry point không đọc file circuit gốc hoặc KMX. Không khẳng định phục hồi root/normalization/divider gốc hay cải thiện baseline. INV-51 chỉ là nguồn so sánh khác target, không phải dependency runtime.
+
+| Mốc | Config | Commit source thực sự dùng | Bằng chứng |
+| --- | --- | --- | --- |
+| Build sạch exact | [reconstructed](configs/reconstructed.json) | `50f9c29b9ce7647e5e0f96ac7ccffc34cf1860d1` | [provenance](../../../results/invsqrt/INV-66/reconstructed/build_only/20261115T033727Z-exact-fe8b97b7/provenance.json), [so bytes/hash](../../../results/invsqrt/INV-66/reconstructed/build_only/20261115T033727Z-exact-fe8b97b7/reconstruction_check.json), [checkout/setup](../../../results/invsqrt/INV-66/reconstructed/build_only/20261115T033727Z-exact-fe8b97b7/clean_checkout.json), [audit](../../../results/invsqrt/INV-66/reconstructed/build_only/20261115T033727Z-exact-fe8b97b7/dependency_audit.json) |
+| Smoke/full | Chưa chấm | Không có source/run chấm mới | Receipt bên ngoài không thay thế run repository |
+
+Lần build đầu của source 92a1069 sinh target bytes nhưng không hoàn tất provenance vì platform.platform() gọi hostname bị audit chặn. Source 50f9c29 thay metadata platform bằng sys.platform rồi build sạch lại; không đổi circuit.py hoặc góc. Dữ liệu lần lỗi ở scratch riêng, không được gọi là build nghiệm thu. CPython audit không bao phủ mọi native OS read; generator chỉ có builder calls, serializer dùng BytesIO, file write qua Python. Source cache probe do importer thử mở không tồn tại sau build, không có cache cũ được chép vào checkout.
+
+Attribution được giữ theo notebook và NOTICE; giấy phép của mọi component trong lineage chưa được xác minh độc lập. Cần reviewer kiểm tra giới hạn này trước công bố/merge. Chưa chạy verifier hoặc smoke/full, chưa có bằng chứng thử seed bổ sung. Bước tiếp theo là thành viên chấm notebook local ở bước 8 rồi review độc lập; không tự merge.

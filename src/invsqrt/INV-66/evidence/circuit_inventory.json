@@ -1,0 +1,854 @@
+{
+  "num_operations": 23877,
+  "num_qubits": 46,
+  "num_bits": 387,
+  "registers": {
+    "x": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21
+    ]
+  },
+  "scratch_qubits": [
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45
+  ],
+  "max_condition_stack_depth": 2,
+  "condition_stack_balanced": true,
+  "operation_counts": {
+    "X": 3267,
+    "CX": 13055,
+    "CCX": 1413,
+    "HMR": 1278,
+    "PUSH_CONDITION": 702,
+    "Z": 978,
+    "CZ": 2225,
+    "POP_CONDITION": 702,
+    "Z_POW": 38,
+    "CSWAP": 129,
+    "NEG": 27,
+    "BIT_INVERT": 41,
+    "CCZ": 9,
+    "BIT_STORE0": 2,
+    "SWAP": 11
+  },
+  "rotations": [
+    {
+      "operation_index_0based": 208,
+      "kmx_line_1based": 232,
+      "text": "Z_POW q35 0.5",
+      "angle_class": "clifford"
+    },
+    {
+      "operation_index_0based": 209,
+      "kmx_line_1based": 233,
+      "text": "Z_POW q36 1.5",
+      "angle_class": "clifford"
+    },
+    {
+      "operation_index_0based": 210,
+      "kmx_line_1based": 234,
+      "text": "Z_POW q21 0.5",
+      "angle_class": "clifford"
+    },
+    {
+      "operation_index_0based": 212,
+      "kmx_line_1based": 236,
+      "text": "Z_POW q21 1.5",
+      "angle_class": "clifford"
+    },
+    {
+      "operation_index_0based": 7681,
+      "kmx_line_1based": 7705,
+      "text": "Z_POW q27 0.0000076293949661334660439226951211821869947016239166259765625",
+      "angle_class": "generic"
+    },
+    {
+      "operation_index_0based": 7682,
+      "kmx_line_1based": 7706,
+      "text": "Z_POW q37 0.0000038146991419539533207938575287698768079280853271484375",
+      "angle_class": "generic"
+    },
+    {
+      "operation_index_0based": 7708,
+      "kmx_line_1based": 7732,
+      "text": "Z_POW q26 0.000015258786710652984253133723768769414164125919342041015625",
+      "angle_class": "generic"
+    },
+    {
+      "operation_index_0based": 7709,
+      "kmx_line_1based": 7733,
+      "text": "Z_POW q38 0.000001907348883243252524177790974135859869420528411865234375",
+      "angle_class": "generic"
+    },
+    {
+      "operation_index_0based": 7746,
+      "kmx_line_1based": 7770,
+      "text": "Z_POW q29 0.00003051757968634024979770469343520744587294757366180419921875",
+      "angle_class": "generic"
+    },
+    {
+      "operation_index_0based": 7747,
+      "kmx_line_1based": 7771,
+      "text": "Z_POW q6 0.0000009536725601778407723774222404244937933981418609619140625",
+      "angle_class": "generic"
+    },
+    {
+      "operation_index_0based": 7808,
+      "kmx_line_1based": 7832,
+      "text": "Z_POW q31 0.000061035157281917064818477225429660393274389207363128662109375",
+      "angle_class": "generic"
+    },
+    {
+      "operation_index_0based": 7809,
+      "kmx_line_1based": 7833,
+      "text": "Z_POW q5 0.000000476834397473003927803159029963353532366454601287841796875",
+      "angle_class": "generic"
+    },
+    {
+      "operation_index_0based": 7870,
+      "kmx_line_1based": 7894,
+      "text": "Z_POW q33 0.0001220703115704150319709153649228028370998799800872802734375",
+      "angle_class": "generic"
+    },
+    {
+      "operation_index_0based": 7871,
+      "kmx_line_1based": 7895,
+      "text": "Z_POW q4 0.000000238416486582153884510315577927030972205102443695068359375",
+      "angle_class": "generic"
+    },
+    {
+      "operation_index_0based": 7908,
+      "kmx_line_1based": 7932,
+      "text": "Z_POW q35 0.000244140625460339557271927102277686572051607072353363037109375",
+      "angle_class": "generic"
+    },
+    {
+      "operation_index_0based": 7909,
+      "kmx_line_1based": 7933,
+      "text": "Z_POW q3 0.000000119210421915924742741754727148872916586697101593017578125",
+      "angle_class": "generic"
+    },
+    {
+      "operation_index_0based": 7946,
+      "kmx_line_1based": 7970,
+      "text": "Z_POW q28 0.000488281240944691088436135917305591647163964807987213134765625",
+      "angle_class": "generic"
+    },
+    {
+      "operation_index_0based": 7947,
+      "kmx_line_1based": 7971,
+      "text": "Z_POW q2 0.000000059604870981705589116916854663941194303333759307861328125",
+      "angle_class": "generic"
+    },
+    {
+      "operation_index_0based": 7997,
+      "kmx_line_1based": 8021,
+      "text": "Z_POW q32 0.00097656252128851587200608630467968396260403096675872802734375",
+      "angle_class": "generic"
+    },
+    {
+      "operation_index_0based": 7998,
+      "kmx_line_1based": 8022,
+      "text": "Z_POW q1 0.00000002980276136142247234150914891870343126356601715087890625",
+      "angle_class": "generic"
+    },
+    {
+      "operation_index_0based": 8051,
+      "kmx_line_1based": 8075,
+      "text": "Z_POW q30 0.000000000029630115526944889037253005881211720407009124755859375",
+      "angle_class": "generic"
+    },
+    {
+      "operation_index_0based": 8062,
+      "kmx_line_1based": 8086,
+      "text": "Z_POW q21 0.0019531250172087218607008818338499622768722474575042724609375",
+      "angle_class": "generic"
+    },
+    {
+      "operation_index_0based": 8075,
+      "kmx_line_1based": 8099,
+      "text": "Z_POW q0 0.0000000148982737570302337104521939181722700595855712890625",
+      "angle_class": "generic"
+    },
+    {
+      "operation_index_0based": 8112,
+      "kmx_line_1based": 8136,
+      "text": "Z_POW q36 0.0000000000593240053435584169250205377466045320034027099609375",
+      "angle_class": "generic"
+    },
+    {
+      "operation_index_0based": 8120,
+      "kmx_line_1based": 8144,
+      "text": "Z_POW q21 0.003906250041797464252722738020651149781770072877407073974609375",
+      "angle_class": "generic"
+    },
+    {
+      "operation_index_0based": 8128,
+      "kmx_line_1based": 8152,
+      "text": "Z_POW q39 0.000000007450823454632597708791053037202800624072551727294921875",
+      "angle_class": "generic"
+    },
+    {
+      "operation_index_0based": 8165,
+      "kmx_line_1based": 8189,
+      "text": "Z_POW q34 0.000000000115793312763755318339775612912490032613277435302734375",
+      "angle_class": "generic"
+    },
+    {
+      "operation_index_0based": 8172,
+      "kmx_line_1based": 8196,
+      "text": "Z_POW q21 0.00781249994757653447481626773907237293315120041370391845703125",
+      "angle_class": "generic"
+    },
+    {
+      "operation_index_0based": 8180,
+      "kmx_line_1based": 8204,
+      "text": "Z_POW q43 0.000000003724144095429253453755080727205495350062847137451171875",
+      "angle_class": "generic"
+    },
+    {
+      "operation_index_0based": 8182,
+      "kmx_line_1based": 8206,
+      "text": "Z_POW q21 0.25",
+      "angle_class": "t"
+    },
+    {
+      "operation_index_0based": 8223,
+      "kmx_line_1based": 8247,
+      "text": "Z_POW q9 0.000000000230775064531153761837600768558331765234470367431640625",
+      "angle_class": "generic"
+    },
+    {
+      "operation_index_0based": 8227,
+      "kmx_line_1based": 8251,
+      "text": "Z_POW q21 0.01562499986956638795519702878067391793592832982540130615234375",
+      "angle_class": "generic"
+    },
+    {
+      "operation_index_0based": 8233,
+      "kmx_line_1based": 8257,
+      "text": "Z_POW q40 0.00000000186484516544183076547369637410156428813934326171875",
+      "angle_class": "generic"
+    },
+    {
+      "operation_index_0based": 8236,
+      "kmx_line_1based": 8260,
+      "text": "Z_POW q21 0.124999995590498267391925402147734303071047179400920867919921875",
+      "angle_class": "generic"
+    },
+    {
+      "operation_index_0based": 8269,
+      "kmx_line_1based": 8293,
+      "text": "Z_POW q8 0.000000000466598713984821278355497042866772972047328948974609375",
+      "angle_class": "generic"
+    },
+    {
+      "operation_index_0based": 8278,
+      "kmx_line_1based": 8302,
+      "text": "Z_POW q21 0.0312499993335630071693287401757288535009138286113739013671875",
+      "angle_class": "generic"
+    },
+    {
+      "operation_index_0based": 8290,
+      "kmx_line_1based": 8314,
+      "text": "Z_POW q41 0.00000000092991988263381453183598068790161050856113433837890625",
+      "angle_class": "generic"
+    },
+    {
+      "operation_index_0based": 8294,
+      "kmx_line_1based": 8318,
+      "text": "Z_POW q21 0.062499998427630404037626254964976624250994063913822174072265625",
+      "angle_class": "generic"
+    }
+  ],
+  "segments": [
+    {
+      "label": "prefix before early Clifford phases",
+      "start_operation_0based": 0,
+      "end_operation_0based": 207,
+      "first_kmx_line": 24,
+      "last_kmx_line": 231,
+      "operation_counts": {
+        "X": 38,
+        "CX": 98,
+        "CCX": 18,
+        "HMR": 9,
+        "PUSH_CONDITION": 9,
+        "Z": 9,
+        "CZ": 18,
+        "POP_CONDITION": 9
+      }
+    },
+    {
+      "label": "early phase/correction neighborhood",
+      "start_operation_0based": 208,
+      "end_operation_0based": 237,
+      "first_kmx_line": 232,
+      "last_kmx_line": 261,
+      "operation_counts": {
+        "Z_POW": 4,
+        "CCX": 1,
+        "X": 2,
+        "CX": 23
+      }
+    },
+    {
+      "label": "pre-patch logic",
+      "start_operation_0based": 238,
+      "end_operation_0based": 3291,
+      "first_kmx_line": 262,
+      "last_kmx_line": 3315,
+      "operation_counts": {
+        "CX": 2433,
+        "CSWAP": 32,
+        "X": 117,
+        "HMR": 155,
+        "PUSH_CONDITION": 10,
+        "Z": 13,
+        "CZ": 104,
+        "POP_CONDITION": 10,
+        "CCX": 180
+      }
+    },
+    {
+      "label": "notebook replacement",
+      "start_operation_0based": 3292,
+      "end_operation_0based": 3293,
+      "first_kmx_line": 3316,
+      "last_kmx_line": 3317,
+      "operation_counts": {
+        "HMR": 1,
+        "CZ": 1
+      }
+    },
+    {
+      "label": "logic before main phase window",
+      "start_operation_0based": 3294,
+      "end_operation_0based": 7680,
+      "first_kmx_line": 3318,
+      "last_kmx_line": 7704,
+      "operation_counts": {
+        "CX": 2823,
+        "CCX": 388,
+        "X": 645,
+        "HMR": 352,
+        "CZ": 76,
+        "PUSH_CONDITION": 17,
+        "Z": 36,
+        "POP_CONDITION": 17,
+        "NEG": 1,
+        "CSWAP": 32
+      }
+    },
+    {
+      "label": "main phase window",
+      "start_operation_0based": 7681,
+      "end_operation_0based": 8294,
+      "first_kmx_line": 7705,
+      "last_kmx_line": 8318,
+      "operation_counts": {
+        "Z_POW": 34,
+        "CX": 252,
+        "HMR": 35,
+        "X": 104,
+        "PUSH_CONDITION": 34,
+        "CZ": 80,
+        "POP_CONDITION": 34,
+        "CCX": 38,
+        "Z": 3
+      }
+    },
+    {
+      "label": "post-phase logic and final layout restoration",
+      "start_operation_0based": 8295,
+      "end_operation_0based": 23876,
+      "first_kmx_line": 8319,
+      "last_kmx_line": 23900,
+      "operation_counts": {
+        "HMR": 726,
+        "CZ": 1946,
+        "PUSH_CONDITION": 632,
+        "Z": 917,
+        "POP_CONDITION": 632,
+        "CX": 7426,
+        "X": 2361,
+        "CSWAP": 65,
+        "CCX": 788,
+        "NEG": 26,
+        "BIT_INVERT": 41,
+        "CCZ": 9,
+        "BIT_STORE0": 2,
+        "SWAP": 11
+      }
+    }
+  ],
+  "qubit_usage": {
+    "q21": {
+      "first_operation": 0,
+      "last_operation": 23865,
+      "references": 1910
+    },
+    "q0": {
+      "first_operation": 1,
+      "last_operation": 23767,
+      "references": 608
+    },
+    "q1": {
+      "first_operation": 2,
+      "last_operation": 23768,
+      "references": 627
+    },
+    "q26": {
+      "first_operation": 3,
+      "last_operation": 22902,
+      "references": 1117
+    },
+    "q20": {
+      "first_operation": 4,
+      "last_operation": 23876,
+      "references": 821
+    },
+    "q19": {
+      "first_operation": 11,
+      "last_operation": 23875,
+      "references": 892
+    },
+    "q27": {
+      "first_operation": 12,
+      "last_operation": 22770,
+      "references": 1069
+    },
+    "q18": {
+      "first_operation": 19,
+      "last_operation": 23874,
+      "references": 803
+    },
+    "q28": {
+      "first_operation": 20,
+      "last_operation": 23828,
+      "references": 985
+    },
+    "q17": {
+      "first_operation": 33,
+      "last_operation": 23873,
+      "references": 837
+    },
+    "q16": {
+      "first_operation": 41,
+      "last_operation": 23872,
+      "references": 843
+    },
+    "q29": {
+      "first_operation": 42,
+      "last_operation": 23844,
+      "references": 1077
+    },
+    "q15": {
+      "first_operation": 55,
+      "last_operation": 23826,
+      "references": 487
+    },
+    "q14": {
+      "first_operation": 63,
+      "last_operation": 23826,
+      "references": 478
+    },
+    "q30": {
+      "first_operation": 64,
+      "last_operation": 23868,
+      "references": 961
+    },
+    "q13": {
+      "first_operation": 77,
+      "last_operation": 23871,
+      "references": 654
+    },
+    "q12": {
+      "first_operation": 85,
+      "last_operation": 23819,
+      "references": 475
+    },
+    "q31": {
+      "first_operation": 86,
+      "last_operation": 23250,
+      "references": 989
+    },
+    "q11": {
+      "first_operation": 99,
+      "last_operation": 23870,
+      "references": 644
+    },
+    "q10": {
+      "first_operation": 107,
+      "last_operation": 23869,
+      "references": 1190
+    },
+    "q32": {
+      "first_operation": 108,
+      "last_operation": 23031,
+      "references": 897
+    },
+    "q9": {
+      "first_operation": 121,
+      "last_operation": 23868,
+      "references": 1001
+    },
+    "q8": {
+      "first_operation": 129,
+      "last_operation": 23867,
+      "references": 2095
+    },
+    "q33": {
+      "first_operation": 130,
+      "last_operation": 23417,
+      "references": 1041
+    },
+    "q7": {
+      "first_operation": 143,
+      "last_operation": 23866,
+      "references": 1716
+    },
+    "q6": {
+      "first_operation": 151,
+      "last_operation": 23798,
+      "references": 644
+    },
+    "q34": {
+      "first_operation": 152,
+      "last_operation": 23874,
+      "references": 1694
+    },
+    "q5": {
+      "first_operation": 165,
+      "last_operation": 23791,
+      "references": 615
+    },
+    "q4": {
+      "first_operation": 173,
+      "last_operation": 23791,
+      "references": 614
+    },
+    "q35": {
+      "first_operation": 174,
+      "last_operation": 23814,
+      "references": 1022
+    },
+    "q3": {
+      "first_operation": 187,
+      "last_operation": 23784,
+      "references": 613
+    },
+    "q2": {
+      "first_operation": 195,
+      "last_operation": 23784,
+      "references": 616
+    },
+    "q36": {
+      "first_operation": 196,
+      "last_operation": 23873,
+      "references": 1069
+    },
+    "q22": {
+      "first_operation": 217,
+      "last_operation": 23786,
+      "references": 390
+    },
+    "q23": {
+      "first_operation": 227,
+      "last_operation": 23779,
+      "references": 216
+    },
+    "q24": {
+      "first_operation": 232,
+      "last_operation": 23821,
+      "references": 109
+    },
+    "q25": {
+      "first_operation": 234,
+      "last_operation": 23793,
+      "references": 104
+    },
+    "q37": {
+      "first_operation": 1418,
+      "last_operation": 23340,
+      "references": 1087
+    },
+    "q38": {
+      "first_operation": 1422,
+      "last_operation": 22642,
+      "references": 1220
+    },
+    "q39": {
+      "first_operation": 1985,
+      "last_operation": 23871,
+      "references": 827
+    },
+    "q40": {
+      "first_operation": 2056,
+      "last_operation": 23875,
+      "references": 834
+    },
+    "q41": {
+      "first_operation": 2082,
+      "last_operation": 23147,
+      "references": 879
+    },
+    "q42": {
+      "first_operation": 2171,
+      "last_operation": 23876,
+      "references": 919
+    },
+    "q43": {
+      "first_operation": 2241,
+      "last_operation": 23870,
+      "references": 855
+    },
+    "q44": {
+      "first_operation": 2302,
+      "last_operation": 20905,
+      "references": 1051
+    },
+    "q45": {
+      "first_operation": 2364,
+      "last_operation": 23872,
+      "references": 1201
+    }
+  },
+  "patch_evidence": [
+    {
+      "operation_index_0based": 3288,
+      "kmx_line_1based": 3312,
+      "text": "CX q16 q21"
+    },
+    {
+      "operation_index_0based": 3289,
+      "kmx_line_1based": 3313,
+      "text": "CX q17 q21"
+    },
+    {
+      "operation_index_0based": 3290,
+      "kmx_line_1based": 3314,
+      "text": "CX q18 q21"
+    },
+    {
+      "operation_index_0based": 3291,
+      "kmx_line_1based": 3315,
+      "text": "CX q18 q16"
+    },
+    {
+      "operation_index_0based": 3292,
+      "kmx_line_1based": 3316,
+      "text": "HMR q21 b61"
+    },
+    {
+      "operation_index_0based": 3293,
+      "kmx_line_1based": 3317,
+      "text": "CZ q16 q20 if b61"
+    },
+    {
+      "operation_index_0based": 3294,
+      "kmx_line_1based": 3318,
+      "text": "CX q18 q16"
+    },
+    {
+      "operation_index_0based": 3295,
+      "kmx_line_1based": 3319,
+      "text": "CX q12 q10"
+    }
+  ],
+  "top_repeated_exact_4grams": [
+    {
+      "count": 53,
+      "operations": [
+        "X q45",
+        "X q42",
+        "X q41",
+        "X q40"
+      ]
+    },
+    {
+      "count": 51,
+      "operations": [
+        "X q42",
+        "X q41",
+        "X q40",
+        "X q43"
+      ]
+    },
+    {
+      "count": 41,
+      "operations": [
+        "X q41",
+        "X q40",
+        "X q43",
+        "X q39"
+      ]
+    },
+    {
+      "count": 38,
+      "operations": [
+        "X q40",
+        "X q43",
+        "X q39",
+        "X q0"
+      ]
+    },
+    {
+      "count": 38,
+      "operations": [
+        "X q39",
+        "X q0",
+        "X q1",
+        "X q2"
+      ]
+    },
+    {
+      "count": 36,
+      "operations": [
+        "X q43",
+        "X q39",
+        "X q0",
+        "X q1"
+      ]
+    },
+    {
+      "count": 36,
+      "operations": [
+        "X q0",
+        "X q1",
+        "X q2",
+        "X q3"
+      ]
+    },
+    {
+      "count": 36,
+      "operations": [
+        "X q1",
+        "X q2",
+        "X q3",
+        "X q4"
+      ]
+    },
+    {
+      "count": 34,
+      "operations": [
+        "X q2",
+        "X q3",
+        "X q4",
+        "X q5"
+      ]
+    },
+    {
+      "count": 34,
+      "operations": [
+        "X q3",
+        "X q4",
+        "X q5",
+        "X q6"
+      ]
+    },
+    {
+      "count": 24,
+      "operations": [
+        "X q38",
+        "X q45",
+        "X q42",
+        "X q41"
+      ]
+    },
+    {
+      "count": 22,
+      "operations": [
+        "X q6",
+        "X q38",
+        "X q37",
+        "X q27"
+      ]
+    }
+  ],
+  "reference_files": {
+    "verifiers/invsqrt/verify_submission_invsqrt.py": {
+      "sha256": "ddef520dec6b68d1cf0a6f328ddd36d79eb84570b9192cf3f7acaf073f06733a",
+      "bytes": 17210
+    },
+    "verifiers/invsqrt/nr_reference_circuit.py": {
+      "sha256": "bb90330dcf774f7b502de471293facba67f27952cc8808fe4a9970a9b1322e23",
+      "bytes": 18862
+    },
+    "src/invsqrt/INV-BASELINE/solution.py": {
+      "sha256": "fddc7ecc89a67a4a897a5bf509c902805383b31c94964221f8ae70c2f695cfad",
+      "bytes": 21858
+    },
+    "src/invsqrt/INV-BASELINE/configs/baseline.json": {
+      "sha256": "8c76e1d32d9b6b0c898d347e883c9ea65b1e26b3151bd57c99d9e98487a1c8a8",
+      "bytes": 150
+    },
+    "src/invsqrt/INV-51/DESCRIPTION.md": {
+      "sha256": "68e1deddb7c6d05baea6dac9cdbeb128fac0f0f638daa71c5da1199c3aafa4d7",
+      "bytes": 10764
+    },
+    "src/invsqrt/INV-51/configs/reconstructed.json": {
+      "sha256": "8dbc0a22ffd91be1216f185a545d1ade354135febae22019e92141c04965d9df",
+      "bytes": 124
+    },
+    "src/invsqrt/INV-51/circuit.py": {
+      "sha256": "b867593d0306c6ca42ee0c5666f79ee5ca3d00120c77f27261435697518f8c17",
+      "bytes": 533497
+    }
+  },
+  "github_check": {
+    "status": "UNVERIFIED",
+    "commands": [
+      "gh issue list --state all --limit 100 --json number,title,state",
+      "gh pr list --state open --json number,title"
+    ],
+    "error": "error connecting to api.github.com"
+  },
+  "rotation_classes_exact_decimal": {
+    "clifford": 4,
+    "t": 1,
+    "generic": 33
+  }
+}

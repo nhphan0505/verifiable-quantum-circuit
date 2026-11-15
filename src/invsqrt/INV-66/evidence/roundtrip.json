@@ -1,0 +1,28 @@
+{
+  "status": "ROUNDTRIP_EXACT",
+  "python": "3.13.7 (tags/v3.13.7:bcee1c3, Aug 14 2025, 14:15:11) [MSC v.1944 64 bit (AMD64)]",
+  "packages": {
+    "kickmix": "1.0.0",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1"
+  },
+  "api": [
+    "Circuit.from_file(input, format=kmb).to_file(direct, format=kmb)",
+    "Circuit.from_file(input, format=kmb).to_file(text, format=kmx)",
+    "Circuit.from_file(text, format=kmx).to_file(roundtrip, format=kmb)"
+  ],
+  "checks": [
+    {
+      "path": "D:\\verifiable-quantum-circuit\\artifacts\\decompiler\\e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6\\20261115T031515Z\\direct.kmb",
+      "bytes": 198590,
+      "sha256": "e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6",
+      "bytes_equal": true
+    },
+    {
+      "path": "D:\\verifiable-quantum-circuit\\artifacts\\decompiler\\e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6\\20261115T031515Z\\roundtrip.kmb",
+      "bytes": 198590,
+      "sha256": "e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6",
+      "bytes_equal": true
+    }
+  ]
+}

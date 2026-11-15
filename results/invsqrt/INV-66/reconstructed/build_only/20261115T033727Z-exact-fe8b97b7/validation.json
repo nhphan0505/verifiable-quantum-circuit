@@ -1,0 +1,11 @@
+{
+  "repository_checks_errors": 0,
+  "scope_checks_errors": 0,
+  "tests_run": 32,
+  "test_failures": 0,
+  "test_errors": 0,
+  "test_command": "Python unittest discovery scripts/tests; process-local GIT_CONFIG_COUNT=1, GIT_CONFIG_KEY_0=core.longpaths, GIT_CONFIG_VALUE_0=true",
+  "test_log": "repository_tests.stdout.txt",
+  "source_commit": "50f9c29b9ce7647e5e0f96ac7ccffc34cf1860d1",
+  "local_grading_executed": false
+}

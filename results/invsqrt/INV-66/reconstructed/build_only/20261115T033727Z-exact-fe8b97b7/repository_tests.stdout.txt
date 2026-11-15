@@ -1,0 +1,66 @@
+test_bad_title_and_config_fail (test_check_repo.RepositoryChecks.test_bad_title_and_config_fail) ... Historical runs exempt from new provenance schema: 8
+ok
+test_current_records_pass (test_check_repo.RepositoryChecks.test_current_records_pass) ... Historical runs exempt from new provenance schema: 8
+ok
+test_full_settings_for_all_tracks (test_check_repo.RepositoryChecks.test_full_settings_for_all_tracks) ... ok
+test_git_snapshots_and_scope (test_check_repo.RepositoryChecks.test_git_snapshots_and_scope) ... ok
+test_new_run_cannot_use_legacy_exemption (test_check_repo.RepositoryChecks.test_new_run_cannot_use_legacy_exemption) ... Historical runs exempt from new provenance schema: 8
+ok
+test_notebook_dependency_drift_fails (test_check_repo.RepositoryChecks.test_notebook_dependency_drift_fails) ... Historical runs exempt from new provenance schema: 8
+ok
+test_personal_research_scope_allows_multiple_sources_not_code (test_check_repo.RepositoryChecks.test_personal_research_scope_allows_multiple_sources_not_code) ... ok
+test_postprocessing_structure (test_check_repo.RepositoryChecks.test_postprocessing_structure) ... ok
+test_pre_git_build_requires_matching_historical_evidence (test_check_repo.RepositoryChecks.test_pre_git_build_requires_matching_historical_evidence) ... ok
+test_research_note_identity_and_hash (test_check_repo.RepositoryChecks.test_research_note_identity_and_hash) ... ok
+test_scores_allow_different_environment_and_verifier (test_check_repo.RepositoryChecks.test_scores_allow_different_environment_and_verifier) ... Historical runs exempt from new provenance schema: 8
+ok
+test_stdout_catches_matching_forged_table (test_check_repo.RepositoryChecks.test_stdout_catches_matching_forged_table) ... Historical runs exempt from new provenance schema: 8
+ok
+test_verifier_change_fails (test_check_repo.RepositoryChecks.test_verifier_change_fails) ... Historical runs exempt from new provenance schema: 8
+ok
+test_wrong_score_and_ratio_fail (test_check_repo.RepositoryChecks.test_wrong_score_and_ratio_fail) ... Historical runs exempt from new provenance schema: 8
+ok
+test_full_engine_accepted (test_engine_evidence.EngineEvidence.test_full_engine_accepted) ... ok
+test_reduced_profile_rejected_as_full (test_engine_evidence.EngineEvidence.test_reduced_profile_rejected_as_full) ... ok
+test_unpinned_engine_rejected (test_engine_evidence.EngineEvidence.test_unpinned_engine_rejected) ... ok
+test_missing_engine_is_actionable (test_engine_runtime.Runtime.test_missing_engine_is_actionable) ... ok
+test_missing_wsl_is_actionable (test_engine_runtime.Runtime.test_missing_wsl_is_actionable) ... ok
+test_native_uses_kernel (test_engine_runtime.Runtime.test_native_uses_kernel) ... ok
+test_wsl_space_path_is_one_argument (test_engine_runtime.Runtime.test_wsl_space_path_is_one_argument) ... ok
+test_dev_is_rejected_before_run (test_local_grade.LocalGrading.test_dev_is_rejected_before_run) ... ok
+test_full_engine_records_runtime_and_default_options (test_local_grade.LocalGrading.test_full_engine_records_runtime_and_default_options) ... Running: ['D:\\verifiable-quantum-circuit\\.venv\\Scripts\\python.exe', '-m', 'kickmix_engine', 'verify', 'invsqrt', 'C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-one-toffoli\\verifiable-quantum-circuit\\artifacts\\tmpqqgxr5mb\\artifacts\\invsqrt\\INV-123\\test.kmb', '--verifier', 'C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-one-toffoli\\verifiable-quantum-circuit\\artifacts\\tmpqqgxr5mb\\verifiers\\invsqrt\\verify_submission_invsqrt.py', '--threads', '4']
+{
+  "status": "PASS",
+  "score": 1
+}
+PASS Saved: C:\Users\ASUS\.codex\worktrees\invsqrt-one-toffoli\verifiable-quantum-circuit\artifacts\tmpqqgxr5mb\results\invsqrt\INV-123\test\full\20261115T034125Z-local-full-dbffdb
+ok
+test_interruption_does_not_save_score (test_local_grade.LocalGrading.test_interruption_does_not_save_score) ... Running: ['D:\\verifiable-quantum-circuit\\.venv\\Scripts\\python.exe', '-m', 'kickmix_engine', 'verify', 'invsqrt', 'C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-one-toffoli\\verifiable-quantum-circuit\\artifacts\\tmpmpg9fsp8\\artifacts\\invsqrt\\INV-123\\test.kmb', '--verifier', 'C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-one-toffoli\\verifiable-quantum-circuit\\artifacts\\tmpmpg9fsp8\\verifiers\\invsqrt\\verify_submission_invsqrt.py', '--threads', '4']
+Stopped; no valid score.
+INTERRUPTED Saved: C:\Users\ASUS\.codex\worktrees\invsqrt-one-toffoli\verifiable-quantum-circuit\artifacts\tmpmpg9fsp8\results\invsqrt\INV-123\test\full\20261115T034125Z-local-full-a7affd
+ok
+test_missing_config_never_creates_run (test_local_grade.LocalGrading.test_missing_config_never_creates_run) ... ok
+test_output_layout_and_missing_provenance (test_local_grade.LocalGrading.test_output_layout_and_missing_provenance) ... Running: ['D:\\verifiable-quantum-circuit\\.venv\\Scripts\\python.exe', '-m', 'kickmix_engine', 'verify', 'invsqrt', 'C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-one-toffoli\\verifiable-quantum-circuit\\artifacts\\tmpmfj08qf0\\artifacts\\invsqrt\\INV-123\\test.kmb', '--verifier', 'C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-one-toffoli\\verifiable-quantum-circuit\\artifacts\\tmpmfj08qf0\\verifiers\\invsqrt\\verify_submission_invsqrt.py', '--threads', '4']
+{
+  "status": "PASS",
+  "score": 1
+}
+PASS Saved: C:\Users\ASUS\.codex\worktrees\invsqrt-one-toffoli\verifiable-quantum-circuit\artifacts\tmpmfj08qf0\results\invsqrt\INV-123\test\full\20261115T034125Z-local-full-8c91f8
+ok
+test_smoke_uses_reduced_engine_options (test_local_grade.LocalGrading.test_smoke_uses_reduced_engine_options) ... Running: ['D:\\verifiable-quantum-circuit\\.venv\\Scripts\\python.exe', '-m', 'kickmix_engine', 'verify', 'invsqrt', 'C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-one-toffoli\\verifiable-quantum-circuit\\artifacts\\tmpq3qqtfob\\artifacts\\invsqrt\\INV-123\\test.kmb', '--verifier', 'C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-one-toffoli\\verifiable-quantum-circuit\\artifacts\\tmpq3qqtfob\\verifiers\\invsqrt\\verify_submission_invsqrt.py', '--threads', '4', '--max-x', '4096', '--shots-per-x', '1']
+{
+  "status": "PASS",
+  "score": 1
+}
+PASS Saved: C:\Users\ASUS\.codex\worktrees\invsqrt-one-toffoli\verifiable-quantum-circuit\artifacts\tmpq3qqtfob\results\invsqrt\INV-123\test\smoke\20261115T034125Z-local-smoke-3444ea
+ok
+test_wrong_track_id_rejected (test_local_grade.LocalGrading.test_wrong_track_id_rejected) ... ok
+test_empty_or_wrong_filename_rejected (test_research_notes.ResearchNotes.test_empty_or_wrong_filename_rejected) ... ok
+test_loose_resources_rejected_but_placeholders_allowed (test_research_notes.ResearchNotes.test_loose_resources_rejected_but_placeholders_allowed) ... ok
+test_notes_for_all_tracks_pass (test_research_notes.ResearchNotes.test_notes_for_all_tracks_pass) ... ok
+test_pdf_only_and_link_only_rejected (test_research_notes.ResearchNotes.test_pdf_only_and_link_only_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 32 tests in 307.976s
+
+OK
