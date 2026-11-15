@@ -54,7 +54,8 @@ def main():
         raise RuntimeError('Build requires a clean committed checkout')
     commit = git('rev-parse', 'HEAD').decode().strip()
     pp_path = root/'src/invsqrt/postprocessing/PP-005/solution.py'
-    inputs = [here/'solution.py', here/'circuit.py', config, root/'requirements.txt', pp_path]
+    inputs = [here/'solution.py', here/'circuit.py', here/'lookup_certificate.py',
+              here/'data/lookup64_certificates.json', config, root/'requirements.txt', pp_path]
     input_records = []
     for path in inputs:
         relative = path.relative_to(root).as_posix()
@@ -120,7 +121,7 @@ def main():
         'source_inputs_checked_against_commit': input_records,
         'read_paths': sorted(reads), 'import_paths': sorted(imports),
         'write_paths': sorted(writes), 'network_or_subprocesses_during_construction': False,
-        'limitations': ['interpreter startup and Git snapshot preflight occur before audit installation', 'native package internal OS reads are outside CPython hooks; circuit.py builds the precursor with builder calls and loads only the declared PP-005 source; PP serializes that new in-memory circuit'],
+        'limitations': ['interpreter startup and Git snapshot preflight occur before audit installation', 'native package internal OS reads are outside CPython hooks; circuit.py builds the precursor with builder calls and the declared lookup compiler/certificates, then loads PP-005; PP serializes that new in-memory circuit'],
     }
     write_json('dependency_audit.json', dependency_audit)
     relative_source = (here/'solution.py').relative_to(root).as_posix()

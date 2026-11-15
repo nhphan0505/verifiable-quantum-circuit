@@ -30,15 +30,15 @@
   "reconstruction_level": "GATE_LEVEL_PYTHON",
   "limitations": [
     "original high-level arithmetic generator not recovered",
-    "static gate-to-API reconstruction; function names describe observed regions only",
+    "two coefficient lookup builders recovered from mathematical certificates; remaining circuit regions retain gate-level reconstruction",
     "external receipt is not a repository verifier run",
     "upstream component license chain not independently established; see NOTICE"
   ],
   "components": [
     {
       "path": "circuit.py",
-      "role": "gate-level precursor construction and declared PP-005 adapter",
-      "sha256": "ace1095ae7c83ebd4fbc36a3eaaec9bf7c22350ba818717e07246f09f43e1ba2",
+      "role": "gate-level precursor with independently recovered coefficient lookup synthesis and declared PP-005 adapter",
+      "sha256": "a56fbedcccbeab32c356777d23b553e4c4a5fe08b780648381983ad19ab0cdc7",
       "x_sweep_loops": 136
     }
   ],
@@ -52,6 +52,18 @@
       "path": "src/invsqrt/postprocessing/PP-005/solution.py",
       "sha256": "28de23f261438791a871f0210e0ebe00bf2951eb635223dbc63104a61b4567ff",
       "acquisition": "tracked checkout, separate PP-005 branch dependency"
+    },
+    {
+      "path": "src/invsqrt/INV-66/lookup_certificate.py",
+      "sha256": "6c7f6205f36d5984dbc8b1435a8bb5b11fa1958a9f6c40fd59bf5f73fffc1c72",
+      "acquisition": "tracked checkout; independently recovered from coefficient lookup behavior",
+      "role": "GF(2) quadratic/affine coefficient lookup compiler"
+    },
+    {
+      "path": "src/invsqrt/INV-66/data/lookup64_certificates.json",
+      "sha256": "46109bf5e8db9b4ddd84733cd52012078db8975ff9bf116c774dd371b7b0b8db",
+      "acquisition": "tracked checkout; independently recovered from coefficient lookup behavior",
+      "role": "six-input coefficient lookup certificates; 27 and 29 quadratic coordinates"
     }
   ],
   "references": [
@@ -67,5 +79,26 @@
     "sha256": "28de23f261438791a871f0210e0ebe00bf2951eb635223dbc63104a61b4567ff",
     "operation_index": 3292,
     "input_hash_prefix_from_reference": "dcde7078"
+  },
+  "algorithm_recovery_analysis": {
+    "status": "PARTIAL_CLASSICAL_MODEL_AND_LOOKUP_BUILDERS_RECOVERED",
+    "runtime_build_dependency": false,
+    "files": [
+      {
+        "path": "recovery_model.py",
+        "sha256": "c9bed3b52492d0372e6d96920216ff513e344e28b52b6764fd1120e1b198f32d"
+      },
+      {
+        "path": "validate_recovery.py",
+        "sha256": "fda1f16cd6f0b26f863ea489cac9fc0a01fe08f91621c854a5eddb60cd97e678"
+      }
+    ],
+    "evidence": "evidence/algorithm_recovery.json",
+    "divider_correspondence": "evidence/divider_correspondence.json",
+    "remaining": [
+      "quantum debt proof and inverse arithmetic lifecycle",
+      "balanced-divider quotient and phase model",
+      "complete high-level builder and clean exact acceptance"
+    ]
   }
 }

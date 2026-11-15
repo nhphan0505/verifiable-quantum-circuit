@@ -1,0 +1,39 @@
+{
+  "kind": "INDEPENDENT_ARITHMETIC_ANALYSIS_NOT_GRADING",
+  "reference_kmx_sha256": "69872bf5557a94e4a7425c9470b7a0451958e18276f2be178b5b0ee27dddb1b1",
+  "reference_operations": 23877,
+  "model_sha256": "c9bed3b52492d0372e6d96920216ff513e344e28b52b6764fd1120e1b198f32d",
+  "validator_sha256": "fda1f16cd6f0b26f863ea489cac9fc0a01fe08f91621c854a5eddb60cd97e678",
+  "lookup_emitter_sha256": "6c7f6205f36d5984dbc8b1435a8bb5b11fa1958a9f6c40fd59bf5f73fffc1c72",
+  "lookup_certificate_sha256": "46109bf5e8db9b4ddd84733cd52012078db8975ff9bf116c774dd371b7b0b8db",
+  "exact_synthesized_lookup_operations": 2977,
+  "exhaustive_input_count": 3133452,
+  "checked_boundaries": [
+    609,
+    1638,
+    3283,
+    3404,
+    4407,
+    15006,
+    23877
+  ],
+  "exhaustive_root_values": 4096,
+  "loader_addresses_per_loader": 64,
+  "loader_AND_counts": [
+    27,
+    29
+  ],
+  "random_measurement_input_branches": 4096,
+  "measurement_seed": 660067,
+  "arithmetic_mismatches": 0,
+  "phase_branch_mismatches": 0,
+  "input_restored": true,
+  "scratch_zero": true,
+  "elapsed_seconds": 13.593,
+  "limitations": [
+    "Exhaustive arithmetic/register checks use zero HMR outcomes.",
+    "Random measurement checks compare exact phase modulo two half-turns; they do not exhaust all outcomes.",
+    "Balanced divider forward quotient/phase model and high-level inverse lifecycle remain unrecovered.",
+    "Lookup certificates/emitter recovered; no complete high-level circuit builder, verifier run, or score is asserted."
+  ]
+}

@@ -4,6 +4,8 @@
 
 Review của nhphan0505 trên 6c94828 yêu cầu phục hồi thuật toán số học gốc. Bản hiện tại chỉ đạt GATE_LEVEL_PYTHON, chưa đáp ứng yêu cầu đó dù build exact và full PASS. Xem [kết quả truy nguồn và kế hoạch phục hồi](ALGORITHM_RECOVERY.md). Chưa xử lý xong review, chưa đủ điều kiện merge và không đổi nhãn mức phục hồi khi chưa có source/model thực tế.
 
+Đã phục hồi độc lập model normalize/root, bảng 64 hàng, coefficient, seed và product; kiểm tra thanh ghi trên toàn miền đầu vào. Xem [model và giới hạn](ALGORITHM_RECOVERY.md). Builder số học và model pha divider vẫn chưa xong; mức bàn giao tiếp tục là GATE_LEVEL_PYTHON.
+
 Loại: Tái dựng từ submission; phục hồi source Python cấp cổng, không nhận là thuật toán mới.
 
 ## Nguồn và mục tiêu

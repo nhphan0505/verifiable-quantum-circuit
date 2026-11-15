@@ -16,26 +16,92 @@ Review [5909379196](https://github.com/nhphan0505/verifiable-quantum-circuit/pul
 
 Các đoạn source tải về và archive gốc chỉ nằm trong scratch ignored, không đưa nguyên bundle/notebook/base64/binary vào runtime hay Git. Evidence JSON chỉ giữ nguồn/hash và kết luận truy nguồn.
 
-## Bản đồ hiểu biết và phần còn thiếu
+## Phục hồi độc lập từ artifact — cách 2
 
-| Thành phần | Điều đã biết | Chưa đủ để phục hồi target |
+Đã bắt đầu phục hồi độc lập, không chờ quyền truy cập generator riêng.
+[recovery_model.py](recovery_model.py) là model số học cổ điển mới viết từ
+quan sát mạch, có bảng intercept/slope thật; không chứa chuỗi cổng hoặc đọc
+artifact. Model chưa phải builder toàn mạch. Hai loader đã thay 2.977 lời gọi cổng trong `circuit.py` bằng [lookup_certificate.py](lookup_certificate.py) và [certificate GF(2)](data/lookup64_certificates.json).
+
+Với x hợp lệ, các invariant đã kiểm tra:
+
+- `k = floor((22 - bit_length(x))/2)`, `n = x * 4**k`.
+- `R = floor(sqrt(16*n))`, `v = R - 4096`, `h = (n - floor(R*(R+1)/16) - 1) mod 1024`.
+- Địa chỉ bảng `a = v >> 6`, tọa độ trong ô `t = v & 63`.
+  Hai loader trả cùng intercept 13 bit và bốn bit thấp của stored slope.
+  Slope đầy đủ có 7 bit; stored slope là `S >> 1`, có 6 bit.
+- Hệ số C được cập nhật bằng sáu hàng cộng/trừ của S, với rounding khác nhau
+  cho dấu dương/âm. Hàm `coefficient` ghi rõ công thức từng hàng; thay bằng
+  một phép nội suy tuyến tính làm tròn cuối cùng sẽ cho kết quả khác.
+- Seed 6 bit dùng ba hàng signed, cắt ở bit 11/10/9, trên các tọa độ Boolean
+  tạm của v. Tích 15 bit dùng mười hàng signed trên residual, có carry phụ
+  thuộc parity của C và carry alias ở hàng cuối.
+
+Các biên operation dưới đây đếm từ 0, loại metadata; biên là exclusive:
+
+| Biên | Trạng thái | Bằng chứng |
 | --- | --- | --- |
-| Contract pha | Verifier yêu cầu exp(2*pi*i/sqrt(x)), khôi phục 22 bit x và scratch zero | Không suy ra được thuật toán chỉ từ contract |
-| Normalize/root/residual | INV-51 có implementation số học, quản lý owner và HMR debt thật | Chưa chứng minh mapping và allocation của từng khối sang fork 64 hàng |
-| Lookup coefficient | Fork được nguồn public mô tả là 64 hàng/6 address bits/13 intercept/7 slope | Giá trị đầy đủ, cách chọn/làm tròn và hai plan loader 27/29 AND chưa lấy được từ source fork |
-| Product/inverse product | Lineage chỉ rõ retire/rebuild slope S4 với hai AND | Chưa có source cập nhật lifecycle, biểu thức Boolean và cleanup certificate của fork |
-| Divider/phase | Có divider/phase source ở INV-51; target chứa 33 generic rotations | Chưa chứng minh các tham số/truncation/register của target giữ nguyên; cần model/correspondence |
-| Finishing/refit | Refit góc Atakan và dead-write PP-005 đã nhận diện; PP-005 đã độc lập | Refit/PP không thay thế generator số học; hold-pass sửa cho interleaved chains chưa phục hồi |
+| 609 | n, k sau normalize | Toàn bộ 3.133.452 x |
+| 1638 | v12, h10 sau căn bậc hai | Toàn bộ 3.133.452 x |
+| 2866 | Loader đầu trả A13, Hlow4 | Cả 64 địa chỉ; 27 CCX |
+| 3283 | C13 sau sáu hàng coefficient | Cả 4.096 v và toàn miền x |
+| 3404 | Seed6 | Cả 4.096 v và toàn miền x |
+| 4407 | Product15 trước khi đo bỏ C | Toàn bộ 3.133.452 x |
+| 15006 | Divider trả lại product trên owner mới | Toàn bộ 3.133.452 x |
+| 16761 | Loader hai trả cùng A13, Hlow4 | Cả 64 địa chỉ; 29 CCX |
+| 23877 | x phục hồi, scratch zero | Toàn bộ 3.133.452 x |
 
-Tên prefix/pre_phase/return_and_layout trong circuit.py hiện tại chỉ là vùng vị trí. Chưa được xem là hàm số học có invariant. Không sửa tên hoặc gom các dòng gate thành hàm để tự nhận ALGORITHM_RECOVERED.
+Loader hai tái sử dụng năm raw address bit 0..4 làm workspace. Chỉ giữ tọa
+độ R-frame trên q44, thay vì lifecycle bảy bit của INV-51. Đây là khác biệt
+thuật toán/allocation cần triển khai, không thể chỉ thay bảng 128 thành 64 hàng.
 
-## Kế hoạch làm lại và điều kiện chuyển tiếp
+### Đối chiếu divider với INV-51
 
-1. Nhận source/data fork 64 hàng có quyền sử dụng, hoặc phục hồi độc lập từng thành phần còn thiếu bằng phân tích dataflow/Boolean/số học. Không yêu cầu submission KMB mới; binary hiện có đã đủ cho đối chiếu.
-2. Viết model số học cổ điển từ x đến pha: địa chỉ, hệ số, signed widths, phép nhân/chia, làm tròn/cắt cụt và thang fixed-point phải rõ. So model với execution trace và các điểm biên; không chỉ so cost/số qubit.
-3. Viết builder từ các hàm số học và register có ý nghĩa, cộng helper/table thật sự cần. Giữ invariant input/output, measurement debt và correction; không dùng chuỗi cổng tuyến tính hoặc toàn mạch làm dữ liệu giả bảng hệ số.
-4. Giữ finishing passes ở module PP tương ứng, pin source/data dependency trong checkout. Nếu cần PP mới, theo workflow PP và kiểm chứng độc lập, không chép implementation lẫn vào generator.
-5. Commit source/config rồi build sạch từ đúng commit đã push, venv mới, cwd khác và audit dependency closure. Đối chiếu riêng toàn bộ 198590 bytes và SHA-256 e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6. Không vá output bằng KMB gốc hoặc hạ tiêu chí khi mismatch.
-6. Chỉ cập nhật reconstruction_level sau khi có generator/model/correspondence thực tế. Các run full cũ giữ source commit của chúng; mới build exact không được ghi thành run verifier mới. Sau đó mới gửi lại reviewer độc lập.
+[evidence/divider_correspondence.json](evidence/divider_correspondence.json)
+ghi ánh xạ dây và bốn đoạn khác nhau giữa raw INV-51 [6712,17303) và target
+[4420,15006). Có 10.575 operation khớp sau khi đổi tên dây, bỏ qua ID bit đo
+và giá trị góc quay. Bốn đoạn còn lại gồm tách/đo AND giữ lại, một feature pha
+bị bỏ và một CSWAP chuyển thành HMR/CZ. Đây là correspondence tĩnh; chưa chứng
+minh các rewrite đó từ source hoặc mọi measurement branch.
 
-Hiện chưa có đầu vào để tái dùng trực tiếp fork 64 hàng; phục hồi độc lập từ low-level circuit vẫn là công việc chưa hoàn tất, không phải điều đã được chứng minh bất khả thi. Cần source public/được cung cấp của ahoirg/qcc-invk6-k6c để tránh tiếp tục suy đoán các thay đổi riêng chưa có căn cứ. PR giữ draft và trạng thái changes requested.
+### Lặp lại kiểm tra phân tích
+
+`validate_recovery.py` chỉ là công cụ kiểm chứng model, không được gọi từ
+`solution.py` hoặc dùng làm đầu vào build. Nó nhận KMX tham chiếu tường minh,
+kiểm hash trước khi diễn giải và không chạy verifier/engine:
+
+```powershell
+.\.venv\Scripts\python.exe src/invsqrt/INV-66/validate_recovery.py --reference-kmx <scratch>/circuit.kmx
+```
+
+[evidence/algorithm_recovery.json](evidence/algorithm_recovery.json) ghi hash
+model/validator đã chạy, phạm vi kiểm tra và giới hạn. Kiểm tra thanh ghi toàn
+miền dùng outcome HMR=0. Ngoài ra, 4.096 cặp input/measurement branch ngẫu nhiên
+(512 input, tám trial, seed 660067) khôi phục x/scratch và khớp pha modulo hai
+half-turn với nhánh outcome=0, dùng số hữu tỉ từ giá trị góc in trong KMX.
+Đó là kiểm tra hữu hạn, không phải chứng minh mọi outcome, không phải điểm chấm
+và không phải provenance của một source build mới.
+
+## Phần chưa phục hồi và bước tiếp
+
+1. Chứng minh cơ chế trả phase debt cho mọi outcome. Hai certificate đã phục hồi
+   có 27/29 coordinate bậc hai, 40/44 ma trận đổi cơ sở affine và 10/15 phép đo.
+   Emitter dùng Gaussian elimination GF(2), sinh khớp đúng toàn bộ 1.228/1.749
+   operation lookup. Dữ liệu chỉ mô tả Boolean LUT sáu đầu vào, không chứa góc,
+   ID bit đo, toàn mạch hoặc chuỗi opcode. Caller truyền owner dây/bit đo;
+   phần cleanup cũ vẫn giữ trách nhiệm trả debt, chưa được phục hồi cấp cao.
+2. Viết model quotient/pha của balanced divider và tham số refit 33 góc.
+   Correspondence 10.575 operation không thay thế model pha số học.
+3. Phục hồi inverse product, retire/rebuild slope S4, giải mã các address bit
+   bị đo và cleanup. Kiểm tra x/scratch ở cuối không chứng minh cách dựng các khối.
+4. Dựng lại từ helper số học, register có invariant và bảng/certificate đã track.
+   Giữ các finishing/postprocessing ở module riêng, gồm PP-005; không đưa dữ liệu
+   KMB/KMX hay toàn chuỗi cổng vào runtime.
+5. Commit source trước build sạch từ commit đã push và môi trường mới, đối chiếu
+   đúng 198590 bytes/SHA-256 e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6.
+   Không sửa run/receipt cũ hoặc hạ tiêu chí exact.
+6. Chỉ sau khi các khối đã thành builder số học thật mới cập nhật reconstruction
+   level và gửi review độc lập lại. Review hiện vẫn chưa được xử lý xong.
+
+Không thiếu KMB hoặc receipt để tiếp tục cách 2. Source private sẽ hữu ích nếu
+được cung cấp hợp lệ, nhưng không còn được coi là điều kiện bắt buộc để làm phân tích.
