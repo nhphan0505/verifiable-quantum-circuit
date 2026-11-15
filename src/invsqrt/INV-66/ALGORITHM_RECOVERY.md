@@ -1,122 +1,150 @@
-# INV-66: phục hồi thuật toán sau review
+# INV-66 — thuật toán số học đã phục hồi
 
-> Đang nghiệm thu phiên bản generator số học hoàn chỉnh: divider m37, pha,
-> inverse product/coefficient và cleanup HMR đã được viết lại bằng helper số học
-> và certificate Boolean. Đang chờ build exact từ commit mới; các kết luận
-> GATE_LEVEL_PYTHON bên dưới mô tả phiên bản trước. Chưa coi review đã được xử lý.
+Generator số học đầy đủ đã thay source cấp cổng. Build sạch của source
+f04c85e17d8114ec99a9a116da7f3ee44ba7e33c đạt RECONSTRUCTED_EXACT cho 198590 bytes,
+SHA-256 e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6.
+Review cũ 5909379196 yêu cầu mức số học; implementation mới đã bổ sung các khối đó,
+nhưng approval/review độc lập trên HEAD mới vẫn chưa có.
 
-## Trạng thái nghiệm thu
+## Biểu diễn và luồng
 
-Review [5909379196](https://github.com/nhphan0505/verifiable-quantum-circuit/pull/67#pullrequestreview-5909379196) của nhphan0505 trên commit 6c94828436f3deba8b92069e064afafeebc884fb yêu cầu phục hồi thuật toán số học gốc. Bản hiện tại chỉ đạt GATE_LEVEL_PYTHON. Build exact, full PASS và tests PP không đáp ứng thêm điều kiện mới này. Chưa xử lý xong yêu cầu review; không đề nghị approve/merge hoặc đổi nhãn recovery level.
-
-## Kết quả truy nguồn đã xác minh
-
-[Evidence](evidence/review_followup.json) ghi version, SHA-256 source notebook đã tải, review/commit và kết quả HTTP. Chỉ đọc source như dữ liệu, không chạy notebook tải về.
-
-1. Notebook public ahoirg/qcc-submit-verify-and-package v25 xác định invsqrt 4560ac0c được dựng từ fork generator Syed Asad Ali với bảng 64 hàng, 6 bit địa chỉ, 13 bit intercept và 7 bit slope; hai loader được tổng hợp lại, S4 bị đo bỏ rồi dựng lại trước inverse product, hold pass xử lý interleaved chain. Source notebook chỉ tìm và đóng gói binary invsqrt_k6c.kmb từ input, không chứa generator của fork.
-2. Generator được notebook đó dẫn là ahoirg/qcc-invk6-k6c. API public trả HTTP 403 khi kiểm tra. Không cố vượt quyền truy cập; chưa có source/data của fork này trong checkout.
-3. Atakan Aldemir quantum-circuits-iso-gap-dqi-h5 v20 đưa bước refit 33 góc từ 4560ac0c sang dcde7078. Source ghi generator/proof riêng không được truy cập. Hai notebook Atakan và portfolio Alex Chilton v155 cung cấp binary/refit/attribution; chưa cung cấp generator số học 64 hàng có thể dùng để dựng từ đầu.
-4. Notebook giải thích của sheroleg v10 dùng mạch đã compile và phép đo/profile để giải thích, không thay thế source generator.
-5. Source INV-51 trong repo và bundle invsqrt_source_zip cũ là nguồn số học thật nhưng khác phiên bản: bảng A/S/stored_slope có 128 hàng, target 321aff83, không phải target e46d90c3 của INV-66. Không được đổi tên wrapper INV-51 thành INV-66 hoặc coi hai generator tương đương vì cùng 46 qubit.
-
-Các đoạn source tải về và archive gốc chỉ nằm trong scratch ignored, không đưa nguyên bundle/notebook/base64/binary vào runtime hay Git. Evidence JSON chỉ giữ nguồn/hash và kết luận truy nguồn.
-
-## Phục hồi độc lập từ artifact — cách 2
-
-Đã bắt đầu phục hồi độc lập, không chờ quyền truy cập generator riêng.
-[recovery_model.py](recovery_model.py) là model số học cổ điển mới viết từ
-quan sát mạch, có bảng intercept/slope thật; không chứa chuỗi cổng hoặc đọc
-artifact. Model chưa phải builder toàn mạch. Hai loader đã thay 2.977 lời gọi cổng trong `circuit.py` bằng [lookup_certificate.py](lookup_certificate.py) và [certificate GF(2)](data/lookup64_certificates.json).
-
-Với x hợp lệ, các invariant đã kiểm tra:
-
-- `k = floor((22 - bit_length(x))/2)`, `n = x * 4**k`.
-- `R = floor(sqrt(16*n))`, `v = R - 4096`, `h = (n - floor(R*(R+1)/16) - 1) mod 1024`.
-- Địa chỉ bảng `a = v >> 6`, tọa độ trong ô `t = v & 63`.
-  Hai loader trả cùng intercept 13 bit và bốn bit thấp của stored slope.
-  Slope đầy đủ có 7 bit; stored slope là `S >> 1`, có 6 bit.
-- Hệ số C được cập nhật bằng sáu hàng cộng/trừ của S, với rounding khác nhau
-  cho dấu dương/âm. Hàm `coefficient` ghi rõ công thức từng hàng; thay bằng
-  một phép nội suy tuyến tính làm tròn cuối cùng sẽ cho kết quả khác.
-- Seed 6 bit dùng ba hàng signed, cắt ở bit 11/10/9, trên các tọa độ Boolean
-  tạm của v. Tích 15 bit dùng mười hàng signed trên residual, có carry phụ
-  thuộc parity của C và carry alias ở hàng cuối.
-
-Các biên operation dưới đây đếm từ 0, loại metadata; biên là exclusive:
-
-| Biên | Trạng thái | Bằng chứng |
-| --- | --- | --- |
-| 609 | n, k sau normalize | Toàn bộ 3.133.452 x |
-| 1638 | v12, h10 sau căn bậc hai | Toàn bộ 3.133.452 x |
-| 2866 | Loader đầu trả A13, Hlow4 | Cả 64 địa chỉ; 27 CCX |
-| 3283 | C13 sau sáu hàng coefficient | Cả 4.096 v và toàn miền x |
-| 3404 | Seed6 | Cả 4.096 v và toàn miền x |
-| 4407 | Product15 trước khi đo bỏ C | Toàn bộ 3.133.452 x |
-| 15006 | Divider trả lại product trên owner mới | Toàn bộ 3.133.452 x |
-| 16761 | Loader hai trả cùng A13, Hlow4 | Cả 64 địa chỉ; 29 CCX |
-| 23877 | x phục hồi, scratch zero | Toàn bộ 3.133.452 x |
-
-Loader hai tái sử dụng năm raw address bit 0..4 làm workspace. Chỉ giữ tọa
-độ R-frame trên q44, thay vì lifecycle bảy bit của INV-51. Đây là khác biệt
-thuật toán/allocation cần triển khai, không thể chỉ thay bảng 128 thành 64 hàng.
-
-### Đối chiếu divider với INV-51
-
-[evidence/divider_correspondence.json](evidence/divider_correspondence.json)
-ghi ánh xạ dây và bốn đoạn khác nhau giữa raw INV-51 [6712,17303) và target
-[4420,15006). Có 10.575 operation khớp sau khi đổi tên dây, bỏ qua ID bit đo
-và giá trị góc quay. Bốn đoạn còn lại gồm tách/đo AND giữ lại, một feature pha
-bị bỏ và một CSWAP chuyển thành HMR/CZ. Đây là correspondence tĩnh; chưa chứng
-minh các rewrite đó từ source hoặc mọi measurement branch.
-
-### Lặp lại kiểm tra phân tích
-
-`validate_recovery.py` chỉ là công cụ kiểm chứng model, không được gọi từ
-`solution.py` hoặc dùng làm đầu vào build. Nó nhận KMX tham chiếu tường minh,
-kiểm hash trước khi diễn giải và không chạy verifier/engine:
-
-```powershell
-.\.venv\Scripts\python.exe src/invsqrt/INV-66/validate_recovery.py --reference-kmx <scratch>/circuit.kmx
+```mermaid
+flowchart LR
+  X[Normalize x] --> R[Consumed root and residual]
+  R --> C[64-row coefficient, seed, product]
+  C --> D[Balanced m37 divider and phase]
+  D --> I[Inverse product and coefficient]
+  I --> E[Decode address and repay HMR debts]
+  E --> U[Inverse root and normalization]
 ```
 
-[evidence/algorithm_recovery.json](evidence/algorithm_recovery.json) ghi hash
-model/validator đã chạy, phạm vi kiểm tra và giới hạn. Kiểm tra thanh ghi toàn
-miền dùng outcome HMR=0. Ngoài ra, 4.096 cặp input/measurement branch ngẫu nhiên
-(512 input, tám trial, seed 660067) khôi phục x/scratch và khớp pha modulo hai
-half-turn với nhánh outcome=0, dùng số hữu tỉ từ giá trị góc in trong KMX.
-Đó là kiểm tra hữu hạn, không phải chứng minh mọi outcome, không phải điểm chấm
-và không phải provenance của một source build mới.
+Số bit được ghi theo little-endian. Các word là phần tử modulo 2**width, không
+tự suy ra signed/real value chỉ từ physical wire. Owner được đổi khi HMR/free;
+token carry/debt phải được tiêu thụ đúng một lần.
 
-## Phần chưa phục hồi và bước tiếp
+1. Với x=1..3133452: k=floor((22-bit_length(x))/2), n=x*4**k.
+2. R=floor(sqrt(16*n)), v=R-4096 (12 bit),
+   h=(n-floor(R*(R+1)/16)-1) mod 1024 (10 bit).
+3. Địa chỉ a=v>>6, tọa độ t=v&63. A[a] có 13 bit, S[a] có 7 bit;
+   stored slope H=S>>1 có 6 bit. Hai loader trả A13 và Hlow4.
 
-1. Chứng minh cơ chế trả phase debt cho mọi outcome. Hai certificate đã phục hồi
-   có 27/29 coordinate bậc hai, 40/44 ma trận đổi cơ sở affine và 10/15 phép đo.
-   Emitter dùng Gaussian elimination GF(2), sinh khớp đúng toàn bộ 1.228/1.749
-   operation lookup. Dữ liệu chỉ mô tả Boolean LUT sáu đầu vào, không chứa góc,
-   ID bit đo, toàn mạch hoặc chuỗi opcode. Caller truyền owner dây/bit đo;
-   phần cleanup cũ vẫn giữ trách nhiệm trả debt, chưa được phục hồi cấp cao.
-2. Viết model quotient/pha của balanced divider và tham số refit 33 góc.
-   Correspondence 10.575 operation không thay thế model pha số học.
-3. Phục hồi inverse product, retire/rebuild slope S4, giải mã các address bit
-   bị đo và cleanup. Kiểm tra x/scratch ở cuối không chứng minh cách dựng các khối.
-4. Dựng lại từ helper số học, register có invariant và bảng/certificate đã track.
-   Giữ các finishing/postprocessing ở module riêng, gồm PP-005; không đưa dữ liệu
-   KMB/KMX hay toàn chuỗi cổng vào runtime.
-5. Commit source trước build sạch từ commit đã push và môi trường mới, đối chiếu
-   đúng 198590 bytes/SHA-256 e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6.
-   Không sửa run/receipt cũ hoặc hạ tiêu chí exact.
-6. Chỉ sau khi các khối đã thành builder số học thật mới cập nhật reconstruction
-   level và gửi review độc lập lại. Review hiện vẫn chưa được xử lý xong.
+R-frame của địa chỉ là
+`r = a5 xor a0 xor a1 xor a2 xor ((a0 xor a2) & a4)`.
+Metadata mượn A11/A12 làm H4/H5 trong coefficient forward; R được frame thành
+parity của S. Sau sáu hàng, metadata được đảo trước overflow update.
 
-Không thiếu KMB hoặc receipt để tiếp tục cách 2. Source private sẽ hữu ích nếu
-được cung cấp hợp lệ, nhưng không còn được coi là điều kiện bắt buộc để làm phân tích.
+## Coefficient, seed và product
 
+Coefficient không phải một phép nội suy rồi làm tròn ở cuối. Với mỗi i=0..5,
+j=5-i, u=S>>(j+1): cộng u+S_j khi t_i=0, trừ u+S_(j-1) khi t_i=1;
+S_-1=0. C là tổng đó với A, modulo 8192. Snapshot A7 và một window 8 bit giữ
+đủ thông tin trả overflow/carry debt khi inverse.
 
-## Nghiệm thu build của bản phục hồi từng phần
+Seed dùng ba tọa độ Boolean tạm của v: p0=v0 xor v2, p1=v1 xor v2,
+p3=v3 xor v2 xor (p0&p1), rồi p0 xor= p1. Khởi tạo ba bit bằng 7; ba hàng
+signed dùng C cắt/làm tròn ở 11/10/9 và thêm bit 1-p tương ứng, cho seed 6 bit.
 
-Source dcb4794910d04a3b86a8d1b3a68bf9adfbab15d6 đã build từ clone GitHub sạch,
-venv mới và cwd ngoài checkout. [Reconstruction check](../../../results/invsqrt/INV-66/reconstructed/build_only/20261115T100613Z-exact-8259a1b7/reconstruction_check.json)
-ghi so bytes độc lập sau build: 198590 bytes và SHA e46d90c3…005b6. Audit ghi
-Python/helper/certificate/PP đã khai báo, không có network/subprocess trong dựng.
-Đây là nghiệm thu exact của bản builder từng phần, không phải nghiệm thu model
-pha hoặc toàn bộ thuật toán cấp cao. Không có verifier run mới.
+Product bắt đầu từ seed6 nối h10 và sentinel ở bit 15. Mười hàng signed cộng
+word 2*C đã dịch vào phần thấp đang lớn dần; carry dùng parity C7 và các bit
+lân cận, hàng cuối có carry alias. Sentinel được trả/freed, còn P15 là word
+modulo 32768 đi vào divider. `signed_product` trong recovery_model.py ghi đầy đủ
+công thức bitwise và rounding, không thay bằng phép nhân real gần đúng.
+
+## Balanced divider m37 và pha
+
+Khởi tạo remainder 14 bit:
+`U = (4094 - 3*v + P12 + P13 - 2*P14) mod 16384`.
+Đây là dạng triangular code có thể HMR P13/P14 rồi dựng lại khi inverse.
+
+Có 24 hàng j=12..35. Với 13 hàng đầu, prev=P_(24-j), cur=P_(23-j)
+(cur=0 ở j=24), s=U13, v0=v&1. Carry Boolean:
+
+```text
+F = v0 xor prev xor (v0&prev) xor (v0&cur)
+    xor (prev&cur) xor (prev&s) xor (cur&s)
+T = ((U&8191) + (2*s-1)*((v>>1)+F+2048)) mod 8192
+U = 2*T + (prev xor v0 xor s xor cur)
+```
+
+Lưu s vào history[j]. Các hàng j>=25 xoay U13 xuống bit 0; giữ phần thấp và
+chỉ cập nhật phần cao có width 13-k bằng phép cộng/trừ tương tự, với k=0 ở
+j=25..27, k=j-26 ở j>=28. Leading offset là 2**(11-k), carry là v_k.
+`divider_forward` và `divider_inverse` là hai recurrence cổ điển độc lập với
+CircuitBuilder; nghịch đảo dựng lại cả 15 bit P, kể cả hai bit cao đã đo.
+
+Sigma25 frame và các XOR v0/v1 biến U/history thành 25 sign bit. Đảo các sign,
+thêm một bit 1, được vòng 26 bit. Năm controlled reflection có centres
+(2,6,24,0,25); controls từ các bit f_i của k:
+(1 xor f2, f3, 1 xor f1 xor f2 xor f3, 1 xor f0 xor f1, 1 xor f0).
+Slots là phép quay (21,22,23,24,25,0,...,20).
+
+Nếu b_i là bit tại slot i, pha tính bằng half-turn, modulo 2:
+
+```text
+sum(i=0..25, alpha_i*b_i)
++ sum(j=0..6, beta_j*[k>=j+1]*b_j)
++ (1/4)*[k>=8]*b7 + (1/2)*[k>=9]*b8 + f1*f3
+```
+
+33 alpha/beta là số dyadic trong data/phase_parameters.json, denominator tới
+2**63. Các giá trị đã được khôi phục, không giả là đã lặp lại search góc upstream.
+Term overflow-8 có giá trị khác 0 ở 13 input nhỏ; PP-004 chuyển implementation
+của nó về normalization, không được bỏ term đó khỏi model. Tất cả 33 generic
+feature và fixed phase đã khớp trên cả 3.133.452 x.
+
+## Inverse arithmetic và S4
+
+Sau divider cleanup, P trở lại đúng word cũ trên owner mới. Loader hai tái sử
+dụng năm address owner 0..4, chỉ giữ R-frame. Coefficient thứ hai tái tạo C;
+conditional Z trả 13 outcome đã đo C lần đầu và XOR các carry transcripts.
+
+Đo S4 (H3), mượn owner đó cho high product bit. Inverse product đi ngược mười
+hàng, trả mọi CarryDebt bằng inverse adder có borrowed dirty wires; đo ba root
+bit 0/1/3 để có workspace. Inverse seed dựng lại chính ba root bit đó, trả pha
+đo tương ứng và khôi phục h10.
+
+Inverse coefficient đảo overflow trước, release snapshot, dựng H5 từ A10..12,
+rebuild S4 bằng hai AND trên A/Hlow và H5, dựng H4 bằng một AND nữa, frame parity
+trong R, rồi đảo sáu hàng coefficient. H4/H5 được HMR với quadratic correction;
+snapshot outcome được trả bằng A7 đã phục hồi. S4 outcome được hoãn sang cleanup.
+
+## Decoder và cleanup: chứng minh mọi outcome
+
+Decoder tám AND trên A13/Hlow4/R trả đúng cả sáu bit địa chỉ trên 64 codewords.
+R-frame được uncompute và release bằng biểu thức quadratic đã biết. Sau đó
+chart raw6+A13+Hlow4 có quadratic rank 64, biểu diễn được mọi Boolean function
+của địa chỉ, kể cả cả 30 debt từ hai loader, Hlow lần đầu và S4.
+
+Với mỗi debt m của function f(a), codebook giải polynomial p trên chart hiện
+tại, kiểm p(a)=f(a) cho cả 64 địa chỉ rồi áp (-1)**(m*p). Dấu HMR
+(-1)**(m*f) triệt tiêu cho mọi m; không cần chọn một measurement sample.
+
+Retirement lần lượt xóa 17 table outputs. Tám bank trung gian có functions
+a1*a2, a4*a5, a3*a4, a0*a1, a0*a2, a0*a1*a2, a3*a5, a3*a4*a5 giữ đủ span cho
+các erasure tiếp theo. Mỗi bank/output được HMR và giải lại polynomial trên
+chart còn sống. Cuối cùng xóa tám bank theo thứ tự nghịch, chỉ còn raw6.
+Không lưu phase opcode list: polynomial được solver dựng từ truth vectors.
+
+Test giữ 55 outcome như các biến ký hiệu độc lập, theo dõi hệ số pha 64 bit cho
+từng biến; mọi hệ số đều zero. Điều này bao phủ đồng thời mọi tổ hợp 2**55 outcome
+trong native Boolean cleanup. Các PP sau đó vẫn là module/phép kiểm riêng.
+Sau cleanup chỉ còn v12+h10+flags4, đủ chạy inverse root/normalization và layout.
+
+## Kiểm chứng và dependency
+
+[evidence/algorithm_recovery.json](evidence/algorithm_recovery.json): toàn miền x,
+cả 4096 v, cả 64 địa chỉ, model chia thuận/nghịch và pha. Công cụ phân tích chỉ
+đọc reference ngoài solution để đối chiếu, không được runtime builder gọi.
+[Tests](tests/test_arithmetic_recovery.py) kiểm symbolic cleanup và các boundary
+chia/hold-coordinate. [Build exact](../../../results/invsqrt/INV-66/reconstructed/build_only/20261115T112732Z-exact-b6c89817/reconstruction_check.json)
+và dependency audit ghi source f04c85e, checkout GitHub sạch, venv mới, cwd khác.
+
+Helper số học chia sẻ chỉ đọc INV-51/circuit.py và 16 math/compatibility objects
+đã chọn trong data/arithmetic_helpers.json; không chạy entry point/gate replay
+hoặc đọc INV-51/tables.json. Finishing gọi PP-001..PP-004, sau đó PP-005 riêng;
+adapter remap tọa độ chain đan xen, không sửa implementation PP của owner khác.
+
+Không còn khối số học/cleanup để lại dưới dạng liệt kê toàn chuỗi cổng.
+Source private và quy trình fit/search tham số không được nhận là đã lấy lại.
+Không có lượt verifier mới hoặc analytic error bound mới; provenance full PASS
+lịch sử vẫn gắn đúng source cũ. Review độc lập HEAD mới còn phải thực hiện.

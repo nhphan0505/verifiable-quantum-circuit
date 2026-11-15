@@ -29,7 +29,7 @@
   },
   "reconstruction_level": "ARITHMETIC_GENERATOR",
   "limitations": [
-    "The arithmetic generator has been independently recovered; exact acceptance of this source revision is pending a new clean build.",
+    "Complete arithmetic generator independently recovered and accepted exact from clean source f04c85e17d8114ec99a9a116da7f3ee44ba7e33c; original private source/search history is not claimed.",
     "Original private generator source and parameter-search history are not claimed; 64-row coefficients, Boolean certificates and 33 dyadic phase parameters are tracked mathematical inputs.",
     "No new verifier run; external receipt and historical grading provenance remain separate.",
     "Independent review on the new source is still required."
@@ -153,7 +153,7 @@
     "input_hash_prefix_from_reference": "dcde7078"
   },
   "algorithm_recovery_analysis": {
-    "status": "ARITHMETIC_MODEL_AND_CONSTRUCTION_READY_FOR_CLEAN_EXACT_BUILD",
+    "status": "COMPLETE_ARITHMETIC_MODEL_AND_GENERATOR_CLEAN_EXACT",
     "runtime_build_dependency": true,
     "files": [
       {
@@ -168,9 +168,15 @@
     "evidence": "evidence/algorithm_recovery.json",
     "divider_correspondence": "evidence/divider_correspondence.json",
     "remaining": [
-      "clean exact acceptance of the new source revision",
-      "independent review"
-    ]
+      "independent review on the new HEAD"
+    ],
+    "clean_build_source_commit": "f04c85e17d8114ec99a9a116da7f3ee44ba7e33c",
+    "clean_build": "results/invsqrt/INV-66/reconstructed/build_only/20261115T112732Z-exact-b6c89817",
+    "native_cleanup_proof": {
+      "codewords": 64,
+      "independent_symbolic_outcomes": 55,
+      "test": "tests/test_arithmetic_recovery.py"
+    }
   },
   "finishing_pipeline": [
     {

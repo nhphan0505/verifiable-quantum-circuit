@@ -1,0 +1,76 @@
+{
+  "source_commit": "f04c85e17d8114ec99a9a116da7f3ee44ba7e33c",
+  "clone_command": [
+    "git",
+    "-c",
+    "core.autocrlf=false",
+    "clone",
+    "--depth",
+    "1",
+    "--single-branch",
+    "--branch",
+    "exp/INV-66-one-toffoli-reconstruction",
+    "https://github.com/nhphan0505/verifiable-quantum-circuit.git",
+    "artifacts/recover66_complete/clean_checkout_f04c85e"
+  ],
+  "environment_setup": [
+    "D:/verifiable-quantum-circuit/.venv/Scripts/python.exe -m venv artifacts/recover66_complete/clean_env_native",
+    "artifacts/recover66_complete/clean_env_native/Scripts/python.exe -m pip install -r requirements.txt",
+    "artifacts/recover66_complete/clean_env_native/Scripts/python.exe -m pip check"
+  ],
+  "build_cwd": "C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-one-toffoli\\verifiable-quantum-circuit\\artifacts\\recover66_complete",
+  "build_command": [
+    "C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-one-toffoli\\verifiable-quantum-circuit\\artifacts\\recover66_complete\\clean_env_native\\Scripts\\python.exe",
+    "clean_checkout_f04c85e/src/invsqrt/INV-66/solution.py",
+    "--config",
+    "clean_checkout_f04c85e/src/invsqrt/INV-66/configs/reconstructed.json"
+  ],
+  "packages": {
+    "kickmix": "1.0.0",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1"
+  },
+  "pip_check": "No broken requirements found.",
+  "source_inputs_checked_against_commit": 19,
+  "original_kmb_read_during_build": false,
+  "original_notebook_or_receipt_read_during_build": false,
+  "inv51_tables_json_read": false,
+  "source_build_only": true,
+  "stage_logs": [
+    {
+      "original_name": "01-affine.log",
+      "tracked_name": "01-affine.stdout.txt",
+      "sha256": "9dd995f44b00bb61971acb6d67d94320a13fe7453a55e5def87ca986a0e8946a"
+    },
+    {
+      "original_name": "02-pairs.log",
+      "tracked_name": "02-pairs.stdout.txt",
+      "sha256": "df8a6125d0b7e4bf2fe74b6c6ede97e1f4825cf99c411e7f530e7b5a651ef05c"
+    },
+    {
+      "original_name": "03-affine-1.log",
+      "tracked_name": "03-affine-1.stdout.txt",
+      "sha256": "f29ef0ffcaad0313c008a94c8b1a8ec21e8f6bc07afe81cef2bbd4cfb3a3c82f"
+    },
+    {
+      "original_name": "03-affine-2.log",
+      "tracked_name": "03-affine-2.stdout.txt",
+      "sha256": "0adc441e27560e11d5031d12f6803832290522fb1258b9610ae1900cb2a07cbd"
+    },
+    {
+      "original_name": "04-rewrite-1.log",
+      "tracked_name": "04-rewrite-1.stdout.txt",
+      "sha256": "f23d5dca0d6c06208113edf332bfef816633e36312a8258abd3d7352b8a5a908"
+    },
+    {
+      "original_name": "05-merge.log",
+      "tracked_name": "05-merge.stdout.txt",
+      "sha256": "75579fe2514c0ff8efd0fc997a0aee5369095114d1111b9d9f0a6e71058bcce0"
+    },
+    {
+      "original_name": "06-relocate.log",
+      "tracked_name": "06-relocate.stdout.txt",
+      "sha256": "36f0efd113679dd2808ca54289a1912c30d401fa786fde9f97276b571b15e3e9"
+    }
+  ]
+}

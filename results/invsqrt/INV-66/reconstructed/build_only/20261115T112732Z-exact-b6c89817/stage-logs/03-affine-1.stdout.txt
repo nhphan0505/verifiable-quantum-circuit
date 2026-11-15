@@ -1,0 +1,26 @@
+{"op": 2921, "line": 2945, "kind": "CCX", "args": ["q44", "q33", "q31"], "condition": null, "depth": 0, "active": 1.0, "stage": "final_layout", "product": "ab", "relation_wires": ["q44"], "relation_constant": 0, "product_identically_zero": false}
+{"op": 4367, "line": 4391, "kind": "CCX", "args": ["q38", "q7", "q8"], "condition": null, "depth": 0, "active": 1.0, "stage": "final_layout", "product": "ab", "relation_wires": ["q8"], "relation_constant": 0, "product_identically_zero": false}
+{"op": 8359, "line": 8383, "kind": "CSWAP", "args": ["q24", "q39", "q8"], "condition": null, "depth": 0, "active": 1.0, "stage": "final_layout", "product": "c(x^y)", "relation_wires": ["q8"], "relation_constant": 1, "product_identically_zero": false}
+{"op": 16820, "line": 16844, "kind": "CCX", "args": ["q8", "q37", "q27"], "condition": null, "depth": 0, "active": 1.0, "stage": "final_layout", "product": "ab", "relation_wires": ["q8"], "relation_constant": 0, "product_identically_zero": false}
+{"op": 19490, "line": 19514, "kind": "CCX", "args": ["q37", "q0", "q8"], "condition": null, "depth": 0, "active": 1.0, "stage": "final_layout", "product": "ab", "relation_wires": ["q0", "q33", "q45"], "relation_constant": 0, "product_identically_zero": false}
+{"op": 19693, "line": 19717, "kind": "CCX", "args": ["q33", "q45", "q8"], "condition": null, "depth": 0, "active": 1.0, "stage": "final_layout", "product": "ab", "relation_wires": ["q31", "q35", "q40", "q42"], "relation_constant": 0, "product_identically_zero": false}
+{"op": 19701, "line": 19725, "kind": "CCX", "args": ["q35", "q42", "q41"], "condition": null, "depth": 0, "active": 1.0, "stage": "final_layout", "product": "ab", "relation_wires": ["q40", "q41"], "relation_constant": 0, "product_identically_zero": false}
+{"op": 20479, "line": 20503, "kind": "CCX", "args": ["q13", "q37", "q27"], "condition": null, "depth": 0, "active": 1.0, "stage": "final_layout", "product": "ab", "relation_wires": ["q13"], "relation_constant": 0, "product_identically_zero": false}
+{"op": 20900, "line": 20924, "kind": "CCX", "args": ["q45", "q42", "q44"], "condition": null, "depth": 0, "active": 1.0, "stage": "final_layout", "product": "ab", "relation_wires": ["q44"], "relation_constant": 0, "product_identically_zero": false}
+{
+ "status": "AUDIT_CANDIDATES_ONLY_NOT_PROVED",
+ "kmx": "C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-one-toffoli\\verifiable-quantum-circuit\\artifacts\\recover66_complete\\clean_checkout_f04c85e\\artifacts\\invsqrt\\INV-66\\20261115T112732Z-exact-b6c89817-finishing\\s2.kmx",
+ "inputs": 3133452,
+ "seed": 0,
+ "operations": 23871,
+ "toffoli_like_static": 1562,
+ "toffoli_like_mean": 1490.7526271345469,
+ "input_restored": true,
+ "scratch_zero": true,
+ "products_tested": 1580,
+ "expected_saving": 9.0,
+ "live_peak": 46,
+ "sample_size": 4156,
+ "seconds": 11.137062199995853
+}
+peak runs: 454 [(2360, 2429, 'final_layout'), (2431, 2484, 'final_layout'), (2486, 2546, 'final_layout'), (2548, 2606, 'final_layout'), (2610, 2657, 'final_layout'), (2659, 2721, 'final_layout'), (2723, 2747, 'final_layout'), (2756, 2858, 'final_layout'), (2897, 2902, 'final_layout'), (2906, 2907, 'final_layout'), (2909, 2910, 'final_layout'), (2912, 2913, 'final_layout'), (2915, 2916, 'final_layout'), (2918, 2919, 'final_layout'), (2946, 2951, 'final_layout'), (2957, 2960, 'final_layout'), (2962, 2963, 'final_layout'), (2965, 2966, 'final_layout'), (2968, 2969, 'final_layout'), (2971, 2972, 'final_layout'), (2999, 3004, 'final_layout'), (3010, 3013, 'final_layout'), (3017, 3020, 'final_layout'), (3022, 3023, 'final_layout'), (3025, 3026, 'final_layout'), (3028, 3029, 'final_layout'), (3056, 3061, 'final_layout'), (3067, 3070, 'final_layout'), (3074, 3077, 'final_layout'), (3081, 3084, 'final_layout'), (3086, 3087, 'final_layout'), (3089, 3090, 'final_layout'), (3117, 3122, 'final_layout'), (3128, 3131, 'final_layout'), (3135, 3138, 'final_layout'), (3142, 3145, 'final_layout'), (3149, 3152, 'final_layout'), (3154, 3155, 'final_layout'), (3181, 3185, 'final_layout'), (3191, 3194, 'final_layout')]

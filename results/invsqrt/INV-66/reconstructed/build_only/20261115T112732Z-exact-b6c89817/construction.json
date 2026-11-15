@@ -1,0 +1,138 @@
+{
+  "cuts": {
+    "normalized": {
+      "cut": 605,
+      "live": 26
+    },
+    "root": {
+      "cut": 1634,
+      "live": 26
+    },
+    "first_lookup": {
+      "cut": 2862,
+      "live": 43
+    },
+    "first_coefficient": {
+      "cut": 3279,
+      "live": 44
+    },
+    "coefficient_metadata_retired": {
+      "cut": 3290,
+      "live": 39
+    },
+    "seed": {
+      "cut": 3399,
+      "live": 45
+    },
+    "product": {
+      "cut": 4402,
+      "live": 44
+    },
+    "divider_entry": {
+      "cut": 4415,
+      "live": 31
+    },
+    "divider_forward": {
+      "cut": 7543,
+      "live": 43
+    },
+    "phase": {
+      "cut": 8532,
+      "live": 43
+    },
+    "divider_return": {
+      "cut": 15006,
+      "live": 31
+    },
+    "second_lookup": {
+      "cut": 16761,
+      "live": 43
+    },
+    "second_coefficient": {
+      "cut": 17175,
+      "live": 44
+    },
+    "coefficient_transcripts_paid": {
+      "cut": 17253,
+      "live": 44
+    },
+    "inverse_product": {
+      "cut": 19574,
+      "live": 41
+    },
+    "seed_cleared": {
+      "cut": 19732,
+      "live": 38
+    },
+    "coefficient_overflow_undone": {
+      "cut": 19784,
+      "live": 38
+    },
+    "coefficient_sources_restored": {
+      "cut": 19820,
+      "live": 40
+    },
+    "coefficient_restored": {
+      "cut": 20552,
+      "live": 38
+    },
+    "table_debts_cleared": {
+      "cut": 22389,
+      "live": 26
+    },
+    "root_restored": {
+      "cut": 23602,
+      "live": 26
+    },
+    "logical_input_restored": {
+      "cut": 23857,
+      "live": 22
+    }
+  },
+  "layout": [
+    [
+      "q30",
+      "q7"
+    ],
+    [
+      "q36",
+      "q8"
+    ],
+    [
+      "q30",
+      "q9"
+    ],
+    [
+      "q40",
+      "q10"
+    ],
+    [
+      "q43",
+      "q11"
+    ],
+    [
+      "q39",
+      "q13"
+    ],
+    [
+      "q45",
+      "q16"
+    ],
+    [
+      "q36",
+      "q17"
+    ],
+    [
+      "q34",
+      "q18"
+    ],
+    [
+      "q40",
+      "q19"
+    ],
+    [
+      "q42",
+      "q20"
+    ]
+  ]
+}

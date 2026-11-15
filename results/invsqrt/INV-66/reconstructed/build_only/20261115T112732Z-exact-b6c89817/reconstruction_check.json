@@ -1,0 +1,194 @@
+{
+  "status": "RECONSTRUCTED_EXACT",
+  "source_commit": "f04c85e17d8114ec99a9a116da7f3ee44ba7e33c",
+  "reconstruction_level": "ARITHMETIC_GENERATOR",
+  "input_sha256": "e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6",
+  "output_sha256": "e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6",
+  "input_bytes": 198590,
+  "output_bytes": 198590,
+  "comparison": "independent full-byte comparison and SHA-256 after clean arithmetic build; only the comparison process reads the original KMB",
+  "postprocessing": {
+    "method": "PP-005",
+    "operation_index": 3292,
+    "rewrites": 1,
+    "precursor_sha256": "dcde70780434501912c5cc032c6dfad25ac694d50da4e8e45cdb65115baa81b2",
+    "finishing": {
+      "hold_chains": [
+        {
+          "chain": [
+            6849,
+            7554
+          ],
+          "gates": [
+            "CCX q11 q6 q8",
+            "CCX q6 q10 q38"
+          ],
+          "hops": 0,
+          "holders": [
+            "q21"
+          ],
+          "expected_toffoli_saving": 1
+        }
+      ],
+      "affine_rounds": [
+        9,
+        0
+      ],
+      "methods": [
+        "PP-001",
+        "PP-002",
+        "PP-003",
+        "PP-004"
+      ]
+    },
+    "construction": {
+      "cuts": {
+        "normalized": {
+          "cut": 605,
+          "live": 26
+        },
+        "root": {
+          "cut": 1634,
+          "live": 26
+        },
+        "first_lookup": {
+          "cut": 2862,
+          "live": 43
+        },
+        "first_coefficient": {
+          "cut": 3279,
+          "live": 44
+        },
+        "coefficient_metadata_retired": {
+          "cut": 3290,
+          "live": 39
+        },
+        "seed": {
+          "cut": 3399,
+          "live": 45
+        },
+        "product": {
+          "cut": 4402,
+          "live": 44
+        },
+        "divider_entry": {
+          "cut": 4415,
+          "live": 31
+        },
+        "divider_forward": {
+          "cut": 7543,
+          "live": 43
+        },
+        "phase": {
+          "cut": 8532,
+          "live": 43
+        },
+        "divider_return": {
+          "cut": 15006,
+          "live": 31
+        },
+        "second_lookup": {
+          "cut": 16761,
+          "live": 43
+        },
+        "second_coefficient": {
+          "cut": 17175,
+          "live": 44
+        },
+        "coefficient_transcripts_paid": {
+          "cut": 17253,
+          "live": 44
+        },
+        "inverse_product": {
+          "cut": 19574,
+          "live": 41
+        },
+        "seed_cleared": {
+          "cut": 19732,
+          "live": 38
+        },
+        "coefficient_overflow_undone": {
+          "cut": 19784,
+          "live": 38
+        },
+        "coefficient_sources_restored": {
+          "cut": 19820,
+          "live": 40
+        },
+        "coefficient_restored": {
+          "cut": 20552,
+          "live": 38
+        },
+        "table_debts_cleared": {
+          "cut": 22389,
+          "live": 26
+        },
+        "root_restored": {
+          "cut": 23602,
+          "live": 26
+        },
+        "logical_input_restored": {
+          "cut": 23857,
+          "live": 22
+        }
+      },
+      "layout": [
+        [
+          "q30",
+          "q7"
+        ],
+        [
+          "q36",
+          "q8"
+        ],
+        [
+          "q30",
+          "q9"
+        ],
+        [
+          "q40",
+          "q10"
+        ],
+        [
+          "q43",
+          "q11"
+        ],
+        [
+          "q39",
+          "q13"
+        ],
+        [
+          "q45",
+          "q16"
+        ],
+        [
+          "q36",
+          "q17"
+        ],
+        [
+          "q34",
+          "q18"
+        ],
+        [
+          "q40",
+          "q19"
+        ],
+        [
+          "q42",
+          "q20"
+        ]
+      ]
+    }
+  },
+  "new_verifier_run": false,
+  "clean_checkout": {
+    "remote": "https://github.com/nhphan0505/verifiable-quantum-circuit.git",
+    "source_commit": "f04c85e17d8114ec99a9a116da7f3ee44ba7e33c",
+    "fresh_environment": true,
+    "cwd_outside_checkout": true,
+    "clean_before_build": "enforced by solution.py Git status and source-byte snapshot preflight"
+  },
+  "dependency_audit": "dependency_audit.json",
+  "historical_full_run": "results/invsqrt/INV-66/reconstructed/full/20261115T042258Z-local-full-7feec4",
+  "historical_full_source_commit": "50f9c29b9ce7647e5e0f96ac7ccffc34cf1860d1"
+}

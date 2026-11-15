@@ -1,4 +1,4 @@
-This is a gate-level Python reconstruction of user-supplied invsqrt.kmb,
+This is an independently recovered arithmetic generator for the supplied invsqrt.kmb,
 SHA-256 e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6.
 
 Reference walkthrough: mizeroluckygall, Quantum Circuits | One Toffoli Less
@@ -7,7 +7,13 @@ and notebook code (stated Apache-2.0), Alex Chilton and Atakan Aldemir for
 shipping the precursor, and the 46-qubit lineage to Syed Asad Ali and
 Ali Haydar Ozdag. Google Quantum AI / Qualtran provide Kickmix and verifier.
 
-The original high-level arithmetic source was not recovered here.
+The complete arithmetic construction and inverse cleanup were independently
+recovered. The original private generator source and parameter-search procedure
+were not obtained. Shared arithmetic/compiler helpers and adapted carry/debt
+formulations are from Syed Asad Ali's Apache-2.0 INV-51 source; see
+../INV-51/LICENSE.txt and ../INV-51/NOTICE.txt. The 64-row coefficient values,
+small Boolean certificates and fixed dyadic phase parameters are mathematical
+inputs, not an embedded submission or source archive.
 This notice preserves the supplied attribution; it does not independently
 establish or relicense every upstream circuit component. Upstream terms
 continue to apply. No license is inferred from a file name or hash.

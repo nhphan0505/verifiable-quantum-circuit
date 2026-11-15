@@ -1,0 +1,2 @@
+verified on 3133452 inputs: endpoint CS at op 8124 (rotation q39 2305843077935410655/9223372036854775808 -> 68721716703/9223372036854775808 ); Clifford site at op 208 ; [x=1] count 1
+wrote C:\Users\ASUS\.codex\worktrees\invsqrt-one-toffoli\verifiable-quantum-circuit\artifacts\recover66_complete\clean_checkout_f04c85e\artifacts\invsqrt\INV-66\20261115T112732Z-exact-b6c89817-finishing\relocated.kmx
