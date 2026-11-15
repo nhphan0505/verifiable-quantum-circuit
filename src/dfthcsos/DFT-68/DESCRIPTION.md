@@ -20,7 +20,7 @@ Hypothesis tái lập: Python phát 15 KMB và NPZ khớp bytes/hash công bố;
 Manifest tác giả ghi tổng 4074 Toffoli mỗi pass của ANGLE và điểm lịch sử 296635967.5935997; đây là công bố nguồn, chưa phải chấm của repo. Baseline DFT-BASELINE là QROM batch 8; không suy điểm cải thiện chỉ từ khác batch hoặc gate count. Chưa có grading mới và không sửa SCORES. Giữ data cuối nguyên bytes; fitting/refit thiếu đầu vào v18 không nằm trong build này. Không claim original ZIP exact; chỉ nghiệm thu component-exact cho tập đầu vào đã cung cấp, container mới deterministic.
 
 ## Kết quả và tái lập
-Build sạch đã thành công từ commit nguồn `7df5dad8ca74a8610dd6597c53057f6cd7f30a4c` trên clone GitHub và venv mới, chạy entry point từ cwd ngoài checkout. Không tạo postprocessing.py. Không chấm hoặc sửa SCORES. Chờ thành viên chấm, sau đó review độc lập; không tự merge.
+Build sạch đã thành công từ commit nguồn `7df5dad8ca74a8610dd6597c53057f6cd7f30a4c` trên clone GitHub và venv mới, chạy entry point từ cwd ngoài checkout. Không tạo postprocessing.py. Mốc này là build-only; kết quả chấm full mới ở phần bên dưới. Chờ review độc lập; không tự merge.
 
 
 ## File bàn giao và cách chạy
@@ -55,7 +55,7 @@ Config `reconstructed`, source commit `7df5dad8ca74a8610dd6597c53057f6cd7f30a4c`
 - [Audit](../../../results/dfthcsos/DFT-68/reconstructed/build_only/20261115T052652Z-build-u3fl7wvi/dependency_audit.json): 22 đường dẫn đọc sau setup/snapshot, không có input ngoài checkout/runtime và file mới tạo của build. Compiler và đóng gói chạy trong một Python process; Git chỉ dùng trước audit để xác minh snapshot/provenance. Không tuyên bố audit Python theo dõi syscall nội bộ thư viện native.
 - [Build report](../../../results/dfthcsos/DFT-68/reconstructed/build_only/20261115T052652Z-build-u3fl7wvi/build.json): 15 loader, tổng 4074 Toffoli/pass theo compiler, serialization và packaging hai lần cho cùng ZIP SHA-256 `fc481755b7b97fa73ae9256e775907b82835b835d5520b3c529440d647bcab8a`.
 
-Mức đạt: COMPONENTS_EXACT và BUILT. ZIP mới chứa 16 file DFTHC ở gốc; notebook Kaggle người dùng cung cấp đóng ZIP chung 18 file với ba bài và prefix dfthcsos/. Hai container phục vụ hai giao diện khác nhau; không tuyên bố toàn ZIP gốc exact. Không chạy lại fitting, exhaustive symbolic proof hoặc official grading, không gọi đây là verifier PASS. Chưa có kết quả chấm mới của nhóm.
+Mức đạt: COMPONENTS_EXACT và BUILT. ZIP mới chứa 16 file DFTHC ở gốc; notebook Kaggle người dùng cung cấp đóng ZIP chung 18 file với ba bài và prefix dfthcsos/. Hai container phục vụ hai giao diện khác nhau; không tuyên bố toàn ZIP gốc exact. Các build-only không chạy lại fitting, exhaustive symbolic proof hoặc official grading; không gọi build-only là verifier PASS. Kết quả chấm riêng được ghi bên dưới.
 
 
 Lặp lại build sạch sau cập nhật metadata nghiệm thu, source commit `5c97b93`:
@@ -64,3 +64,38 @@ Lặp lại build sạch sau cập nhật metadata nghiệm thu, source commit `
 Entry point hoàn tất với cùng ZIP hash và 16 thành phần exact. Đây là build mới,
 không sửa record của mốc nguồn `7df5dad`. Repository checker/scope: 0 lỗi;
 bộ 34 tests repository đã đạt, các thay đổi audit sau đó được kiểm bằng build end-to-end.
+
+
+## Full PASS của nhóm
+
+Config `reconstructed`: [run full](../../../results/dfthcsos/DFT-68/reconstructed/full/20261115T055007Z-local-full-edb6ea/verifier.json),
+[metadata](../../../results/dfthcsos/DFT-68/reconstructed/full/20261115T055007Z-local-full-edb6ea/metadata.json),
+[provenance](../../../results/dfthcsos/DFT-68/reconstructed/full/20261115T055007Z-local-full-edb6ea/provenance.json),
+[giải quyết build cùng hash](../../../results/dfthcsos/DFT-68/reconstructed/full/20261115T055007Z-local-full-edb6ea/review_resolution.json).
+Người dùng chạy notebook bằng kickmix-engine 0.6.0 (Linux/WSL, Python 3.13.18);
+compiler/rebuild trước đó chạy native Windows venv. Không trộn hai môi trường.
+
+Full PASS trên 78080 shots = 1220 địa chỉ x 64. Điểm `296635967.5935997`, lambda_eff
+`46.907347493481`, Toffoli `14810.0`, qubit `427`;
+15 loader, brot=8, batch=5. Error_1 `0.019610371288992456`,
+error_2 `0.019998779892854764`, E_gap `3.914898200000607`.
+E_gap chỉ cao hơn ngưỡng 3.914898 khoảng 2e-7 Ha và error_2 gần ngưỡng 0.02;
+không suy ra biên an toàn rộng hoặc tự thay đổi dữ liệu sau PASS.
+
+Baseline full của nhóm có score `3355599588.3155375`:
+[run đối chứng](../../../results/dfthcsos/DFT-BASELINE/baseline/full/20261113T190138Z-local-full-e2ab8f/verifier.json).
+Baseline/candidate = `11.31218043` lần. Hai mạch khác brot, batch, factorization và
+số địa chỉ; đây là so chi phí toàn phương án, không cô lập tác động của compiler
+hoặc một thay đổi thuật toán. Không quy toàn bộ cải thiện cho giảm Toffoli loader.
+
+Artifact đã chấm có ZIP SHA-256 `fc481755b7b97fa73ae9256e775907b82835b835d5520b3c529440d647bcab8a`, 16 component hashes
+khớp manifest và build. Nguồn thực tế nối về `7df5dad8ca74a8610dd6597c53057f6cd7f30a4c` qua build_run
+`20261115T052652Z-build-u3fl7wvi`, không gán HEAD khi chấm làm SHA nguồn. Notebook giữ nguyên review.json
+báo hai build cùng hash; thêm review_resolution.json và provenance.json thay vì sửa
+record gốc. Verifier submission_sha256 là fingerprint nội dung, không phải ZIP hash;
+ZIP hash được đối chiếu từ upload_artifact trong metadata.
+
+Kết luận: giả thuyết tái dựng từng thành phần được kiểm bằng bytes; phương án cuối
+đạt full PASS thực tế. Dừng tái dựng ở đây, không chạy refit hoặc tối ưu thêm trong
+hướng này. Bước còn lại là review độc lập code–thuật toán, tái lập và bằng chứng
+chấm trên PR #69; chưa có approval/merge.
