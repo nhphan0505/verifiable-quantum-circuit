@@ -13,6 +13,8 @@ Mỗi tiêu đề bên dưới trùng H1 của mô tả và title GitHub Issue. 
 | DQI-27 | [[DQI-27] Thu gọn decoder Schur bằng Narrow Return cursor và giải mã lịch sử, giữ cờ converter ở 890 qubit](DQI-27/DESCRIPTION.md) | https://github.com/nhphan0505/verifiable-quantum-circuit/issues/27 |
 | DQI-39 | [[DQI-39] Tái lập decoder q26 từ mã nguồn và giản lược CNOT giao hoán](DQI-39/DESCRIPTION.md) | https://github.com/nhphan0505/verifiable-quantum-circuit/issues/39 |
 
+| DQI-72 | [[DQI-72] Phục hồi decoder v7 889 qubit bằng emitter Python từ source archive, đối chiếu exact KMB](DQI-72/DESCRIPTION.md) | https://github.com/nhphan0505/verifiable-quantum-circuit/issues/72 |
+
 Tiêu đề phải nêu phần xử lý, cách làm/thay đổi và phạm vi phân biệt với các hướng khác. Không dùng tên chung như “tối ưu baseline” hay chỉ ghi tên file. Quy tắc và ví dụ: [CONTRIBUTING.md](../../CONTRIBUTING.md).
 
 Điểm full/dev_5min: [SCORES.md](SCORES.md). Kết quả từng lần chạy: [results](../../results/dqi/).
