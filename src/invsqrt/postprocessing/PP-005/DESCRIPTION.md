@@ -22,7 +22,7 @@ Benchmark: build raw INV-BASELINE từ source repository (không bật finishing
 
 ## Kết luận ban đầu
 
-API và 13 tests semantic/guard đã đạt; hai lượt smoke riêng PP đã PASS. Tích hợp INV-66 là công việc riêng được người dùng giao cùng yêu cầu; chỉ làm sau kiểm chứng PP. Giữ run/provenance lịch sử, build source mới từ checkout sạch và so exact target. PR experiment sẽ phụ thuộc branch PP để checker scope không cần sửa/bypass. Không merge hoặc đóng Issue trong lượt này.
+API và 13 tests semantic/guard đã đạt; hai lượt smoke riêng PP đã PASS. Tích hợp INV-66 là công việc riêng được người dùng giao cùng yêu cầu; chỉ làm sau kiểm chứng PP. Giữ run/provenance lịch sử, build source mới từ checkout sạch và so exact target. Sau yêu cầu gộp PR của người dùng, phương pháp và integration được nộp chung PR #67; folder và Issue PP vẫn riêng. Checker scope hiện chưa hỗ trợ diff experiment kèm module PP; không sửa/bypass checker trong nhiệm vụ gộp PR. Không merge hoặc đóng Issue trong lượt này.
 
 ## Kết luận kiểm chứng riêng PP
 
