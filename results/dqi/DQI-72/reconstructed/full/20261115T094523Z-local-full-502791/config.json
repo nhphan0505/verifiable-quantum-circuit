@@ -1,0 +1,18 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-72",
+  "config_name": "reconstructed",
+  "mode": "full",
+  "command": [
+    "/mnt/d/GQA/.venv-engine/bin/python",
+    "-m",
+    "kickmix_engine",
+    "verify",
+    "dqi",
+    "/mnt/d/GQA/artifacts/dqi/DQI-72/reconstructed.kmb",
+    "--verifier",
+    "/mnt/d/GQA/verifiers/dqi/verify_submission_dqi.py",
+    "--threads",
+    "4"
+  ]
+}

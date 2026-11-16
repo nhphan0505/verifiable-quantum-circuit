@@ -1,0 +1,31 @@
+{
+  "url": "https://www.kaggle.com/api/v1/datasets/download/syed3000/vqcc-own-circuit-portfolio/dqi_source_zip?datasetVersionNumber=12",
+  "dataset_version": 12,
+  "authentication_used": false,
+  "http_status": 200,
+  "bytes": 8486126,
+  "sha256": "49e2b331d4008afb724985caf1038765b7a910f08838b590bf6e8fb692772763",
+  "checked_at_utc": "2026-11-16T01:39:24.765023+00:00",
+  "dataset_listing": {
+    "url": "https://www.kaggle.com/api/v1/datasets/list?search=vqcc-own-circuit-portfolio",
+    "id": 13072949,
+    "ref": "syed3000/vqcc-own-circuit-portfolio",
+    "isPrivate": false,
+    "currentVersionNumber": 14,
+    "licenseName": "Apache 2.0"
+  },
+  "notebook": {
+    "url": "https://www.kaggle.com/code/syed3000/vqcc-own-circuit-portfolio-notebook",
+    "author": "syed3000",
+    "script_version_id": 369893243,
+    "source": "User-supplied public notebook URL; title, author and version verified from public page HTML"
+  },
+  "dataset_url": "https://www.kaggle.com/datasets/syed3000/vqcc-own-circuit-portfolio/versions/12",
+  "archive_members_sha256": {
+    "LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "NOTICE": "3e0eea3a45192471eb7d3f9ceb8f47c070d45a9e46ee6553ccd60ed17f8bfa13",
+    "README.md": "31684eea2093a19526e7972ee83cc3c5a0ffb991395950640356ff1b68637a91"
+  },
+  "license_notice_match": "LICENSE and NOTICE match the restored copies after line-ending normalization",
+  "verification": "Anonymous curl HTTPS download with --ssl-revoke-best-effort; exact archive bytes SHA-256 equals the supplied source archive. The public notebook HTML alone does not establish dataset attachment; the archive download/hash is the direct source evidence."
+}

@@ -1,0 +1,44 @@
+{
+  "status": "RECONSTRUCTED_EXACT",
+  "source_commit": "9d899c2fe708135ee86f43473084f8288b5865ab",
+  "input": {
+    "bytes": 455590024,
+    "sha256": "7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9"
+  },
+  "output": {
+    "bytes": 455590024,
+    "sha256": "7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9"
+  },
+  "bytes_equal": true,
+  "first_difference": null,
+  "comparison": "Sequential 1 MiB binary blocks plus SHA-256, separate process after build",
+  "clean_checkout": true,
+  "environment": {
+    "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "win32",
+    "os_name": "nt",
+    "windows_version": [
+      10,
+      0,
+      26200,
+      2,
+      ""
+    ],
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    },
+    "runtime_binary_hashes": [
+      {
+        "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Scripts\\python.exe",
+        "sha256": "b70275ad94210fce7548761143be5e177769721045e287bb6c80aac3f928c65b"
+      },
+      {
+        "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\kickmix.cp313-win_amd64.pyd",
+        "sha256": "cf84657d91fb53d7558872ac64969dd5ad88d0bf7fdd8ae5f7e00b8c95fdf4cc"
+      }
+    ]
+  },
+  "manifest": "src/dqi/DQI-72/reconstruction.json"
+}
