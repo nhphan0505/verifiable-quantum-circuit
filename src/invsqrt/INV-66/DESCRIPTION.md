@@ -71,6 +71,14 @@ Implementation rewrite giữ nguyên bytes, chỉ đổi vị trí và đường
 source builder vì thế thay đổi và cần build sạch mới. Các build/full PASS cũ vẫn
 gắn với source commit cũ, không chỉnh provenance hoặc nhận đã review độc lập HEAD mới.
 
+Sau di chuyển, source `77a4ecd57e271c7b11745c2354713fe3019e34cc` đã clone mới từ
+GitHub, tạo venv mới với package pins và chạy build từ cwd ngoài checkout.
+[Record mới](../../../results/invsqrt/INV-66/reconstructed/build_only/20261116T042607Z-exact-5046eee3/reconstruction_check.json)
+đối chiếu toàn bộ 198590 bytes với input gốc sau build, SHA-256 vẫn đúng target;
+audit ghi 19 input source/config và module postprocessing nội bộ, không đọc
+PP-005 ngoài experiment hay KMB/notebook/receipt gốc. 19 component tests đạt;
+checker trusted main trên scope main đạt 0 lỗi. Không có lượt chấm mới.
+
 ## Hypothesis tái lập và nghiệm thu
 
 Hypothesis: các hàm số học, typed cleanup và dữ liệu toán học đã track đủ sinh đúng

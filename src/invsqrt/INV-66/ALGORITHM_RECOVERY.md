@@ -159,3 +159,10 @@ nhưng bàn giao cùng PR67 trên base main, không phụ thuộc PR71 hoặc s�
 Implementation rewrite giữ nguyên bytes từ 1298d954; đường dẫn import/audit thay
 đổi nên cần build sạch mới với source commit thật. Kết quả build/chấm cũ được giữ
 nguyên; không chuyển provenance hoặc nhận đã có approval cho thay đổi này.
+
+Build sạch mới tại source 77a4ecd57e271c7b11745c2354713fe3019e34cc đạt exact
+198590 bytes, SHA-256 e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6.
+Record: results/invsqrt/INV-66/reconstructed/build_only/20261116T042607Z-exact-5046eee3.
+19 arithmetic/postprocessing tests đạt; checker gốc so main đạt 0 lỗi.
+Audit chỉ đọc source/math inputs đã khai báo và intermediate mới; không cần
+PR71 hoặc thư mục PP-005 trong checkout. Chưa có lượt verifier hoặc approval mới.

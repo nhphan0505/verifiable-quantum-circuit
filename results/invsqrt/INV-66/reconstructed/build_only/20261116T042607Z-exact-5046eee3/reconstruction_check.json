@@ -1,0 +1,17 @@
+{
+  "status": "RECONSTRUCTED_EXACT",
+  "source_commit": "77a4ecd57e271c7b11745c2354713fe3019e34cc",
+  "input_sha256": "e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6",
+  "output_sha256": "e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6",
+  "input_bytes": 198590,
+  "output_bytes": 198590,
+  "comparison": "Independent full-byte comparison after clean source build; original KMB read only by this comparison process.",
+  "clean_checkout": true,
+  "fresh_pinned_environment": true,
+  "cwd_outside_checkout": true,
+  "dependency_audit": "dependency_audit.json",
+  "runtime_inputs": 19,
+  "postprocessing_path": "src/invsqrt/INV-66/postprocessing/solution.py",
+  "original_pp005_directory_present": false,
+  "new_verifier_run": false
+}
