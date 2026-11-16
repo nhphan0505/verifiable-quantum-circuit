@@ -10,7 +10,9 @@
     {
       "author": "Syed Asad Ali (as declared in supplied archive)",
       "license": "Apache-2.0",
-      "url": null
+      "url": "https://www.kaggle.com/datasets/syed3000/vqcc-own-circuit-portfolio/versions/12",
+      "notebook_url": "https://www.kaggle.com/code/syed3000/vqcc-own-circuit-portfolio-notebook",
+      "public_source_evidence": "evidence/public_source.json"
     }
   ],
   "reconstruction_level": "RECONSTRUCTED_EXACT: independent source-derived emitters, clean GitHub checkout, pinned new venv",
@@ -27,7 +29,8 @@
     "LICENSE",
     "NOTICE",
     "solution.py",
-    "configs/reconstructed.json"
+    "configs/reconstructed.json",
+    "evidence/public_source.json"
   ],
   "dependencies": [
     {
@@ -832,8 +835,6 @@
     }
   ],
   "limitations": [
-    "No verifier run or score measured for this restoration",
-    "Original release URL not supplied",
     "Only the fixed reconstructed configuration is supported",
     "Python file-open audit plus code inspection; native Kickmix artifact write explicitly recorded"
   ],

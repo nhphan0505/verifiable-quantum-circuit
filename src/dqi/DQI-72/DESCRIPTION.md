@@ -6,7 +6,12 @@ Loại: Tái dựng từ submission và mã nguồn đi kèm.
 
 Người dùng cung cấp archive chứa `dqi.kmb`, `dqi_source.zip` và thư mục source
 đã giải nén. Bundle khai báo tác giả Syed Asad Ali, Apache-2.0; giữ LICENSE,
-NOTICE và attribution khi trích source. Chưa có URL phát hành được xác minh.
+NOTICE và attribution khi trích source. Nguồn công khai: [notebook của syed3000](https://www.kaggle.com/code/syed3000/vqcc-own-circuit-portfolio-notebook)
+và [Kaggle dataset version 12](https://www.kaggle.com/datasets/syed3000/vqcc-own-circuit-portfolio/versions/12).
+Đã tải ẩn danh `dqi_source_zip` (8.486.126 byte), SHA-256 trùng hoàn toàn với
+source ZIP người dùng cung cấp; LICENSE/NOTICE khớp bản giữ trong repo sau chuẩn hóa
+xuống dòng. Xem [bằng chứng nguồn công khai](evidence/public_source.json).
+Archive là bằng chứng nguồn gốc; build chỉ dùng source đã track trong checkout.
 SHA-256 input: `7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9`,
 455.590.024 byte. Source ZIP: `49e2b331d4008afb724985caf1038765b7a910f08838b590bf6e8fb692772763`.
 430 file của bảng kê source khớp hash, gồm 425 file trong src và 5 file đóng gói.
