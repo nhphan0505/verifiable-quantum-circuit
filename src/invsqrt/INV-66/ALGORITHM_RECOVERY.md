@@ -159,3 +159,12 @@ PP-005 dùng lại PR71; diff PR67 trên base dependency chỉ chứa INV-66 và
 tracking của INV-66. Sau khi PR71 merge mới đổi base về main và kiểm lại. Trạng
 thái review thuật toán vẫn cần reviewer độc lập trên source mới; không tự đóng
 review hoặc ghi approval.
+
+Kiểm tra sau commit khôi phục 495c8ea (2026-11-16): checker gốc chạy với
+`--base origin/pp/PP-005-dead-write-hmr --branch exp/INV-66-one-toffoli-reconstruction`
+đạt 0 lỗi; `python -m unittest discover -s scripts/tests -q` đạt 34 tests;
+`python -m unittest discover -s src/invsqrt/postprocessing/PP-005/tests -q`
+đạt 13 tests. Các bài test harness dùng fixture/mock, không phải lượt chấm INV-66.
+19 runtime inputs vẫn khớp dependency audit của build f04c85e; notebook người dùng
+không thuộc commit. Kết quả scope trên dependency không chứng minh đã đủ điều
+kiện merge vào main; PR71 vẫn phải được review/merge trước rồi kiểm lại PR67.
