@@ -1,0 +1,557 @@
+{
+  "repository_url": "https://github.com/nhphan0505/verifiable-quantum-circuit.git",
+  "source_commit": "9d899c2fe708135ee86f43473084f8288b5865ab",
+  "checkout": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal",
+  "working_tree_before": "",
+  "cwd": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115",
+  "command": [
+    "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Scripts\\python.exe",
+    "-B",
+    "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\solution.py",
+    "--config",
+    "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\configs\\reconstructed.json"
+  ],
+  "source_snapshot": [
+    {
+      "path": "src/dqi/DQI-72/DESCRIPTION.md",
+      "bytes": 5754,
+      "sha256": "4149344f5cd6c92fb11a62376c81ef38f3aa55992a8884214dca669c596916b4"
+    },
+    {
+      "path": "src/dqi/DQI-72/LICENSE",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "src/dqi/DQI-72/NOTICE",
+      "bytes": 230,
+      "sha256": "3e0eea3a45192471eb7d3f9ceb8f47c070d45a9e46ee6553ccd60ed17f8bfa13"
+    },
+    {
+      "path": "src/dqi/DQI-72/configs/reconstructed.json",
+      "bytes": 198,
+      "sha256": "01ee47959610a4cb6146ac4d1466b0c7cc265a81db6424cfd40390d3b0be6b64"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/adaptive_gauge64.py",
+      "bytes": 19487,
+      "sha256": "3299627d63c20cf1223dc782cc6d48728f328a237d420f76f2d9260811bc7e5d"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/additive_fft_phase_scan.py",
+      "bytes": 7120,
+      "sha256": "cfbbfd64870a09e0cdd9ec15cccc5f07b0b0267d16fd404451282a8df6c1376a"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/coherent_border.py",
+      "bytes": 2530,
+      "sha256": "05e11f5133a18edb74b5cc2dfa6b9adebb0b1cb96b82553252af03bd40e8c631"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/compact_dual_scale.py",
+      "bytes": 827,
+      "sha256": "a5356c1fd7e1831bde05b2f0cf249048030ba4f2fd1dfefcfdf9ac8c0cf51aa9"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/compact_inverse.py",
+      "bytes": 4635,
+      "sha256": "d78ac34822324f79606235e1cced4d5286737ae7afcc760484ed3f81cab7eaa7"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/compact_inverse22.py",
+      "bytes": 1674,
+      "sha256": "53713d9b3e1ef8c34195ba3613e68411cf650e6bc3a1007a2f732a995802b326"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/compact_six130.py",
+      "bytes": 5282,
+      "sha256": "ee71c254c38e8c68c7fc0c60c2db22fcd2ad51ab5df6988954b9a1328d3cec5a"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/confluent_reference.py",
+      "bytes": 8638,
+      "sha256": "7d190f80a1e68c18db668ad70eeddcc97d0c0fcd2dcc432562674f69165c770d"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/cubic_inverse130.py",
+      "bytes": 13485,
+      "sha256": "b71110b9699fb4beb229fa725fd8a7126ac676e58f328344caffabbc4c96b27a"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/cubic_trace_quotient20.py",
+      "bytes": 2369,
+      "sha256": "5c4e5c8e8241aca141db76d2ce3bc9580a9647e72e895ac6ee9729c1351c6205"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/deferred_fold.py",
+      "bytes": 1287,
+      "sha256": "ed666db7eca6ab1fcacd49f32fe9101fac0a1c9a010d35b2b05cb0bf84c153e3"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/direct_carry_arithmetic.py",
+      "bytes": 7630,
+      "sha256": "555fd0361f6bd6bd1ec7e6def49bdb7b9403d420c9bae18abda37649b0464bb0"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/direct_carry_extractor.py",
+      "bytes": 4656,
+      "sha256": "d3fae7bd85e876f0d309c55575563ac5f73c40a7c5eace2164d8e90a3bfc3cf3"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/direct_carry_first2.py",
+      "bytes": 5957,
+      "sha256": "0be03d5a608ad31078720f425899813d37e45fcedeb3e89b87e3a8f7d81aeb8a"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/dual64_tensor.py",
+      "bytes": 7956,
+      "sha256": "523d25f4128113a66392c41911af26beb0d1223cc9d199e39aa6fc4bf7955c83"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/dual_scale.py",
+      "bytes": 1972,
+      "sha256": "d857fd28bd4ad2a4f0afde66dd8620e21f2ec555bcd4b9777f3bed7e5b852443"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/even_forney_classical.py",
+      "bytes": 3945,
+      "sha256": "e89ed789a8e2058f2dc8651a1f0308d7148ecb3b068932797fc7e106518ce7b7"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/extension24_tensor.py",
+      "bytes": 4841,
+      "sha256": "58707f8c2d09e4245ab84c5f8975deaa635d4e4f3f1e90ee63ba5086398c8de9"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/field_tensor.py",
+      "bytes": 5956,
+      "sha256": "5ff27ee0ee83d5a171430506c2f2abe0956f205ce25e31256cc6f2e04657575f"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/finish_outer_seam.py",
+      "bytes": 6025,
+      "sha256": "67b7ea6170806f691f254ccee95a51abb7f3c80625342475f1c22bc5ec6d8846"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/first3_retained_norm_adapter.py",
+      "bytes": 8140,
+      "sha256": "6d66d5b5a308e56c50fe628cf0cfecda944db7e9189891d32ab628808d1e4cc8"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/fixed_modular_finish.py",
+      "bytes": 6207,
+      "sha256": "ad1243bd20c6c7c45fc440ed0488e496dbd00e92a35dd98c193b11d29bc26286"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/fused_crt_synthesis.py",
+      "bytes": 5086,
+      "sha256": "706d3555240ba60c088bbf50ae2ff9ce0f957b474f9175e917fde99a28cae240"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/gauge_park_core.py",
+      "bytes": 7624,
+      "sha256": "63755be5d5ad910030555721a3484b075446ccecc680b1433fa75ebe89dd5744"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/gauge_park_lender.py",
+      "bytes": 5053,
+      "sha256": "55cc5444cd33997772a7b0a41f50885bee649f486ff068c7cd57148f8a81a0ae"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/gauge_park_outer.py",
+      "bytes": 7881,
+      "sha256": "07d21ce2e4daef77603487eb58bb4082762b19eea0a1c209a9c0c53f17bfe09c"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/gauge_park_paired.py",
+      "bytes": 5508,
+      "sha256": "7ffa6507d69fbd3de4c2f2e7a1eac09fd70eb49b7fa60d3d50468fae4f042320"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/gauge_park_virtual.py",
+      "bytes": 5061,
+      "sha256": "8f4179fe13c009c60367cb61edcac86c34c0dca862fef101b46eaebfed70e002"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/gf24_arithmetic.py",
+      "bytes": 14182,
+      "sha256": "bdb7d8472869b1a1083596976894b45312ec70c7b030d6144ebb6b227abfc999"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/gf24_nested_norm.py",
+      "bytes": 13900,
+      "sha256": "b96e9a84af80118fb9ef207dafad6c1d264987129ba3330a63da2f85ff0efeac"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/inplace_scan.py",
+      "bytes": 4177,
+      "sha256": "de1c4263821da2fd8a325b3d86498b8c7d1fe4fe74d8ce3093f3ff8d24229b8d"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/integrated_pipeline.py",
+      "bytes": 12046,
+      "sha256": "0f1962859040fe4447be075dd6f6c39a5722650ec341a082bf5400acfb08eec9"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/inverse_phase27.py",
+      "bytes": 9478,
+      "sha256": "b0c5695638f727381c5f6888fdaac7b12b24df8a3695d307addc930ecc9bc93f"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/inverse_retained_norm_deferred.py",
+      "bytes": 8462,
+      "sha256": "8cb8eaee9312acc81a3048072ec3ddf721399ba8ccdd7eac94002f9d4ec2da46"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/last_return_retained_norm.py",
+      "bytes": 6156,
+      "sha256": "a27cefbb1380c79d678c1742a4c7defc6bbda97719e41b340e4ecca9a1da5228"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/local_flag_core.py",
+      "bytes": 12742,
+      "sha256": "7e1ec0eb318f23666642048123b726c5175e5a02bd8d9791642dfed7ec4aec8b"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/local_flag_window.py",
+      "bytes": 12827,
+      "sha256": "bd58bbb619c4cf27ad28cec0443a3305b1e3db2af93638c31d09c86e8284dd41"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/low_cached_arithmetic.py",
+      "bytes": 2193,
+      "sha256": "c64cca88f70e41a4d9e1a2f08506112d4f585cbf3a15e796d93a5105e24b12aa"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/low_pipeline.py",
+      "bytes": 6243,
+      "sha256": "8c187dd4bfbc8ce7b7ef9f632d87fe5a6c9964e98239965ba21ca8decc700d75"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/low_space_inverse.py",
+      "bytes": 5485,
+      "sha256": "a9fc14b93db44e49abfd86ee9264e115374d79112fafae08b24b626ef8915c6c"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/lowspace_field.py",
+      "bytes": 5358,
+      "sha256": "8f327cfb37f122690bc111e58f6c45628dbf9ab6796e911c731bc3c594ba69c4"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/lowspace_field130.py",
+      "bytes": 3507,
+      "sha256": "e5e24c094c54a58f255257c30ba00027e431bc6cecebc11b0196a60ae203b82c"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/mask_gauge135.py",
+      "bytes": 5904,
+      "sha256": "8ccf4ef6589f54f5abab89dc21b791aef1991a1451cec0183ac4bcf35439caa5"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/mask_gauge_blocked.py",
+      "bytes": 10162,
+      "sha256": "0583bb931d91bb660108f815bb110d3885b713616b0b928bb3b385b22740a722"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/masked_parked_scale_phase.py",
+      "bytes": 1305,
+      "sha256": "202f391f8be4bbc88b40ed9fede962a6b1cf469dae37b9cf2fb5a733e0a2a0ec"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/modular_quadratic_direct.py",
+      "bytes": 7687,
+      "sha256": "34749a359f131b63c3d18601f51cc6589b2d179c49ebb0212d4d513c23201abc"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/monic_forney.py",
+      "bytes": 7273,
+      "sha256": "98646104740f851ca9646b1cf830fb32bbb1e633ee8d9f94d14bc625588b3e5f"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/narrow_field130.py",
+      "bytes": 7071,
+      "sha256": "f021152bc598f334d854bfba13b9f228cd6a0b751010dde10c9341203bd49bf6"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/nested_norm_inverse.py",
+      "bytes": 4226,
+      "sha256": "f5495e64ae9b2a78899ee4069bf7d854f09fb04cfa1395ffc4740702df4dbe19"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/night_outer.py",
+      "bytes": 6759,
+      "sha256": "8dd322592815fff0cfd07696ae44179901d2733502de21f5aa49afd90ba20200"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/night_reference.py",
+      "bytes": 2733,
+      "sha256": "1c2b36f6202d966086d7bacc46ab2c3b2849a235b94c81cadb61c0b86e85eb4d"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/norm_cached_field.py",
+      "bytes": 4629,
+      "sha256": "f58f5c8fb0297171114e9f4ea2934822f9837f2fda5e9cdf4416dfc680228a9c"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/norm_division.py",
+      "bytes": 3583,
+      "sha256": "8acc4bf6a3608b56dbba540fb07355f4de267b318927b74b853efb811be4c2d3"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/normal_fold.py",
+      "bytes": 3463,
+      "sha256": "8bcaaa6047d9eaf759294e64adcc81c681a9ccbfeaaacc7b14b7e1603f847cc6"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/normal_pipeline.py",
+      "bytes": 4563,
+      "sha256": "e44d71b69df8c0875a8a97e7a5998342e2ac7b8a62520be13499f22aeb4965d7"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/normalization.py",
+      "bytes": 1694,
+      "sha256": "2aaedcc08268bac63435d486a5c79cd49b193ce988a04555778f2a2afbc397ec"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/paired_converter_scale.py",
+      "bytes": 5394,
+      "sha256": "c8f6d09297668b5bcfd197f7328abef5ab7afc1029334b841c30883c46c1a2c5"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/paired_phase62.py",
+      "bytes": 7174,
+      "sha256": "b1e4b759b384a28b1ac557d6b5674319b5403cf53aa03cc0f196b03356d0d150"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/parked_scale_phase.py",
+      "bytes": 2858,
+      "sha256": "07af5f682e7a04b1782f107d38785125c645e537f9ccd50c6efa7b5d4966cbb6"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/phase_inverse12.py",
+      "bytes": 4421,
+      "sha256": "bec0b90a5d3167daaec666c3066e17fc34851d49d5baddcf43dfcccd6a35d28b"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/projective_carry.py",
+      "bytes": 6896,
+      "sha256": "89f66f94bd12b5471a183258fb580ebf2e684cd20f8d424125b1f28a0190565f"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/projective_finish.py",
+      "bytes": 3684,
+      "sha256": "96ea7459a7b242f1112807ee9d7321f1f32de9d95a2a16e0484277d211d5713a"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/projective_finish_infinity3.py",
+      "bytes": 5877,
+      "sha256": "77594ca9ce843028de409474fe9ecac733c0c5f84da5b5573b96f6e02eaddbf8"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/public_geometry.py",
+      "bytes": 1851,
+      "sha256": "a6e410dd457679005c364d91ad191471086daf9f82ade0c9763d4ca13c016cf7"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/quadratic_phase_scan.py",
+      "bytes": 2796,
+      "sha256": "05c6db0470cd7d1e5fbdfc928eaaee9a2c2b4f21f223f1d885db2b6ed3dcd9cf"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/quantum_reciprocal.py",
+      "bytes": 5370,
+      "sha256": "3b2ba08d7a56152c3aa9dbb85159a52c2be119056ee9828cafb1ff2165349078"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/quotient_phase62.py",
+      "bytes": 2892,
+      "sha256": "510b413697d3cd50b3d2c024252552bf294875ab5ff7ffe253f75b437b2fdc06"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/quotient_phase84.py",
+      "bytes": 8736,
+      "sha256": "8dace651bfe5be9467fc1ea20547d97635842c00b4546ea00f4f1286af2bcb94"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/quotient_phase84_mask_guard.py",
+      "bytes": 3704,
+      "sha256": "a7cc4537044ed5f1e02c5cfbd5fd52346e56654a929bd92f1631d071d23100a8"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/quotient_phase85.py",
+      "bytes": 3345,
+      "sha256": "2302af0cec0d9bc714097c14585cbcf3f963e91e991f05e8ab839f8f87f95d2f"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/raw_gap2_bezout.py",
+      "bytes": 6289,
+      "sha256": "f63e78a80383a51cfcfa4a97e96863b9968e55e8a88a87da9652e2f0e446b80e"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/raw_query_extractor.py",
+      "bytes": 7419,
+      "sha256": "6fdffebf05c304261abd9273219ed36c20206e024a627b0a5f31f246d22f5c3c"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/raw_toeplitz.py",
+      "bytes": 956,
+      "sha256": "f3f6f76448a8965b0d40464b14b7db5459b379c670a18ec330ce6f74f3a98d60"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/raw_window_tensor.py",
+      "bytes": 5398,
+      "sha256": "6e801adee808e928778b9793e31611d639de6a34a1fa6974133a829f8eaaf91f"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/raw_window_transpose.py",
+      "bytes": 4139,
+      "sha256": "c6ad98c84c756e5cdf07f142c9d93cfc568d5a3ba7af14852e85cdf5d09553fa"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/rolling_tail.py",
+      "bytes": 10717,
+      "sha256": "fa5cc8a0e4f3124355825ea74ddd42c37be6a59b25e784a6a73951d1637b6463"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/rolling_tail_conditional.py",
+      "bytes": 3900,
+      "sha256": "86eb5ca81c7c7fd3f6ecb52a261ec2ae254efd9a6c837c9b33998d60ed98a8c6"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/rolling_tail_deferred.py",
+      "bytes": 5594,
+      "sha256": "5ae298f8e1a14500cb8ca5763e3fd8626b4e2c7b84367dc6994d2229fe9bf137"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/rolling_tail_early.py",
+      "bytes": 5716,
+      "sha256": "270abf30788db64ae1e91d3a0b13637d03493800899933f6202644adbb56f4a8"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/scalar_inverse_phase.py",
+      "bytes": 5784,
+      "sha256": "c282f255da58547f7b2c773a1e0a2a45b5aedaf528cb2eb0d72007a2c1ec8bb3"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/scalar_seed.py",
+      "bytes": 3557,
+      "sha256": "9a64c32c9965e4882b960d18bccfc8735196d81ab6463331b2ed24ec3d94c5a4"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/scalar_seed_padded.py",
+      "bytes": 3931,
+      "sha256": "a38c716fc6b37c81b6892de2ee1b85cf087815cf904ee7a4a1be74b934c35a75"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/scan10.py",
+      "bytes": 2694,
+      "sha256": "14a4e8e90dcc3b5f4b0dc3cc4ad5e306ebe55c87ca4185bc583f1ed9311f8b21"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/sized_field130.py",
+      "bytes": 7739,
+      "sha256": "53bdc97b48a037be36a3fa3847b3208aab0209c5554ddba68e2e0809e1a484a7"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/third_pivot_chart.py",
+      "bytes": 5606,
+      "sha256": "ea8983c56196d61f476ac43988625dea4a0cb09b623ff49c45fe5abb3b3cd6be"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/tower_inverse.py",
+      "bytes": 13658,
+      "sha256": "71a25e24bbdae241f1c7f0917e523d3c48d71c6c05412c058584f8fbde780ffd"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/transpose14_core.py",
+      "bytes": 12819,
+      "sha256": "8b5eb93766ac6d9ef638594829ec8f6d27945e84b610c718b4cf9bea73ab039d"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/transpose14_window.py",
+      "bytes": 15241,
+      "sha256": "1c25f660a58f7907602e60cfc32fbfc51a2775023cc911e33d5d10c2860236b4"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/transpose_handoff_core.py",
+      "bytes": 9247,
+      "sha256": "fffc577ac9e1714834c861d293dc2e7da0b26be41e9638abf5d3ad42e697aba1"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/transpose_handoff_outer.py",
+      "bytes": 7965,
+      "sha256": "ad6ea448f621bcb506f2376e39330c24d3e5039b7868606a440d019d087fb827"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/unit_jet_tensor.py",
+      "bytes": 8893,
+      "sha256": "370b0099892ba9cec432c956ea8e9a34576d0760dc0f6f196b5d0c940193ab17"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/unit_toeplitz.py",
+      "bytes": 3333,
+      "sha256": "8f3b8b9f600e02e5d3c421b9f81401c57fba2a2244846a8decdbfd8d43160f7c"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/v7_pipeline.py",
+      "bytes": 13893,
+      "sha256": "c1b0c03013fad172d34db38df1673f785515a10a0c4378d35b204a5082a6b53d"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/virtual_divisor.py",
+      "bytes": 4947,
+      "sha256": "b18f90a0a020a7f9bef5fa23f5ac33085fdd6a3287a44ffb79f65b36ccbd7fe8"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/window_forward_retained_flag.py",
+      "bytes": 4997,
+      "sha256": "8d84b64de0c7d221a418afbabf913dd9a5fd5d53993ab81525538b1f9b067200"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/window_tensor_shared.py",
+      "bytes": 5965,
+      "sha256": "683d02a8640cbcca0013ca685d00a8212b035c31915779fcbe16110514e24ae8"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/window_transpose_handoff.py",
+      "bytes": 7087,
+      "sha256": "bb8423494ded91d4b42e83b147de4d45cf5bdb87695788ea66ef73cc3f817b21"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/window_transpose_shared.py",
+      "bytes": 4948,
+      "sha256": "8d74cd453e5c3c38d10396e8d9b6ab8c2f89f464c2c90dfb62863ef32cf23b18"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/zero_erasure.py",
+      "bytes": 1483,
+      "sha256": "e0730bb7b4a15e4ab95ac0ebb8ea6c36f7b1d55587a981b58604c4f8ab962362"
+    },
+    {
+      "path": "src/dqi/DQI-72/decoder/zero_mask_scan.py",
+      "bytes": 3684,
+      "sha256": "cacf6f97a639ff6b89d500e9cb9e2d427819ba461635cd6407a573d1668b53f1"
+    },
+    {
+      "path": "src/dqi/DQI-72/reconstruction.json",
+      "bytes": 61962,
+      "sha256": "f7bf9ff60bcb6c9ff1003ac6aec041d733b4828abafbd7f8af4d726cbb37b97e"
+    },
+    {
+      "path": "src/dqi/DQI-72/solution.py",
+      "bytes": 7946,
+      "sha256": "a25c954bddae700156a5a8a80b624ae693d01bf3d0efbd99180695cb6f2d2704"
+    }
+  ],
+  "started_at": "2026-11-15T08:24:58.110319+00:00",
+  "setup_commands": [
+    "First clean-build-1 was cloned directly from the repository URL; no source was copied from the development workspace.",
+    "git -C clean-build-1 fetch --depth 1 origin exp/DQI-72-v7-source-reconstruction",
+    "git -C clean-build-1 worktree add --detach D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal 9d899c2fe708135ee86f43473084f8288b5865ab",
+    "D:/GQA/.venv/Scripts/python.exe -m venv .venv",
+    "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Scripts\\python.exe -m pip install --timeout 10 --retries 1 -r requirements.txt"
+  ],
+  "git_common_dir": "D:/GQA/artifacts/decompiler/7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9/inspection-20261115/clean-build-1/.git",
+  "working_tree_after": "",
+  "pip_check": "No broken requirements found."
+}

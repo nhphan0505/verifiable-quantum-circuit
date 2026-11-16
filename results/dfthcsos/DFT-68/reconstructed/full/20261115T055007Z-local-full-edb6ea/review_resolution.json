@@ -1,0 +1,17 @@
+{
+  "status": "RESOLVED",
+  "original_review_unchanged": true,
+  "selected_build_run": "results/dfthcsos/DFT-68/reconstructed/build_only/20261115T052652Z-build-u3fl7wvi",
+  "source_commit": "7df5dad8ca74a8610dd6597c53057f6cd7f30a4c",
+  "reason": "The artifact in the primary workspace was copied from the accepted 7df5dad clean build; the later 5c97b93 clean build produced byte-identical components/ZIP and did not replace that primary artifact. Both immutable build records share the grading hash. This links to the known actual original copy, not current HEAD.",
+  "artifact_sha256": "fc481755b7b97fa73ae9256e775907b82835b835d5520b3c529440d647bcab8a",
+  "checks": [
+    "Full verifier stdout equals verifier.json; metadata PASS/exit code and full command verified.",
+    "1220 addresses x 64 shots = 78080.",
+    "ZIP hash and every component hash match recorded build and expected source targets."
+  ],
+  "limitations": [
+    "Full PASS is verifier evidence, not a replay of fitting or an exhaustive symbolic phase proof.",
+    "Original Kaggle all-task ZIP not supplied; container original-exact not claimed."
+  ]
+}

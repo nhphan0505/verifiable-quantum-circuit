@@ -1,0 +1,36 @@
+{
+  "track": "dfthcsos",
+  "experiment_id": "DFT-68",
+  "config_name": "reconstructed",
+  "source_commit": "7df5dad8ca74a8610dd6597c53057f6cd7f30a4c",
+  "source_path": "src/dfthcsos/DFT-68/solution.py",
+  "source_sha256": "0379eba02b89e0a25d9450a36364a91f93f0427f56fb13c70de0f1a5c31bd12d",
+  "build_config_path": "src/dfthcsos/DFT-68/configs/reconstructed.json",
+  "build_config_sha256": "a14ef76b5fdfa7dde595162e4baa75f232990901dd58b3788f12ba1b3d41658a",
+  "artifact_path": "artifacts/dfthcsos/DFT-68/reconstructed.zip",
+  "artifact_sha256": "fc481755b7b97fa73ae9256e775907b82835b835d5520b3c529440d647bcab8a",
+  "build_run": null,
+  "build_command": [
+    "D:\\GQA\\artifacts\\dfthc68-clean-build\\.venv\\Scripts\\python.exe",
+    "D:\\GQA\\artifacts\\dfthc68-clean-build\\src\\dfthcsos\\DFT-68\\solution.py",
+    "--config",
+    "D:\\GQA\\artifacts\\dfthc68-clean-build\\src\\dfthcsos\\DFT-68\\configs\\reconstructed.json"
+  ],
+  "dependency_sha256": {
+    "src/dfthcsos/DFT-68/solution.py": "0379eba02b89e0a25d9450a36364a91f93f0427f56fb13c70de0f1a5c31bd12d",
+    "src/dfthcsos/DFT-68/circuit.py": "244b4d1584da6e9bb02193fd94e5cd4d5a5a71675f06c74c1dddfd7da768f6d7",
+    "src/dfthcsos/DFT-68/data.json": "de05abde26e7676dd28607e15471c7af51076253926ee0c014bcce3f995f4aba",
+    "src/dfthcsos/DFT-68/reconstruction.json": "30abf0a8b1ccad8492918210043e485c835ccdb8cb0e2681df63218ce51a044f",
+    "src/dfthcsos/DFT-68/configs/reconstructed.json": "a14ef76b5fdfa7dde595162e4baa75f232990901dd58b3788f12ba1b3d41658a",
+    "src/common/package_submission.py": "4956fdaed87e93c550617e1f8d091637e737c1d085df86a1f8ab288a5e3ad1bf"
+  },
+  "environment": {
+    "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+    "os": "Windows-11-10.0.26200-SP0",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    }
+  }
+}

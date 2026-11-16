@@ -1,0 +1,1642 @@
+{
+  "checkout": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal",
+  "runtime_roots": [
+    "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv",
+    "C:\\Program Files\\Python313"
+  ],
+  "entrypoint": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\solution.py",
+  "subprocesses_allowed": false,
+  "accesses": [
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\__pycache__\\_compat_pickle.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\__pycache__\\base64.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\__pycache__\\contextvars.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\__pycache__\\copy.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\__pycache__\\dataclasses.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\__pycache__\\datetime.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\__pycache__\\decimal.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\__pycache__\\fractions.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\__pycache__\\ipaddress.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\__pycache__\\numbers.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\__pycache__\\pickle.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\__pycache__\\platform.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\__pycache__\\quopri.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\__pycache__\\string.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\ctypes\\__pycache__\\__init__.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\ctypes\\__pycache__\\_endian.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\email\\__pycache__\\_encoded_words.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\email\\__pycache__\\_parseaddr.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\email\\__pycache__\\_policybase.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\email\\__pycache__\\base64mime.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\email\\__pycache__\\charset.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\email\\__pycache__\\encoders.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\email\\__pycache__\\errors.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\email\\__pycache__\\feedparser.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\email\\__pycache__\\header.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\email\\__pycache__\\iterators.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\email\\__pycache__\\message.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\email\\__pycache__\\parser.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\email\\__pycache__\\quoprimime.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\email\\__pycache__\\utils.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\importlib\\metadata\\__pycache__\\_adapters.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\importlib\\metadata\\__pycache__\\_text.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\sysconfig\\__pycache__\\__init__.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\urllib\\__pycache__\\__init__.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\urllib\\__pycache__\\parse.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\python313.zip",
+      "operation": "read",
+      "count": 3
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\kickmix-1.0.0.dist-info\\METADATA",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy-2.5.4.dist-info\\METADATA",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\__pycache__\\__config__.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\__pycache__\\__init__.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\__pycache__\\_array_api_info.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\__pycache__\\_distributor_init.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\__pycache__\\_expired_attrs_2_0.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\__pycache__\\_globals.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\__pycache__\\_pytesttester.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\__pycache__\\dtypes.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\__pycache__\\exceptions.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\__pycache__\\version.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_core\\__pycache__\\__init__.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_core\\__pycache__\\_add_newdocs.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_core\\__pycache__\\_add_newdocs_scalars.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_core\\__pycache__\\_asarray.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_core\\__pycache__\\_dtype.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_core\\__pycache__\\_dtype_ctypes.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_core\\__pycache__\\_exceptions.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_core\\__pycache__\\_internal.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_core\\__pycache__\\_methods.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_core\\__pycache__\\_string_helpers.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_core\\__pycache__\\_type_aliases.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_core\\__pycache__\\_ufunc_config.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_core\\__pycache__\\arrayprint.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_core\\__pycache__\\einsumfunc.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_core\\__pycache__\\fromnumeric.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_core\\__pycache__\\function_base.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_core\\__pycache__\\getlimits.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_core\\__pycache__\\memmap.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_core\\__pycache__\\multiarray.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_core\\__pycache__\\numeric.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_core\\__pycache__\\numerictypes.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_core\\__pycache__\\overrides.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_core\\__pycache__\\printoptions.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_core\\__pycache__\\records.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_core\\__pycache__\\shape_base.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_core\\__pycache__\\umath.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_typing\\__pycache__\\__init__.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_typing\\__pycache__\\_array_like.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_typing\\__pycache__\\_char_codes.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_typing\\__pycache__\\_dtype_like.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_typing\\__pycache__\\_nbit.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_typing\\__pycache__\\_nbit_base.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_typing\\__pycache__\\_nested_sequence.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_typing\\__pycache__\\_scalars.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_typing\\__pycache__\\_shape.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_typing\\__pycache__\\_ufunc.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_utils\\__pycache__\\__init__.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_utils\\__pycache__\\_conversions.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\_utils\\__pycache__\\_inspect.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\lib\\__pycache__\\__init__.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\lib\\__pycache__\\_array_utils_impl.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\lib\\__pycache__\\_arraypad_impl.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\lib\\__pycache__\\_arraysetops_impl.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\lib\\__pycache__\\_arrayterator_impl.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\lib\\__pycache__\\_datasource.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\lib\\__pycache__\\_format_impl.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\lib\\__pycache__\\_function_base_impl.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\lib\\__pycache__\\_histograms_impl.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\lib\\__pycache__\\_index_tricks_impl.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\lib\\__pycache__\\_iotools.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\lib\\__pycache__\\_nanfunctions_impl.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\lib\\__pycache__\\_npyio_impl.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\lib\\__pycache__\\_polynomial_impl.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\lib\\__pycache__\\_scimath_impl.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\lib\\__pycache__\\_shape_base_impl.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\lib\\__pycache__\\_stride_tricks_impl.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\lib\\__pycache__\\_twodim_base_impl.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\lib\\__pycache__\\_type_check_impl.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\lib\\__pycache__\\_ufunclike_impl.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\lib\\__pycache__\\_utils_impl.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\lib\\__pycache__\\_version.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\lib\\__pycache__\\array_utils.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\lib\\__pycache__\\format.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\lib\\__pycache__\\introspect.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\lib\\__pycache__\\mixins.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\lib\\__pycache__\\npyio.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\lib\\__pycache__\\scimath.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\lib\\__pycache__\\stride_tricks.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\linalg\\__pycache__\\__init__.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\linalg\\__pycache__\\_linalg.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\matrixlib\\__pycache__\\__init__.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\numpy\\matrixlib\\__pycache__\\defmatrix.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\.venv\\Lib\\site-packages\\scipy-1.18.1.dist-info\\METADATA",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\artifacts\\dqi\\DQI-72\\reconstructed.build.json",
+      "operation": "write",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\artifacts\\dqi\\DQI-72\\reconstructed.file-audit.json",
+      "operation": "write",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\artifacts\\dqi\\DQI-72\\reconstructed.kmb",
+      "operation": "native_write",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\artifacts\\dqi\\DQI-72\\reconstructed.kmb",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\configs\\reconstructed.json",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\adaptive_gauge64.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\additive_fft_phase_scan.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\coherent_border.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\compact_dual_scale.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\compact_inverse.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\compact_inverse22.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\compact_six130.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\confluent_reference.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\cubic_inverse130.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\cubic_trace_quotient20.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\deferred_fold.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\direct_carry_arithmetic.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\direct_carry_extractor.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\direct_carry_first2.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\dual64_tensor.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\dual_scale.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\even_forney_classical.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\extension24_tensor.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\field_tensor.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\finish_outer_seam.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\first3_retained_norm_adapter.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\fixed_modular_finish.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\fused_crt_synthesis.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\gauge_park_core.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\gauge_park_lender.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\gauge_park_outer.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\gauge_park_paired.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\gauge_park_virtual.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\gf24_arithmetic.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\gf24_nested_norm.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\inplace_scan.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\integrated_pipeline.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\inverse_phase27.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\inverse_retained_norm_deferred.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\last_return_retained_norm.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\local_flag_core.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\local_flag_window.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\low_cached_arithmetic.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\low_pipeline.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\low_space_inverse.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\lowspace_field.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\lowspace_field130.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\mask_gauge135.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\mask_gauge_blocked.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\masked_parked_scale_phase.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\modular_quadratic_direct.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\monic_forney.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\narrow_field130.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\nested_norm_inverse.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\night_outer.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\night_reference.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\norm_cached_field.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\norm_division.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\normal_fold.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\normal_pipeline.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\normalization.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\paired_converter_scale.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\paired_phase62.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\parked_scale_phase.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\phase_inverse12.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\projective_carry.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\projective_finish.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\projective_finish_infinity3.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\public_geometry.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\quadratic_phase_scan.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\quantum_reciprocal.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\quotient_phase62.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\quotient_phase84.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\quotient_phase84_mask_guard.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\quotient_phase85.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\raw_gap2_bezout.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\raw_query_extractor.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\raw_toeplitz.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\raw_window_tensor.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\raw_window_transpose.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\rolling_tail.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\rolling_tail_conditional.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\rolling_tail_deferred.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\rolling_tail_early.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\scalar_inverse_phase.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\scalar_seed.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\scalar_seed_padded.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\scan10.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\sized_field130.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\third_pivot_chart.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\tower_inverse.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\transpose14_core.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\transpose14_window.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\transpose_handoff_core.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\transpose_handoff_outer.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\unit_jet_tensor.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\unit_toeplitz.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\v7_pipeline.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\virtual_divisor.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\window_forward_retained_flag.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\window_tensor_shared.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\window_transpose_handoff.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\window_transpose_shared.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\zero_erasure.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\__pycache__\\zero_mask_scan.cpython-313.pyc",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\adaptive_gauge64.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\additive_fft_phase_scan.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\coherent_border.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\compact_dual_scale.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\compact_inverse.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\compact_inverse22.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\compact_six130.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\confluent_reference.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\cubic_inverse130.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\cubic_trace_quotient20.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\deferred_fold.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\direct_carry_arithmetic.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\direct_carry_extractor.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\direct_carry_first2.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\dual64_tensor.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\dual_scale.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\even_forney_classical.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\extension24_tensor.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\field_tensor.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\finish_outer_seam.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\first3_retained_norm_adapter.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\fixed_modular_finish.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\fused_crt_synthesis.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\gauge_park_core.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\gauge_park_lender.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\gauge_park_outer.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\gauge_park_paired.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\gauge_park_virtual.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\gf24_arithmetic.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\gf24_nested_norm.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\inplace_scan.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\integrated_pipeline.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\inverse_phase27.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\inverse_retained_norm_deferred.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\last_return_retained_norm.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\local_flag_core.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\local_flag_window.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\low_cached_arithmetic.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\low_pipeline.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\low_space_inverse.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\lowspace_field.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\lowspace_field130.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\mask_gauge135.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\mask_gauge_blocked.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\masked_parked_scale_phase.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\modular_quadratic_direct.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\monic_forney.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\narrow_field130.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\nested_norm_inverse.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\night_outer.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\night_reference.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\norm_cached_field.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\norm_division.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\normal_fold.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\normal_pipeline.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\normalization.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\paired_converter_scale.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\paired_phase62.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\parked_scale_phase.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\phase_inverse12.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\projective_carry.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\projective_finish.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\projective_finish_infinity3.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\public_geometry.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\quadratic_phase_scan.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\quantum_reciprocal.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\quotient_phase62.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\quotient_phase84.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\quotient_phase84_mask_guard.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\quotient_phase85.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\raw_gap2_bezout.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\raw_query_extractor.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\raw_toeplitz.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\raw_window_tensor.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\raw_window_transpose.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\rolling_tail.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\rolling_tail_conditional.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\rolling_tail_deferred.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\rolling_tail_early.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\scalar_inverse_phase.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\scalar_seed.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\scalar_seed_padded.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\scan10.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\sized_field130.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\third_pivot_chart.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\tower_inverse.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\transpose14_core.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\transpose14_window.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\transpose_handoff_core.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\transpose_handoff_outer.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\unit_jet_tensor.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\unit_toeplitz.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\v7_pipeline.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\virtual_divisor.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\window_forward_retained_flag.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\window_tensor_shared.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\window_transpose_handoff.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\window_transpose_shared.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\zero_erasure.py",
+      "operation": "read",
+      "count": 1
+    },
+    {
+      "path": "D:\\GQA\\artifacts\\decompiler\\7cbe8ecf6f6e9743529b574f019504bb1712ce06fbb570c719ce9d9e2c914cd9\\inspection-20261115\\clean-build-minimal\\src\\dqi\\DQI-72\\decoder\\zero_mask_scan.py",
+      "operation": "read",
+      "count": 1
+    }
+  ],
+  "scope": "Python audit open events; native artifact output explicitly recorded"
+}

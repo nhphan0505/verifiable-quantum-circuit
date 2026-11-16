@@ -1,0 +1,28 @@
+{
+  "read_paths": [
+    "D:\\GQA\\artifacts\\dfthc68-clean-build\\artifacts\\dfthcsos\\DFT-68\\build-u3fl7wvi\\components\\angle_k_0.kmb",
+    "D:\\GQA\\artifacts\\dfthc68-clean-build\\artifacts\\dfthcsos\\DFT-68\\build-u3fl7wvi\\components\\angle_k_1.kmb",
+    "D:\\GQA\\artifacts\\dfthc68-clean-build\\artifacts\\dfthcsos\\DFT-68\\build-u3fl7wvi\\components\\angle_k_10.kmb",
+    "D:\\GQA\\artifacts\\dfthc68-clean-build\\artifacts\\dfthcsos\\DFT-68\\build-u3fl7wvi\\components\\angle_k_11.kmb",
+    "D:\\GQA\\artifacts\\dfthc68-clean-build\\artifacts\\dfthcsos\\DFT-68\\build-u3fl7wvi\\components\\angle_k_12.kmb",
+    "D:\\GQA\\artifacts\\dfthc68-clean-build\\artifacts\\dfthcsos\\DFT-68\\build-u3fl7wvi\\components\\angle_k_13.kmb",
+    "D:\\GQA\\artifacts\\dfthc68-clean-build\\artifacts\\dfthcsos\\DFT-68\\build-u3fl7wvi\\components\\angle_k_14.kmb",
+    "D:\\GQA\\artifacts\\dfthc68-clean-build\\artifacts\\dfthcsos\\DFT-68\\build-u3fl7wvi\\components\\angle_k_2.kmb",
+    "D:\\GQA\\artifacts\\dfthc68-clean-build\\artifacts\\dfthcsos\\DFT-68\\build-u3fl7wvi\\components\\angle_k_3.kmb",
+    "D:\\GQA\\artifacts\\dfthc68-clean-build\\artifacts\\dfthcsos\\DFT-68\\build-u3fl7wvi\\components\\angle_k_4.kmb",
+    "D:\\GQA\\artifacts\\dfthc68-clean-build\\artifacts\\dfthcsos\\DFT-68\\build-u3fl7wvi\\components\\angle_k_5.kmb",
+    "D:\\GQA\\artifacts\\dfthc68-clean-build\\artifacts\\dfthcsos\\DFT-68\\build-u3fl7wvi\\components\\angle_k_6.kmb",
+    "D:\\GQA\\artifacts\\dfthc68-clean-build\\artifacts\\dfthcsos\\DFT-68\\build-u3fl7wvi\\components\\angle_k_7.kmb",
+    "D:\\GQA\\artifacts\\dfthc68-clean-build\\artifacts\\dfthcsos\\DFT-68\\build-u3fl7wvi\\components\\angle_k_8.kmb",
+    "D:\\GQA\\artifacts\\dfthc68-clean-build\\artifacts\\dfthcsos\\DFT-68\\build-u3fl7wvi\\components\\angle_k_9.kmb",
+    "D:\\GQA\\artifacts\\dfthc68-clean-build\\artifacts\\dfthcsos\\DFT-68\\build-u3fl7wvi\\components\\submission.npz",
+    "D:\\GQA\\artifacts\\dfthc68-clean-build\\artifacts\\dfthcsos\\DFT-68\\build-u3fl7wvi\\repeat.zip",
+    "D:\\GQA\\artifacts\\dfthc68-clean-build\\artifacts\\dfthcsos\\DFT-68\\reconstructed.zip",
+    "D:\\GQA\\artifacts\\dfthc68-clean-build\\src\\common\\__pycache__\\package_submission.cpython-313.pyc",
+    "D:\\GQA\\artifacts\\dfthc68-clean-build\\src\\dfthcsos\\DFT-68\\__pycache__\\circuit.cpython-313.pyc",
+    "D:\\GQA\\artifacts\\dfthc68-clean-build\\src\\dfthcsos\\DFT-68\\data.json",
+    "D:\\GQA\\artifacts\\dfthc68-clean-build\\src\\dfthcsos\\DFT-68\\reconstruction.json"
+  ],
+  "unexpected_inputs": [],
+  "scope": "Python open audit after explicit config, snapshot and runtime checks; no compiler subprocesses; Git used only for provenance."
+}

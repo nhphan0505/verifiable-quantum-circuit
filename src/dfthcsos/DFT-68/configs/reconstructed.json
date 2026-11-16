@@ -1,0 +1,5 @@
+{
+  "batch_size": 5,
+  "word_bits": 8,
+  "plan_set": "author_frozen_v12"
+}
