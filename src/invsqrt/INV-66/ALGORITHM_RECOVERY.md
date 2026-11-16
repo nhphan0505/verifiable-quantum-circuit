@@ -148,3 +148,14 @@ Không còn khối số học/cleanup để lại dưới dạng liệt kê toà
 Source private và quy trình fit/search tham số không được nhận là đã lấy lại.
 Không có lượt verifier mới hoặc analytic error bound mới; provenance full PASS
 lịch sử vẫn gắn đúng source cũ. Review độc lập HEAD mới còn phải thực hiện.
+
+
+## Sửa phạm vi hạ tầng theo hai review
+
+Review Reece1512 ở 11ab6bc yêu cầu bỏ thay đổi checker/test policy/docs chung và
+đưa PP-005 qua luồng riêng. Đã khôi phục scripts/check_repo.py và
+ docs/REPOSITORY_CHECKS.md từ trusted main, bỏ scripts/tests/test_postprocessing_scope.py.
+PP-005 dùng lại PR71; diff PR67 trên base dependency chỉ chứa INV-66 và các dòng
+tracking của INV-66. Sau khi PR71 merge mới đổi base về main và kiểm lại. Trạng
+thái review thuật toán vẫn cần reviewer độc lập trên source mới; không tự đóng
+review hoặc ghi approval.

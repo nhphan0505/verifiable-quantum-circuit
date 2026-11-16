@@ -140,9 +140,3 @@ chặn merge khi đỏ; chỉ có workflow không tự bật bảo vệ branch.
 
 Nếu source.json có project_snapshot, hash phải lấy từ Git blob tại commit đã ghi,
 không lấy từ checkout CRLF/LF. Checker đối chiếu với git show khi có Git.
-
-## Experiment và PP trong cùng PR
-
-PR experiment có thể kèm module PP được khai báo trong reconstruction.json đã commit ở HEAD. Mỗi declaration postprocessing (object hoặc list) phải có method PP-NNN, path solution.py dưới src/<track>/postprocessing hoặc src/common/postprocessing, SHA-256 khớp Git blob HEAD và một entry dependencies trùng path/hash. Chỉ thư mục đúng các method đã xác minh được phép đi kèm; METHODS.md chỉ được đổi dòng của những mã đó. Không đọc declaration từ working tree để mở rộng scope. Module PP khác, track khác, verifier, workflow và experiment khác vẫn bị từ chối; các checks thuật toán/ownership và nguyên vẹn run lịch sử vẫn giữ nguyên.
-
-Để đưa policy này vào repo có checker cũ, chỉ lần base Git chưa có hàm experiment_postprocessing, một PR có dependency PP hợp lệ và thay checker được kèm đúng scripts/check_repo.py, scripts/tests/test_postprocessing_scope.py và tài liệu này. Đây là phạm vi bootstrap hữu hạn của thay đổi hạ tầng được giao; khi base đã có policy mới, experiment không còn được sửa các file hạ tầng đó. Không có flag tắt scope, đổi tên branch hoặc danh sách miễn trừ theo ID experiment.

@@ -199,5 +199,13 @@
       "path": "src/invsqrt/postprocessing/PP-004/solution.py",
       "sha256": "ba5ae4093dac8cc80b6d3aa06c18ca38134635d542195ea2fb55808b6625751b"
     }
-  ]
+  ],
+  "dependency_workflow": {
+    "method": "PP-005",
+    "issue": "https://github.com/nhphan0505/verifiable-quantum-circuit/issues/70",
+    "prerequisite_pr": "https://github.com/nhphan0505/verifiable-quantum-circuit/pull/71",
+    "temporary_pr_base": "pp/PP-005-dead-write-hmr",
+    "merge_order": "Merge reviewed PP71 into main first; retarget PR67 to main and recheck before merge",
+    "checker_policy_changes": false
+  }
 }

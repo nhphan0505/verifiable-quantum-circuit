@@ -57,6 +57,21 @@ PP-005 trong src/invsqrt/postprocessing. Adapter truyền từng hold-chain cho 
 và remap tọa độ chain chưa xử lý sau insert/replace; không sửa method của owner khác.
 PP-005 giữ module riêng và rewrite đúng site 3292. Các dependency được pin SHA-256.
 
+## Phạm vi PR và dependency PP-005 sau review
+
+Theo review của nhphan0505 và Reece1512, PR67 không sửa checker, test policy hoặc
+REPOSITORY_CHECKS để mở rộng phạm vi experiment. Các file hệ thống đã được trả
+về bản trusted main. PP-005 thuộc Issue #70 và [PR71](https://github.com/nhphan0505/verifiable-quantum-circuit/pull/71),
+không nộp chung thay đổi method/catalog trong diff INV-66.
+
+PR67 tạm đặt base `pp/PP-005-dead-write-hmr` để thể hiện dependency chưa merge.
+PR71 cần review/merge vào main trước; sau đó mới đổi base PR67 về main và kiểm
+scope/checks lại. CI trên base dependency không có nghĩa dependency đã có trên
+main hoặc PR67 đủ điều kiện merge. Không tự merge hoặc tự approve dependency.
+
+Source/helper/data build giữ nguyên bytes của source f04c85e đã nghiệm thu exact;
+việc hoàn tác policy và tài liệu không tạo một lượt build/chấm mới.
+
 ## Hypothesis tái lập và nghiệm thu
 
 Hypothesis: các hàm số học, typed cleanup và dữ liệu toán học đã track đủ sinh đúng
