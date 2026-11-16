@@ -34,6 +34,7 @@ Luôn đối chiếu với EXPERIMENTS, Issues và results
 | mrmeows v3 — mạch mở và kết quả âm của ba bài | shared | Invsqrt, DQI, DFTHCSOS | [note.md — ready](shared/discussions/kaggle-mrmeows-open-circuits-v3/note.md) | — |
 | Biên dịch mạch lượng tử với cấu trúc kiểm chứng được | shared | Invsqrt, DQI, DFTHCSOS | [note.md — ready](shared/discussions/verifiable-circuit-compilation/note.md) | — |
 | Kirill Tymchishin — Conditional Uncompute Audit, DQI V5/V6 | dqi | Terminal readout, phase fold và đối chiếu Schur/Bézout | [note.md — ready](dqi/discussions/kaggle-kirilltym-conditional-uncompute-audit/note.md) | — |
+| RezOps 759220 — generator invsqrt 46 qubit, cutoff DQI và coded-word chemistry | shared | Width–charge, rủi ro shot lỗi, loader/refit và kết quả âm | [note.md — draft](shared/discussions/kaggle-759220-rezops-generator-frontier/note.md) | [INV-51](../src/invsqrt/INV-51/DESCRIPTION.md); chưa triển khai biến thể mới |
 
 Chưa có discussion được lưu.
 
