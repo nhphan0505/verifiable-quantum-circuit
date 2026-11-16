@@ -1,0 +1,57 @@
+{
+  "mechanism": "CPython open/import audit; all circuit serialization uses BytesIO, final file write uses Python open",
+  "source_inputs_checked_against_commit": [
+    {
+      "path": "src/invsqrt/INV-66/solution.py",
+      "sha256": "fca658c82480d2f6a06449e29d68eb3de9be7edd0c14ef632b8964991c68e9f6"
+    },
+    {
+      "path": "src/invsqrt/INV-66/circuit.py",
+      "sha256": "a56fbedcccbeab32c356777d23b553e4c4a5fe08b780648381983ad19ab0cdc7"
+    },
+    {
+      "path": "src/invsqrt/INV-66/lookup_certificate.py",
+      "sha256": "6c7f6205f36d5984dbc8b1435a8bb5b11fa1958a9f6c40fd59bf5f73fffc1c72"
+    },
+    {
+      "path": "src/invsqrt/INV-66/data/lookup64_certificates.json",
+      "sha256": "3765c5ee45bd600d2908e726de250944f743ad8a35865899d7a067752e0ad3b2"
+    },
+    {
+      "path": "src/invsqrt/INV-66/configs/reconstructed.json",
+      "sha256": "23e40c8119ed8bf501536363543c449ac1e5a5e89dea1411f061fb74a7a19d76"
+    },
+    {
+      "path": "requirements.txt",
+      "sha256": "f3cd725b18083117d8ad73afd9accf3a5a99a634fac00f221bf1d77d71ad09a8"
+    },
+    {
+      "path": "src/invsqrt/postprocessing/PP-005/solution.py",
+      "sha256": "28de23f261438791a871f0210e0ebe00bf2951eb635223dbc63104a61b4567ff"
+    }
+  ],
+  "read_paths": [
+    "C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-one-toffoli\\verifiable-quantum-circuit\\artifacts\\recover66\\clean_checkout_dcb4794\\src\\invsqrt\\INV-66\\__pycache__\\circuit.cpython-313.pyc",
+    "C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-one-toffoli\\verifiable-quantum-circuit\\artifacts\\recover66\\clean_checkout_dcb4794\\src\\invsqrt\\INV-66\\__pycache__\\lookup_certificate.cpython-313.pyc",
+    "C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-one-toffoli\\verifiable-quantum-circuit\\artifacts\\recover66\\clean_checkout_dcb4794\\src\\invsqrt\\INV-66\\circuit.py",
+    "C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-one-toffoli\\verifiable-quantum-circuit\\artifacts\\recover66\\clean_checkout_dcb4794\\src\\invsqrt\\INV-66\\data\\lookup64_certificates.json",
+    "C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-one-toffoli\\verifiable-quantum-circuit\\artifacts\\recover66\\clean_checkout_dcb4794\\src\\invsqrt\\INV-66\\lookup_certificate.py",
+    "C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-one-toffoli\\verifiable-quantum-circuit\\artifacts\\recover66\\clean_checkout_dcb4794\\src\\invsqrt\\postprocessing\\PP-005\\__pycache__\\solution.cpython-313.pyc",
+    "C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-one-toffoli\\verifiable-quantum-circuit\\artifacts\\recover66\\clean_checkout_dcb4794\\src\\invsqrt\\postprocessing\\PP-005\\solution.py",
+    "C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\__pycache__\\decimal.cpython-313.pyc",
+    "C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\__pycache__\\fractions.cpython-313.pyc",
+    "C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\__pycache__\\numbers.cpython-313.pyc"
+  ],
+  "import_paths": [
+    "C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-one-toffoli\\verifiable-quantum-circuit\\artifacts\\recover66\\clean_env\\Lib\\site-packages\\kickmix.cp313-win_amd64.pyd",
+    "C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_decimal.pyd"
+  ],
+  "write_paths": [
+    "C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-one-toffoli\\verifiable-quantum-circuit\\artifacts\\recover66\\clean_checkout_dcb4794\\artifacts\\invsqrt\\INV-66\\reconstructed.kmb"
+  ],
+  "network_or_subprocesses_during_construction": false,
+  "limitations": [
+    "interpreter startup and Git snapshot preflight occur before audit installation",
+    "native package internal OS reads are outside CPython hooks; circuit.py builds the precursor with builder calls and the declared lookup compiler/certificates, then loads PP-005; PP serializes that new in-memory circuit"
+  ]
+}

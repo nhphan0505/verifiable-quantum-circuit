@@ -1,0 +1,1 @@
+{"z_pow_gates": 37, "groups_merged": 1, "t_before": 4, "rotations_before": 33} [(['rotation', 't'], 'rotation')]

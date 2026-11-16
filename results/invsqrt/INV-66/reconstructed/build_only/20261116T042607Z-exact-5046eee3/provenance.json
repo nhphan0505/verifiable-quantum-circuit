@@ -1,0 +1,282 @@
+{
+  "track": "invsqrt",
+  "experiment_id": "INV-66",
+  "config_name": "reconstructed",
+  "source_commit": "77a4ecd57e271c7b11745c2354713fe3019e34cc",
+  "source_path": "src/invsqrt/INV-66/solution.py",
+  "source_sha256": "9968fb729176c1bd25d4a639c36255d23e44c56e98010fe8025b97db1c787614",
+  "build_config_path": "src/invsqrt/INV-66/configs/reconstructed.json",
+  "build_config_sha256": "23e40c8119ed8bf501536363543c449ac1e5a5e89dea1411f061fb74a7a19d76",
+  "artifact_path": "artifacts/invsqrt/INV-66/reconstructed.kmb",
+  "artifact_sha256": "e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6",
+  "build_command": [
+    "C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-one-toffoli\\verifiable-quantum-circuit\\artifacts\\inv66_single_pr_20261116\\venv\\Scripts\\python.exe",
+    "artifacts/inv66_single_pr_20261116/checkout/src/invsqrt/INV-66/solution.py",
+    "--config",
+    "artifacts/inv66_single_pr_20261116/checkout/src/invsqrt/INV-66/configs/reconstructed.json"
+  ],
+  "build_run": null,
+  "environment": {
+    "python": "3.13.7 (tags/v3.13.7:bcee1c3, Aug 14 2025, 14:15:11) [MSC v.1944 64 bit (AMD64)]",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    },
+    "platform": "win32",
+    "dependencies": [
+      {
+        "path": "src/invsqrt/INV-66/solution.py",
+        "sha256": "9968fb729176c1bd25d4a639c36255d23e44c56e98010fe8025b97db1c787614"
+      },
+      {
+        "path": "src/invsqrt/INV-66/circuit.py",
+        "sha256": "3474c8145e4f3845a5a03750faae48083d741d59660170bb33e55e500b50b98a"
+      },
+      {
+        "path": "src/invsqrt/INV-66/arithmetic_helpers.py",
+        "sha256": "f8c39e6856bc8752e712f79a5f0504e1db5a73e866681e020bba26e81a2acbbe"
+      },
+      {
+        "path": "src/invsqrt/INV-66/cleanup.py",
+        "sha256": "a6d1adaf389dca05d071cddbbaf0f1d999f0009590ecf58d3aea8890264a32b7"
+      },
+      {
+        "path": "src/invsqrt/INV-66/finishing.py",
+        "sha256": "c9dbe9465e25ffcf0965411b40ba515d86bb29b5524c4ea452f20f83e8e65714"
+      },
+      {
+        "path": "src/invsqrt/INV-66/lookup_certificate.py",
+        "sha256": "6c7f6205f36d5984dbc8b1435a8bb5b11fa1958a9f6c40fd59bf5f73fffc1c72"
+      },
+      {
+        "path": "src/invsqrt/INV-66/recovery_model.py",
+        "sha256": "5e228a9c919727084222ddc183b0a41dda6be9878d38b167e0f10ade594b4318"
+      },
+      {
+        "path": "src/invsqrt/INV-66/data/lookup64_certificates.json",
+        "sha256": "3765c5ee45bd600d2908e726de250944f743ad8a35865899d7a067752e0ad3b2"
+      },
+      {
+        "path": "src/invsqrt/INV-66/data/cleanup64.json",
+        "sha256": "eb9c19cef2cb11a2954ef66387a0ed5f2564e0a352e3fcbbb62f1c2830e559aa"
+      },
+      {
+        "path": "src/invsqrt/INV-66/data/arithmetic_helpers.json",
+        "sha256": "55ef1cf214a99a45f52c9d58f269925d78d6dcdcc467882b6c21a1a51d425b3b"
+      },
+      {
+        "path": "src/invsqrt/INV-66/data/phase_parameters.json",
+        "sha256": "1e3ea9102ae143b666aeec5234902eec624fa36773efd2a43e5ab41e605e4b69"
+      },
+      {
+        "path": "src/invsqrt/INV-66/configs/reconstructed.json",
+        "sha256": "23e40c8119ed8bf501536363543c449ac1e5a5e89dea1411f061fb74a7a19d76"
+      },
+      {
+        "path": "requirements.txt",
+        "sha256": "f3cd725b18083117d8ad73afd9accf3a5a99a634fac00f221bf1d77d71ad09a8"
+      },
+      {
+        "path": "src/invsqrt/INV-51/circuit.py",
+        "sha256": "b867593d0306c6ca42ee0c5666f79ee5ca3d00120c77f27261435697518f8c17"
+      },
+      {
+        "path": "src/invsqrt/postprocessing/PP-001/solution.py",
+        "sha256": "dea983724a71fbe8f5b0335e566b32ad1145e085ea0e9b1d5e23ea16fc4c4af5"
+      },
+      {
+        "path": "src/invsqrt/postprocessing/PP-002/solution.py",
+        "sha256": "0728034b9ef1598000c635543a01c0d173049fb734c746e818760ad9d32c33e0"
+      },
+      {
+        "path": "src/invsqrt/postprocessing/PP-003/solution.py",
+        "sha256": "c1bc58d1e1c432788ba3affb69fab2d62d3d9b7c6215105016d7782983f0415a"
+      },
+      {
+        "path": "src/invsqrt/postprocessing/PP-004/solution.py",
+        "sha256": "ba5ae4093dac8cc80b6d3aa06c18ca38134635d542195ea2fb55808b6625751b"
+      },
+      {
+        "path": "src/invsqrt/INV-66/postprocessing/solution.py",
+        "sha256": "28de23f261438791a871f0210e0ebe00bf2951eb635223dbc63104a61b4567ff"
+      }
+    ]
+  },
+  "reconstruction_level": "ARITHMETIC_GENERATOR",
+  "dependency_audit": "dependency_audit.json",
+  "postprocessing": {
+    "method": "PP-005",
+    "operation_index": 3292,
+    "rewrites": 1,
+    "precursor_sha256": "dcde70780434501912c5cc032c6dfad25ac694d50da4e8e45cdb65115baa81b2",
+    "finishing": {
+      "hold_chains": [
+        {
+          "chain": [
+            6849,
+            7554
+          ],
+          "gates": [
+            "CCX q11 q6 q8",
+            "CCX q6 q10 q38"
+          ],
+          "hops": 0,
+          "holders": [
+            "q21"
+          ],
+          "expected_toffoli_saving": 1
+        }
+      ],
+      "affine_rounds": [
+        9,
+        0
+      ],
+      "methods": [
+        "PP-001",
+        "PP-002",
+        "PP-003",
+        "PP-004"
+      ]
+    },
+    "construction": {
+      "cuts": {
+        "normalized": {
+          "cut": 605,
+          "live": 26
+        },
+        "root": {
+          "cut": 1634,
+          "live": 26
+        },
+        "first_lookup": {
+          "cut": 2862,
+          "live": 43
+        },
+        "first_coefficient": {
+          "cut": 3279,
+          "live": 44
+        },
+        "coefficient_metadata_retired": {
+          "cut": 3290,
+          "live": 39
+        },
+        "seed": {
+          "cut": 3399,
+          "live": 45
+        },
+        "product": {
+          "cut": 4402,
+          "live": 44
+        },
+        "divider_entry": {
+          "cut": 4415,
+          "live": 31
+        },
+        "divider_forward": {
+          "cut": 7543,
+          "live": 43
+        },
+        "phase": {
+          "cut": 8532,
+          "live": 43
+        },
+        "divider_return": {
+          "cut": 15006,
+          "live": 31
+        },
+        "second_lookup": {
+          "cut": 16761,
+          "live": 43
+        },
+        "second_coefficient": {
+          "cut": 17175,
+          "live": 44
+        },
+        "coefficient_transcripts_paid": {
+          "cut": 17253,
+          "live": 44
+        },
+        "inverse_product": {
+          "cut": 19574,
+          "live": 41
+        },
+        "seed_cleared": {
+          "cut": 19732,
+          "live": 38
+        },
+        "coefficient_overflow_undone": {
+          "cut": 19784,
+          "live": 38
+        },
+        "coefficient_sources_restored": {
+          "cut": 19820,
+          "live": 40
+        },
+        "coefficient_restored": {
+          "cut": 20552,
+          "live": 38
+        },
+        "table_debts_cleared": {
+          "cut": 22389,
+          "live": 26
+        },
+        "root_restored": {
+          "cut": 23602,
+          "live": 26
+        },
+        "logical_input_restored": {
+          "cut": 23857,
+          "live": 22
+        }
+      },
+      "layout": [
+        [
+          "q30",
+          "q7"
+        ],
+        [
+          "q36",
+          "q8"
+        ],
+        [
+          "q30",
+          "q9"
+        ],
+        [
+          "q40",
+          "q10"
+        ],
+        [
+          "q43",
+          "q11"
+        ],
+        [
+          "q39",
+          "q13"
+        ],
+        [
+          "q45",
+          "q16"
+        ],
+        [
+          "q36",
+          "q17"
+        ],
+        [
+          "q34",
+          "q18"
+        ],
+        [
+          "q40",
+          "q19"
+        ],
+        [
+          "q42",
+          "q20"
+        ]
+      ]
+    }
+  },
+  "generated_work_directory": "artifacts/invsqrt/INV-66/20261116T042607Z-exact-5046eee3-finishing"
+}

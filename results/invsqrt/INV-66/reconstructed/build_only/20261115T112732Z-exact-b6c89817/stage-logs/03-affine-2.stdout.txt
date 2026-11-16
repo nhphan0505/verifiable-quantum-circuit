@@ -1,0 +1,17 @@
+{
+ "status": "AUDIT_CANDIDATES_ONLY_NOT_PROVED",
+ "kmx": "C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-one-toffoli\\verifiable-quantum-circuit\\artifacts\\recover66_complete\\clean_checkout_f04c85e\\artifacts\\invsqrt\\INV-66\\20261115T112732Z-exact-b6c89817-finishing\\r1.kmx",
+ "inputs": 3133452,
+ "seed": 0,
+ "operations": 23886,
+ "toffoli_like_static": 1553,
+ "toffoli_like_mean": 1481.7538130470803,
+ "input_restored": true,
+ "scratch_zero": true,
+ "products_tested": 1571,
+ "expected_saving": 0,
+ "live_peak": 46,
+ "sample_size": 4156,
+ "seconds": 12.070934000003035
+}
+peak runs: 454 [(2360, 2429, 'final_layout'), (2431, 2484, 'final_layout'), (2486, 2546, 'final_layout'), (2548, 2606, 'final_layout'), (2610, 2657, 'final_layout'), (2659, 2721, 'final_layout'), (2723, 2747, 'final_layout'), (2756, 2858, 'final_layout'), (2897, 2902, 'final_layout'), (2906, 2907, 'final_layout'), (2909, 2910, 'final_layout'), (2912, 2913, 'final_layout'), (2915, 2916, 'final_layout'), (2918, 2919, 'final_layout'), (2946, 2951, 'final_layout'), (2957, 2960, 'final_layout'), (2962, 2963, 'final_layout'), (2965, 2966, 'final_layout'), (2968, 2969, 'final_layout'), (2971, 2972, 'final_layout'), (2999, 3004, 'final_layout'), (3010, 3013, 'final_layout'), (3017, 3020, 'final_layout'), (3022, 3023, 'final_layout'), (3025, 3026, 'final_layout'), (3028, 3029, 'final_layout'), (3056, 3061, 'final_layout'), (3067, 3070, 'final_layout'), (3074, 3077, 'final_layout'), (3081, 3084, 'final_layout'), (3086, 3087, 'final_layout'), (3089, 3090, 'final_layout'), (3117, 3122, 'final_layout'), (3128, 3131, 'final_layout'), (3135, 3138, 'final_layout'), (3142, 3145, 'final_layout'), (3149, 3152, 'final_layout'), (3154, 3155, 'final_layout'), (3181, 3185, 'final_layout'), (3191, 3194, 'final_layout')]

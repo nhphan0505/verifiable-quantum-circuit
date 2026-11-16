@@ -1,0 +1,43 @@
+{
+  "repository_url": "https://github.com/nhphan0505/verifiable-quantum-circuit.git",
+  "source_commit": "50f9c29b9ce7647e5e0f96ac7ccffc34cf1860d1",
+  "checkout": "D:\\verifiable-quantum-circuit\\artifacts\\decompiler\\e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6\\20261115T031515Z\\clean-final",
+  "checkout_method": "fresh shallow HTTPS clone of pushed branch",
+  "clean_before_build": true,
+  "clean_evidence": "entry point rejects any git status --porcelain output before construction; build succeeded",
+  "cwd": "D:\\verifiable-quantum-circuit\\artifacts\\decompiler\\e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6\\20261115T031515Z",
+  "entrypoint": "D:\\verifiable-quantum-circuit\\artifacts\\decompiler\\e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6\\20261115T031515Z\\clean-final\\src\\invsqrt\\INV-66\\solution.py",
+  "environment": "fresh .venv created inside clean-final; pip --no-cache-dir -r requirements.txt",
+  "commands": [
+    "git -c core.longpaths=true -c core.autocrlf=false clone --depth 1 --single-branch --branch exp/INV-66-one-toffoli-reconstruction https://github.com/nhphan0505/verifiable-quantum-circuit.git ./clean-final",
+    "git -C ./clean-final config core.longpaths true",
+    "py -3.13 -m venv ./clean-final/.venv",
+    "./clean-final/.venv/Scripts/python.exe -m pip install --no-cache-dir --report ./final-package-install.json -r ./clean-final/requirements.txt",
+    "./clean-final/.venv/Scripts/python.exe ./clean-final/src/invsqrt/INV-66/solution.py --config ./clean-final/src/invsqrt/INV-66/configs/reconstructed.json"
+  ],
+  "package_wheels": [
+    {
+      "name": "kickmix",
+      "version": "1.0.0",
+      "hashes": {
+        "sha256": "d5ac9b393f1227011c08307063962221f0fa6b4165f9ecf09d0d2d7c39db73b2"
+      }
+    },
+    {
+      "name": "numpy",
+      "version": "2.5.4",
+      "hashes": {
+        "sha256": "8b4d2fd2d34e5f8c9235ee787de5631a37a28402b15cb80814df973d2be54129"
+      }
+    },
+    {
+      "name": "scipy",
+      "version": "1.18.1",
+      "hashes": {
+        "sha256": "559ed65f60c1af5a03f3912605a1b5114f522c7c32fb23c3376ae8f03219fe28"
+      }
+    }
+  ],
+  "pip_check": "No broken requirements found.",
+  "artifact_input_copied_into_checkout": false
+}

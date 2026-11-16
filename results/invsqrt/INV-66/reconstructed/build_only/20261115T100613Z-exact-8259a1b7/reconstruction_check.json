@@ -1,0 +1,31 @@
+{
+  "status": "RECONSTRUCTED_EXACT",
+  "source_commit": "dcb4794910d04a3b86a8d1b3a68bf9adfbab15d6",
+  "input_sha256": "e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6",
+  "output_sha256": "e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6",
+  "input_bytes": 198590,
+  "output_bytes": 198590,
+  "comparison": "independent bytes and SHA-256 after build; only this comparison process reads the reference KMB",
+  "postprocessing": {
+    "method": "PP-005",
+    "operation_index": 3292,
+    "rewrites": 1,
+    "precursor_sha256": "dcde70780434501912c5cc032c6dfad25ac694d50da4e8e45cdb65115baa81b2"
+  },
+  "new_verifier_run": false,
+  "reconstruction_level": "GATE_LEVEL_PYTHON",
+  "recovered_components": [
+    "first 27-AND and second 29-AND coefficient lookup builders"
+  ],
+  "remaining": "complete arithmetic/phase builder not recovered",
+  "clean_checkout": {
+    "remote": "https://github.com/nhphan0505/verifiable-quantum-circuit.git",
+    "source_commit": "dcb4794910d04a3b86a8d1b3a68bf9adfbab15d6",
+    "method": "fresh single-branch GitHub clone; source byte snapshot and clean status enforced by solution preflight",
+    "fresh_environment": true,
+    "dependency_audit": "dependency_audit.json",
+    "cwd_outside_checkout": true
+  },
+  "historical_full_run": "results/invsqrt/INV-66/reconstructed/full/20261115T042258Z-local-full-7feec4",
+  "historical_full_source_commit": "50f9c29b9ce7647e5e0f96ac7ccffc34cf1860d1"
+}

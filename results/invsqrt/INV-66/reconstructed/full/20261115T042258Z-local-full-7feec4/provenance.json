@@ -1,0 +1,48 @@
+{
+  "track": "invsqrt",
+  "experiment_id": "INV-66",
+  "config_name": "reconstructed",
+  "source_commit": "50f9c29b9ce7647e5e0f96ac7ccffc34cf1860d1",
+  "source_path": "src/invsqrt/INV-66/solution.py",
+  "source_sha256": "31c44aa9c23b63933e94bb9aa7c727b7c50e6f430b0ee97c3da3cdc6b098728f",
+  "build_config_path": "src/invsqrt/INV-66/configs/reconstructed.json",
+  "build_config_sha256": "23e40c8119ed8bf501536363543c449ac1e5a5e89dea1411f061fb74a7a19d76",
+  "artifact_path": "artifacts/invsqrt/INV-66/reconstructed.kmb",
+  "artifact_sha256": "e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6",
+  "build_command": [
+    "D:\\verifiable-quantum-circuit\\artifacts\\decompiler\\e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6\\20261115T031515Z\\clean-final\\.venv\\Scripts\\python.exe",
+    "./clean-final/src/invsqrt/INV-66/solution.py",
+    "--config",
+    "./clean-final/src/invsqrt/INV-66/configs/reconstructed.json"
+  ],
+  "build_run": "results/invsqrt/INV-66/reconstructed/build_only/20261115T033727Z-exact-fe8b97b7",
+  "environment": {
+    "python": "3.13.7 (tags/v3.13.7:bcee1c3, Aug 14 2025, 14:15:11) [MSC v.1944 64 bit (AMD64)]",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    },
+    "platform": "win32",
+    "dependencies": [
+      {
+        "path": "src/invsqrt/INV-66/solution.py",
+        "sha256": "31c44aa9c23b63933e94bb9aa7c727b7c50e6f430b0ee97c3da3cdc6b098728f"
+      },
+      {
+        "path": "src/invsqrt/INV-66/circuit.py",
+        "sha256": "5ebd4c23434cca80ad04d844ba6fda271fb4cac008cf6219a0ce3d8b9bf4b726"
+      },
+      {
+        "path": "src/invsqrt/INV-66/configs/reconstructed.json",
+        "sha256": "23e40c8119ed8bf501536363543c449ac1e5a5e89dea1411f061fb74a7a19d76"
+      },
+      {
+        "path": "requirements.txt",
+        "sha256": "f3cd725b18083117d8ad73afd9accf3a5a99a634fac00f221bf1d77d71ad09a8"
+      }
+    ]
+  },
+  "reconstruction_level": "GATE_LEVEL_PYTHON",
+  "dependency_audit": "dependency_audit.json"
+}

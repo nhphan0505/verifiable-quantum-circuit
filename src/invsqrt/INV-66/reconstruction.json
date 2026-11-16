@@ -1,0 +1,216 @@
+{
+  "schema_version": 1,
+  "track": "invsqrt",
+  "input_sha256": "e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6",
+  "input_bytes": 198590,
+  "source_url": "https://www.kaggle.com/code/mizeroluckygall/quantum-circuits-one-toffoli-less-in-invsqrt",
+  "input_files": [
+    {
+      "name": "submission_inv.zip",
+      "sha256": "35123b205c7b9db340cac87339849e16c70813945ea301b1292822568e551d78",
+      "bytes": 49293419
+    },
+    {
+      "name": "receipt.json",
+      "sha256": "7080631a78bb16ee28a9f6822eaee5346fe6a5d17ddf3b5c2d589d02f6b63c95",
+      "bytes": 4897
+    },
+    {
+      "name": "quantum-circuits-one-toffoli-less-in-invsqrt.ipynb",
+      "sha256": "1d3df3e244d4f87b93389e358a5bf94b5fa877e9e8ee707de82d12a95842e9ff",
+      "bytes": 22869
+    }
+  ],
+  "environment": {
+    "python": "3.13",
+    "kickmix": "1.0.0",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1"
+  },
+  "reconstruction_level": "ARITHMETIC_GENERATOR",
+  "limitations": [
+    "Complete arithmetic generator independently recovered and accepted exact from clean source f04c85e17d8114ec99a9a116da7f3ee44ba7e33c; original private source/search history is not claimed.",
+    "Original private generator source and parameter-search history are not claimed; 64-row coefficients, Boolean certificates and 33 dyadic phase parameters are tracked mathematical inputs.",
+    "No new verifier run; external receipt and historical grading provenance remain separate.",
+    "Independent review on the new source is still required."
+  ],
+  "components": [
+    {
+      "path": "circuit.py",
+      "sha256": "3474c8145e4f3845a5a03750faae48083d741d59660170bb33e55e500b50b98a",
+      "role": "complete arithmetic and inverse construction with owner/carry-debt tokens"
+    },
+    {
+      "path": "cleanup.py",
+      "sha256": "a6d1adaf389dca05d071cddbbaf0f1d999f0009590ecf58d3aea8890264a32b7",
+      "role": "six-bit decoder and symbolic HMR phase repayment in quadratic codebooks"
+    },
+    {
+      "path": "arithmetic_helpers.py",
+      "sha256": "f8c39e6856bc8752e712f79a5f0504e1db5a73e866681e020bba26e81a2acbbe",
+      "role": "selected shared INV-51 arithmetic library adapter; does not run its generator"
+    },
+    {
+      "path": "finishing.py",
+      "sha256": "c9dbe9465e25ffcf0965411b40ba515d86bb29b5524c4ea452f20f83e8e65714",
+      "role": "adapter for separate PP implementations with interleaved coordinate remapping"
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "requirements.txt",
+      "sha256": "f3cd725b18083117d8ad73afd9accf3a5a99a634fac00f221bf1d77d71ad09a8",
+      "acquisition": "tracked checkout and pinned package installation"
+    },
+    {
+      "path": "src/invsqrt/INV-51/circuit.py",
+      "sha256": "b867593d0306c6ca42ee0c5666f79ee5ca3d00120c77f27261435697518f8c17",
+      "acquisition": "tracked checkout; declared source or mathematical helper data"
+    },
+    {
+      "path": "src/invsqrt/postprocessing/PP-001/solution.py",
+      "sha256": "dea983724a71fbe8f5b0335e566b32ad1145e085ea0e9b1d5e23ea16fc4c4af5",
+      "acquisition": "tracked checkout; declared source or mathematical helper data"
+    },
+    {
+      "path": "src/invsqrt/postprocessing/PP-002/solution.py",
+      "sha256": "0728034b9ef1598000c635543a01c0d173049fb734c746e818760ad9d32c33e0",
+      "acquisition": "tracked checkout; declared source or mathematical helper data"
+    },
+    {
+      "path": "src/invsqrt/postprocessing/PP-003/solution.py",
+      "sha256": "c1bc58d1e1c432788ba3affb69fab2d62d3d9b7c6215105016d7782983f0415a",
+      "acquisition": "tracked checkout; declared source or mathematical helper data"
+    },
+    {
+      "path": "src/invsqrt/postprocessing/PP-004/solution.py",
+      "sha256": "ba5ae4093dac8cc80b6d3aa06c18ca38134635d542195ea2fb55808b6625751b",
+      "acquisition": "tracked checkout; declared source or mathematical helper data"
+    },
+    {
+      "path": "src/invsqrt/INV-66/postprocessing/solution.py",
+      "sha256": "28de23f261438791a871f0210e0ebe00bf2951eb635223dbc63104a61b4567ff",
+      "acquisition": "tracked checkout; declared source or mathematical helper data"
+    },
+    {
+      "path": "src/invsqrt/INV-66/lookup_certificate.py",
+      "sha256": "6c7f6205f36d5984dbc8b1435a8bb5b11fa1958a9f6c40fd59bf5f73fffc1c72",
+      "acquisition": "tracked checkout; declared source or mathematical helper data"
+    },
+    {
+      "path": "src/invsqrt/INV-66/recovery_model.py",
+      "sha256": "5e228a9c919727084222ddc183b0a41dda6be9878d38b167e0f10ade594b4318",
+      "acquisition": "tracked checkout; declared source or mathematical helper data"
+    },
+    {
+      "path": "src/invsqrt/INV-66/arithmetic_helpers.py",
+      "sha256": "f8c39e6856bc8752e712f79a5f0504e1db5a73e866681e020bba26e81a2acbbe",
+      "acquisition": "tracked checkout; declared source or mathematical helper data"
+    },
+    {
+      "path": "src/invsqrt/INV-66/cleanup.py",
+      "sha256": "a6d1adaf389dca05d071cddbbaf0f1d999f0009590ecf58d3aea8890264a32b7",
+      "acquisition": "tracked checkout; declared source or mathematical helper data"
+    },
+    {
+      "path": "src/invsqrt/INV-66/finishing.py",
+      "sha256": "c9dbe9465e25ffcf0965411b40ba515d86bb29b5524c4ea452f20f83e8e65714",
+      "acquisition": "tracked checkout; declared source or mathematical helper data"
+    },
+    {
+      "path": "src/invsqrt/INV-66/data/lookup64_certificates.json",
+      "sha256": "3765c5ee45bd600d2908e726de250944f743ad8a35865899d7a067752e0ad3b2",
+      "acquisition": "tracked checkout; declared source or mathematical helper data"
+    },
+    {
+      "path": "src/invsqrt/INV-66/data/cleanup64.json",
+      "sha256": "eb9c19cef2cb11a2954ef66387a0ed5f2564e0a352e3fcbbb62f1c2830e559aa",
+      "acquisition": "tracked checkout; declared source or mathematical helper data"
+    },
+    {
+      "path": "src/invsqrt/INV-66/data/arithmetic_helpers.json",
+      "sha256": "55ef1cf214a99a45f52c9d58f269925d78d6dcdcc467882b6c21a1a51d425b3b",
+      "acquisition": "tracked checkout; declared source or mathematical helper data"
+    },
+    {
+      "path": "src/invsqrt/INV-66/data/phase_parameters.json",
+      "sha256": "1e3ea9102ae143b666aeec5234902eec624fa36773efd2a43e5ab41e605e4b69",
+      "acquisition": "tracked checkout; declared source or mathematical helper data"
+    }
+  ],
+  "references": [
+    "https://www.kaggle.com/code/asteriospanoras/lb-25-367-qcc-toolkit-simulator-cost-anatomy",
+    "https://www.kaggle.com/code/atakanaldemir/qcc-gap-3-residue-repair-and-c43-native-compiler",
+    "src/invsqrt/INV-51/DESCRIPTION.md"
+  ],
+  "runtime_input_artifacts": [],
+  "postprocessing": {
+    "method": "PP-005",
+    "source_commit": "1298d954ef9e06a552edf9e8f38e040e3efe97f8",
+    "path": "src/invsqrt/INV-66/postprocessing/solution.py",
+    "sha256": "28de23f261438791a871f0210e0ebe00bf2951eb635223dbc63104a61b4567ff",
+    "operation_index": 3292,
+    "input_hash_prefix_from_reference": "dcde7078",
+    "source_commit_role": "original implementation lineage; current build uses the relocated file in its own source snapshot"
+  },
+  "algorithm_recovery_analysis": {
+    "status": "COMPLETE_ARITHMETIC_MODEL_AND_GENERATOR_CLEAN_EXACT",
+    "runtime_build_dependency": true,
+    "files": [
+      {
+        "path": "recovery_model.py",
+        "sha256": "5e228a9c919727084222ddc183b0a41dda6be9878d38b167e0f10ade594b4318"
+      },
+      {
+        "path": "validate_recovery.py",
+        "sha256": "68bfad12fde9e48c895de288a982464dcf79616582c4107ea8c5250eb0b203b8"
+      }
+    ],
+    "evidence": "evidence/algorithm_recovery.json",
+    "divider_correspondence": "evidence/divider_correspondence.json",
+    "remaining": [
+      "independent review on the new HEAD"
+    ],
+    "clean_build_source_commit": "f04c85e17d8114ec99a9a116da7f3ee44ba7e33c",
+    "clean_build": "results/invsqrt/INV-66/reconstructed/build_only/20261115T112732Z-exact-b6c89817",
+    "native_cleanup_proof": {
+      "codewords": 64,
+      "independent_symbolic_outcomes": 55,
+      "test": "tests/test_arithmetic_recovery.py"
+    },
+    "latest_integrated_clean_build": {
+      "source_commit": "77a4ecd57e271c7b11745c2354713fe3019e34cc",
+      "run": "results/invsqrt/INV-66/reconstructed/build_only/20261116T042607Z-exact-5046eee3",
+      "postprocessing_path": "src/invsqrt/INV-66/postprocessing/solution.py",
+      "status": "RECONSTRUCTED_EXACT"
+    }
+  },
+  "finishing_pipeline": [
+    {
+      "method": "PP-001",
+      "path": "src/invsqrt/postprocessing/PP-001/solution.py",
+      "sha256": "dea983724a71fbe8f5b0335e566b32ad1145e085ea0e9b1d5e23ea16fc4c4af5"
+    },
+    {
+      "method": "PP-002",
+      "path": "src/invsqrt/postprocessing/PP-002/solution.py",
+      "sha256": "0728034b9ef1598000c635543a01c0d173049fb734c746e818760ad9d32c33e0"
+    },
+    {
+      "method": "PP-003",
+      "path": "src/invsqrt/postprocessing/PP-003/solution.py",
+      "sha256": "c1bc58d1e1c432788ba3affb69fab2d62d3d9b7c6215105016d7782983f0415a"
+    },
+    {
+      "method": "PP-004",
+      "path": "src/invsqrt/postprocessing/PP-004/solution.py",
+      "sha256": "ba5ae4093dac8cc80b6d3aa06c18ca38134635d542195ea2fb55808b6625751b"
+    }
+  ],
+  "dependency_workflow": {
+    "delivery": "generator and separate experiment-local postprocessing module in PR67",
+    "pr_base": "main",
+    "prerequisite_pr": null,
+    "checker_policy_changes": false
+  }
+}

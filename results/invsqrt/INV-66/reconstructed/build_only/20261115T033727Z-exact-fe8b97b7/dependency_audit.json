@@ -1,0 +1,40 @@
+{
+  "mechanism": "CPython open/import audit; all circuit serialization uses BytesIO, final file write uses Python open",
+  "source_inputs_checked_against_commit": [
+    {
+      "path": "src/invsqrt/INV-66/solution.py",
+      "sha256": "31c44aa9c23b63933e94bb9aa7c727b7c50e6f430b0ee97c3da3cdc6b098728f"
+    },
+    {
+      "path": "src/invsqrt/INV-66/circuit.py",
+      "sha256": "5ebd4c23434cca80ad04d844ba6fda271fb4cac008cf6219a0ce3d8b9bf4b726"
+    },
+    {
+      "path": "src/invsqrt/INV-66/configs/reconstructed.json",
+      "sha256": "23e40c8119ed8bf501536363543c449ac1e5a5e89dea1411f061fb74a7a19d76"
+    },
+    {
+      "path": "requirements.txt",
+      "sha256": "f3cd725b18083117d8ad73afd9accf3a5a99a634fac00f221bf1d77d71ad09a8"
+    }
+  ],
+  "read_paths": [
+    "C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\__pycache__\\decimal.cpython-313.pyc",
+    "C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\__pycache__\\fractions.cpython-313.pyc",
+    "C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\__pycache__\\numbers.cpython-313.pyc",
+    "D:\\verifiable-quantum-circuit\\artifacts\\decompiler\\e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6\\20261115T031515Z\\clean-final\\src\\invsqrt\\INV-66\\__pycache__\\circuit.cpython-313.pyc",
+    "D:\\verifiable-quantum-circuit\\artifacts\\decompiler\\e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6\\20261115T031515Z\\clean-final\\src\\invsqrt\\INV-66\\circuit.py"
+  ],
+  "import_paths": [
+    "C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_decimal.pyd",
+    "D:\\verifiable-quantum-circuit\\artifacts\\decompiler\\e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6\\20261115T031515Z\\clean-final\\.venv\\Lib\\site-packages\\kickmix.cp313-win_amd64.pyd"
+  ],
+  "write_paths": [
+    "D:\\verifiable-quantum-circuit\\artifacts\\decompiler\\e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6\\20261115T031515Z\\clean-final\\artifacts\\invsqrt\\INV-66\\reconstructed.kmb"
+  ],
+  "network_or_subprocesses_during_construction": false,
+  "limitations": [
+    "interpreter startup and Git snapshot preflight occur before audit installation",
+    "native package internal OS reads are outside CPython hooks; circuit.py contains only builder calls and no file or subprocess API"
+  ]
+}

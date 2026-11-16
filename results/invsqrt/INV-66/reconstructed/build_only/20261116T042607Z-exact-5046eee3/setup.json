@@ -1,0 +1,32 @@
+{
+  "source_commit": "77a4ecd57e271c7b11745c2354713fe3019e34cc",
+  "clone_command": [
+    "git",
+    "-c",
+    "core.autocrlf=false",
+    "clone",
+    "--single-branch",
+    "--branch",
+    "exp/INV-66-one-toffoli-reconstruction",
+    "https://github.com/nhphan0505/verifiable-quantum-circuit.git",
+    "artifacts/inv66_single_pr_20261116/checkout"
+  ],
+  "environment_setup": [
+    "D:/verifiable-quantum-circuit/.venv/Scripts/python.exe -m venv artifacts/inv66_single_pr_20261116/venv",
+    "artifacts/inv66_single_pr_20261116/venv/Scripts/python.exe -m pip install -r requirements.txt",
+    "artifacts/inv66_single_pr_20261116/venv/Scripts/python.exe -m pip check"
+  ],
+  "pip_check": "No broken requirements found.",
+  "build_cwd": "C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-one-toffoli\\verifiable-quantum-circuit",
+  "build_command": [
+    "C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-one-toffoli\\verifiable-quantum-circuit\\artifacts\\inv66_single_pr_20261116\\venv\\Scripts\\python.exe",
+    "artifacts/inv66_single_pr_20261116/checkout/src/invsqrt/INV-66/solution.py",
+    "--config",
+    "artifacts/inv66_single_pr_20261116/checkout/src/invsqrt/INV-66/configs/reconstructed.json"
+  ],
+  "packages": {
+    "kickmix": "1.0.0",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1"
+  }
+}

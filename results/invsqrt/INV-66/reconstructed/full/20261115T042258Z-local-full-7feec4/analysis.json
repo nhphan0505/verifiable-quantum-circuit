@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "assessment": "VERIFIED_RECORDED_RUN",
+  "created_utc": "2026-11-15T04:30:36.158383+00:00",
+  "mode": "full",
+  "status": "PASS",
+  "source_commit": "50f9c29b9ce7647e5e0f96ac7ccffc34cf1860d1",
+  "build_run": "results/invsqrt/INV-66/reconstructed/build_only/20261115T033727Z-exact-fe8b97b7",
+  "artifact_sha256": "e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6",
+  "verified_shots": 200540928,
+  "score_recorded": 78719.52914734723,
+  "eligible_for_scores": true,
+  "stdout_matches_verifier": true,
+  "metadata_verifier_hashes_match_checkout": true,
+  "provenance_matches_build": true,
+  "seed_policy": "default artifact-hash-derived draws; no explicit --salt/--seed override",
+  "engine": "0.6.0",
+  "grading_python": "3.13.18 (main, Nov 11 2026, 00:17:48) [Clang 23.1.3 ]",
+  "grading_platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "original_run_file_sha256": {
+    "config.json": "f8a2c902487b20c284e9aebf968d1206f4094297c864fa2699a1371cee524c0e",
+    "metadata.json": "7e1e984f060bba2c10575ebe2e067c5bc27bda65eb80d3649faf242fccdbef9a",
+    "provenance.json": "4d9cfa33768e972930379fe405a942adbae8e3cf72e243f3faa61ccc305fa78a",
+    "verifier.json": "d64748ea0e371adf069b2eae7cfe808e64fbf7d05313d8fd71849a98d530dbd1",
+    "verify.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "verify.stdout.txt": "d64748ea0e371adf069b2eae7cfe808e64fbf7d05313d8fd71849a98d530dbd1"
+  },
+  "limitations": [
+    "full samples 64 measurement outcomes for each legal x, not every possible transcript",
+    "no additional salt/seed run",
+    "gate-level reconstruction does not recover original high-level arithmetic"
+  ],
+  "baseline_comparison": {
+    "run": "results/invsqrt/INV-BASELINE/baseline/full/20261113T183503Z-local-full-35f777",
+    "score": 2076774.233715282,
+    "improvement": 26.381944305433734,
+    "baseline_threads": "1",
+    "candidate_threads": "4",
+    "baseline_platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "candidate_platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "same_python": true,
+    "same_packages": true
+  },
+  "remaining_error_margin_percent": 0.13339990907327293
+}

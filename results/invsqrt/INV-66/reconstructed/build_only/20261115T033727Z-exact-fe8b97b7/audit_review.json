@@ -1,0 +1,7 @@
+{
+  "source_cache_probe": "D:\\verifiable-quantum-circuit\\artifacts\\decompiler\\e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6\\20261115T031515Z\\clean-final\\src\\invsqrt\\INV-66\\__pycache__\\circuit.cpython-313.pyc",
+  "source_cache_exists_after_build": false,
+  "interpretation": "audit open events are attempts; absent source cache probe does not indicate a cache dependency",
+  "static_generator_api": "only kickmix import, builder calls, explicit scalar arguments and X sweep loops; no filesystem/network/subprocess/parser",
+  "copied_artifact_sha256": "e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6"
+}

@@ -1,0 +1,66 @@
+{
+  "track": "invsqrt",
+  "experiment_id": "INV-66",
+  "config_name": "reconstructed",
+  "source_commit": "dcb4794910d04a3b86a8d1b3a68bf9adfbab15d6",
+  "source_path": "src/invsqrt/INV-66/solution.py",
+  "source_sha256": "fca658c82480d2f6a06449e29d68eb3de9be7edd0c14ef632b8964991c68e9f6",
+  "build_config_path": "src/invsqrt/INV-66/configs/reconstructed.json",
+  "build_config_sha256": "23e40c8119ed8bf501536363543c449ac1e5a5e89dea1411f061fb74a7a19d76",
+  "artifact_path": "artifacts/invsqrt/INV-66/reconstructed.kmb",
+  "artifact_sha256": "e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6",
+  "build_command": [
+    "C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-one-toffoli\\verifiable-quantum-circuit\\artifacts\\recover66\\clean_env\\Scripts\\python.exe",
+    "clean_checkout_dcb4794/src/invsqrt/INV-66/solution.py",
+    "--config",
+    "clean_checkout_dcb4794/src/invsqrt/INV-66/configs/reconstructed.json"
+  ],
+  "build_run": null,
+  "environment": {
+    "python": "3.13.7 (tags/v3.13.7:bcee1c3, Aug 14 2025, 14:15:11) [MSC v.1944 64 bit (AMD64)]",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    },
+    "platform": "win32",
+    "dependencies": [
+      {
+        "path": "src/invsqrt/INV-66/solution.py",
+        "sha256": "fca658c82480d2f6a06449e29d68eb3de9be7edd0c14ef632b8964991c68e9f6"
+      },
+      {
+        "path": "src/invsqrt/INV-66/circuit.py",
+        "sha256": "a56fbedcccbeab32c356777d23b553e4c4a5fe08b780648381983ad19ab0cdc7"
+      },
+      {
+        "path": "src/invsqrt/INV-66/lookup_certificate.py",
+        "sha256": "6c7f6205f36d5984dbc8b1435a8bb5b11fa1958a9f6c40fd59bf5f73fffc1c72"
+      },
+      {
+        "path": "src/invsqrt/INV-66/data/lookup64_certificates.json",
+        "sha256": "3765c5ee45bd600d2908e726de250944f743ad8a35865899d7a067752e0ad3b2"
+      },
+      {
+        "path": "src/invsqrt/INV-66/configs/reconstructed.json",
+        "sha256": "23e40c8119ed8bf501536363543c449ac1e5a5e89dea1411f061fb74a7a19d76"
+      },
+      {
+        "path": "requirements.txt",
+        "sha256": "f3cd725b18083117d8ad73afd9accf3a5a99a634fac00f221bf1d77d71ad09a8"
+      },
+      {
+        "path": "src/invsqrt/postprocessing/PP-005/solution.py",
+        "sha256": "28de23f261438791a871f0210e0ebe00bf2951eb635223dbc63104a61b4567ff"
+      }
+    ]
+  },
+  "reconstruction_level": "GATE_LEVEL_PYTHON",
+  "dependency_audit": "dependency_audit.json",
+  "postprocessing": {
+    "method": "PP-005",
+    "operation_index": 3292,
+    "rewrites": 1,
+    "precursor_sha256": "dcde70780434501912c5cc032c6dfad25ac694d50da4e8e45cdb65115baa81b2"
+  }
+}

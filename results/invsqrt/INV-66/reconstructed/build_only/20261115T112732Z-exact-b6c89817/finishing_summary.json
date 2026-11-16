@@ -1,0 +1,29 @@
+{
+  "hold_chains": [
+    {
+      "chain": [
+        6849,
+        7554
+      ],
+      "gates": [
+        "CCX q11 q6 q8",
+        "CCX q6 q10 q38"
+      ],
+      "hops": 0,
+      "holders": [
+        "q21"
+      ],
+      "expected_toffoli_saving": 1
+    }
+  ],
+  "affine_rounds": [
+    9,
+    0
+  ],
+  "methods": [
+    "PP-001",
+    "PP-002",
+    "PP-003",
+    "PP-004"
+  ]
+}

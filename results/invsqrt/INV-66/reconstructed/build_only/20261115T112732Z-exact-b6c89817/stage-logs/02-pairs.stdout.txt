@@ -1,0 +1,44 @@
+sampled pair hits: 774 gates with a hit: 650 seconds 12.0
+exact recomputed pairs: 650
+1 ('final_layout', 45)
+649 ('final_layout', 46)
+7554 ['CCX', 'q6', 'q10', 'q38'] <- 6849 ['CCX', 'q11', 'q6', 'q8'] dist 705 maxlive 45 final_layout [] 0
+14428 ['CCX', 'q32', 'q20', 'q44'] <- 14422 ['CCX', 'q32', 'q20', 'q44'] dist 6 maxlive 46 final_layout [] 0
+14736 ['CCX', 'q9', 'q20', 'q44'] <- 14730 ['CCX', 'q9', 'q20', 'q44'] dist 6 maxlive 46 final_layout [] 0
+14431 ['CCX', 'q28', 'q30', 'q20'] <- 14416 ['CCX', 'q28', 'q30', 'q20'] dist 15 maxlive 46 final_layout [] 0
+14739 ['CCX', 'q32', 'q19', 'q20'] <- 14724 ['CCX', 'q32', 'q19', 'q20'] dist 15 maxlive 46 final_layout [] 0
+14742 ['CCX', 'q28', 'q18', 'q19'] <- 14718 ['CCX', 'q28', 'q18', 'q19'] dist 24 maxlive 46 final_layout [] 0
+14745 ['CCX', 'q35', 'q17', 'q18'] <- 14712 ['CCX', 'q35', 'q17', 'q18'] dist 33 maxlive 46 final_layout [] 0
+14748 ['CCX', 'q33', 'q16', 'q17'] <- 14706 ['CCX', 'q33', 'q16', 'q17'] dist 42 maxlive 46 final_layout [] 0
+14751 ['CCX', 'q31', 'q21', 'q16'] <- 14700 ['CCX', 'q31', 'q21', 'q16'] dist 51 maxlive 46 final_layout [] 0
+3395 ['CCX', 'q10', 'q11', 'q13'] <- 3293 ['CCX', 'q10', 'q11', 'q13'] dist 102 maxlive 46 final_layout [] 0
+3241 ['CCX', 'q27', 'q42', 'q37'] <- 2877 ['CCX', 'q27', 'q42', 'q37'] dist 364 maxlive 46 final_layout [] 0
+17137 ['CCX', 'q31', 'q7', 'q33'] <- 16773 ['CCX', 'q31', 'q7', 'q33'] dist 364 maxlive 46 final_layout [] 0
+3247 ['CCX', 'q27', 'q37', 'q38'] <- 2872 ['CCX', 'q27', 'q37', 'q38'] dist 375 maxlive 46 final_layout [] 0
+17143 ['CCX', 'q31', 'q33', 'q35'] <- 16768 ['CCX', 'q31', 'q33', 'q35'] dist 375 maxlive 46 final_layout [] 0
+3288 ['CCX', 'q16', 'q20', 'q21'] <- 2866 ['CCX', 'q16', 'q20', 'q21'] dist 422 maxlive 46 final_layout [] 0
+8331 ['CSWAP', 'q23', 'q41', 'q9'] <- 7624 ['CSWAP', 'q23', 'q41', 'q9'] dist 707 maxlive 46 final_layout [] 0
+8332 ['CSWAP', 'q23', 'q40', 'q34'] <- 7625 ['CSWAP', 'q23', 'q40', 'q34'] dist 707 maxlive 46 final_layout [] 0
+8333 ['CSWAP', 'q23', 'q43', 'q36'] <- 7626 ['CSWAP', 'q23', 'q43', 'q36'] dist 707 maxlive 46 final_layout [] 0
+8334 ['CSWAP', 'q23', 'q39', 'q30'] <- 7627 ['CSWAP', 'q23', 'q39', 'q30'] dist 707 maxlive 46 final_layout [] 0
+8335 ['CSWAP', 'q23', 'q0', 'q32'] <- 7628 ['CSWAP', 'q23', 'q0', 'q32'] dist 707 maxlive 46 final_layout [] 0
+8336 ['CSWAP', 'q23', 'q1', 'q28'] <- 7629 ['CSWAP', 'q23', 'q1', 'q28'] dist 707 maxlive 46 final_layout [] 0
+8337 ['CSWAP', 'q23', 'q4', 'q31'] <- 7630 ['CSWAP', 'q23', 'q4', 'q31'] dist 707 maxlive 46 final_layout [] 0
+8338 ['CSWAP', 'q23', 'q5', 'q29'] <- 7631 ['CSWAP', 'q23', 'q5', 'q29'] dist 707 maxlive 46 final_layout [] 0
+8342 ['CSWAP', 'q25', 'q41', 'q2'] <- 7609 ['CSWAP', 'q25', 'q41', 'q2'] dist 733 maxlive 46 final_layout [] 0
+8343 ['CSWAP', 'q25', 'q40', 'q1'] <- 7610 ['CSWAP', 'q25', 'q40', 'q1'] dist 733 maxlive 46 final_layout [] 0
+8344 ['CSWAP', 'q25', 'q43', 'q0'] <- 7611 ['CSWAP', 'q25', 'q43', 'q0'] dist 733 maxlive 46 final_layout [] 0
+8345 ['CSWAP', 'q25', 'q3', 'q8'] <- 7612 ['CSWAP', 'q25', 'q3', 'q8'] dist 733 maxlive 46 final_layout [] 0
+8346 ['CSWAP', 'q25', 'q4', 'q9'] <- 7613 ['CSWAP', 'q25', 'q4', 'q9'] dist 733 maxlive 46 final_layout [] 0
+8347 ['CSWAP', 'q25', 'q5', 'q34'] <- 7614 ['CSWAP', 'q25', 'q5', 'q34'] dist 733 maxlive 46 final_layout [] 0
+8348 ['CSWAP', 'q25', 'q6', 'q36'] <- 7615 ['CSWAP', 'q25', 'q6', 'q36'] dist 733 maxlive 46 final_layout [] 0
+8349 ['CSWAP', 'q25', 'q38', 'q30'] <- 7616 ['CSWAP', 'q25', 'q38', 'q30'] dist 733 maxlive 46 final_layout [] 0
+8350 ['CSWAP', 'q25', 'q37', 'q32'] <- 7617 ['CSWAP', 'q25', 'q37', 'q32'] dist 733 maxlive 46 final_layout [] 0
+8351 ['CSWAP', 'q25', 'q27', 'q28'] <- 7618 ['CSWAP', 'q25', 'q27', 'q28'] dist 733 maxlive 46 final_layout [] 0
+8352 ['CSWAP', 'q25', 'q26', 'q35'] <- 7619 ['CSWAP', 'q25', 'q26', 'q35'] dist 733 maxlive 46 final_layout [] 0
+8353 ['CSWAP', 'q25', 'q29', 'q33'] <- 7620 ['CSWAP', 'q25', 'q29', 'q33'] dist 733 maxlive 46 final_layout [] 0
+8355 ['CSWAP', 'q24', 'q41', 'q43'] <- 7596 ['CSWAP', 'q24', 'q41', 'q43'] dist 759 maxlive 46 final_layout [] 0
+8357 ['CSWAP', 'q24', 'q0', 'q9'] <- 7598 ['CSWAP', 'q24', 'q0', 'q9'] dist 759 maxlive 46 final_layout [] 0
+8358 ['CSWAP', 'q24', 'q1', 'q34'] <- 7599 ['CSWAP', 'q24', 'q1', 'q34'] dist 759 maxlive 46 final_layout [] 0
+8359 ['CSWAP', 'q24', 'q2', 'q36'] <- 7600 ['CSWAP', 'q24', 'q2', 'q36'] dist 759 maxlive 46 final_layout [] 0
+8360 ['CSWAP', 'q24', 'q3', 'q30'] <- 7601 ['CSWAP', 'q24', 'q3', 'q30'] dist 759 maxlive 46 final_layout [] 0
