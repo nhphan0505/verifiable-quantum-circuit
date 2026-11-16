@@ -1,0 +1,18 @@
+{
+  "track": "invsqrt",
+  "experiment_id": "INV-64",
+  "config_name": "phase2_row0",
+  "mode": "full",
+  "command": [
+    "/Users/thanhs/Documents/Kaggle/GQA/.venv/bin/python",
+    "-m",
+    "kickmix_engine",
+    "verify",
+    "invsqrt",
+    "/Users/thanhs/Documents/Kaggle/GQA/artifacts/invsqrt/INV-64/phase2_row0.kmb",
+    "--verifier",
+    "/Users/thanhs/Documents/Kaggle/GQA/verifiers/invsqrt/verify_submission_invsqrt.py",
+    "--threads",
+    "4"
+  ]
+}

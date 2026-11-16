@@ -1,0 +1,21 @@
+{
+  "track": "invsqrt",
+  "experiment_id": "INV-64",
+  "config_name": "phase2_row0",
+  "source_commit": "22c4472510f6337a197c8a4019cbb0f31a82574e",
+  "source_path": "src/invsqrt/INV-64/solution.py",
+  "source_sha256": "36e5f2d081ca1a4b3a3608c3a9841a9ef463139b3ac19545f174eed75f9496d1",
+  "build_config_path": "src/invsqrt/INV-64/configs/phase2_row0.json",
+  "build_config_sha256": "3eb177dee2dbb6be806ef6e10c4040c43bb4d2b4ce7f36f4ad82ca7008a605ed",
+  "artifact_path": "artifacts/invsqrt/INV-64/phase2_row0.kmb",
+  "artifact_sha256": "aa89f2ff3a32b9ad6bbac476852e76c16227af2854f942e0ca0d90ee5a6339ed",
+  "build_command": ".venv/bin/python src/invsqrt/INV-64/solution.py --config src/invsqrt/INV-64/configs/phase2_row0.json --overwrite",
+  "environment": {
+    "python": "3.13.18",
+    "platform": "macOS-26.7.3-arm64-arm-64bit-Mach-O",
+    "kickmix": "1.0.0",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1"
+  },
+  "build_run": null
+}
