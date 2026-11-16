@@ -1,0 +1,8 @@
+{
+  "missing_provenance": true,
+  "matching_builds": [
+    "results/dfthcsos/DFT-68/reconstructed/build_only/20261115T052652Z-build-u3fl7wvi",
+    "results/dfthcsos/DFT-68/reconstructed/build_only/20261115T053100Z-build-co4afj7g"
+  ],
+  "note": "Agent must identify build evidence; do not infer source commit from current HEAD."
+}

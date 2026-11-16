@@ -1,0 +1,139 @@
+{
+  "track": "dfthcsos",
+  "experiment_id": "DFT-68",
+  "config_name": "reconstructed",
+  "run_id": "20261115T055007Z-local-full-edb6ea",
+  "owner": "nhphan0505",
+  "verification_level": "full",
+  "status": "PASS",
+  "python": "3.13.18 (main, Nov 11 2026, 00:17:48) [Clang 23.1.3 ]",
+  "packages": {
+    "kickmix": "1.0.0",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "kickmix-engine": "0.6.0"
+  },
+  "upload_artifact": {
+    "name": "reconstructed.zip",
+    "sha256": "fc481755b7b97fa73ae9256e775907b82835b835d5520b3c529440d647bcab8a",
+    "size_bytes": 7499076
+  },
+  "artifact_path": "artifacts/dfthcsos/DFT-68/reconstructed.zip",
+  "verifier_sha256": {
+    "verifiers/dfthcsos/verify.py": "0775be7a528922367caebe9e4d051d6199811f1aefeaa4b793eaaa4621b8ec9d",
+    "verifiers/dfthcsos/__init__.py": "81915e324cc0cade67f52a54b7a51991fd96abaea94d1f8a4d423dae20e57348",
+    "verifiers/dqi/dqi_reference_circuit.py": "2b8e1b80a806157c333a7e308eaf2499ee09de499efbc05875202c327959959e",
+    "verifiers/dqi/verify_submission_dqi.py": "f14274bc0943fb9769ddb01131be6063191a15009fe1caf1d4bdd9fd25194e65",
+    "verifiers/dqi/__init__.py": "01c870aa9763f4e4357fc6654bff1d3296cec995bd0943f87b4a48946ada5b40",
+    "verifiers/invsqrt/nr_reference_circuit.py": "bb90330dcf774f7b502de471293facba67f27952cc8808fe4a9970a9b1322e23",
+    "verifiers/invsqrt/verify_submission_invsqrt.py": "ddef520dec6b68d1cf0a6f328ddd36d79eb84570b9192cf3f7acaf073f06733a",
+    "verifiers/invsqrt/__init__.py": "e9a6ecf253c343528578be5fa92eb820ccade63333aebb784552fb4ae75dbc0b",
+    "verifiers/dfthcsos/example_submission/angle_k_reference_circuit.py": "8daccdca69f2d718b0176cd9281803df84a988ea5ac6c167fbb02e461ac2b371",
+    "verifiers/dfthcsos/scoreinfra/circuits.py": "fc027b52fdcebe14404f403a089122485d097ed65d03e6d989623d620b1ab68c",
+    "verifiers/dfthcsos/scoreinfra/costs_prepare.py": "7f1e190c42fc5325f3e6689fbbef51f95b0cb12f1c828cda92b6c088e72206da",
+    "verifiers/dfthcsos/scoreinfra/dfthc_math.py": "ae82898d47a7a86b96378fb906e0f8a9f46003065cf19c7c09952a123b5b5af8",
+    "verifiers/dfthcsos/scoreinfra/reference.py": "a2d5a63191d655729e29f0fde1e85fe4630bf896a91a63bb894d8d7daf71ed39",
+    "verifiers/dfthcsos/scoreinfra/__init__.py": "be90e0d503d5c20dcac0102af638b9a4ccad0341daa5baa5d49216a259e4516f"
+  },
+  "timeout_seconds": null,
+  "engine": {
+    "name": "kickmix-engine",
+    "version": "0.6.0",
+    "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "kernel": {
+      "arch": "x86_64",
+      "os": "linux",
+      "compiled": [
+        "baseline",
+        "avx2",
+        "avx512"
+      ],
+      "available": [
+        "baseline",
+        "avx2"
+      ],
+      "features": {
+        "sse4.2": true,
+        "popcnt": true,
+        "avx": true,
+        "avx2": true,
+        "bmi1": true,
+        "bmi2": true,
+        "fma": true,
+        "lzcnt": true,
+        "movbe": true,
+        "avx512f": false,
+        "avx512bw": false,
+        "avx512vl": false,
+        "avx512dq": false
+      },
+      "kernel_features": {
+        "baseline": [],
+        "avx2": [
+          "avx2",
+          "bmi1",
+          "bmi2",
+          "fma",
+          "lzcnt",
+          "movbe"
+        ],
+        "avx512": [
+          "avx2",
+          "bmi1",
+          "bmi2",
+          "fma",
+          "lzcnt",
+          "movbe",
+          "avx512f",
+          "avx512bw",
+          "avx512vl",
+          "avx512dq"
+        ]
+      },
+      "env_var": "KICKMIX_ENGINE_KERNEL",
+      "env_request": null,
+      "kernel": "avx2",
+      "selected_by": "auto",
+      "kernel_requires": [
+        "avx2",
+        "bmi1",
+        "bmi2",
+        "fma",
+        "lzcnt",
+        "movbe"
+      ]
+    }
+  },
+  "verify_command": [
+    "/mnt/d/GQA/.venv-engine/bin/python",
+    "-m",
+    "kickmix_engine",
+    "verify",
+    "dfthcsos",
+    "/mnt/d/GQA/artifacts/dfthcsos/DFT-68/.verify-5y3ia1ot",
+    "--verifier",
+    "/mnt/d/GQA/verifiers/dfthcsos",
+    "--threads",
+    "4"
+  ],
+  "submission_sha256": {
+    "angle_k_0.kmb": "ce7ebaf342c5b49f7d539637359fb8a282718fb3057e7b25dd193f2a6a4b8974",
+    "angle_k_1.kmb": "3eac70665f021b0e304106fd62749277d4d69db775df008aacd6d950e4934193",
+    "angle_k_10.kmb": "fdb67807154e35d9f41471c22b38bbc3ed07e5c93efef30a57f0599fb8400ff7",
+    "angle_k_11.kmb": "d22baf8e2d294165618bcee40d958ef2806f0b35352c8b92e0d201aff3269c37",
+    "angle_k_12.kmb": "b1b6af502f4bf02e521ab888600f645aa5a5bed028290466b54a835423eb2517",
+    "angle_k_13.kmb": "1843d7993215656e4e0eee69169966ba269d544bc0b90e855e4ed5e6e113accc",
+    "angle_k_14.kmb": "b763f0cd2fdeaaa31e7811084e51fde5d51575b036fa22854fb28172c1712a8e",
+    "angle_k_2.kmb": "c3e1454e29a05c3c28bcfd16c2aee02340b5d439d9466774424fedf0ed7601d1",
+    "angle_k_3.kmb": "d26b576ae789b0471ec6c11b7317c7c69eb3d7190472af8120ccf25cf217a8ea",
+    "angle_k_4.kmb": "2efacc9d944aa5a855acf780e6bbc3c07af16c0275eb9549bb24adc70acca344",
+    "angle_k_5.kmb": "7e4ed9a363c8f56d85410185c7b4449211788bc61e81b3dc7cbdd10ab7ce8a42",
+    "angle_k_6.kmb": "26ab1d5df8132bbc28e068a4eef0b247ea21a96fa4034f89a6d1bf306f07e284",
+    "angle_k_7.kmb": "1ae98642315e7aaedfde99773af4ae48198bf8b4f2e11e97883d6aa1bfe12bee",
+    "angle_k_8.kmb": "e69c554c360c709e52126a6f773afeaa3564da7be0927d6293665f342203771f",
+    "angle_k_9.kmb": "38848ce19bd553e4007a454d9b7d392d05ac105cf4b269f41521bd1003bf838e",
+    "submission.npz": "6418ec8e10b1a8da967ee26278434f9ac950474741185f4d61363e17a03da77f"
+  },
+  "exit_code": 0,
+  "finished_at_utc": "2026-11-15T05:50:15.216042+00:00"
+}

@@ -1,0 +1,110 @@
+{
+  "status": "ROUNDTRIP_EXACT",
+  "files": [
+    {
+      "input": "dfthcsos__angle_k_0.kmb",
+      "sha256": "ce7ebaf342c5b49f7d539637359fb8a282718fb3057e7b25dd193f2a6a4b8974",
+      "direct_exact": true,
+      "text_exact": true,
+      "kmx_bytes": 471200
+    },
+    {
+      "input": "dfthcsos__angle_k_1.kmb",
+      "sha256": "3eac70665f021b0e304106fd62749277d4d69db775df008aacd6d950e4934193",
+      "direct_exact": true,
+      "text_exact": true,
+      "kmx_bytes": 484550
+    },
+    {
+      "input": "dfthcsos__angle_k_2.kmb",
+      "sha256": "c3e1454e29a05c3c28bcfd16c2aee02340b5d439d9466774424fedf0ed7601d1",
+      "direct_exact": true,
+      "text_exact": true,
+      "kmx_bytes": 485472
+    },
+    {
+      "input": "dfthcsos__angle_k_3.kmb",
+      "sha256": "d26b576ae789b0471ec6c11b7317c7c69eb3d7190472af8120ccf25cf217a8ea",
+      "direct_exact": true,
+      "text_exact": true,
+      "kmx_bytes": 479181
+    },
+    {
+      "input": "dfthcsos__angle_k_4.kmb",
+      "sha256": "2efacc9d944aa5a855acf780e6bbc3c07af16c0275eb9549bb24adc70acca344",
+      "direct_exact": true,
+      "text_exact": true,
+      "kmx_bytes": 421306
+    },
+    {
+      "input": "dfthcsos__angle_k_5.kmb",
+      "sha256": "7e4ed9a363c8f56d85410185c7b4449211788bc61e81b3dc7cbdd10ab7ce8a42",
+      "direct_exact": true,
+      "text_exact": true,
+      "kmx_bytes": 419137
+    },
+    {
+      "input": "dfthcsos__angle_k_6.kmb",
+      "sha256": "26ab1d5df8132bbc28e068a4eef0b247ea21a96fa4034f89a6d1bf306f07e284",
+      "direct_exact": true,
+      "text_exact": true,
+      "kmx_bytes": 422848
+    },
+    {
+      "input": "dfthcsos__angle_k_7.kmb",
+      "sha256": "1ae98642315e7aaedfde99773af4ae48198bf8b4f2e11e97883d6aa1bfe12bee",
+      "direct_exact": true,
+      "text_exact": true,
+      "kmx_bytes": 429195
+    },
+    {
+      "input": "dfthcsos__angle_k_8.kmb",
+      "sha256": "e69c554c360c709e52126a6f773afeaa3564da7be0927d6293665f342203771f",
+      "direct_exact": true,
+      "text_exact": true,
+      "kmx_bytes": 406802
+    },
+    {
+      "input": "dfthcsos__angle_k_9.kmb",
+      "sha256": "38848ce19bd553e4007a454d9b7d392d05ac105cf4b269f41521bd1003bf838e",
+      "direct_exact": true,
+      "text_exact": true,
+      "kmx_bytes": 413773
+    },
+    {
+      "input": "dfthcsos__angle_k_10.kmb",
+      "sha256": "fdb67807154e35d9f41471c22b38bbc3ed07e5c93efef30a57f0599fb8400ff7",
+      "direct_exact": true,
+      "text_exact": true,
+      "kmx_bytes": 414225
+    },
+    {
+      "input": "dfthcsos__angle_k_11.kmb",
+      "sha256": "d22baf8e2d294165618bcee40d958ef2806f0b35352c8b92e0d201aff3269c37",
+      "direct_exact": true,
+      "text_exact": true,
+      "kmx_bytes": 414201
+    },
+    {
+      "input": "dfthcsos__angle_k_12.kmb",
+      "sha256": "b1b6af502f4bf02e521ab888600f645aa5a5bed028290466b54a835423eb2517",
+      "direct_exact": true,
+      "text_exact": true,
+      "kmx_bytes": 413627
+    },
+    {
+      "input": "dfthcsos__angle_k_13.kmb",
+      "sha256": "1843d7993215656e4e0eee69169966ba269d544bc0b90e855e4ed5e6e113accc",
+      "direct_exact": true,
+      "text_exact": true,
+      "kmx_bytes": 413100
+    },
+    {
+      "input": "dfthcsos__angle_k_14.kmb",
+      "sha256": "b763f0cd2fdeaaa31e7811084e51fde5d51575b036fa22854fb28172c1712a8e",
+      "direct_exact": true,
+      "text_exact": true,
+      "kmx_bytes": 414994
+    }
+  ]
+}

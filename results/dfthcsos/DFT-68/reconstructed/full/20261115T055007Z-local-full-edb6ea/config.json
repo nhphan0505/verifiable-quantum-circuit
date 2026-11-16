@@ -1,0 +1,18 @@
+{
+  "track": "dfthcsos",
+  "experiment_id": "DFT-68",
+  "config_name": "reconstructed",
+  "mode": "full",
+  "command": [
+    "/mnt/d/GQA/.venv-engine/bin/python",
+    "-m",
+    "kickmix_engine",
+    "verify",
+    "dfthcsos",
+    "/mnt/d/GQA/artifacts/dfthcsos/DFT-68/.verify-5y3ia1ot",
+    "--verifier",
+    "/mnt/d/GQA/verifiers/dfthcsos",
+    "--threads",
+    "4"
+  ]
+}
