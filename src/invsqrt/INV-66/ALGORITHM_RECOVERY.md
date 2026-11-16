@@ -150,21 +150,12 @@ Không có lượt verifier mới hoặc analytic error bound mới; provenance 
 lịch sử vẫn gắn đúng source cũ. Review độc lập HEAD mới còn phải thực hiện.
 
 
-## Sửa phạm vi hạ tầng theo hai review
+## Phạm vi sau review và yêu cầu gộp PR
 
-Review Reece1512 ở 11ab6bc yêu cầu bỏ thay đổi checker/test policy/docs chung và
-đưa PP-005 qua luồng riêng. Đã khôi phục scripts/check_repo.py và
- docs/REPOSITORY_CHECKS.md từ trusted main, bỏ scripts/tests/test_postprocessing_scope.py.
-PP-005 dùng lại PR71; diff PR67 trên base dependency chỉ chứa INV-66 và các dòng
-tracking của INV-66. Sau khi PR71 merge mới đổi base về main và kiểm lại. Trạng
-thái review thuật toán vẫn cần reviewer độc lập trên source mới; không tự đóng
-review hoặc ghi approval.
-
-Kiểm tra sau commit khôi phục 495c8ea (2026-11-16): checker gốc chạy với
-`--base origin/pp/PP-005-dead-write-hmr --branch exp/INV-66-one-toffoli-reconstruction`
-đạt 0 lỗi; `python -m unittest discover -s scripts/tests -q` đạt 34 tests;
-`python -m unittest discover -s src/invsqrt/postprocessing/PP-005/tests -q`
-đạt 13 tests. Các bài test harness dùng fixture/mock, không phải lượt chấm INV-66.
-19 runtime inputs vẫn khớp dependency audit của build f04c85e; notebook người dùng
-không thuộc commit. Kết quả scope trên dependency không chứng minh đã đủ điều
-kiện merge vào main; PR71 vẫn phải được review/merge trước rồi kiểm lại PR67.
+Checker/docs hệ thống giữ đúng trusted main. Theo yêu cầu người dùng, postprocessing
+HMR/CZ chuyển vào `INV-66/postprocessing/solution.py`, semantic tests chuyển vào
+`INV-66/tests/test_postprocessing.py`; generator và finishing vẫn tách module,
+nhưng bàn giao cùng PR67 trên base main, không phụ thuộc PR71 hoặc sửa catalog chung.
+Implementation rewrite giữ nguyên bytes từ 1298d954; đường dẫn import/audit thay
+đổi nên cần build sạch mới với source commit thật. Kết quả build/chấm cũ được giữ
+nguyên; không chuyển provenance hoặc nhận đã có approval cho thay đổi này.

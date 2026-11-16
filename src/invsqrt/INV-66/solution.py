@@ -3,7 +3,7 @@
 The source constructs the 64-row coefficient code, consumed-root arithmetic,
 balanced division/phase and inverse cleanup with typed owner/debt helpers.
 The private upstream source/search procedure is not claimed to be recovered. The circuit phases by the verifier's 1/sqrt(x) contract and restores x
-and scratch according to external evidence, not a new verifier run. The original precursor is generated first; shared PP-005 applies the HMR/CZ
+and scratch according to external evidence, not a new verifier run. The original precursor is generated first; the separate INV-66 postprocessing module applies the HMR/CZ
 correction, preserving the fixed output bytes. There are no numerical tuning parameters.
 
 Run: python src/invsqrt/INV-66/solution.py --config
@@ -53,7 +53,7 @@ def main():
     if git('status', '--porcelain').strip():
         raise RuntimeError('Build requires a clean committed checkout')
     commit = git('rev-parse', 'HEAD').decode().strip()
-    pp_path = root/'src/invsqrt/postprocessing/PP-005/solution.py'
+    pp_path = here/'postprocessing/solution.py'
     shared_source = root/'src/invsqrt/INV-51/circuit.py'
     finishing_paths = [root/f'src/invsqrt/postprocessing/PP-{index:03d}/solution.py' for index in range(1,5)]
     inputs = [here/name for name in (

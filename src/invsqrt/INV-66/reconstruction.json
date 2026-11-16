@@ -37,7 +37,7 @@
   "components": [
     {
       "path": "circuit.py",
-      "sha256": "a3db35437b114b1389f9a5ca42e80c2fc230502b65978e852cef4516d6a8b309",
+      "sha256": "3474c8145e4f3845a5a03750faae48083d741d59660170bb33e55e500b50b98a",
       "role": "complete arithmetic and inverse construction with owner/carry-debt tokens"
     },
     {
@@ -52,7 +52,7 @@
     },
     {
       "path": "finishing.py",
-      "sha256": "5af3856023f0119f6038eaf2afd9db32fea0b5baae0a2502902090e70d637d30",
+      "sha256": "c9dbe9465e25ffcf0965411b40ba515d86bb29b5524c4ea452f20f83e8e65714",
       "role": "adapter for separate PP implementations with interleaved coordinate remapping"
     }
   ],
@@ -88,7 +88,7 @@
       "acquisition": "tracked checkout; declared source or mathematical helper data"
     },
     {
-      "path": "src/invsqrt/postprocessing/PP-005/solution.py",
+      "path": "src/invsqrt/INV-66/postprocessing/solution.py",
       "sha256": "28de23f261438791a871f0210e0ebe00bf2951eb635223dbc63104a61b4567ff",
       "acquisition": "tracked checkout; declared source or mathematical helper data"
     },
@@ -114,7 +114,7 @@
     },
     {
       "path": "src/invsqrt/INV-66/finishing.py",
-      "sha256": "5af3856023f0119f6038eaf2afd9db32fea0b5baae0a2502902090e70d637d30",
+      "sha256": "c9dbe9465e25ffcf0965411b40ba515d86bb29b5524c4ea452f20f83e8e65714",
       "acquisition": "tracked checkout; declared source or mathematical helper data"
     },
     {
@@ -147,10 +147,11 @@
   "postprocessing": {
     "method": "PP-005",
     "source_commit": "1298d954ef9e06a552edf9e8f38e040e3efe97f8",
-    "path": "src/invsqrt/postprocessing/PP-005/solution.py",
+    "path": "src/invsqrt/INV-66/postprocessing/solution.py",
     "sha256": "28de23f261438791a871f0210e0ebe00bf2951eb635223dbc63104a61b4567ff",
     "operation_index": 3292,
-    "input_hash_prefix_from_reference": "dcde7078"
+    "input_hash_prefix_from_reference": "dcde7078",
+    "source_commit_role": "original implementation lineage; current build uses the relocated file in its own source snapshot"
   },
   "algorithm_recovery_analysis": {
     "status": "COMPLETE_ARITHMETIC_MODEL_AND_GENERATOR_CLEAN_EXACT",
@@ -201,11 +202,9 @@
     }
   ],
   "dependency_workflow": {
-    "method": "PP-005",
-    "issue": "https://github.com/nhphan0505/verifiable-quantum-circuit/issues/70",
-    "prerequisite_pr": "https://github.com/nhphan0505/verifiable-quantum-circuit/pull/71",
-    "temporary_pr_base": "pp/PP-005-dead-write-hmr",
-    "merge_order": "Merge reviewed PP71 into main first; retarget PR67 to main and recheck before merge",
+    "delivery": "generator and separate experiment-local postprocessing module in PR67",
+    "pr_base": "main",
+    "prerequisite_pr": null,
     "checker_policy_changes": false
   }
 }

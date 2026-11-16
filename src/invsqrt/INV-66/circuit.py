@@ -366,7 +366,7 @@ def build_raw_circuit():
     return (circuit, dict(cuts=cuts, layout=layout))
 
 def build_circuit(work):
-    """Build arithmetic, run declared finishing, then the shared PP-005 rule."""
+    """Build arithmetic, run declared finishing, then the experiment-local HMR/CZ rule."""
     import kickmix as km
     circuit, construction = build_raw_circuit()
     text, finishing = finish(circuit, work)
@@ -377,7 +377,7 @@ def build_circuit(work):
     expected = 'dcde70780434501912c5cc032c6dfad25ac694d50da4e8e45cdb65115baa81b2'
     if before != expected:
         raise RuntimeError('Arithmetic precursor mismatch: ' + before)
-    path = HERE.parent / 'postprocessing/PP-005/solution.py'
+    path = HERE / 'postprocessing/solution.py'
     spec = importlib.util.spec_from_file_location('inv66_pp005', path)
     pp = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(pp)

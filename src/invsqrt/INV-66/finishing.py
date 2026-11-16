@@ -1,4 +1,4 @@
-"""Orchestrate the existing, separate PP-001..PP-005 implementations.
+"""Orchestrate the existing, separate PP-001..PP-004 implementations.
 
 The arithmetic builder calls this module only on its newly generated circuit.
 Hold chains are passed to PP-001 individually; remaining coordinates are updated

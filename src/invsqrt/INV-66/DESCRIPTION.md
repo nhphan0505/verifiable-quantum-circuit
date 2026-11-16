@@ -42,6 +42,7 @@ Receipt bên ngoài chỉ là evidence, không phải local-run/source-build pro
 | [cleanup.py](cleanup.py) | Decoder 8 AND, inverse R-frame, trả debt và erasure với tám bank Boolean |
 | [recovery_model.py](recovery_model.py) | Model cổ điển độc lập và bảng A64/S64 |
 | [finishing.py](finishing.py) | Adapter gọi PP riêng và giữ đúng tọa độ khi chain đan xen |
+| [postprocessing/solution.py](postprocessing/solution.py) | Module HMR/CZ riêng của INV-66, tách khỏi generator |
 | data/lookup64_certificates.json | Hai plan Boolean sáu đầu vào; không chứa toàn mạch |
 | data/cleanup64.json | Decoder nhỏ và lịch retirement/bank; không chứa phase opcode list |
 | data/arithmetic_helpers.json | 16 đối tượng toán học/compatibility cần để khởi tạo helper cũ, khoảng 19 KB |
@@ -53,24 +54,22 @@ cache cũ và dữ liệu scratch không phải input runtime. KMX trung gian ch
 build hiện tại mới sinh trong work directory riêng dưới artifacts.
 
 Finishing vẫn tách khỏi thuật toán: gọi nguyên implementation PP-001..PP-004 rồi
-PP-005 trong src/invsqrt/postprocessing. Adapter truyền từng hold-chain cho PP-001
+module HMR/CZ trong `INV-66/postprocessing/solution.py`. Adapter truyền từng hold-chain cho PP-001
 và remap tọa độ chain chưa xử lý sau insert/replace; không sửa method của owner khác.
-PP-005 giữ module riêng và rewrite đúng site 3292. Các dependency được pin SHA-256.
+Phép sửa kế thừa PP-005 giữ module riêng và rewrite đúng site 3292. Các dependency được pin SHA-256.
 
-## Phạm vi PR và dependency PP-005 sau review
+## Phạm vi PR và postprocessing sau review
 
-Theo review của nhphan0505 và Reece1512, PR67 không sửa checker, test policy hoặc
-REPOSITORY_CHECKS để mở rộng phạm vi experiment. Các file hệ thống đã được trả
-về bản trusted main. PP-005 thuộc Issue #70 và [PR71](https://github.com/nhphan0505/verifiable-quantum-circuit/pull/71),
-không nộp chung thay đổi method/catalog trong diff INV-66.
+Theo yêu cầu người dùng, generator và module postprocessing được bàn giao cùng
+PR67 trên base main. Phép sửa HMR/CZ nằm trong `INV-66/postprocessing/`, tests nằm
+trong `INV-66/tests/`; không thêm method/catalog dùng chung hay phụ thuộc PR71.
+PP-001..PP-004 đã có trên main được gọi nguyên trạng. Không sửa checker,
+REPOSITORY_CHECKS hoặc test policy; dùng checker trusted main để kiểm scope.
 
-PR67 tạm đặt base `pp/PP-005-dead-write-hmr` để thể hiện dependency chưa merge.
-PR71 cần review/merge vào main trước; sau đó mới đổi base PR67 về main và kiểm
-scope/checks lại. CI trên base dependency không có nghĩa dependency đã có trên
-main hoặc PR67 đủ điều kiện merge. Không tự merge hoặc tự approve dependency.
-
-Source/helper/data build giữ nguyên bytes của source f04c85e đã nghiệm thu exact;
-việc hoàn tác policy và tài liệu không tạo một lượt build/chấm mới.
+Việc này thay phương án stacked PR trước đó: PR71 không còn là prerequisite.
+Implementation rewrite giữ nguyên bytes, chỉ đổi vị trí và đường dẫn import/audit;
+source builder vì thế thay đổi và cần build sạch mới. Các build/full PASS cũ vẫn
+gắn với source commit cũ, không chỉnh provenance hoặc nhận đã review độc lập HEAD mới.
 
 ## Hypothesis tái lập và nghiệm thu
 

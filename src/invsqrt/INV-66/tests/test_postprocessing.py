@@ -7,7 +7,7 @@ import unittest
 import kickmix as km
 import numpy as np
 
-path = Path(__file__).resolve().parents[1] / 'solution.py'
+path = Path(__file__).resolve().parents[1] / 'postprocessing' / 'solution.py'
 spec = importlib.util.spec_from_file_location('pp005', path)
 pp = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(pp)
