@@ -14,6 +14,27 @@ from lookup import load
 from return_path import inverse
 
 
+def restore_layout(cb,current,original):
+    """Restore the logical input permutation, borrowing only clean owners.
+
+    Adapted from Syed Asad Ali's tracked INV-51 layout helper. Keeping this
+    small permutation routine here avoids its unused model/data dependency.
+    """
+    current=list(current)
+    assert cb.num_allocated_qubits==22 and len(set(current))==22
+    spare=list(cb.alloc_qubits(44-22))
+    all_wires=set(current+spare)
+    for bit,target in enumerate(original):
+        source=current[bit]
+        if source==target:continue
+        cb.swap(source,target)
+        for other in range(bit+1,22):
+            if current[other]==target:current[other]=source
+        current[bit]=target
+    cb.free(km.array(sorted(all_wires-set(original),key=str)))
+    assert current==original and cb.num_allocated_qubits==22
+
+
 def build_circuit():
     native,x,flags=create_prefix()
     cb=coefficient.Builder(native)
@@ -27,8 +48,7 @@ def build_circuit():
     root.inverse(cb,norm)
     normal.inverse(cb,norm,flags)
     cb.free(km.array(flags))
-    layout=component('_inv74_layout','work/c10/narrow/native/candidate01/layout.py')
-    layout.restore_input_layout(cb,norm,x,44)
+    restore_layout(cb,norm,x)
     metadata=[f'APPEND_TO_REGISTER q{i} r0' for i in range(22)]+['REGISTER r0 "x"']
     text='\n'.join(metadata)+'\n'+str(cb.finish_circuit())
     return km.Circuit.from_file(io.BytesIO(text.encode('utf8')),format='kmx')

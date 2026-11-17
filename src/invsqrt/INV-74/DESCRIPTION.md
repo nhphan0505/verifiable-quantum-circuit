@@ -1,4 +1,4 @@
-# INV-74 — Fusion inverse-square-root, Q44
+# [INV-74] Tái dựng Fusion 44 qubit bằng Python và phục hồi số học từ KMX
 
 Original builder: **Syed Asad Ali**, dataset `syed3000/vqcc-own-circuit-portfolio`.
 Independent arithmetic reconstruction; see [NOTICE](NOTICE.txt) and
