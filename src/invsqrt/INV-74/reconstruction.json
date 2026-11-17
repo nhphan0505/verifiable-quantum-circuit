@@ -113,12 +113,11 @@
     "runtime": "requirements.txt"
   },
   "limitations": [
-    "Full arithmetic source requires a fresh committed entry-point build; earlier exact records are distinct snapshots",
     "Original private generator/search/refit unavailable",
     "No new verifier score, independent review or merge"
   ],
-  "reconstruction_check": "results/invsqrt/INV-74/reconstructed/build_only/20261117T112724Z-exact-4e8c34e8/reconstruction_check.json",
-  "clean_checkout_build": "results/invsqrt/INV-74/reconstructed/build_only/20261117T112724Z-exact-4e8c34e8/clean_checkout_build.json",
+  "reconstruction_check": "results/invsqrt/INV-74/reconstructed/build_only/20261117T160232Z-exact-e9c11e96/reconstruction_check.json",
+  "clean_checkout_build": "results/invsqrt/INV-74/reconstructed/build_only/20261117T160232Z-exact-e9c11e96/clean_checkout_build.json",
   "arithmetic_recovered_blocks": [
     "normalization",
     "consumed_root_with_parity_frame",
@@ -132,5 +131,8 @@
     "Boolean table retirement and inverse root/normalization layout"
   ],
   "arithmetic_unresolved_blocks": [],
-  "historical_build_source_commit": "36553eb7800dfa7afd1185aaf924297219642dc3"
+  "historical_build_source_commit": "36553eb7800dfa7afd1185aaf924297219642dc3",
+  "build_source_commit": "c843a80857d8f42e5c9d7113ae547417e0f58b2f",
+  "status": "RECONSTRUCTED_EXACT",
+  "byte_comparison": "results/invsqrt/INV-74/reconstructed/build_only/20261117T160232Z-exact-e9c11e96/byte_comparison.json"
 }

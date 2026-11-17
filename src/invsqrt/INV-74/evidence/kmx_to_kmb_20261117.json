@@ -1,0 +1,9 @@
+{
+  "input_kmx": "C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-x2763-recovery\\verifiable-quantum-circuit\\artifacts\\decompiler\\47b318383a03c52e08a5c222c5600fd52e004b468f53fad038082fc0f26386ef\\20261117T113311Z-arithmetic\\reference.kmx",
+  "input_kmx_sha256": "365e454b9c73104a7b3074bd00a6b6695f61e7c9ebabc71b5ca35c6fd00e671a",
+  "output_kmb": "C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-x2763-recovery\\verifiable-quantum-circuit\\artifacts\\decompiler\\47b318383a03c52e08a5c222c5600fd52e004b468f53fad038082fc0f26386ef\\20261117T113311Z-arithmetic\\kmx-to-kmb-20261117T114425Z.kmb",
+  "bytes": 200369,
+  "sha256": "47b318383a03c52e08a5c222c5600fd52e004b468f53fad038082fc0f26386ef",
+  "original_bytes_equal": true,
+  "status": "ROUNDTRIP_EXACT"
+}

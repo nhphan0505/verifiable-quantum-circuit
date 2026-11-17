@@ -60,12 +60,16 @@ implementation, not the original source, numerical fit or search procedure.
 
 ## Evidence and current acceptance
 
-Isolated component reconstruction matched each original operation through the
-normalization inverse at boundary 24120. Input-layout restoration accounts for
-the final 12 operations. Full entry-point build from a fresh GitHub checkout
-must validate the composed allocator and exact KMB after the source commit.
-The current arithmetic source has not yet been accepted on the strength of a
-previous gate-level build.
+Complete arithmetic source `c843a80857d8f42e5c9d7113ae547417e0f58b2f` built from a fresh
+GitHub clone and a new pinned venv, invoked from outside the checkout. The
+entry point produced exactly 200369 bytes and the input SHA-256. A separate
+stream comparison checked every byte. See [clean build](../../../results/invsqrt/INV-74/reconstructed/build_only/20261117T160232Z-exact-e9c11e96/clean_checkout_build.json),
+[byte comparison](../../../results/invsqrt/INV-74/reconstructed/build_only/20261117T160232Z-exact-e9c11e96/byte_comparison.json) and
+[dependency audit](../../../results/invsqrt/INV-74/reconstructed/build_only/20261117T160232Z-exact-e9c11e96/dependency_audit.json).
+Run `20261117T160232Z-exact-e9c11e96` is build-only and establishes `RECONSTRUCTED_EXACT` for this
+arithmetic snapshot. Later description/manifest changes do not change its
+source commit. The audit rejected an earlier unused model dependency; the
+accepted build uses a local mathematical layout permutation instead.
 
 Historical clean build source `36553eb7800dfa7afd1185aaf924297219642dc3`
 matched all bytes; its immutable records remain at

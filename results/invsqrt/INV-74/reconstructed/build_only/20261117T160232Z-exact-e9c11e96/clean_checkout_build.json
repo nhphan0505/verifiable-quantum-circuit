@@ -1,0 +1,42 @@
+{
+  "repository": "https://github.com/nhphan0505/verifiable-quantum-circuit",
+  "source_commit": "c843a80857d8f42e5c9d7113ae547417e0f58b2f",
+  "branch": "exp/INV-74-fusion44-reconstruction",
+  "checkout": "C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-x2763-recovery\\verifiable-quantum-circuit\\artifacts\\buildchecks\\c843a80\\checkout",
+  "fresh_clone": true,
+  "clean_before_build": true,
+  "clean_check": "git status --porcelain returned empty; solution also rejects dirty checkout and compares all input bytes against HEAD",
+  "fresh_venv": "C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-x2763-recovery\\verifiable-quantum-circuit\\artifacts\\buildchecks\\c843a80\\runtime",
+  "setup_commands": [
+    "git -c core.longpaths=true clone --single-branch --branch exp/INV-74-fusion44-reconstruction https://github.com/nhphan0505/verifiable-quantum-circuit.git artifacts/buildchecks/c843a80/checkout",
+    "D:/verifiable-quantum-circuit/.venv/Scripts/python.exe -m venv artifacts/buildchecks/c843a80/runtime",
+    "artifacts/buildchecks/c843a80/runtime/Scripts/python.exe -m pip install -r artifacts/buildchecks/c843a80/checkout/requirements.txt"
+  ],
+  "build_command": [
+    "C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-x2763-recovery\\verifiable-quantum-circuit\\artifacts\\buildchecks\\c843a80\\runtime\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-x2763-recovery\\verifiable-quantum-circuit\\artifacts\\buildchecks\\c843a80\\checkout\\src\\invsqrt\\INV-74\\solution.py",
+    "--config",
+    "C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-x2763-recovery\\verifiable-quantum-circuit\\artifacts\\buildchecks\\c843a80\\checkout\\src\\invsqrt\\INV-74\\configs\\reconstructed.json"
+  ],
+  "cwd": "C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-x2763-recovery\\verifiable-quantum-circuit",
+  "cwd_outside_checkout": true,
+  "exit_code": 0,
+  "python_executable_sha256": "200d001707ed494066ef00e31e38330e32490c2a74a450ca5d66d2179396fd0e",
+  "runtime_configuration_sha256": "3e72c9a239dfb32a3be9fba68d18b0f23be80453946d5dc294e6f892feef543b",
+  "requirements_sha256": "f3cd725b18083117d8ad73afd9accf3a5a99a634fac00f221bf1d77d71ad09a8",
+  "packages": {
+    "kickmix": "1.0.0",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1"
+  },
+  "dependency_audit": "dependency_audit.json",
+  "stdout": "build.stdout.txt",
+  "stderr": "build.stderr.txt",
+  "byte_comparison": "byte_comparison.json",
+  "limitations": [
+    "Native runtime internal OS reads are outside CPython hooks",
+    "No verifier or score measurement"
+  ]
+}
