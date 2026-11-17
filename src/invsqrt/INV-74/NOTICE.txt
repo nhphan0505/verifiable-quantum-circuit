@@ -1,0 +1,11 @@
+User-supplied attribution: the inverse-square-root and DQI circuits come
+from generators originally built by Syed Asad Ali, dataset
+syed3000/vqcc-own-circuit-portfolio.
+
+The user requests retention of this attribution on every redistribution and
+all derivatives, at any number of generations removed. This independently
+transcribed Python construction preserves that attribution. The complete
+upstream notice/license for this exact Q44 artifact has not been supplied or
+independently verified. This notice does not infer or grant a license, and does
+not claim the original private generator or search procedure was recovered.
+Input SHA-256: 47b318383a03c52e08a5c222c5600fd52e004b468f53fad038082fc0f26386ef.

@@ -30,4 +30,8 @@ Giữ thứ tự register, qubit, bit đo, PUSH/POP_CONDITION, HMR correction, e
 
 ## Giới hạn hiện tại
 
-Bước tiếp nhận/khứ hồi/phân tích ban đầu đã có scratch bất biến. Chưa có source tái dựng, clean build hoặc grading mới. Thông tin cost/ratio từ người dùng được giữ ở manifest đầu vào, không đưa lên bảng điểm. Chưa khẳng định phục hồi source/search procedure gốc hoặc đủ điều kiện merge.
+Bước tiếp nhận/khứ hồi/phân tích ban đầu đã có scratch bất biến. Đã viết source explicit cấp cổng trong circuit.py và CLI solution.py, config reconstructed; chưa build. Đây chưa phải phục hồi generator số học; clean build và grading mới chưa có. Thông tin cost/ratio từ người dùng được giữ ở manifest đầu vào, không đưa lên bảng điểm. Chưa khẳng định phục hồi source/search procedure gốc hoặc đủ điều kiện merge.
+
+## Implementation ban đầu
+
+[solution.py](solution.py) kiểm snapshot committed và môi trường, cấm network/subprocess khi dựng, chỉ đọc [circuit.py](circuit.py) cùng runtime đã pin. Source sinh mỗi lệnh bằng lời gọi Python rõ ràng, chia hàm theo khoảng operation để kiểm tra; không chứa nguyên KMX/binary trong data và không đọc submission gốc. Đây là mốc GATE_LEVEL_PYTHON phục vụ phục hồi tiếp, chưa đáp ứng mục tiêu generator số học giống INV-66. Góc là decimal string exact half-turn, điều kiện từng lệnh và stack giữ riêng. [reconstruction.json](reconstruction.json) khai báo dependency và giới hạn; [NOTICE](NOTICE.txt) giữ attribution qua mọi lớp phái sinh.

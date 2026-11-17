@@ -1,0 +1,28 @@
+{
+  "status": "ROUNDTRIP_EXACT",
+  "python": "3.13.7 (tags/v3.13.7:bcee1c3, Aug 14 2025, 14:15:11) [MSC v.1944 64 bit (AMD64)]",
+  "packages": {
+    "kickmix": "1.0.0",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1"
+  },
+  "api": [
+    "Circuit.from_file(input, format=kmb).to_file(direct, format=kmb)",
+    "Circuit.to_file(input.kmx, format=kmx)",
+    "Circuit.from_file(input.kmx, format=kmx).to_file(roundtrip, format=kmb)"
+  ],
+  "checks": [
+    {
+      "path": "direct.kmb",
+      "bytes": 200369,
+      "sha256": "47b318383a03c52e08a5c222c5600fd52e004b468f53fad038082fc0f26386ef",
+      "bytes_equal": true
+    },
+    {
+      "path": "roundtrip.kmb",
+      "bytes": 200369,
+      "sha256": "47b318383a03c52e08a5c222c5600fd52e004b468f53fad038082fc0f26386ef",
+      "bytes_equal": true
+    }
+  ]
+}

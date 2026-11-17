@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "track": "invsqrt",
+  "input_sha256": "47b318383a03c52e08a5c222c5600fd52e004b468f53fad038082fc0f26386ef",
+  "input_bytes": 200369,
+  "source_attribution": "Syed Asad Ali; user-supplied dataset syed3000/vqcc-own-circuit-portfolio",
+  "source_version": null,
+  "reconstruction_level": "GATE_LEVEL_PYTHON",
+  "components": [
+    {
+      "path": "solution.py",
+      "sha256": "d8f0b004a4d80ac43f9192c3b22369541dad6ae55a6512f145780d49c201f5b5",
+      "role": "entry point with snapshot/audit/provenance"
+    },
+    {
+      "path": "circuit.py",
+      "sha256": "4daae333736436346e7b426591d8bdffdc09a8ef3a9e2f09ffbb1b954fc0af8c",
+      "role": "explicit per-instruction Python emitter; not arithmetic recovery"
+    }
+  ],
+  "environment": {
+    "python": "3.13",
+    "kickmix": "1.0.0",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1"
+  },
+  "dependencies": {
+    "external_bundle_required": false,
+    "local_files": [
+      "solution.py",
+      "circuit.py",
+      "configs/reconstructed.json"
+    ],
+    "runtime": "requirements.txt"
+  },
+  "limitations": [
+    "Not an arithmetic generator; original private source/search history not recovered",
+    "User cost/ratio not verified; no grading run",
+    "Upstream complete notice/license for this exact artifact not verified; attribution retained in NOTICE.txt"
+  ]
+}
