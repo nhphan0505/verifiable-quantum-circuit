@@ -1,0 +1,13 @@
+{
+  "status": "RECONSTRUCTED_EXACT",
+  "comparison": "separate post-build binary stream comparison in 65536-byte chunks; every byte compared",
+  "bytes_equal": true,
+  "input_path": "D:\\invsqrt_x2763.kmb",
+  "output_path": "C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-x2763-recovery\\verifiable-quantum-circuit\\artifacts\\buildchecks\\c843a80\\checkout\\artifacts\\invsqrt\\INV-74\\reconstructed.kmb",
+  "input_bytes": 200369,
+  "output_bytes": 200369,
+  "input_sha256": "47b318383a03c52e08a5c222c5600fd52e004b468f53fad038082fc0f26386ef",
+  "output_sha256": "47b318383a03c52e08a5c222c5600fd52e004b468f53fad038082fc0f26386ef",
+  "source_commit": "c843a80857d8f42e5c9d7113ae547417e0f58b2f",
+  "original_read_during_construction": false
+}

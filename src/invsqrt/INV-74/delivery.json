@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "track": "invsqrt",
+  "experiment_id": "INV-74",
+  "branch": "exp/INV-74-fusion44-reconstruction",
+  "config_name": "reconstructed",
+  "config_path": "src/invsqrt/INV-74/configs/reconstructed.json",
+  "artifact_path": "artifacts/invsqrt/INV-74/reconstructed.kmb",
+  "artifact_bytes": 200369,
+  "artifact_sha256": "47b318383a03c52e08a5c222c5600fd52e004b468f53fad038082fc0f26386ef",
+  "source_commit": "12d971d5d2a6f8b8b3ef20e30eaeaf73d9416716",
+  "build_run": "results/invsqrt/INV-74/reconstructed/build_only/20261117T163158Z-exact-133928ca",
+  "provenance": "results/invsqrt/INV-74/reconstructed/build_only/20261117T163158Z-exact-133928ca/provenance.json",
+  "status": "RECONSTRUCTED_EXACT",
+  "original_builder": "Syed Asad Ali",
+  "notice": "src/invsqrt/INV-74/NOTICE.txt",
+  "notebook_selection": {
+    "TRACK": "invsqrt",
+    "EXPERIMENT_ID": "INV-74",
+    "CONFIG_NAME": "reconstructed",
+    "OWNER": "Cheemshoang"
+  },
+  "notebook_discovery_verified": true,
+  "artifact_distribution": "Local artifact installed; Git tracking excludes all .kmb; external publication awaits explicit approval",
+  "grading_summary": "src/invsqrt/INV-74/evidence/grading_summary.json",
+  "grading_runs": {
+    "smoke": {
+      "run": "results/invsqrt/INV-74/reconstructed/smoke/20261117T163400Z-local-smoke-62712d",
+      "source_commit": "12d971d5d2a6f8b8b3ef20e30eaeaf73d9416716",
+      "build_run": "results/invsqrt/INV-74/reconstructed/build_only/20261117T163158Z-exact-133928ca",
+      "status": "PASS",
+      "score": 73630.74893951333,
+      "verified_shots": 4096,
+      "worst_error_over_tolerance": 0.8128326979187013,
+      "verifier_sha256": "f995ed9273ae845bdd86f7dbcc4458e9b78e0c72a471a9aa9ad83b294a4dfe5b",
+      "metadata_sha256": "2acff7259d5e60ba3eacfa0a5a43b3507337af930fd4dd447d34e36a893d9664",
+      "grading_python": "3.13.18 (main, Nov 11 2026, 00:17:48) [Clang 23.1.3 ]",
+      "grading_platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39"
+    },
+    "full": {
+      "run": "results/invsqrt/INV-74/reconstructed/full/20261117T163551Z-local-full-50ae76",
+      "source_commit": "12d971d5d2a6f8b8b3ef20e30eaeaf73d9416716",
+      "build_run": "results/invsqrt/INV-74/reconstructed/build_only/20261117T163158Z-exact-133928ca",
+      "status": "PASS",
+      "score": 75170.62025728542,
+      "verified_shots": 200540928,
+      "worst_error_over_tolerance": 0.9912046209041316,
+      "verifier_sha256": "1928656bec6243a9aa7f556772149bceec957c2e3c5d931016c83a43111291ee",
+      "metadata_sha256": "17c27f9099dfc8bf7650968fcc48a0a2d1cd5fe914a5eb46ebf447a4f3f31879",
+      "grading_python": "3.13.18 (main, Nov 11 2026, 00:17:48) [Clang 23.1.3 ]",
+      "grading_platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39"
+    }
+  }
+}

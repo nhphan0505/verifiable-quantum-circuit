@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "author_validation": true,
+  "independent_review": false,
+  "track": "invsqrt",
+  "experiment_id": "INV-74",
+  "config_name": "reconstructed",
+  "artifact_sha256": "47b318383a03c52e08a5c222c5600fd52e004b468f53fad038082fc0f26386ef",
+  "build_source_commit": "12d971d5d2a6f8b8b3ef20e30eaeaf73d9416716",
+  "baseline_full": {
+    "path": "results/invsqrt/INV-BASELINE/baseline/full/20261113T183503Z-local-full-35f777/verifier.json",
+    "sha256": "26d5ae2238e023b5f1949ac22420be7a0bca98d6a60319c521a5cac9a0a463d6",
+    "score": 2076774.233715282
+  },
+  "runs": {
+    "smoke": {
+      "run": "results/invsqrt/INV-74/reconstructed/smoke/20261117T163400Z-local-smoke-62712d",
+      "source_commit": "12d971d5d2a6f8b8b3ef20e30eaeaf73d9416716",
+      "build_run": "results/invsqrt/INV-74/reconstructed/build_only/20261117T163158Z-exact-133928ca",
+      "status": "PASS",
+      "score": 73630.74893951333,
+      "verified_shots": 4096,
+      "worst_error_over_tolerance": 0.8128326979187013,
+      "verifier_sha256": "f995ed9273ae845bdd86f7dbcc4458e9b78e0c72a471a9aa9ad83b294a4dfe5b",
+      "metadata_sha256": "2acff7259d5e60ba3eacfa0a5a43b3507337af930fd4dd447d34e36a893d9664",
+      "grading_python": "3.13.18 (main, Nov 11 2026, 00:17:48) [Clang 23.1.3 ]",
+      "grading_platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39"
+    },
+    "full": {
+      "run": "results/invsqrt/INV-74/reconstructed/full/20261117T163551Z-local-full-50ae76",
+      "source_commit": "12d971d5d2a6f8b8b3ef20e30eaeaf73d9416716",
+      "build_run": "results/invsqrt/INV-74/reconstructed/build_only/20261117T163158Z-exact-133928ca",
+      "status": "PASS",
+      "score": 75170.62025728542,
+      "verified_shots": 200540928,
+      "worst_error_over_tolerance": 0.9912046209041316,
+      "verifier_sha256": "1928656bec6243a9aa7f556772149bceec957c2e3c5d931016c83a43111291ee",
+      "metadata_sha256": "17c27f9099dfc8bf7650968fcc48a0a2d1cd5fe914a5eb46ebf447a4f3f31879",
+      "grading_python": "3.13.18 (main, Nov 11 2026, 00:17:48) [Clang 23.1.3 ]",
+      "grading_platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39"
+    }
+  },
+  "full_improvement_ratio": 27.62747236363271,
+  "full_cost_reduction_percent": 96.38041444096658,
+  "raw_files_preserved": {
+    "results/invsqrt/INV-74/reconstructed/smoke/20261117T163400Z-local-smoke-62712d/config.json": "a6178b1ae5338c29485301cdd711b2003915d1fdc49b3d3ed1e98049eca37fce",
+    "results/invsqrt/INV-74/reconstructed/smoke/20261117T163400Z-local-smoke-62712d/metadata.json": "2acff7259d5e60ba3eacfa0a5a43b3507337af930fd4dd447d34e36a893d9664",
+    "results/invsqrt/INV-74/reconstructed/smoke/20261117T163400Z-local-smoke-62712d/review.json": "4499e908a45f2f18bae742f9559f781029e6a6a941143602eaaff7c51a8007a3",
+    "results/invsqrt/INV-74/reconstructed/smoke/20261117T163400Z-local-smoke-62712d/verifier.json": "f995ed9273ae845bdd86f7dbcc4458e9b78e0c72a471a9aa9ad83b294a4dfe5b",
+    "results/invsqrt/INV-74/reconstructed/smoke/20261117T163400Z-local-smoke-62712d/verify.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "results/invsqrt/INV-74/reconstructed/smoke/20261117T163400Z-local-smoke-62712d/verify.stdout.txt": "f995ed9273ae845bdd86f7dbcc4458e9b78e0c72a471a9aa9ad83b294a4dfe5b",
+    "results/invsqrt/INV-74/reconstructed/full/20261117T163551Z-local-full-50ae76/config.json": "ea4832b003bd0e641d3ab29aebd41ed77265f4a01d6f47c586355cb7b61f7a58",
+    "results/invsqrt/INV-74/reconstructed/full/20261117T163551Z-local-full-50ae76/metadata.json": "17c27f9099dfc8bf7650968fcc48a0a2d1cd5fe914a5eb46ebf447a4f3f31879",
+    "results/invsqrt/INV-74/reconstructed/full/20261117T163551Z-local-full-50ae76/review.json": "4499e908a45f2f18bae742f9559f781029e6a6a941143602eaaff7c51a8007a3",
+    "results/invsqrt/INV-74/reconstructed/full/20261117T163551Z-local-full-50ae76/verifier.json": "1928656bec6243a9aa7f556772149bceec957c2e3c5d931016c83a43111291ee",
+    "results/invsqrt/INV-74/reconstructed/full/20261117T163551Z-local-full-50ae76/verify.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "results/invsqrt/INV-74/reconstructed/full/20261117T163551Z-local-full-50ae76/verify.stdout.txt": "1928656bec6243a9aa7f556772149bceec957c2e3c5d931016c83a43111291ee"
+  },
+  "limitations": [
+    "Smoke score is not entered in full/dev score table",
+    "Independent review remains required",
+    "Artifact is reproducible from committed inputs; KMB is excluded from Git by repository policy"
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "validation_type": "author_results_validation",
+  "independent_review": false,
+  "status": "RESULTS_VALIDATED",
+  "original_review": "review.json",
+  "missing_provenance_resolved": true,
+  "build_run": "results/invsqrt/INV-74/reconstructed/build_only/20261117T163158Z-exact-133928ca",
+  "source_commit": "12d971d5d2a6f8b8b3ef20e30eaeaf73d9416716",
+  "artifact_sha256": "47b318383a03c52e08a5c222c5600fd52e004b468f53fad038082fc0f26386ef",
+  "build_selection_basis": "The local grading artifact was installed from this fresh build before both runs; delivery.json records that handoff. Other matching builds have identical bytes, so hash equality alone is not used to choose the source commit.",
+  "handoff_manifest": "src/invsqrt/INV-74/delivery.json",
+  "checks": {
+    "stdout_equals_verifier_json": true,
+    "exit_code_zero": true,
+    "official_verifier_path": true,
+    "verifier_hashes_match_repository": true,
+    "profile_arguments_match_mode": true,
+    "shots_expected": 200540928,
+    "engine": "kickmix-engine==0.6.0",
+    "artifact_matches_recorded_build": true,
+    "source_and_dependency_hashes_match_source_commit": true
+  },
+  "raw_files_sha256": {
+    "config.json": "ea4832b003bd0e641d3ab29aebd41ed77265f4a01d6f47c586355cb7b61f7a58",
+    "metadata.json": "17c27f9099dfc8bf7650968fcc48a0a2d1cd5fe914a5eb46ebf447a4f3f31879",
+    "review.json": "4499e908a45f2f18bae742f9559f781029e6a6a941143602eaaff7c51a8007a3",
+    "verifier.json": "1928656bec6243a9aa7f556772149bceec957c2e3c5d931016c83a43111291ee",
+    "verify.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "verify.stdout.txt": "1928656bec6243a9aa7f556772149bceec957c2e3c5d931016c83a43111291ee"
+  },
+  "limitations": [
+    "Author validation is not independent code review",
+    "Windows build Python 3.13.7 and WSL grading Python 3.13.18 are recorded separately",
+    "PASS validates this artifact/run; it does not recover the original private generator/search"
+  ]
+}

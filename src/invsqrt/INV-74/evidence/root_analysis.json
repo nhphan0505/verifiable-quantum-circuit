@@ -1,0 +1,16 @@
+{
+  "kind": "ANALYSIS_NOT_GRADING",
+  "samples": 2054,
+  "seed": 74001,
+  "root_boundary_operation_excluding_metadata": 1649,
+  "root_formula_matches_INV66": true,
+  "residual_high9_match_INV66": true,
+  "residual_low_bit_zero": true,
+  "flags_low2_match": true,
+  "flags_xor_delta_values": [
+    0,
+    12
+  ],
+  "injected_bit_formula": "h0 xor 1 xor v2 xor v3 xor v4 xor temporary_q36 at operation 1612",
+  "limitation": "zero HMR outcomes only; scratch and phase correction not yet verified"
+}

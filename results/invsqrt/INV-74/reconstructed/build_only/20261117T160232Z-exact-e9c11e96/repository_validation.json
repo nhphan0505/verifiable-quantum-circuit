@@ -1,0 +1,31 @@
+{
+  "source_commit": "c843a80857d8f42e5c9d7113ae547417e0f58b2f",
+  "checks": [
+    {
+      "command": "python scripts/check_repo.py --base origin/main --branch exp/INV-74-fusion44-reconstruction",
+      "exit_code": 0,
+      "errors": 0
+    },
+    {
+      "command": "python -m unittest discover -s scripts/tests -v",
+      "exit_code": 0,
+      "tests": 34,
+      "seconds": 258.749,
+      "result": "OK",
+      "environment": {
+        "GIT_CONFIG_COUNT": "1",
+        "GIT_CONFIG_KEY_0": "core.longpaths",
+        "GIT_CONFIG_VALUE_0": "true"
+      }
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "scope": "INV-74 source, own evidence and new build-only run; no verifier, infrastructure or historical run changed",
+  "limitations": [
+    "Repository tests use mock grading fixtures; these are not INV-74 verifier scores",
+    "Independent review and grading remain separate"
+  ]
+}

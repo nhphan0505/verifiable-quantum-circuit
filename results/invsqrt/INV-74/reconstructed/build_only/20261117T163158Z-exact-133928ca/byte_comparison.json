@@ -1,0 +1,10 @@
+{
+  "status": "RECONSTRUCTED_EXACT",
+  "source_commit": "12d971d5d2a6f8b8b3ef20e30eaeaf73d9416716",
+  "method": "separate full binary byte equality after construction",
+  "input_path": "D:/invsqrt_x2763.kmb",
+  "output_path": "D:/verifiable-quantum-circuit/artifacts/invsqrt/INV-74/reconstructed.kmb",
+  "bytes_equal": true,
+  "bytes": 200369,
+  "sha256": "47b318383a03c52e08a5c222c5600fd52e004b468f53fad038082fc0f26386ef"
+}

@@ -1,0 +1,19 @@
+{
+  "input_path": "D:\\invsqrt_x2763.kmb",
+  "sha256": "47b318383a03c52e08a5c222c5600fd52e004b468f53fad038082fc0f26386ef",
+  "bytes": 200369,
+  "checked_at": "2026-11-17T11:00:50.731381+00:00",
+  "source_attribution_user_supplied": "Syed Asad Ali; syed3000/vqcc-own-circuit-portfolio",
+  "attribution_scope_user_supplied": "Retain attribution on redistribution and derivatives at any depth; supplied notice text is incomplete.",
+  "claimed_metrics": {
+    "qubits": 44,
+    "cost": 75170.66,
+    "ratio": 27.63,
+    "status": "USER_SUPPLIED_NOT_VERIFIED"
+  },
+  "track": "invsqrt",
+  "registers": "{'x': km.array([km.q(0), km.q(1), km.q(2), km.q(3), km.q(4), km.q(5), km.q(6), km.q(7), km.q(8), km.q(9), km.q(10), km.q(11), km.q(12), km.q(13), km.q(14), km.q(15), km.q(16), km.q(17), km.q(18), km.q(19), km.q(20), km.q(21)])}",
+  "num_qubits": 44,
+  "source_version": null,
+  "upstream_license_for_this_file": "not verified"
+}

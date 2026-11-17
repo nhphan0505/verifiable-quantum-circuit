@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "track": "invsqrt",
+  "input_sha256": "47b318383a03c52e08a5c222c5600fd52e004b468f53fad038082fc0f26386ef",
+  "input_bytes": 200369,
+  "source_attribution": "Syed Asad Ali; user-supplied dataset syed3000/vqcc-own-circuit-portfolio",
+  "source_version": "Q44 artifact described in dataset v13; v14 attribution metadata verified",
+  "reconstruction_level": "ARITHMETIC_PYTHON",
+  "components": [
+    {
+      "path": "arithmetic_body.py",
+      "sha256": "5b1a3599e81fe32c19e0f8bd0b6216f10dabe343691bda38d7ecd0eceb3b5df9",
+      "role": "arithmetic body; see DESCRIPTION.md"
+    },
+    {
+      "path": "arithmetic_prefix.py",
+      "sha256": "95c9bfce5fcf213b31d4fb88549734951ca886e55a630c4a795a11cd01a722b9",
+      "role": "arithmetic prefix; see DESCRIPTION.md"
+    },
+    {
+      "path": "circuit.py",
+      "sha256": "a7a18626f309dcbaa3a5064462e0969c8f6246d1b2c2cc8f7e79b699f826b823",
+      "role": "circuit; see DESCRIPTION.md"
+    },
+    {
+      "path": "coefficient.py",
+      "sha256": "fd38d349117c46456a633dd2f818f015dd9b398e5b8040e9300ae16b024b2ec0",
+      "role": "coefficient; see DESCRIPTION.md"
+    },
+    {
+      "path": "data/cleanup_codes.json",
+      "sha256": "b2e84233fa70e0db8019dd90b206d61dc4f8deb4e01434fc22e55feb2f201512",
+      "role": "cleanup codes; see DESCRIPTION.md"
+    },
+    {
+      "path": "data/coefficient_codes.json",
+      "sha256": "7c7f3e32ed65fb8f0096dd61bfb7cf2671bc5918a8447bb1ee33d1c7d043cf25",
+      "role": "coefficient codes; see DESCRIPTION.md"
+    },
+    {
+      "path": "data/history_code.json",
+      "sha256": "42359e57b96ba8c61554db77f000844aa2440afb1103b65acd3f451dcdec31ab",
+      "role": "history code; see DESCRIPTION.md"
+    },
+    {
+      "path": "divider.py",
+      "sha256": "1ea0e1c47953901f3c49c3f7e885212354bdf6a1b0ca95347cf8a38a4596fe18",
+      "role": "divider; see DESCRIPTION.md"
+    },
+    {
+      "path": "divider_inverse.py",
+      "sha256": "494457313c0d13c35f92b4bfb6b4da89f8363e14668de2fffec9c4f3ab0e0c0f",
+      "role": "divider inverse; see DESCRIPTION.md"
+    },
+    {
+      "path": "lookup.py",
+      "sha256": "0843a1a34d719baaf228ce1bbd9dd24ffef6befd15644b349590e8515b5e928f",
+      "role": "lookup; see DESCRIPTION.md"
+    },
+    {
+      "path": "phase.py",
+      "sha256": "54509decf1856891dc8db819884fb4f7ad20c13e6d0b53cf8d7eb4ce4ac1d670",
+      "role": "phase; see DESCRIPTION.md"
+    },
+    {
+      "path": "phase_parameters.py",
+      "sha256": "22eb594c453abccc773656c30a98742f592e35a7ad81763ce6daa47ab552fdc3",
+      "role": "phase parameters; see DESCRIPTION.md"
+    },
+    {
+      "path": "return_path.py",
+      "sha256": "970bfa8e4bd139cadd8e34c3718168a0789c7029c0c033169f0e422f0fc9fef9",
+      "role": "return path; see DESCRIPTION.md"
+    },
+    {
+      "path": "seed_product.py",
+      "sha256": "243952c3fdd92593871d0c828535103abd636e53caeb8cd328f18ca517d78d1e",
+      "role": "seed product; see DESCRIPTION.md"
+    },
+    {
+      "path": "solution.py",
+      "sha256": "f19b0cab2f7150148f181e0416983464fa286b408498b482c2724c1e418a53d6",
+      "role": "solution; see DESCRIPTION.md"
+    }
+  ],
+  "environment": {
+    "python": "3.13",
+    "kickmix": "1.0.0",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1"
+  },
+  "dependencies": {
+    "external_bundle_required": false,
+    "local_files": [
+      "arithmetic_body.py",
+      "arithmetic_prefix.py",
+      "circuit.py",
+      "coefficient.py",
+      "data/cleanup_codes.json",
+      "data/coefficient_codes.json",
+      "data/history_code.json",
+      "divider.py",
+      "divider_inverse.py",
+      "lookup.py",
+      "phase.py",
+      "phase_parameters.py",
+      "return_path.py",
+      "seed_product.py",
+      "solution.py",
+      "configs/reconstructed.json",
+      "../INV-51/circuit.py"
+    ],
+    "runtime": "requirements.txt"
+  },
+  "limitations": [
+    "Original private generator/search/refit unavailable",
+    "Independent review and merge remain outstanding",
+    "Full PASS is empirical verification, not an analytic approximation-error proof"
+  ],
+  "reconstruction_check": "results/invsqrt/INV-74/reconstructed/build_only/20261117T160232Z-exact-e9c11e96/reconstruction_check.json",
+  "clean_checkout_build": "results/invsqrt/INV-74/reconstructed/build_only/20261117T160232Z-exact-e9c11e96/clean_checkout_build.json",
+  "arithmetic_recovered_blocks": [
+    "normalization",
+    "consumed_root_with_parity_frame",
+    "coefficient/rounding/overflow",
+    "seed/folded residual/product14",
+    "balanced divider forward",
+    "N27 reflected phase and root metadata return",
+    "lookup/address code synthesis",
+    "divider inverse and initializer cleanup",
+    "coefficient/product/seed inverse",
+    "Boolean table retirement and inverse root/normalization layout"
+  ],
+  "arithmetic_unresolved_blocks": [],
+  "historical_build_source_commit": "36553eb7800dfa7afd1185aaf924297219642dc3",
+  "build_source_commit": "c843a80857d8f42e5c9d7113ae547417e0f58b2f",
+  "status": "RECONSTRUCTED_EXACT",
+  "byte_comparison": "results/invsqrt/INV-74/reconstructed/build_only/20261117T160232Z-exact-e9c11e96/byte_comparison.json",
+  "grading_summary": "src/invsqrt/INV-74/evidence/grading_summary.json"
+}

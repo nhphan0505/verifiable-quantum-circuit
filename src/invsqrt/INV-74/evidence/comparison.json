@@ -1,0 +1,97 @@
+{
+  "reference_kmx": "D:\\verifiable-quantum-circuit\\artifacts\\decompiler\\e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6\\20261115T031515Z\\circuit.kmx",
+  "new_line_count": 24155,
+  "reference_line_count": 23900,
+  "new_counts": {
+    "APPEND_TO_REGISTER": 22,
+    "REGISTER": 1,
+    "X": 3192,
+    "CX": 13255,
+    "CCX": 1379,
+    "HMR": 1236,
+    "PUSH_CONDITION": 732,
+    "Z": 1010,
+    "CZ": 2300,
+    "POP_CONDITION": 732,
+    "Z_POW": 39,
+    "CSWAP": 145,
+    "NEG": 30,
+    "BIT_INVERT": 59,
+    "CCZ": 9,
+    "BIT_STORE0": 2,
+    "SWAP": 12
+  },
+  "reference_counts": {
+    "APPEND_TO_REGISTER": 22,
+    "REGISTER": 1,
+    "X": 3267,
+    "CX": 13055,
+    "CCX": 1413,
+    "HMR": 1278,
+    "PUSH_CONDITION": 702,
+    "Z": 978,
+    "CZ": 2225,
+    "POP_CONDITION": 702,
+    "Z_POW": 38,
+    "CSWAP": 129,
+    "NEG": 27,
+    "BIT_INVERT": 41,
+    "CCZ": 9,
+    "BIT_STORE0": 2,
+    "SWAP": 11
+  },
+  "identical_ordered_lines": 4753,
+  "largest_exact_blocks": [
+    {
+      "reference_line_1based": 1,
+      "new_line_1based": 1,
+      "lines": 1635
+    },
+    {
+      "reference_line_1based": 1636,
+      "new_line_1based": 1647,
+      "lines": 26
+    },
+    {
+      "reference_line_1based": 4583,
+      "new_line_1based": 4588,
+      "lines": 12
+    },
+    {
+      "reference_line_1based": 4690,
+      "new_line_1based": 4705,
+      "lines": 12
+    },
+    {
+      "reference_line_1based": 4741,
+      "new_line_1based": 4904,
+      "lines": 12
+    },
+    {
+      "reference_line_1based": 4848,
+      "new_line_1based": 5021,
+      "lines": 12
+    },
+    {
+      "reference_line_1based": 4899,
+      "new_line_1based": 5062,
+      "lines": 12
+    },
+    {
+      "reference_line_1based": 5006,
+      "new_line_1based": 5179,
+      "lines": 12
+    },
+    {
+      "reference_line_1based": 5509,
+      "new_line_1based": 5834,
+      "lines": 12
+    },
+    {
+      "reference_line_1based": 5616,
+      "new_line_1based": 5951,
+      "lines": 12
+    }
+  ],
+  "changed_region_count": 1455
+}

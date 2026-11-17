@@ -1,0 +1,28 @@
+Copyright 2026 Syed Asad Ali. Licensed under Apache-2.0.
+
+Original builder: Syed Asad Ali, dataset syed3000/vqcc-own-circuit-portfolio.
+Credits: Syed Asad Ali, working with a team of AI agents (GPT-6 Astra Pro,
+Gemini 4 Argon, Fable 5.2, Mythos 5.2 and Opus 5.5), with Claude Science
+supporting the research.
+
+Lineage and licence terms (Apache-2.0, Section 4(d)): the inverse-square-root
+and DQI circuits here come from the generators originally built by Syed Asad
+Ali. Every redistribution of these files, and of any work derived from them
+at any number of steps removed (a fork of a fork of a fork, however many
+levels down), must carry the NOTICE file (or its full attribution text) in a
+readable place and must name Syed Asad Ali as the original builder in its
+credit or lineage line, before any later contributors. Improvements by others
+are welcome; credit them after the original builder.
+
+Source: Kaggle dataset metadata, current version 14, retrieved 2026-11-17:
+https://www.kaggle.com/datasets/syed3000/vqcc-own-circuit-portfolio
+Metadata description identifies the Q44 inverse-square-root circuit as v13;
+v14 updates licence/notice text. Original private Q44 Python source was not
+available. This repository independently reconstructs arithmetic from KMB.
+Input SHA-256: 47b318383a03c52e08a5c222c5600fd52e004b468f53fad038082fc0f26386ef.
+
+Normalization, consumed square root, arithmetic and Boolean compiler helpers
+are reused from tracked ../INV-51/circuit.py, Copyright 2026 Syed Asad Ali,
+Apache-2.0. See ../INV-51/NOTICE.txt and LICENSE.txt here. No INV-51 generator
+bundle or tables.json is used. Later reconstruction changes: INV-74 modules,
+Boolean certificates and recovered Q44 allocation/phase schedule (2026-11-17).

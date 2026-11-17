@@ -1,0 +1,365 @@
+{
+  "inputs": [
+    [
+      "v",
+      8
+    ],
+    [
+      "next"
+    ],
+    [
+      "v",
+      11
+    ],
+    [
+      "v",
+      10
+    ],
+    [
+      "v",
+      9
+    ],
+    [
+      "v",
+      7
+    ],
+    [
+      "v",
+      6
+    ]
+  ],
+  "helpers": [
+    {
+      "width": 7,
+      "factors": [
+        {
+          "width": 7,
+          "left": 49,
+          "right": 61,
+          "pivots": [
+            0,
+            2
+          ],
+          "left_order": [
+            4,
+            5
+          ],
+          "right_order": [
+            0,
+            3
+          ]
+        }
+      ],
+      "phase_factors": [
+        {
+          "width": 7,
+          "left": 49,
+          "right": 61,
+          "pivots": [
+            0,
+            2
+          ],
+          "left_order": [
+            4,
+            5
+          ],
+          "right_order": [
+            0,
+            3
+          ]
+        }
+      ],
+      "phase_linear_order": []
+    },
+    {
+      "width": 8,
+      "factors": [
+        {
+          "width": 8,
+          "left": 8,
+          "right": 46,
+          "pivots": [
+            3,
+            1
+          ],
+          "left_order": [],
+          "right_order": [
+            2,
+            3,
+            5
+          ]
+        }
+      ],
+      "phase_factors": [
+        {
+          "width": 8,
+          "left": 8,
+          "right": 46,
+          "pivots": [
+            3,
+            1
+          ],
+          "left_order": [],
+          "right_order": [
+            2,
+            3,
+            5
+          ]
+        }
+      ],
+      "phase_linear_order": []
+    },
+    {
+      "width": 9,
+      "factors": [
+        {
+          "width": 9,
+          "left": 262,
+          "right": 282,
+          "pivots": [
+            1,
+            4
+          ],
+          "left_order": [
+            2,
+            8
+          ],
+          "right_order": [
+            1,
+            3,
+            2
+          ]
+        }
+      ],
+      "phase_factors": [
+        {
+          "width": 9,
+          "left": 262,
+          "right": 282,
+          "pivots": [
+            1,
+            4
+          ],
+          "left_order": [
+            2,
+            8
+          ],
+          "right_order": [
+            1,
+            3,
+            2
+          ]
+        }
+      ],
+      "phase_linear_order": []
+    },
+    {
+      "width": 10,
+      "factors": [
+        {
+          "width": 10,
+          "left": 702,
+          "right": 343,
+          "pivots": [
+            4,
+            6
+          ],
+          "left_order": [
+            1,
+            2,
+            3,
+            5,
+            7,
+            9
+          ],
+          "right_order": [
+            0,
+            4,
+            8,
+            3,
+            5,
+            7,
+            9
+          ]
+        }
+      ],
+      "phase_factors": [
+        {
+          "width": 10,
+          "left": 702,
+          "right": 343,
+          "pivots": [
+            4,
+            6
+          ],
+          "left_order": [
+            1,
+            2,
+            3,
+            5,
+            7,
+            9
+          ],
+          "right_order": [
+            0,
+            4,
+            8,
+            3,
+            5,
+            7,
+            9
+          ]
+        }
+      ],
+      "phase_linear_order": []
+    },
+    {
+      "width": 11,
+      "factors": [
+        {
+          "width": 11,
+          "left": 1021,
+          "right": 1983,
+          "pivots": [
+            6,
+            0
+          ],
+          "left_order": [
+            0,
+            4,
+            2,
+            3,
+            5,
+            7,
+            8,
+            9
+          ],
+          "right_order": [
+            4,
+            1,
+            2,
+            3,
+            5,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        {
+          "width": 11,
+          "left": 740,
+          "right": 587,
+          "pivots": [
+            6,
+            0
+          ],
+          "left_order": [
+            2,
+            5,
+            7,
+            9
+          ],
+          "right_order": [
+            6,
+            1,
+            3,
+            2,
+            5,
+            7
+          ]
+        }
+      ],
+      "phase_factors": [
+        {
+          "width": 11,
+          "left": 740,
+          "right": 587,
+          "pivots": [
+            6,
+            0
+          ],
+          "left_order": [
+            2,
+            5,
+            7,
+            9
+          ],
+          "right_order": [
+            6,
+            1,
+            3,
+            2,
+            5,
+            7
+          ]
+        },
+        {
+          "width": 11,
+          "left": 1021,
+          "right": 1983,
+          "pivots": [
+            6,
+            0
+          ],
+          "left_order": [
+            0,
+            4,
+            2,
+            3,
+            5,
+            7,
+            8,
+            9
+          ],
+          "right_order": [
+            4,
+            1,
+            2,
+            3,
+            5,
+            7,
+            8,
+            9,
+            10
+          ]
+        }
+      ],
+      "phase_linear_order": []
+    }
+  ],
+  "output_factors": [
+    {
+      "width": 12,
+      "left": 788,
+      "right": 2557,
+      "pivots": [
+        4,
+        6
+      ],
+      "left_order": [
+        2,
+        8,
+        9
+      ],
+      "right_order": [
+        0,
+        4,
+        3,
+        5,
+        7,
+        11,
+        9
+      ]
+    }
+  ],
+  "output_linear_order": [
+    0,
+    1,
+    2,
+    3,
+    7,
+    8
+  ],
+  "constant": false
+}
