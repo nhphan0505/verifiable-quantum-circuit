@@ -9,13 +9,18 @@
   "components": [
     {
       "path": "solution.py",
-      "sha256": "bba3d8c0686efae03a0ea0891587a579651b72884f6f9065d925f4dc821d6b7f",
-      "role": "entry point with snapshot/audit/provenance"
+      "sha256": "9bda1360e40c11e39ba710c52b5a3b0e6248c3ea52bace938abf27c6c07868e5",
+      "role": "audited CLI"
     },
     {
       "path": "circuit.py",
-      "sha256": "4daae333736436346e7b426591d8bdffdc09a8ef3a9e2f09ffbb1b954fc0af8c",
-      "role": "explicit per-instruction Python emitter; not arithmetic recovery"
+      "sha256": "5e9babf5530eb87c7b2bb6be791d8c344e9910baaea0eaed8023509d5e07be02",
+      "role": "explicit remaining gate-level construction"
+    },
+    {
+      "path": "arithmetic_prefix.py",
+      "sha256": "4d23fc761fa89db3c6d55b25044978217671fa5851a8397d767a5749d72b96e2",
+      "role": "normalization/root generator and guarded Q44 phase/parity schedule"
     }
   ],
   "environment": {
@@ -29,12 +34,14 @@
     "local_files": [
       "solution.py",
       "circuit.py",
-      "configs/reconstructed.json"
+      "configs/reconstructed.json",
+      "arithmetic_prefix.py",
+      "../INV-51/circuit.py"
     ],
     "runtime": "requirements.txt"
   },
   "limitations": [
-    "Not an arithmetic generator; original private source/search history not recovered",
+    "Arithmetic recovered only for normalization/root; lookup/coefficient/divider/phase/inverse remain gate-level",
     "User cost/ratio not verified; no grading run",
     "Upstream complete notice/license for this exact artifact not verified; attribution retained in NOTICE.txt"
   ]

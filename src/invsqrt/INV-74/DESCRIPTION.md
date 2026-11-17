@@ -39,3 +39,7 @@ Bước tiếp nhận/khứ hồi/phân tích ban đầu đã có scratch bất 
 ## Manh mối phục hồi root và frame
 
 Trên 2054 input (seed 74001), tại boundary operation 1649 không tính metadata, root q10..q21 khớp normalize_root của INV-66; residual q1..q9 giữ 9 bit cao còn q0 bằng zero. Hai cờ q24/q25 cùng XOR một bit t, hai cờ thấp không đổi. Tại operation 1612, t = h0 XOR 1 XOR v2 XOR v3 XOR v4 XOR temporary_q36; trên tập mẫu t bằng parity của normalized n. Đoạn mới 11 lệnh đưa t vào hai cờ rồi HMR q0 và conditional CZ(q24,q25). Đây là quan sát basis với outcome HMR zero, chưa chứng minh branch phase cho mọi outcome và chưa suy giảm 2 qubit chỉ từ đoạn này. Xem evidence/root_analysis.json.
+
+## Phục hồi prefix bằng số học
+
+[arithmetic_prefix.py](arithmetic_prefix.py) đã thay 1649 lời gọi cấp cổng đầu bằng normalization và consumed-root thật từ INV-51/circuit.py trên main. Chỉ nạp các primitive forward và patch narrow normalization; `_TABLES={}` để cấm fallback sang data/bundle INV-51. Bốn Z_POW exact tại normalization và frame/retire parity có guard theo owner/boundary compiler cố định. Phần lookup/coefficient/divider/phase/inverse vẫn explicit cấp cổng; không nhận đã phục hồi toàn generator. Thay đổi source cần build sạch lại trước nghiệm thu exact.

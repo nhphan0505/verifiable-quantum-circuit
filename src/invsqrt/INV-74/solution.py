@@ -49,7 +49,8 @@ def main():
     if git('status','--porcelain').strip():
         raise RuntimeError('Build requires a clean committed checkout')
     commit = git('rev-parse','HEAD').decode().strip()
-    inputs = [here/'solution.py', here/'circuit.py', config, root/'requirements.txt']
+    inputs = [here/'solution.py', here/'circuit.py', here/'arithmetic_prefix.py',
+              here.parent/'INV-51/circuit.py', config, root/'requirements.txt']
     records = []
     for path in inputs:
         relative = path.relative_to(root).as_posix()

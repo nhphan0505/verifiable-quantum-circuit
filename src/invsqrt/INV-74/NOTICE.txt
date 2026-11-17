@@ -9,3 +9,9 @@ upstream notice/license for this exact Q44 artifact has not been supplied or
 independently verified. This notice does not infer or grant a license, and does
 not claim the original private generator or search procedure was recovered.
 Input SHA-256: 47b318383a03c52e08a5c222c5600fd52e004b468f53fad038082fc0f26386ef.
+
+The normalization/consumed-root arithmetic/compiler helpers are reused from
+tracked INV-51/circuit.py, Copyright 2026 Syed Asad Ali, Apache-2.0. See
+../INV-51/LICENSE.txt and ../INV-51/NOTICE.txt. No INV-51 generator, external
+bundle or tables.json is used. The Q44 parity/phase schedule is independently
+recovered from this artifact; private generator source is not claimed.
