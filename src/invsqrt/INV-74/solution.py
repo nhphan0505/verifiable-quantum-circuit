@@ -8,7 +8,8 @@ verifier, not established by the transcription itself. See DESCRIPTION.md.
 
 Run with repository-pinned Python 3.13:
 python src/invsqrt/INV-74/solution.py --config src/invsqrt/INV-74/configs/reconstructed.json
-Inputs are only committed circuit.py/config and pinned runtime packages.
+Inputs are committed circuit.py, arithmetic_prefix.py, shared INV-51/circuit.py,
+config and pinned runtime packages.
 Original KMB/KMX, scratch, bundles and external files are never build inputs.
 Output/provenance are new paths; existing outputs are never overwritten.
 """

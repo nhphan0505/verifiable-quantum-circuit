@@ -9,7 +9,7 @@
   "components": [
     {
       "path": "solution.py",
-      "sha256": "9bda1360e40c11e39ba710c52b5a3b0e6248c3ea52bace938abf27c6c07868e5",
+      "sha256": "a3160cdb47601dcded21fe28325ed9eb31047bf566249a7450849e0b977a0dc0",
       "role": "audited CLI"
     },
     {

@@ -43,3 +43,7 @@ Trên 2054 input (seed 74001), tại boundary operation 1649 không tính metada
 ## Phục hồi prefix bằng số học
 
 [arithmetic_prefix.py](arithmetic_prefix.py) đã thay 1649 lời gọi cấp cổng đầu bằng normalization và consumed-root thật từ INV-51/circuit.py trên main. Chỉ nạp các primitive forward và patch narrow normalization; `_TABLES={}` để cấm fallback sang data/bundle INV-51. Bốn Z_POW exact tại normalization và frame/retire parity có guard theo owner/boundary compiler cố định. Phần lookup/coefficient/divider/phase/inverse vẫn explicit cấp cổng; không nhận đã phục hồi toàn generator. Thay đổi source cần build sạch lại trước nghiệm thu exact.
+
+## Chứng minh phase cho parity frame
+
+Vì n=x*4^k, n lẻ kéo theo k=0. Với k=0..10, code k không có đồng thời bit2 và bit3 bằng 1. Đổi code thành f=k XOR 12*p, p=n mod 2, cho f=12 khi p=1 và f=k khi p=0; ánh xạ (k,p)→f là đơn ánh trên miền hợp lệ, p=f2*f3, k=f XOR 12*p. HMR của q0=p sinh dấu (-1)^(m*p); CZ(f2,f3) dưới điều kiện m sinh cùng dấu, tích bằng 1 với cả hai outcome. Đó là lý do có thể retire q0 mà giữ coherence trên miền bài toán. Hai tests trong tests/test_parity_frame.py kiểm toàn bộ code hợp lệ và cả hai outcome. Công thức t=n mod 2 trước khi đo đã được kiểm exhaustively riêng; đây chưa phải chứng minh toàn bộ mạch hoặc điểm mới.
