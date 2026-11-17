@@ -97,3 +97,17 @@ pointing to this checkout's `configs/reconstructed.json`, from any cwd. Output:
 `results/invsqrt/INV-74/reconstructed/build_only/<run-id>/`. Existing output is
 never overwritten. No smoke/full grading, independent review or merge is
 claimed by a build-only record.
+
+## Local notebook handoff
+
+The local KMB is `artifacts/invsqrt/INV-74/reconstructed.kmb`; paired config:
+`src/invsqrt/INV-74/configs/reconstructed.json`. Actual build provenance and
+hashes are linked in [delivery.json](delivery.json). A fresh build of source
+`12d971d5d2a6f8b8b3ef20e30eaeaf73d9416716` matches every original byte. The
+notebook selection functions were executed without running the verifier and
+confirmed INV-74 / reconstructed is discoverable. Refresh the list and select
+that ID; selecting INV-41 uses a different experiment's config directory.
+
+Git excludes `artifacts/`, and the repository checker rejects tracked KMBs.
+Therefore pulling this branch supplies JSON/source/provenance; the KMB must
+be generated locally or obtained separately. No new grader result is claimed.

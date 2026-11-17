@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "track": "invsqrt",
+  "experiment_id": "INV-74",
+  "branch": "exp/INV-74-fusion44-reconstruction",
+  "config_name": "reconstructed",
+  "config_path": "src/invsqrt/INV-74/configs/reconstructed.json",
+  "artifact_path": "artifacts/invsqrt/INV-74/reconstructed.kmb",
+  "artifact_bytes": 200369,
+  "artifact_sha256": "47b318383a03c52e08a5c222c5600fd52e004b468f53fad038082fc0f26386ef",
+  "source_commit": "12d971d5d2a6f8b8b3ef20e30eaeaf73d9416716",
+  "build_run": "results/invsqrt/INV-74/reconstructed/build_only/20261117T163158Z-exact-133928ca",
+  "provenance": "results/invsqrt/INV-74/reconstructed/build_only/20261117T163158Z-exact-133928ca/provenance.json",
+  "status": "RECONSTRUCTED_EXACT",
+  "original_builder": "Syed Asad Ali",
+  "notice": "src/invsqrt/INV-74/NOTICE.txt",
+  "notebook_selection": {
+    "TRACK": "invsqrt",
+    "EXPERIMENT_ID": "INV-74",
+    "CONFIG_NAME": "reconstructed",
+    "OWNER": "Cheemshoang"
+  },
+  "notebook_discovery_verified": true,
+  "artifact_distribution": "Local artifact installed; Git tracking excludes all .kmb; external publication awaits explicit approval"
+}
