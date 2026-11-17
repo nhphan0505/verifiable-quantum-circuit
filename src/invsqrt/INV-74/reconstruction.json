@@ -4,53 +4,83 @@
   "input_sha256": "47b318383a03c52e08a5c222c5600fd52e004b468f53fad038082fc0f26386ef",
   "input_bytes": 200369,
   "source_attribution": "Syed Asad Ali; user-supplied dataset syed3000/vqcc-own-circuit-portfolio",
-  "source_version": null,
-  "reconstruction_level": "GATE_LEVEL_PYTHON",
+  "source_version": "Q44 artifact described in dataset v13; v14 attribution metadata verified",
+  "reconstruction_level": "ARITHMETIC_PYTHON",
   "components": [
     {
-      "path": "solution.py",
-      "sha256": "8daa94bf8119d76c665bc0115ee9b00e442a770c599652d4d3ce5d5d409e9bb5",
-      "role": "audited CLI and complete declared dependency snapshot"
-    },
-    {
-      "path": "circuit.py",
-      "sha256": "99ea8ec0c83f6a7c35e21c9f010d4cfe87b3dfd017e9836949d1b90178fda4c4",
-      "role": "staged composition; lookup and inverse still gate-level"
+      "path": "arithmetic_body.py",
+      "sha256": "5b1a3599e81fe32c19e0f8bd0b6216f10dabe343691bda38d7ecd0eceb3b5df9",
+      "role": "arithmetic body; see DESCRIPTION.md"
     },
     {
       "path": "arithmetic_prefix.py",
-      "sha256": "4d23fc761fa89db3c6d55b25044978217671fa5851a8397d767a5749d72b96e2",
-      "role": "arithmetic normalization/root and parity frame"
+      "sha256": "95c9bfce5fcf213b31d4fb88549734951ca886e55a630c4a795a11cd01a722b9",
+      "role": "arithmetic prefix; see DESCRIPTION.md"
+    },
+    {
+      "path": "circuit.py",
+      "sha256": "a66b99eb638b07f55403c22b5a9239297c23c8f23a40f683fc67b02d29be46c4",
+      "role": "circuit; see DESCRIPTION.md"
     },
     {
       "path": "coefficient.py",
-      "sha256": "9257c6bb9134d6f50e46957314a152d275905680d768f2cd9eeeb148664de769",
-      "role": "six rounded interpolation rows, metadata and deferred overflow"
+      "sha256": "fd38d349117c46456a633dd2f818f015dd9b398e5b8040e9300ae16b024b2ec0",
+      "role": "coefficient; see DESCRIPTION.md"
     },
     {
-      "path": "seed_product.py",
-      "sha256": "c06126a26d0d6d78f50aefb2d89f6057863b4081702d8b20de1a5ca9af1aa698",
-      "role": "signed seed, folded residual and ten-row product14"
+      "path": "data/cleanup_codes.json",
+      "sha256": "b2e84233fa70e0db8019dd90b206d61dc4f8deb4e01434fc22e55feb2f201512",
+      "role": "cleanup codes; see DESCRIPTION.md"
+    },
+    {
+      "path": "data/coefficient_codes.json",
+      "sha256": "7c7f3e32ed65fb8f0096dd61bfb7cf2671bc5918a8447bb1ee33d1c7d043cf25",
+      "role": "coefficient codes; see DESCRIPTION.md"
+    },
+    {
+      "path": "data/history_code.json",
+      "sha256": "42359e57b96ba8c61554db77f000844aa2440afb1103b65acd3f451dcdec31ab",
+      "role": "history code; see DESCRIPTION.md"
     },
     {
       "path": "divider.py",
       "sha256": "1ea0e1c47953901f3c49c3f7e885212354bdf6a1b0ca95347cf8a38a4596fe18",
-      "role": "triangular initializer, balanced feed/rotate rows and carry debts"
+      "role": "divider; see DESCRIPTION.md"
+    },
+    {
+      "path": "divider_inverse.py",
+      "sha256": "494457313c0d13c35f92b4bfb6b4da89f8363e14668de2fffec9c4f3ab0e0c0f",
+      "role": "divider inverse; see DESCRIPTION.md"
+    },
+    {
+      "path": "lookup.py",
+      "sha256": "0843a1a34d719baaf228ce1bbd9dd24ffef6befd15644b349590e8515b5e928f",
+      "role": "lookup; see DESCRIPTION.md"
     },
     {
       "path": "phase.py",
       "sha256": "54509decf1856891dc8db819884fb4f7ad20c13e6d0b53cf8d7eb4ce4ac1d670",
-      "role": "N27 streamed reflected phase, metadata borrowing/restoration"
+      "role": "phase; see DESCRIPTION.md"
     },
     {
       "path": "phase_parameters.py",
       "sha256": "22eb594c453abccc773656c30a98742f592e35a7ad81763ce6daa47ab552fdc3",
-      "role": "34 exact mathematical phase parameters"
+      "role": "phase parameters; see DESCRIPTION.md"
     },
     {
-      "path": "arithmetic_body.py",
-      "sha256": "f9be289c3167b1a61b14798d3c73b21cfb4fa9596b54153998dd220e56ff4c7d",
-      "role": "typed forward arithmetic composition"
+      "path": "return_path.py",
+      "sha256": "970bfa8e4bd139cadd8e34c3718168a0789c7029c0c033169f0e422f0fc9fef9",
+      "role": "return path; see DESCRIPTION.md"
+    },
+    {
+      "path": "seed_product.py",
+      "sha256": "243952c3fdd92593871d0c828535103abd636e53caeb8cd328f18ca517d78d1e",
+      "role": "seed product; see DESCRIPTION.md"
+    },
+    {
+      "path": "solution.py",
+      "sha256": "f19b0cab2f7150148f181e0416983464fa286b408498b482c2724c1e418a53d6",
+      "role": "solution; see DESCRIPTION.md"
     }
   ],
   "environment": {
@@ -62,26 +92,31 @@
   "dependencies": {
     "external_bundle_required": false,
     "local_files": [
-      "solution.py",
-      "circuit.py",
+      "arithmetic_body.py",
       "arithmetic_prefix.py",
+      "circuit.py",
       "coefficient.py",
-      "seed_product.py",
+      "data/cleanup_codes.json",
+      "data/coefficient_codes.json",
+      "data/history_code.json",
       "divider.py",
+      "divider_inverse.py",
+      "lookup.py",
       "phase.py",
       "phase_parameters.py",
-      "arithmetic_body.py",
+      "return_path.py",
+      "seed_product.py",
+      "solution.py",
       "configs/reconstructed.json",
       "../INV-51/circuit.py"
     ],
     "runtime": "requirements.txt"
   },
   "limitations": [
-    "Forward arithmetic recovered and 5503-operation body checked instruction-for-instruction; lookup and return stages remain gate-level. New source has not yet passed clean end-to-end build.",
-    "User cost/ratio not verified; no grading run",
-    "Upstream complete notice/license for this exact artifact not verified; attribution retained in NOTICE.txt"
+    "Full arithmetic source requires a fresh committed entry-point build; earlier exact records are distinct snapshots",
+    "Original private generator/search/refit unavailable",
+    "No new verifier score, independent review or merge"
   ],
-  "build_source_commit": "36553eb7800dfa7afd1185aaf924297219642dc3",
   "reconstruction_check": "results/invsqrt/INV-74/reconstructed/build_only/20261117T112724Z-exact-4e8c34e8/reconstruction_check.json",
   "clean_checkout_build": "results/invsqrt/INV-74/reconstructed/build_only/20261117T112724Z-exact-4e8c34e8/clean_checkout_build.json",
   "arithmetic_recovered_blocks": [
@@ -90,12 +125,12 @@
     "coefficient/rounding/overflow",
     "seed/folded residual/product14",
     "balanced divider forward",
-    "N27 reflected phase and root metadata return"
-  ],
-  "arithmetic_unresolved_blocks": [
+    "N27 reflected phase and root metadata return",
     "lookup/address code synthesis",
     "divider inverse and initializer cleanup",
     "coefficient/product/seed inverse",
     "Boolean table retirement and inverse root/normalization layout"
-  ]
+  ],
+  "arithmetic_unresolved_blocks": [],
+  "historical_build_source_commit": "36553eb7800dfa7afd1185aaf924297219642dc3"
 }

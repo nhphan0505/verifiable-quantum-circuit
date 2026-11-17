@@ -13,7 +13,6 @@ values match the observed 13-bit coefficient at operation boundary 3335.
 """
 from dataclasses import dataclass
 from types import SimpleNamespace
-import sys
 import kickmix as km
 
 INTERCEPT = (8065, 7821, 7587, 7364, 7151, 6947, 6751, 6564, 6384, 6212, 6046, 5887, 5734, 5587, 5445, 5309, 5178, 5051, 4930, 4812, 4699, 4590, 4484, 4382, 4284, 4189, 4097, 4008, 3921, 3838, 3757, 3679, 3603, 3529, 3458, 3389, 3322, 3257, 3194, 3132, 3073, 3015, 2958, 2904, 2850, 2799, 2748, 2699, 2651, 2605, 2559, 2515, 2472, 2430, 2390, 2350, 2311, 2273, 2236, 2200, 2165, 2130, 2097, 2064)
@@ -162,36 +161,10 @@ def forward(cb, ar, v, D, slope_low, bridge):
     return D,CoefficientToken(rows,overflow,coded,slope_outcomes,saved_outcome)
 
 
-class _SegmentBuilder:
-    """Temporary physical-owner adapter while the remaining stages are lifted.
-
-    The public forward API above accepts the live builder of the full generator.
-    This adapter only reconstructs the entry allocator of the existing stage;
-    it reads no reference input and carries no operation tape.
-    """
-    def __init__(self):
-        self.cb=km.CircuitBuilder()
-        self.cb.set_max_qubits(44)
-        self.cb.alloc_qubits(44)
-        self.cb.free(km.array([km.q(43),km.q(42)]))
-        self.cb.alloc_bits(8)
-    def __getattr__(self,name):
-        return getattr(self.cb,name)
+class Builder:
+    """Live allocator adapter supporting local arithmetic synthesis callbacks."""
+    def __init__(self,builder):self.cb=builder
+    def __getattr__(self,name):return getattr(self.cb,name)
     def del_and(self,a,b,target):
         self.cb.hmr(target,km.b(1))
         self.cb.ccz(km.b(1),a,b)
-
-
-def build_coefficient_segment():
-    """Compile the recovered metadata/interpolation/overflow stage in isolation."""
-    from arithmetic_prefix import arithmetic_modules
-    arithmetic_modules()
-    shared=sys.modules['_inv74_shared_arithmetic']
-    spec=shared._Spec('_inv74_paired_arithmetic',shared._VROOT/'work/c10/narrow/checkpoint002/cleanroom/baseline_stage97/engine/paired_arithmetic.py')
-    ar=shared._new_module(spec)
-    sys.modules[spec.name]=ar
-    spec.loader.exec_module(ar)
-    cb=_SegmentBuilder()
-    D=[km.q(i) for i in (21,34,36,0,30,32,28,35,33,31,20,26,27)]
-    forward(cb,ar,[km.q(i) for i in range(10,16)],D,[km.q(i) for i in range(37,42)],km.q(29))
-    return str(cb.finish_circuit()).splitlines()

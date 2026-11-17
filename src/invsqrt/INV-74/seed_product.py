@@ -118,20 +118,3 @@ def forward(cb,ar,v,D,flags,residual_high,*,hold_outcome,top_outcome):
     cb.cx(v10,D[11]);cb.cx(v10,D[10])
     cb.x(word[-1]);cb.cx(word[-2],word[-1]);cb.free(word[-1])
     return v+[v10,v11],word[:-1],ProductToken(debts,product)
-
-
-def build_seed_product_segment():
-    """Compile the substage while the surrounding return stages are being lifted."""
-    import coefficient as cf
-    from arithmetic_prefix import arithmetic_modules
-    arithmetic_modules()
-    shared=sys.modules['_inv74_shared_arithmetic']
-    spec=shared._Spec('_inv74_product_arithmetic',shared._VROOT/'work/c10/narrow/checkpoint002/cleanroom/baseline_stage97/engine/paired_arithmetic.py')
-    ar=shared._new_module(spec);sys.modules[spec.name]=ar;spec.loader.exec_module(ar)
-    cb=cf._SegmentBuilder()
-    D=[km.q(i) for i in (21,34,36,0,30,32,28,35,33,31,20,26,27)]
-    D,_=cf.forward(cb,ar,[km.q(i) for i in range(10,16)],D,[km.q(i) for i in range(37,42)],km.q(29))
-    before=len(str(cb.finish_circuit()).splitlines())
-    forward(cb,ar,[km.q(i) for i in range(10,20)],D,[km.q(i) for i in range(22,26)],
-            [km.q(i) for i in range(1,10)],hold_outcome=km.b(363),top_outcome=km.b(364))
-    return str(cb.finish_circuit()).splitlines()[before:]

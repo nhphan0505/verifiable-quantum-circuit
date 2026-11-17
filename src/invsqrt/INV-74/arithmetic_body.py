@@ -1,8 +1,8 @@
 """Compose the recovered forward arithmetic, preserving typed inverse debts.
 
-This is the continuous coefficient/seed/product/divider/phase body. During
-staged recovery its adapter supplies the existing lookup's physical owners;
-the individual modules expose word-level APIs for the complete generator.
+The live builder carries coefficient/seed/product/divider/phase words and
+typed measurement debts into their inverse. Every stage preserves allocator
+ownership and the fixed Q44 schedule.
 No KMB/KMX, external bundle, cache or reference file is a runtime input.
 """
 import sys
@@ -15,15 +15,18 @@ from arithmetic_prefix import arithmetic_modules
 from phase_parameters import BASE_HALF_TURNS, OVERFLOW_HALF_TURNS
 
 
-def context():
-    arithmetic_modules()
+def component(name,key):
     shared=sys.modules['_inv74_shared_arithmetic']
-    def component(name,key):
-        spec=shared._Spec(name,shared._VROOT/key)
-        module=shared._new_module(spec)
-        sys.modules[name]=module
-        spec.loader.exec_module(module)
-        return module
+    spec=shared._Spec(name,shared._VROOT/key)
+    module=shared._new_module(spec)
+    sys.modules[name]=module
+    spec.loader.exec_module(module)
+    return module
+
+
+def context():
+    if '_inv74_shared_arithmetic' not in sys.modules:arithmetic_modules()
+    shared=sys.modules['_inv74_shared_arithmetic']
     base='work/c10/narrow/checkpoint002/cleanroom/baseline_stage97/engine/'
     return (component('_inv74_paired',base+'paired_arithmetic.py'),
             component('_inv74_polynomial',base+'quadratic_terms.py'),
@@ -40,13 +43,3 @@ def forward(cb,v,D,H,bridge,flags,h):
     phase.apply(cb,poly,cyclic,token,{'base_half_turns':list(BASE_HALF_TURNS),
         'overflow_half_turns':list(OVERFLOW_HALF_TURNS)},finishing_outcome=km.b(365))
     return token,ptoken,ctoken
-
-
-def build_forward_body():
-    """Compile arithmetic against the still-unlifted lookup's owner interface."""
-    cb=coefficient._SegmentBuilder()
-    q=km.q
-    D=[q(i) for i in (21,34,36,0,30,32,28,35,33,31,20,26,27)]
-    forward(cb,[q(i) for i in range(10,20)],D,[q(i) for i in range(37,42)],
-        q(29),[q(i) for i in range(22,26)],[q(i) for i in range(1,10)])
-    return str(cb.finish_circuit()).splitlines()

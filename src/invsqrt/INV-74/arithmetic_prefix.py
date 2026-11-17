@@ -93,7 +93,7 @@ Other builder calls pass through unchanged, retaining allocator ownership.
         cb.x(target)
 
 
-def build_prefix():
+def create_prefix():
     """Return the 1649 generated prefix instructions, without register metadata."""
     normal, root = arithmetic_modules()
     builder = km.CircuitBuilder()
@@ -107,4 +107,10 @@ def build_prefix():
     lines = str(builder.finish_circuit()).splitlines()
     if not schedule.phase_inserted or not schedule.parity_inserted or len(lines) != 1649:
         raise RuntimeError('Arithmetic prefix schedule did not match fixed target')
-    return lines
+    return builder,x,flags
+
+
+def build_prefix():
+    """Compile the prefix from its live arithmetic state."""
+    builder,_,_=create_prefix()
+    return str(builder.finish_circuit()).splitlines()

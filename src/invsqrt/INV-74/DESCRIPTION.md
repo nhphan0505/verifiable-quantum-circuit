@@ -1,77 +1,95 @@
-# [INV-74] Tái dựng Fusion 44 qubit bằng Python và phục hồi số học từ KMX
+# INV-74 — Fusion inverse-square-root, Q44
 
-Loại: Tái dựng từ submission; không coi thông tin điểm bên ngoài là kết quả local.
+Original builder: **Syed Asad Ali**, dataset `syed3000/vqcc-own-circuit-portfolio`.
+Independent arithmetic reconstruction; see [NOTICE](NOTICE.txt) and
+[Apache-2.0](LICENSE.txt). Issue #74, branch
+`exp/INV-74-fusion44-reconstruction`, owner `Cheemshoang`, draft PR #75.
 
-## Nguồn và mục tiêu
+## Input and conversion
 
-Input `invsqrt_x2763.kmb`, 200369 bytes, SHA-256 `47b318383a03c52e08a5c222c5600fd52e004b468f53fad038082fc0f26386ef`. Người dùng cung cấp attribution Syed Asad Ali, dataset `syed3000/vqcc-own-circuit-portfolio`, yêu cầu giữ attribution qua mọi lớp phái sinh. Chưa có source generator hay toàn văn notice/license của đúng artifact này; không tự suy giấy phép từ INV-51. Mục tiêu là Python độc lập dựng exact và phục hồi thuật toán tương tự INV-66, không chỉ wrapper hoặc opcode tape.
+`invsqrt_x2763.kmb`: 200369 bytes, SHA-256
+`47b318383a03c52e08a5c222c5600fd52e004b468f53fad038082fc0f26386ef`.
+44 qubits, register x[0:22], 24132 operations. KMB → KMX → KMB was checked
+before reconstruction; the latest separate KMX → KMB check also matched every
+byte. Original input is immutable and is never read by solution.py.
 
-## Quan sát và đối chứng
+The supplied Q44 cost 75170.66 and ratio 27.63× agree with the upstream dataset
+metadata. These are upstream reported values; this work has no new verifier
+score, PASS or improvement claim. The private Q44 generator/search was not
+available and is not claimed recovered.
 
-Mạch có 44 qubit; register x là q0..q21. KMB trực tiếp và KMB qua KMX đều trùng bytes/hash. Có 24155 dòng KMX, 1379 CCX, 9 CCZ, 145 CSWAP, 1236 HMR, 39 Z_POW. Số lệnh là thống kê tĩnh, không phải chi phí thực thi. Đối chứng INV-66 tại source `f315c15b5828166e011e91388c2bdf97a54a77f9`, target `e46d90c36d1beb3ce7731a3e0b5c3659b3cda7f5f290b73c6c34513d96c005b6`, 46 qubit. 1635 dòng đầu hai KMX giống hệt; chưa suy phần còn lại giống thuật toán. INV-66 chưa merge nên không đưa dependency chưa có trên main vào build mà không track/push rõ ràng.
+## Arithmetic generator
 
-## Tái dựng và phục hồi thuật toán
+The source now composes words and measured carry debts throughout, following
+the module structure used by INV-66. There is no expanded gate list, original
+KMX/KMB, compressed submission or external bundle in the runtime inputs.
 
-Giữ thứ tự register, qubit, bit đo, PUSH/POP_CONDITION, HMR correction, exact rational angles và layout. Bắt đầu từ emitter Python rõ lệnh để khóa mục tiêu hash; sau đó thay từng khối bằng helper số học được đối chiếu instruction-for-instruction. Emitter không được đọc KMB/KMX gốc khi build, nhúng binary/archive hoặc toàn submission dưới dạng dữ liệu. Mức gate-level không đồng nghĩa phục hồi thuật toán và không phải kết luận cuối mong muốn.
+- `circuit.py`: live allocator composition, inverse normalization and original
+  input/register layout.
+- `arithmetic_prefix.py`: normalized consumed square root and recovered parity
+  frame. For k=floor((22-bit_length(x))/2), n=x*4**k, R=isqrt(16*n), the root
+  fraction is v=R-4096 and residual is
+  h=(n-floor(R*(R+1)/16)-1) modulo 1024. The first residual bit is packed into
+  flags until seed/product unfolds it.
+- `lookup.py`, `data/coefficient_codes.json`: two six-input Boolean coefficient
+  codebooks. Invertible GF(2) matrices and factored quadratic coordinates
+  replace lookup gate calls; measured coordinates retain 64-codeword truths.
+- `coefficient.py`: 64 intercepts/slopes, six rounded signed interpolation rows,
+  low-byte arithmetic and a deferred high-word overflow.
+- `seed_product.py`: three signed seed rows, folded residual parity and ten
+  rounded product rows; returns mandatory inverse carry tokens.
+- `divider.py`, `divider_inverse.py`: triangular remainder initializer, 24
+  balanced feed/rotate rows and inverse recurrence. `data/history_code.json`
+  is the seven-input Boolean sign-15 restoration certificate.
+- `phase.py`, `phase_parameters.py`: N27 reflected phase walk with 27 base and
+  seven overflow angles, root/history borrowing and exact phase repayment.
+- `return_path.py`, `data/cleanup_codes.json`: return interpolation, inverse
+  product/seed, early slope retirement, six-bit address decoder and repayment
+  of every table measurement phase. Every quadratic phase is checked over all
+  64 table codewords. The last two coordinates use three conditioned helper
+  charts with polynomial identities checked at construction.
+- `arithmetic_body.py`: shared mathematical compiler context and forward body.
+  Selected helpers come from tracked `../INV-51/circuit.py`; its data bundle is
+  disabled. `solution.py` audits all declared source/data/runtime reads.
 
-Định vị normalize/consumed-root theo shared prefix và helper đã track của INV-51. Phân tích riêng lookup/address frame, bảng hệ số và rounding theo hàng, seed/product, divider, phase endpoint, inverse và HMR debt repayment. Chưa biết công thức của các khối mới thì ghi chưa biết; không thay bằng công thức INV-66 theo suy đoán. Với mỗi khối xác định input/output owner, width, modular arithmetic, carry/debt invariant và snapshot classical độc lập. Contract cuối là exp(2*pi*i/sqrt(x)) cho x=1..3133452, khôi phục x và toàn scratch; đúng hash không tự chứng minh mô tả thuật toán đúng.
+Data certificates contain small Boolean mathematical problems, with no opcode
+stream, physical owner lists, measurement IDs, rotation tape or whole-circuit
+program. Allocation and finishing slots remain fixed because byte-exact
+reconstruction is the target. This is an independently recovered arithmetic
+implementation, not the original source, numerical fit or search procedure.
 
-## Kế hoạch kiểm chứng hypothesis
+## Evidence and current acceptance
 
-- Hypothesis tái lập: source/config/helper/data đã track và push đủ để dựng exact 200369 bytes với target hash; bác bỏ nếu khác một byte hoặc cần dữ liệu ngoài checkout/runtime.
-- Config đầu tiên reconstructed, target cố định; package theo requirements của repo. Không chỉnh precision/góc/cấp phát trong giai đoạn exact.
-- Build entry point từ checkout GitHub sạch, venv mới, cwd ngoài checkout; audit toàn read/import/subprocess, chỉ đọc checkout/runtime và intermediate vừa sinh. Ghi provenance và reconstruction_check build_only, giữ commit nguồn.
-- Hai vòng sửa có căn cứ cho mỗi khối rồi đánh giá nguyên nhân nếu còn mismatch; không lặp quét tham số vô hạn. Không nghiệm thu arithmetic khi chỉ có emitter.
-- Chấm notebook local là bước riêng; chưa có run mới, chưa xác nhận số liệu người dùng. Không sửa verifier, checker, notebook hoặc run cũ. Review độc lập và checks là điều kiện hoàn tất, không tự approve/merge.
+Isolated component reconstruction matched each original operation through the
+normalization inverse at boundary 24120. Input-layout restoration accounts for
+the final 12 operations. Full entry-point build from a fresh GitHub checkout
+must validate the composed allocator and exact KMB after the source commit.
+The current arithmetic source has not yet been accepted on the strength of a
+previous gate-level build.
 
-## Hướng cải tiến hậu nghiệm cần kiểm chứng riêng
+Historical clean build source `36553eb7800dfa7afd1185aaf924297219642dc3`
+matched all bytes; its immutable records remain at
+`results/invsqrt/INV-74/reconstructed/build_only/20261117T112724Z-exact-4e8c34e8`.
+The forward arithmetic checkpoint `8059cdf4bc8caeb6f7eca9421402fe604fbf87b9`
+also built exact from a fresh clone/venv. Those runs are distinct from the
+current complete arithmetic source.
 
-Ưu tiên giải thích giảm peak owner từ 46 xuống 44 trước; chưa nhận là đã biết cơ chế. Sau exact có thể khảo sát dead-write CCX trước HMR theo guards control/owner và conditional CZ; hoặc gộp pha trên cùng Boolean feature bằng rational exact. Đây là đề xuất, chưa chọn hypothesis PP và chưa triển khai. Phải chứng minh input chưa qua PP tương ứng và kiểm từng phương pháp độc lập theo instructions/postprocessing, không lấy pipeline ghép làm bằng chứng. Bác bỏ nếu không có ứng viên hợp lệ, trả pha/scratch sai, hoặc full Q*C không cải thiện. Giới hạn một thay đổi có chứng minh rồi kiểm độc lập; không tự quét vô hạn.
+Root/frame semantics were checked for all 3,133,452 valid x with zero HMR
+outcomes (`evidence/exhaustive_root.json`). A separate 141-input check used
+zero plus four random measurement streams per input, preserving x, scratch
+zero and phase (`evidence/branch_analysis.json`). These are semantic analysis,
+not a verifier run or a complete approximation-error proof.
 
-## Giới hạn hiện tại
+No new postprocessing rewrite is applied. The conservative INV-66 dead-write
+CCX→HMR/CZ guard found zero candidates (`evidence/pp_guard_scan.json`). Any
+future improvement needs a separately scoped experiment and measured score.
 
-Bước tiếp nhận/khứ hồi/phân tích ban đầu đã có scratch bất biến. Đã viết source explicit cấp cổng trong circuit.py và CLI solution.py, config reconstructed; chưa build. Đây chưa phải phục hồi generator số học; clean build và grading mới chưa có. Thông tin cost/ratio từ người dùng được giữ ở manifest đầu vào, không đưa lên bảng điểm. Chưa khẳng định phục hồi source/search procedure gốc hoặc đủ điều kiện merge.
+## Reproduce
 
-## Implementation ban đầu
-
-[solution.py](solution.py) kiểm snapshot committed và môi trường, cấm network/subprocess khi dựng, chỉ đọc [circuit.py](circuit.py) cùng runtime đã pin. Source ban đầu sinh mỗi lệnh bằng lời gọi Python rõ ràng, chia hàm theo khoảng operation để kiểm tra; prefix hiện đã được thay bằng arithmetic_prefix.py; không chứa nguyên KMX/binary trong data và không đọc submission gốc. Đây là mốc GATE_LEVEL_PYTHON phục vụ phục hồi tiếp, chưa đáp ứng mục tiêu generator số học giống INV-66. Góc là decimal string exact half-turn, điều kiện từng lệnh và stack giữ riêng. [reconstruction.json](reconstruction.json) khai báo dependency và giới hạn; [NOTICE](NOTICE.txt) giữ attribution qua mọi lớp phái sinh.
-
-## Manh mối phục hồi root và frame
-
-Trên 2054 input (seed 74001), tại boundary operation 1649 không tính metadata, root q10..q21 khớp normalize_root của INV-66; residual q1..q9 giữ 9 bit cao còn q0 bằng zero. Hai cờ q24/q25 cùng XOR một bit t, hai cờ thấp không đổi. Tại operation 1612, t = h0 XOR 1 XOR v2 XOR v3 XOR v4 XOR temporary_q36; trên tập mẫu t bằng parity của normalized n. Đoạn mới 11 lệnh đưa t vào hai cờ rồi HMR q0 và conditional CZ(q24,q25). Đây là quan sát basis với outcome HMR zero, chưa chứng minh branch phase cho mọi outcome và chưa suy giảm 2 qubit chỉ từ đoạn này. Xem evidence/root_analysis.json.
-
-## Phục hồi prefix bằng số học
-
-[arithmetic_prefix.py](arithmetic_prefix.py) đã thay 1649 lời gọi cấp cổng đầu bằng normalization và consumed-root thật từ INV-51/circuit.py trên main. Chỉ nạp các primitive forward và patch narrow normalization; `_TABLES={}` để cấm fallback sang data/bundle INV-51. Bốn Z_POW exact tại normalization và frame/retire parity có guard theo owner/boundary compiler cố định. Phần lookup/coefficient/divider/phase/inverse vẫn explicit cấp cổng; không nhận đã phục hồi toàn generator. Thay đổi source cần build sạch lại trước nghiệm thu exact.
-
-## Chứng minh phase cho parity frame
-
-Vì n=x*4^k, n lẻ kéo theo k=0. Với k=0..10, code k không có đồng thời bit2 và bit3 bằng 1. Đổi code thành f=k XOR 12*p, p=n mod 2, cho f=12 khi p=1 và f=k khi p=0; ánh xạ (k,p)→f là đơn ánh trên miền hợp lệ, p=f2*f3, k=f XOR 12*p. HMR của q0=p sinh dấu (-1)^(m*p); CZ(f2,f3) dưới điều kiện m sinh cùng dấu, tích bằng 1 với cả hai outcome. Đó là lý do có thể retire q0 mà giữ coherence trên miền bài toán. Hai tests trong tests/test_parity_frame.py kiểm toàn bộ code hợp lệ và cả hai outcome. Công thức t=n mod 2 trước khi đo đã được kiểm exhaustively riêng; đây chưa phải chứng minh toàn bộ mạch hoặc điểm mới.
-
-## Mốc build exact và kiểm tra thực tế
-
-Source `36553eb7800dfa7afd1185aaf924297219642dc3` đã được clone từ GitHub vào checkout sạch, tạo venv mới và cài requirements pin. Entry point chạy từ cwd ngoài checkout; output trùng toàn bộ 200369 bytes và SHA-256 target. Audit ghi các source/helper thực sự đọc, gồm shared INV-51/circuit.py; không đọc submission gốc hoặc data/bundle/cache máy tác giả. So bytes với input được thực hiện riêng sau build. Xem [clean checkout build](../../../results/invsqrt/INV-74/reconstructed/build_only/20261117T112724Z-exact-4e8c34e8/clean_checkout_build.json) và [byte comparison](../../../results/invsqrt/INV-74/reconstructed/build_only/20261117T112724Z-exact-4e8c34e8/byte_comparison.json). Config reconstructed → source `36553eb7800dfa7afd1185aaf924297219642dc3` → run `20261117T112724Z-exact-4e8c34e8`. Thay đổi tài liệu/manifest sau đó không thay SHA nguồn của run.
-
-Đã kiểm root/frame trên toàn miền x=1..3133452 với outcome HMR zero: v và h cao khớp công thức, q0 zero, flags=k XOR 12*(n mod 2), scratch q26 trở lên zero tại boundary 1649. Xem evidence/exhaustive_root.json. Kiểm thêm 141 input biên/ngẫu nhiên, seed 74002, mỗi input có nhánh zero và bốn luồng outcome HMR ngẫu nhiên: x khôi phục, scratch zero, pha exact modulo hai half-turn khớp nhánh zero. Xem evidence/branch_analysis.json. Đây là phân tích semantics, không phải verifier run hoặc chứng minh synthesis error/score.
-
-Checker và diff scope ban đầu đạt 0 lỗi. Bộ scripts/tests ban đầu chạy 34 tests, một lỗi fixture do đường dẫn Windows dài; chạy lại toàn nhóm test_check_repo với core.longpaths=true đạt 14/14. Hai tests parity-frame đạt. Không sửa checker/tests hạ tầng hoặc kết quả cũ.
-
-## Khảo sát cải tiến và phần chưa phục hồi
-
-Quét chỉ đọc theo toàn bộ guard conservative dead-write CCX→HMR/CZ của INV-66 cho 0 ứng viên. Không rewrite hoặc áp PP, không khẳng định có thể giảm thêm Toffoli bằng rule đó. Pipeline tạo input gốc chưa biết nên chưa thể xác nhận input chưa qua PP. Bằng chứng ở evidence/pp_guard_scan.json. Thử nghiệm PP mới phải chọn hypothesis và quản lý độc lập theo instructions/postprocessing; không tự tích hợp nhiều PP vào bản exact.
-
-Hai hướng còn có căn cứ khảo sát: (1) mở rộng cách dùng code chuẩn hóa dư để giữ metadata và giảm peak owner ở lookup/coefficient, với điều kiện encoding đơn ánh và trả toàn debt; (2) so sánh Boolean features pha để tìm phép gộp exact có lợi cho chi phí tổng, không gộp chỉ vì cùng dây tại thời điểm khác. Đây là đề xuất hậu nghiệm, chưa đo lợi ích hoặc triển khai. Dừng nếu không chứng minh được owner/phase invariant; không thay artifact exact âm thầm.
-
-Mục tiêu phục hồi generator số học đầy đủ như INV-66 **chưa hoàn tất**. Prefix đã dùng thuật toán số học nhưng lookup/address frame, coefficient rounding, seed/product, divider/phase và inverse/cleanup vẫn ở mức explicit gate-level. Không dùng bảng/công thức INV-66 để thay khối mới khi chưa có mapping owner và kiểm chứng. Bước tiếp theo là giải các truth table/frame của loader mới và recurrence coefficient từ snapshots độc lập, rồi thay từng khối và build sạch lại. Draft PR giữ trạng thái chưa sẵn sàng nghiệm thu toàn generator; không có review độc lập, grading mới hoặc merge.
-
-## Chạy lại từ checkout mới
-
-Tại root checkout của source commit ở trên, dùng Python 3.13 tạo `.venv`, chạy `.venv/Scripts/python.exe -m pip install -r requirements.txt`. Có thể chạy từ bất kỳ cwd với đường dẫn tuyệt đối tới `src/invsqrt/INV-74/solution.py` và `--config` trỏ vào `src/invsqrt/INV-74/configs/reconstructed.json` của checkout đó. Working tree phải sạch; output mặc định là `artifacts/invsqrt/INV-74/reconstructed.kmb`, không ghi đè output có sẵn. Records mới được tạo trong results/invsqrt/INV-74/reconstructed/build_only. Chưa có run full/smoke để ghi vào SCORES.
-
-## Đợt phục hồi số học thuận tiếp theo
-
-Đã chuyển KMX sang KMB trước đợt source mới, so toàn bytes/hash trùng input; file chuyển đổi giữ trong artifacts/decompiler/<input-sha>/<run>/, không phải dependency build. Theo mẫu INV-66, source được chia thành coefficient.py, seed_product.py, divider.py, phase.py, phase_parameters.py và arithmetic_body.py. API nhận word/owner và trả token carry/debt; không đọc KMX/KMB gốc.
-
-Body liên tục tại operations 2904..8406 (5503 lệnh, không tính metadata) đã được sinh từ sáu hàng interpolation có rounding, deferred overflow, ba hàng seed, mười hàng product14, initializer triangular, 24 hàng balanced divider, walk N27 và phục hồi root metadata. Đối chiếu từng lệnh với input đạt exact cho riêng body; chưa thay bằng chứng clean build 36553eb cũ cho source mới. Hai bảng 64 hàng A/S khác INV-66 đã được khôi phục và công thức C(v) khớp toàn bộ 4096 v. Phase dùng 27 base angles và 7 overflow angles exact; không nhận tìm lại search/refit gốc.
-
-Lookup và inverse/cleanup vẫn còn cấp cổng, nên chưa nhận đã hoàn toàn generator số học. Mốc này giữ reconstruction_level GATE_LEVEL_PYTHON cho toàn source; build lại sau commit và tiếp tục thay các khối return trước nghiệm thu cuối. Source, artifacts và records chỉ nằm đúng các đường dẫn INV-74 theo repo.
+Use a clean checkout of the source commit and a fresh Python 3.13 venv; install
+`requirements.txt`. Run `src/invsqrt/INV-74/solution.py` with absolute `--config`
+pointing to this checkout's `configs/reconstructed.json`, from any cwd. Output:
+`artifacts/invsqrt/INV-74/reconstructed.kmb`. New records:
+`results/invsqrt/INV-74/reconstructed/build_only/<run-id>/`. Existing output is
+never overwritten. No smoke/full grading, independent review or merge is
+claimed by a build-only record.
