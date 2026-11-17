@@ -44,5 +44,19 @@
     "Arithmetic recovered only for normalization/root; lookup/coefficient/divider/phase/inverse remain gate-level",
     "User cost/ratio not verified; no grading run",
     "Upstream complete notice/license for this exact artifact not verified; attribution retained in NOTICE.txt"
+  ],
+  "build_source_commit": "36553eb7800dfa7afd1185aaf924297219642dc3",
+  "reconstruction_check": "results/invsqrt/INV-74/reconstructed/build_only/20261117T112724Z-exact-4e8c34e8/reconstruction_check.json",
+  "clean_checkout_build": "results/invsqrt/INV-74/reconstructed/build_only/20261117T112724Z-exact-4e8c34e8/clean_checkout_build.json",
+  "arithmetic_recovered_blocks": [
+    "normalization",
+    "consumed_root_with_parity_frame"
+  ],
+  "arithmetic_unresolved_blocks": [
+    "lookup/address frame",
+    "rounded coefficient",
+    "seed/product",
+    "divider/phase",
+    "inverse arithmetic/cleanup"
   ]
 }

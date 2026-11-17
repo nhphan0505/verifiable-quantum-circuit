@@ -1,0 +1,38 @@
+{
+  "kind": "EXHAUSTIVE_ROOT_FRAME_ANALYSIS_NOT_GRADING",
+  "input_count": 3133452,
+  "root_formula": "k=floor((22-bit_length(x))/2); n=x*4**k; R=floor(sqrt(16*n)); v=R-4096; h=(n-floor(R*(R+1)/16)-1) mod 1024",
+  "boundary_operation": 1649,
+  "root_ports": [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21
+  ],
+  "residual_high_ports": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "residual_low_q0_zero": true,
+  "injected_bit": "n mod 2",
+  "flags_encoding": "k xor (12*(n mod 2))",
+  "root_scratch_q26_up_zero": true,
+  "all_classical_checks_matched": true,
+  "hmr_outcomes": "all zero",
+  "elapsed_seconds": 2.478898700006539
+}

@@ -1,0 +1,58 @@
+{
+  "mechanism": "CPython open/import audit; network and subprocess denied during construction",
+  "inputs_checked_against_commit": [
+    {
+      "path": "src/invsqrt/INV-74/solution.py",
+      "sha256": "a3160cdb47601dcded21fe28325ed9eb31047bf566249a7450849e0b977a0dc0"
+    },
+    {
+      "path": "src/invsqrt/INV-74/circuit.py",
+      "sha256": "5e9babf5530eb87c7b2bb6be791d8c344e9910baaea0eaed8023509d5e07be02"
+    },
+    {
+      "path": "src/invsqrt/INV-74/arithmetic_prefix.py",
+      "sha256": "4d23fc761fa89db3c6d55b25044978217671fa5851a8397d767a5749d72b96e2"
+    },
+    {
+      "path": "src/invsqrt/INV-51/circuit.py",
+      "sha256": "b867593d0306c6ca42ee0c5666f79ee5ca3d00120c77f27261435697518f8c17"
+    },
+    {
+      "path": "src/invsqrt/INV-74/configs/reconstructed.json",
+      "sha256": "e7f65ce80421c408b6584d038cc2e2d8ce1036ffced8b0728fa634feb56b84d0"
+    },
+    {
+      "path": "requirements.txt",
+      "sha256": "f3cd725b18083117d8ad73afd9accf3a5a99a634fac00f221bf1d77d71ad09a8"
+    }
+  ],
+  "read_paths": [
+    "C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\copy.py",
+    "C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\dataclasses.py",
+    "C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\decimal.py",
+    "C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\fractions.py",
+    "C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\numbers.py",
+    "D:\\verifiable-quantum-circuit\\artifacts\\inv74-clean-36553eb\\results\\invsqrt\\INV-74\\reconstructed\\build_only\\20261117T112724Z-exact-4e8c34e8\\disabled-cache\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\copy.cpython-313.pyc",
+    "D:\\verifiable-quantum-circuit\\artifacts\\inv74-clean-36553eb\\results\\invsqrt\\INV-74\\reconstructed\\build_only\\20261117T112724Z-exact-4e8c34e8\\disabled-cache\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\dataclasses.cpython-313.pyc",
+    "D:\\verifiable-quantum-circuit\\artifacts\\inv74-clean-36553eb\\results\\invsqrt\\INV-74\\reconstructed\\build_only\\20261117T112724Z-exact-4e8c34e8\\disabled-cache\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\decimal.cpython-313.pyc",
+    "D:\\verifiable-quantum-circuit\\artifacts\\inv74-clean-36553eb\\results\\invsqrt\\INV-74\\reconstructed\\build_only\\20261117T112724Z-exact-4e8c34e8\\disabled-cache\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\fractions.cpython-313.pyc",
+    "D:\\verifiable-quantum-circuit\\artifacts\\inv74-clean-36553eb\\results\\invsqrt\\INV-74\\reconstructed\\build_only\\20261117T112724Z-exact-4e8c34e8\\disabled-cache\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\numbers.cpython-313.pyc",
+    "D:\\verifiable-quantum-circuit\\artifacts\\inv74-clean-36553eb\\results\\invsqrt\\INV-74\\reconstructed\\build_only\\20261117T112724Z-exact-4e8c34e8\\disabled-cache\\verifiable-quantum-circuit\\artifacts\\inv74-clean-36553eb\\src\\invsqrt\\INV-51\\circuit.cpython-313.pyc",
+    "D:\\verifiable-quantum-circuit\\artifacts\\inv74-clean-36553eb\\results\\invsqrt\\INV-74\\reconstructed\\build_only\\20261117T112724Z-exact-4e8c34e8\\disabled-cache\\verifiable-quantum-circuit\\artifacts\\inv74-clean-36553eb\\src\\invsqrt\\INV-74\\arithmetic_prefix.cpython-313.pyc",
+    "D:\\verifiable-quantum-circuit\\artifacts\\inv74-clean-36553eb\\results\\invsqrt\\INV-74\\reconstructed\\build_only\\20261117T112724Z-exact-4e8c34e8\\disabled-cache\\verifiable-quantum-circuit\\artifacts\\inv74-clean-36553eb\\src\\invsqrt\\INV-74\\circuit.cpython-313.pyc",
+    "D:\\verifiable-quantum-circuit\\artifacts\\inv74-clean-36553eb\\src\\invsqrt\\INV-51\\circuit.py",
+    "D:\\verifiable-quantum-circuit\\artifacts\\inv74-clean-36553eb\\src\\invsqrt\\INV-74\\arithmetic_prefix.py",
+    "D:\\verifiable-quantum-circuit\\artifacts\\inv74-clean-36553eb\\src\\invsqrt\\INV-74\\circuit.py"
+  ],
+  "write_paths": [
+    "D:\\verifiable-quantum-circuit\\artifacts\\inv74-clean-36553eb\\artifacts\\invsqrt\\INV-74\\reconstructed.kmb"
+  ],
+  "import_paths": [
+    "C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_decimal.pyd",
+    "D:\\verifiable-quantum-circuit\\artifacts\\inv74-runtime-36553eb\\Lib\\site-packages\\kickmix.cp313-win_amd64.pyd"
+  ],
+  "limitations": [
+    "interpreter startup and Git preflight precede audit",
+    "native runtime internal OS reads are outside CPython hooks"
+  ]
+}

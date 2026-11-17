@@ -1,0 +1,34 @@
+{
+  "repository_url": "https://github.com/nhphan0505/verifiable-quantum-circuit.git",
+  "source_commit": "36553eb7800dfa7afd1185aaf924297219642dc3",
+  "checkout": "D:\\verifiable-quantum-circuit\\artifacts\\inv74-clean-36553eb",
+  "checkout_status_before_build": "",
+  "setup_commands": [
+    "git -c core.longpaths=true clone --single-branch --branch exp/INV-74-fusion44-reconstruction https://github.com/nhphan0505/verifiable-quantum-circuit.git D:\\verifiable-quantum-circuit\\artifacts\\inv74-clean-36553eb",
+    "D:/verifiable-quantum-circuit/.venv/Scripts/python.exe -m venv D:\\verifiable-quantum-circuit\\artifacts\\inv74-runtime-36553eb",
+    "D:\\verifiable-quantum-circuit\\artifacts\\inv74-runtime-36553eb\\Scripts\\python.exe -m pip install -r D:\\verifiable-quantum-circuit\\artifacts\\inv74-clean-36553eb\\requirements.txt"
+  ],
+  "build_command": [
+    "D:\\verifiable-quantum-circuit\\artifacts\\inv74-runtime-36553eb\\Scripts\\python.exe",
+    "D:\\verifiable-quantum-circuit\\artifacts\\inv74-clean-36553eb\\src\\invsqrt\\INV-74\\solution.py",
+    "--config",
+    "D:\\verifiable-quantum-circuit\\artifacts\\inv74-clean-36553eb\\src\\invsqrt\\INV-74\\configs\\reconstructed.json"
+  ],
+  "build_cwd": "D:\\verifiable-quantum-circuit",
+  "environment": {
+    "python": "3.13.7 (tags/v3.13.7:bcee1c3, Aug 14 2025, 14:15:11) [MSC v.1944 64 bit (AMD64)]",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    }
+  },
+  "exit_code": 0,
+  "no_workspace_source_or_bundle_copied": true,
+  "separate_byte_comparison": "byte_comparison.json",
+  "dependency_audit": "dependency_audit.json",
+  "limitations": [
+    "Arithmetic recovered for normalization/root prefix only; remaining source gate-level",
+    "No verifier or score run"
+  ]
+}

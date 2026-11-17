@@ -1,0 +1,13 @@
+{
+  "kind": "READ_ONLY_PP_GUARD_SCAN_NOT_PP_VALIDATION",
+  "method_reference": "INV-66/postprocessing/solution.py at f315c15",
+  "method_sha256": "28de23f261438791a871f0210e0ebe00bf2951eb635223dbc63104a61b4567ff",
+  "guard_matches": [],
+  "count": 0,
+  "rewrites_applied": 0,
+  "limitations": [
+    "Original generating pipeline and pre-existing PP unknown",
+    "User has not selected a new PP hypothesis",
+    "No verifier run or predicted cost benefit established"
+  ]
+}

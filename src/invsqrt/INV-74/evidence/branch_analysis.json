@@ -1,0 +1,22 @@
+{
+  "kind": "BRANCH_PHASE_INVARIANCE_ANALYSIS_NOT_GRADING",
+  "samples": 141,
+  "seed": 74002,
+  "branches_per_sample": 5,
+  "hmr_outcome_streams": [
+    740021,
+    740022,
+    740023,
+    740024
+  ],
+  "zero_outcome_reference": true,
+  "restored_x": true,
+  "scratch_zero": true,
+  "phase_matches_zero_outcome_modulo_two_halfturns": true,
+  "exact_phase_scale": 127,
+  "limitations": [
+    "Not exhaustive measurement outcomes",
+    "Not a verifier run or synthesis-error budget/score",
+    "Compares original artifact branches, not a recovered arithmetic model"
+  ]
+}
