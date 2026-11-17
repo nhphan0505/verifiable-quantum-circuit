@@ -93,6 +93,8 @@ def main():
             if not permitted(path):
                 raise RuntimeError('Read outside declared inputs/runtime: '+str(path))
             reads.add(str(path))
+    # Point cache probes into this fresh run; never read checkout cache files.
+    sys.pycache_prefix = str(run / "disabled-cache")
     sys.dont_write_bytecode = True
     sys.addaudithook(audit)
     from circuit import build_circuit

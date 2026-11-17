@@ -35,3 +35,7 @@ Bước tiếp nhận/khứ hồi/phân tích ban đầu đã có scratch bất 
 ## Implementation ban đầu
 
 [solution.py](solution.py) kiểm snapshot committed và môi trường, cấm network/subprocess khi dựng, chỉ đọc [circuit.py](circuit.py) cùng runtime đã pin. Source sinh mỗi lệnh bằng lời gọi Python rõ ràng, chia hàm theo khoảng operation để kiểm tra; không chứa nguyên KMX/binary trong data và không đọc submission gốc. Đây là mốc GATE_LEVEL_PYTHON phục vụ phục hồi tiếp, chưa đáp ứng mục tiêu generator số học giống INV-66. Góc là decimal string exact half-turn, điều kiện từng lệnh và stack giữ riêng. [reconstruction.json](reconstruction.json) khai báo dependency và giới hạn; [NOTICE](NOTICE.txt) giữ attribution qua mọi lớp phái sinh.
+
+## Manh mối phục hồi root và frame
+
+Trên 2054 input (seed 74001), tại boundary operation 1649 không tính metadata, root q10..q21 khớp normalize_root của INV-66; residual q1..q9 giữ 9 bit cao còn q0 bằng zero. Hai cờ q24/q25 cùng XOR một bit t, hai cờ thấp không đổi. Tại operation 1612, t = h0 XOR 1 XOR v2 XOR v3 XOR v4 XOR temporary_q36; trên tập mẫu t bằng parity của normalized n. Đoạn mới 11 lệnh đưa t vào hai cờ rồi HMR q0 và conditional CZ(q24,q25). Đây là quan sát basis với outcome HMR zero, chưa chứng minh branch phase cho mọi outcome và chưa suy giảm 2 qubit chỉ từ đoạn này. Xem evidence/root_analysis.json.

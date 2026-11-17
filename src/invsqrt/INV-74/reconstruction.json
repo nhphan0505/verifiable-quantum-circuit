@@ -9,7 +9,7 @@
   "components": [
     {
       "path": "solution.py",
-      "sha256": "d8f0b004a4d80ac43f9192c3b22369541dad6ae55a6512f145780d49c201f5b5",
+      "sha256": "bba3d8c0686efae03a0ea0891587a579651b72884f6f9065d925f4dc821d6b7f",
       "role": "entry point with snapshot/audit/provenance"
     },
     {
