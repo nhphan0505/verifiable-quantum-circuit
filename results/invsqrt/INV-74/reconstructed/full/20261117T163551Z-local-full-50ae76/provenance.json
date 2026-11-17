@@ -1,0 +1,104 @@
+{
+  "track": "invsqrt",
+  "experiment_id": "INV-74",
+  "config_name": "reconstructed",
+  "source_commit": "12d971d5d2a6f8b8b3ef20e30eaeaf73d9416716",
+  "source_path": "src/invsqrt/INV-74/solution.py",
+  "source_sha256": "f19b0cab2f7150148f181e0416983464fa286b408498b482c2724c1e418a53d6",
+  "build_config_path": "src/invsqrt/INV-74/configs/reconstructed.json",
+  "build_config_sha256": "e7f65ce80421c408b6584d038cc2e2d8ce1036ffced8b0728fa634feb56b84d0",
+  "artifact_path": "artifacts/invsqrt/INV-74/reconstructed.kmb",
+  "artifact_sha256": "47b318383a03c52e08a5c222c5600fd52e004b468f53fad038082fc0f26386ef",
+  "build_command": [
+    "C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-x2763-recovery\\verifiable-quantum-circuit\\artifacts\\buildchecks\\delivery-20261117\\runtime\\Scripts\\python.exe",
+    "C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-x2763-recovery\\verifiable-quantum-circuit\\artifacts\\buildchecks\\delivery-20261117\\checkout/src/invsqrt/INV-74/solution.py",
+    "--config",
+    "C:\\Users\\ASUS\\.codex\\worktrees\\invsqrt-x2763-recovery\\verifiable-quantum-circuit\\artifacts\\buildchecks\\delivery-20261117\\checkout/src/invsqrt/INV-74/configs/reconstructed.json"
+  ],
+  "build_run": "results/invsqrt/INV-74/reconstructed/build_only/20261117T163158Z-exact-133928ca",
+  "environment": {
+    "python": "3.13.7 (tags/v3.13.7:bcee1c3, Aug 14 2025, 14:15:11) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "win32",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    },
+    "dependencies": [
+      {
+        "path": "src/invsqrt/INV-74/solution.py",
+        "sha256": "f19b0cab2f7150148f181e0416983464fa286b408498b482c2724c1e418a53d6"
+      },
+      {
+        "path": "src/invsqrt/INV-74/circuit.py",
+        "sha256": "a7a18626f309dcbaa3a5064462e0969c8f6246d1b2c2cc8f7e79b699f826b823"
+      },
+      {
+        "path": "src/invsqrt/INV-74/arithmetic_prefix.py",
+        "sha256": "95c9bfce5fcf213b31d4fb88549734951ca886e55a630c4a795a11cd01a722b9"
+      },
+      {
+        "path": "src/invsqrt/INV-74/arithmetic_body.py",
+        "sha256": "5b1a3599e81fe32c19e0f8bd0b6216f10dabe343691bda38d7ecd0eceb3b5df9"
+      },
+      {
+        "path": "src/invsqrt/INV-74/coefficient.py",
+        "sha256": "fd38d349117c46456a633dd2f818f015dd9b398e5b8040e9300ae16b024b2ec0"
+      },
+      {
+        "path": "src/invsqrt/INV-74/seed_product.py",
+        "sha256": "243952c3fdd92593871d0c828535103abd636e53caeb8cd328f18ca517d78d1e"
+      },
+      {
+        "path": "src/invsqrt/INV-74/divider.py",
+        "sha256": "1ea0e1c47953901f3c49c3f7e885212354bdf6a1b0ca95347cf8a38a4596fe18"
+      },
+      {
+        "path": "src/invsqrt/INV-74/divider_inverse.py",
+        "sha256": "494457313c0d13c35f92b4bfb6b4da89f8363e14668de2fffec9c4f3ab0e0c0f"
+      },
+      {
+        "path": "src/invsqrt/INV-74/phase.py",
+        "sha256": "54509decf1856891dc8db819884fb4f7ad20c13e6d0b53cf8d7eb4ce4ac1d670"
+      },
+      {
+        "path": "src/invsqrt/INV-74/phase_parameters.py",
+        "sha256": "22eb594c453abccc773656c30a98742f592e35a7ad81763ce6daa47ab552fdc3"
+      },
+      {
+        "path": "src/invsqrt/INV-74/lookup.py",
+        "sha256": "0843a1a34d719baaf228ce1bbd9dd24ffef6befd15644b349590e8515b5e928f"
+      },
+      {
+        "path": "src/invsqrt/INV-74/return_path.py",
+        "sha256": "970bfa8e4bd139cadd8e34c3718168a0789c7029c0c033169f0e422f0fc9fef9"
+      },
+      {
+        "path": "src/invsqrt/INV-74/data/coefficient_codes.json",
+        "sha256": "7c7f3e32ed65fb8f0096dd61bfb7cf2671bc5918a8447bb1ee33d1c7d043cf25"
+      },
+      {
+        "path": "src/invsqrt/INV-74/data/cleanup_codes.json",
+        "sha256": "b2e84233fa70e0db8019dd90b206d61dc4f8deb4e01434fc22e55feb2f201512"
+      },
+      {
+        "path": "src/invsqrt/INV-74/data/history_code.json",
+        "sha256": "42359e57b96ba8c61554db77f000844aa2440afb1103b65acd3f451dcdec31ab"
+      },
+      {
+        "path": "src/invsqrt/INV-51/circuit.py",
+        "sha256": "b867593d0306c6ca42ee0c5666f79ee5ca3d00120c77f27261435697518f8c17"
+      },
+      {
+        "path": "src/invsqrt/INV-74/configs/reconstructed.json",
+        "sha256": "e7f65ce80421c408b6584d038cc2e2d8ce1036ffced8b0728fa634feb56b84d0"
+      },
+      {
+        "path": "requirements.txt",
+        "sha256": "f3cd725b18083117d8ad73afd9accf3a5a99a634fac00f221bf1d77d71ad09a8"
+      }
+    ]
+  },
+  "reconstruction_level": "ARITHMETIC_PYTHON",
+  "dependency_audit": "dependency_audit.json"
+}

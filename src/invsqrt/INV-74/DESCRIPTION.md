@@ -14,8 +14,7 @@ before reconstruction; the latest separate KMX → KMB check also matched every
 byte. Original input is immutable and is never read by solution.py.
 
 The supplied Q44 cost 75170.66 and ratio 27.63× agree with the upstream dataset
-metadata. These are upstream reported values; this work has no new verifier
-score, PASS or improvement claim. The private Q44 generator/search was not
+metadata. These are upstream reported values; the measured local full result is documented below. The private Q44 generator/search was not
 available and is not claimed recovered.
 
 ## Arithmetic generator
@@ -110,4 +109,49 @@ that ID; selecting INV-41 uses a different experiment's config directory.
 
 Git excludes `artifacts/`, and the repository checker rejects tracked KMBs.
 Therefore pulling this branch supplies JSON/source/provenance; the KMB must
-be generated locally or obtained separately. No new grader result is claimed.
+be generated locally or obtained separately. The measured smoke/full results and their build links are recorded below.
+
+## Measured results and review handoff
+
+Source/config build commit: `12d971d5d2a6f8b8b3ef20e30eaeaf73d9416716`.
+The KMB installed from that clean build was used for both local notebook runs;
+its hash is the original target hash. The original `review.json` records the
+notebook's ambiguous-build warning because three builds have identical output.
+It is preserved. Added `provenance.json` and `review_v2.json` link the actual
+handoff build and validate the recorded profile, source, verifier and hashes.
+These are author checks, not an independent review.
+
+| Mode | Run | Result | Score | Shots |
+| --- | --- | --- | ---: | ---: |
+| smoke | [20261117T163400Z-local-smoke-62712d](../../../results/invsqrt/INV-74/reconstructed/smoke/20261117T163400Z-local-smoke-62712d/verifier.json) | PASS | 73630.74893951333 | 4096 |
+| full | [20261117T163551Z-local-full-50ae76](../../../results/invsqrt/INV-74/reconstructed/full/20261117T163551Z-local-full-50ae76/verifier.json) | PASS | 75170.62025728542 | 200540928 |
+
+Full uses the official invsqrt verifier, kickmix-engine 0.6.0, four threads and
+no reduced-domain/shot options. Smoke uses max-x 4096 and one shot per input.
+Both recorded stdout JSONs exactly match verifier.json; stderr is empty. Both
+use WSL Linux, Python 3.13.18, AVX2; the Windows build used Python 3.13.7. Pins
+kickmix/numpy/scipy are unchanged. See metadata and provenance for both contexts.
+No seed override is recorded; the command and engine defaults define the run.
+
+Baseline full cost 2076774.233715282 divided by INV-74 full 75170.62025728542
+is **27.6274723636x**, a **96.380414441%** cost reduction. Only full is entered
+in SCORES; smoke is retained for its limited verification scope. Q44 uses
+1458.2501961744188 mean Toffolis, 1 T and 34 rotations in the full record.
+Worst error/tolerance is 0.9912046209041316 at x=191189, below the limit but
+close to it; this measured PASS is not an analytic approximation-error proof.
+The small difference from the upstream reported 75170.66 is kept explicit.
+
+The reconstruction hypothesis (independent arithmetic source reproduces the
+original KMB exactly) is supported by byte comparison and the recorded full
+PASS. No further optimization was implemented or claimed. Stop this recovery
+stage and request independent review; do not infer recovery of the private
+search/refit. [grading_summary.json](evidence/grading_summary.json) contains
+ratios, run/build links and immutable raw-file hashes.
+
+Reviewer setup: fresh clone, checkout the build source commit above, create a
+new Python 3.13 venv and install requirements.txt. Invoke solution.py using
+absolute source/config paths from a cwd outside the checkout. Expected KMB is
+200369 bytes with the target SHA-256. Check dependency_audit.json against the
+committed helpers/data, then inspect the forward/inverse carry and table phase
+contracts. All runtime inputs and license notices are committed; no author
+bundle is required. Independent code review and merge remain outstanding.
