@@ -9,18 +9,48 @@
   "components": [
     {
       "path": "solution.py",
-      "sha256": "a3160cdb47601dcded21fe28325ed9eb31047bf566249a7450849e0b977a0dc0",
-      "role": "audited CLI"
+      "sha256": "8daa94bf8119d76c665bc0115ee9b00e442a770c599652d4d3ce5d5d409e9bb5",
+      "role": "audited CLI and complete declared dependency snapshot"
     },
     {
       "path": "circuit.py",
-      "sha256": "5e9babf5530eb87c7b2bb6be791d8c344e9910baaea0eaed8023509d5e07be02",
-      "role": "explicit remaining gate-level construction"
+      "sha256": "99ea8ec0c83f6a7c35e21c9f010d4cfe87b3dfd017e9836949d1b90178fda4c4",
+      "role": "staged composition; lookup and inverse still gate-level"
     },
     {
       "path": "arithmetic_prefix.py",
       "sha256": "4d23fc761fa89db3c6d55b25044978217671fa5851a8397d767a5749d72b96e2",
-      "role": "normalization/root generator and guarded Q44 phase/parity schedule"
+      "role": "arithmetic normalization/root and parity frame"
+    },
+    {
+      "path": "coefficient.py",
+      "sha256": "9257c6bb9134d6f50e46957314a152d275905680d768f2cd9eeeb148664de769",
+      "role": "six rounded interpolation rows, metadata and deferred overflow"
+    },
+    {
+      "path": "seed_product.py",
+      "sha256": "c06126a26d0d6d78f50aefb2d89f6057863b4081702d8b20de1a5ca9af1aa698",
+      "role": "signed seed, folded residual and ten-row product14"
+    },
+    {
+      "path": "divider.py",
+      "sha256": "1ea0e1c47953901f3c49c3f7e885212354bdf6a1b0ca95347cf8a38a4596fe18",
+      "role": "triangular initializer, balanced feed/rotate rows and carry debts"
+    },
+    {
+      "path": "phase.py",
+      "sha256": "54509decf1856891dc8db819884fb4f7ad20c13e6d0b53cf8d7eb4ce4ac1d670",
+      "role": "N27 streamed reflected phase, metadata borrowing/restoration"
+    },
+    {
+      "path": "phase_parameters.py",
+      "sha256": "22eb594c453abccc773656c30a98742f592e35a7ad81763ce6daa47ab552fdc3",
+      "role": "34 exact mathematical phase parameters"
+    },
+    {
+      "path": "arithmetic_body.py",
+      "sha256": "f9be289c3167b1a61b14798d3c73b21cfb4fa9596b54153998dd220e56ff4c7d",
+      "role": "typed forward arithmetic composition"
     }
   ],
   "environment": {
@@ -34,14 +64,20 @@
     "local_files": [
       "solution.py",
       "circuit.py",
-      "configs/reconstructed.json",
       "arithmetic_prefix.py",
+      "coefficient.py",
+      "seed_product.py",
+      "divider.py",
+      "phase.py",
+      "phase_parameters.py",
+      "arithmetic_body.py",
+      "configs/reconstructed.json",
       "../INV-51/circuit.py"
     ],
     "runtime": "requirements.txt"
   },
   "limitations": [
-    "Arithmetic recovered only for normalization/root; lookup/coefficient/divider/phase/inverse remain gate-level",
+    "Forward arithmetic recovered and 5503-operation body checked instruction-for-instruction; lookup and return stages remain gate-level. New source has not yet passed clean end-to-end build.",
     "User cost/ratio not verified; no grading run",
     "Upstream complete notice/license for this exact artifact not verified; attribution retained in NOTICE.txt"
   ],
@@ -50,13 +86,16 @@
   "clean_checkout_build": "results/invsqrt/INV-74/reconstructed/build_only/20261117T112724Z-exact-4e8c34e8/clean_checkout_build.json",
   "arithmetic_recovered_blocks": [
     "normalization",
-    "consumed_root_with_parity_frame"
+    "consumed_root_with_parity_frame",
+    "coefficient/rounding/overflow",
+    "seed/folded residual/product14",
+    "balanced divider forward",
+    "N27 reflected phase and root metadata return"
   ],
   "arithmetic_unresolved_blocks": [
-    "lookup/address frame",
-    "rounded coefficient",
-    "seed/product",
-    "divider/phase",
-    "inverse arithmetic/cleanup"
+    "lookup/address code synthesis",
+    "divider inverse and initializer cleanup",
+    "coefficient/product/seed inverse",
+    "Boolean table retirement and inverse root/normalization layout"
   ]
 }

@@ -51,6 +51,8 @@ def main():
         raise RuntimeError('Build requires a clean committed checkout')
     commit = git('rev-parse','HEAD').decode().strip()
     inputs = [here/'solution.py', here/'circuit.py', here/'arithmetic_prefix.py',
+              *[here/name for name in ('coefficient.py','seed_product.py','divider.py',
+                'phase.py','phase_parameters.py','arithmetic_body.py')],
               here.parent/'INV-51/circuit.py', config, root/'requirements.txt']
     records = []
     for path in inputs:

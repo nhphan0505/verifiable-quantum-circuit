@@ -67,3 +67,11 @@ Mục tiêu phục hồi generator số học đầy đủ như INV-66 **chưa h
 ## Chạy lại từ checkout mới
 
 Tại root checkout của source commit ở trên, dùng Python 3.13 tạo `.venv`, chạy `.venv/Scripts/python.exe -m pip install -r requirements.txt`. Có thể chạy từ bất kỳ cwd với đường dẫn tuyệt đối tới `src/invsqrt/INV-74/solution.py` và `--config` trỏ vào `src/invsqrt/INV-74/configs/reconstructed.json` của checkout đó. Working tree phải sạch; output mặc định là `artifacts/invsqrt/INV-74/reconstructed.kmb`, không ghi đè output có sẵn. Records mới được tạo trong results/invsqrt/INV-74/reconstructed/build_only. Chưa có run full/smoke để ghi vào SCORES.
+
+## Đợt phục hồi số học thuận tiếp theo
+
+Đã chuyển KMX sang KMB trước đợt source mới, so toàn bytes/hash trùng input; file chuyển đổi giữ trong artifacts/decompiler/<input-sha>/<run>/, không phải dependency build. Theo mẫu INV-66, source được chia thành coefficient.py, seed_product.py, divider.py, phase.py, phase_parameters.py và arithmetic_body.py. API nhận word/owner và trả token carry/debt; không đọc KMX/KMB gốc.
+
+Body liên tục tại operations 2904..8406 (5503 lệnh, không tính metadata) đã được sinh từ sáu hàng interpolation có rounding, deferred overflow, ba hàng seed, mười hàng product14, initializer triangular, 24 hàng balanced divider, walk N27 và phục hồi root metadata. Đối chiếu từng lệnh với input đạt exact cho riêng body; chưa thay bằng chứng clean build 36553eb cũ cho source mới. Hai bảng 64 hàng A/S khác INV-66 đã được khôi phục và công thức C(v) khớp toàn bộ 4096 v. Phase dùng 27 base angles và 7 overflow angles exact; không nhận tìm lại search/refit gốc.
+
+Lookup và inverse/cleanup vẫn còn cấp cổng, nên chưa nhận đã hoàn toàn generator số học. Mốc này giữ reconstruction_level GATE_LEVEL_PYTHON cho toàn source; build lại sau commit và tiếp tục thay các khối return trước nghiệm thu cuối. Source, artifacts và records chỉ nằm đúng các đường dẫn INV-74 theo repo.
