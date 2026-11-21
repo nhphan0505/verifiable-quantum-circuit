@@ -25,3 +25,11 @@ Run the repository Python 3.13 environment with requirements.txt and the [active
     python src/dfthcsos/DFT-78/solution.py --config src/dfthcsos/DFT-78/configs/notebook-native.json
 
 The active build compiles directly from the checkout. The former bundle configs are retained as archival names for existing results. Their original source/config snapshots remain in Git. Build records identify the actual source used. The verifier is a separate step.
+
+## Kết quả kiểm chứng
+
+A clean GitHub checkout of f707786f79081316e6b3a97b6f74ac9b3eb91bee reproduced the native artifact SHA-256 3abc10ecbd1991563891d30dd29a8ce8292e676a20453f8a1c14960127c20c8b. kickmix-engine 0.6.0 smoke passed with 1,219 verified shots. Full grading and independent review of this revision are pending.
+
+- [Build provenance](../../../results/dfthcsos/DFT-78/notebook-native/build_only/20261121T091941Z-build-7ee07443/provenance.json)
+- [Smoke verifier](../../../results/dfthcsos/DFT-78/notebook-native/smoke/20261121T091942Z-local-smoke-cddb3e/verifier.json)
+- [Smoke provenance](../../../results/dfthcsos/DFT-78/notebook-native/smoke/20261121T091942Z-local-smoke-cddb3e/provenance.json)
