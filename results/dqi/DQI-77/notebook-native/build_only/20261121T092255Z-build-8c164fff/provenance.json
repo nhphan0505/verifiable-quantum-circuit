@@ -1,0 +1,61 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-77",
+  "config_name": "notebook-native",
+  "source_commit": "f1e272a4ccdf7e23b8b63b173bbcac0e2b52ca5d",
+  "source_path": "src/dqi/DQI-77/solution.py",
+  "source_sha256": "550c1389a23bb69de4be048255f0ab1650ac80d7820bd9e430fdae843f761807",
+  "build_config_path": "src/dqi/DQI-77/configs/notebook-native.json",
+  "build_config_sha256": "8fe14c1f95365c3ee42e9944db0c645b3e38697025f9a04bae78ecbfdc6d0f83",
+  "artifact_path": "artifacts/dqi/DQI-77/notebook-native.kmb",
+  "artifact_sha256": "e9d0fad46cc7eb3a7ed2901e8003cb9ce476df0bebc48e1cfbb3a844fd6ca9e5",
+  "build_command": [
+    "/mnt/d/verifiable-quantum-circuit/.venv-engine/bin/python",
+    "/tmp/orecord-review-verified-1oy40mvu/DQI-77/src/dqi/DQI-77/solution.py"
+  ],
+  "environment": {
+    "python": "3.13.18",
+    "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "packages": {
+      "kickmix": "1.0.0",
+      "numpy": "2.5.4"
+    }
+  },
+  "component_sha256": {
+    "dqi.kmb": "e9d0fad46cc7eb3a7ed2901e8003cb9ce476df0bebc48e1cfbb3a844fd6ca9e5"
+  },
+  "build_dependencies": {
+    "src/dqi/DQI-77/circuit.py": "41d7292622f88d458a71cefbae80365d27bd55f5f1a96386ea96b47e59fb8b2c",
+    "src/dqi/DQI-77/decoder/common.py": "fb5b3c9aa8e3892267978ceb01a271c0c0f77707f07002c8743c1b8bf8b2f93b",
+    "src/dqi/DQI-77/decoder/compact_euclid.py": "5e76f5a3c6c9cdf0e088cd3461c2d433120c2ca7626c54ce12a2cfbfc91fca57",
+    "src/dqi/DQI-77/decoder/counter.py": "c5480be5923b7960cb48fb4ceec88a6945422a5f645e34c80d7105c58bc82f65",
+    "src/dqi/DQI-77/decoder/cubic.py": "965320066c4a2806522301aa7fa3403b474d8511b3fbcf08c85547714d751dac",
+    "src/dqi/DQI-77/decoder/early_a.py": "c002e30091914878e596c743ba09b592cba5247bafe5d30643d35c4cfc7dbadb",
+    "src/dqi/DQI-77/decoder/evaluation.py": "1b9e620ffea6663ec68e10e26f1304a723d4385bdd719e6d80d3ce03662ab352",
+    "src/dqi/DQI-77/decoder/forney_control.py": "23f18a8a78bac5f0bff08c55d6958b2ac61106ec6f9f5f06b55c34f11c7db5d5",
+    "src/dqi/DQI-77/decoder/jfraction_decoder.py": "87f9416e574bf502a4414eae1ce824396c2af523b0062c7b72de3fa8c74a1eef",
+    "src/dqi/DQI-77/decoder/jfraction_gap_decoder.py": "46b9ce13b06d71d3b99b832a26d7a16c047396c679e2d8b7d8697884f7f0f9f2",
+    "src/dqi/DQI-77/decoder/jfraction_merged.py": "dbb094dff4cbb94f74ecffaae4836430277e3b65dff25d622b1a54d10b958487",
+    "src/dqi/DQI-77/decoder/jfraction_merged_decoder.py": "e1ab023921cb35ffa248ff074517c725f28702ed870230cbd07c844e2f9c6299",
+    "src/dqi/DQI-77/decoder/mask_projection.py": "83f8c7a684c7ae632db60d7dddbbf30294ef74811199fd8b1714c1a4cfa5f588",
+    "src/dqi/DQI-77/decoder/model_fast_extraction.py": "809f1e4838bcd317d9a1133004c37863215d03c94efbc578cc548a361041a9e8",
+    "src/dqi/DQI-77/decoder/narrow.py": "6c5e861b1698cfc1411adbdfa9e95295308530bb1d1d90009910836f2a6cad07",
+    "src/dqi/DQI-77/decoder/poly_arithmetic.py": "508e61d9bc14e23c89c944276f0ddab2e534f8b116d108f482d916dc3ce52d76",
+    "src/dqi/DQI-77/decoder/quotient.py": "b2befe8a619e9543b049e32c8adcbbf300b987b5ebd3d84b270422528483aa3b",
+    "src/dqi/DQI-77/decoder/quotient_hmr.py": "79d308a144fb310093a8fdd72972fdfdf92bc4828266f3eb1e3cf80d451dd5c4",
+    "src/dqi/DQI-77/decoder/recursive.py": "7700fe569d15065988b53d84d6251d002d203ba7fb87a17ae273354df1112fd7",
+    "src/dqi/DQI-77/decoder/static_divisions.py": "374ba956ce227bdba2f5397a8732fce9d36420a76aef71083a9d3f07b2671547",
+    "src/dqi/DQI-77/decoder/sweep.py": "8ce16972dd74cc074a608ee2af965e382826afef713f6836d9a781877a4dff49",
+    "src/dqi/DQI-77/decoder/tower.py": "3dea96ce4c6a454c2cd6984be1aaf0be2abdc607684ea24aac44c47a6f746f4e",
+    "src/dqi/DQI-77/decoder/zero_chain.py": "e4144acaa1b64beeecfdd7ae3e26d98bba76314b27a5979640b4eaf39c57a07d",
+    "verifiers/dqi/__init__.py": "01c870aa9763f4e4357fc6654bff1d3296cec995bd0943f87b4a48946ada5b40",
+    "verifiers/dqi/dqi_reference_circuit.py": "2b8e1b80a806157c333a7e308eaf2499ee09de499efbc05875202c327959959e",
+    "verifiers/dqi/verify_submission_dqi.py": "f14274bc0943fb9769ddb01131be6063191a15009fe1caf1d4bdd9fd25194e65"
+  },
+  "build_run": null,
+  "clean_checkout": {
+    "remote": "https://github.com/nhphan0505/verifiable-quantum-circuit.git",
+    "commit": "f1e272a4ccdf7e23b8b63b173bbcac0e2b52ca5d",
+    "clean_at_start": true
+  }
+}
