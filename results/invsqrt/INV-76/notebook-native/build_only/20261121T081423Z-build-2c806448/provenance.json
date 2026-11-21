@@ -1,0 +1,37 @@
+{
+  "track": "invsqrt",
+  "experiment_id": "INV-76",
+  "config_name": "notebook-native",
+  "source_commit": "3b18cf153df60f4efd920f9283aa58fa0b3dd431",
+  "source_path": "src/invsqrt/INV-76/solution.py",
+  "source_sha256": "0469dcefde2926011df45556accb251683e1b1919be103f95fe9afdc2afe778a",
+  "build_config_path": "src/invsqrt/INV-76/configs/notebook-native.json",
+  "build_config_sha256": "8fe14c1f95365c3ee42e9944db0c645b3e38697025f9a04bae78ecbfdc6d0f83",
+  "artifact_path": "artifacts/invsqrt/INV-76/notebook-native.kmb",
+  "artifact_sha256": "f7fb315d23c7fbd020781eb88de818faf1b5e1bb04af65c98f34fd0e8f337ad1",
+  "build_command": [
+    "/mnt/d/verifiable-quantum-circuit/.venv-engine/bin/python",
+    "/tmp/orecord-github-native-7ltqo4zo/INV-76/src/invsqrt/INV-76/solution.py"
+  ],
+  "environment": {
+    "python": "3.13.18",
+    "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "packages": {
+      "numpy": "2.5.4"
+    },
+    "input_sha256": {}
+  },
+  "component_sha256": {
+    "invsqrt.kmb": "f7fb315d23c7fbd020781eb88de818faf1b5e1bb04af65c98f34fd0e8f337ad1"
+  },
+  "build_dependencies": {
+    "src/invsqrt/INV-76/circuit.py": "ad086c68c752ea3baa9bddfc73870b6e699a0cba7ae14eb3c97ab0e4afa12c66"
+  },
+  "build_run": null,
+  "clean_checkout": {
+    "remote": "https://github.com/nhphan0505/verifiable-quantum-circuit.git",
+    "commit": "3b18cf153df60f4efd920f9283aa58fa0b3dd431",
+    "clean_at_start": true,
+    "mode": "native config without upstream bundle"
+  }
+}
