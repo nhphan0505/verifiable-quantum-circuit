@@ -1,6 +1,6 @@
 # [DQI-77] Port the v25 DQI generator and verify pass-through decoder bytes
 
-Loáº¡i: Tinh chá»‰nh má»™t phÆ°Æ¡ng Ã¡n.
+Loại: Tinh chỉnh một phương án.
 
 ## Upstream sources
 
@@ -22,3 +22,11 @@ The notebook verifies and packages the generator output byte-for-byte. The track
 ## Reproduction status
 
 Local grading pending.
+
+## Build
+
+Run from this worktree with the Linux Python 3.13 environment and the pinned bundle.
+
+```sh
+python src/dqi/DQI-77/solution.py --config src/dqi/DQI-77/configs/notebook-v25.json --generator-bundle /path/to/generators.zip
+```
