@@ -1,13 +1,7 @@
 """Load the installed competition helpers without vendoring competition data."""
 
-from pathlib import Path
-import sys
-
-ROOT = Path(__file__).resolve().parents[1]
-
-import kickmix as km  # noqa: E402
-import dqi_reference_circuit as ref  # noqa: E402
-import verify_submission_dqi as verifier  # noqa: E402
+import kickmix as km
+import dqi_reference_circuit as ref
 
 
 def build(builder, *, iterations=None, decoder_type=None):

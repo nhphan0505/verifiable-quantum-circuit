@@ -4,18 +4,7 @@ Each shear has sources disjoint from targets; it can use evaluation rank
 len(A)+len(B)-1 with two clean field words. The ordinary field model below
 checks the block scheduling, using schoolbook arithmetic within shears.
 """
-import argparse
-import importlib.util
-import json
-import pathlib
-import random
-from collections import Counter
 from functools import cache
-
-path = pathlib.Path(__file__).with_name('model_jfraction.py')
-spec = importlib.util.spec_from_file_location('jmodel', path)
-jm = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(jm)
 
 
 @cache
@@ -65,79 +54,3 @@ def power_plan(n,d):
     candidates = [(power_plan(m,d)[0]+toeplitz_plan(n-m,d)[0]
                    +shear_cost(n,d,True,m),m) for m in range((n+d-1)//d,n)]
     return min(candidates)
-
-
-class Model:
-    def __init__(self):
-        self.cost = Counter()
-        self.operations = []
-        self.shears = []
-
-    def shear(self, data, src, dst, n, d, constant_b0=False, m=None):
-        m = (n+1)//2 if m is None else m
-        assert len(dst) == n
-        target = set(dst[m:])
-        if constant_b0 and n > d+1:
-            self.cost[f'whole_power_evaluations_d{d}'] += (d+1)*(m-2)+1
-        # src[i] names the coefficient of the Frobenius operand.
-        for piece in shear_pieces(n,d,constant_b0,m):
-            sources = {src[i] for i in piece['is']} | {dst[j] for j in piece['js']}
-            assert not target & sources
-            self.shears.append({'frobenius_power':d,
-                                'left_cells':[src[i] for i in piece['is']],
-                                'right_cells':[dst[j] for j in piece['js']],
-                                'target_cells':sorted({dst[k] for i,j,k in piece['terms']}),
-                                'coefficient_targets':{
-                                    h:dst[d*(piece['is'][0]+h)+piece['js'][0]]
-                                    for h in range(len(piece['is'])+len(piece['js'])-1)
-                                    if m <= d*(piece['is'][0]+h)+piece['js'][0] < n},
-                                'terms':[(dst[k],src[i],dst[j]) for i,j,k in piece['terms']],
-                                'rank':piece['rank'],
-                                'method':piece['method'],
-                                'evaluation_rank':piece['evaluation_rank']})
-            self.cost['products'] += piece['rank']
-            self.cost[f'{"power_self" if constant_b0 else "toeplitz"}_products_d{d}'] += piece['rank']
-            self.cost['naive_products'] += len(piece['terms'])
-            self.cost['pieces'] += 1
-            self.cost['output_vector_nonzeros_upper'] += piece['rank']*len({k for i,j,k in piece['terms']})
-            self.cost['input_form_terms_upper'] += piece['rank']*(len(piece['is'])+len(piece['js']))
-            for i,j,k in piece['terms']:
-                op = (dst[k],src[i],dst[j],d)
-                self.operations.append(op)
-                data[dst[k]] ^= jm.mul(jm.power(data[src[i]],d), data[dst[j]])
-        if constant_b0:
-            for i in range(1,(n-1)//d+1):
-                k = d*i
-                if m <= k < n:
-                    self.operations.append((dst[k],src[i],None,d))
-                    data[dst[k]] ^= jm.power(data[src[i]],d)
-                    self.cost['linear_terms'] += 1
-
-    def toeplitz(self,data,src,dst,d):
-        n = len(dst)
-        if n <= d:
-            return
-        _,m = toeplitz_plan(n,d)
-        self.toeplitz(data,src,dst[m:],d)
-        self.shear(data,src,dst,n,d,m=m)
-        self.toeplitz(data,src,dst[:m],d)
-
-    def power_map(self,data,dst,d):
-        n = len(dst)
-        if n <= d:
-            return
-        _,m = power_plan(n,d)
-        self.toeplitz(data,dst,dst[m:],d)
-        self.shear(data,dst,dst,n,d,constant_b0=True,m=m)
-        self.power_map(data,dst[:m],d)
-
-    def reciprocal(self,data):
-        d, exponent = 2,1
-        while exponent < len(data)-1:
-            self.power_map(data,list(range(len(data))),d)
-            exponent *= 1+d
-            d *= d
-
-    def undo(self,data):
-        for k,i,j,d in reversed(self.operations):
-            data[k] ^= jm.power(data[i],d) if j is None else jm.mul(jm.power(data[i],d),data[j])
