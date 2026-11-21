@@ -30,3 +30,5 @@ Run from this worktree with the Linux Python 3.13 environment and the pinned bun
 ```sh
 python src/invsqrt/INV-76/solution.py --config src/invsqrt/INV-76/configs/notebook-v25.json --generator-bundle /path/to/generators.zip
 ```
+
+The build calls the [standalone PP-006 method](postprocessing/PP-006/DESCRIPTION.md) from this experiment's postprocessing directory. The method can also be run separately using the linked CLI instructions.

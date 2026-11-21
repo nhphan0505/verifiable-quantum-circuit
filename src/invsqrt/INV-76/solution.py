@@ -11,11 +11,11 @@ build_only provenance after the required digest comparisons.
 import argparse
 import hashlib
 from importlib.metadata import version
+from importlib.util import module_from_spec, spec_from_file_location
 import json
 import os
 from pathlib import Path
 import platform
-import shutil
 import subprocess
 import sys
 import tempfile
@@ -27,6 +27,7 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
 TRACK = HERE.parent.name
 EXPERIMENT = HERE.name
+POSTPROCESS_SOURCE = HERE / "postprocessing" / "PP-006" / "solution.py"
 GENERATOR_SHA = "2715ee84ce70d59c2e799ee397e11b253e9822e54fbe76fda51a8f274e555496"
 
 
@@ -51,7 +52,7 @@ def source_snapshot(config_path):
         if len(gitdir) > 2 and gitdir[1] == ":":
             git = "git.exe"
     commit = subprocess.check_output([git, "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
-    for path in (Path(__file__).resolve(), config_path):
+    for path in (Path(__file__).resolve(), config_path, POSTPROCESS_SOURCE):
         relative = path.relative_to(ROOT).as_posix()
         committed = subprocess.check_output([git, "show", f"{commit}:{relative}"], cwd=ROOT)
         if path.read_bytes() != committed:
@@ -82,15 +83,11 @@ def build_generator(bundle, workspace, task):
     return build
 
 
-def publish(artifact, output):
-    # Exclusive creation also prevents two concurrent builds from replacing each other.
-    with artifact.open("rb") as source, output.open("xb") as target:
-        try:
-            shutil.copyfileobj(source, target, 1 << 20)
-        except BaseException:
-            target.close()
-            output.unlink()
-            raise
+def load_postprocess():
+    spec = spec_from_file_location("pp_006", POSTPROCESS_SOURCE)
+    module = module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
 def record_build(config_path, commit, output, component_hashes, inputs):
@@ -118,6 +115,8 @@ def record_build(config_path, commit, output, component_hashes, inputs):
             "input_sha256": inputs,
         },
         "component_sha256": component_hashes,
+        "postprocess_source": POSTPROCESS_SOURCE.relative_to(ROOT).as_posix(),
+        "postprocess_source_sha256": digest(POSTPROCESS_SOURCE),
         "build_run": None,
     }
     (run / "provenance.json").write_text(json.dumps(provenance, indent=2) + "\n", encoding="utf-8")
@@ -128,7 +127,6 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", required=True, type=Path)
     parser.add_argument("--generator-bundle", required=True, type=Path, help="Pinned Tony Li v2 ZIP")
-    add_track_arguments(parser)
     args = parser.parse_args()
     config_path = args.config.resolve(strict=True)
     if config_path.parent != HERE / "configs" or config_path.suffix != ".json":
@@ -144,8 +142,11 @@ def main():
     with tempfile.TemporaryDirectory(prefix="orecord-v25-") as scratch:
         workspace = Path(scratch)
         base = build_generator(args.generator_bundle.resolve(strict=True), workspace, GENERATOR_TASK)
-        artifact, hashes, inputs = postprocess(base, workspace, config, args)
-        publish(artifact, output)
+        if config["postprocess"] != "verify-and-pass-through":
+            raise ValueError("Expected verify-and-pass-through for the v25 submission")
+        circuit = base / (GENERATOR_TASK + EXTENSION)
+        hashes = {circuit.name: load_postprocess().apply(circuit, output)}
+    inputs = {}
     inputs["generator_bundle"] = GENERATOR_SHA
     inputs["upstream_kickmix_sdk"] = "c66b3216c4029e0cdfd09054306aa0feadf53ab2f50c1164e37f752874e5005e"
     record_build(config_path, commit, output, hashes, inputs)
@@ -154,19 +155,6 @@ def main():
 EXTENSION = ".kmb"
 GENERATOR_TASK = "invsqrt"
 PACKAGE_NAMES = ("numpy",)
-EXPECTED_CIRCUIT = "68eb8c13ebc75c5e443ed5a8c6357c2c77e6676c499ed1324108bf025faf1489"
-
-
-def add_track_arguments(parser):
-    """This task needs only the generator bundle."""
-
-
-def postprocess(base, workspace, config, args):
-    """Validate and return the exact generated circuit without rewriting it."""
-    if config["postprocess"] != "verify-and-pass-through":
-        raise ValueError("Expected verify-and-pass-through for the v25 submission")
-    circuit = base / (GENERATOR_TASK + EXTENSION)
-    return circuit, {circuit.name: require_digest(circuit, EXPECTED_CIRCUIT)}, {}
 
 
 if __name__ == "__main__":
