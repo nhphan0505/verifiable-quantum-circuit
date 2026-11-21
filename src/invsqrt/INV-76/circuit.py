@@ -1,8 +1,13 @@
-"""Build the inverse-square-root interpolation circuit from notebook cells 3–5.
+"""
+Interpolation and reversible phase cleanup.
 
-Adapted from orecord, Apache-2.0. Staged flags normalize the address,
-interpolation reuses coefficient scratch, and HMR cleanup reconstructs
-conditional phases before temporary wires are released.
+The 22-qubit input is normalized by the shared leading-bit chain and staged shifts. The parity and seven address bits select one of 256 coefficient rows. The builder splits the quadratic contribution into coarse and residual pieces, interpolates with the fixed-width updates in InvSqrtCfg, and reuses the lookup and arithmetic workspace. _adaptive_lookup changes lookup realization according to the table pattern. _folded_gadd and _shift_pruned keep the low and high arithmetic paths reversible.
+
+The fixed integer table and rational phase angles preserve the upstream approximation. Scratch is cleared by inverse arithmetic or HMR. _demolish returns measurement outcomes to _repair_anf for address-dependent phase correction. The last joint top-normalization repair handles the parity and pending-measurement cases before the flags are freed. Correctness requires input restoration and phase within the official verifier tolerance across the 3,133,452-input domain.
+
+Run solution.py with configs/notebook-native.json in the repository Python
+3.13 environment. The output is checked separately by the official verifier.
+See NOTICE.md for upstream attribution.
 """
 
 from fractions import Fraction

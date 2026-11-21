@@ -1,46 +1,30 @@
-"""INV-76 standalone builder for Kaggle notebook v25 (script 372019840).
+"""Build this experiment with interpolation and reversible phase cleanup.
 
-Assemble v90 KMX with the v50 divider update and fitted rotation exponents. The divider retains the low carry in both directions, rotates in the even remainder and updates the leftover bit. The q29 lend changes the carry schedule and restores q29 after measurement. The phase repair saves the q38 measurement in b1800, clears b100, emits four controlled-Z gates immediately and delays the fifth until the q29 product is available. Preserve instruction order, phase controls and complete uncomputation on the original 3,133,452-input domain. Expected width is 39 qubits.
-
-Uses the pinned external Tony Li v2 archive and the notebook lineage
-credited in DESCRIPTION.md. Run on x86-64 Linux/WSL with Python 3.13.
-The default notebook-native config builds from the checked-in circuit.py. Historical scored configs accept --generator-bundle. Writes the repository artifact and
-build_only provenance after the required digest comparisons.
+The notebook-native config runs circuit.py from a committed checkout. Use
+Python 3.13 and requirements.txt. The output and build-only provenance use
+repository paths. Prior config files are retained for historical run links.
 """
-
 import argparse
 import hashlib
 from importlib.metadata import version
-from importlib.util import module_from_spec, spec_from_file_location
 import json
 import os
 from pathlib import Path
 import platform
 import subprocess
 import sys
-import tempfile
 from datetime import datetime, timezone
 import uuid
-import zipfile
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
 TRACK = HERE.parent.name
 EXPERIMENT = HERE.name
-POSTPROCESS_SOURCE = HERE / "postprocessing" / "PP-006" / "solution.py"
-GENERATOR_SHA = "2715ee84ce70d59c2e799ee397e11b253e9822e54fbe76fda51a8f274e555496"
 
 
 def digest(path):
     with path.open("rb") as stream:
         return hashlib.file_digest(stream, "sha256").hexdigest()
-
-
-def require_digest(path, expected):
-    actual = digest(path)
-    if actual != expected:
-        raise ValueError(f"{path.name}: SHA-256 {actual}, expected {expected}")
-    return actual
 
 
 def source_snapshot(config_path, sources):
@@ -60,37 +44,7 @@ def source_snapshot(config_path, sources):
     return commit
 
 
-def build_generator(bundle, workspace, task):
-    # Verifying the archive first pins every executable, source file and notice.
-    require_digest(bundle, GENERATOR_SHA)
-    source = workspace / "source"
-    with zipfile.ZipFile(bundle) as archive:
-        # Only extract members needed by the selected release build.
-        names = [
-            name for name in archive.namelist()
-            if name in {"expected_sha256.json", "generate.py"}
-            or name.startswith((task + "/", "runtime/kickmix/"))
-        ]
-        archive.extractall(source, members=names)
-    child_env = os.environ.copy()
-    child_env.pop("PYTHONPATH", None)
-    build = workspace / "generated"
-    subprocess.run(
-        [sys.executable, str(source / "generate.py"), task, "--output", str(build)],
-        check=True,
-        env=child_env,
-    )
-    return build
-
-
-def load_postprocess():
-    spec = spec_from_file_location("pp_006", POSTPROCESS_SOURCE)
-    module = module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
-
-
-def record_build(config_path, commit, output, component_hashes, inputs, sources):
+def record_build(config_path, commit, output, component_hashes, sources):
     now = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     run = ROOT / "results" / TRACK / EXPERIMENT / config_path.stem / "build_only" / (
         f"{now}-build-{uuid.uuid4().hex[:8]}"
@@ -112,7 +66,6 @@ def record_build(config_path, commit, output, component_hashes, inputs, sources)
             "python": platform.python_version(),
             "platform": platform.platform(),
             "packages": {name: version(name) for name in PACKAGE_NAMES},
-            "input_sha256": inputs,
         },
         "component_sha256": component_hashes,
         "build_dependencies": {path.relative_to(ROOT).as_posix(): digest(path) for path in sources},
@@ -125,50 +78,33 @@ def record_build(config_path, commit, output, component_hashes, inputs, sources)
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, default=HERE / "configs" / "notebook-native.json")
-    parser.add_argument("--generator-bundle", type=Path, help="Pinned Tony Li v2 ZIP for historical release configs")
     args = parser.parse_args()
     config_path = args.config.resolve(strict=True)
-    if config_path.parent != HERE / "configs" or config_path.suffix != ".json":
-        parser.error("--config must identify a JSON file inside this experiment's configs directory")
+    if config_path != HERE / "configs" / "notebook-native.json":
+        parser.error("Only configs/notebook-native.json is active. Other configs are historical.")
     if sys.version_info[:2] != (3, 13):
         parser.error("Use the repository Python 3.13 environment")
     config = json.loads(config_path.read_text(encoding="utf-8"))
-    native = config.get("builder") == "notebook-native"
-    if not native and (args.generator_bundle is None or sys.platform != "linux" or platform.machine() != "x86_64"):
-        parser.error("Historical release configs require --generator-bundle on x86-64 Linux")
     output = ROOT / "artifacts" / TRACK / EXPERIMENT / (config_path.stem + EXTENSION)
     if output.exists():
         raise FileExistsError(output)
-    sources = native_dependencies() if native else [POSTPROCESS_SOURCE]
+    sources = native_dependencies()
     commit = source_snapshot(config_path, sources)
     output.parent.mkdir(parents=True, exist_ok=True)
-    with tempfile.TemporaryDirectory(prefix="orecord-v25-") as scratch:
-        workspace = Path(scratch)
-        if native:
-            hashes = build_native(output, workspace, config)
-            inputs = {}
-        else:
-            base = build_generator(args.generator_bundle.resolve(strict=True), workspace, GENERATOR_TASK)
-            if config["postprocess"] != "verify-and-pass-through":
-                raise ValueError("Expected verify-and-pass-through for the v25 submission")
-            circuit = base / (GENERATOR_TASK + EXTENSION)
-            hashes = {circuit.name: load_postprocess().apply(circuit, output)}
-            inputs = {}
-            inputs["generator_bundle"] = GENERATOR_SHA
-            inputs["upstream_kickmix_sdk"] = "c66b3216c4029e0cdfd09054306aa0feadf53ab2f50c1164e37f752874e5005e"
-    record_build(config_path, commit, output, hashes, inputs, sources)
+    hashes = build_native(output)
+    record_build(config_path, commit, output, hashes, sources)
 
 
 EXTENSION = ".kmb"
 GENERATOR_TASK = "invsqrt"
-PACKAGE_NAMES = ("numpy",)
+PACKAGE_NAMES = ("kickmix", "numpy")
 
 
 def native_dependencies():
     return [HERE / "circuit.py"]
 
 
-def build_native(output, workspace, config):
+def build_native(output):
     from circuit import build_circuit
 
     staged = output.parent / f".{output.name}.{uuid.uuid4().hex}.tmp"
