@@ -6,7 +6,7 @@ Mỗi tiêu đề bên dưới trùng H1 của mô tả và title GitHub Issue. 
 | --- | --- | --- |
 | DFT-68 | [[DFT-68] Tái dựng 15 loader DFTHC bằng plan Boolean và dữ liệu factorization cố định](DFT-68/DESCRIPTION.md) | [#68](https://github.com/nhphan0505/verifiable-quantum-circuit/issues/68) |
 | DFT-BASELINE | [[DFT-BASELINE] Tải góc Givens theo batch 8 word bằng QROM và XOR delta](DFT-BASELINE/DESCRIPTION.md) | Chưa tạo |
-| DFT-78 | [[DFT-78] Port the v25 chemistry generator and reproduce the loader swap and coefficient refit](DFT-78/DESCRIPTION.md) | [#78](https://github.com/nhphan0505/verifiable-quantum-circuit/issues/78) |
+| DFT-78 | [[DFT-78] Build DFTHC angle loaders with pebbled ANF from declared 7-bit fit inputs](DFT-78/DESCRIPTION.md) | [#78](https://github.com/nhphan0505/verifiable-quantum-circuit/issues/78) |
 
 Tiêu đề phải nêu phần xử lý, cách làm/thay đổi và phạm vi phân biệt với các hướng khác. Không dùng tên chung như “tối ưu baseline” hay chỉ ghi tên file. Quy tắc và ví dụ: [CONTRIBUTING.md](../../CONTRIBUTING.md).
 

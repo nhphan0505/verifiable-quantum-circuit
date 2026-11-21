@@ -1,8 +1,13 @@
-"""Synthesize DFTHC ANGLE loaders using the notebook ANF generator.
+"""
+Pebbled anf lookup from declared numeric inputs.
 
-Adapted from orecord, Apache-2.0. Batches implement XOR deltas on dirty
-targets and uncompute prefix products through the Kickmix builder. The
-tracked arrays are Tony Li v2 fit parameters, including angle-word edits.
+The build reads the frozen Tony Li v2 fit as decimal tables, with explicit dtypes and dimensions. The angle word table is the upstream 7-bit input. The loader generator validates and applies the separate row/column/value overrides. It splits the 75 columns into batches of five and computes XOR deltas between successive batches. A packed MÃ¶bius transform over GF(2) produces the ANF for each delta. Prefix products are pebbled into scratch, reused across fan-out, and uncomputed by measurement with phase correction. The first batch XORs its absolute words into the target.
+
+Each loader must preserve the selection register, leave scratch clear, and XOR the appropriate delta even when the target begins dirty. The compiler checks the ANF on all legal addresses while choosing padding values for unreachable ones. It writes the matching NPZ using deterministic NPY/ZIP metadata. The frozen fit came from upstream timing-dependent numerical fitting and quantization. This experiment implements table validation, overrides and loader synthesis. The FCIDUMP-based optimizer that originally obtained U, W and H2_I is outside the implementation.
+
+Run solution.py with configs/notebook-native.json in the repository Python
+3.13 environment. The output is checked separately by the official verifier.
+See NOTICE.md for upstream attribution.
 """
 
 from functools import lru_cache
@@ -15,7 +20,38 @@ import kickmix as km
 import numpy as np
 
 DATA = Path(__file__).resolve().parent / "data"
-ARRAY_NAMES = ("H1_I", "H2_I", "Hsym_lower", "U", "W", "angle_words", "tree_edges")
+ARRAY_LAYOUT = {
+    "H1_I": ("<f4", ()),
+    "H2_I": ("<f8", (9, 46)),
+    "Hsym_lower": ("<f4", (2926,)),
+    "U": ("<f8", (9, 127, 76)),
+    "W": ("<f8", (9, 127, 46)),
+    "angle_words": ("<i8", (1219, 75)),
+    "tree_edges": ("<i8", (75, 2)),
+}
+
+
+def load_fit(brot):
+    """Read the declared upstream fit and apply its published word overrides."""
+    arrays = {}
+    for name, (dtype, shape) in ARRAY_LAYOUT.items():
+        table = np.loadtxt(DATA / f"{name}.tsv", dtype=dtype, ndmin=2)
+        columns = shape[-1] if len(shape) > 1 else 1
+        if table.shape[1] != columns:
+            raise ValueError(f"Unexpected column count in {name}.tsv")
+        arrays[name] = table.reshape(shape)
+    words = arrays["angle_words"]
+    with (DATA / "angle_word_edits.tsv").open(encoding="ascii") as edits:
+        for lineno, line in enumerate(edits, 1):
+            fields = line.partition("#")[0].split()
+            if not fields:
+                continue
+            row, column, value = map(int, fields)
+            if not (0 <= row < words.shape[0] and 0 <= column < words.shape[1]
+                    and 0 <= value < 1 << brot):
+                raise ValueError(f"Invalid angle override on line {lineno}")
+            words[row, column] = value
+    return arrays
 
 
 def make_deltas(words, j):
@@ -122,7 +158,7 @@ def qrom_anf(delta, brot):
 
 def build_components(output, *, brot=7, batch_size=5):
     """Synthesize ANGLE loaders and write the matching numerical factorization."""
-    arrays = {name: np.load(DATA / (name + ".npy"), allow_pickle=False) for name in ARRAY_NAMES}
+    arrays = load_fit(brot)
     words = arrays["angle_words"]
     if brot != 7 or batch_size != 5 or words.min() < 0 or words.max() >= 1 << brot:
         raise ValueError("Use the committed 7-bit chemistry words in batches of five")
