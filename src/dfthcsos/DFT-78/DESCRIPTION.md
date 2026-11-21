@@ -32,3 +32,5 @@ python src/dfthcsos/DFT-78/solution.py --config src/dfthcsos/DFT-78/configs/note
 ```
 
 Use the generated config with only the generator bundle to measure the base release. The notebook-v25 config exercises both the chemistry swap and the refit.
+
+The build calls the [standalone PP-008 method](postprocessing/PP-008/DESCRIPTION.md) from this experiment's postprocessing directory. The method can also be run separately using the linked CLI instructions.
