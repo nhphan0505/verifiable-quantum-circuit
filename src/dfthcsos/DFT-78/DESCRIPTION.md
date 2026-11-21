@@ -22,3 +22,13 @@ The [Rithvik milestone dataset](https://www.kaggle.com/datasets/rithvikredrouthu
 ## Reproduction status
 
 Local grading pending.
+
+## Build
+
+Run from this worktree with the Linux Python 3.13 environment and the pinned bundle.
+
+```sh
+python src/dfthcsos/DFT-78/solution.py --config src/dfthcsos/DFT-78/configs/notebook-v25.json --generator-bundle /path/to/generators.zip --milestone-bundle /path/to/milestone.zip --verifier-data /path/to/official/dfthcsos
+```
+
+Use the generated config with only the generator bundle to measure the base release. The notebook-v25 config exercises both the chemistry swap and the refit.
