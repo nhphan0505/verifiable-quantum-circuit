@@ -16,7 +16,7 @@ Test exact output, hash mismatch, input preservation and occupied output refusal
 
 ## Status
 
-Awaiting implementation and verification.
+The original INV-76 KMB was unavailable at its relocated checkout, so its pinned upstream generator was rerun in temporary space and matched the recorded build digest. The standalone API at source commit fea71662176095a76d0a3b4dfbe8421887c13ef7 produced exactly the input bytes. Both input and output passed kickmix-engine 0.6.0 smoke with four threads and --max-x 4096 --shots-per-x 1 and had equal verifier costs. Full grading has not been run. Temporary outputs were removed.
 
 ## Usage
 
