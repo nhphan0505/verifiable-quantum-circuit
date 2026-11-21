@@ -1,0 +1,59 @@
+{
+  "track": "dfthcsos",
+  "experiment_id": "DFT-78",
+  "config_name": "notebook-v25",
+  "source_commit": "4a40e5407ed6303db99f12547f04fbf5f751284f",
+  "source_path": "src/dfthcsos/DFT-78/solution.py",
+  "source_sha256": "cf35b071a60c462bb1852d299d76d7732ab81d206ccd8749297492e63d41d9df",
+  "build_config_path": "src/dfthcsos/DFT-78/configs/notebook-v25.json",
+  "build_config_sha256": "dea6a5bf9e9abfc19e7a4128babe52d70f549cd831626aa431a69b6994cbcb60",
+  "artifact_path": "artifacts/dfthcsos/DFT-78/notebook-v25.zip",
+  "artifact_sha256": "bc7f8aa85975c5650ea2f67f7a2c49f6f559069447b34e3c945fae0eb1661713",
+  "build_command": [
+    "/mnt/d/verifiable-quantum-circuit/.venv-engine/bin/python",
+    "/mnt/c/Users/ASUS/.codex/worktrees/orecord-dfthcsos/verifiable-quantum-circuit/src/dfthcsos/DFT-78/solution.py",
+    "--config",
+    "/mnt/c/Users/ASUS/.codex/worktrees/orecord-dfthcsos/verifiable-quantum-circuit/src/dfthcsos/DFT-78/configs/notebook-v25.json",
+    "--generator-bundle",
+    "/mnt/c/Users/ASUS/AppData/Local/Temp/codex-orecord-v25-01a1fc5b/generators.zip",
+    "--milestone-bundle",
+    "/mnt/c/Users/ASUS/AppData/Local/Temp/codex-orecord-v25-01a1fc5b/milestone.zip",
+    "--verifier-data",
+    "/mnt/d/verifiable-quantum-circuit/verifiers/dfthcsos"
+  ],
+  "environment": {
+    "python": "3.13.18",
+    "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "kickmix": "1.0.0"
+    },
+    "input_sha256": {
+      "milestone_pack": "b4e5beedeaa827c7a240bc23df40b9a8f84d87f24c36efcdf5106f4df38ecde9",
+      "fcidump": "e5a48af746fd075026dec9e8f5df2d363802a121e8c53af9a0b984bde695e1bd",
+      "fixed_shifts": "7b7facf63fe35a9d9d3d00787ffdb700c863fa845fe4724d7f7c54778151cd87",
+      "generator_bundle": "2715ee84ce70d59c2e799ee397e11b253e9822e54fbe76fda51a8f274e555496",
+      "upstream_kickmix_sdk": "c66b3216c4029e0cdfd09054306aa0feadf53ab2f50c1164e37f752874e5005e"
+    }
+  },
+  "component_sha256": {
+    "submission.npz": "39a86eb5b3c5b22ccd217c63e3147545ef213faceca8961fda0672fa2ab8bbff",
+    "angle_k_0.kmb": "8df36485e020b9e30353142a694b69018dc7defdf81847a6b405cd0d9b152402",
+    "angle_k_1.kmb": "b84a398bc050db8dd8b4caa5a73ebee8a1ff262453ce9397671775718863f492",
+    "angle_k_2.kmb": "8b22faa7cb7ed947a5cfdab52a302d622fc4130c4b0812d7ffaa54fd3b034f88",
+    "angle_k_3.kmb": "8a241e9e0884bc32433ffd873afef74d7857198f5b34da217641de15578e7a6e",
+    "angle_k_4.kmb": "517985499e517440036e6e080561e34e45364472ac86c19ef1f1472c990c6f88",
+    "angle_k_5.kmb": "0718ed8e096bb8947de07341240448ba2b1ae399801bbc9426ab5e9fa8d789b4",
+    "angle_k_6.kmb": "e476a76381494e6be9a4e046dfa5eaac06eda33a2251c59458d861e26d89a392",
+    "angle_k_7.kmb": "18da4cf5c0c67ca2f169abea481c1aa6ba26db9d3e2fb79263267f7ca5d65dff",
+    "angle_k_8.kmb": "005df3b85f43b06096226f4736fee0f6613d0737386a874e4aadfa83b6c68ec6",
+    "angle_k_9.kmb": "085ec2716e8980aa5dfc36fe3131497f71ef7fb1a463311c143575c1d997a437",
+    "angle_k_10.kmb": "706df9b9dd42586bf78eda4b671ea192131ef0a93ae64cb3054125def250ce95",
+    "angle_k_11.kmb": "5ac10d8f786b6e54f161ee52c7b6a3b42f6b3b76b06edbb9bb248f3f84217097",
+    "angle_k_12.kmb": "6e85a07768f1d9c2aadea1f5cf4f6013678a190f2f96c99c008f0b9d5cbf27b7",
+    "angle_k_13.kmb": "d4ff6058fe7b36a9b21e21d7f5b591966b44c5dd95ce56de6127f54042a2eac9",
+    "angle_k_14.kmb": "022fcb8d0b2ba892c3dfecb77d9f782f78763295d093d113a29859c811166a9d"
+  },
+  "build_run": null
+}
