@@ -1,0 +1,115 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-77",
+  "config_name": "notebook-native",
+  "run_id": "20261121T092307Z-local-smoke-13d495",
+  "owner": "Cheemshoang",
+  "verification_level": "smoke",
+  "status": "PASS",
+  "python": "3.13.18 (main, Nov 11 2026, 00:17:48) [Clang 23.1.3 ]",
+  "packages": {
+    "kickmix": "1.0.0",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "kickmix-engine": "0.6.0"
+  },
+  "upload_artifact": {
+    "name": "notebook-native.kmb",
+    "sha256": "e9d0fad46cc7eb3a7ed2901e8003cb9ce476df0bebc48e1cfbb3a844fd6ca9e5",
+    "size_bytes": 886048038
+  },
+  "artifact_path": "artifacts/dqi/DQI-77/notebook-native.kmb",
+  "verifier_sha256": {
+    "verifiers/dqi/verify_submission_dqi.py": "f14274bc0943fb9769ddb01131be6063191a15009fe1caf1d4bdd9fd25194e65",
+    "verifiers/dqi/__init__.py": "01c870aa9763f4e4357fc6654bff1d3296cec995bd0943f87b4a48946ada5b40",
+    "verifiers/dqi/dqi_reference_circuit.py": "2b8e1b80a806157c333a7e308eaf2499ee09de499efbc05875202c327959959e"
+  },
+  "timeout_seconds": null,
+  "engine": {
+    "name": "kickmix-engine",
+    "version": "0.6.0",
+    "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "kernel": {
+      "arch": "x86_64",
+      "os": "linux",
+      "compiled": [
+        "baseline",
+        "avx2",
+        "avx512"
+      ],
+      "available": [
+        "baseline",
+        "avx2"
+      ],
+      "features": {
+        "sse4.2": true,
+        "popcnt": true,
+        "avx": true,
+        "avx2": true,
+        "bmi1": true,
+        "bmi2": true,
+        "fma": true,
+        "lzcnt": true,
+        "movbe": true,
+        "avx512f": false,
+        "avx512bw": false,
+        "avx512vl": false,
+        "avx512dq": false
+      },
+      "kernel_features": {
+        "baseline": [],
+        "avx2": [
+          "avx2",
+          "bmi1",
+          "bmi2",
+          "fma",
+          "lzcnt",
+          "movbe"
+        ],
+        "avx512": [
+          "avx2",
+          "bmi1",
+          "bmi2",
+          "fma",
+          "lzcnt",
+          "movbe",
+          "avx512f",
+          "avx512bw",
+          "avx512vl",
+          "avx512dq"
+        ]
+      },
+      "env_var": "KICKMIX_ENGINE_KERNEL",
+      "env_request": null,
+      "kernel": "avx2",
+      "selected_by": "auto",
+      "kernel_requires": [
+        "avx2",
+        "bmi1",
+        "bmi2",
+        "fma",
+        "lzcnt",
+        "movbe"
+      ]
+    }
+  },
+  "verify_command": [
+    "/mnt/d/verifiable-quantum-circuit/.venv-engine/bin/python",
+    "-m",
+    "kickmix_engine",
+    "verify",
+    "dqi",
+    "/tmp/orecord-review-verified-1oy40mvu/smoke-DQI-77/artifacts/dqi/DQI-77/notebook-native.kmb",
+    "--verifier",
+    "/tmp/orecord-review-verified-1oy40mvu/smoke-DQI-77/verifiers/dqi/verify_submission_dqi.py",
+    "--threads",
+    "4",
+    "--num-shots",
+    "4096"
+  ],
+  "submission_sha256": {
+    "notebook-native.kmb": "e9d0fad46cc7eb3a7ed2901e8003cb9ce476df0bebc48e1cfbb3a844fd6ca9e5"
+  },
+  "exit_code": 0,
+  "finished_at_utc": "2026-11-21T09:23:21.861713+00:00"
+}

@@ -1,0 +1,20 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-77",
+  "config_name": "notebook-native",
+  "mode": "smoke",
+  "command": [
+    "/mnt/d/verifiable-quantum-circuit/.venv-engine/bin/python",
+    "-m",
+    "kickmix_engine",
+    "verify",
+    "dqi",
+    "/tmp/orecord-review-verified-1oy40mvu/smoke-DQI-77/artifacts/dqi/DQI-77/notebook-native.kmb",
+    "--verifier",
+    "/tmp/orecord-review-verified-1oy40mvu/smoke-DQI-77/verifiers/dqi/verify_submission_dqi.py",
+    "--threads",
+    "4",
+    "--num-shots",
+    "4096"
+  ]
+}

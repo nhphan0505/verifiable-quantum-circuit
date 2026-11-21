@@ -25,3 +25,11 @@ Run the repository Python 3.13 environment with requirements.txt and the [active
     python src/dqi/DQI-77/solution.py --config src/dqi/DQI-77/configs/notebook-native.json
 
 The active build compiles directly from the checkout. The former bundle configs are retained as archival names for existing results. Their original source/config snapshots remain in Git. Build records identify the actual source used. The verifier is a separate step.
+
+## Kết quả kiểm chứng
+
+A clean GitHub checkout of f1e272a4ccdf7e23b8b63b173bbcac0e2b52ca5d reproduced the native artifact SHA-256 e9d0fad46cc7eb3a7ed2901e8003cb9ce476df0bebc48e1cfbb3a844fd6ca9e5. kickmix-engine 0.6.0 smoke passed with 4,096 verified shots. The verifier reported 0 value errors and 0 phase errors. Full grading and independent review of this revision are pending.
+
+- [Build provenance](../../../results/dqi/DQI-77/notebook-native/build_only/20261121T092255Z-build-8c164fff/provenance.json)
+- [Smoke verifier](../../../results/dqi/DQI-77/notebook-native/smoke/20261121T092307Z-local-smoke-13d495/verifier.json)
+- [Smoke provenance](../../../results/dqi/DQI-77/notebook-native/smoke/20261121T092307Z-local-smoke-13d495/provenance.json)
