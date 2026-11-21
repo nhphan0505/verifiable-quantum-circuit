@@ -34,3 +34,13 @@ python src/dfthcsos/DFT-78/solution.py --config src/dfthcsos/DFT-78/configs/note
 Use the generated config with only the generator bundle to measure the base release. The notebook-v25 config exercises both the chemistry swap and the refit.
 
 The build calls the [standalone PP-008 method](postprocessing/PP-008/DESCRIPTION.md) from this experiment's postprocessing directory. The method can also be run separately using the linked CLI instructions.
+
+## Repository-native notebook generator
+
+The native config calls the notebook ANF/pebbling generator. The attachment references an external femoco_thc_r5.npz. This port uses Tony Li v2's published numeric 7-bit factorization with five words per batch and its angle-word edits. The loader gates are synthesized from the numeric words.
+
+Attached notebook SHA-256 1406a547dae8d22b2171e019d5754c2724ef97ede01b07b0f786308acf365c8a.
+
+    python src/dfthcsos/DFT-78/solution.py --config src/dfthcsos/DFT-78/configs/notebook-native.json
+
+The native build reads its generator and inputs from the checkout. Historical release configs remain available with their original bundle arguments. The native output is a separate artifact with its own provenance and requires local grading.

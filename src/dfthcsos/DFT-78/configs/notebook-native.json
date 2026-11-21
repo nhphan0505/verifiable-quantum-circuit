@@ -1,0 +1,5 @@
+{
+  "builder": "notebook-native",
+  "brot": 7,
+  "batch_size": 5
+}
