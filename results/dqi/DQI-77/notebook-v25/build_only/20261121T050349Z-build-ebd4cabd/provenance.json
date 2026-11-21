@@ -1,0 +1,35 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-77",
+  "config_name": "notebook-v25",
+  "source_commit": "b5bd13ae9d134d40022d98a452076bfcd05231d0",
+  "source_path": "src/dqi/DQI-77/solution.py",
+  "source_sha256": "583e3ea709c832111a2cb3ef1baeb5415d4f3e6be98c27eb18fcd3a7324f4d4c",
+  "build_config_path": "src/dqi/DQI-77/configs/notebook-v25.json",
+  "build_config_sha256": "5745c1e5c991868afb0591433f494a1aa5ef03a465d98158b5e4c05eb552b53d",
+  "artifact_path": "artifacts/dqi/DQI-77/notebook-v25.kmb",
+  "artifact_sha256": "4b5721411adc239f61fc11c773a2358b75dfe7cb15586efae4f0459c77d77e52",
+  "build_command": [
+    "/mnt/d/verifiable-quantum-circuit/.venv-engine/bin/python",
+    "/mnt/c/Users/ASUS/.codex/worktrees/orecord-dqi/verifiable-quantum-circuit/src/dqi/DQI-77/solution.py",
+    "--config",
+    "/mnt/c/Users/ASUS/.codex/worktrees/orecord-dqi/verifiable-quantum-circuit/src/dqi/DQI-77/configs/notebook-v25.json",
+    "--generator-bundle",
+    "/mnt/c/Users/ASUS/AppData/Local/Temp/codex-orecord-v25-01a1fc5b/generators.zip"
+  ],
+  "environment": {
+    "python": "3.13.18",
+    "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "packages": {
+      "numpy": "2.5.4"
+    },
+    "input_sha256": {
+      "generator_bundle": "2715ee84ce70d59c2e799ee397e11b253e9822e54fbe76fda51a8f274e555496",
+      "upstream_kickmix_sdk": "c66b3216c4029e0cdfd09054306aa0feadf53ab2f50c1164e37f752874e5005e"
+    }
+  },
+  "component_sha256": {
+    "dqi.kmb": "4b5721411adc239f61fc11c773a2358b75dfe7cb15586efae4f0459c77d77e52"
+  },
+  "build_run": null
+}
