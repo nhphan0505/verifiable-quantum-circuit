@@ -30,3 +30,5 @@ Run from this worktree with the Linux Python 3.13 environment and the pinned bun
 ```sh
 python src/dqi/DQI-77/solution.py --config src/dqi/DQI-77/configs/notebook-v25.json --generator-bundle /path/to/generators.zip
 ```
+
+The build calls the [standalone PP-007 method](postprocessing/PP-007/DESCRIPTION.md) from this experiment's postprocessing directory. The method can also be run separately using the linked CLI instructions.
