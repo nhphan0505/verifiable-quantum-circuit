@@ -32,3 +32,13 @@ python src/dqi/DQI-77/solution.py --config src/dqi/DQI-77/configs/notebook-v25.j
 ```
 
 The build calls the [standalone PP-007 method](postprocessing/PP-007/DESCRIPTION.md) from this experiment's postprocessing directory. The method can also be run separately using the linked CLI instructions.
+
+## Repository-native notebook generator
+
+The native config uses the public merged J-fraction generator named in the notebook, from [Ahmed Berat Ozer's source dataset](https://www.kaggle.com/datasets/ahmedberatozer/df-thc-group-compression-factorization). The notebook's scored cell used the later Tony Li D16 release, whose inherited stages are distributed as KMX.
+
+Attached notebook SHA-256 1406a547dae8d22b2171e019d5754c2724ef97ede01b07b0f786308acf365c8a.
+
+    python src/dqi/DQI-77/solution.py --config src/dqi/DQI-77/configs/notebook-native.json
+
+The native build reads its generator and inputs from the checkout. Historical release configs remain available with their original bundle arguments. The native output is a separate artifact with its own provenance and requires local grading.

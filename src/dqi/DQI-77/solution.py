@@ -4,7 +4,7 @@ Assemble the source stages in their declared order. The selector maps received b
 
 Uses the pinned external Tony Li v2 archive and the notebook lineage
 credited in DESCRIPTION.md. Run on x86-64 Linux/WSL with Python 3.13.
-Pass --config and --generator-bundle. Writes the repository artifact and
+The default notebook-native config builds from the checked-in circuit.py. Historical scored configs accept --generator-bundle. Writes the repository artifact and
 build_only provenance after the required digest comparisons.
 """
 
@@ -43,7 +43,7 @@ def require_digest(path, expected):
     return actual
 
 
-def source_snapshot(config_path):
+def source_snapshot(config_path, sources):
     # Git for Windows understands the linked worktree paths written by the host.
     dotgit = ROOT / ".git"
     git = "git"
@@ -52,7 +52,7 @@ def source_snapshot(config_path):
         if len(gitdir) > 2 and gitdir[1] == ":":
             git = "git.exe"
     commit = subprocess.check_output([git, "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
-    for path in (Path(__file__).resolve(), config_path, POSTPROCESS_SOURCE):
+    for path in (Path(__file__).resolve(), config_path, *sources):
         relative = path.relative_to(ROOT).as_posix()
         committed = subprocess.check_output([git, "show", f"{commit}:{relative}"], cwd=ROOT)
         if path.read_bytes() != committed:
@@ -90,7 +90,7 @@ def load_postprocess():
     return module
 
 
-def record_build(config_path, commit, output, component_hashes, inputs):
+def record_build(config_path, commit, output, component_hashes, inputs, sources):
     now = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     run = ROOT / "results" / TRACK / EXPERIMENT / config_path.stem / "build_only" / (
         f"{now}-build-{uuid.uuid4().hex[:8]}"
@@ -115,8 +115,7 @@ def record_build(config_path, commit, output, component_hashes, inputs):
             "input_sha256": inputs,
         },
         "component_sha256": component_hashes,
-        "postprocess_source": POSTPROCESS_SOURCE.relative_to(ROOT).as_posix(),
-        "postprocess_source_sha256": digest(POSTPROCESS_SOURCE),
+        "build_dependencies": {path.relative_to(ROOT).as_posix(): digest(path) for path in sources},
         "build_run": None,
     }
     (run / "provenance.json").write_text(json.dumps(provenance, indent=2) + "\n", encoding="utf-8")
@@ -125,36 +124,60 @@ def record_build(config_path, commit, output, component_hashes, inputs):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--config", required=True, type=Path)
-    parser.add_argument("--generator-bundle", required=True, type=Path, help="Pinned Tony Li v2 ZIP")
+    parser.add_argument("--config", type=Path, default=HERE / "configs" / "notebook-native.json")
+    parser.add_argument("--generator-bundle", type=Path, help="Pinned Tony Li v2 ZIP for historical release configs")
     args = parser.parse_args()
     config_path = args.config.resolve(strict=True)
     if config_path.parent != HERE / "configs" or config_path.suffix != ".json":
         parser.error("--config must identify a JSON file inside this experiment's configs directory")
-    if sys.version_info[:2] != (3, 13) or sys.platform != "linux" or platform.machine() != "x86_64":
-        parser.error("The pinned upstream generator requires x86-64 Linux and Python 3.13 (WSL on Windows)")
+    if sys.version_info[:2] != (3, 13):
+        parser.error("Use the repository Python 3.13 environment")
     config = json.loads(config_path.read_text(encoding="utf-8"))
+    native = config.get("builder") == "notebook-native"
+    if not native and (args.generator_bundle is None or sys.platform != "linux" or platform.machine() != "x86_64"):
+        parser.error("Historical release configs require --generator-bundle on x86-64 Linux")
     output = ROOT / "artifacts" / TRACK / EXPERIMENT / (config_path.stem + EXTENSION)
     if output.exists():
         raise FileExistsError(output)
-    commit = source_snapshot(config_path)
+    sources = native_dependencies() if native else [POSTPROCESS_SOURCE]
+    commit = source_snapshot(config_path, sources)
     output.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix="orecord-v25-") as scratch:
         workspace = Path(scratch)
-        base = build_generator(args.generator_bundle.resolve(strict=True), workspace, GENERATOR_TASK)
-        if config["postprocess"] != "verify-and-pass-through":
-            raise ValueError("Expected verify-and-pass-through for the v25 submission")
-        circuit = base / (GENERATOR_TASK + EXTENSION)
-        hashes = {circuit.name: load_postprocess().apply(circuit, output)}
-    inputs = {}
-    inputs["generator_bundle"] = GENERATOR_SHA
-    inputs["upstream_kickmix_sdk"] = "c66b3216c4029e0cdfd09054306aa0feadf53ab2f50c1164e37f752874e5005e"
-    record_build(config_path, commit, output, hashes, inputs)
+        if native:
+            hashes = build_native(output, workspace, config)
+            inputs = {}
+        else:
+            base = build_generator(args.generator_bundle.resolve(strict=True), workspace, GENERATOR_TASK)
+            if config["postprocess"] != "verify-and-pass-through":
+                raise ValueError("Expected verify-and-pass-through for the v25 submission")
+            circuit = base / (GENERATOR_TASK + EXTENSION)
+            hashes = {circuit.name: load_postprocess().apply(circuit, output)}
+            inputs = {}
+            inputs["generator_bundle"] = GENERATOR_SHA
+            inputs["upstream_kickmix_sdk"] = "c66b3216c4029e0cdfd09054306aa0feadf53ab2f50c1164e37f752874e5005e"
+    record_build(config_path, commit, output, hashes, inputs, sources)
 
 
 EXTENSION = ".kmb"
 GENERATOR_TASK = "dqi"
 PACKAGE_NAMES = ("numpy",)
+
+
+def native_dependencies():
+    return [HERE / "circuit.py", *sorted((HERE / "decoder").glob("*.py")), *sorted((ROOT / "verifiers" / "dqi").glob("*.py"))]
+
+
+def build_native(output, workspace, config):
+    from circuit import build_circuit
+
+    staged = output.parent / f".{output.name}.{uuid.uuid4().hex}.tmp"
+    try:
+        build_circuit().to_file(staged, format="kmb")
+        os.link(staged, output)
+    finally:
+        staged.unlink(missing_ok=True)
+    return {f"{GENERATOR_TASK}.kmb": digest(output)}
 
 
 if __name__ == "__main__":
