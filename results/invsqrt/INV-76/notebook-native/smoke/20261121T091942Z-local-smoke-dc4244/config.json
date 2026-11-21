@@ -1,0 +1,22 @@
+{
+  "track": "invsqrt",
+  "experiment_id": "INV-76",
+  "config_name": "notebook-native",
+  "mode": "smoke",
+  "command": [
+    "/mnt/d/verifiable-quantum-circuit/.venv-engine/bin/python",
+    "-m",
+    "kickmix_engine",
+    "verify",
+    "invsqrt",
+    "/tmp/orecord-review-verified-1oy40mvu/smoke-INV-76/artifacts/invsqrt/INV-76/notebook-native.kmb",
+    "--verifier",
+    "/tmp/orecord-review-verified-1oy40mvu/smoke-INV-76/verifiers/invsqrt/verify_submission_invsqrt.py",
+    "--threads",
+    "4",
+    "--max-x",
+    "4096",
+    "--shots-per-x",
+    "1"
+  ]
+}

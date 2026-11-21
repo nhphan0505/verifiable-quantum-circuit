@@ -25,3 +25,11 @@ Run the repository Python 3.13 environment with requirements.txt and the [active
     python src/invsqrt/INV-76/solution.py --config src/invsqrt/INV-76/configs/notebook-native.json
 
 The active build compiles directly from the checkout. The former bundle configs are retained as archival names for existing results. Their original source/config snapshots remain in Git. Build records identify the actual source used. The verifier is a separate step.
+
+## Kết quả kiểm chứng
+
+A clean GitHub checkout of 8f07e38b0da4649115e00ab1ca285378a8982098 reproduced the native artifact SHA-256 f7fb315d23c7fbd020781eb88de818faf1b5e1bb04af65c98f34fd0e8f337ad1. kickmix-engine 0.6.0 smoke passed with 4,096 verified shots. Full grading and independent review of this revision are pending.
+
+- [Build provenance](../../../results/invsqrt/INV-76/notebook-native/build_only/20261121T091941Z-build-d9eb213b/provenance.json)
+- [Smoke verifier](../../../results/invsqrt/INV-76/notebook-native/smoke/20261121T091942Z-local-smoke-dc4244/verifier.json)
+- [Smoke provenance](../../../results/invsqrt/INV-76/notebook-native/smoke/20261121T091942Z-local-smoke-dc4244/provenance.json)
