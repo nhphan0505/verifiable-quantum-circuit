@@ -16,7 +16,7 @@ Test invalid pack and occupied output rejection and hash-checked member extracti
 
 ## Status
 
-Awaiting implementation and verification.
+Source commit 93c24d902cfadbcefd47ba5c1034c6d24dabab5f reproduced the existing v25 chemistry ZIP with SHA-256 bc7f8aa85975c5650ea2f67f7a2c49f6f559069447b34e3c945fae0eb1661713. The unprocessed DFT-78 generated comparison and the standalone output both passed kickmix-engine 0.6.0 smoke with four threads and --shots-per-address 1 (1,219 shots). The combined replacement and refit reduced verifier cost. The experiment did not isolate how much of the reduction came from the refit alone. Full grading has not been run. Temporary outputs were removed.
 
 ## Usage
 
