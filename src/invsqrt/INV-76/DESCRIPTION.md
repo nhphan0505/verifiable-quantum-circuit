@@ -32,3 +32,13 @@ python src/invsqrt/INV-76/solution.py --config src/invsqrt/INV-76/configs/notebo
 ```
 
 The build calls the [standalone PP-006 method](postprocessing/PP-006/DESCRIPTION.md) from this experiment's postprocessing directory. The method can also be run separately using the linked CLI instructions.
+
+## Repository-native notebook generator
+
+The native config runs the attached notebook's own time-multiplexed interpolation generator and coefficient table. Its circuit is distinct from the Tony Li 39-qubit release used by the notebook's scored cells.
+
+Attached notebook SHA-256 1406a547dae8d22b2171e019d5754c2724ef97ede01b07b0f786308acf365c8a.
+
+    python src/invsqrt/INV-76/solution.py --config src/invsqrt/INV-76/configs/notebook-native.json
+
+The native build reads its generator and inputs from the checkout. Historical release configs remain available with their original bundle arguments. The native output is a separate artifact with its own provenance and requires local grading.
