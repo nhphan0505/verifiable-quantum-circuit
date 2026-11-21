@@ -16,7 +16,7 @@ Test exact output, hash mismatch, input preservation and occupied output refusal
 
 ## Status
 
-Awaiting implementation and verification.
+Used the existing DQI-77 build-only KMB after checking the committed source and artifact hashes. The standalone API at source commit 056c91ea10ac345d8a5d234c8c46c16c76efbe14 produced exactly the input bytes. Both input and output passed kickmix-engine 0.6.0 smoke with four threads and --num-shots 4096 and had equal verifier costs. Full grading has not been run. Temporary outputs were removed.
 
 ## Usage
 
