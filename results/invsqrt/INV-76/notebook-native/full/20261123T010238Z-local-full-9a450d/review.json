@@ -1,0 +1,8 @@
+{
+  "missing_provenance": true,
+  "matching_builds": [
+    "results/invsqrt/INV-76/notebook-native/build_only/20261121T081423Z-build-2c806448",
+    "results/invsqrt/INV-76/notebook-native/build_only/20261121T091941Z-build-d9eb213b"
+  ],
+  "note": "Agent must identify build evidence; do not infer source commit from current HEAD."
+}

@@ -1,0 +1,35 @@
+{
+  "track": "invsqrt",
+  "experiment_id": "INV-76",
+  "config_name": "notebook-v25",
+  "source_commit": "f20e9479c540982252b2900e7d5257298815a640",
+  "source_path": "src/invsqrt/INV-76/solution.py",
+  "source_sha256": "793d345f5f9e568578afd8f3203fff02a1931d8a9bb395a143336a0305cb22e5",
+  "build_config_path": "src/invsqrt/INV-76/configs/notebook-v25.json",
+  "build_config_sha256": "5745c1e5c991868afb0591433f494a1aa5ef03a465d98158b5e4c05eb552b53d",
+  "artifact_path": "artifacts/invsqrt/INV-76/notebook-v25.kmb",
+  "artifact_sha256": "68eb8c13ebc75c5e443ed5a8c6357c2c77e6676c499ed1324108bf025faf1489",
+  "build_command": [
+    "/mnt/d/verifiable-quantum-circuit/.venv-engine/bin/python",
+    "/mnt/c/Users/ASUS/.codex/worktrees/orecord-invsqrt/verifiable-quantum-circuit/src/invsqrt/INV-76/solution.py",
+    "--config",
+    "/mnt/c/Users/ASUS/.codex/worktrees/orecord-invsqrt/verifiable-quantum-circuit/src/invsqrt/INV-76/configs/notebook-v25.json",
+    "--generator-bundle",
+    "/mnt/c/Users/ASUS/AppData/Local/Temp/codex-orecord-v25-01a1fc5b/generators.zip"
+  ],
+  "environment": {
+    "python": "3.13.18",
+    "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "packages": {
+      "numpy": "2.5.4"
+    },
+    "input_sha256": {
+      "generator_bundle": "2715ee84ce70d59c2e799ee397e11b253e9822e54fbe76fda51a8f274e555496",
+      "upstream_kickmix_sdk": "c66b3216c4029e0cdfd09054306aa0feadf53ab2f50c1164e37f752874e5005e"
+    }
+  },
+  "component_sha256": {
+    "invsqrt.kmb": "68eb8c13ebc75c5e443ed5a8c6357c2c77e6676c499ed1324108bf025faf1489"
+  },
+  "build_run": null
+}
