@@ -36,8 +36,19 @@ The active build compiles directly from the checkout. The former bundle configs 
 
 ## Kết luận và phiên bản tái lập
 
-A clean GitHub checkout of f707786f79081316e6b3a97b6f74ac9b3eb91bee reproduced the native artifact SHA-256 3abc10ecbd1991563891d30dd29a8ce8292e676a20453f8a1c14960127c20c8b. kickmix-engine 0.6.0 smoke passed with 1,219 verified shots. The current evidence establishes reproducibility and smoke validity. The hypothesis about full-run cost and resource trade-offs remains open.
+A clean GitHub checkout of f707786f79081316e6b3a97b6f74ac9b3eb91bee reproduced the native artifact SHA-256 3abc10ecbd1991563891d30dd29a8ce8292e676a20453f8a1c14960127c20c8b. kickmix-engine 0.6.0 smoke passed with 1,219 verified shots. The current evidence establishes reproducibility and smoke validity.
 
 - [Build provenance](../../../results/dfthcsos/DFT-78/notebook-native/build_only/20261121T091941Z-build-7ee07443/provenance.json)
 - [Smoke verifier](../../../results/dfthcsos/DFT-78/notebook-native/smoke/20261121T091942Z-local-smoke-cddb3e/verifier.json)
 - [Smoke provenance](../../../results/dfthcsos/DFT-78/notebook-native/smoke/20261121T091942Z-local-smoke-cddb3e/provenance.json)
+
+### Full verification
+
+The notebook-native full run passed with 78,016 verified shots on kickmix-engine 0.6.0. The score was 811,632,454.2457356, a 4.1344x improvement over the official baseline and 2.7361x the cost of DFT-68.
+
+The run used 405 qubits, reaction depth 135, 42,710 Toffolis and lambda_eff 46.92182. Its width and depth were lower than DFT-68's 427 qubits and depth 168, while its Toffoli count was higher than 14,810. The fits differ, so the score comparison cannot isolate the loader. Stop this cost iteration. A same-fit loader comparison belongs to a separate iteration.
+
+The full artifact matches source build 052164a67e85a51b11f6375dc60d3ee4e462d6ac by SHA-256.
+
+- [Full verifier](../../../results/dfthcsos/DFT-78/notebook-native/full/20261123T012234Z-local-full-5d86bb/verifier.json)
+- [Full provenance](../../../results/dfthcsos/DFT-78/notebook-native/full/20261123T012234Z-local-full-5d86bb/provenance.json)

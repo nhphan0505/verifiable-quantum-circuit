@@ -1,0 +1,58 @@
+{
+  "track": "dfthcsos",
+  "experiment_id": "DFT-78",
+  "config_name": "notebook-native",
+  "source_commit": "052164a67e85a51b11f6375dc60d3ee4e462d6ac",
+  "source_path": "src/dfthcsos/DFT-78/solution.py",
+  "source_sha256": "a1ee7a9b456517bea8853eb7a04d160a363ba1a8f3ac98314a4884c0d9d26feb",
+  "build_config_path": "src/dfthcsos/DFT-78/configs/notebook-native.json",
+  "build_config_sha256": "40fd9e86b9bc954f8d34264a42c2d267f51b0d6b37b540fc9e996747b8ebf4eb",
+  "artifact_path": "artifacts/dfthcsos/DFT-78/notebook-native.zip",
+  "artifact_sha256": "3abc10ecbd1991563891d30dd29a8ce8292e676a20453f8a1c14960127c20c8b",
+  "build_command": [
+    "D:\\verifiable-quantum-circuit\\.venv\\Scripts\\python.exe",
+    ".\\src\\dfthcsos\\DFT-78\\solution.py",
+    "--config",
+    ".\\src\\dfthcsos\\DFT-78\\configs\\notebook-native.json"
+  ],
+  "environment": {
+    "python": "3.13.7",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "kickmix": "1.0.0"
+    }
+  },
+  "component_sha256": {
+    "submission.npz": "3f95076d9adf8d79a3c5247229d2f9f8ed9448f0c5dbd5032154f095da60ea34",
+    "angle_k_0.kmb": "7cb2d13239b8bf267f2dba9fa933660f3955b2f681ed9e236bd713209829bfb6",
+    "angle_k_1.kmb": "c418aedf9c9b13b1638ddd25c9f512332a39b937b2a59c6b5e279508eacbfb51",
+    "angle_k_2.kmb": "cc571d1afd361f5a236d786abb8eb6f3e1847f8bee5c556b8fcc44b76838d95f",
+    "angle_k_3.kmb": "724bfe8bb2da9e0f08e2f5fed9d02027808e81b2e3ac680133c3e9bca8a23318",
+    "angle_k_4.kmb": "13a649e3c51c65983a75881952175f38bcf4a80612d1ad2652aed1f462c934fc",
+    "angle_k_5.kmb": "db927a244ebdef2cadb5a255fa20a3bdc7a4f755e9691830b71a4a1475bc5894",
+    "angle_k_6.kmb": "d71686c3ad7f1bfb386caf485157f0ec4f4732ca56e7e6fbf2a215e9a7a9cbaa",
+    "angle_k_7.kmb": "2b3893f0ecc74c1ad97585921bf04791cf92a0671963be7247e1508889be0876",
+    "angle_k_8.kmb": "5fae5745d0a1bd95bfc920530cde629648b648a62906075e83981b7f67532b34",
+    "angle_k_9.kmb": "b60da38d21bec3189a2b8c118244ab9d2f70f7369349e427fcfa65ace5c867b0",
+    "angle_k_10.kmb": "a61e198fc3d07a868ab004baffe2621aa7ef6c6ff00cdac43a781238d1106a3f",
+    "angle_k_11.kmb": "593d3a1f6929de0ac046212531433b7187d362feccb01c40fac97fb67b2e4330",
+    "angle_k_12.kmb": "ff9cc43f7e902f66b9d5db39135905d4c9a2cebc5d508c7a19afdff600ee28d2",
+    "angle_k_13.kmb": "14f3924e2054c09bdfff708519fb9183f330750f6eb692135ab407be540e7e2c",
+    "angle_k_14.kmb": "03a3707be0a5df77c4de00ab2bad688a0d5d77a6a9cd2c9ca99c308b59f87220"
+  },
+  "build_dependencies": {
+    "src/dfthcsos/DFT-78/circuit.py": "274df5b96530d3db51c06f47e1da9851241f77489ecb4cdc0dc5329f5a158373",
+    "src/dfthcsos/DFT-78/data/angle_word_edits.tsv": "a531b909ae55a68970964f1156528a328da7070d02d609cbff08b65ad1c04b08",
+    "src/dfthcsos/DFT-78/data/angle_words.tsv": "f9c6280ac25763d253bc5d2b1427ece739bb3dadb32bc4c4ad2e3f3dbc3207c4",
+    "src/dfthcsos/DFT-78/data/H1_I.tsv": "528602def59340140a3b03b576e7ce7cac44b5db98914b5898cd008dabbc88d0",
+    "src/dfthcsos/DFT-78/data/H2_I.tsv": "1e425ca1c5bb52a301e3723b2a22e980878f40570a1572ba15fa06b204cdafca",
+    "src/dfthcsos/DFT-78/data/Hsym_lower.tsv": "fdc48741a02a942202dd83902d45450f8838259af98f14ec7366c5993ab76ff1",
+    "src/dfthcsos/DFT-78/data/tree_edges.tsv": "7b602c1f3c21ee1b2aca71d00d5abb0a81e0260d0d3bcd7675cbcb99e5b46320",
+    "src/dfthcsos/DFT-78/data/U.tsv": "29d0088937c7bb2d6d679a26e7d7cead951f9a104ef1a4f588302641482e9d69",
+    "src/dfthcsos/DFT-78/data/W.tsv": "98c607a6ec919f10dc1932695ab3ed12b990ba81a215d2fa8939e12ea08fa4d8",
+    "src/common/package_submission.py": "4956fdaed87e93c550617e1f8d091637e737c1d085df86a1f8ab288a5e3ad1bf"
+  },
+  "build_run": "results/dfthcsos/DFT-78/notebook-native/build_only/20261123T012156Z-build-99a1cbc5"
+}
