@@ -1,0 +1,18 @@
+{
+  "track": "dqi",
+  "experiment_id": "DQI-77",
+  "config_name": "notebook-native",
+  "mode": "full",
+  "command": [
+    "/mnt/d/verifiable-quantum-circuit/.venv-engine/bin/python",
+    "-m",
+    "kickmix_engine",
+    "verify",
+    "dqi",
+    "/mnt/d/verifiable-quantum-circuit/artifacts/dqi/DQI-77/notebook-native.kmb",
+    "--verifier",
+    "/mnt/d/verifiable-quantum-circuit/verifiers/dqi/verify_submission_dqi.py",
+    "--threads",
+    "4"
+  ]
+}

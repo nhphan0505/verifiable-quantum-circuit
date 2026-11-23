@@ -36,8 +36,19 @@ The active build compiles directly from the checkout. The former bundle configs 
 
 ## Kết luận và phiên bản tái lập
 
-A clean GitHub checkout of f1e272a4ccdf7e23b8b63b173bbcac0e2b52ca5d reproduced the native artifact SHA-256 e9d0fad46cc7eb3a7ed2901e8003cb9ce476df0bebc48e1cfbb3a844fd6ca9e5. kickmix-engine 0.6.0 smoke passed with 4,096 verified shots. The verifier reported 0 value errors and 0 phase errors. The current evidence establishes reproducibility and smoke validity. The hypothesis about full-run cost and resource trade-offs remains open.
+A clean GitHub checkout of f1e272a4ccdf7e23b8b63b173bbcac0e2b52ca5d reproduced the native artifact SHA-256 e9d0fad46cc7eb3a7ed2901e8003cb9ce476df0bebc48e1cfbb3a844fd6ca9e5. kickmix-engine 0.6.0 smoke passed with 4,096 verified shots. The verifier reported 0 value errors and 0 phase errors. The current evidence establishes reproducibility and smoke validity.
 
 - [Build provenance](../../../results/dqi/DQI-77/notebook-native/build_only/20261121T092255Z-build-8c164fff/provenance.json)
 - [Smoke verifier](../../../results/dqi/DQI-77/notebook-native/smoke/20261121T092307Z-local-smoke-13d495/verifier.json)
 - [Smoke provenance](../../../results/dqi/DQI-77/notebook-native/smoke/20261121T092307Z-local-smoke-13d495/provenance.json)
+
+### Full verification
+
+The notebook-native full run passed with 102,400 verified shots on kickmix-engine 0.6.0. The score was 1,041,978,413,483.687, a 23.4549x improvement over the official baseline and 2.8885x the cost of DQI-72.
+
+The run used 898 qubits, 1,084,674.22 mean Toffolis and repetition factor 1.19126046. It reported zero value and phase errors. The repetition factor equals DQI-72's, while higher Toffoli and qubit counts increased cost. Stop this iteration and retain the measured trade-off.
+
+The full artifact matches source build e7182a3f1d786c69713655f78d30d6fd1c43b81f by SHA-256.
+
+- [Full verifier](../../../results/dqi/DQI-77/notebook-native/full/20261123T011741Z-local-full-37df7c/verifier.json)
+- [Full provenance](../../../results/dqi/DQI-77/notebook-native/full/20261123T011741Z-local-full-37df7c/provenance.json)
