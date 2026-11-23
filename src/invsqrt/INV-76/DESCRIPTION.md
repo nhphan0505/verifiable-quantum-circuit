@@ -36,8 +36,19 @@ The active build compiles directly from the checkout. The former bundle configs 
 
 ## Kết luận và phiên bản tái lập
 
-A clean GitHub checkout of 8f07e38b0da4649115e00ab1ca285378a8982098 reproduced the native artifact SHA-256 f7fb315d23c7fbd020781eb88de818faf1b5e1bb04af65c98f34fd0e8f337ad1. kickmix-engine 0.6.0 smoke passed with 4,096 verified shots. The current evidence establishes reproducibility and smoke validity. The hypothesis about full-run cost and resource trade-offs remains open.
+A clean GitHub checkout of 8f07e38b0da4649115e00ab1ca285378a8982098 reproduced the native artifact SHA-256 f7fb315d23c7fbd020781eb88de818faf1b5e1bb04af65c98f34fd0e8f337ad1. kickmix-engine 0.6.0 smoke passed with 4,096 verified shots. The current evidence establishes reproducibility and smoke validity.
 
 - [Build provenance](../../../results/invsqrt/INV-76/notebook-native/build_only/20261121T091941Z-build-d9eb213b/provenance.json)
 - [Smoke verifier](../../../results/invsqrt/INV-76/notebook-native/smoke/20261121T091942Z-local-smoke-dc4244/verifier.json)
 - [Smoke provenance](../../../results/invsqrt/INV-76/notebook-native/smoke/20261121T091942Z-local-smoke-dc4244/provenance.json)
+
+### Full verification
+
+The notebook-native full run passed with 200,540,928 verified shots on kickmix-engine 0.6.0. The score was 159,479.03394760322, a 13.0222x improvement over the official baseline and 2.1216x the cost of INV-74.
+
+At 85 qubits the run measured 1,876.22 Toffoli-equivalents per shot and reaction depth 206 versus 1,282 for INV-74. The worst error-to-tolerance ratio was 0.98348. Stop this cost iteration and retain the candidate as a lower-depth reference.
+
+The full artifact matches source build 8f07e38b0da4649115e00ab1ca285378a8982098 by SHA-256. The grader found two historical builds with the same artifact hash. This record cites the later clean-checkout build as a reproducible match.
+
+- [Full verifier](../../../results/invsqrt/INV-76/notebook-native/full/20261123T010238Z-local-full-9a450d/verifier.json)
+- [Full provenance](../../../results/invsqrt/INV-76/notebook-native/full/20261123T010238Z-local-full-9a450d/provenance.json)
