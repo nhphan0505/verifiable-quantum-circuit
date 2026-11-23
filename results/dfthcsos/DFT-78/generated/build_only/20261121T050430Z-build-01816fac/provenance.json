@@ -1,0 +1,52 @@
+{
+  "track": "dfthcsos",
+  "experiment_id": "DFT-78",
+  "config_name": "generated",
+  "source_commit": "4a40e5407ed6303db99f12547f04fbf5f751284f",
+  "source_path": "src/dfthcsos/DFT-78/solution.py",
+  "source_sha256": "cf35b071a60c462bb1852d299d76d7732ab81d206ccd8749297492e63d41d9df",
+  "build_config_path": "src/dfthcsos/DFT-78/configs/generated.json",
+  "build_config_sha256": "36323899ba026695da9ceabf0fbfe5377dcc514fbb1fb22efe0f26496a46e609",
+  "artifact_path": "artifacts/dfthcsos/DFT-78/generated.zip",
+  "artifact_sha256": "440676b07a0e4af85fb7a223aecc8af18b9fcd762d9adb623c75a37a90ae49cb",
+  "build_command": [
+    "/mnt/d/verifiable-quantum-circuit/.venv-engine/bin/python",
+    "/mnt/c/Users/ASUS/.codex/worktrees/orecord-dfthcsos/verifiable-quantum-circuit/src/dfthcsos/DFT-78/solution.py",
+    "--config",
+    "/mnt/c/Users/ASUS/.codex/worktrees/orecord-dfthcsos/verifiable-quantum-circuit/src/dfthcsos/DFT-78/configs/generated.json",
+    "--generator-bundle",
+    "/mnt/c/Users/ASUS/AppData/Local/Temp/codex-orecord-v25-01a1fc5b/generators.zip"
+  ],
+  "environment": {
+    "python": "3.13.18",
+    "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "kickmix": "1.0.0"
+    },
+    "input_sha256": {
+      "generator_bundle": "2715ee84ce70d59c2e799ee397e11b253e9822e54fbe76fda51a8f274e555496",
+      "upstream_kickmix_sdk": "c66b3216c4029e0cdfd09054306aa0feadf53ab2f50c1164e37f752874e5005e"
+    }
+  },
+  "component_sha256": {
+    "submission.npz": "3f95076d9adf8d79a3c5247229d2f9f8ed9448f0c5dbd5032154f095da60ea34",
+    "angle_k_0.kmb": "cc6aa67f8e6b533e4e558683377bb9de36a8a8415cba37c7a92a3068a9e8666e",
+    "angle_k_1.kmb": "cc52baccf1d3801f0bc484c9a63f3da468c3e2df21e942d07ddfd5f99a7a80e9",
+    "angle_k_2.kmb": "8b22faa7cb7ed947a5cfdab52a302d622fc4130c4b0812d7ffaa54fd3b034f88",
+    "angle_k_3.kmb": "8a241e9e0884bc32433ffd873afef74d7857198f5b34da217641de15578e7a6e",
+    "angle_k_4.kmb": "55656e5eba6de211773358b28264837ea06c8871370cc427f05172b0c9f9a5d4",
+    "angle_k_5.kmb": "2c6145fbb6402eed1d9b30ecd71020be1dcad2c11296ce02d370a704f210fb04",
+    "angle_k_6.kmb": "91f7fc529e86269294231c06953072503a531a45739eb463591c5191267bcb69",
+    "angle_k_7.kmb": "6cd6df12fbf9a5394252d38370c66a59a5f3fb332d3ec92853810e2b44d317cd",
+    "angle_k_8.kmb": "dc356a2b5728d0cde753912fc333f7251bb2b804b059cf8c9d04eef024f41bef",
+    "angle_k_9.kmb": "085ec2716e8980aa5dfc36fe3131497f71ef7fb1a463311c143575c1d997a437",
+    "angle_k_10.kmb": "706df9b9dd42586bf78eda4b671ea192131ef0a93ae64cb3054125def250ce95",
+    "angle_k_11.kmb": "4927883dff5a64b0a213fed529743debf9f5ccd273077e6a1030f2b1948b14aa",
+    "angle_k_12.kmb": "6e85a07768f1d9c2aadea1f5cf4f6013678a190f2f96c99c008f0b9d5cbf27b7",
+    "angle_k_13.kmb": "f4c71e96dd956fb8aacf921082fb0479b2b750c6cec93ba358d8a4f3271e08ff",
+    "angle_k_14.kmb": "cea9a1435d6112099f882b110eda8fb915ee774a9d352870643176745d872bee"
+  },
+  "build_run": null
+}

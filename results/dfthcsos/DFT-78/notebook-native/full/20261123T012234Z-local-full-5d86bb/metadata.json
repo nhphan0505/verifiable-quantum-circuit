@@ -1,0 +1,139 @@
+{
+  "track": "dfthcsos",
+  "experiment_id": "DFT-78",
+  "config_name": "notebook-native",
+  "run_id": "20261123T012234Z-local-full-5d86bb",
+  "owner": "Cheemshoang",
+  "verification_level": "full",
+  "status": "PASS",
+  "python": "3.13.18 (main, Nov 11 2026, 00:17:48) [Clang 23.1.3 ]",
+  "packages": {
+    "kickmix": "1.0.0",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "kickmix-engine": "0.6.0"
+  },
+  "upload_artifact": {
+    "name": "notebook-native.zip",
+    "sha256": "3abc10ecbd1991563891d30dd29a8ce8292e676a20453f8a1c14960127c20c8b",
+    "size_bytes": 6260880
+  },
+  "artifact_path": "artifacts/dfthcsos/DFT-78/notebook-native.zip",
+  "verifier_sha256": {
+    "verifiers/dfthcsos/verify.py": "0775be7a528922367caebe9e4d051d6199811f1aefeaa4b793eaaa4621b8ec9d",
+    "verifiers/dfthcsos/__init__.py": "81915e324cc0cade67f52a54b7a51991fd96abaea94d1f8a4d423dae20e57348",
+    "verifiers/dqi/dqi_reference_circuit.py": "2b8e1b80a806157c333a7e308eaf2499ee09de499efbc05875202c327959959e",
+    "verifiers/dqi/verify_submission_dqi.py": "f14274bc0943fb9769ddb01131be6063191a15009fe1caf1d4bdd9fd25194e65",
+    "verifiers/dqi/__init__.py": "01c870aa9763f4e4357fc6654bff1d3296cec995bd0943f87b4a48946ada5b40",
+    "verifiers/invsqrt/nr_reference_circuit.py": "bb90330dcf774f7b502de471293facba67f27952cc8808fe4a9970a9b1322e23",
+    "verifiers/invsqrt/verify_submission_invsqrt.py": "ddef520dec6b68d1cf0a6f328ddd36d79eb84570b9192cf3f7acaf073f06733a",
+    "verifiers/invsqrt/__init__.py": "e9a6ecf253c343528578be5fa92eb820ccade63333aebb784552fb4ae75dbc0b",
+    "verifiers/dfthcsos/example_submission/angle_k_reference_circuit.py": "8daccdca69f2d718b0176cd9281803df84a988ea5ac6c167fbb02e461ac2b371",
+    "verifiers/dfthcsos/scoreinfra/circuits.py": "fc027b52fdcebe14404f403a089122485d097ed65d03e6d989623d620b1ab68c",
+    "verifiers/dfthcsos/scoreinfra/costs_prepare.py": "7f1e190c42fc5325f3e6689fbbef51f95b0cb12f1c828cda92b6c088e72206da",
+    "verifiers/dfthcsos/scoreinfra/dfthc_math.py": "ae82898d47a7a86b96378fb906e0f8a9f46003065cf19c7c09952a123b5b5af8",
+    "verifiers/dfthcsos/scoreinfra/reference.py": "a2d5a63191d655729e29f0fde1e85fe4630bf896a91a63bb894d8d7daf71ed39",
+    "verifiers/dfthcsos/scoreinfra/__init__.py": "be90e0d503d5c20dcac0102af638b9a4ccad0341daa5baa5d49216a259e4516f"
+  },
+  "timeout_seconds": null,
+  "engine": {
+    "name": "kickmix-engine",
+    "version": "0.6.0",
+    "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "kernel": {
+      "arch": "x86_64",
+      "os": "linux",
+      "compiled": [
+        "baseline",
+        "avx2",
+        "avx512"
+      ],
+      "available": [
+        "baseline",
+        "avx2"
+      ],
+      "features": {
+        "sse4.2": true,
+        "popcnt": true,
+        "avx": true,
+        "avx2": true,
+        "bmi1": true,
+        "bmi2": true,
+        "fma": true,
+        "lzcnt": true,
+        "movbe": true,
+        "avx512f": false,
+        "avx512bw": false,
+        "avx512vl": false,
+        "avx512dq": false
+      },
+      "kernel_features": {
+        "baseline": [],
+        "avx2": [
+          "avx2",
+          "bmi1",
+          "bmi2",
+          "fma",
+          "lzcnt",
+          "movbe"
+        ],
+        "avx512": [
+          "avx2",
+          "bmi1",
+          "bmi2",
+          "fma",
+          "lzcnt",
+          "movbe",
+          "avx512f",
+          "avx512bw",
+          "avx512vl",
+          "avx512dq"
+        ]
+      },
+      "env_var": "KICKMIX_ENGINE_KERNEL",
+      "env_request": null,
+      "kernel": "avx2",
+      "selected_by": "auto",
+      "kernel_requires": [
+        "avx2",
+        "bmi1",
+        "bmi2",
+        "fma",
+        "lzcnt",
+        "movbe"
+      ]
+    }
+  },
+  "verify_command": [
+    "/mnt/d/verifiable-quantum-circuit/.venv-engine/bin/python",
+    "-m",
+    "kickmix_engine",
+    "verify",
+    "dfthcsos",
+    "/mnt/d/verifiable-quantum-circuit/artifacts/dfthcsos/DFT-78/.verify-g1bu2f_u",
+    "--verifier",
+    "/mnt/d/verifiable-quantum-circuit/verifiers/dfthcsos",
+    "--threads",
+    "4"
+  ],
+  "submission_sha256": {
+    "angle_k_0.kmb": "7cb2d13239b8bf267f2dba9fa933660f3955b2f681ed9e236bd713209829bfb6",
+    "angle_k_1.kmb": "c418aedf9c9b13b1638ddd25c9f512332a39b937b2a59c6b5e279508eacbfb51",
+    "angle_k_10.kmb": "a61e198fc3d07a868ab004baffe2621aa7ef6c6ff00cdac43a781238d1106a3f",
+    "angle_k_11.kmb": "593d3a1f6929de0ac046212531433b7187d362feccb01c40fac97fb67b2e4330",
+    "angle_k_12.kmb": "ff9cc43f7e902f66b9d5db39135905d4c9a2cebc5d508c7a19afdff600ee28d2",
+    "angle_k_13.kmb": "14f3924e2054c09bdfff708519fb9183f330750f6eb692135ab407be540e7e2c",
+    "angle_k_14.kmb": "03a3707be0a5df77c4de00ab2bad688a0d5d77a6a9cd2c9ca99c308b59f87220",
+    "angle_k_2.kmb": "cc571d1afd361f5a236d786abb8eb6f3e1847f8bee5c556b8fcc44b76838d95f",
+    "angle_k_3.kmb": "724bfe8bb2da9e0f08e2f5fed9d02027808e81b2e3ac680133c3e9bca8a23318",
+    "angle_k_4.kmb": "13a649e3c51c65983a75881952175f38bcf4a80612d1ad2652aed1f462c934fc",
+    "angle_k_5.kmb": "db927a244ebdef2cadb5a255fa20a3bdc7a4f755e9691830b71a4a1475bc5894",
+    "angle_k_6.kmb": "d71686c3ad7f1bfb386caf485157f0ec4f4732ca56e7e6fbf2a215e9a7a9cbaa",
+    "angle_k_7.kmb": "2b3893f0ecc74c1ad97585921bf04791cf92a0671963be7247e1508889be0876",
+    "angle_k_8.kmb": "5fae5745d0a1bd95bfc920530cde629648b648a62906075e83981b7f67532b34",
+    "angle_k_9.kmb": "b60da38d21bec3189a2b8c118244ab9d2f70f7369349e427fcfa65ace5c867b0",
+    "submission.npz": "3f95076d9adf8d79a3c5247229d2f9f8ed9448f0c5dbd5032154f095da60ea34"
+  },
+  "exit_code": 0,
+  "finished_at_utc": "2026-11-23T01:22:56.761232+00:00"
+}

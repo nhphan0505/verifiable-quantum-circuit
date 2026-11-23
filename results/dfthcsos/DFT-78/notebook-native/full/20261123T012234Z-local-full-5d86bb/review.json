@@ -1,0 +1,9 @@
+{
+  "missing_provenance": true,
+  "matching_builds": [
+    "results/dfthcsos/DFT-78/notebook-native/build_only/20261121T081423Z-build-e5958950",
+    "results/dfthcsos/DFT-78/notebook-native/build_only/20261121T091941Z-build-7ee07443",
+    "results/dfthcsos/DFT-78/notebook-native/build_only/20261123T012156Z-build-99a1cbc5"
+  ],
+  "note": "Agent must identify build evidence; do not infer source commit from current HEAD."
+}

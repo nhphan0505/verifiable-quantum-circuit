@@ -1,0 +1,18 @@
+{
+  "track": "dfthcsos",
+  "experiment_id": "DFT-78",
+  "config_name": "notebook-native",
+  "mode": "full",
+  "command": [
+    "/mnt/d/verifiable-quantum-circuit/.venv-engine/bin/python",
+    "-m",
+    "kickmix_engine",
+    "verify",
+    "dfthcsos",
+    "/mnt/d/verifiable-quantum-circuit/artifacts/dfthcsos/DFT-78/.verify-g1bu2f_u",
+    "--verifier",
+    "/mnt/d/verifiable-quantum-circuit/verifiers/dfthcsos",
+    "--threads",
+    "4"
+  ]
+}
