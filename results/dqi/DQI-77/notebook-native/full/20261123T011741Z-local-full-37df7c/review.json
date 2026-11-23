@@ -1,0 +1,9 @@
+{
+  "missing_provenance": true,
+  "matching_builds": [
+    "results/dqi/DQI-77/notebook-native/build_only/20261121T081827Z-build-eca9d0ac",
+    "results/dqi/DQI-77/notebook-native/build_only/20261121T092255Z-build-8c164fff",
+    "results/dqi/DQI-77/notebook-native/build_only/20261123T011542Z-build-8516ae18"
+  ],
+  "note": "Agent must identify build evidence; do not infer source commit from current HEAD."
+}
